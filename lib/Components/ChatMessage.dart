@@ -5,6 +5,9 @@ import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import '/MVP/Presenters/MessagePresenter.dart';
 import '/Pages/Search.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:ui' as ui;
+import 'dart:async';
+import 'package:flutter/services.dart';
 
 /// [ChatMessage] is a Widget that takes a [twitch.Message] and renders into something readable and interactable.
 class ChatMessage extends StatelessWidget {
@@ -14,6 +17,14 @@ class ChatMessage extends StatelessWidget {
     Key key,
     @required this.message,
   }) : super(key: key);
+
+  Future<ui.Image> imageFromUrl(String url) {
+    Completer<ui.Image> completer = Completer<ui.Image>();
+    NetworkImage(url).resolve(new ImageConfiguration()).addListener(ImageStreamListener((image, synchronousCall) {
+      completer.complete(image.image);
+    }));
+    return completer.future;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,24 +101,43 @@ class ChatMessage extends StatelessWidget {
         case twitch.MessageTokenType.Emote:
           spans.add(
             WidgetSpan(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 4.0),
-                child: Image.network(token.data.mipmap[0]),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 4.0),
+                    child: Image.network(
+                      token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
+                      filterQuality: FilterQuality.high,
+                      isAntiAlias: true,
+                      scale: token.data.provider == 'Twitch' ? 2.0 : 4.0,
+                    ),
+                  ),
+                ],
               ),
             ),
           );
           break;
         case twitch.MessageTokenType.EmoteStack:
-          for (var emote in token.data) {
-            spans.add(
-              WidgetSpan(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 4.0),
-                  child: Image.network(emote.mipmap[0]),
-                ),
+          spans.add(
+            WidgetSpan(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  for (var emote in token.data)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4.0),
+                      child: Image.network(
+                        emote.provider == 'Twitch' ? emote.mipmap[1] : emote.mipmap.last,
+                        filterQuality: FilterQuality.high,
+                        isAntiAlias: true,
+                        scale: emote.provider == 'Twitch' ? 2.0 : 4.0,
+                      ),
+                    ),
+                ],
               ),
-            );
-          }
+            ),
+          );
           break;
         case twitch.MessageTokenType.User:
           break;
@@ -130,7 +160,12 @@ class ChatMessage extends StatelessWidget {
                     WidgetSpan(
                       child: Padding(
                         padding: const EdgeInsets.only(right: 4.0),
-                        child: Image.network(badge.mipmap[0]),
+                        child: Image.network(
+                          badge.mipmap.last,
+                          filterQuality: FilterQuality.high,
+                          isAntiAlias: true,
+                          scale: 4.0,
+                        ),
                       ),
                     ),
                   TextSpan(
