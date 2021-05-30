@@ -8,7 +8,7 @@ You can find the latest release for supported platforms [here](https://github.co
 
 # Supported platforms
 
-- [x] Android 9+  
+- [x] Android 7+  
 - [x] iOS 12.2+  
 - [ ] Browser extension  
 - [ ] Windows  
