@@ -119,6 +119,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                   child: InkWell(
                     onTap: () async {
                       showModalBottomSheet(
+                        isScrollControlled: true,
                         context: context,
                         backgroundColor: Colors.transparent,
                         builder: (context) => SafeArea(

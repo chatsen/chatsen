@@ -1,3 +1,4 @@
+import 'package:chatsen/Components/WidgetTooltip.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -104,13 +105,35 @@ class ChatMessage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 4.0),
-                    child: Image.network(
-                      token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
-                      filterQuality: FilterQuality.high,
-                      isAntiAlias: true,
-                      scale: token.data.provider == 'Twitch' ? 2.0 : 4.0,
+                  WidgetTooltip(
+                    message: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 4.0),
+                            child: Image.network(
+                              (token.data as twitch.Emote).mipmap.last,
+                              isAntiAlias: true,
+                              filterQuality: FilterQuality.high,
+                              height: 96.0,
+                              fit: BoxFit.fitHeight,
+                            ),
+                          ),
+                          Text((token.data as twitch.Emote).name),
+                          Text((token.data as twitch.Emote).provider),
+                        ],
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 4.0),
+                      child: Image.network(
+                        token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
+                        filterQuality: FilterQuality.high,
+                        isAntiAlias: true,
+                        scale: token.data.provider == 'Twitch' ? 2.0 : 4.0,
+                      ),
                     ),
                   ),
                 ],
@@ -125,13 +148,49 @@ class ChatMessage extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   for (var emote in token.data)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 4.0),
-                      child: Image.network(
-                        emote.provider == 'Twitch' ? emote.mipmap[1] : emote.mipmap.last,
-                        filterQuality: FilterQuality.high,
-                        isAntiAlias: true,
-                        scale: emote.provider == 'Twitch' ? 2.0 : 4.0,
+                    WidgetTooltip(
+                      message: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 4.0),
+                              child: Image.network(
+                                (token.data as List<twitch.Emote>).first.mipmap.last,
+                                isAntiAlias: true,
+                                filterQuality: FilterQuality.high,
+                                height: 96.0,
+                                fit: BoxFit.fitHeight,
+                              ),
+                            ),
+                            Text((token.data as List<twitch.Emote>).first.name),
+                            Text((token.data as List<twitch.Emote>).first.provider),
+                            for (var emote in (token.data as List<twitch.Emote>).sublist(1))
+                              Padding(
+                                padding: const EdgeInsets.only(top: 4.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 8.0),
+                                      child: Image.network(emote.mipmap.first),
+                                    ),
+                                    Text(emote.name),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 4.0),
+                        child: Image.network(
+                          emote.provider == 'Twitch' ? emote.mipmap[1] : emote.mipmap.last,
+                          filterQuality: FilterQuality.high,
+                          isAntiAlias: true,
+                          scale: emote.provider == 'Twitch' ? 2.0 : 4.0,
+                        ),
                       ),
                     ),
                 ],
