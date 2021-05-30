@@ -1,0 +1,99 @@
+on: [push, pull_request]
+
+jobs:
+  android_build:
+    name: Android Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{secrets.GHKEY}}
+          path: chatsen
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+
+      - uses: subosito/flutter-action@v1.5.0
+        with:
+          channel: "master"
+
+      - name: Check for flutter updates
+        run: flutter upgrade
+
+      - name: Generate project files and cleanup
+        working-directory: ./chatsen
+        run: |
+          flutter create --org com.chatsen .
+          rm -rf test
+          sed '/.*package=".*".*/a \ \ \ <uses-permission android:name="android.permission.INTERNET"/>' ./android/app/src/main/AndroidManifest.xml > ./android/app/src/main/AndroidManifest2.xml
+          mv -f ./android/app/src/main/AndroidManifest2.xml ./android/app/src/main/AndroidManifest.xml
+          sed -e '/.*release {.*/a \ \ \ \ \ \ \ \ \ \ \ \ shrinkResources false\n\ \ \ \ \ \ \ \ \ \ \ \ minifyEnabled false' -e 's/minSdkVersion 16/minSdkVersion 19/' ./android/app/build.gradle > ./android/app/build2.gradle
+          mv -f ./android/app/build2.gradle ./android/app/build.gradle
+          flutter pub run flutter_launcher_icons:main
+          flutter build apk
+
+      - name: Prepare release files
+        run: |
+          mkdir release
+          cp ./chatsen/build/app/outputs/flutter-apk/app-release.apk ./release/Android.apk
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Android.apk
+          path: ./release/Android.apk
+
+      - uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ./release/Android.apk
+        env:
+          GITHUB_TOKEN: ${{secrets.GHKEY}}
+
+  ios_build:
+    name: iOS Build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{secrets.GHKEY}}
+          path: chatsen
+
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+
+      - uses: subosito/flutter-action@v1.5.0
+        with:
+          channel: "master"
+
+      - name: Check for flutter updates
+        run: flutter upgrade
+
+      - name: Generate project files and cleanup
+        working-directory: ./chatsen
+        run: |
+          flutter create --org com.chatsen .
+          rm -rf test
+          flutter pub run flutter_launcher_icons:main
+          flutter build ios --no-codesign
+
+      - name: Prepare release files and converting .app to .ipa
+        run: |
+          mkdir -p release/Payload
+          cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
+          ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS.ipa
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: iOS.ipa
+          path: ./release/iOS.ipa
+
+      - uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ./release/iOS.ipa
+        env:
+          GITHUB_TOKEN: ${{secrets.GHKEY}}

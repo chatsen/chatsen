@@ -1,0 +1,17 @@
+*
+!*/
+!/lib/**
+!.github/workflows/**.yml
+!assets/**
+
+# Global avoids
+.DS_Store
+*/.DS_Store
+**/.DS_Store
+
+# Single files to allow
+!/README.md
+!/LICENSE
+!/analysis_options.yaml
+!/pubspec.yaml
+!/.gitignore

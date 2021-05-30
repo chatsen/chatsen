@@ -1,0 +1,43 @@
+name: chatsen
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev using `pub publish`
+
+version: 2.6.9+2
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  url_launcher: any
+  hive: any
+  hive_flutter: any
+  webview_flutter: any
+  file_picker: any
+  dio: any
+  flutter_local_notifications: 1.4.4+4
+  flutter_chatsen_irc:
+    path: libraries/flutter_chatsen_irc
+  flutter_material_next:
+    path: libraries/flutter_material_next
+  bloc: any
+  flutter_bloc: any
+  equatable: any
+
+dev_dependencies:
+  hive_generator: any
+  build_runner: any
+  flutter_launcher_icons: "^0.8.0" # flutter pub run flutter_launcher_icons:main
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/forseniPhone.png
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/forseniPhone.png"
