@@ -77,6 +77,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                 ? WebView(
                     initialUrl: 'https://player.twitch.tv/?channel=${state.channelName}&enableExtensions=true&muted=false&parent=pornhub.com',
                     javascriptMode: JavascriptMode.unrestricted,
+                    allowsInlineMediaPlayback: true,
                   )
                 : null;
 
