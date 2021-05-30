@@ -4,7 +4,7 @@ Chatsen is a cross-platform application that allows you to chat on Twitch with s
 It also features a built-in video player (on supported platforms) and a variety of other features, such as auto-completion, notifications, whispers, and more to come!
 
 # Downloads
-You can find the latest release for supported platforms [here](http://no.pe).
+You can find the latest release for supported platforms [here](https://github.com/Chatsen/chatsen/releases).
 
 # Supported platforms
 
