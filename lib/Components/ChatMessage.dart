@@ -8,7 +8,6 @@ import '/Pages/Search.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 import 'dart:async';
-import 'package:flutter/services.dart';
 
 /// [ChatMessage] is a Widget that takes a [twitch.Message] and renders into something readable and interactable.
 class ChatMessage extends StatelessWidget {

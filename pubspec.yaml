@@ -29,6 +29,8 @@ dependencies:
   collection: any
 
 dev_dependencies:
+  pedantic: any
+  flutter_lints: any
   hive_generator: any
   build_runner: any
   flutter_launcher_icons: "^0.8.0" # flutter pub run flutter_launcher_icons:main
