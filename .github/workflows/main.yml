@@ -77,7 +77,7 @@ jobs:
           flutter create --org com.chatsen .
           rm -rf test
           sed -e 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info2.plist
-          mv - ./ios/Runner/Info2.plist ./ios/Runner/Info.plist
+          mv -f ./ios/Runner/Info2.plist ./ios/Runner/Info.plist
           flutter pub run flutter_launcher_icons:main
           flutter build ios --no-codesign
 
