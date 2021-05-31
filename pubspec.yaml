@@ -26,6 +26,7 @@ dependencies:
   bloc: any
   flutter_bloc: any
   equatable: any
+  collection: any
 
 dev_dependencies:
   hive_generator: any
