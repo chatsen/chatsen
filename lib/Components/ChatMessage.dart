@@ -203,42 +203,45 @@ class ChatMessage extends StatelessWidget {
       }
     }
 
-    return InkWell(
-      onLongPress: () async => await Clipboard.setData(ClipboardData(text: message.body)),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-        child: Text.rich(
-          TextSpan(
-            children: <InlineSpan>[
-                  if (MessagePresenter.cache.timestamps)
-                    TextSpan(
-                      text: '${message.dateTime.hour.toString().padLeft(2, '0')}:${message.dateTime.minute.toString().padLeft(2, '0')} ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  for (var badge in message.badges)
-                    WidgetSpan(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 4.0),
-                        child: Image.network(
-                          badge.mipmap.last,
-                          filterQuality: FilterQuality.high,
-                          isAntiAlias: true,
-                          scale: 4.0,
+    return Ink(
+      color: message.mention ? Theme.of(context).primaryColor.withAlpha(48) : null,
+      child: InkWell(
+        onLongPress: () async => await Clipboard.setData(ClipboardData(text: message.body)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+          child: Text.rich(
+            TextSpan(
+              children: <InlineSpan>[
+                    if (MessagePresenter.cache.timestamps)
+                      TextSpan(
+                        text: '${message.dateTime.hour.toString().padLeft(2, '0')}:${message.dateTime.minute.toString().padLeft(2, '0')} ',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    for (var badge in message.badges)
+                      WidgetSpan(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 4.0),
+                          child: Image.network(
+                            badge.mipmap.last,
+                            filterQuality: FilterQuality.high,
+                            isAntiAlias: true,
+                            scale: 4.0,
+                          ),
                         ),
                       ),
-                    ),
-                  TextSpan(
-                    text: '${message.user.displayName}' + (message.user.displayName.toLowerCase() != message.user.login.toLowerCase() ? ' (${message.user.login})' : '') + (message.action ? ' ' : ': '),
-                    style: TextStyle(color: color, fontWeight: FontWeight.bold),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () async => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => SearchPage(channel: message.channel, user: message.user),
+                    TextSpan(
+                      text: '${message.user.displayName}' + (message.user.displayName.toLowerCase() != message.user.login.toLowerCase() ? ' (${message.user.login})' : '') + (message.action ? ' ' : ': '),
+                      style: TextStyle(color: color, fontWeight: FontWeight.bold),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => SearchPage(channel: message.channel, user: message.user),
+                              ),
                             ),
-                          ),
-                  ),
-                ] +
-                spans,
+                    ),
+                  ] +
+                  spans,
+            ),
           ),
         ),
       ),
