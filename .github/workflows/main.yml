@@ -20,14 +20,12 @@ jobs:
         with:
           java-version: "12.x"
 
-      - uses: subosito/flutter-action@v1.5.0
+      - uses: chatsen/flutter-action@master
         with:
-          channel: "stable"
+          channel: "master"
 
       - name: Check for flutter updates
-        run: |
-          flutter channel master
-          flutter upgrade
+        run: flutter upgrade
 
       - name: Debug
         run: tree
@@ -78,14 +76,12 @@ jobs:
         with:
           java-version: "12.x"
 
-      - uses: subosito/flutter-action@v1.5.0
+      - uses: chatsen/flutter-action@master
         with:
           channel: "master"
 
       - name: Check for flutter updates
-        run: |
-          flutter channel master
-          flutter upgrade
+        run: flutter upgrade
 
       - name: Generate project files and cleanup
         working-directory: ./chatsen
