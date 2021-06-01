@@ -80,6 +80,9 @@ jobs:
       - name: Check for flutter updates
         run: flutter upgrade
 
+      - name: Debug
+        run: tree
+
       - name: Generate project files and cleanup
         working-directory: ./chatsen
         run: |
