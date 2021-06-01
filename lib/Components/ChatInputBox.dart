@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import '/Components/EmoteListModal.dart';
 import '/MVP/Presenters/AutocompletePresenter.dart';
+import 'WidgetTooltip.dart';
 
 /// [ChatInputBox] is our widget that features the input field used for every channel. It's feature rich and even contains autocompletion features!
 class ChatInputBox extends StatefulWidget {
@@ -40,20 +41,44 @@ class _ChatInputBoxState extends State<ChatInputBox> {
         if (textEditingController.text.split(' ').last.length >= 2 && !textEditingController.text.endsWith(' '))
           for (var emote in widget.client.emotes + widget.channel.emotes + widget.channel.transmitter.emotes)
             if ('${AutocompletePresenter.cache.emotePrefix ? ':' : ''}${emote.name}'.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()) && (AutocompletePresenter.cache.emotePrefix ? textEditingController.text.startsWith(':') : true))
-              InkWell(
-                onTap: () async {
-                  var splits = textEditingController.text.split(' ');
-                  splits.last = emote.name;
-                  textEditingController.text = splits.join(' ') + ' ';
-                  textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
-                  focusNode.requestFocus();
-                  setState(() {});
-                },
-                child: Padding(
+              WidgetTooltip(
+                // message: '${emote.name}',
+                message: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 32.0,
-                    child: Image.network(emote.mipmap.first),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4.0),
+                        child: Image.network(
+                          emote.mipmap.last,
+                          isAntiAlias: true,
+                          filterQuality: FilterQuality.high,
+                          height: 96.0,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                      Text(emote.name),
+                      Text(emote.provider),
+                    ],
+                  ),
+                ),
+
+                child: InkWell(
+                  onTap: () async {
+                    var splits = textEditingController.text.split(' ');
+                    splits.last = emote.name;
+                    textEditingController.text = splits.join(' ') + ' ';
+                    textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
+                    focusNode.requestFocus();
+                    setState(() {});
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 32.0,
+                      child: Image.network(emote.mipmap.first),
+                    ),
                   ),
                 ),
               ),

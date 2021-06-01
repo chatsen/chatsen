@@ -27,9 +27,12 @@ void main() async {
     if (androidInfo.version.sdkInt >= 21) await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
   }
 
-  await Hive.initFlutter();
-  // await Hive.init('.');
-  await Hive.registerAdapter(AccountModelAdapter());
+  if (Platform.isAndroid || Platform.isIOS) {
+    await Hive.initFlutter();
+  } else {
+    Hive.init('.');
+  }
+  Hive.registerAdapter(AccountModelAdapter());
   await Hive.openBox('Settings');
   await Hive.openBox('Accounts');
   await NotificationPresenter.loadData();
