@@ -7,6 +7,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          name: chatsen/signingkeys
+          token: ${{secrets.GHKEY}}
+          path: signingkeys
+
+      - uses: actions/checkout@v2
+        with:
           token: ${{secrets.GHKEY}}
           path: chatsen
 
@@ -26,10 +32,13 @@ jobs:
         run: |
           flutter create --org com.chatsen .
           rm -rf test
-          sed -e 's/android:label=".*"/android:label="Chatsen"/' -e '/.*package=".*".*/a \ \ \ <uses-permission android:name="android.permission.INTERNET"/>' ./android/app/src/main/AndroidManifest.xml > ./android/app/src/main/AndroidManifest2.xml
-          mv -f ./android/app/src/main/AndroidManifest2.xml ./android/app/src/main/AndroidManifest.xml
-          sed -e '/.*release {.*/a \ \ \ \ \ \ \ \ \ \ \ \ shrinkResources false\n\ \ \ \ \ \ \ \ \ \ \ \ minifyEnabled false' -e 's/minSdkVersion 16/minSdkVersion 19/' ./android/app/build.gradle > ./android/app/build2.gradle
-          mv -f ./android/app/build2.gradle ./android/app/build.gradle
+          sed -i 's/android:label=".*"/android:label="Chatsen"/'
+          sed -i '/.*package=".*".*/a \ \ \ <uses-permission android:name="android.permission.INTERNET"/>' ./android/app/src/main/AndroidManifest.xml
+          sed -i '/.*release {.*/a \ \ \ \ \ \ \ \ \ \ \ \ shrinkResources false\n\ \ \ \ \ \ \ \ \ \ \ \ minifyEnabled false'
+          sed -i 's/minSdkVersion 16/minSdkVersion 19/' ./android/app/build.gradle
+          sed -i '/android {/i def keystoreProperties = new Properties()\ndef keystorePropertiesFile = rootProject.file('\''key.properties'\'')\nif (keystorePropertiesFile.exists()) {\n    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))\n}\n' ./android/app/build.gradle
+          sed -i '/.*buildTypes {/i \ \ \ \ signingConfigs {\n\ \ \ \ \ \ \ \ release {\n\ \ \ \ \ \ \ \ \ \ \ \ keyAlias keystoreProperties['\''keyAlias'\'']\n\ \ \ \ \ \ \ \ \ \ \ \ keyPassword keystoreProperties['\''keyPassword'\'']\n\ \ \ \ \ \ \ \ \ \ \ \ storeFile keystoreProperties['\''storeFile'\''] ? file(keystoreProperties['\''storeFile'\'']) : null\n\ \ \ \ \ \ \ \ \ \ \ \ storePassword keystoreProperties['\''storePassword'\'']\n\ \ \ \ \ \ \ \ }\n\ \ \ \ }' ./android/app/build.gradle
+          sed -i 's/signingConfig signingConfigs.debug/signingConfig signingConfigs.release/' ./android/app/build.gradle
           flutter pub run flutter_launcher_icons:main
           flutter build apk
 
@@ -76,8 +85,7 @@ jobs:
         run: |
           flutter create --org com.chatsen .
           rm -rf test
-          sed -e 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info.plist > ./ios/Runner/Info2.plist
-          mv -f ./ios/Runner/Info2.plist ./ios/Runner/Info.plist
+          sed -i 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info.plist
           flutter pub run flutter_launcher_icons:main
           flutter build ios --no-codesign
 
