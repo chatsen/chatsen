@@ -22,10 +22,12 @@ jobs:
 
       - uses: subosito/flutter-action@v1.5.0
         with:
-          channel: "master"
+          channel: "stable"
 
       - name: Check for flutter updates
-        run: flutter upgrade
+        run: |
+          flutter channel master
+          flutter upgrade
 
       - name: Debug
         run: tree
@@ -81,7 +83,9 @@ jobs:
           channel: "master"
 
       - name: Check for flutter updates
-        run: flutter upgrade
+        run: |
+          flutter channel master
+          flutter upgrade
 
       - name: Generate project files and cleanup
         working-directory: ./chatsen
