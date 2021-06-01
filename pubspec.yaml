@@ -27,6 +27,7 @@ dependencies:
   flutter_bloc: any
   equatable: any
   collection: any
+  device_info: ^2.0.2
 
 dev_dependencies:
   pedantic: any

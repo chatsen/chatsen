@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +7,7 @@ import '/MVP/Presenters/AutocompletePresenter.dart';
 import '/MVP/Presenters/MessagePresenter.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:device_info/device_info.dart';
 
 import 'App.dart';
 import 'MVP/Models/AccountModel.dart';
@@ -17,7 +20,11 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.transparent,
   ));
-  await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+  if (Platform.isAndroid) {
+    var deviceInfo = DeviceInfoPlugin();
+    var androidInfo = await deviceInfo.androidInfo;
+    if (androidInfo.version.sdkInt >= 21) await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+  }
 
   await Hive.initFlutter();
   // await Hive.init('.');

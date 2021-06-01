@@ -17,7 +17,7 @@ You can find the latest release for supported platforms [here](https://github.co
 
 # Supported platforms
 
-- [x] Android 7+
+- [x] Android 5+ (>=4.1 && <5.0 also supported but without login/video player)
 - [x] iOS 12.2+
 - [ ] Browser extension
 - [ ] Windows
@@ -35,7 +35,7 @@ I currently do not own an iPhone and community members have had to test the appl
 
 # iOS Installation Guide
 
-As mentionned in the Support and donations section, I unfortunately do not own an Apple Developer license nor the required hardware to develop the application.
+As mentioned in the Support and donations section, I unfortunately do not own an Apple Developer license nor the required hardware to develop the application.
 However, there is still a way for you to install the iOS application, even on non-jailbroken devices!
 
 - Install AltStore on your device https://altstore.io/
