@@ -20,6 +20,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.transparent,
   ));
+
   if (Platform.isAndroid) {
     var deviceInfo = DeviceInfoPlugin();
     var androidInfo = await deviceInfo.androidInfo;

@@ -28,6 +28,10 @@ dependencies:
   equatable: any
   collection: any
   device_info: ^2.0.2
+  version: any
+  package_info: any
+  path_provider: any
+  open_file: any
 
 dev_dependencies:
   pedantic: any

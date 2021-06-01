@@ -118,7 +118,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                   height: 32.0,
                   child: InkWell(
                     onTap: () async {
-                      showModalBottomSheet(
+                      await showModalBottomSheet(
                         isScrollControlled: true,
                         context: context,
                         backgroundColor: Colors.transparent,
