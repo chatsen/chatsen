@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                             ),
                           ),
                           Tooltip(
-                            message: 'Add/Join a channel',
+                            message: 'Add/join a channel',
                             child: InkWell(
                               child: Container(
                                 child: Icon(Icons.add),
