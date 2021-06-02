@@ -7,7 +7,11 @@ It also features a built-in video player (on supported platforms) and a variety 
 
 # Downloads
 
-You can find the latest release for supported platforms [here](https://github.com/Chatsen/chatsen/releases).
+You can find the latest release for supported platforms (iOS, Android) [here](https://github.com/Chatsen/chatsen/releases).
+
+# Media
+
+**_TODO: Add screenshots_**
 
 # Store Releases
 
