@@ -32,6 +32,9 @@ dependencies:
   package_info: any
   path_provider: any
   open_file: any
+  dart_downloader:
+    git: https://github.com/williambulin/dart_downloader.git
+    # path: ../dart_downloader
 
 dev_dependencies:
   pedantic: any

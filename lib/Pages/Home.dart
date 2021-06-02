@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chatsen/Components/UpdateModal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,101 +69,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
     client.listeners.add(this);
 
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      var packageInfo = await PackageInfo.fromPlatform();
-      var response = await http.get(Uri.parse('https://api.github.com/repos/chatsen/chatsen/tags'));
-      var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
-
-      var releases = <Version, String>{};
-      for (var tagData in jsonResponse) {
-        try {
-          releases[Version.parse(tagData['name'].split('+').first)] = tagData['name'];
-          // ignore: empty_catches
-        } catch (e) {}
-      }
-
-      var releasesSorted = releases.keys.toList()..sort((a1, a2) => a1.compareTo(a2));
-
-      var lastRelease = releasesSorted.last;
-      var currentRelease = Version.parse(packageInfo.version);
-
-      if (currentRelease < lastRelease) {
-        await showModalBottomSheet(
-          context: context,
-          backgroundColor: Colors.transparent,
-          builder: (context) => SafeArea(
-            child: Padding(
-              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: WidgetBlur(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(height: 1.0, color: Theme.of(context).dividerColor),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(width: 32.0, height: 2.0, color: Theme.of(context).dividerColor),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0, right: 8.0),
-                            child: Text(
-                              'An update is available',
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0, right: 8.0),
-                            child: Text(
-                              '${releases[lastRelease]} (you: $currentRelease+${packageInfo.buildNumber})',
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                          ),
-                        ),
-                        Row(
-                          children: [
-                            Spacer(),
-                            OutlinedButton(
-                              onPressed: () async {
-                                Navigator.of(context).pop();
-                                var savePath = (await getApplicationDocumentsDirectory()).path;
-
-                                if (Platform.isAndroid) {
-                                  var response = await http.get(Uri.parse('https://github.com/chatsen/chatsen/releases/download/${releases[lastRelease]}/Android.apk'));
-                                  await File('$savePath/Update.apk').writeAsBytes(response.bodyBytes, flush: true);
-                                  await OpenFile.open('$savePath/Update.apk');
-                                } else if (Platform.isIOS) {
-                                  var response = await http.get(Uri.parse('https://github.com/chatsen/chatsen/releases/download/${releases[lastRelease]}/iOS.ipa'));
-                                  await File('$savePath/Update.ipa').writeAsBytes(response.bodyBytes, flush: true);
-                                  await OpenFile.open('$savePath/Update.ipa');
-                                }
-                              },
-                              child: Text('Download update'),
-                            ),
-                            SizedBox(width: 8.0),
-                            OutlinedButton(
-                              onPressed: () => Navigator.of(context).pop(),
-                              child: Text('Cancel'),
-                            ),
-                            SizedBox(width: 16.0),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Container(height: 1.0, color: Theme.of(context).dividerColor),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        );
-      }
+      // UpdateModal.searchForUpdate(null);
     });
 
     super.initState();
@@ -269,16 +176,30 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                   ),
                 ),
               ),
-              body: Builder(
-                builder: (context) => TabBarView(
-                  children: [
-                    for (var channel in client.channels)
-                      ChatView(
-                        client: client,
-                        channel: channel,
-                      ),
-                  ],
-                ),
+              body: Stack(
+                children: [
+                  TabBarView(
+                    children: [
+                      for (var channel in client.channels)
+                        ChatView(
+                          client: client,
+                          channel: channel,
+                        ),
+                    ],
+                  ),
+                  // Align(
+                  //   alignment: Alignment.topRight,
+                  //   child: SafeArea(
+                  //     child: IconButton(
+                  //       icon: Icon(
+                  //         Icons.update,
+                  //         color: Theme.of(context).primaryColor,
+                  //       ),
+                  //       onPressed: () async => UpdateModal.searchForUpdate(context),
+                  //     ),
+                  //   ),
+                  // ),
+                ],
               ),
             );
 

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dart_downloader/DownloadManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,8 +41,11 @@ void main() async {
   await AutocompletePresenter.loadData();
   runApp(
     BlocProvider(
-      create: (BuildContext context) => StreamOverlayBloc(),
-      child: App(),
+      create: (BuildContext context) => DownloadManager(),
+      child: BlocProvider(
+        create: (BuildContext context) => StreamOverlayBloc(),
+        child: App(),
+      ),
     ),
   );
   await Hive.close();
