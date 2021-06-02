@@ -19,8 +19,8 @@ class ChatMessage extends StatelessWidget {
   }) : super(key: key);
 
   Future<ui.Image> imageFromUrl(String url) {
-    Completer<ui.Image> completer = Completer<ui.Image>();
-    NetworkImage(url).resolve(new ImageConfiguration()).addListener(ImageStreamListener((image, synchronousCall) {
+    var completer = Completer<ui.Image>();
+    NetworkImage(url).resolve(ImageConfiguration()).addListener(ImageStreamListener((image, synchronousCall) {
       completer.complete(image.image);
     }));
     return completer.future;

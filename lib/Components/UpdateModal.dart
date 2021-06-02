@@ -99,77 +99,80 @@ class UpdateModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocBuilder<DownloadManager, DownloadManagerState>(
         builder: (context, state) => WidgetBlur(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(height: 1.0, color: Theme.of(context).dividerColor),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(width: 32.0, height: 2.0, color: Theme.of(context).dividerColor),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    for (var download in state.downloads)
-                      BlocBuilder<Download, DownloadState>(
-                        buildWhen: (state1, state2) => true,
-                        bloc: download,
-                        builder: (context, state) => InkWell(
-                          onTap: () async {
-                            if (state is DownloadCompleted) {
-                              var savePath = (await getApplicationDocumentsDirectory()).path;
-                              var fileName = state.url.split('/').last;
-                              await File('$savePath/$fileName').writeAsBytes(state.bytes, flush: true);
-                              await OpenFile.open('$savePath/$fileName');
-                            }
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text('${state is DownloadCompleted ? 'Downloaded' : 'Downloading'} update ${latestRelease.version}'),
-                                  SizedBox(height: 8.0),
-                                  if (state is DownloadContentState)
-                                    LinearProgressIndicator(
-                                      value: state.curBytes / state.maxBytes,
-                                    ),
-                                ],
+          child: Material(
+            color: Theme.of(context).canvasColor.withAlpha(196),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(height: 1.0, color: Theme.of(context).dividerColor),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(width: 32.0, height: 2.0, color: Theme.of(context).dividerColor),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      for (var download in state.downloads)
+                        BlocBuilder<Download, DownloadState>(
+                          buildWhen: (state1, state2) => true,
+                          bloc: download,
+                          builder: (context, state) => InkWell(
+                            onTap: () async {
+                              if (state is DownloadCompleted) {
+                                var savePath = (await getApplicationDocumentsDirectory()).path;
+                                var fileName = state.url.split('/').last;
+                                await File('$savePath/$fileName').writeAsBytes(state.bytes, flush: true);
+                                await OpenFile.open('$savePath/$fileName');
+                              }
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('${state is DownloadCompleted ? 'Downloaded' : 'Downloading'} update ${latestRelease.version}'),
+                                    SizedBox(height: 8.0),
+                                    if (state is DownloadContentState)
+                                      LinearProgressIndicator(
+                                        value: state.curBytes / state.maxBytes,
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    if (state.downloads.isEmpty) ...[
-                      Text('Local version: $currentVersion'),
-                      Text('Upstream version: ${latestRelease.version}'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton.icon(
-                            onPressed: () => BlocProvider.of<DownloadManager>(context).add(DownloadManagerAdd(url: '${latestRelease.downloads}/${Platform.isAndroid ? 'Android.apk' : 'iOS.ipa'}')),
-                            label: Text('Update now'),
-                            icon: Icon(Icons.system_update),
-                          ),
-                          SizedBox(width: 8.0),
-                          OutlinedButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: Text('Cancel'),
-                          ),
-                        ],
-                      ),
+                      if (state.downloads.isEmpty) ...[
+                        Text('Local version: $currentVersion'),
+                        Text('Upstream version: ${latestRelease.version}'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton.icon(
+                              onPressed: () => BlocProvider.of<DownloadManager>(context).add(DownloadManagerAdd(url: '${latestRelease.downloads}/${Platform.isAndroid ? 'Android.apk' : 'iOS.ipa'}')),
+                              label: Text('Update now'),
+                              icon: Icon(Icons.system_update),
+                            ),
+                            SizedBox(width: 8.0),
+                            OutlinedButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text('Cancel'),
+                            ),
+                          ],
+                        ),
+                      ],
                     ],
-                  ],
+                  ),
                 ),
-              ),
-              Container(height: 1.0, color: Theme.of(context).dividerColor),
-            ],
+                Container(height: 1.0, color: Theme.of(context).dividerColor),
+              ],
+            ),
           ),
         ),
       );
