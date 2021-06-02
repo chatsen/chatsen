@@ -38,6 +38,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> implements twitch.Listener {
   twitch.Client client;
   TextEditingController textEditingController;
+  Future<bool> updateFuture;
 
   Future<void> loadChannelHistory() async {
     var channels = await Hive.openBox('Channels');
@@ -68,8 +69,10 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
     textEditingController = TextEditingController();
     client.listeners.add(this);
 
+    updateFuture = UpdateModal.hasUpdate();
+
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      // UpdateModal.searchForUpdate(null);
+      UpdateModal.searchForUpdate(context);
     });
 
     super.initState();
@@ -187,18 +190,23 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                         ),
                     ],
                   ),
-                  // Align(
-                  //   alignment: Alignment.topRight,
-                  //   child: SafeArea(
-                  //     child: IconButton(
-                  //       icon: Icon(
-                  //         Icons.update,
-                  //         color: Theme.of(context).primaryColor,
-                  //       ),
-                  //       onPressed: () async => UpdateModal.searchForUpdate(context),
-                  //     ),
-                  //   ),
-                  // ),
+                  FutureBuilder<bool>(
+                    future: updateFuture,
+                    builder: (context, future) => future.hasData && future.data == true
+                        ? Align(
+                            alignment: Alignment.topRight,
+                            child: SafeArea(
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.system_update,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                onPressed: () async => UpdateModal.searchForUpdate(context),
+                              ),
+                            ),
+                          )
+                        : SizedBox(),
+                  ),
                 ],
               ),
             );

@@ -56,6 +56,15 @@ class UpdateModal extends StatelessWidget {
   final Version currentVersion;
   final GithubRelease latestRelease;
 
+  static Future<bool> hasUpdate() async {
+    var releases = await GithubReleaseProvider('chatsen/chatsen').getReleases();
+    releases.sort((a1, a2) => a1.version.compareTo(a2.version));
+    var packageInfo = await PackageInfo.fromPlatform();
+    var currentReleaseVersion = Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
+    var lastRelease = releases.last;
+    return currentReleaseVersion < lastRelease.version;
+  }
+
   static void searchForUpdate(BuildContext context) async {
     var releases = await GithubReleaseProvider('chatsen/chatsen').getReleases();
     releases.sort((a1, a2) => a1.version.compareTo(a2.version));
@@ -64,7 +73,7 @@ class UpdateModal extends StatelessWidget {
     var currentReleaseVersion = Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
     var lastRelease = releases.last;
 
-    if (currentReleaseVersion <= lastRelease.version) {
+    if (currentReleaseVersion < lastRelease.version) {
       await showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -106,6 +115,7 @@ class UpdateModal extends StatelessWidget {
                   children: [
                     for (var download in state.downloads)
                       BlocBuilder<Download, DownloadState>(
+                        buildWhen: (state1, state2) => true,
                         bloc: download,
                         builder: (context, state) => InkWell(
                           onTap: () async {
@@ -118,17 +128,20 @@ class UpdateModal extends StatelessWidget {
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('${state is DownloadCompleted ? 'Downloaded' : 'Downloading'} update ${latestRelease.version}'),
-                                SizedBox(height: 8.0),
-                                if (state is DownloadContentState)
-                                  LinearProgressIndicator(
-                                    value: state.bytes.length / state.maxBytes,
-                                  ),
-                              ],
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text('${state is DownloadCompleted ? 'Downloaded' : 'Downloading'} update ${latestRelease.version}'),
+                                  SizedBox(height: 8.0),
+                                  if (state is DownloadContentState)
+                                    LinearProgressIndicator(
+                                      value: state.curBytes / state.maxBytes,
+                                    ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -155,60 +168,6 @@ class UpdateModal extends StatelessWidget {
                   ],
                 ),
               ),
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   mainAxisSize: MainAxisSize.min,
-              //   children: [
-              //     Align(
-              //       alignment: Alignment.topLeft,
-              //       child: Padding(
-              //         padding: const EdgeInsets.only(left: 16.0, right: 8.0),
-              //         child: Text(
-              //           'An update is available',
-              //           style: Theme.of(context).textTheme.headline5,
-              //         ),
-              //       ),
-              //     ),
-              //     Align(
-              //       alignment: Alignment.topLeft,
-              //       child: Padding(
-              //         padding: const EdgeInsets.only(left: 16.0, right: 8.0),
-              //         child: Text(
-              //           '', // '${releases[lastRelease]} (you: $currentRelease+${packageInfo.buildNumber})',
-              //           style: Theme.of(context).textTheme.headline6,
-              //         ),
-              //       ),
-              //     ),
-              //     Row(
-              //       children: [
-              //         Spacer(),
-              //         OutlinedButton(
-              //           onPressed: () async {
-              //             Navigator.of(context).pop();
-              //             var savePath = (await getApplicationDocumentsDirectory()).path;
-
-              //             // if (Platform.isAndroid) {
-              //             //   var response = await http.get(Uri.parse('https://github.com/chatsen/chatsen/releases/download/${releases[lastRelease]}/Android.apk'));
-              //             //   await File('$savePath/Update.apk').writeAsBytes(response.bodyBytes, flush: true);
-              //             //   await OpenFile.open('$savePath/Update.apk');
-              //             // } else if (Platform.isIOS) {
-              //             //   var response = await http.get(Uri.parse('https://github.com/chatsen/chatsen/releases/download/${releases[lastRelease]}/iOS.ipa'));
-              //             //   await File('$savePath/Update.ipa').writeAsBytes(response.bodyBytes, flush: true);
-              //             //   await OpenFile.open('$savePath/Update.ipa');
-              //             // }
-              //           },
-              //           child: Text('Download update'),
-              //         ),
-              //         SizedBox(width: 8.0),
-              //         OutlinedButton(
-              //           onPressed: () => Navigator.of(context).pop(),
-              //           child: Text('Cancel'),
-              //         ),
-              //         SizedBox(width: 16.0),
-              //       ],
-              //     ),
-              //   ],
-              // ),
               Container(height: 1.0, color: Theme.of(context).dividerColor),
             ],
           ),
