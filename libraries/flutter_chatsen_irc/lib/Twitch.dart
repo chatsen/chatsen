@@ -519,7 +519,7 @@ class Channel {
         ),
         id: null,
         body: message,
-        mention: message.contains(receiver.credentials.login), // TODO: Move to message's constructor
+        mention: message.toLowerCase().contains(receiver.credentials.login.toLowerCase()), // TODO: Move to message's constructor
         dateTime: DateTime.now(),
       );
 
@@ -684,7 +684,7 @@ class Connection {
           ),
           id: message.tags['id'],
           body: message.parameters[1],
-          mention: message.parameters[1].contains(credentials.login), // TODO: Move to message's constructor
+          mention: message.parameters[1].toLowerCase().contains(credentials.login.toLowerCase()), // TODO: Move to message's constructor
           tagBadges: message.tags['badges'],
           tagEmotes: message.tags['emotes'],
         );
