@@ -54,7 +54,7 @@ class HomeEndDrawer extends StatelessWidget {
                             : ListView(
                                 reverse: true,
                                 children: [
-                                  for (var message in state)
+                                  for (var message in state.reversed)
                                     ChatMessage(
                                       prefixText: message.channel.name,
                                       message: message,
