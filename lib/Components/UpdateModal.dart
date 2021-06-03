@@ -122,10 +122,10 @@ class UpdateModal extends StatelessWidget {
                           builder: (context, state) => InkWell(
                             onTap: () async {
                               if (state is DownloadCompleted) {
-                                var savePath = (await getApplicationDocumentsDirectory()).path;
-                                var fileName = state.url.split('/').last;
-                                await File('$savePath/$fileName').writeAsBytes(state.bytes, flush: true);
-                                await OpenFile.open('$savePath/$fileName');
+                                // var savePath = (await getApplicationDocumentsDirectory()).path;
+                                // var fileName = state.url.split('/').last;
+                                // await File('$savePath/$fileName').writeAsBytes(state.bytes, flush: true);
+                                await OpenFile.open(state.file.path);
                               }
                             },
                             child: Padding(
@@ -187,7 +187,12 @@ class UpdateModal extends StatelessWidget {
                                 icon: Icon(Icons.add_shopping_cart_outlined),
                               ),
                             TextButton.icon(
-                              onPressed: () => BlocProvider.of<DownloadManager>(context).add(DownloadManagerAdd(url: '${latestRelease.downloads}/${Platform.isAndroid ? 'Android.apk' : 'iOS.ipa'}')),
+                              onPressed: () async => BlocProvider.of<DownloadManager>(context).add(
+                                DownloadManagerAdd(
+                                  url: '${latestRelease.downloads}/${Platform.isAndroid ? 'Android.apk' : 'iOS.ipa'}',
+                                  file: File('${(await getApplicationDocumentsDirectory()).path}/${Platform.isAndroid ? 'Android.apk' : 'iOS.ipa'}'),
+                                ),
+                              ),
                               label: Text('Update now'),
                               icon: Icon(Icons.system_update),
                             ),
