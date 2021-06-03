@@ -328,7 +328,7 @@ class Channel {
         ),
         id: message.tags['id'],
         body: message.parameters[1],
-        mention: message.parameters[1].contains(receiver.credentials.login), // TODO: Move to message's constructor
+        mention: message.parameters[1].toLowerCase().contains(receiver.credentials.login.toLowerCase()), // TODO: Move to message's constructor
         tagBadges: message.tags['badges'],
         tagEmotes: message.tags['emotes'],
         dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? 0),
