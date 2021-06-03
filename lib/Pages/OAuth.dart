@@ -27,6 +27,12 @@ class _OAuthPageState extends State<OAuthPage> {
   CookieManager cookieManager = CookieManager();
 
   @override
+  void initState() {
+    super.initState();
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text('Login with Twitch'),

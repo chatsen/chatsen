@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -71,11 +72,19 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
     updateFuture = UpdateModal.hasUpdate();
 
+    Timer.periodic(Duration(minutes: 5), (timer) {
+      print('Checking for updates...');
+      setState(() {
+        updateFuture = UpdateModal.hasUpdate();
+      });
+    });
+
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       UpdateModal.searchForUpdate(context);
     });
 
     super.initState();
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
   @override
