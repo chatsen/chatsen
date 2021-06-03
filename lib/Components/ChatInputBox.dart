@@ -121,7 +121,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                   key: key,
                   focusNode: focusNode,
                   controller: textEditingController,
-                  autofocus: true,
+                  autofocus: false,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
                     filled: false,
