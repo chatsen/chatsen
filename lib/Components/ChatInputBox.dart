@@ -142,6 +142,16 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                 child: Container(
                   height: 32.0,
                   child: InkWell(
+                    onTap: () async {},
+                    child: Icon(Icons.file_present),
+                  ),
+                ),
+              ),
+              AspectRatio(
+                aspectRatio: 1.0,
+                child: Container(
+                  height: 32.0,
+                  child: InkWell(
                     onTap: () async {
                       await showModalBottomSheet(
                         isScrollControlled: true,

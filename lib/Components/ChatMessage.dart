@@ -11,10 +11,12 @@ import 'dart:async';
 
 /// [ChatMessage] is a Widget that takes a [twitch.Message] and renders into something readable and interactable.
 class ChatMessage extends StatelessWidget {
+  final String prefixText;
   final twitch.Message message;
 
   const ChatMessage({
     Key key,
+    this.prefixText,
     @required this.message,
   }) : super(key: key);
 
@@ -211,6 +213,11 @@ class ChatMessage extends StatelessWidget {
           child: Text.rich(
             TextSpan(
               children: <InlineSpan>[
+                    if (prefixText != null)
+                      TextSpan(
+                        text: '$prefixText ',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
                     if (MessagePresenter.cache.timestamps)
                       TextSpan(
                         text: '${message.dateTime.hour.toString().padLeft(2, '0')}:${message.dateTime.minute.toString().padLeft(2, '0')} ',

@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chatsen/Components/HomeEndDrawer.dart';
 import 'package:chatsen/Components/UpdateModal.dart';
+import 'package:chatsen/Mentions/MentionsCubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -121,6 +123,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                   );
                 },
               ),
+              endDrawer: HomeEndDrawer(),
               bottomNavigationBar: Builder(
                 builder: (context) => SafeArea(
                   child: Container(
@@ -180,6 +183,14 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                 width: 32.0,
                                 child: Icon(Icons.add),
                               ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () async => Scaffold.of(context).openEndDrawer(),
+                            child: Container(
+                              height: 32.0,
+                              width: 32.0,
+                              child: Icon(Icons.alternate_email, size: 20.0),
                             ),
                           ),
                         ],
@@ -262,6 +273,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void onMessage(twitch.Channel channel, twitch.Message message) {
+    if (message.mention) BlocProvider.of<MentionsCubit>(context).add(message);
     if (NotificationPresenter.cache.mentionNotification && message.mention) {
       NotificationWrapper.of(context).sendNotification(
         payload: message.body,

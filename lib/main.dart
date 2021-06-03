@@ -13,6 +13,7 @@ import 'package:device_info/device_info.dart';
 import 'App.dart';
 import 'MVP/Models/AccountModel.dart';
 import 'MVP/Presenters/NotificationPresenter.dart';
+import 'Mentions/MentionsCubit.dart';
 import 'StreamOverlay/StreamOverlayBloc.dart';
 
 /// The main function is the entry point of our application.
@@ -41,10 +42,13 @@ void main() async {
   await AutocompletePresenter.loadData();
   runApp(
     BlocProvider(
-      create: (BuildContext context) => DownloadManager(),
+      create: (BuildContext context) => MentionsCubit(),
       child: BlocProvider(
-        create: (BuildContext context) => StreamOverlayBloc(),
-        child: App(),
+        create: (BuildContext context) => DownloadManager(),
+        child: BlocProvider(
+          create: (BuildContext context) => StreamOverlayBloc(),
+          child: App(),
+        ),
       ),
     ),
   );
