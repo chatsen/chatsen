@@ -62,7 +62,7 @@ class UpdateModal extends StatelessWidget {
     var packageInfo = await PackageInfo.fromPlatform();
     var currentReleaseVersion = Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
     var lastRelease = releases.last;
-    return currentReleaseVersion < lastRelease.version;
+    return currentReleaseVersion <= lastRelease.version;
   }
 
   static void searchForUpdate(BuildContext context) async {
@@ -73,7 +73,7 @@ class UpdateModal extends StatelessWidget {
     var currentReleaseVersion = Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
     var lastRelease = releases.last;
 
-    if (currentReleaseVersion < lastRelease.version) {
+    if (currentReleaseVersion <= lastRelease.version) {
       await showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -149,11 +149,43 @@ class UpdateModal extends StatelessWidget {
                           ),
                         ),
                       if (state.downloads.isEmpty) ...[
-                        Text('Local version: $currentVersion'),
-                        Text('Upstream version: ${latestRelease.version}'),
+                        Text('An update is available', style: Theme.of(context).textTheme.subtitle1),
+                        Text('$currentVersion -> ${latestRelease.version}', style: Theme.of(context).textTheme.subtitle2),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
+                            if (Platform.isIOS)
+                              TextButton.icon(
+                                onPressed: () async {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('The update is being downloaded in the background, it may take a while...'),
+                                      behavior: SnackBarBehavior.floating,
+                                    ),
+                                  );
+
+                                  Navigator.of(context).pop();
+
+                                  try {
+                                    var url = '${latestRelease.downloads}/iOS.ipa';
+                                    var bytes = (await http.get(Uri.parse(url))).bodyBytes;
+
+                                    var savePath = (await getApplicationDocumentsDirectory()).path;
+                                    var fileName = url.split('/').last;
+                                    await File('$savePath/$fileName').writeAsBytes(bytes, flush: true);
+                                    await OpenFile.open('$savePath/$fileName');
+                                  } catch (e) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('An error has occured while downloading the update: $e'),
+                                        behavior: SnackBarBehavior.floating,
+                                      ),
+                                    );
+                                  }
+                                },
+                                label: Text('iOS Legacy'),
+                                icon: Icon(Icons.add_shopping_cart_outlined),
+                              ),
                             TextButton.icon(
                               onPressed: () => BlocProvider.of<DownloadManager>(context).add(DownloadManagerAdd(url: '${latestRelease.downloads}/${Platform.isAndroid ? 'Android.apk' : 'iOS.ipa'}')),
                               label: Text('Update now'),
