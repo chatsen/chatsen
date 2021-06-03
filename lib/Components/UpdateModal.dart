@@ -62,7 +62,7 @@ class UpdateModal extends StatelessWidget {
     var packageInfo = await PackageInfo.fromPlatform();
     var currentReleaseVersion = Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
     var lastRelease = releases.last;
-    return currentReleaseVersion <= lastRelease.version;
+    return currentReleaseVersion < lastRelease.version;
   }
 
   static void searchForUpdate(BuildContext context) async {
@@ -73,7 +73,7 @@ class UpdateModal extends StatelessWidget {
     var currentReleaseVersion = Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
     var lastRelease = releases.last;
 
-    if (currentReleaseVersion <= lastRelease.version) {
+    if (currentReleaseVersion < lastRelease.version) {
       await showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -154,7 +154,7 @@ class UpdateModal extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            if (Platform.isIOS)
+                            if (Platform.isAndroid)
                               TextButton.icon(
                                 onPressed: () async {
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -167,7 +167,7 @@ class UpdateModal extends StatelessWidget {
                                   Navigator.of(context).pop();
 
                                   try {
-                                    var url = '${latestRelease.downloads}/iOS.ipa';
+                                    var url = '${latestRelease.downloads}/Android.apk';
                                     var bytes = (await http.get(Uri.parse(url))).bodyBytes;
 
                                     var savePath = (await getApplicationDocumentsDirectory()).path;
@@ -183,7 +183,7 @@ class UpdateModal extends StatelessWidget {
                                     );
                                   }
                                 },
-                                label: Text('iOS Legacy'),
+                                label: Text('4.1 Test'),
                                 icon: Icon(Icons.add_shopping_cart_outlined),
                               ),
                             TextButton.icon(
