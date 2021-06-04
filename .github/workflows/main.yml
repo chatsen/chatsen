@@ -85,7 +85,7 @@ jobs:
       - uses: r0adkll/upload-google-play@v1
         with:
           packageName: com.chatsen.chatsen
-          serviceAccountJson: ./signingkeys/pc-api-7512701657656671844-671-7355ae1b4dab.json
+          serviceAccountJson: ./signingkeys/pc-api-7512701657656671844-671-a7a04005a195.json
           track: production
           releaseFiles: ./release/PlayStore.aab
           whatsNewDirectory: .
