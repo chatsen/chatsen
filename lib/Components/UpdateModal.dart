@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chatsen/Consts.dart';
 import 'package:dart_downloader/DownloadManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,6 +58,7 @@ class UpdateModal extends StatelessWidget {
   final GithubRelease latestRelease;
 
   static Future<bool> hasUpdate() async {
+    if (kPlayStoreRelease) return false;
     var releases = await GithubReleaseProvider('chatsen/chatsen').getReleases();
     releases.sort((a1, a2) => a1.version.compareTo(a2.version));
     var packageInfo = await PackageInfo.fromPlatform();
@@ -66,6 +68,8 @@ class UpdateModal extends StatelessWidget {
   }
 
   static void searchForUpdate(BuildContext context) async {
+    if (kPlayStoreRelease) return;
+
     var releases = await GithubReleaseProvider('chatsen/chatsen').getReleases();
     releases.sort((a1, a2) => a1.version.compareTo(a2.version));
 
@@ -121,12 +125,7 @@ class UpdateModal extends StatelessWidget {
                           bloc: download,
                           builder: (context, state) => InkWell(
                             onTap: () async {
-                              if (state is DownloadCompleted) {
-                                // var savePath = (await getApplicationDocumentsDirectory()).path;
-                                // var fileName = state.url.split('/').last;
-                                // await File('$savePath/$fileName').writeAsBytes(state.bytes, flush: true);
-                                await OpenFile.open(state.file.path);
-                              }
+                              if (state is DownloadCompleted) await OpenFile.open(state.file.path);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -142,6 +141,10 @@ class UpdateModal extends StatelessWidget {
                                       LinearProgressIndicator(
                                         value: state.curBytes / state.maxBytes,
                                       ),
+                                    if (state is DownloadCompleted) ...[
+                                      SizedBox(height: 8.0),
+                                      Text('Tap here to install update'),
+                                    ],
                                   ],
                                 ),
                               ),
@@ -154,39 +157,8 @@ class UpdateModal extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            if (Platform.isAndroid)
-                              TextButton.icon(
-                                onPressed: () async {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('The update is being downloaded in the background, it may take a while...'),
-                                      behavior: SnackBarBehavior.floating,
-                                    ),
-                                  );
-
-                                  Navigator.of(context).pop();
-
-                                  try {
-                                    var url = '${latestRelease.downloads}/Android.apk';
-                                    var bytes = (await http.get(Uri.parse(url))).bodyBytes;
-
-                                    var savePath = (await getApplicationDocumentsDirectory()).path;
-                                    var fileName = url.split('/').last;
-                                    await File('$savePath/$fileName').writeAsBytes(bytes, flush: true);
-                                    await OpenFile.open('$savePath/$fileName');
-                                  } catch (e) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text('An error has occured while downloading the update: $e'),
-                                        behavior: SnackBarBehavior.floating,
-                                      ),
-                                    );
-                                  }
-                                },
-                                label: Text('4.1 Test'),
-                                icon: Icon(Icons.add_shopping_cart_outlined),
-                              ),
                             TextButton.icon(
+                              // TODO: Check Android version and open link in browser for API <= 19: (await DeviceInfoPlugin().androidInfo).version.sdkInt
                               onPressed: () async => BlocProvider.of<DownloadManager>(context).add(
                                 DownloadManagerAdd(
                                   url: '${latestRelease.downloads}/${Platform.isAndroid ? 'Android.apk' : 'iOS.ipa'}',
@@ -214,3 +186,37 @@ class UpdateModal extends StatelessWidget {
         ),
       );
 }
+
+
+                            // if (Platform.isAndroid)
+                            //   TextButton.icon(
+                            //     onPressed: () async {
+                            //       ScaffoldMessenger.of(context).showSnackBar(
+                            //         SnackBar(
+                            //           content: Text('The update is being downloaded in the background, it may take a while...'),
+                            //           behavior: SnackBarBehavior.floating,
+                            //         ),
+                            //       );
+
+                            //       Navigator.of(context).pop();
+
+                            //       try {
+                            //         var url = '${latestRelease.downloads}/Android.apk';
+                            //         var bytes = (await http.get(Uri.parse(url))).bodyBytes;
+
+                            //         var savePath = (await getApplicationDocumentsDirectory()).path;
+                            //         var fileName = url.split('/').last;
+                            //         await File('$savePath/$fileName').writeAsBytes(bytes, flush: true);
+                            //         await OpenFile.open('$savePath/$fileName');
+                            //       } catch (e) {
+                            //         ScaffoldMessenger.of(context).showSnackBar(
+                            //           SnackBar(
+                            //             content: Text('An error has occured while downloading the update: $e'),
+                            //             behavior: SnackBarBehavior.floating,
+                            //           ),
+                            //         );
+                            //       }
+                            //     },
+                            //     label: Text('4.1 Test'),
+                            //     icon: Icon(Icons.add_shopping_cart_outlined),
+                            //   ),

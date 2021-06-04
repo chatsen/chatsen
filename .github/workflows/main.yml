@@ -65,6 +65,31 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GHKEY}}
 
+      - name: Generate project files and cleanup
+        working-directory: ./chatsen
+        run: |
+          sed -i 's/kPlayStoreRelease = false/kPlayStoreRelease = true/' ./lib/Consts.dart
+          flutter build appbundle
+
+      - name: Prepare release files
+        run: |
+          cp ./chatsen/build/app/outputs/bundle/release/app-release.aab ./release/PlayStore.aab
+          echo "Sync with Github repository." > whatsnew-en-US
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: PlayStore.aab
+          path: ./release/PlayStore.aab
+
+      - uses: r0adkll/upload-google-play@v1
+        with:
+          packageName: com.chatsen.chatsen
+          serviceAccountJson: ./signingkeys/pc-api-7512701657656671844-671-7355ae1b4dab.json
+          track: production
+          releaseFiles: ./release/PlayStore.aab
+          whatsNewDirectory: .
+
   ios_build:
     name: iOS Build
     runs-on: macos-latest

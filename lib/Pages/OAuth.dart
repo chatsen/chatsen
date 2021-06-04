@@ -83,7 +83,7 @@ class _OAuthPageState extends State<OAuthPage> {
 
                 var profileAvatarUrl = profileInfo['data']['user']['profileImageURL'];
 
-                Uint8List bytes = (await NetworkAssetBundle(Uri.parse(profileAvatarUrl)).load(profileAvatarUrl)).buffer.asUint8List();
+                var bytes = (await NetworkAssetBundle(Uri.parse(profileAvatarUrl)).load(profileAvatarUrl)).buffer.asUint8List();
                 print(bytes);
 
                 var data = await AccountPresenter.loadData();
@@ -94,7 +94,7 @@ class _OAuthPageState extends State<OAuthPage> {
                   existing.id = int.tryParse(cookies['twilight-user']['id']) ?? 0;
                   existing.login = cookies['twilight-user']['login'];
                   existing.avatarBytes = bytes;
-                  existing.save();
+                  await existing.save();
                 } else {
                   data.add(
                     AccountModel(
@@ -106,12 +106,12 @@ class _OAuthPageState extends State<OAuthPage> {
                     ),
                   );
 
-                  await AccountPresenter.saveData(data);
+                  AccountPresenter.saveData(data);
                 }
               } catch (e) {}
 
-              webViewController.clearCache();
-              cookieManager.clearCookies();
+              await webViewController.clearCache();
+              await cookieManager.clearCookies();
 
               Navigator.of(context).pop();
               widget.refresh();

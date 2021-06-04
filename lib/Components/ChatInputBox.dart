@@ -1,3 +1,4 @@
+import 'package:chatsen/Upload/UploadModal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import '/Components/EmoteListModal.dart';
@@ -137,16 +138,16 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                   },
                 ),
               ),
-              AspectRatio(
-                aspectRatio: 1.0,
-                child: Container(
-                  height: 32.0,
-                  child: InkWell(
-                    onTap: () async {},
-                    child: Icon(Icons.file_present),
-                  ),
-                ),
-              ),
+              // AspectRatio(
+              //   aspectRatio: 1.0,
+              //   child: Container(
+              //     height: 32.0,
+              //     child: InkWell(
+              //       onTap: () async => await UploadModal.show(context: context),
+              //       child: Icon(Icons.file_present),
+              //     ),
+              //   ),
+              // ),
               AspectRatio(
                 aspectRatio: 1.0,
                 child: Container(

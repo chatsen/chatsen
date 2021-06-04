@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:chatsen/Components/HomeEndDrawer.dart';
@@ -8,10 +7,6 @@ import 'package:chatsen/Mentions/MentionsCubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_material_next/WidgetBlur.dart';
-import 'package:package_info/package_info.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:version/version.dart';
 import '/Components/ChannelJoinModal.dart';
 import '/Components/HomeDrawer.dart';
 import '/Components/HomeTab.dart';
@@ -24,8 +19,6 @@ import '/Views/Chat.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import 'package:hive/hive.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:http/http.dart' as http;
-import 'package:open_file/open_file.dart';
 
 /// Our [HomePage]. This will contain access to everything: from Settings via a drawer, access to the different chat channels to everything else related to our application.
 class HomePage extends StatefulWidget {

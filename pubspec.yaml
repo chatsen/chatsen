@@ -27,7 +27,7 @@ dependencies:
   flutter_bloc: any
   equatable: any
   collection: any
-  device_info: ^2.0.2
+  device_info: ^2.0.2 # TODO: Switch to device_info_plus
   version: any
   package_info: any
   path_provider: any
@@ -35,6 +35,7 @@ dependencies:
   dart_downloader:
     git: https://github.com/williambulin/dart_downloader.git
     # path: ../dart_downloader
+  # file_picker_cross: ^4.4.2
 
 dev_dependencies:
   pedantic: any
