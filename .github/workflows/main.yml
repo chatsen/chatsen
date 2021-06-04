@@ -32,6 +32,7 @@ jobs:
         working-directory: ./chatsen
         run: |
           sed -i "s/^version: .*$/^version: ${GITHUB_REF/refs\/tags\//}/" ./pubspec.yaml
+          cat ./pubspec.yaml
 
       - name: Generate project files and cleanup
         working-directory: ./chatsen
@@ -123,6 +124,7 @@ jobs:
         run: |
           sed -e "s/^version: .*$/^version: ${GITHUB_REF/refs\/tags\//}/" ./pubspec.yaml > ./pubspec2.yaml
           mv -f ./pubspec2.yaml ./pubspec.yaml
+          cat ./pubspec.yaml
 
       - name: Generate project files and cleanup
         working-directory: ./chatsen
