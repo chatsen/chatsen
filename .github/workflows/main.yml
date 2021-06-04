@@ -31,8 +31,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         working-directory: ./chatsen
         run: |
-          sed -i 's/version: .*$/version: ${GITHUB_REF/refs\/tags\//}/' ./pubspec.yaml
-          cat ./pubspec.yaml
+          sed -i "s/^version: .*$/^version: ${GITHUB_REF/refs\/tags\//}/" ./pubspec.yaml
 
       - name: Generate project files and cleanup
         working-directory: ./chatsen
