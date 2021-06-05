@@ -6,7 +6,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev using `p
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -36,6 +36,7 @@ dependencies:
     git: https://github.com/williambulin/dart_downloader.git
     # path: ../dart_downloader
   # file_picker_cross: ^4.4.2
+  tinycolor: ^1.0.3
 
 dev_dependencies:
   pedantic: ^1.11.0

@@ -20,7 +20,7 @@ class App extends StatelessWidget {
             appBuilder: (BuildContext context, ThemeData darkTheme, ThemeData lightTheme, ThemeMode themeMode) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                themeMode: ThemeMode.dark,
+                themeMode: themeMode,
                 darkTheme: darkTheme,
                 theme: lightTheme,
                 home: Builder(
