@@ -9,9 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 import 'dart:async';
 
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:tinycolor/tinycolor.dart';
-
 /// [ChatMessage] is a Widget that takes a [twitch.Message] and renders into something readable and interactable.
 class ChatMessage extends StatelessWidget {
   final String? prefixText;
@@ -23,47 +20,14 @@ class ChatMessage extends StatelessWidget {
     required this.message,
   }) : super(key: key);
 
-  Color darken(Color color, [double amount = .1]) {
-    assert(amount >= 0 && amount <= 1);
-    final hsl = HSLColor.fromColor(color);
-    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
-    return hslDark.toColor();
-  }
-
-  Color lighten(Color color, [double amount = .1]) {
-    assert(amount >= 0 && amount <= 1);
-    final hsl = HSLColor.fromColor(color);
-    final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
-    return hslLight.toColor();
-  }
-
   Color getUserColor(BuildContext context, Color color) {
-    // var luma = (color.computeLuminance() * 255.0).floor();
     switch (Theme.of(context).brightness) {
       case Brightness.dark:
-        var tinyColor = color.toTinyColor();
-        var b1 = tinyColor.getBrightness();
-        var b3 = 0;
-        while (tinyColor.isDark()) {
-          tinyColor = tinyColor.lighten(1);
-          b3++;
-        }
-        // if (b1 < 128.0) {
-        //   tinyColor = tinyColor.lighten(((128.0 - b1) / 128.0 * 50.0).floor());
-        //   var b2 = tinyColor.getBrightness();
-        //   print(b1);
-        //   print(b2);
-        //   print(b3);
-        //   print('');
-        // }
-
-        return tinyColor.color;
+        final hsl = HSLColor.fromColor(Color(color.value == 0xFF000000 ? 0xFF010101 : color.value));
+        return hsl.withLightness(hsl.lightness.clamp(0.6, 1.0)).toColor();
       case Brightness.light:
-        var tinyColor = color.toTinyColor();
-        while (tinyColor.isLight()) {
-          tinyColor = tinyColor.darken(1);
-        }
-        return tinyColor.color;
+        final hsl = HSLColor.fromColor(Color(color.value == 0xFF000000 ? 0xFF010101 : color.value));
+        return hsl.withLightness(hsl.lightness.clamp(0.0, 0.4)).toColor();
     }
   }
 
@@ -135,8 +99,8 @@ class ChatMessage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: InkWell(
-                      child: Image.network('${token.data}'),
                       onTap: () async => launch(token.data),
+                      child: Image.network('${token.data}'),
                     ),
                   ),
                 ),
