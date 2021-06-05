@@ -3,9 +3,9 @@ import 'package:hive/hive.dart';
 
 /// [AccountPresenter] is the presenter used for our accounts. It saves and loads in a list of [AccountModel] models.
 class AccountPresenter {
-  static Future<List<AccountModel>> loadData() async {
+  static Future<List<AccountModel?>> loadData() async {
     var box = await Hive.openBox('Accounts');
-    var data = <AccountModel>[];
+    var data = <AccountModel?>[];
     if (box.isEmpty) {
       data.add(
         AccountModel(
@@ -17,34 +17,37 @@ class AccountPresenter {
       await saveData(data);
       return await loadData();
     }
-    for (int i = 0; i < box.length; ++i) {
+    for (var i = 0; i < box.length; ++i) {
       data.add(box.getAt(i));
     }
     return data;
   }
 
-  static void saveData(List<AccountModel> models) async {
+  static Future<void> saveData(List<AccountModel?> models) async {
     var box = await Hive.openBox('Accounts');
     await box.clear();
     await box.addAll(models);
   }
 
-  static Future<AccountModel> findCurrentAccount() async {
+  static Future<AccountModel?> findCurrentAccount() async {
+    print('first step');
     var box = await Hive.openBox('Settings');
+    print('second step');
     var currentId = box.containsKey('currentAccountId') ? box.get('currentAccountId') : 0;
     var accounts = await loadData();
-    return accounts.firstWhere((element) => element.isActive, orElse: () => accounts.first);
+    print('third step');
+    return accounts.firstWhere((element) => element!.isActive!, orElse: () => accounts.first);
   }
 
-  static void setCurrentAccount(AccountModel model) async {
+  static void setCurrentAccount(AccountModel? model) async {
     var box = await Hive.openBox('Settings');
     var currentId = box.containsKey('currentAccountId') ? box.get('currentAccountId') : 0;
     var accounts = await loadData();
     for (var account in accounts) {
-      if (account.isActive) account.isActive = false;
-      if (account.id == model.id) account.isActive = true;
-      account.save();
+      if (account!.isActive!) account.isActive = false;
+      if (account.id == model!.id) account.isActive = true;
+      await account.save();
     }
-    await saveData(accounts);
+    saveData(accounts);
   }
 }

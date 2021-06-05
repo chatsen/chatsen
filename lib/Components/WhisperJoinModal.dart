@@ -5,13 +5,13 @@ import 'package:hive/hive.dart';
 
 /// [WhisperJoinModal] is our modal view/widget designed to add and join new channels to the client.
 class WhisperJoinModal extends StatefulWidget {
-  final twitch.Client client;
+  final twitch.Client? client;
   final Function refresh;
 
   const WhisperJoinModal({
-    Key key,
-    @required this.client,
-    @required this.refresh,
+    Key? key,
+    required this.client,
+    required this.refresh,
   }) : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class WhisperJoinModal extends StatefulWidget {
 }
 
 class _WhisperJoinModalState extends State<WhisperJoinModal> {
-  TextEditingController textEditingController;
+  TextEditingController? textEditingController;
 
   @override
   void initState() {
@@ -29,14 +29,14 @@ class _WhisperJoinModalState extends State<WhisperJoinModal> {
 
   @override
   void dispose() {
-    textEditingController.dispose();
+    textEditingController!.dispose();
     super.dispose();
   }
 
   void submit() async {
-    var channelNames = textEditingController.text.replaceAll(' ', ',').split(',').map((value) => '$value').toList();
-    channelNames.removeWhere((channelName) => widget.client.channels.any((channel) => channel.name == channelName));
-    for (var channelName in channelNames) widget.client.transmitters[null].joinWhisper(channelName);
+    var channelNames = textEditingController!.text.replaceAll(' ', ',').split(',').map((value) => '$value').toList();
+    channelNames.removeWhere((channelName) => widget.client!.channels.any((channel) => channel.name == channelName));
+    for (var channelName in channelNames) widget.client!.transmitters[null]!.joinWhisper(channelName);
     Navigator.of(context).pop();
     textEditingController?.clear();
     widget.refresh();

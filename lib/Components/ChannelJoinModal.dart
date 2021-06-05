@@ -5,13 +5,13 @@ import 'package:hive/hive.dart';
 
 /// [ChannelJoinModal] is our modal view/widget designed to add and join new channels to the client.
 class ChannelJoinModal extends StatefulWidget {
-  final twitch.Client client;
+  final twitch.Client? client;
   final Function refresh;
 
   const ChannelJoinModal({
-    Key key,
-    @required this.client,
-    @required this.refresh,
+    Key? key,
+    required this.client,
+    required this.refresh,
   }) : super(key: key);
 
   @override
@@ -19,7 +19,7 @@ class ChannelJoinModal extends StatefulWidget {
 }
 
 class _ChannelJoinModalState extends State<ChannelJoinModal> {
-  TextEditingController textEditingController;
+  TextEditingController? textEditingController;
 
   @override
   void initState() {
@@ -29,17 +29,17 @@ class _ChannelJoinModalState extends State<ChannelJoinModal> {
 
   @override
   void dispose() {
-    textEditingController.dispose();
+    textEditingController!.dispose();
     super.dispose();
   }
 
   void submit() async {
-    var channelNames = textEditingController.text.replaceAll(' ', ',').split(',').map((value) => '#$value').toList();
-    channelNames.removeWhere((channelName) => widget.client.channels.any((channel) => channel.name == channelName));
-    await widget.client.joinChannels(channelNames);
+    var channelNames = textEditingController!.text.replaceAll(' ', ',').split(',').map((value) => '#$value').toList();
+    channelNames.removeWhere((channelName) => widget.client!.channels.any((channel) => channel.name == channelName));
+    await widget.client!.joinChannels(channelNames);
     var channelsBox = await Hive.openBox('Channels');
     channelsBox.clear();
-    channelsBox.addAll(widget.client.channels.map((channel) => channel.name));
+    channelsBox.addAll(widget.client!.channels.map((channel) => channel.name));
     Navigator.of(context).pop();
     textEditingController?.clear();
     widget.refresh();

@@ -7,11 +7,11 @@ import '/Components/WhisperTab.dart';
 import '/Views/Chat.dart';
 
 class WhispersPage extends StatefulWidget {
-  final twitch.Client client;
+  final twitch.Client? client;
 
   const WhispersPage({
-    Key key,
-    @required this.client,
+    Key? key,
+    required this.client,
   }) : super(key: key);
 
   @override
@@ -21,26 +21,26 @@ class WhispersPage extends StatefulWidget {
 class _WhispersPageState extends State<WhispersPage> implements twitch.Listener {
   @override
   void initState() {
-    widget.client.listeners.add(this);
+    widget.client!.listeners.add(this);
     super.initState();
   }
 
   @override
   void dispose() {
-    widget.client.listeners.remove(this);
+    widget.client!.listeners.remove(this);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) => DefaultTabController(
-        length: widget.client.transmitters[null].whispers.length,
+        length: widget.client!.transmitters[null]!.whispers.length,
         child: Scaffold(
           extendBody: true,
           extendBodyBehindAppBar: true,
           body: Builder(
             builder: (context) => TabBarView(
               children: [
-                for (var channel in widget.client.transmitters[null].whispers)
+                for (var channel in widget.client!.transmitters[null]!.whispers)
                   ChatView(
                     client: widget.client,
                     channel: channel,
@@ -72,7 +72,7 @@ class _WhispersPageState extends State<WhispersPage> implements twitch.Listener 
                           child: TabBar(
                             labelPadding: EdgeInsets.only(left: 8.0),
                             isScrollable: true,
-                            tabs: widget.client.transmitters[null].whispers
+                            tabs: widget.client!.transmitters[null]!.whispers
                                 .map(
                                   (channel) => WhisperTab(
                                     client: widget.client,
@@ -129,7 +129,7 @@ class _WhispersPageState extends State<WhispersPage> implements twitch.Listener 
   void onHistoryLoaded(twitch.Channel channel) {}
 
   @override
-  void onMessage(twitch.Channel channel, twitch.Message message) {}
+  void onMessage(twitch.Channel? channel, twitch.Message message) {}
 
   @override
   void onWhisper(twitch.Channel channel, twitch.Message message) {

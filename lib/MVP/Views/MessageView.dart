@@ -20,7 +20,7 @@ class _MessageViewState extends State<MessageView> {
                   value: snapshot.data.timestamps,
                   onChanged: (value) async {
                     snapshot.data.timestamps = value;
-                    await MessagePresenter.saveData(snapshot.data);
+                    MessagePresenter.saveData(snapshot.data);
                     setState(() {});
                   },
                 ),
@@ -29,7 +29,7 @@ class _MessageViewState extends State<MessageView> {
                   value: snapshot.data.imagePreview,
                   onChanged: (value) async {
                     snapshot.data.imagePreview = value;
-                    await MessagePresenter.saveData(snapshot.data);
+                    MessagePresenter.saveData(snapshot.data);
                     setState(() {});
                   },
                 ),

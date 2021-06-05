@@ -20,7 +20,7 @@ class _AutocompleteViewState extends State<AutocompleteView> {
                   value: snapshot.data.userPrefix,
                   onChanged: (value) async {
                     snapshot.data.userPrefix = value;
-                    await AutocompletePresenter.saveData(snapshot.data);
+                    AutocompletePresenter.saveData(snapshot.data);
                     setState(() {});
                   },
                 ),
@@ -29,7 +29,7 @@ class _AutocompleteViewState extends State<AutocompleteView> {
                   value: snapshot.data.emotePrefix,
                   onChanged: (value) async {
                     snapshot.data.emotePrefix = value;
-                    await AutocompletePresenter.saveData(snapshot.data);
+                    AutocompletePresenter.saveData(snapshot.data);
                     setState(() {});
                   },
                 ),

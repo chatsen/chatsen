@@ -4,12 +4,12 @@ import '/Components/ChatMessage.dart';
 
 /// [SearchPage] is a page that will allow the user to search for any message in a provided [twitch.Channel] channel. It features a simple searchbox and fetches results as you type.
 class SearchPage extends StatefulWidget {
-  final twitch.Channel channel;
-  final twitch.User user;
+  final twitch.Channel? channel;
+  final twitch.User? user;
 
   const SearchPage({
-    Key key,
-    @required this.channel,
+    Key? key,
+    required this.channel,
     this.user,
   }) : super(key: key);
 
@@ -18,7 +18,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController textEditingController;
+  TextEditingController? textEditingController;
 
   @override
   void initState() {
@@ -44,7 +44,7 @@ class _SearchPageState extends State<SearchPage> {
                 child: ListView(
                   reverse: true,
                   children: [
-                    for (var message in widget.channel.messages.where((message) => (widget.user != null ? message.user.id == widget.user.id : true) && message.body.toLowerCase().contains((textEditingController?.text ?? '').toLowerCase())).toList().reversed)
+                    for (var message in widget.channel!.messages.where((message) => (widget.user != null ? message.user!.id == widget.user!.id : true) && message.body!.toLowerCase().contains((textEditingController?.text ?? '').toLowerCase())).toList().reversed)
                       ChatMessage(
                         message: message,
                       ),

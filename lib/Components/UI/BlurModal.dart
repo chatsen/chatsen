@@ -6,8 +6,8 @@ class BlurModal extends StatelessWidget {
   final Widget child;
 
   const BlurModal({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -33,7 +33,7 @@ class BlurModal extends StatelessWidget {
         ),
       );
 
-  static Future<void> show({@required BuildContext context, @required Widget child}) async {
+  static Future<void> show({required BuildContext context, required Widget child}) async {
     await showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,

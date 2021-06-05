@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_material_next/ThemeableMaterialApp.dart';
+
 import '/Components/Notification.dart';
 import '/MVP/Presenters/ThemePresenter.dart';
 import '/Pages/Home.dart';
+import '/MVP/Models/ThemeModel.dart';
 
 /// Our [App] class. It represents our MaterialApp and will redirect us to our app's homepage.
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NotificationWrapper(
-      child: FutureBuilder(
+      child: FutureBuilder<ThemeModel>(
         future: ThemePresenter.loadData(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData)
-            return MaterialApp(
-              home: Scaffold(),
-            );
-
+          if (!snapshot.hasData) return MaterialApp(home: Scaffold());
           return ThemeableMaterialApp(
             appBuilder: (BuildContext context, ThemeData darkTheme, ThemeData lightTheme, ThemeMode themeMode) {
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                themeMode: themeMode,
+                themeMode: ThemeMode.dark,
                 darkTheme: darkTheme,
                 theme: lightTheme,
                 home: Builder(
@@ -37,8 +35,8 @@ class App extends StatelessWidget {
                 ),
               );
             },
-            colors: snapshot.data.color,
-            themeMode: snapshot.data.themeMode,
+            colors: snapshot.data!.color!.map((x) => x!).toList(),
+            themeMode: snapshot.data!.themeMode,
           );
         },
       ),

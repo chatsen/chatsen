@@ -7,7 +7,7 @@ import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 class HomeEndDrawer extends StatelessWidget {
   const HomeEndDrawer({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -56,7 +56,7 @@ class HomeEndDrawer extends StatelessWidget {
                                 children: [
                                   for (var message in state.reversed)
                                     ChatMessage(
-                                      prefixText: message.channel.name,
+                                      prefixText: message.channel!.name,
                                       message: message,
                                     ),
                                 ],

@@ -6,40 +6,40 @@ class NotificationWrapper extends StatefulWidget {
   final Widget child;
 
   const NotificationWrapper({
-    @required this.child,
+    required this.child,
   });
 
-  static _NotificationWrapperState of(BuildContext context) => context.findAncestorStateOfType<_NotificationWrapperState>();
+  static _NotificationWrapperState? of(BuildContext context) => context.findAncestorStateOfType<_NotificationWrapperState>();
 
   @override
   _NotificationWrapperState createState() => _NotificationWrapperState();
 }
 
 class _NotificationWrapperState extends State<NotificationWrapper> {
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  Future<void> onSelectNotification(String payload) async {}
+  Future<void> onSelectNotification(String? payload) async {}
 
   int currentNotificationIndex = 0;
 
   Future<void> sendNotification({
-    String payload,
-    String title,
-    String subtitle,
+    String? payload,
+    String? title,
+    String? subtitle,
   }) async {
     await flutterLocalNotificationsPlugin.show(
       currentNotificationIndex,
       title,
       subtitle,
       NotificationDetails(
-        AndroidNotificationDetails(
+        android: AndroidNotificationDetails(
           'Twitchat',
           'Twitchat',
           'Twitchat',
-          importance: Importance.Max,
-          priority: Priority.High,
+          importance: Importance.max,
+          priority: Priority.max,
         ),
-        IOSNotificationDetails(),
+        iOS: IOSNotificationDetails(),
       ),
       payload: payload,
     );
@@ -51,8 +51,8 @@ class _NotificationWrapperState extends State<NotificationWrapper> {
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin()
       ..initialize(
         InitializationSettings(
-          AndroidInitializationSettings('@mipmap/ic_launcher'),
-          IOSInitializationSettings(),
+          android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+          iOS: IOSInitializationSettings(),
         ),
         onSelectNotification: onSelectNotification,
       );

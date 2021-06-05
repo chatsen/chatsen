@@ -8,7 +8,7 @@ import '/MVP/Presenters/AutocompletePresenter.dart';
 import '/MVP/Presenters/MessagePresenter.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:device_info/device_info.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 import 'App.dart';
 import 'MVP/Models/AccountModel.dart';
@@ -26,7 +26,7 @@ void main() async {
   if (Platform.isAndroid) {
     var deviceInfo = DeviceInfoPlugin();
     var androidInfo = await deviceInfo.androidInfo;
-    if (androidInfo.version.sdkInt >= 21) await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    if (androidInfo.version.sdkInt! >= 21) await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
   }
 
   if (Platform.isAndroid || Platform.isIOS) {

@@ -21,7 +21,7 @@ class _NotificationViewState extends State<NotificationView> {
                   value: snapshot.data.mentionNotification,
                   onChanged: (value) async {
                     snapshot.data.mentionNotification = value;
-                    await NotificationPresenter.saveData(snapshot.data);
+                    NotificationPresenter.saveData(snapshot.data);
                     setState(() {});
                   },
                 ),
@@ -30,7 +30,7 @@ class _NotificationViewState extends State<NotificationView> {
                   value: snapshot.data.whisperNotification,
                   onChanged: (value) async {
                     snapshot.data.whisperNotification = value;
-                    await NotificationPresenter.saveData(snapshot.data);
+                    NotificationPresenter.saveData(snapshot.data);
                     setState(() {});
                   },
                 ),

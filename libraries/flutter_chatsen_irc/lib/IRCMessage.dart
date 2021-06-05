@@ -13,7 +13,7 @@ class IRCMessage {
     this.parameters = const [],
   });
 
-  factory IRCMessage.fromData(message) {
+  static IRCMessage? fromData(message) {
     if (message.length <= 0) return null;
 
     var ircMessage = IRCMessage(

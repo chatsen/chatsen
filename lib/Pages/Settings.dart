@@ -9,13 +9,13 @@ import 'Settings/Theme.dart';
 class SettingsTile extends StatelessWidget {
   final Icon icon;
   final String title;
-  final String description;
-  final Function routeBuilder;
+  final String? description;
+  final Function? routeBuilder;
 
   const SettingsTile({
-    Key key,
-    @required this.icon,
-    @required this.title,
+    Key? key,
+    required this.icon,
+    required this.title,
     this.description,
     this.routeBuilder,
   }) : super(key: key);
@@ -24,11 +24,11 @@ class SettingsTile extends StatelessWidget {
   Widget build(BuildContext context) => ListTile(
         leading: icon,
         title: Text(title),
-        subtitle: description != null ? Text(description) : null,
+        subtitle: description != null ? Text(description!) : null,
         onTap: routeBuilder != null
             ? () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (BuildContext context) => routeBuilder(),
+                    builder: (BuildContext context) => routeBuilder!(),
                   ),
                 )
             : null,

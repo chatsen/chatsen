@@ -11,13 +11,13 @@ import 'dart:async';
 
 /// [ChatMessage] is a Widget that takes a [twitch.Message] and renders into something readable and interactable.
 class ChatMessage extends StatelessWidget {
-  final String prefixText;
+  final String? prefixText;
   final twitch.Message message;
 
   const ChatMessage({
-    Key key,
+    Key? key,
     this.prefixText,
-    @required this.message,
+    required this.message,
   }) : super(key: key);
 
   Future<ui.Image> imageFromUrl(String url) {
@@ -30,7 +30,7 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var color = Color(int.tryParse(message.user.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255);
+    var color = Color(int.tryParse(message.user!.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255);
     var spans = <InlineSpan>[];
 
     for (var token in message.tokens) {
@@ -61,7 +61,7 @@ class ChatMessage extends StatelessWidget {
           );
           break;
         case twitch.MessageTokenType.Image:
-          if (!MessagePresenter.cache.imagePreview) {
+          if (!MessagePresenter.cache.imagePreview!) {
             spans.add(
               TextSpan(
                 children: [
@@ -115,15 +115,15 @@ class ChatMessage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 4.0),
                             child: Image.network(
-                              (token.data as twitch.Emote).mipmap.last,
+                              (token.data as twitch.Emote).mipmap!.last!,
                               isAntiAlias: true,
                               filterQuality: FilterQuality.high,
                               height: 96.0,
                               fit: BoxFit.fitHeight,
                             ),
                           ),
-                          Text((token.data as twitch.Emote).name),
-                          Text((token.data as twitch.Emote).provider),
+                          Text((token.data as twitch.Emote).name!),
+                          Text((token.data as twitch.Emote).provider!),
                         ],
                       ),
                     ),
@@ -158,15 +158,15 @@ class ChatMessage extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 4.0),
                               child: Image.network(
-                                (token.data as List<twitch.Emote>).first.mipmap.last,
+                                (token.data as List<twitch.Emote>).first.mipmap!.last!,
                                 isAntiAlias: true,
                                 filterQuality: FilterQuality.high,
                                 height: 96.0,
                                 fit: BoxFit.fitHeight,
                               ),
                             ),
-                            Text((token.data as List<twitch.Emote>).first.name),
-                            Text((token.data as List<twitch.Emote>).first.provider),
+                            Text((token.data as List<twitch.Emote>).first.name!),
+                            Text((token.data as List<twitch.Emote>).first.provider!),
                             for (var emote in (token.data as List<twitch.Emote>).sublist(1))
                               Padding(
                                 padding: const EdgeInsets.only(top: 4.0),
@@ -175,9 +175,9 @@ class ChatMessage extends StatelessWidget {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(right: 8.0),
-                                      child: Image.network(emote.mipmap.first),
+                                      child: Image.network(emote.mipmap!.first!),
                                     ),
-                                    Text(emote.name),
+                                    Text(emote.name!),
                                   ],
                                 ),
                               ),
@@ -218,9 +218,9 @@ class ChatMessage extends StatelessWidget {
                         text: '$prefixText ',
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
-                    if (MessagePresenter.cache.timestamps)
+                    if (MessagePresenter.cache.timestamps!)
                       TextSpan(
-                        text: '${message.dateTime.hour.toString().padLeft(2, '0')}:${message.dateTime.minute.toString().padLeft(2, '0')} ',
+                        text: '${message.dateTime!.hour.toString().padLeft(2, '0')}:${message.dateTime!.minute.toString().padLeft(2, '0')} ',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     for (var badge in message.badges)
@@ -228,7 +228,7 @@ class ChatMessage extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(right: 4.0),
                           child: Image.network(
-                            badge.mipmap.last,
+                            badge.mipmap!.last!,
                             filterQuality: FilterQuality.high,
                             isAntiAlias: true,
                             scale: 4.0,
@@ -236,7 +236,7 @@ class ChatMessage extends StatelessWidget {
                         ),
                       ),
                     TextSpan(
-                      text: '${message.user.displayName}' + (message.user.displayName.toLowerCase() != message.user.login.toLowerCase() ? ' (${message.user.login})' : '') + (message.action ? ' ' : ': '),
+                      text: '${message.user!.displayName}' + (message.user!.displayName!.toLowerCase() != message.user!.login!.toLowerCase() ? ' (${message.user!.login})' : '') + (message.action ? ' ' : ': '),
                       style: TextStyle(color: color, fontWeight: FontWeight.bold),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () async => Navigator.of(context).push(

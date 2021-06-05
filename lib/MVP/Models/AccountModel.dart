@@ -7,22 +7,22 @@ part 'AccountModel.g.dart';
 @HiveType(typeId: 0)
 class AccountModel extends HiveObject {
   @HiveField(0)
-  String login;
+  String? login;
 
   @HiveField(1)
-  String token;
+  String? token;
 
   @HiveField(2)
-  int id;
+  int? id;
 
   @HiveField(3)
-  String clientId;
+  String? clientId;
 
   @HiveField(4)
-  Uint8List avatarBytes;
+  Uint8List? avatarBytes;
 
   @HiveField(5)
-  bool isActive = false;
+  bool? isActive = false;
 
   AccountModel({
     this.login,

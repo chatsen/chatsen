@@ -7,15 +7,15 @@ import 'package:hive/hive.dart';
 
 /// [EmoteListModal] is our modal view/widget designed to add and join new channels to the client.
 class EmoteListModal extends StatefulWidget {
-  final twitch.Client client;
-  final twitch.Channel channel;
-  final Function(String emote) insertEmote;
+  final twitch.Client? client;
+  final twitch.Channel? channel;
+  final Function(String? emote) insertEmote;
 
   const EmoteListModal({
-    Key key,
-    @required this.client,
-    @required this.channel,
-    @required this.insertEmote,
+    Key? key,
+    required this.client,
+    required this.channel,
+    required this.insertEmote,
   }) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class EmoteListModal extends StatefulWidget {
 }
 
 class _EmoteListModalState extends State<EmoteListModal> {
-  TextEditingController textEditingController;
+  TextEditingController? textEditingController;
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
 
   @override
   void dispose() {
-    textEditingController.dispose();
+    textEditingController!.dispose();
     super.dispose();
   }
 
@@ -72,7 +72,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
                             children: [
                               ListView(
                                 children: [
-                                  for (var group in groupBy(widget.channel.emotes, (emote) => emote.provider).entries) ...[
+                                  for (var group in groupBy(widget.channel!.emotes, (dynamic emote) => emote.provider).entries) ...[
                                     Padding(
                                       padding: const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
                                       child: Text('${group.key}', style: Theme.of(context).textTheme.headline6),
@@ -82,7 +82,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
                                       physics: NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
                                       children: [
-                                        for (var emote in group.value.where((x) => x.name.toLowerCase().contains(textEditingController.text.toLowerCase()))) buildEmoteButton(emote),
+                                        for (var emote in group.value.where((x) => x.name!.toLowerCase().contains(textEditingController!.text.toLowerCase()))) buildEmoteButton(emote),
                                       ],
                                     ),
                                   ],
@@ -91,12 +91,12 @@ class _EmoteListModalState extends State<EmoteListModal> {
                               GridView.extent(
                                 maxCrossAxisExtent: 48.0,
                                 children: [
-                                  for (var emote in widget.channel.transmitter.emotes.where((x) => x.name.toLowerCase().contains(textEditingController.text.toLowerCase()))) buildEmoteButton(emote),
+                                  for (var emote in widget.channel!.transmitter!.emotes.where((x) => x.name!.toLowerCase().contains(textEditingController!.text.toLowerCase()))) buildEmoteButton(emote),
                                 ],
                               ),
                               ListView(
                                 children: [
-                                  for (var group in groupBy(widget.client.emotes, (emote) => emote.provider).entries) ...[
+                                  for (var group in groupBy(widget.client!.emotes, (dynamic emote) => emote.provider).entries) ...[
                                     Padding(
                                       padding: const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
                                       child: Text('${group.key}', style: Theme.of(context).textTheme.headline6),
@@ -106,7 +106,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
                                       physics: NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
                                       children: [
-                                        for (var emote in group.value.where((x) => x.name.toLowerCase().contains(textEditingController.text.toLowerCase()))) buildEmoteButton(emote),
+                                        for (var emote in group.value.where((x) => x.name!.toLowerCase().contains(textEditingController!.text.toLowerCase()))) buildEmoteButton(emote),
                                       ],
                                     ),
                                   ],
@@ -151,15 +151,15 @@ class _EmoteListModalState extends State<EmoteListModal> {
             Padding(
               padding: const EdgeInsets.only(bottom: 4.0),
               child: Image.network(
-                emote.mipmap.last,
+                emote.mipmap!.last!,
                 isAntiAlias: true,
                 filterQuality: FilterQuality.high,
                 height: 96.0,
                 fit: BoxFit.fitHeight,
               ),
             ),
-            Text(emote.name),
-            Text(emote.provider),
+            Text(emote.name!),
+            Text(emote.provider!),
           ],
         ),
       ),
@@ -168,7 +168,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Image.network(
-            emote.mipmap.last,
+            emote.mipmap!.last!,
             filterQuality: FilterQuality.high,
             isAntiAlias: true,
           ),

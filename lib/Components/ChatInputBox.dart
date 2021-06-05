@@ -7,13 +7,13 @@ import 'WidgetTooltip.dart';
 
 /// [ChatInputBox] is our widget that features the input field used for every channel. It's feature rich and even contains autocompletion features!
 class ChatInputBox extends StatefulWidget {
-  final twitch.Client client;
-  final twitch.Channel channel;
+  final twitch.Client? client;
+  final twitch.Channel? channel;
 
   const ChatInputBox({
-    Key key,
-    @required this.client,
-    @required this.channel,
+    Key? key,
+    required this.client,
+    required this.channel,
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class ChatInputBox extends StatefulWidget {
 
 class _ChatInputBoxState extends State<ChatInputBox> {
   GlobalKey key = GlobalKey();
-  TextEditingController textEditingController;
+  TextEditingController? textEditingController;
   FocusNode focusNode = FocusNode();
 
   @override
@@ -39,9 +39,9 @@ class _ChatInputBoxState extends State<ChatInputBox> {
   }
 
   List<Widget> getAutoCompletionItems() => [
-        if (textEditingController.text.split(' ').last.length >= 2 && !textEditingController.text.endsWith(' '))
-          for (var emote in widget.client.emotes + widget.channel.emotes + widget.channel.transmitter.emotes)
-            if ('${AutocompletePresenter.cache.emotePrefix ? ':' : ''}${emote.name}'.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()) && (AutocompletePresenter.cache.emotePrefix ? textEditingController.text.startsWith(':') : true))
+        if (textEditingController!.text.split(' ').last.length >= 2 && !textEditingController!.text.endsWith(' '))
+          for (var emote in widget.client!.emotes + widget.channel!.emotes + widget.channel!.transmitter!.emotes)
+            if ('${AutocompletePresenter.cache.emotePrefix! ? ':' : ''}${emote.name}'.toLowerCase().contains(textEditingController!.text.split(' ').last.toLowerCase()) && (AutocompletePresenter.cache.emotePrefix! ? textEditingController!.text.startsWith(':') : true))
               WidgetTooltip(
                 // message: '${emote.name}',
                 message: Padding(
@@ -52,25 +52,25 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4.0),
                         child: Image.network(
-                          emote.mipmap.last,
+                          emote.mipmap!.last!,
                           isAntiAlias: true,
                           filterQuality: FilterQuality.high,
                           height: 96.0,
                           fit: BoxFit.fitHeight,
                         ),
                       ),
-                      Text(emote.name),
-                      Text(emote.provider),
+                      Text(emote.name!),
+                      Text(emote.provider!),
                     ],
                   ),
                 ),
 
                 child: InkWell(
                   onTap: () async {
-                    var splits = textEditingController.text.split(' ');
+                    List<String?> splits = textEditingController!.text.split(' ');
                     splits.last = emote.name;
-                    textEditingController.text = splits.join(' ') + ' ';
-                    textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
+                    textEditingController!.text = splits.join(' ') + ' ';
+                    textEditingController!.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController!.text.length));
                     focusNode.requestFocus();
                     setState(() {});
                   },
@@ -78,7 +78,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       height: 32.0,
-                      child: Image.network(emote.mipmap.first),
+                      child: Image.network(emote.mipmap!.first!),
                     ),
                   ),
                 ),
@@ -127,7 +127,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                     contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
                     filled: false,
                     isDense: true,
-                    hintText: 'Message ${widget.channel.name} as ${widget.channel.transmitter.credentials.login}',
+                    hintText: 'Message ${widget.channel!.name} as ${widget.channel!.transmitter!.credentials!.login}',
                     border: InputBorder.none,
                   ),
                   onChanged: (text) async => setState(() {}),
@@ -165,10 +165,10 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                               client: widget.client,
                               channel: widget.channel,
                               insertEmote: (emote) {
-                                var splits = textEditingController.text.split(' ');
-                                splits.last = emote;
-                                textEditingController.text = splits.join(' ') + ' ';
-                                textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
+                                var splits = textEditingController!.text.split(' ');
+                                splits.last = emote!;
+                                textEditingController!.text = splits.join(' ') + ' ';
+                                textEditingController!.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController!.text.length));
                                 focusNode.requestFocus();
                                 Navigator.of(context).pop();
                                 setState(() {});
@@ -189,7 +189,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                   height: 32.0,
                   child: InkWell(
                     onTap: () async {
-                      widget.channel?.send(textEditingController?.text);
+                      widget.channel?.send(textEditingController!.text);
                       textEditingController?.clear();
                       setState(() {});
                     },
@@ -206,15 +206,15 @@ class _ChatInputBoxState extends State<ChatInputBox> {
   }
 
   List<Widget> getAutoCompletionUsers() => [
-        if (textEditingController.text.split(' ').last.length >= 2 && !textEditingController.text.endsWith(' '))
-          for (var user in widget.channel.users.values.expand((element) => element))
-            if ('${AutocompletePresenter.cache.userPrefix ? '@' : ''}$user'.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()) && (AutocompletePresenter.cache.userPrefix ? textEditingController.text.startsWith('@') : true))
+        if (textEditingController!.text.split(' ').last.length >= 2 && !textEditingController!.text.endsWith(' '))
+          for (var user in widget.channel!.users.values.expand((element) => element))
+            if ('${AutocompletePresenter.cache.userPrefix! ? '@' : ''}$user'.toLowerCase().contains(textEditingController!.text.split(' ').last.toLowerCase()) && (AutocompletePresenter.cache.userPrefix! ? textEditingController!.text.startsWith('@') : true))
               InkWell(
                 onTap: () async {
-                  var splits = textEditingController.text.split(' ');
+                  var splits = textEditingController!.text.split(' ');
                   splits.last = user;
-                  textEditingController.text = splits.join(' ') + ' ';
-                  textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
+                  textEditingController!.text = splits.join(' ') + ' ';
+                  textEditingController!.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController!.text.length));
                   focusNode.requestFocus();
                   setState(() {});
                 },

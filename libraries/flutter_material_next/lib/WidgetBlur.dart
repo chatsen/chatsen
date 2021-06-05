@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 class WidgetBlur extends StatelessWidget {
   final Widget child;
-  final BorderRadius borderRadius;
+  final BorderRadius? borderRadius;
   final double blur;
 
   const WidgetBlur({
-    @required this.child,
+    required this.child,
     this.borderRadius,
     this.blur = 10.0,
   });

@@ -3,11 +3,11 @@ import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 /// The [UserlistView] class is a view designed to hold the list of users currently connected to a channel. It can be refreshed with a pull-to-refresh swipe movement.
 class UserlistView extends StatefulWidget {
-  final twitch.Channel channel;
+  final twitch.Channel? channel;
 
   const UserlistView({
-    Key key,
-    @required this.channel,
+    Key? key,
+    required this.channel,
   }) : super(key: key);
 
   @override
@@ -15,10 +15,10 @@ class UserlistView extends StatefulWidget {
 }
 
 class _UserlistViewState extends State<UserlistView> {
-  Future<dynamic> gqlFuture;
+  Future<dynamic>? gqlFuture;
   TextEditingController tec = TextEditingController();
 
-  void refreshUserlist() async => gqlFuture = widget.channel.updateUsers();
+  void refreshUserlist() async => gqlFuture = widget.channel!.updateUsers();
 
   @override
   void initState() {
@@ -38,7 +38,7 @@ class _UserlistViewState extends State<UserlistView> {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
             var userlistWidgets = <Widget>[];
-            for (var group in widget.channel.users.entries) {
+            for (var group in widget.channel!.users.entries) {
               if (group.value.isEmpty || !group.value.any((x) => x.toLowerCase().contains(tec.text.toLowerCase()))) continue;
 
               userlistWidgets.add(
@@ -46,7 +46,7 @@ class _UserlistViewState extends State<UserlistView> {
                   padding: const EdgeInsets.only(left: 10.0, top: 12.0),
                   child: Text(
                     group.key,
-                    style: Theme.of(context).textTheme.headline6.copyWith(color: Theme.of(context).accentColor),
+                    style: Theme.of(context).textTheme.headline6!.copyWith(color: Theme.of(context).accentColor),
                   ),
                 ),
               );
@@ -65,7 +65,7 @@ class _UserlistViewState extends State<UserlistView> {
             }
 
             return RefreshIndicator(
-              onRefresh: () async => await refreshUserlist(),
+              onRefresh: () async => refreshUserlist(),
               child: Column(
                 children: [
                   TextField(

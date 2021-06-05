@@ -14,13 +14,13 @@ import 'package:version/version.dart';
 
 class GithubRelease {
   final String repositoryPath;
-  Version version;
+  Version? version;
 
   String get downloads => 'https://github.com/$repositoryPath/releases/download/$version';
 
   GithubRelease({
-    @required this.repositoryPath,
-    String versionName,
+    required this.repositoryPath,
+    String? versionName,
   }) {
     version = Version.parse(versionName);
   }
@@ -60,7 +60,7 @@ class UpdateModal extends StatelessWidget {
   static Future<bool> hasUpdate() async {
     if (kPlayStoreRelease) return false;
     var releases = await GithubReleaseProvider('chatsen/chatsen').getReleases();
-    releases.sort((a1, a2) => a1.version.compareTo(a2.version));
+    releases.sort((a1, a2) => a1.version!.compareTo(a2.version));
     var packageInfo = await PackageInfo.fromPlatform();
     var currentReleaseVersion = Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
     var lastRelease = releases.last;
@@ -71,7 +71,7 @@ class UpdateModal extends StatelessWidget {
     if (kPlayStoreRelease) return;
 
     var releases = await GithubReleaseProvider('chatsen/chatsen').getReleases();
-    releases.sort((a1, a2) => a1.version.compareTo(a2.version));
+    releases.sort((a1, a2) => a1.version!.compareTo(a2.version));
 
     var packageInfo = await PackageInfo.fromPlatform();
     var currentReleaseVersion = Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
@@ -95,9 +95,9 @@ class UpdateModal extends StatelessWidget {
   }
 
   const UpdateModal({
-    Key key,
-    @required this.currentVersion,
-    @required this.latestRelease,
+    Key? key,
+    required this.currentVersion,
+    required this.latestRelease,
   }) : super(key: key);
 
   @override
@@ -125,7 +125,7 @@ class UpdateModal extends StatelessWidget {
                           bloc: download,
                           builder: (context, state) => InkWell(
                             onTap: () async {
-                              if (state is DownloadCompleted) await OpenFile.open(state.file.path);
+                              if (state is DownloadCompleted) await OpenFile.open(state.file!.path);
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),

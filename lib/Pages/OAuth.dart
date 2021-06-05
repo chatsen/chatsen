@@ -14,8 +14,8 @@ class OAuthPage extends StatefulWidget {
   final Function refresh;
 
   const OAuthPage({
-    Key key,
-    @required this.refresh,
+    Key? key,
+    required this.refresh,
   }) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class OAuthPage extends StatefulWidget {
 }
 
 class _OAuthPageState extends State<OAuthPage> {
-  WebViewController webViewController;
+  late WebViewController webViewController;
   CookieManager cookieManager = CookieManager();
 
   @override
@@ -87,7 +87,7 @@ class _OAuthPageState extends State<OAuthPage> {
                 print(bytes);
 
                 var data = await AccountPresenter.loadData();
-                var existing = data.firstWhere((model) => model.id == (int.tryParse(cookies['twilight-user']['id']) ?? -1), orElse: () => null);
+                var existing = data.firstWhere((model) => model!.id == (int.tryParse(cookies['twilight-user']['id']) ?? -1), orElse: () => null);
 
                 if (existing != null) {
                   existing.token = cookies['twilight-user']['authToken'];

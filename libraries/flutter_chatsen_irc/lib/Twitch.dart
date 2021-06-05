@@ -11,17 +11,17 @@ import '/WebSockets/AbstractWebSocket.dart';
 abstract class Listener {
   void onConnectionStateChange(Connection connection, ConnectionState state);
   void onChannelStateChange(Channel channel, ChannelState state);
-  void onMessage(Channel channel, Message message);
+  void onMessage(Channel? channel, Message message);
   void onHistoryLoaded(Channel channel);
   void onWhisper(Channel channel, Message message);
 }
 
 // TODO: Rework with consideration for emote sets and link to emote if available, maybe even owner and whatnot
 class Emote {
-  final String name;
-  final String id;
-  final String provider;
-  final List<String> mipmap;
+  final String? name;
+  final String? id;
+  final String? provider;
+  final List<String?>? mipmap;
 
   Emote({
     this.name,
@@ -42,12 +42,12 @@ enum MessageTokenType {
 }
 
 class Badge {
-  final String tag;
-  final String name;
-  final String id;
-  final List<String> mipmap;
-  final String title;
-  final String description;
+  final String? tag;
+  final String? name;
+  final String? id;
+  final List<String?>? mipmap;
+  final String? title;
+  final String? description;
 
   Badge({
     this.tag,
@@ -58,7 +58,7 @@ class Badge {
     this.description,
   });
 
-  Badge.fromJson(String typename, String typeid, Map<String, dynamic> json)
+  Badge.fromJson(String? typename, String? typeid, Map<String, dynamic> json)
       : tag = '$typename/$typeid',
         name = typename,
         id = typeid,
@@ -72,9 +72,9 @@ class Badge {
 }
 
 class TwitchEmote {
-  final String id;
-  final int startPosition;
-  final int endPosition;
+  final String? id;
+  final int? startPosition;
+  final int? endPosition;
 
   TwitchEmote({
     this.id,
@@ -117,10 +117,10 @@ class MessageToken {
 }
 
 class Credentials {
-  final int id;
+  final int? id;
   final String login;
-  final String clientId;
-  final String token;
+  final String? clientId;
+  final String? token;
 
   const Credentials({
     this.id,
@@ -131,10 +131,10 @@ class Credentials {
 }
 
 class User {
-  String login;
-  String displayName;
-  int id;
-  String color;
+  String? login;
+  String? displayName;
+  int? id;
+  String? color;
 
   User({
     this.login,
@@ -145,11 +145,11 @@ class User {
 }
 
 class Message {
-  Channel channel;
+  Channel? channel;
 
-  User user;
-  String id;
-  String body;
+  User? user;
+  String? id;
+  String? body;
 
   bool action = false;
   bool mention = false;
@@ -158,7 +158,7 @@ class Message {
   List<MessageToken> tokens = [];
   List<TwitchEmote> twitchEmotes = [];
 
-  DateTime dateTime;
+  DateTime? dateTime;
 
   Message({
     String tagBadges = '',
@@ -170,13 +170,13 @@ class Message {
     this.mention = false,
     this.dateTime,
   }) {
-    if (body.contains(RegExp('ACTION .*'))) action = true;
-    if (action) body = body.substring('ACTION '.length, body.length - 1);
+    if (body!.contains(RegExp('ACTION .*'))) action = true;
+    if (action) body = body!.substring('ACTION '.length, body!.length - 1);
 
-    body = body.replaceAll(utf8.decode([0xF3, 0xA0, 0x80, 0x80]), '');
+    body = body!.replaceAll(utf8.decode([0xF3, 0xA0, 0x80, 0x80]), '');
 
     for (var tagBadge in tagBadges.split(',')) {
-      var badge = channel?.badges?.firstWhere((badge) => badge.tag == tagBadge, orElse: () => channel.client.badges.firstWhere((badge) => badge.tag == tagBadge, orElse: () => null));
+      var badge = channel?.badges?.firstWhere((badge) => badge!.tag == tagBadge, orElse: () => channel!.client!.badges.firstWhereOrNull((badge) => badge.tag == tagBadge));
       if (badge != null) badges.add(badge);
     }
 
@@ -196,9 +196,9 @@ class Message {
       }
     }
 
-    twitchEmotes.sort((item, item2) => item2.startPosition.compareTo(item.startPosition));
+    twitchEmotes.sort((item, item2) => item2.startPosition!.compareTo(item.startPosition!));
 
-    tokens = tokenize(body);
+    tokens = tokenize(body!);
 
     dateTime = dateTime ?? DateTime.now();
   }
@@ -220,7 +220,7 @@ class Message {
 
     var runes = body.runes.toList();
     for (var twitchEmote in twitchEmotes) {
-      runes.replaceRange(twitchEmote.startPosition, twitchEmote.endPosition + 1, utf8.encode(' ${twitchEmote.id}|${String.fromCharCodes(runes.getRange(twitchEmote.startPosition, twitchEmote.endPosition + 1))} '));
+      runes.replaceRange(twitchEmote.startPosition!, twitchEmote.endPosition! + 1, utf8.encode(' ${twitchEmote.id}|${String.fromCharCodes(runes.getRange(twitchEmote.startPosition!, twitchEmote.endPosition! + 1))} '));
     }
 
     var runeBody = String.fromCharCodes(runes);
@@ -245,8 +245,8 @@ class Message {
         );
       }
 
-      var channelEmote = channel?.emotes?.firstWhere((emote) => emote.name == messageSplit, orElse: () => null);
-      var globalEmote = client?.emotes?.firstWhere((emote) => emote.name == messageSplit, orElse: () => null);
+      var channelEmote = channel?.emotes?.firstWhereOrNull((emote) => emote.name == messageSplit);
+      var globalEmote = client?.emotes?.firstWhereOrNull((emote) => emote.name == messageSplit);
       var emote = twitchEmote ?? channelEmote ?? globalEmote;
 
       if (messageSplit.startsWith('http://') || messageSplit.startsWith('https://')) {
@@ -284,15 +284,15 @@ enum ChannelState {
 }
 
 class Channel {
-  Client client;
-  Connection receiver;
-  Connection transmitter;
-  String name;
-  int id;
+  Client? client;
+  Connection? receiver;
+  Connection? transmitter;
+  String? name;
+  int? id;
 
   List<Message> messages = [];
   List<Emote> emotes = [];
-  List<Badge> badges = [];
+  List<Badge?> badges = [];
   Map<String, List<String>> users = {};
 
   var state = ChannelState.Disconnected;
@@ -303,17 +303,17 @@ class Channel {
 
     state = newState;
 
-    client.listeners.forEach((listener) => listener.onChannelStateChange(this, state));
+    client!.listeners.forEach((listener) => listener.onChannelStateChange(this, state));
   }
 
   Future<void> loadHistory() async {
     // https://recent-messages.robotty.de/api/v2/recent-messages/
-    var response = await http.get(Uri.parse('https://recent-messages.robotty.de/api/v2/recent-messages/${name.substring(1)}'));
+    var response = await http.get(Uri.parse('https://recent-messages.robotty.de/api/v2/recent-messages/${name!.substring(1)}'));
     var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
 
     for (var raw in jsonResponse['messages'] ?? []) {
       var message = IRCMessage.fromData(raw);
-      if (message.command != 'PRIVMSG') {
+      if (message?.command != 'PRIVMSG') {
         print(raw);
         continue;
       }
@@ -321,24 +321,24 @@ class Channel {
       var chatMessage = Message(
         channel: this,
         user: User(
-          login: message.prefix.split('!').first.toLowerCase(),
+          login: message!.prefix.split('!').first.toLowerCase(),
           displayName: message.tags['display-name'],
           id: int.tryParse(message.tags['user-id'] ?? '0'),
           color: (message.tags['color'] == null || message.tags['color'].trim().isEmpty ? null : message.tags['color'].substring(1)),
         ),
         id: message.tags['id'],
         body: message.parameters[1],
-        mention: message.parameters[1].toLowerCase().contains(receiver.credentials.login.toLowerCase()), // TODO: Move to message's constructor
+        mention: message.parameters[1].toLowerCase().contains(receiver!.credentials!.login.toLowerCase()), // TODO: Move to message's constructor
         tagBadges: message.tags['badges'],
         tagEmotes: message.tags['emotes'],
         dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? 0),
       );
 
-      messages?.add(chatMessage);
-      if ((messages?.length ?? 0) > 1000) messages?.removeRange(0, (messages?.length ?? 0) - 1000);
+      messages.add(chatMessage);
+      if (messages.length > 1000) messages.removeRange(0, messages.length - 1000);
     }
 
-    client.listeners.forEach((listener) => listener.onHistoryLoaded(this));
+    client!.listeners.forEach((listener) => listener.onHistoryLoaded(this));
   }
 
   // TODO: Rework this
@@ -461,7 +461,7 @@ class Channel {
     try {
       var data = await GQL.request7('''
         query {
-          user(id: "${name.substring(1).toLowerCase()}") {
+          user(id: "${name!.substring(1).toLowerCase()}") {
             emotes {
               id
               name
@@ -496,7 +496,7 @@ class Channel {
     this.name,
     this.id,
   }) {
-    client.listeners.forEach((listener) => listener.onChannelStateChange(this, state));
+    client!.listeners.forEach((listener) => listener.onChannelStateChange(this, state));
   }
 
   void send(String message, {bool action = false}) async {
@@ -507,24 +507,24 @@ class Channel {
     if (action) return send('ACTION $message');
 
     if (receiver == transmitter) {
-      transmitter?.send('PRIVMSG #${transmitter.credentials.login.toLowerCase()} :/w $name $message');
+      transmitter?.send('PRIVMSG #${transmitter!.credentials!.login.toLowerCase()} :/w $name $message');
       var chatMessage = Message(
         channel: this,
         user: User(
-          login: transmitter.credentials.login.toLowerCase(),
-          displayName: transmitter.credentials.login,
-          id: transmitter.credentials.id,
+          login: transmitter!.credentials!.login.toLowerCase(),
+          displayName: transmitter!.credentials!.login,
+          id: transmitter!.credentials!.id,
           color: '777777',
           // color: (message.tags['color'] == null || message.tags['color'].trim().isEmpty ? null : message.tags['color'].substring(1)),
         ),
         id: null,
         body: message,
-        mention: message.toLowerCase().contains(receiver.credentials.login.toLowerCase()), // TODO: Move to message's constructor
+        mention: message.toLowerCase().contains(receiver!.credentials!.login.toLowerCase()), // TODO: Move to message's constructor
         dateTime: DateTime.now(),
       );
 
-      messages?.add(chatMessage);
-      client.listeners.forEach((listener) => listener.onWhisper(this, chatMessage));
+      messages.add(chatMessage);
+      client!.listeners.forEach((listener) => listener.onWhisper(this, chatMessage));
     } else {
       transmitter?.send('PRIVMSG $name :$message');
     }
@@ -541,18 +541,18 @@ enum ConnectionState {
 }
 
 class Connection {
-  Client client;
+  Client? client;
   bool transmission;
-  Credentials credentials;
+  Credentials? credentials;
 
-  List<String> channelsToPart = [];
+  List<String?> channelsToPart = [];
 
-  WebSocketChannel webSocketChannel;
-  StreamSubscription streamSubscription;
+  WebSocketChannel? webSocketChannel;
+  StreamSubscription? streamSubscription;
 
-  String get name => '${credentials.login}@${transmission ? 'tx' : 'rx'}';
-  Iterable<Channel> get channels => client.channels.where((channel) => channel.receiver == this);
-  List<Channel> whispers = [];
+  String get name => '${credentials!.login}@${transmission ? 'tx' : 'rx'}';
+  Iterable<Channel> get channels => client!.channels.where((channel) => channel.receiver == this);
+  List<Channel?> whispers = [];
 
   var state = ConnectionState.Disconnected;
   set stateChanger(ConnectionState newState) {
@@ -567,7 +567,7 @@ class Connection {
       channels.forEach((channel) => channel.stateChanger = ChannelState.Disconnected);
     }
 
-    client.listeners.forEach((listener) => listener.onConnectionStateChange(this, state));
+    client!.listeners.forEach((listener) => listener.onConnectionStateChange(this, state));
   }
 
   List<Emote> emotes = [];
@@ -575,16 +575,16 @@ class Connection {
   Future<void> updateUserEmotes() async {
     emotes.clear();
 
-    if (credentials == null || credentials.token == null || credentials.clientId == null || credentials.id == null) {
+    if (credentials == null || credentials!.token == null || credentials!.clientId == null || credentials!.id == null) {
       return;
     }
 
     var emotesRequest = await http.get(
-      Uri.parse('https://api.twitch.tv/kraken/users/${credentials.id}/emotes'),
+      Uri.parse('https://api.twitch.tv/kraken/users/${credentials!.id}/emotes'),
       headers: {
-        'Client-ID': credentials.clientId,
+        'Client-ID': credentials!.clientId!,
         'Accept': 'application/vnd.twitchtv.v5+json',
-        'Authorization': 'OAuth ${credentials.token}',
+        'Authorization': 'OAuth ${credentials!.token}',
       },
     );
 
@@ -614,7 +614,7 @@ class Connection {
     this.transmission = false,
     this.credentials,
   }) {
-    client.listeners.forEach((listener) => listener.onConnectionStateChange(this, state));
+    client!.listeners.forEach((listener) => listener.onConnectionStateChange(this, state));
 
     connect(credentials);
   }
@@ -630,26 +630,26 @@ class Connection {
   }
 
   void partWhisper(String name) {
-    whispers.removeWhere((element) => element.name == name);
+    whispers.removeWhere((element) => element!.name == name);
   }
 
   void send(String data) async {
     var message = IRCMessage.fromData(data);
     // print('\x1b[31m< $name: ${message.command}: \x1b[37m$data\x1b[37m');
-    webSocketChannel.sink.add(data);
+    webSocketChannel!.sink.add(data);
   }
 
   void receive(String data) async {
     var message = IRCMessage.fromData(data);
     // print('\x1b[32m> $name: ${message.command}: \x1b[37m$data\x1b[37m');
 
-    switch (message.command) {
+    switch (message?.command) {
       case '372':
         stateChanger = ConnectionState.Connected;
         await updateUserEmotes();
         break;
       case 'PING':
-        send('PONG :${message.parameters[1] ?? 'tmi.twitch.tv'}');
+        send('PONG :${message!.parameters[1] ?? 'tmi.twitch.tv'}');
         break;
       case 'RECONNECT':
         // print('$name: Reconnect requested');
@@ -658,33 +658,33 @@ class Connection {
         connect(credentials);
         break;
       case 'ROOMSTATE':
-        var channel = channels.firstWhere((channel) => channel.name == message.parameters[0], orElse: () => null);
+        var channel = channels.firstWhereOrNull((channel) => channel.name == message!.parameters[0]);
         channel?.stateChanger = ChannelState.Connected;
-        channel?.id = int.tryParse(message.tags['room-id']) ?? 22484632;
+        channel?.id = int.tryParse(message!.tags['room-id']) ?? 22484632;
         await channel?.updateEmotes();
         await channel?.updateBadges();
         await channel?.updateUsers();
         await channel?.loadHistory();
         break;
       case 'NOTICE':
-        var channel = channels.firstWhere((channel) => channel.name == message.parameters[0], orElse: () => null);
-        if (message.tags.containsKey('msg-id') ? message.tags['msg-id'] == 'msg_channel_suspended' : false) channel?.stateChanger = ChannelState.Suspended;
+        var channel = channels.firstWhereOrNull((channel) => channel.name == message!.parameters[0]);
+        if (message!.tags.containsKey('msg-id') ? message.tags['msg-id'] == 'msg_channel_suspended' : false) channel?.stateChanger = ChannelState.Suspended;
         if (message.tags.containsKey('msg-id') ? message.tags['msg-id'] == 'msg_banned' : false) channel?.stateChanger = ChannelState.Banned;
         break;
       case 'PRIVMSG':
-        var channel = channels.firstWhere((channel) => channel.name == message.parameters[0], orElse: () => null);
+        var channel = channels.firstWhereOrNull((channel) => channel.name == message!.parameters[0]);
 
         var chatMessage = Message(
           channel: channel,
           user: User(
-            login: message.prefix.split('!').first.toLowerCase(),
+            login: message!.prefix.split('!').first.toLowerCase(),
             displayName: message.tags['display-name'],
             id: int.tryParse(message.tags['user-id']),
             color: (message.tags['color'] == null || message.tags['color'].trim().isEmpty ? null : message.tags['color'].substring(1)),
           ),
           id: message.tags['id'],
           body: message.parameters[1],
-          mention: message.parameters[1].toLowerCase().contains(credentials.login.toLowerCase()), // TODO: Move to message's constructor
+          mention: message.parameters[1].toLowerCase().contains(credentials!.login.toLowerCase()), // TODO: Move to message's constructor
           tagBadges: message.tags['badges'],
           tagEmotes: message.tags['emotes'],
         );
@@ -692,14 +692,14 @@ class Connection {
         channel?.messages?.add(chatMessage);
         if ((channel?.messages?.length ?? 0) > 1000) channel?.messages?.removeRange(0, (channel?.messages?.length ?? 0) - 1000);
 
-        client.listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
+        client!.listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
         break;
       case 'WHISPER':
         if (!transmission) break;
-        var name = message.prefix.split('!').first;
-        var channel = whispers.firstWhere((channel) => channel.name == name, orElse: () {
+        var name = message!.prefix.split('!').first;
+        var channel = whispers.firstWhere((channel) => channel!.name == name, orElse: () {
           joinWhisper(name);
-          return whispers.firstWhere((channel) => channel.name == name, orElse: () => null);
+          return whispers.firstWhere((channel) => channel!.name == name, orElse: () => null);
         });
         if (channel == null) break;
 
@@ -713,28 +713,28 @@ class Connection {
           ),
           id: message.tags['id'],
           body: message.parameters[1],
-          mention: message.parameters[1].toLowerCase().contains(credentials.login.toLowerCase()), // TODO: Move to message's constructor
+          mention: message.parameters[1].toLowerCase().contains(credentials!.login.toLowerCase()), // TODO: Move to message's constructor
           // tagBadges: message.tags['badges'],
           tagEmotes: message.tags['emotes'],
         );
 
-        channel?.messages?.add(chatMessage);
-        client.listeners.forEach((listener) => listener.onWhisper(channel, chatMessage));
+        channel.messages.add(chatMessage);
+        client!.listeners.forEach((listener) => listener.onWhisper(channel, chatMessage));
         break;
     }
   }
 
-  void connect(Credentials newCredentials) async {
+  void connect(Credentials? newCredentials) async {
     await dispose();
 
     credentials = newCredentials ?? credentials;
 
     webSocketChannel = connectWebSocket('wss://irc-ws.chat.twitch.tv:443');
     send('CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership');
-    if (credentials.token != null) send('PASS oauth:${credentials.token}');
-    send('NICK ${credentials.login}');
+    if (credentials!.token != null) send('PASS oauth:${credentials!.token}');
+    send('NICK ${credentials!.login}');
 
-    streamSubscription = webSocketChannel.stream.listen(
+    streamSubscription = webSocketChannel!.stream.listen(
       (event) async {
         for (var message in event.trim().split('\r\n')) {
           receive(message);
@@ -756,7 +756,7 @@ class Connection {
     );
   }
 
-  void dispose() async {
+  Future<void> dispose() async {
     stateChanger = ConnectionState.Disconnected;
     await streamSubscription?.cancel();
     webSocketChannel = null;
@@ -767,13 +767,13 @@ class Client {
   List<Listener> listeners = [];
 
   Credentials credentials;
-  Map<Credentials, List<Connection>> receivers = {};
-  Map<Credentials, Connection> transmitters = {};
+  Map<Credentials?, List<Connection>> receivers = {};
+  Map<Credentials?, Connection> transmitters = {};
   List<Channel> channels = [];
   List<Emote> emotes = [];
   List<Badge> badges = [];
 
-  Timer timer;
+  Timer? timer;
 
   // TODO: Rework this
   Future<void> updateBadges() async {
@@ -900,10 +900,10 @@ class Client {
   void consumeChannelBucket() async {
     var tokens = (50.0 * 0.95 / 15.0 * 2.0).floor() - 2;
 
-    var channelsToJoin = channels.where((channel) => channel.state == ChannelState.Disconnected && channel.receiver.state == ConnectionState.Connected).take(tokens);
+    var channelsToJoin = channels.where((channel) => channel.state == ChannelState.Disconnected && channel.receiver!.state == ConnectionState.Connected).take(tokens);
     var channelsToJoinGroups = groupBy(channelsToJoin, (Channel channel) => channel.receiver);
     for (var channelGroup in channelsToJoinGroups.entries) {
-      channelGroup.key.send('JOIN ${channelGroup.value.map((channel) => channel.name).join(',')}');
+      channelGroup.key!.send('JOIN ${channelGroup.value.map((channel) => channel.name).join(',')}');
       channelGroup.value.forEach((channel) => channel.stateChanger = ChannelState.Connecting);
     }
 
@@ -926,16 +926,16 @@ class Client {
     transmitters[null]?.connect(newCredentials);
   }
 
-  Future<List<Connection>> acquireConnections({Credentials receiverCredentials, Credentials transmitterCredentials}) async {
+  Future<List<Connection?>> acquireConnections({Credentials? receiverCredentials, Credentials? transmitterCredentials}) async {
     if (receivers[receiverCredentials] == null) {
       receivers[receiverCredentials] = <Connection>[];
     }
 
-    var bestSuitedReceiver = receivers[receiverCredentials].firstWhere(
+    var bestSuitedReceiver = receivers[receiverCredentials]!.firstWhere(
       (connection) => connection.channels.length < 100,
       orElse: () {
         var receiver = Connection(client: this, credentials: receiverCredentials ?? credentials);
-        receivers[receiverCredentials].add(receiver);
+        receivers[receiverCredentials]!.add(receiver);
         return receiver;
       },
     );
@@ -947,11 +947,11 @@ class Client {
     return [bestSuitedReceiver, transmitters[transmitterCredentials]];
   }
 
-  Future<List<Channel>> swapChannels(List<Channel> channelsToSwap, {Credentials receiverCredentials, Credentials transmitterCredentials}) async {
+  Future<List<Channel>> swapChannels(List<Channel> channelsToSwap, {Credentials? receiverCredentials, Credentials? transmitterCredentials}) async {
     var swappedChannels = <Channel>[];
 
     for (var channel in channelsToSwap) {
-      channel.receiver.channelsToPart.add(channel.name);
+      channel.receiver!.channelsToPart.add(channel.name);
 
       var connections = await acquireConnections(receiverCredentials: receiverCredentials, transmitterCredentials: transmitterCredentials);
 
@@ -965,7 +965,7 @@ class Client {
     return swappedChannels;
   }
 
-  Future<List<Channel>> joinChannels(List<dynamic> channelsToJoin, {Credentials receiverCredentials, Credentials transmitterCredentials}) async {
+  Future<List<Channel>> joinChannels(List<dynamic> channelsToJoin, {Credentials? receiverCredentials, Credentials? transmitterCredentials}) async {
     var joinedChannels = <Channel>[];
 
     for (var channelToJoin in channelsToJoin) {
@@ -985,7 +985,7 @@ class Client {
 
   void partChannels(List<Channel> channelsToPart) async {
     for (var channelToLeave in channelsToPart) {
-      channelToLeave.receiver.channelsToPart.add(channelToLeave.name);
+      channelToLeave.receiver!.channelsToPart.add(channelToLeave.name);
       channels.remove(channelToLeave);
       // TODO: Kill connection if there are no channels left
     }
@@ -999,7 +999,7 @@ class Client {
 class GQL {
   static String endpoint = 'https://gql.twitch.tv/gql';
 
-  static Future<dynamic> request(String gql, {Credentials credentials}) async {
+  static Future<dynamic> request(String gql, {Credentials? credentials}) async {
     var request = await http.post(
       Uri.parse(endpoint),
       body: jsonEncode({'query': gql}),
@@ -1012,7 +1012,7 @@ class GQL {
     return jsonDecode(utf8.decode(request.bodyBytes));
   }
 
-  static Future<dynamic> request7(String gql, {Credentials credentials}) async {
+  static Future<dynamic> request7(String gql, {Credentials? credentials}) async {
     var request = await http.post(
       Uri.parse('https://api.7tv.app/v2/gql'),
       body: jsonEncode({'query': gql}),

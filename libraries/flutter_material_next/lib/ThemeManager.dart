@@ -9,16 +9,16 @@ class ThemeManager extends StatefulWidget {
   final Widget child;
 
   const ThemeManager({
-    Key key,
-    @required this.child,
-    @required this.colors,
-    @required this.themeMode,
+    Key? key,
+    required this.child,
+    required this.colors,
+    required this.themeMode,
   }) : super(key: key);
 
   @override
   ThemeManagerState createState() => ThemeManagerState();
 
-  static ThemeManagerState of(BuildContext context) => context.findAncestorStateOfType<ThemeManagerState>();
+  static ThemeManagerState? of(BuildContext context) => context.findAncestorStateOfType<ThemeManagerState>();
 }
 
 class ThemeManagerState extends State<ThemeManager> {
@@ -39,7 +39,7 @@ class ThemeManagerState extends State<ThemeManager> {
   );
 
   ThemeMode get mode => themeMode;
-  set mode(ThemeMode mode) => ThemeableMaterialApp.of(context).setState(() => themeMode = mode);
+  set mode(ThemeMode mode) => ThemeableMaterialApp.of(context)!.setState(() => themeMode = mode);
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class ThemeManagerState extends State<ThemeManager> {
         },
       ),
       primaryColor: themeColors.accent,
-      backgroundColor: themeColors.iconColor.withAlpha(128),
+      backgroundColor: themeColors.iconColor!.withAlpha(128),
       accentColor: themeColors.accent,
       textSelectionTheme: (baseTheme.textSelectionTheme ?? TextSelectionThemeData()).copyWith(
         cursorColor: themeColors.accent,
@@ -71,9 +71,9 @@ class ThemeManagerState extends State<ThemeManager> {
         selectionHandleColor: themeColors.accent,
       ),
       sliderTheme: SliderThemeData.fromPrimaryColors(
-        primaryColor: themeColors.accent,
-        primaryColorDark: themeColors.accent,
-        primaryColorLight: themeColors.accent,
+        primaryColor: themeColors.accent!,
+        primaryColorDark: themeColors.accent!,
+        primaryColorLight: themeColors.accent!,
         valueIndicatorTextStyle: baseTheme.sliderTheme.valueIndicatorTextStyle ?? TextStyle(),
       ),
       toggleableActiveColor: themeColors.accent,
@@ -118,7 +118,7 @@ class ThemeManagerState extends State<ThemeManager> {
         color: themeColors.iconColor,
       ),
       primaryTextTheme: (baseTheme.appBarTheme.textTheme ?? baseTheme.primaryTextTheme ?? TextTheme()).copyWith(
-        headline6: (baseTheme.appBarTheme.textTheme ?? baseTheme.primaryTextTheme ?? TextTheme()).headline6.copyWith(
+        headline6: (baseTheme.appBarTheme.textTheme ?? baseTheme.primaryTextTheme ?? TextTheme()).headline6!.copyWith(
               color: themeColors.iconColor,
             ),
       ),

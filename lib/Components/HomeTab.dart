@@ -4,15 +4,15 @@ import 'package:hive/hive.dart';
 
 /// [HomeTab] is a widget that represents a channel as a simple tab.
 class HomeTab extends StatelessWidget {
-  final twitch.Client client;
+  final twitch.Client? client;
   final twitch.Channel channel;
   final Function refresh;
 
   const HomeTab({
-    Key key,
-    @required this.client,
-    @required this.channel,
-    @required this.refresh,
+    Key? key,
+    required this.client,
+    required this.channel,
+    required this.refresh,
   }) : super(key: key);
 
   @override
@@ -25,14 +25,14 @@ class HomeTab extends StatelessWidget {
               width: 32.0,
               height: 32.0,
               child: InkWell(
-                child: Icon(Icons.close),
                 onTap: () async {
-                  await client.partChannels([channel]);
+                  client!.partChannels([channel]);
                   var channelsBox = await Hive.openBox('Channels');
-                  channelsBox.clear();
-                  channelsBox.addAll(client.channels.map((channel) => channel.name));
+                  await channelsBox.clear();
+                  await channelsBox.addAll(client!.channels.map((channel) => channel.name));
                   refresh();
                 },
+                child: Icon(Icons.close),
               ),
             ),
           ],

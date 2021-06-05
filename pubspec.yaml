@@ -6,43 +6,43 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev using `p
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  url_launcher: any
-  hive: any
-  hive_flutter: any
-  webview_flutter: any
-  file_picker: any
-  dio: any
-  flutter_local_notifications: 1.4.4+4
+  cupertino_icons: ^1.0.3
+  url_launcher: ^6.0.6
+  hive: ^2.0.4
+  hive_flutter: ^1.0.0
+  webview_flutter: ^2.0.8
+  file_picker: ^3.0.2+2
+  dio: ^4.0.0
+  flutter_local_notifications: ^6.0.0
   flutter_chatsen_irc:
     path: libraries/flutter_chatsen_irc
   flutter_material_next:
     path: libraries/flutter_material_next
-  bloc: any
-  flutter_bloc: any
-  equatable: any
-  collection: any
-  device_info: ^2.0.2 # TODO: Switch to device_info_plus
-  version: any
-  package_info: any
-  path_provider: any
-  open_file: any
+  bloc: ^7.0.0
+  flutter_bloc: ^7.0.1
+  equatable: ^2.0.2
+  collection: ^1.15.0
+  device_info_plus: ^1.0.1
+  version: ^2.0.0
+  package_info: ^2.0.2
+  path_provider: ^2.0.2
+  open_file: ^3.2.1
   dart_downloader:
     git: https://github.com/williambulin/dart_downloader.git
     # path: ../dart_downloader
   # file_picker_cross: ^4.4.2
 
 dev_dependencies:
-  pedantic: any
-  flutter_lints: any
-  hive_generator: any
-  build_runner: any
-  flutter_launcher_icons: "^0.8.0" # flutter pub run flutter_launcher_icons:main
+  pedantic: ^1.11.0
+  flutter_lints: ^1.0.3
+  hive_generator: ^1.1.0
+  build_runner: ^2.0.4
+  flutter_launcher_icons: ^0.9.0 # flutter pub run flutter_launcher_icons:main
 
 flutter:
   uses-material-design: true

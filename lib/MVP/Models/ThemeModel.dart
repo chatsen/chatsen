@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// The [ThemeModel] is a class that holds our data for the theme.
 class ThemeModel {
-  List<Color> color;
+  List<Color?>? color;
   ThemeMode themeMode;
 
   ThemeModel({

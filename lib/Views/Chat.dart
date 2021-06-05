@@ -12,13 +12,13 @@ import '/StreamOverlay/StreamOverlayState.dart';
 
 /// The [ChatView] widget is a view that renders the messages associated to a channel with regards to the given client.
 class ChatView extends StatefulWidget {
-  final twitch.Client client;
-  final twitch.Channel channel;
+  final twitch.Client? client;
+  final twitch.Channel? channel;
 
   const ChatView({
-    Key key,
-    @required this.client,
-    @required this.channel,
+    Key? key,
+    required this.client,
+    required this.channel,
   }) : super(key: key);
 
   @override
@@ -27,13 +27,13 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends State<ChatView> implements twitch.Listener {
   bool shouldScroll = true;
-  ScrollController scrollController;
-  double scrollPosition;
+  ScrollController? scrollController;
+  double? scrollPosition;
 
   void scrollToEnd() {
-    scrollController.jumpTo(0);
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      scrollController.jumpTo(0);
+    scrollController!.jumpTo(0);
+    SchedulerBinding.instance!.addPostFrameCallback((_) {
+      scrollController!.jumpTo(0);
     });
   }
 
@@ -63,7 +63,7 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
                 setState(() {});
               }
             } else if (scrollNotification is ScrollUpdateNotification || scrollNotification is ScrollEndNotification) {
-              if (scrollController.position.pixels == scrollController.position.minScrollExtent && shouldScroll != true) {
+              if (scrollController!.position.pixels == scrollController!.position.minScrollExtent && shouldScroll != true) {
                 shouldScroll = true;
                 setState(() {});
               }
@@ -75,7 +75,7 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
             controller: scrollController,
             padding: MediaQuery.of(context).padding + (Platform.isMacOS ? EdgeInsets.only(top: 26.0) : EdgeInsets.zero) + EdgeInsets.only(bottom: 32.0 + 8.0, top: 8.0),
             children: [
-              for (var message in widget.channel.messages)
+              for (var message in widget.channel!.messages)
                 ChatMessage(
                   message: message,
                 ),
@@ -142,7 +142,7 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
   void onConnectionStateChange(twitch.Connection connection, twitch.ConnectionState state) {}
 
   @override
-  void onMessage(twitch.Channel channel, twitch.Message message) {
+  void onMessage(twitch.Channel? channel, twitch.Message message) {
     if (channel != widget.channel || !shouldScroll) return;
     setState(() {});
   }

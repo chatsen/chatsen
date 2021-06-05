@@ -17,12 +17,12 @@ class AccountModelAdapter extends TypeAdapter<AccountModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AccountModel(
-      login: fields[0] as String,
-      token: fields[1] as String,
-      id: fields[2] as int,
-      clientId: fields[3] as String,
-      avatarBytes: fields[4] as Uint8List,
-    )..isActive = fields[5] as bool;
+      login: fields[0] as String?,
+      token: fields[1] as String?,
+      id: fields[2] as int?,
+      clientId: fields[3] as String?,
+      avatarBytes: fields[4] as Uint8List?,
+    )..isActive = fields[5] as bool?;
   }
 
   @override

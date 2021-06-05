@@ -23,7 +23,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 /// Our [HomePage]. This will contain access to everything: from Settings via a drawer, access to the different chat channels to everything else related to our application.
 class HomePage extends StatefulWidget {
   const HomePage({
-    Key key,
+    Key? key,
     // @required this.client,
   }) : super(key: key);
 
@@ -32,9 +32,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> implements twitch.Listener {
-  twitch.Client client;
-  TextEditingController textEditingController;
-  Future<bool> updateFuture;
+  twitch.Client client = twitch.Client();
+  Future<bool>? updateFuture;
 
   Future<void> loadChannelHistory() async {
     var channels = await Hive.openBox('Channels');
@@ -44,16 +43,14 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void initState() {
-    client = twitch.Client();
-
     AccountPresenter.findCurrentAccount().then(
       (account) async {
-        print(account.login);
-        await client.swapCredentials(
+        print(account!.login);
+        client.swapCredentials(
           twitch.Credentials(
             clientId: account.clientId,
             id: account.id,
-            login: account.login,
+            login: account.login!,
             token: account.token,
           ),
         );
@@ -62,7 +59,6 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
     loadChannelHistory();
 
-    textEditingController = TextEditingController();
     client.listeners.add(this);
 
     updateFuture = UpdateModal.hasUpdate();
@@ -74,7 +70,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
       });
     });
 
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
+    SchedulerBinding.instance!.addPostFrameCallback((_) async {
       UpdateModal.searchForUpdate(context);
     });
 
@@ -84,7 +80,6 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void dispose() {
-    textEditingController?.dispose();
     client.listeners.remove(this);
     super.dispose();
   }
@@ -95,7 +90,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
         child: BlocBuilder<StreamOverlayBloc, StreamOverlayState>(
           builder: (context, state) {
             var horizontal = MediaQuery.of(context).size.aspectRatio > 1.0;
-            // var videoPlayer = Container(color: Theme.of(context).primaryColor);
+            // // var videoPlayer = Container(color: Theme.of(context).primaryColor);
             var videoPlayer = state is StreamOverlayOpened
                 ? WebView(
                     initialUrl: 'https://player.twitch.tv/?channel=${state.channelName}&enableExtensions=true&muted=false&parent=pornhub.com',
@@ -109,7 +104,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
               extendBodyBehindAppBar: true,
               drawer: Builder(
                 builder: (context) {
-                  var currentChannel = client.channels.isNotEmpty ? client.channels[DefaultTabController.of(context).index] : null;
+                  var currentChannel = client.channels.isNotEmpty ? client.channels[DefaultTabController.of(context)!.index] : null;
                   return HomeDrawer(
                     client: client,
                     channel: currentChannel,
@@ -141,7 +136,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                               child: TabBar(
                                 labelPadding: EdgeInsets.only(left: 8.0),
                                 isScrollable: true,
-                                tabs: client.channels
+                                tabs: client!.channels
                                     .map(
                                       (channel) => HomeTab(
                                         client: client,
@@ -196,7 +191,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                 children: [
                   TabBarView(
                     children: [
-                      for (var channel in client.channels)
+                      for (var channel in client!.channels)
                         ChatView(
                           client: client,
                           channel: channel,
@@ -230,7 +225,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                     ? Row(
                         children: [
                           Expanded(
-                            child: SafeArea(child: videoPlayer),
+                            child: SafeArea(child: videoPlayer!),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(0.0),
@@ -265,12 +260,12 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
   void onConnectionStateChange(twitch.Connection connection, twitch.ConnectionState state) {}
 
   @override
-  void onMessage(twitch.Channel channel, twitch.Message message) {
+  void onMessage(twitch.Channel? channel, twitch.Message message) {
     if (message.mention) BlocProvider.of<MentionsCubit>(context).add(message);
-    if (NotificationPresenter.cache.mentionNotification && message.mention) {
-      NotificationWrapper.of(context).sendNotification(
+    if (NotificationPresenter.cache.mentionNotification! && message.mention) {
+      NotificationWrapper.of(context)!.sendNotification(
         payload: message.body,
-        title: message.user.login,
+        title: message.user!.login,
         subtitle: message.body,
       );
     }
@@ -281,10 +276,10 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void onWhisper(twitch.Channel channel, twitch.Message message) {
-    if (NotificationPresenter.cache.whisperNotification && message.user.id != channel.receiver.credentials.id) {
-      NotificationWrapper.of(context).sendNotification(
+    if (NotificationPresenter.cache.whisperNotification! && message.user!.id != channel.receiver!.credentials!.id) {
+      NotificationWrapper.of(context)!.sendNotification(
         payload: message.body,
-        title: message.user.login,
+        title: message.user!.login,
         subtitle: message.body,
       );
     }

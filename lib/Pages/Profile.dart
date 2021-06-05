@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
@@ -14,16 +15,16 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  void changeAvatar(AccountModel model) async {
-    FilePickerResult result = await FilePicker.platform.pickFiles(
+  void changeAvatar(AccountModel? model) async {
+    var result = await (FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['png'],
       withData: true,
-    );
+    ) as FutureOr<FilePickerResult>);
 
     if (result.files.isEmpty) return;
 
-    model.avatarBytes = result.files.first.bytes;
+    model!.avatarBytes = result.files.first.bytes;
     model.save();
 
     var uploadUrlRequest = await http.post(
@@ -39,10 +40,10 @@ class _ProfilePageState extends State<ProfilePage> {
     var uploadUrlResult = jsonDecode(utf8.decode(uploadUrlRequest.bodyBytes));
     if (uploadUrlResult['upload_url'] == null) return;
 
-    var fileRequest = new http.Request(
-      "PUT",
+    var fileRequest = http.Request(
+      'PUT',
       Uri.parse(uploadUrlResult['upload_url']),
-    )..bodyBytes = result.files.first.bytes;
+    )..bodyBytes = result.files.first.bytes!;
     fileRequest.headers['Content-Type'] = 'image/png';
 
     await fileRequest.send();
@@ -54,20 +55,20 @@ class _ProfilePageState extends State<ProfilePage> {
         appBar: AppBar(
           title: Text('Profile'),
         ),
-        body: FutureBuilder<AccountModel>(
+        body: FutureBuilder<AccountModel?>(
           future: AccountPresenter.findCurrentAccount(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView(
                 children: [
-                  if (snapshot.data.avatarBytes != null)
+                  if (snapshot.data!.avatarBytes != null)
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Ink.image(
-                            image: MemoryImage(snapshot.data.avatarBytes),
+                            image: MemoryImage(snapshot.data!.avatarBytes!),
                             fit: BoxFit.fill,
                             width: 150,
                             height: 150,
@@ -78,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                     ),
-                  if (snapshot.data.avatarBytes == null && snapshot.data.token != null)
+                  if (snapshot.data!.avatarBytes == null && snapshot.data!.token != null)
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: IconButton(
@@ -89,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      snapshot.data.login,
+                      snapshot.data!.login!,
                       style: Theme.of(context).textTheme.headline4,
                       textAlign: TextAlign.center,
                     ),
@@ -97,13 +98,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      controller: TextEditingController(text: snapshot.data.token),
+                      controller: TextEditingController(text: snapshot.data!.token),
                       decoration: InputDecoration(
                         labelText: 'Token',
                         filled: true,
                         suffixIcon: IconButton(
                           icon: Icon(Icons.copy),
-                          onPressed: () async => await Clipboard.setData(ClipboardData(text: snapshot.data.token)),
+                          onPressed: () async => await Clipboard.setData(ClipboardData(text: snapshot.data!.token)),
                         ),
                       ),
                       readOnly: true,
@@ -113,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      controller: TextEditingController(text: snapshot.data.clientId),
+                      controller: TextEditingController(text: snapshot.data!.clientId),
                       decoration: InputDecoration(
                         labelText: 'Client ID',
                         filled: true,
@@ -124,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                      controller: TextEditingController(text: snapshot.data.id.toString()),
+                      controller: TextEditingController(text: snapshot.data!.id.toString()),
                       decoration: InputDecoration(
                         labelText: 'User ID',
                         filled: true,

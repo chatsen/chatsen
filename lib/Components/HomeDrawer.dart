@@ -15,13 +15,13 @@ import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 /// The [HomeDrawer] widget represents the drawer available on the home page. It features our [UserlistView] which displays all the users currently in a channel as well as giving us the way to access multiple options, accounts and features.
 class HomeDrawer extends StatelessWidget {
-  final twitch.Client client;
-  final twitch.Channel channel;
+  final twitch.Client? client;
+  final twitch.Channel? channel;
 
   const HomeDrawer({
-    Key key,
-    @required this.client,
-    @required this.channel,
+    Key? key,
+    required this.client,
+    required this.channel,
   }) : super(key: key);
 
   @override
@@ -50,7 +50,7 @@ class HomeDrawer extends StatelessWidget {
                             if (channel != null)
                               IconButton(
                                 icon: Icon(Icons.play_arrow),
-                                onPressed: () async => (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) ? BlocProvider.of<StreamOverlayBloc>(context).add(StreamOverlayOpen(channelName: channel.name.substring(1))) : BlocProvider.of<StreamOverlayBloc>(context).add(StreamOVerlayClose()), //launch('https://twitch.tv/${channel.name.substring(1)}'),
+                                onPressed: () async => (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) ? BlocProvider.of<StreamOverlayBloc>(context).add(StreamOverlayOpen(channelName: channel!.name!.substring(1))) : BlocProvider.of<StreamOverlayBloc>(context).add(StreamOVerlayClose()), //launch('https://twitch.tv/${channel.name.substring(1)}'),
                                 tooltip: 'Open current channel\'s stream',
                               ),
                             if (channel != null)

@@ -4,16 +4,16 @@ import 'WidgetBlur.dart';
 
 class BottomModal extends StatelessWidget {
   final Widget child;
-  final double height;
+  final double? height;
 
   const BottomModal({
-    @required this.child,
+    required this.child,
     this.height,
   });
 
   static Future<PersistentBottomSheetController> push({
-    @required BuildContext context,
-    @required Widget child,
+    required BuildContext context,
+    required Widget child,
   }) async {
     return Scaffold.of(context).showBottomSheet(
       (context) => child,
@@ -24,7 +24,7 @@ class BottomModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) => WidgetBlur(
         child: Container(
-          color: Theme.of(context).appBarTheme.backgroundColor.withAlpha(96),
+          color: Theme.of(context).appBarTheme.backgroundColor!.withAlpha(96),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

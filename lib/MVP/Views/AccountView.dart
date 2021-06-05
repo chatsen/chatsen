@@ -6,11 +6,11 @@ import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 /// [AccountView] is our settings view that allows to change accounts. It uses the [AccountPresenter] to fetch and save a [AccountModel] model that contains our configuration.
 class AccountView extends StatefulWidget {
-  final twitch.Client client;
+  final twitch.Client? client;
 
   const AccountView({
-    Key key,
-    @required this.client,
+    Key? key,
+    required this.client,
   }) : super(key: key);
 
   @override
@@ -18,7 +18,7 @@ class AccountView extends StatefulWidget {
 }
 
 class _AccountViewState extends State<AccountView> {
-  Future accounts;
+  Future? accounts;
 
   void refresh() async {
     accounts = AccountPresenter.loadData();
@@ -47,22 +47,22 @@ class _AccountViewState extends State<AccountView> {
                             icon: Icon(Icons.delete),
                             onPressed: () async {
                               snapshot.data.remove(account);
-                              await AccountPresenter.saveData(snapshot.data);
+                              AccountPresenter.saveData(snapshot.data);
                               setState(() {});
                             },
                           )
                         : null,
                     leading: (account.avatarBytes != null)
                         ? ClipRRect(
-                            child: Image.memory(account.avatarBytes),
                             borderRadius: BorderRadius.circular(128.0),
+                            child: Image.memory(account.avatarBytes),
                           )
                         : Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Icon(Icons.account_circle, size: 48.0),
                           ),
                     onTap: () async {
-                      await widget.client.swapCredentials(
+                      widget.client!.swapCredentials(
                         twitch.Credentials(
                           clientId: account.clientId,
                           id: account.id,
@@ -70,7 +70,7 @@ class _AccountViewState extends State<AccountView> {
                           token: account.token,
                         ),
                       );
-                      await AccountPresenter.setCurrentAccount(account);
+                      AccountPresenter.setCurrentAccount(account);
                       Navigator.of(context).pop();
                     },
                   ),

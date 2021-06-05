@@ -2,7 +2,7 @@ import 'package:chatsen/Components/UI/BlurModal.dart';
 import 'package:flutter/material.dart';
 
 class UploadModal extends StatelessWidget {
-  const UploadModal({Key key}) : super(key: key);
+  const UploadModal({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Column(
@@ -20,7 +20,7 @@ class UploadModal extends StatelessWidget {
         ],
       );
 
-  static Future<void> show({@required BuildContext context}) async {
+  static Future<void> show({required BuildContext context}) async {
     await BlurModal.show(
       context: context,
       child: UploadModal(),
