@@ -78,7 +78,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       height: 32.0,
-                      child: Image.network(emote.mipmap!.first!),
+                      child: Image.network(emote.mipmap!.last!),
                     ),
                   ),
                 ),

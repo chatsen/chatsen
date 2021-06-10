@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                               child: TabBar(
                                 labelPadding: EdgeInsets.only(left: 8.0),
                                 isScrollable: true,
-                                tabs: client!.channels
+                                tabs: client.channels
                                     .map(
                                       (channel) => HomeTab(
                                         client: client,
@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                 children: [
                   TabBarView(
                     children: [
-                      for (var channel in client!.channels)
+                      for (var channel in client.channels)
                         ChatView(
                           client: client,
                           channel: channel,

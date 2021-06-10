@@ -225,7 +225,12 @@ class Message {
 
     var runeBody = String.fromCharCodes(runes);
 
-    for (var messageSplit in runeBody.split(' ').where((split) => split.isNotEmpty)) {
+    var splits = runeBody.split(' ').where((split) => split.isNotEmpty);
+    mention = splits.any(
+      (split) => (split.toLowerCase() == '${channel?.receiver?.credentials?.login.toLowerCase()}' || split.toLowerCase() == '@${channel?.receiver?.credentials?.login.toLowerCase()}' || split.toLowerCase() == '${channel?.receiver?.credentials?.login.toLowerCase()},' || split.toLowerCase() == '@${channel?.receiver?.credentials?.login.toLowerCase()},'),
+    );
+
+    for (var messageSplit in splits) {
       var client = channel?.transmitter?.client;
 
       var twitchEmote;
