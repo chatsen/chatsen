@@ -234,21 +234,21 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 ),
-                for (var i = 0; i < 10; ++i)
-                  SettingsEntry(
-                    category: 'Message',
-                    title: 'Alternate background color',
-                    description: 'Changes the background color for each message as a separation',
-                    builder: (context, category, title, description) => Tile(
-                      title: title,
-                      subtitle: description,
-                      onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageAlternateBackground: !state.messageAlternateBackground))),
-                      trailing: Switch(
-                        onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageAlternateBackground: value))),
-                        value: state.messageAlternateBackground,
-                      ),
+                // for (var i = 0; i < 10; ++i)
+                SettingsEntry(
+                  category: 'Message',
+                  title: 'Alternate background color',
+                  description: 'Changes the background color for each message as a separation',
+                  builder: (context, category, title, description) => Tile(
+                    title: title,
+                    subtitle: description,
+                    onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageAlternateBackground: !state.messageAlternateBackground))),
+                    trailing: Switch(
+                      onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageAlternateBackground: value))),
+                      value: state.messageAlternateBackground,
                     ),
                   ),
+                ),
               ];
 
               var listChildren = [
