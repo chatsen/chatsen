@@ -2,7 +2,6 @@ import 'package:chatsen/Upload/UploadModal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import '/Components/EmoteListModal.dart';
-import '/MVP/Presenters/AutocompletePresenter.dart';
 import 'WidgetTooltip.dart';
 
 /// [ChatInputBox] is our widget that features the input field used for every channel. It's feature rich and even contains autocompletion features!
@@ -41,7 +40,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
   List<Widget> getAutoCompletionItems() => [
         if (textEditingController!.text.split(' ').last.length >= 2 && !textEditingController!.text.endsWith(' '))
           for (var emote in widget.client!.emotes + widget.channel!.emotes + widget.channel!.transmitter!.emotes)
-            if ('${AutocompletePresenter.cache.emotePrefix! ? ':' : ''}${emote.name}'.toLowerCase().contains(textEditingController!.text.split(' ').last.toLowerCase()) && (AutocompletePresenter.cache.emotePrefix! ? textEditingController!.text.startsWith(':') : true))
+            if ('${false ? ':' : ''}${emote.name}'.toLowerCase().contains(textEditingController!.text.split(' ').last.toLowerCase()) && (false ? textEditingController!.text.startsWith(':') : true))
               WidgetTooltip(
                 // message: '${emote.name}',
                 message: Padding(
@@ -208,7 +207,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
   List<Widget> getAutoCompletionUsers() => [
         if (textEditingController!.text.split(' ').last.length >= 2 && !textEditingController!.text.endsWith(' '))
           for (var user in widget.channel!.users.values.expand((element) => element))
-            if ('${AutocompletePresenter.cache.userPrefix! ? '@' : ''}$user'.toLowerCase().contains(textEditingController!.text.split(' ').last.toLowerCase()) && (AutocompletePresenter.cache.userPrefix! ? textEditingController!.text.startsWith('@') : true))
+            if ('${false ? '@' : ''}$user'.toLowerCase().contains(textEditingController!.text.split(' ').last.toLowerCase()) && (false ? textEditingController!.text.startsWith('@') : true))
               InkWell(
                 onTap: () async {
                   var splits = textEditingController!.text.split(' ');

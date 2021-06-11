@@ -1,9 +1,11 @@
 import 'package:chatsen/Components/WidgetTooltip.dart';
+import 'package:chatsen/Settings/Settings.dart';
+import 'package:chatsen/Settings/SettingsState.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
-import '/MVP/Presenters/MessagePresenter.dart';
 import '/Pages/Search.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
@@ -13,11 +15,13 @@ import 'dart:async';
 class ChatMessage extends StatelessWidget {
   final String? prefixText;
   final twitch.Message message;
+  final Color? backgroundColor;
 
   const ChatMessage({
     Key? key,
     this.prefixText,
     required this.message,
+    this.backgroundColor,
   }) : super(key: key);
 
   Color getUserColor(BuildContext context, Color color) {
@@ -72,7 +76,7 @@ class ChatMessage extends StatelessWidget {
           );
           break;
         case twitch.MessageTokenType.Image:
-          if (!MessagePresenter.cache.imagePreview!) {
+          if (!(BlocProvider.of<Settings>(context).state as SettingsLoaded).messageImagePreview) {
             spans.add(
               TextSpan(
                 children: [
@@ -216,7 +220,7 @@ class ChatMessage extends StatelessWidget {
     }
 
     return Container(
-      color: message.mention ? Theme.of(context).primaryColor.withAlpha(48) : null,
+      color: message.mention ? Theme.of(context).primaryColor.withAlpha(48) : backgroundColor,
       child: InkWell(
         onLongPress: () async => await Clipboard.setData(ClipboardData(text: message.body)),
         child: Padding(
@@ -229,7 +233,7 @@ class ChatMessage extends StatelessWidget {
                         text: '$prefixText ',
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
-                    if (MessagePresenter.cache.timestamps!)
+                    if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).messageTimestamp)
                       TextSpan(
                         text: '${message.dateTime!.hour.toString().padLeft(2, '0')}:${message.dateTime!.minute.toString().padLeft(2, '0')} ',
                         style: TextStyle(fontWeight: FontWeight.bold),

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:chatsen/Settings/Settings.dart';
+import 'package:chatsen/Settings/SettingsState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,16 +72,28 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
             }
             return true;
           },
-          child: ListView(
-            reverse: true,
-            controller: scrollController,
-            padding: MediaQuery.of(context).padding + (Platform.isMacOS ? EdgeInsets.only(top: 26.0) : EdgeInsets.zero) + EdgeInsets.only(bottom: 32.0 + 8.0, top: 8.0),
-            children: [
-              for (var message in widget.channel!.messages)
-                ChatMessage(
-                  message: message,
-                ),
-            ].reversed.toList(),
+          child: BlocBuilder<Settings, SettingsState>(
+            builder: (context, state) {
+              var i = 0;
+              return ListView(
+                reverse: true,
+                controller: scrollController,
+                padding: MediaQuery.of(context).padding + (Platform.isMacOS ? EdgeInsets.only(top: 26.0) : EdgeInsets.zero) + EdgeInsets.only(bottom: 32.0 + 8.0, top: 8.0),
+                children: [
+                  for (var message in widget.channel!.messages) ...[
+                    if (state is SettingsLoaded && state.messageLines)
+                      Container(
+                        color: Theme.of(context).dividerColor,
+                        height: 1.0,
+                      ),
+                    ChatMessage(
+                      backgroundColor: state is SettingsLoaded && state.messageAlternateBackground && (i++ % 2 == 0) ? Theme.of(context).dividerColor : null,
+                      message: message,
+                    ),
+                  ],
+                ].reversed.toList(),
+              );
+            },
           ),
         ),
         if ((Platform.isMacOS ? 0.0 : MediaQuery.of(context).padding.top) > 0.0 && (MediaQuery.of(context).size.aspectRatio > 1.0 ? true : BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed))

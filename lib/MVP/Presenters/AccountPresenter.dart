@@ -30,17 +30,14 @@ class AccountPresenter {
   }
 
   static Future<AccountModel?> findCurrentAccount() async {
-    print('first step');
-    var box = await Hive.openBox('Settings');
-    print('second step');
+    var box = await Hive.openBox('SettingsOld');
     var currentId = box.containsKey('currentAccountId') ? box.get('currentAccountId') : 0;
     var accounts = await loadData();
-    print('third step');
     return accounts.firstWhere((element) => element!.isActive!, orElse: () => accounts.first);
   }
 
   static void setCurrentAccount(AccountModel? model) async {
-    var box = await Hive.openBox('Settings');
+    var box = await Hive.openBox('SettingsOld');
     var currentId = box.containsKey('currentAccountId') ? box.get('currentAccountId') : 0;
     var accounts = await loadData();
     for (var account in accounts) {

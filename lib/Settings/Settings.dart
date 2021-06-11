@@ -1,0 +1,39 @@
+import 'package:bloc/bloc.dart';
+import 'package:hive/hive.dart';
+
+import 'SettingsEvent.dart';
+import 'SettingsState.dart';
+
+class Settings extends Bloc<SettingsEvent, SettingsState> {
+  final Box settingsBox;
+
+  Settings(this.settingsBox) : super(SettingsLoading()) {
+    add(SettingsLoad());
+  }
+
+  @override
+  Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
+    if (event is SettingsLoad) {
+      yield SettingsLoaded(
+        setupScreen: settingsBox.get('setupScreen') ?? true,
+        notificationOnWhisper: settingsBox.get('notificationOnWhisper') ?? false,
+        notificationOnMention: settingsBox.get('notificationOnMention') ?? false,
+        messageTimestamp: settingsBox.get('messageTimestamp') ?? false,
+        messageImagePreview: settingsBox.get('messageImagePreview') ?? false,
+        messageLines: settingsBox.get('messageLines') ?? false,
+        messageAlternateBackground: settingsBox.get('messageAlternateBackground') ?? false,
+        mentionCustom: settingsBox.get('mentionCustom') ?? [],
+      );
+    } else if (event is SettingsChange) {
+      await settingsBox.put('setupScreen', event.state.setupScreen);
+      await settingsBox.put('notificationOnWhisper', event.state.notificationOnWhisper);
+      await settingsBox.put('notificationOnMention', event.state.notificationOnMention);
+      await settingsBox.put('messageTimestamp', event.state.messageTimestamp);
+      await settingsBox.put('messageImagePreview', event.state.messageImagePreview);
+      await settingsBox.put('messageLines', event.state.messageLines);
+      await settingsBox.put('messageAlternateBackground', event.state.messageAlternateBackground);
+      await settingsBox.put('mentionCustom', event.state.mentionCustom);
+      yield event.state;
+    }
+  }
+}

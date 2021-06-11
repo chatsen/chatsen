@@ -1,10 +1,10 @@
+import 'package:chatsen/Pages/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_material_next/WidgetBlur.dart';
 import '/Pages/Account.dart';
 import '/Pages/Profile.dart';
 import '/Pages/Search.dart';
-import '/Pages/Settings.dart';
 import '/Pages/Whispers.dart';
 import '/StreamOverlay/StreamOverlayBloc.dart';
 import '/StreamOverlay/StreamOverlayEvent.dart';

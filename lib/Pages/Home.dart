@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:chatsen/Components/HomeEndDrawer.dart';
 import 'package:chatsen/Components/UpdateModal.dart';
 import 'package:chatsen/Mentions/MentionsCubit.dart';
+import 'package:chatsen/Settings/Settings.dart';
+import 'package:chatsen/Settings/SettingsState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +14,6 @@ import '/Components/HomeDrawer.dart';
 import '/Components/HomeTab.dart';
 import '/Components/Notification.dart';
 import '/MVP/Presenters/AccountPresenter.dart';
-import '/MVP/Presenters/NotificationPresenter.dart';
 import '/StreamOverlay/StreamOverlayBloc.dart';
 import '/StreamOverlay/StreamOverlayState.dart';
 import '/Views/Chat.dart';
@@ -262,7 +263,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
   @override
   void onMessage(twitch.Channel? channel, twitch.Message message) {
     if (message.mention) BlocProvider.of<MentionsCubit>(context).add(message);
-    if (NotificationPresenter.cache.mentionNotification! && message.mention) {
+    if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).notificationOnMention && message.mention) {
       NotificationWrapper.of(context)!.sendNotification(
         payload: message.body,
         title: message.user!.login,
@@ -276,7 +277,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void onWhisper(twitch.Channel channel, twitch.Message message) {
-    if (NotificationPresenter.cache.whisperNotification! && message.user!.id != channel.receiver!.credentials!.id) {
+    if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).notificationOnWhisper && message.user!.id != channel.receiver!.credentials!.id) {
       NotificationWrapper.of(context)!.sendNotification(
         payload: message.body,
         title: message.user!.login,
