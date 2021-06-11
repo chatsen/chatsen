@@ -93,15 +93,15 @@ class HomeDrawer extends StatelessWidget {
                               ),
                               tooltip: 'Add or switch between your accounts',
                             ),
-                            IconButton(
-                              icon: Icon(Icons.account_circle),
-                              onPressed: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) => ProfilePage(),
-                                ),
-                              ),
-                              tooltip: 'Get your profile information',
-                            ),
+                            // IconButton(
+                            //   icon: Icon(Icons.account_circle),
+                            //   onPressed: () => Navigator.of(context).push(
+                            //     MaterialPageRoute(
+                            //       builder: (BuildContext context) => ProfilePage(),
+                            //     ),
+                            //   ),
+                            //   tooltip: 'Get your profile information',
+                            // ),
                             IconButton(
                               icon: Icon(Icons.settings),
                               onPressed: () => Navigator.of(context).push(

@@ -148,7 +148,7 @@ class ChatMessage extends StatelessWidget {
                         token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
                         filterQuality: FilterQuality.high,
                         isAntiAlias: true,
-                        scale: token.data.provider == 'Twitch' ? 2.0 : 4.0,
+                        scale: token.data.provider == 'Twitch' ? 2.0 : (token.data.mipmap.length == 1 ? 1.0 : 4.0),
                       ),
                     ),
                   ),

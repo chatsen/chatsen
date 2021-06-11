@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:chatsen/Components/HomeEndDrawer.dart';
-import 'package:chatsen/Components/UpdateModal.dart';
+import 'package:chatsen/Components/Modal/SetupModal.dart';
+import 'package:chatsen/Components/Modal/UpdateModal.dart';
 import 'package:chatsen/Mentions/MentionsCubit.dart';
 import 'package:chatsen/Settings/Settings.dart';
+import 'package:chatsen/Settings/SettingsEvent.dart';
 import 'package:chatsen/Settings/SettingsState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -73,6 +75,11 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
     SchedulerBinding.instance!.addPostFrameCallback((_) async {
       UpdateModal.searchForUpdate(context);
+      var settingsState = BlocProvider.of<Settings>(context).state;
+      if (settingsState is SettingsLoaded && settingsState.setupScreen) {
+        await SetupModal.show(context);
+        BlocProvider.of<Settings>(context).add(SettingsChange(state: settingsState.copyWith(setupScreen: false)));
+      }
     });
 
     super.initState();
@@ -208,7 +215,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                               child: IconButton(
                                 icon: Icon(
                                   Icons.system_update,
-                                  color: Theme.of(context).primaryColor,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                                 onPressed: () async => UpdateModal.searchForUpdate(context),
                               ),

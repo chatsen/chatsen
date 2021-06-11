@@ -23,6 +23,7 @@ class Settings extends Bloc<SettingsEvent, SettingsState> {
         messageLines: settingsBox.get('messageLines') ?? false,
         messageAlternateBackground: settingsBox.get('messageAlternateBackground') ?? false,
         mentionCustom: settingsBox.get('mentionCustom') ?? [],
+        historyUseRecentMessages: settingsBox.get('historyEnabled') ?? true,
       );
     } else if (event is SettingsChange) {
       await settingsBox.put('setupScreen', event.state.setupScreen);
@@ -33,6 +34,7 @@ class Settings extends Bloc<SettingsEvent, SettingsState> {
       await settingsBox.put('messageLines', event.state.messageLines);
       await settingsBox.put('messageAlternateBackground', event.state.messageAlternateBackground);
       await settingsBox.put('mentionCustom', event.state.mentionCustom);
+      await settingsBox.put('historyEnabled', event.state.historyUseRecentMessages);
       yield event.state;
     }
   }

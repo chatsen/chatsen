@@ -12,6 +12,8 @@ import 'package:chatsen/Theme/ThemeState.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info/package_info.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsEntry extends StatelessWidget {
   final String? category;
@@ -156,7 +158,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 SettingsEntry(
                   category: 'Notifications',
-                  title: 'Notification on whisper',
+                  title: 'Notification on whispers',
                   description: 'Sends a system notification when a whisper is received',
                   builder: (context, category, title, description) => Tile(
                     title: title,
@@ -170,7 +172,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 SettingsEntry(
                   category: 'Notifications',
-                  title: 'Notification on mention',
+                  title: 'Notification on mentions',
                   description: 'Sends a system notification when you are mentionned in an open chat',
                   builder: (context, category, title, description) => Tile(
                     title: title,
@@ -249,6 +251,60 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 ),
+                SettingsEntry(
+                  category: '3rd-party services',
+                  title: 'Load chat history from recent-messages',
+                  description: 'Uses a 3rd-party service by @randers to load chat history',
+                  builder: (context, category, title, description) => Tile(
+                    leading: InkWell(
+                      borderRadius: BorderRadius.circular(32.0),
+                      onTap: () => launch('https://recent-messages.robotty.de/'),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.history),
+                      ),
+                    ),
+                    title: title,
+                    subtitle: description,
+                    onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyEnabled: !state.historyUseRecentMessages))),
+                    trailing: Switch(
+                      onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyEnabled: value))),
+                      value: state.historyUseRecentMessages,
+                    ),
+                  ),
+                ),
+                SettingsEntry(
+                  category: 'About',
+                  title: 'Show open-source licenses',
+                  description: 'Display the list of licenses used by dependencies',
+                  builder: (context, category, title, description) => Tile(
+                    leading: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.info),
+                    ),
+                    title: title,
+                    subtitle: description,
+                    onTap: () => showLicensePage(context: context),
+                  ),
+                ),
+
+                SettingsEntry(
+                  category: 'About',
+                  // title: 'Check for updates',
+                  title: 'About Chatsen',
+                  description: 'Version',
+                  builder: (context, category, title, description) => FutureBuilder<PackageInfo>(
+                    future: PackageInfo.fromPlatform(),
+                    builder: (context, snapshot) => Tile(
+                      leading: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.system_security_update),
+                      ),
+                      title: title,
+                      subtitle: snapshot.hasData ? 'Running ${snapshot.data!.packageName} ${snapshot.data!.version}+${snapshot.data!.buildNumber}' : null,
+                    ),
+                  ),
+                ),
               ];
 
               var listChildren = [
@@ -262,6 +318,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   for (var entry in entryGroup.value) entry,
                 ],
+                SizedBox(height: MediaQuery.of(context).padding.bottom),
               ];
 
               return CustomScrollView(
