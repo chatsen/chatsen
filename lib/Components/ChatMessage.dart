@@ -220,7 +220,7 @@ class ChatMessage extends StatelessWidget {
     }
 
     return Container(
-      color: message.mention ? Theme.of(context).primaryColor.withAlpha(48) : backgroundColor,
+      color: message.mention ? Theme.of(context).colorScheme.primary.withAlpha(48) : backgroundColor,
       child: InkWell(
         onLongPress: () async => await Clipboard.setData(ClipboardData(text: message.body)),
         child: Padding(
