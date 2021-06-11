@@ -7,7 +7,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_material_next/WidgetBlur.dart';
+import '/Components/UI/WidgetBlur.dart';
 
 class WidgetTooltip extends StatefulWidget {
   /// Creates a tooltip.

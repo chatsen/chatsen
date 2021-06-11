@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_material_next/WidgetBlur.dart';
+import '/Components/UI/WidgetBlur.dart';
 import '/MVP/Presenters/AccountPresenter.dart';
 import '/Pages/OAuth.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;

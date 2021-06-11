@@ -2,7 +2,7 @@ import 'package:chatsen/Components/ChatMessage.dart';
 import 'package:chatsen/Mentions/MentionsCubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_material_next/WidgetBlur.dart';
+import '/Components/UI/WidgetBlur.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 class HomeEndDrawer extends StatelessWidget {
@@ -38,8 +38,12 @@ class HomeEndDrawer extends StatelessWidget {
                             ? Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Icon(Icons.alternate_email, size: 48.0),
-                                  SizedBox(height: 4.0),
+                                  Icon(
+                                    Icons.alternate_email,
+                                    size: 48.0,
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
+                                  SizedBox(height: 8.0),
                                   Text.rich(
                                     TextSpan(
                                       text: 'Mentions would go here\n...if you had any ',

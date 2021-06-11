@@ -1,9 +1,14 @@
 import 'dart:math';
 
+import 'package:chatsen/Components/UI/BlurModal.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
 import 'package:chatsen/Settings/Settings.dart';
 import 'package:chatsen/Settings/SettingsEvent.dart';
 import 'package:chatsen/Settings/SettingsState.dart';
+import 'package:chatsen/Theme/ThemeBloc.dart';
+import 'package:chatsen/Theme/ThemeEvent.dart';
+import 'package:chatsen/Theme/ThemeManager.dart';
+import 'package:chatsen/Theme/ThemeState.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,6 +75,71 @@ class _SettingsPageState extends State<SettingsPage> {
           builder: (context, state) {
             if (state is SettingsLoaded) {
               var entries = [
+                SettingsEntry(
+                  category: 'Theme',
+                  title: 'Color',
+                  description: 'Change the primary color of the application',
+                  builder: (context, category, title, description) => Tile(
+                    onTap: () async => BlurModal.show(
+                      context: context,
+                      child: BlocBuilder<ThemeBloc, ThemeState>(
+                        builder: (context, state) => SafeArea(
+                          child: Material(
+                            child: SizedBox(
+                              child: GridView.extent(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                maxCrossAxisExtent: 16.0 * 5.0,
+                                children: [
+                                  for (var colorScheme in ThemeManager.colors.entries)
+                                    Tooltip(
+                                      message: colorScheme.key,
+                                      child: InkWell(
+                                        onTap: () => BlocProvider.of<ThemeBloc>(context).add(ThemeColorSchemeChanged(colorScheme: colorScheme.key)),
+                                        child: Ink(
+                                          color: colorScheme.value.first,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    leading: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Material(
+                        elevation: 2.0,
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(32.0),
+                        clipBehavior: Clip.antiAlias,
+                        child: SizedBox(width: 24.0, height: 24.0),
+                      ),
+                    ),
+                    title: title,
+                    subtitle: description,
+                  ),
+                ),
+                SettingsEntry(
+                  category: 'Theme',
+                  title: 'Brightness',
+                  description: 'Change between light and dark theme',
+                  builder: (context, category, title, description) => Tile(
+                    leading: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.wb_sunny_outlined),
+                    ),
+                    onTap: () => BlocProvider.of<ThemeBloc>(context).add(
+                      ThemeModeChanged(
+                        mode: (BlocProvider.of<ThemeBloc>(context).state as ThemeLoaded).mode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light,
+                      ),
+                    ),
+                    title: title,
+                    subtitle: description,
+                  ),
+                ),
                 SettingsEntry(
                   category: 'Setup',
                   title: 'Setup screen',
@@ -187,7 +257,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 4.0),
                     child: Text(
                       '${entryGroup.key}',
-                      style: Theme.of(context).textTheme.button!.copyWith(color: Theme.of(context).primaryColor),
+                      style: Theme.of(context).textTheme.button!.copyWith(color: Theme.of(context).colorScheme.primary),
                     ),
                   ),
                   for (var entry in entryGroup.value) entry,
@@ -196,35 +266,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
               return CustomScrollView(
                 slivers: <Widget>[
-                  // SliverAppBar(
-                  //   pinned: false,
-                  //   snap: false,
-                  //   floating: true,
-                  //   expandedHeight: 128.0 * 1.5,
-                  //   // titleSpacing: 0.0,
-                  //   // leading: Container(),
-                  //   // leadingWidth: 0.0,
-                  //   // automaticallyImplyLeading: false,
-                  //   flexibleSpace: FlexibleSpaceBar(
-                  //     title: Row(
-                  //       children: [
-                  //         Container(
-                  //           width: 24.0,
-                  //           height: 24.0,
-                  //           child: IconButton(
-                  //             icon: Icon(Icons.arrow_back),
-                  //             onPressed: () => Navigator.of(context).pop(),
-                  //             padding: EdgeInsets.zero,
-                  //             iconSize: 24.0,
-                  //           ),
-                  //         ),
-                  //         SizedBox(width: 8.0),
-                  //         Text('Settings'),
-                  //       ],
-                  //     ),
-                  //     titlePadding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                  //   ),
-                  // ),
                   SliverToBoxAdapter(
                     child: SizedBox(
                       height: 128.0 * 1.5,
@@ -247,7 +288,9 @@ class _SettingsPageState extends State<SettingsPage> {
                             Spacer(),
                             Text(
                               'Settings',
-                              style: Theme.of(context).textTheme.headline4,
+                              style: Theme.of(context).textTheme.headline4!.copyWith(
+                                    color: Theme.of(context).colorScheme.onSurface,
+                                  ),
                             ),
                           ],
                         ),
@@ -264,6 +307,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0) + EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                         child: Material(
                           borderRadius: BorderRadius.circular(64.0),
+                          color: Theme.of(context).colorScheme.surface,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 24.0),
                             child: Center(
@@ -300,33 +344,42 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ],
               );
-
-              // Column(
-              //   children: [
-              //     Expanded(
-              //       child: ListView(
-              //         children: ,
-              //         ],
-              //       ),
-              //     ),
-              //     SafeArea(
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(8.0),
-              //         child: TextField(
-              //           controller: searchController,
-              //           decoration: InputDecoration(
-              //             labelText: 'Search',
-              //             filled: true,
-              //           ),
-              //           onChanged: (value) => setState(() {}),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // );
             }
             return Center(child: CircularProgressIndicator.adaptive());
           },
         ),
       );
 }
+
+
+/*
+                  // SliverAppBar(
+                  //   pinned: false,
+                  //   snap: false,
+                  //   floating: true,
+                  //   expandedHeight: 128.0 * 1.5,
+                  //   // titleSpacing: 0.0,
+                  //   // leading: Container(),
+                  //   // leadingWidth: 0.0,
+                  //   // automaticallyImplyLeading: false,
+                  //   flexibleSpace: FlexibleSpaceBar(
+                  //     title: Row(
+                  //       children: [
+                  //         Container(
+                  //           width: 24.0,
+                  //           height: 24.0,
+                  //           child: IconButton(
+                  //             icon: Icon(Icons.arrow_back),
+                  //             onPressed: () => Navigator.of(context).pop(),
+                  //             padding: EdgeInsets.zero,
+                  //             iconSize: 24.0,
+                  //           ),
+                  //         ),
+                  //         SizedBox(width: 8.0),
+                  //         Text('Settings'),
+                  //       ],
+                  //     ),
+                  //     titlePadding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                  //   ),
+                  // ),
+*/

@@ -21,8 +21,6 @@ dependencies:
   flutter_local_notifications: ^6.0.0
   flutter_chatsen_irc:
     path: libraries/flutter_chatsen_irc
-  flutter_material_next:
-    path: libraries/flutter_material_next
   bloc: ^7.0.0
   flutter_bloc: ^7.0.1
   equatable: ^2.0.2

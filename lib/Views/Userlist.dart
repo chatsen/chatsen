@@ -46,7 +46,7 @@ class _UserlistViewState extends State<UserlistView> {
                   padding: const EdgeInsets.only(left: 10.0, top: 12.0),
                   child: Text(
                     group.key,
-                    style: Theme.of(context).textTheme.headline6!.copyWith(color: Theme.of(context).accentColor),
+                    style: Theme.of(context).textTheme.headline6!.copyWith(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
               );

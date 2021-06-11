@@ -1,7 +1,7 @@
 import 'package:chatsen/Components/WidgetTooltip.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_material_next/WidgetBlur.dart';
+import '/Components/UI/WidgetBlur.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import 'package:hive/hive.dart';
 

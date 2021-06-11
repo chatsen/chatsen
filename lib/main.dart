@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chatsen/Theme/ThemeBloc.dart';
 import 'package:dart_downloader/DownloadManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,11 +36,15 @@ void main() async {
   Hive.registerAdapter(AccountModelAdapter());
   await Hive.openBox('Accounts');
   await Hive.openBox('SettingsOld');
+
   var settingsBox = await Hive.openBox('Settings');
+  var themeBox = await Hive.openBox('Theme');
+
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (BuildContext context) => MentionsCubit()),
+        BlocProvider(create: (BuildContext context) => ThemeBloc(themeBox, mode: ThemeMode.dark, colorScheme: 'red')),
         BlocProvider(create: (BuildContext context) => DownloadManager()),
         BlocProvider(create: (BuildContext context) => StreamOverlayBloc()),
         BlocProvider(create: (BuildContext context) => Settings(settingsBox)),

@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '/Components/ChatInputBox.dart';
 import '/Components/ChatMessage.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
-import 'package:flutter_material_next/WidgetBlur.dart';
+import '/Components/UI/WidgetBlur.dart';
 import '/StreamOverlay/StreamOverlayBloc.dart';
 import '/StreamOverlay/StreamOverlayState.dart';
 
@@ -132,7 +132,7 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
                 ),
               WidgetBlur(
                 child: Material(
-                  color: Theme.of(context).canvasColor.withAlpha(196),
+                  color: Theme.of(context).colorScheme.surface.withAlpha(196),
                   child: ChatInputBox(
                     client: widget.client,
                     channel: widget.channel,
