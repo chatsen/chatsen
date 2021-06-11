@@ -134,7 +134,10 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                               child: Container(
                                 height: 32.0,
                                 width: 32.0,
-                                child: Icon(Icons.menu),
+                                child: Icon(
+                                  Icons.menu,
+                                  color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                                ),
                               ),
                             ),
                           ),
@@ -177,7 +180,10 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                               child: Container(
                                 height: 32.0,
                                 width: 32.0,
-                                child: Icon(Icons.add),
+                                child: Icon(
+                                  Icons.add,
+                                  color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                                ),
                               ),
                             ),
                           ),
@@ -186,7 +192,11 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                             child: Container(
                               height: 32.0,
                               width: 32.0,
-                              child: Icon(Icons.alternate_email, size: 20.0),
+                              child: Icon(
+                                Icons.alternate_email,
+                                size: 20.0,
+                                color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                              ),
                             ),
                           ),
                         ],

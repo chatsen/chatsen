@@ -178,7 +178,10 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                         // backgroundColor: Colors.transparent,
                       );
                     },
-                    child: Icon(Icons.emoji_emotions_outlined),
+                    child: Icon(
+                      Icons.emoji_emotions_outlined,
+                      color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                    ),
                   ),
                 ),
               ),
@@ -192,7 +195,10 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                       textEditingController?.clear();
                       setState(() {});
                     },
-                    child: Icon(Icons.send),
+                    child: Icon(
+                      Icons.send,
+                      color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                    ),
                   ),
                 ),
               ),
