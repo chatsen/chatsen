@@ -15,7 +15,7 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 
 # Store Releases
 
-- [x] [Play Store](https://play.google.com/store/apps/details?id=com.chatsen.chatsen) (currently a very old version, do **NOT** use)
+- [x] [Play Store](https://play.google.com/store/apps/details?id=com.chatsen.chatsen)
 - [ ] F-Droid Store
 - [ ] App Store (alternative installation method available down the readme, even for non-jailbroken users, in the iOS Installation Guide section)
 
