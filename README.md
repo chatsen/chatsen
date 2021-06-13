@@ -1,4 +1,4 @@
-[<img height="64" src="assets/forseniPhone.png">](assets/forseniPhone.png)
+[<img height="64" src="assets/forseniPhoneRound.png">](assets/forseniPhoneRound.png)
 Chatsen
 ============
 
