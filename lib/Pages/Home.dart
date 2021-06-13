@@ -243,6 +243,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                         ? Align(
                             alignment: Alignment.topRight,
                             child: SafeArea(
+                              top: state is StreamOverlayClosed || horizontal,
                               child: IconButton(
                                 icon: Icon(
                                   Icons.system_update,
@@ -278,6 +279,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                     : Column(
                         children: [
                           SafeArea(
+                            bottom: false,
                             child: AspectRatio(
                               aspectRatio: 16.0 / 9.0,
                               child: videoPlayer,
