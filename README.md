@@ -1,5 +1,5 @@
 [<img height="64" src="assets/forseniPhoneRound.png">](assets/forseniPhoneRound.png)
-Chatsen
+Chatsen ![GitHub](https://img.shields.io/github/license/chatsen/chatsen) ![GitHub all releases](https://img.shields.io/github/downloads/chatsen/chatsen/total)
 ============
 
 Chatsen is a cross-platform application that allows you to chat on Twitch with support for 3rd-party services such as 7TV, BTTV and FFZ.  
