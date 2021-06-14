@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '/Components/UI/WidgetBlur.dart';
 import '/MVP/Presenters/AccountPresenter.dart';
-import '../../Pages/OAuthFrontend.dart';
+import '../../Pages/OAuth.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 /// [AccountView] is our settings view that allows to change accounts. It uses the [AccountPresenter] to fetch and save a [AccountModel] model that contains our configuration.

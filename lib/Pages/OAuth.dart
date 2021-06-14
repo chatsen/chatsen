@@ -171,7 +171,7 @@ class _OAuthPageState extends State<OAuthPage> {
             //   widget.refresh();
             // }
           },
-          initialUrl: 'https://id.twitch.tv/oauth2/authorize?client_id=vvxbprk8sfufgzd7k9wwr1478znf7b&redirect_uri=http://localhost&response_type=token&scope=user_subscriptions user_blocks_edit user_blocks_read user_follows_edit channel_editor channel:moderate channel:read:redemptions chat:edit chat:read whispers:read whispers:edit channel_commercial channel:edit:commercial user:edit:follows clips:edit channel:manage:broadcast user:read:blocked_users user:manage:blocked_users moderator:manage:automod',
+          initialUrl: 'https://id.twitch.tv/oauth2/authorize?client_id=vvxbprk8sfufgzd7k9wwr1478znf7b&redirect_uri=http://localhost&response_type=token&scope=user_subscriptions%20user_blocks_edit%20user_blocks_read%20user_follows_edit%20channel_editor%20channel:moderate%20channel:read:redemptions%20chat:edit%20chat:read%20whispers:read%20whispers:edit%20channel_commercial%20channel:edit:commercial%20user:edit:follows%20clips:edit%20channel:manage:broadcast%20user:read:blocked_users%20user:manage:blocked_users%20moderator:manage:automod',
           javascriptMode: JavascriptMode.unrestricted,
           userAgent: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0',
         ),
