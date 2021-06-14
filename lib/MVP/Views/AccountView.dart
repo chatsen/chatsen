@@ -40,8 +40,8 @@ class _AccountViewState extends State<AccountView> {
               children: [
                 for (var account in snapshot.data)
                   ListTile(
-                    title: Text(account.login),
-                    subtitle: Text(account.token != null ? account.clientId : 'Anonymous Login'),
+                    title: Text(account.token != null ? account.login : 'Anonymous Login'),
+                    subtitle: Text(account.token != null ? account.clientId : account.login),
                     trailing: account.token != null
                         ? IconButton(
                             icon: Icon(Icons.delete),
