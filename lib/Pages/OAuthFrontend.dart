@@ -9,20 +9,20 @@ import '/MVP/Models/AccountModel.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
-/// [OAuthPage] is the page that contains our login webview. It's used to be able to add accounts to the application.
-class OAuthPage extends StatefulWidget {
+/// [OAuthFrontendPage] is the page that contains our login webview. It's used to be able to add accounts to the application.
+class OAuthFrontendPage extends StatefulWidget {
   final Function refresh;
 
-  const OAuthPage({
+  const OAuthFrontendPage({
     Key? key,
     required this.refresh,
   }) : super(key: key);
 
   @override
-  _OAuthPageState createState() => _OAuthPageState();
+  _OAuthFrontendPageState createState() => _OAuthFrontendPageState();
 }
 
-class _OAuthPageState extends State<OAuthPage> {
+class _OAuthFrontendPageState extends State<OAuthFrontendPage> {
   late WebViewController webViewController;
   CookieManager cookieManager = CookieManager();
 

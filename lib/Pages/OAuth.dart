@@ -34,16 +34,20 @@ class _OAuthPageState extends State<OAuthPage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text('Login with Twitch'),
-          // actions: [
-          //   IconButton(
-          //     icon: Icon(Icons.add),
-          //     onPressed: () async {},
-          //   ),
-          // ],
+          actions: [
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () async {
+                await webViewController.clearCache();
+                await cookieManager.clearCookies();
+              },
+            ),
+          ],
         ),
         body: WebView(
           onWebViewCreated: (controller) => webViewController = controller,
           onPageFinished: (url) async {
+            print('wow url: $url');
             if (url.contains('access_token')) {
               try {
                 var fragmentParameters = {
