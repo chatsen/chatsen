@@ -198,7 +198,11 @@ class Message {
 
     twitchEmotes.sort((item, item2) => item2.startPosition!.compareTo(item.startPosition!));
 
-    tokens = tokenize(body!);
+    try {
+      tokens = tokenize(body!);
+    } catch (e) {
+      print('$e: $body');
+    }
 
     dateTime = dateTime ?? DateTime.now();
   }
@@ -242,10 +246,10 @@ class Message {
           name: emoteData.last,
           provider: 'Twitch',
           mipmap: [
-            'https://static-cdn.jtvnw.net/emoticons/v1/${emoteData.first}/1.0',
-            'https://static-cdn.jtvnw.net/emoticons/v1/${emoteData.first}/2.0',
-            'https://static-cdn.jtvnw.net/emoticons/v1/${emoteData.first}/3.0',
-            'https://static-cdn.jtvnw.net/emoticons/v1/${emoteData.first}/4.0',
+            'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData.first}/default/dark/1.0',
+            'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData.first}/default/dark/2.0',
+            'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData.first}/default/dark/3.0',
+            'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData.first}/default/dark/4.0',
           ],
         );
       }
