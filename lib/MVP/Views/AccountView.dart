@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/Components/UI/WidgetBlur.dart';
 import '/MVP/Presenters/AccountPresenter.dart';
+import '../../Pages/OAuth.dart';
 import '../../Pages/OAuthFrontend.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
@@ -40,8 +41,8 @@ class _AccountViewState extends State<AccountView> {
               children: [
                 for (var account in snapshot.data)
                   ListTile(
-                    title: Text(account.login),
-                    subtitle: Text(account.token != null ? account.clientId : 'Anonymous Login'),
+                    title: Text(account.token != null ? account.login : 'Anonymous Login'),
+                    subtitle: Text(account.token != null ? account.clientId : account.login),
                     trailing: account.token != null
                         ? IconButton(
                             icon: Icon(Icons.delete),
@@ -74,6 +75,20 @@ class _AccountViewState extends State<AccountView> {
                       Navigator.of(context).pop();
                     },
                   ),
+                // ListTile(
+                //   leading: Padding(
+                //     padding: const EdgeInsets.all(12.0),
+                //     child: Icon(Icons.add, size: 32.0),
+                //   ),
+                //   title: Text('Add account'),
+                //   onTap: () async => Navigator.of(context).push(
+                //     MaterialPageRoute(
+                //       builder: (context) => OAuthPage(
+                //         refresh: refresh,
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 ListTile(
                   leading: Padding(
                     padding: const EdgeInsets.all(12.0),
@@ -82,7 +97,7 @@ class _AccountViewState extends State<AccountView> {
                   title: Text('Add account'),
                   onTap: () async => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => OAuthPage(
+                      builder: (context) => OAuthFrontendPage(
                         refresh: refresh,
                       ),
                     ),
