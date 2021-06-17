@@ -33,6 +33,8 @@ dependencies:
   dart_downloader:
     git: https://github.com/williambulin/dart_downloader.git
     # path: ../dart_downloader
+  chatsen_resources:
+    git: https://github.com/chatsen/resources.git
   # file_picker_cross: ^4.4.2
 
 dev_dependencies:

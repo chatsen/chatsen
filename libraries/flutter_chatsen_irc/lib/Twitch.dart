@@ -249,7 +249,7 @@ class Message {
             'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData.first}/default/dark/1.0',
             'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData.first}/default/dark/2.0',
             'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData.first}/default/dark/3.0',
-            'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData.first}/default/dark/4.0',
+            // 'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData.first}/default/dark/4.0',
           ],
         );
       }
@@ -352,40 +352,46 @@ class Channel {
 
   // TODO: Rework this
   Future<dynamic> updateUsers() async {
-    var userListQuery = await GQL.request('''
-          query {
-            channel(id: "$id") {
-              chatters {
-                staff {
-                  login
-                }
-                broadcasters {
-                  login
-                }
-                moderators {
-                  login
-                }
-                vips {
-                  login
-                }
-                viewers {
-                  login
-                }
-              }
-            }
-          }
-        ''');
+    // var userListQuery = await GQL.request('''
+    //       query {
+    //         channel(id: "$id") {
+    //           chatters {
+    //             staff {
+    //               login
+    //             }
+    //             broadcasters {
+    //               login
+    //             }
+    //             moderators {
+    //               login
+    //             }
+    //             vips {
+    //               login
+    //             }
+    //             viewers {
+    //               login
+    //             }
+    //           }
+    //         }
+    //       }
+    //     ''');
 
-    users = (userListQuery['data']['channel']['chatters'] as Map<String, dynamic>).map(
-      (key, chatterList) => MapEntry<String, List<String>>(
-        key,
-        List<String>.from(
-          chatterList.map(
-            (chatter) => chatter['login'],
-          ),
-        ),
-      ),
-    );
+    // users = (userListQuery['data']['channel']['chatters'] as Map<String, dynamic>).map(
+    //   (key, chatterList) => MapEntry<String, List<String>>(
+    //     key,
+    //     List<String>.from(
+    //       chatterList.map(
+    //         (chatter) => chatter['login'],
+    //       ),
+    //     ),
+    //   ),
+    // );
+
+    // return users;
+    var response = await http.get(Uri.parse('http://tmi.twitch.tv/group/user/${name!.substring(1)}/chatters'));
+    var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+
+    users = Map<String, List<String>>.from(jsonResponse['chatters'].map((k, v) => MapEntry(k, List<String>.from(v))));
 
     return users;
   }
@@ -607,10 +613,10 @@ class Connection {
             id: emoteData['id'].toString(),
             provider: 'Twitch',
             mipmap: [
-              'https://static-cdn.jtvnw.net/emoticons/v1/${emoteData['id']}/1.0',
-              'https://static-cdn.jtvnw.net/emoticons/v1/${emoteData['id']}/2.0',
-              'https://static-cdn.jtvnw.net/emoticons/v1/${emoteData['id']}/3.0',
-              'https://static-cdn.jtvnw.net/emoticons/v1/${emoteData['id']}/4.0',
+              'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/1.0',
+              'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/2.0',
+              'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/3.0',
+              // 'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/4.0',
             ],
           ),
         );

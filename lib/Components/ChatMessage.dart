@@ -1,6 +1,8 @@
+import 'package:chatsen/Badges/ChatsenBadges.dart';
 import 'package:chatsen/Components/WidgetTooltip.dart';
 import 'package:chatsen/Settings/Settings.dart';
 import 'package:chatsen/Settings/SettingsState.dart';
+import 'package:chatsen_resources/user.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -238,15 +240,52 @@ class ChatMessage extends StatelessWidget {
                         text: '${message.dateTime!.hour.toString().padLeft(2, '0')}:${message.dateTime!.minute.toString().padLeft(2, '0')} ',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    for (var badge in message.badges)
+                    // if (first != null)
+                    //   for (var badge in first.badges)
+                    //     WidgetSpan(
+                    //       child: Padding(
+                    //         padding: const EdgeInsets.only(right: 4.0),
+                    //         child: Image.network(
+                    //           data!.badges.firstWhere((element) => element.name == badge.badgeName).image,
+                    //           filterQuality: FilterQuality.high,
+                    //           isAntiAlias: true,
+                    //           // scale: 4.0,
+                    //           height: 18.0,
+                    //         ),
+                    //       ),
+                    //     ),
+                    for (var badge in BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}') + message.badges)
                       WidgetSpan(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 4.0),
-                          child: Image.network(
-                            badge.mipmap!.last!,
-                            filterQuality: FilterQuality.high,
-                            isAntiAlias: true,
-                            scale: 4.0,
+                        child: WidgetTooltip(
+                          message: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 4.0),
+                                  child: Image.network(
+                                    badge.mipmap!.last!,
+                                    isAntiAlias: true,
+                                    filterQuality: FilterQuality.high,
+                                    height: 96.0,
+                                    fit: BoxFit.fitHeight,
+                                  ),
+                                ),
+                                Text('${badge.title}'),
+                                if (badge.title != badge.description) Text('${badge.description}'),
+                              ],
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 4.0),
+                            child: Image.network(
+                              badge.mipmap!.last!,
+                              filterQuality: FilterQuality.high,
+                              isAntiAlias: true,
+                              scale: 4.0,
+                              height: 18.0,
+                            ),
                           ),
                         ),
                       ),

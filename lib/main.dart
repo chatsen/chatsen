@@ -10,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
 import 'App.dart';
+import 'Badges/ChatsenBadges.dart';
 import 'MVP/Models/AccountModel.dart';
 import 'Mentions/MentionsCubit.dart';
 import 'Settings/Settings.dart';
@@ -43,6 +44,7 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(create: (BuildContext context) => ChatsenBadges()),
         BlocProvider(create: (BuildContext context) => MentionsCubit()),
         BlocProvider(create: (BuildContext context) => ThemeBloc(themeBox, mode: ThemeMode.dark, colorScheme: 'red')),
         BlocProvider(create: (BuildContext context) => DownloadManager()),
