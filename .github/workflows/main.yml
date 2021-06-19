@@ -36,7 +36,7 @@ jobs:
 
       - name: Patch a fix for gifs inside the Flutter framework
         run: |
-          sed -i '/_frameDuration = _nextFrame!.duration;/a \ \ \ \ \ \ if (_frameDuration!.inMilliseconds <= 10) _frameDuration = Duration(milliseconds: 100);' $(where flutter | head -n 1 | sed -e 's/\\/\//g' -e 's/\/bin\/flutter.*//')/packages/flutter/lib/src/painting/image_stream.dart
+          sed -i '/_frameDuration = _nextFrame!.duration;/a \ \ \ \ \ \ if (_frameDuration!.inMilliseconds <= 10) _frameDuration = Duration(milliseconds: 100);' $(which flutter | head -n 1 | sed -e 's/\\/\//g' -e 's/\/bin\/flutter.*//')/packages/flutter/lib/src/painting/image_stream.dart
 
       - name: Generate project files and cleanup
         working-directory: ./chatsen
@@ -134,7 +134,7 @@ jobs:
 
       - name: Patch a fix for gifs inside the Flutter framework
         run: |
-          gsed -i '/_frameDuration = _nextFrame!.duration;/a \ \ \ \ \ \ if (_frameDuration!.inMilliseconds <= 10) _frameDuration = Duration(milliseconds: 100);' $(where flutter | head -n 1 | sed -e 's/\\/\//g' -e 's/\/bin\/flutter.*//')/packages/flutter/lib/src/painting/image_stream.dart
+          gsed -i '/_frameDuration = _nextFrame!.duration;/a \ \ \ \ \ \ if (_frameDuration!.inMilliseconds <= 10) _frameDuration = Duration(milliseconds: 100);' $(which flutter | head -n 1 | sed -e 's/\\/\//g' -e 's/\/bin\/flutter.*//')/packages/flutter/lib/src/painting/image_stream.dart
 
       - name: Generate project files and cleanup
         working-directory: ./chatsen
