@@ -98,6 +98,7 @@ class _AccountViewState extends State<AccountView> {
                   onTap: () async => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => OAuthFrontendPage(
+                        client: widget.client!,
                         refresh: refresh,
                       ),
                     ),

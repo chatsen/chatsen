@@ -11,11 +11,13 @@ import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 /// [OAuthFrontendPage] is the page that contains our login webview. It's used to be able to add accounts to the application.
 class OAuthFrontendPage extends StatefulWidget {
+  final twitch.Client client;
   final Function refresh;
 
   const OAuthFrontendPage({
     Key? key,
     required this.refresh,
+    required this.client,
   }) : super(key: key);
 
   @override
@@ -95,18 +97,35 @@ class _OAuthFrontendPageState extends State<OAuthFrontendPage> {
                   existing.login = cookies['twilight-user']['login'];
                   existing.avatarBytes = bytes;
                   await existing.save();
-                } else {
-                  data.add(
-                    AccountModel(
-                      clientId: 'kimne78kx3ncx6brgo4mv6wki5h1ko',
-                      token: cookies['twilight-user']['authToken'],
-                      id: int.tryParse(cookies['twilight-user']['id']) ?? 0,
-                      login: cookies['twilight-user']['login'],
-                      avatarBytes: bytes,
+                  await AccountPresenter.saveData(data);
+                  AccountPresenter.setCurrentAccount(existing);
+                  widget.client.swapCredentials(
+                    twitch.Credentials(
+                      clientId: existing.clientId,
+                      id: existing.id,
+                      login: existing.login!,
+                      token: existing.token,
                     ),
                   );
-
-                  AccountPresenter.saveData(data);
+                } else {
+                  var accountModel = AccountModel(
+                    clientId: 'kimne78kx3ncx6brgo4mv6wki5h1ko',
+                    token: cookies['twilight-user']['authToken'],
+                    id: int.tryParse(cookies['twilight-user']['id']) ?? 0,
+                    login: cookies['twilight-user']['login'],
+                    avatarBytes: bytes,
+                  );
+                  data.add(accountModel);
+                  await AccountPresenter.saveData(data);
+                  AccountPresenter.setCurrentAccount(accountModel);
+                  widget.client.swapCredentials(
+                    twitch.Credentials(
+                      clientId: accountModel.clientId,
+                      id: accountModel.id,
+                      login: accountModel.login!,
+                      token: accountModel.token,
+                    ),
+                  );
                 }
               } catch (e) {}
 
