@@ -1,4 +1,8 @@
 import 'package:chatsen/Badges/ChatsenBadges.dart';
+import 'package:chatsen/Badges/ChatterinoBadges.dart';
+import 'package:chatsen/Badges/FFZAPBadges.dart';
+import 'package:chatsen/Badges/FFZBadges.dart';
+import 'package:chatsen/Badges/SevenTVBadges.dart';
 import 'package:chatsen/Components/WidgetTooltip.dart';
 import 'package:chatsen/Settings/Settings.dart';
 import 'package:chatsen/Settings/SettingsState.dart';
@@ -254,7 +258,7 @@ class ChatMessage extends StatelessWidget {
                     //         ),
                     //       ),
                     //     ),
-                    for (var badge in BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}') + message.badges)
+                    for (var badge in BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}') + message.badges + BlocProvider.of<FFZBadges>(context).getBadgesForUser('${message.user?.login?.toLowerCase()}') + BlocProvider.of<FFZAPBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatterinoBadges>(context).getBadgesForUser('${message.user?.id}'))
                       WidgetSpan(
                         child: WidgetTooltip(
                           message: Padding(
@@ -264,27 +268,40 @@ class ChatMessage extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 4.0),
-                                  child: Image.network(
-                                    badge.mipmap!.last!,
-                                    isAntiAlias: true,
-                                    filterQuality: FilterQuality.high,
-                                    height: 96.0,
-                                    fit: BoxFit.fitHeight,
+                                  child: ClipRRect(
+                                    borderRadius: badge.color != null ? BorderRadius.circular(96.0 / 8.0) : BorderRadius.zero,
+                                    child: Container(
+                                      color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
+                                      child: Image.network(
+                                        badge.mipmap!.last!,
+                                        isAntiAlias: true,
+                                        filterQuality: FilterQuality.high,
+                                        height: 96.0,
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 Text('${badge.title}'),
-                                if (badge.title != badge.description) Text('${badge.description}'),
+                                if (badge.title != badge.description && badge.description != null) Text('${badge.description}'),
                               ],
                             ),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.only(right: 4.0),
-                            child: Image.network(
-                              badge.mipmap!.last!,
-                              filterQuality: FilterQuality.high,
-                              isAntiAlias: true,
-                              scale: 4.0,
-                              height: 18.0,
+                            child: ClipRRect(
+                              borderRadius: badge.color != null ? BorderRadius.circular(2.0) : BorderRadius.zero,
+                              child: Container(
+                                color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
+                                child: Image.network(
+                                  badge.mipmap!.last!,
+                                  filterQuality: FilterQuality.high,
+                                  isAntiAlias: true,
+                                  scale: 4.0,
+                                  height: 18.0,
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              ),
                             ),
                           ),
                         ),

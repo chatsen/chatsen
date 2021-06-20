@@ -48,6 +48,7 @@ class Badge {
   final List<String?>? mipmap;
   final String? title;
   final String? description;
+  final String? color;
 
   Badge({
     this.tag,
@@ -56,6 +57,7 @@ class Badge {
     this.mipmap,
     this.title,
     this.description,
+    this.color,
   });
 
   Badge.fromJson(String? typename, String? typeid, Map<String, dynamic> json)
@@ -68,7 +70,8 @@ class Badge {
           json['image_url_4x'],
         ],
         title = json['title'],
-        description = json['description'];
+        description = json['description'],
+        color = null;
 }
 
 class TwitchEmote {
@@ -173,7 +176,7 @@ class Message {
     if (body!.contains(RegExp('ACTION .*'))) action = true;
     if (action) body = body!.substring('ACTION '.length, body!.length - 1);
 
-    body = body!.replaceAll(utf8.decode([0xF3, 0xA0, 0x80, 0x80]), '');
+    // body = body!.replaceAll(utf8.decode([0xF3, 0xA0, 0x80, 0x80]), '');
 
     for (var tagBadge in tagBadges.split(',')) {
       var badge = channel?.badges?.firstWhere((badge) => badge!.tag == tagBadge, orElse: () => channel!.client!.badges.firstWhereOrNull((badge) => badge.tag == tagBadge));
@@ -227,7 +230,7 @@ class Message {
       runes.replaceRange(twitchEmote.startPosition!, twitchEmote.endPosition! + 1, utf8.encode(' ${twitchEmote.id}|${String.fromCharCodes(runes.getRange(twitchEmote.startPosition!, twitchEmote.endPosition! + 1))} '));
     }
 
-    var runeBody = String.fromCharCodes(runes);
+    var runeBody = String.fromCharCodes(runes).replaceAll(utf8.decode([0xF3, 0xA0, 0x80, 0x80]), '');
 
     var splits = runeBody.split(' ').where((split) => split.isNotEmpty);
     mention = splits.any(
@@ -254,8 +257,8 @@ class Message {
         );
       }
 
-      var channelEmote = channel?.emotes?.firstWhereOrNull((emote) => emote.name == messageSplit);
-      var globalEmote = client?.emotes?.firstWhereOrNull((emote) => emote.name == messageSplit);
+      var channelEmote = channel?.emotes.firstWhereOrNull((emote) => emote.name == messageSplit);
+      var globalEmote = client?.emotes.firstWhereOrNull((emote) => emote.name == messageSplit);
       var emote = twitchEmote ?? channelEmote ?? globalEmote;
 
       if (messageSplit.startsWith('http://') || messageSplit.startsWith('https://')) {
@@ -541,7 +544,8 @@ class Channel {
       messages.add(chatMessage);
       client!.listeners.forEach((listener) => listener.onWhisper(this, chatMessage));
     } else {
-      transmitter?.send('PRIVMSG $name :$message');
+      var lastMessageByTransmitter = messages.lastWhereOrNull((element) => element.user?.id == transmitter!.credentials!.id);
+      transmitter?.send('PRIVMSG $name :$message${(lastMessageByTransmitter?.body == message) ? utf8.decode([0xF3, 0xA0, 0x80, 0x80]) : ''}');
     }
   }
 }

@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:chatsen/Badges/ChatterinoBadges.dart';
+import 'package:chatsen/Badges/FFZBadges.dart';
 import 'package:chatsen/Theme/ThemeBloc.dart';
 import 'package:dart_downloader/DownloadManager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -11,6 +14,8 @@ import 'package:device_info_plus/device_info_plus.dart';
 
 import 'App.dart';
 import 'Badges/ChatsenBadges.dart';
+import 'Badges/FFZAPBadges.dart';
+import 'Badges/SevenTVBadges.dart';
 import 'MVP/Models/AccountModel.dart';
 import 'Mentions/MentionsCubit.dart';
 import 'Settings/Settings.dart';
@@ -41,9 +46,15 @@ void main() async {
   var settingsBox = await Hive.openBox('Settings');
   var themeBox = await Hive.openBox('Theme');
 
+  // timeDilation = 4.0;
+
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(create: (BuildContext context) => FFZAPBadges()),
+        BlocProvider(create: (BuildContext context) => FFZBadges()),
+        BlocProvider(create: (BuildContext context) => ChatterinoBadges()),
+        BlocProvider(create: (BuildContext context) => SevenTVBadges()),
         BlocProvider(create: (BuildContext context) => ChatsenBadges()),
         BlocProvider(create: (BuildContext context) => MentionsCubit()),
         BlocProvider(create: (BuildContext context) => ThemeBloc(themeBox, mode: ThemeMode.dark, colorScheme: 'red')),
