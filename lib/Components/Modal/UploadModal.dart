@@ -33,7 +33,7 @@ class UploadModal extends StatelessWidget {
             Center(
               child: Image.memory(
                 file.toUint8List(),
-                height: 300.0,
+                height: MediaQuery.of(context).size.height / 5,
               ),
             ),
             SizedBox(height: 16.0),
