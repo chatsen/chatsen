@@ -35,7 +35,7 @@ dependencies:
     # path: ../dart_downloader
   chatsen_resources:
     git: https://github.com/chatsen/resources.git
-  # file_picker_cross: ^4.4.2
+  file_picker_cross: ^4.4.2
 
 dev_dependencies:
   pedantic: ^1.11.0

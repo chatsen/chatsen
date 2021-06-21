@@ -260,9 +260,10 @@ class Message {
       var channelEmote = channel?.emotes.firstWhereOrNull((emote) => emote.name == messageSplit);
       var globalEmote = client?.emotes.firstWhereOrNull((emote) => emote.name == messageSplit);
       var emote = twitchEmote ?? channelEmote ?? globalEmote;
+      var lowSplit = messageSplit.toLowerCase();
 
-      if (messageSplit.startsWith('http://') || messageSplit.startsWith('https://')) {
-        if (messageSplit.endsWith('.png') || messageSplit.endsWith('.jpg') || messageSplit.endsWith('.jpeg') || messageSplit.endsWith('.apng') || messageSplit.endsWith('.gif')) {
+      if (lowSplit.startsWith('http://') || lowSplit.startsWith('https://')) {
+        if (lowSplit.endsWith('.png') || lowSplit.endsWith('.jpg') || lowSplit.endsWith('.jpeg') || lowSplit.endsWith('.apng') || lowSplit.endsWith('.gif') || lowSplit.endsWith('.webp')) {
           tokens.add(MessageToken.image(messageSplit));
         } else {
           tokens.add(MessageToken.link(messageSplit));
