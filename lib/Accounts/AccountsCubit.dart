@@ -12,7 +12,15 @@ class AccountsCubit extends Cubit<List<AccountModel>> {
     login: 'justinfan64537',
   );
 
-  AccountsCubit(this.accountBox) : super([]);
+  AccountsCubit(this.accountBox) : super([]) {
+    refresh();
+  }
+
+  Future<void> refresh() async {
+    emit([
+      for (var account in accountBox.values) account as AccountModel,
+    ]);
+  }
 
   Future<void> add(AccountModel account) async {
     await accountBox.add(account);
