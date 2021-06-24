@@ -15,7 +15,6 @@ import '/Components/ChannelJoinModal.dart';
 import '/Components/HomeDrawer.dart';
 import '/Components/HomeTab.dart';
 import '/Components/Notification.dart';
-import '/MVP/Presenters/AccountPresenter.dart';
 import '/StreamOverlay/StreamOverlayBloc.dart';
 import '/StreamOverlay/StreamOverlayState.dart';
 import '/Views/Chat.dart';
@@ -48,19 +47,19 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void initState() {
-    AccountPresenter.findCurrentAccount().then(
-      (account) async {
-        print(account!.login);
-        client.swapCredentials(
-          twitch.Credentials(
-            clientId: account.clientId,
-            id: account.id,
-            login: account.login!,
-            token: account.token,
-          ),
-        );
-      },
-    );
+    // AccountPresenter.findCurrentAccount().then(
+    //   (account) async {
+    //     print(account!.login);
+    //     client.swapCredentials(
+    //       twitch.Credentials(
+    //         clientId: account.clientId,
+    //         id: account.id,
+    //         login: account.login!,
+    //         token: account.token,
+    //       ),
+    //     );
+    //   },
+    // );
 
     loadChannelHistory();
 

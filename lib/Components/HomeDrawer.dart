@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/Components/UI/WidgetBlur.dart';
 import '/Pages/Account.dart';
-import '/Pages/Profile.dart';
 import '/Pages/Search.dart';
 import '/Pages/Whispers.dart';
 import '/StreamOverlay/StreamOverlayBloc.dart';
@@ -87,7 +86,7 @@ class HomeDrawer extends StatelessWidget {
                               onPressed: () => Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (BuildContext context) => AccountPage(
-                                    client: client,
+                                    client: client!,
                                   ),
                                 ),
                               ),

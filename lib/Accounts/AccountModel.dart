@@ -22,7 +22,7 @@ class AccountModel extends HiveObject {
   Uint8List? avatarBytes;
 
   @HiveField(5)
-  bool? isActive = false;
+  bool? isActive;
 
   AccountModel({
     this.login,
@@ -30,5 +30,6 @@ class AccountModel extends HiveObject {
     this.id,
     this.clientId,
     this.avatarBytes,
+    this.isActive = false,
   });
 }

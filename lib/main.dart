@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Badges/ChatterinoBadges.dart';
 import 'package:chatsen/Badges/FFZBadges.dart';
 import 'package:chatsen/Theme/ThemeBloc.dart';
@@ -12,11 +13,11 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
+import 'Accounts/AccountModel.dart';
 import 'App.dart';
 import 'Badges/ChatsenBadges.dart';
 import 'Badges/FFZAPBadges.dart';
 import 'Badges/SevenTVBadges.dart';
-import 'MVP/Models/AccountModel.dart';
 import 'Mentions/MentionsCubit.dart';
 import 'Settings/Settings.dart';
 import 'StreamOverlay/StreamOverlayBloc.dart';
@@ -39,18 +40,19 @@ void main() async {
   } else {
     Hive.init('.');
   }
+
   Hive.registerAdapter(AccountModelAdapter());
-  await Hive.openBox('Accounts');
-  await Hive.openBox('SettingsOld');
 
   var settingsBox = await Hive.openBox('Settings');
   var themeBox = await Hive.openBox('Theme');
+  var accountsBox = await Hive.openBox('Accounts');
 
   // timeDilation = 4.0;
 
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(create: (BuildContext context) => AccountsCubit(accountsBox)),
         BlocProvider(create: (BuildContext context) => FFZAPBadges()),
         BlocProvider(create: (BuildContext context) => FFZBadges()),
         BlocProvider(create: (BuildContext context) => ChatterinoBadges()),

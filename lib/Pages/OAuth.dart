@@ -1,19 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chatsen/Accounts/AccountModel.dart';
+import 'package:chatsen/Accounts/AccountsCubit.dart';
+import 'package:collection/src/iterable_extensions.dart';
 import 'package:flutter/material.dart';
-import '/MVP/Presenters/AccountPresenter.dart';
-import '/MVP/Models/AccountModel.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:http/http.dart' as http;
 
 /// [OAuthPage] is the page that contains our login webview. It's used to be able to add accounts to the application.
 class OAuthPage extends StatefulWidget {
-  final Function refresh;
-
   const OAuthPage({
     Key? key,
-    required this.refresh,
   }) : super(key: key);
 
   @override
@@ -35,13 +34,13 @@ class _OAuthPageState extends State<OAuthPage> {
         appBar: AppBar(
           title: Text('Login with Twitch'),
           actions: [
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () async {
-                await webViewController.clearCache();
-                await cookieManager.clearCookies();
-              },
-            ),
+            // IconButton(
+            //   icon: Icon(Icons.add),
+            //   onPressed: () async {
+            //     await webViewController.clearCache();
+            //     await cookieManager.clearCookies();
+            //   },
+            // ),
           ],
         ),
         body: WebView(
@@ -65,9 +64,9 @@ class _OAuthPageState extends State<OAuthPage> {
 
                 var imageBytes = (await http.get(Uri.parse(responseJson['data'][0]['profile_image_url']))).bodyBytes;
 
-                var data = await AccountPresenter.loadData();
-                var existing = data.firstWhere((model) => model!.id == (int.tryParse(responseJson['data'][0]['id']) ?? -1), orElse: () => null);
+                var cubit = BlocProvider.of<AccountsCubit>(context);
 
+                var existing = cubit.state.firstWhereOrNull((model) => model.id == (int.tryParse(responseJson['data'][0]['id']) ?? -1));
                 if (existing != null) {
                   existing.clientId = 'vvxbprk8sfufgzd7k9wwr1478znf7b';
                   existing.token = fragmentParameters['access_token'];
@@ -75,18 +74,17 @@ class _OAuthPageState extends State<OAuthPage> {
                   existing.login = responseJson['data'][0]['login'];
                   existing.avatarBytes = imageBytes;
                   await existing.save();
+                  await cubit.setActive(existing);
                 } else {
-                  data.add(
-                    AccountModel(
-                      clientId: 'vvxbprk8sfufgzd7k9wwr1478znf7b',
-                      token: fragmentParameters['access_token'],
-                      id: int.tryParse(responseJson['data'][0]['id']) ?? 0,
-                      login: responseJson['data'][0]['login'],
-                      avatarBytes: imageBytes,
-                    ),
+                  var model = AccountModel(
+                    clientId: 'vvxbprk8sfufgzd7k9wwr1478znf7b',
+                    token: fragmentParameters['access_token'],
+                    id: int.tryParse(responseJson['data'][0]['id']) ?? 0,
+                    login: responseJson['data'][0]['login'],
+                    avatarBytes: imageBytes,
                   );
-
-                  await AccountPresenter.saveData(data);
+                  await cubit.add(model);
+                  await cubit.setActive(model);
                 }
 
                 await webViewController.clearCache();
@@ -96,7 +94,6 @@ class _OAuthPageState extends State<OAuthPage> {
               }
 
               Navigator.of(context).pop();
-              widget.refresh();
             }
           },
           initialUrl: 'https://id.twitch.tv/oauth2/authorize?client_id=vvxbprk8sfufgzd7k9wwr1478znf7b&redirect_uri=https://chatsen.app&response_type=token&scope=user_subscriptions%20user_blocks_edit%20user_blocks_read%20user_follows_edit%20channel_editor%20channel:moderate%20channel:read:redemptions%20chat:edit%20chat:read%20whispers:read%20whispers:edit%20channel_commercial%20channel:edit:commercial%20user:edit:follows%20clips:edit%20channel:manage:broadcast%20user:read:blocked_users%20user:manage:blocked_users%20moderator:manage:automod',
