@@ -60,7 +60,7 @@ class ThemeManager {
         labelColor: colorScheme.primary,
         unselectedLabelColor: colorScheme.onSurface.withAlpha(192),
       ),
-      platform: TargetPlatform.fuchsia,
+      // platform: TargetPlatform.fuchsia,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: <TargetPlatform, PageTransitionsBuilder>{

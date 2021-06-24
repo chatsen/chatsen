@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Components/HomeEndDrawer.dart';
 import 'package:chatsen/Components/Modal/SetupModal.dart';
 import 'package:chatsen/Components/Modal/UpdateModal.dart';
@@ -47,6 +48,19 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void initState() {
+    Future.delayed(Duration(seconds: 2)).then(
+      (t) => BlocProvider.of<AccountsCubit>(context).getActive().then(
+            (account) => client.swapCredentials(
+              twitch.Credentials(
+                clientId: account.clientId,
+                id: account.id,
+                login: account.login!,
+                token: account.token,
+              ),
+            ),
+          ),
+    );
+
     // AccountPresenter.findCurrentAccount().then(
     //   (account) async {
     //     print(account!.login);

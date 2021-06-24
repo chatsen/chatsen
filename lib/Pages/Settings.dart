@@ -150,7 +150,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: title,
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(setupScreen: !state.setupScreen))),
-                    trailing: Switch(
+                    trailing: Switch.adaptive(
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(setupScreen: value))),
                       value: state.setupScreen,
                     ),
@@ -164,7 +164,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: title,
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(notificationOnWhisper: !state.notificationOnWhisper))),
-                    trailing: Switch(
+                    trailing: Switch.adaptive(
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(notificationOnWhisper: value))),
                       value: state.notificationOnWhisper,
                     ),
@@ -178,7 +178,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: title,
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(notificationOnMention: !state.notificationOnMention))),
-                    trailing: Switch(
+                    trailing: Switch.adaptive(
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(notificationOnMention: value))),
                       value: state.notificationOnMention,
                     ),
@@ -202,7 +202,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: title,
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageTimestamp: !state.messageTimestamp))),
-                    trailing: Switch(
+                    trailing: Switch.adaptive(
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageTimestamp: value))),
                       value: state.messageTimestamp,
                     ),
@@ -216,7 +216,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: title,
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageImagePreview: !state.messageImagePreview))),
-                    trailing: Switch(
+                    trailing: Switch.adaptive(
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageImagePreview: value))),
                       value: state.messageImagePreview,
                     ),
@@ -230,7 +230,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: title,
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageLines: !state.messageLines))),
-                    trailing: Switch(
+                    trailing: Switch.adaptive(
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageLines: value))),
                       value: state.messageLines,
                     ),
@@ -267,7 +267,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: title,
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyEnabled: !state.historyUseRecentMessages))),
-                    trailing: Switch(
+                    trailing: Switch.adaptive(
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyEnabled: value))),
                       value: state.historyUseRecentMessages,
                     ),
