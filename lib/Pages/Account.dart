@@ -76,7 +76,7 @@ class _AccountPageState extends State<AccountPage> {
                           )
                         : Icon(Icons.hide_source),
                   ),
-                  trailing: account.token != null
+                  trailing: account != AccountsCubit.defaultAccount
                       ? Padding(
                           padding: EdgeInsets.all(0.0),
                           child: IconButton(
