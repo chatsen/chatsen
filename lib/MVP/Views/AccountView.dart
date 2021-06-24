@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '/Components/UI/WidgetBlur.dart';
 import '/MVP/Presenters/AccountPresenter.dart';
 import '../../Pages/OAuth.dart';
-import '../../Pages/OAuthFrontend.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 /// [AccountView] is our settings view that allows to change accounts. It uses the [AccountPresenter] to fetch and save a [AccountModel] model that contains our configuration.
@@ -97,8 +96,8 @@ class _AccountViewState extends State<AccountView> {
                   title: Text('Add account'),
                   onTap: () async => Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => OAuthFrontendPage(
-                        client: widget.client!,
+                      builder: (context) => OAuthPage(
+                        // client: widget.client!,
                         refresh: refresh,
                       ),
                     ),
