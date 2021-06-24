@@ -138,22 +138,22 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                     },
                   ),
                 ),
-                AspectRatio(
-                  aspectRatio: 1.0,
-                  child: Container(
-                    height: 32.0,
-                    child: InkWell(
-                      onTap: () async => await UploadModal.show(
-                        context,
-                        channel: widget.channel!,
-                      ),
-                      child: Icon(
-                        Icons.file_present,
-                        color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
-                      ),
-                    ),
-                  ),
-                ),
+                // AspectRatio(
+                //   aspectRatio: 1.0,
+                //   child: Container(
+                //     height: 32.0,
+                //     child: InkWell(
+                //       onTap: () async => await UploadModal.show(
+                //         context,
+                //         channel: widget.channel!,
+                //       ),
+                //       child: Icon(
+                //         Icons.file_present,
+                //         color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 AspectRatio(
                   aspectRatio: 1.0,
                   child: Container(
