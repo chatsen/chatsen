@@ -17,6 +17,14 @@ class AccountsCubit extends Cubit<List<AccountModel>> {
   }
 
   Future<void> refresh() async {
+    try {
+      for (var account in accountBox.values) {
+        if (account.token == null) {
+          await (account as HiveObject).delete();
+        }
+      }
+      // ignore: empty_catches
+    } catch (e) {}
     emit([
       for (var account in accountBox.values) account as AccountModel,
     ]);
