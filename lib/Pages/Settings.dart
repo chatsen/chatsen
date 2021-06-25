@@ -245,7 +245,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: title,
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageAlternateBackground: !state.messageAlternateBackground))),
-                    trailing: Switch(
+                    trailing: Switch.adaptive(
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageAlternateBackground: value))),
                       value: state.messageAlternateBackground,
                     ),
