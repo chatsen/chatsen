@@ -26,7 +26,7 @@ class SevenTVBadges extends Cubit<Map<String, List<twitch.Badge>>> {
             description: null,
             id: badgeData['id'],
             mipmap: [
-              for (var url in badgeData['urls'].take(1)) url.last,
+              for (var url in badgeData['urls']) url.last,
             ],
             name: badgeData['id'],
             tag: badgeData['id'],
