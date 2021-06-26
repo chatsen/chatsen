@@ -1,4 +1,4 @@
-[<img height="64" src="assets/forseniPhoneRound.png">](assets/logo-round.png)
+[<img height="64" src="assets/logo-round.png">](assets/logo-round.png)
 Chatsen ![GitHub](https://img.shields.io/github/license/chatsen/chatsen) ![GitHub all releases](https://img.shields.io/github/downloads/chatsen/chatsen/total) ![Discord](https://img.shields.io/discord/758710852756570153)
 ============
 
@@ -93,5 +93,3 @@ There might be completly anonymous and opt-in optional analytics in the future b
 # Contact
 
 - Discord: https://discord.gg/chatsen
-
-<iframe src="https://discord.com/widget?id=758710852756570153&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
