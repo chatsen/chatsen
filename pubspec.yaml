@@ -45,10 +45,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/forseniPhone.png
+    - assets/logo.png
 
 flutter_icons:
   android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/forseniPhone.png"
+  image_path: "assets/logo.png"

@@ -1,5 +1,5 @@
-[<img height="64" src="assets/forseniPhoneRound.png">](assets/forseniPhoneRound.png)
-Chatsen ![GitHub](https://img.shields.io/github/license/chatsen/chatsen) ![GitHub all releases](https://img.shields.io/github/downloads/chatsen/chatsen/total)
+[<img height="64" src="assets/logo-round.png">](assets/logo-round.png)
+Chatsen ![GitHub](https://img.shields.io/github/license/chatsen/chatsen) ![GitHub all releases](https://img.shields.io/github/downloads/chatsen/chatsen/total) ![Discord](https://img.shields.io/discord/758710852756570153)
 ============
 
 Chatsen is a cross-platform application that allows you to chat on Twitch with support for 3rd-party services such as 7TV, BTTV and FFZ.  
@@ -17,7 +17,8 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 
 - [x] [Play Store](https://play.google.com/store/apps/details?id=com.chatsen.chatsen)
 - [ ] F-Droid Store
-- [ ] App Store (alternative installation method available down the readme, even for non-jailbroken users, in the iOS Installation Guide section)
+- [ ] App Store 
+<!-- (alternative installation method available down the readme, even for non-jailbroken users, in the iOS Installation Guide section) -->
 
 [<img height="75" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png">](https://play.google.com/store/apps/details?id=com.chatsen.chatsen)
 
@@ -37,9 +38,9 @@ I currently do not own an iPhone and community members have had to test the appl
 
 # Features
 
-**TODO: Complete**
-
-# iOS Installation Guide
+**TODO: Complete**  
+  
+<!-- # iOS Installation Guide
 
 As mentioned in the Support and donations section, I unfortunately do not own an Apple Developer license nor the required hardware to develop the application.
 However, there is still a way for you to install the iOS application, even on non-jailbroken devices!
@@ -48,7 +49,7 @@ However, there is still a way for you to install the iOS application, even on no
 - Download the .ipa file available on the [release page](https://github.com/Chatsen/chatsen/releases)
 - Open the .ipa file with AltStore on your iPhone
 
-Note: the .ipa file is not signed but will be signed automatically with AltStore on your device.
+Note: the .ipa file is not signed but will be signed automatically with AltStore on your device. -->
 
 # Build instructions
 
@@ -91,4 +92,4 @@ There might be completly anonymous and opt-in optional analytics in the future b
 
 # Contact
 
-- Discord: **_TODO: Discord link_**
+- Discord: https://discord.gg/chatsen
