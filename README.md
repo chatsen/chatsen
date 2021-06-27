@@ -64,16 +64,14 @@ flutter create .
 rm -rf test
 
 # Android
-sed -e 's/android:label=".*"/android:label="Chatsen"/' -e '/.*package=".*".*/a \ \ \ <uses-permission android:name="android.permission.INTERNET"/>' ./android/app/src/main/AndroidManifest.xml > ./android/app/src/main/AndroidManifest2.xml
-mv -f ./android/app/src/main/AndroidManifest2.xml ./android/app/src/main/AndroidManifest.xml
-sed -e '/.*release {.*/a \ \ \ \ \ \ \ \ \ \ \ \ shrinkResources false\n\ \ \ \ \ \ \ \ \ \ \ \ minifyEnabled false' -e 's/minSdkVersion 16/minSdkVersion 19/' ./android/app/build.gradle > ./android/app/build2.gradle
-mv -f ./android/app/build2.gradle ./android/app/build.gradle
+sed -i '/<\/manifest>/i \ \ \ \ <uses-sdk tools:overrideLibrary="io.flutter.plugins.webviewflutter"/>' ./android/app/src/main/AndroidManifest.xml
+sed -i '/.*package=".*".*/i \ \ \ \ xmlns:tools="http://schemas.android.com/tools"' ./android/app/src/main/AndroidManifest.xml
+sed -i '/.*package=".*".*/a \ \ \ <uses-permission android:name="android.permission.INTERNET"/>' ./android/app/src/main/AndroidManifest.xml
+sed -i '/.*release {.*/a \ \ \ \ \ \ \ \ \ \ \ \ shrinkResources false\n\ \ \ \ \ \ \ \ \ \ \ \ minifyEnabled false' ./android/app/build.gradle
 flutter pub run flutter_launcher_icons:main
 flutter build apk
 
 # iOS
-sed -e 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info2.plist
-mv -f ./ios/Runner/Info2.plist ./ios/Runner/Info.plist
 flutter pub run flutter_launcher_icons:main
 flutter build ios --no-codesign
 ```
