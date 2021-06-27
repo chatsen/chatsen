@@ -3,15 +3,19 @@ Chatsen ![GitHub](https://img.shields.io/github/license/chatsen/chatsen) ![GitHu
 ============
 
 Chatsen is a cross-platform application that allows you to chat on Twitch with support for 3rd-party services such as 7TV, BTTV and FFZ.  
-It also features a built-in video player (on supported platforms) and a variety of other features, such as auto-completion, notifications, whispers, and more to come!
+It also features a built-in video player and a variety of other features, such as auto-completion, notifications (on supported platforms), whispers, and more to come!
 
 # Downloads
 
 You can find the latest release for supported platforms (iOS, Android) [here](https://github.com/Chatsen/chatsen/releases).
 
 # Media
-
-**_TODO: Add screenshots_**
+<p align="middle" float="left">
+  <img src="https://raw.githubusercontent.com/chatsen/resources/master/assets/screenshots/1.png" width="200" />
+  <img src="https://raw.githubusercontent.com/chatsen/resources/master/assets/screenshots/2.png" width="200" />
+  <img src="https://raw.githubusercontent.com/chatsen/resources/master/assets/screenshots/3.png" width="200" />
+  <img src="https://raw.githubusercontent.com/chatsen/resources/master/assets/screenshots/4.png" width="200" />
+</p>
 
 # Store Releases
 
@@ -36,11 +40,11 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 Donations are currently not open but would be appreciated in the future!
 I currently do not own an iPhone and community members have had to test the application for me which makes eliminating bugs on the platform rather difficult, so the current primary goals would be to be able to afford Apple devices and pay for their high developer fees in order to deploy the application on the App Store.
 
-# Features
+<!-- # Features
 
-**TODO: Complete**  
+**TODO: Complete**   -->
   
-<!-- # iOS Installation Guide
+# iOS Installation Guide
 
 As mentioned in the Support and donations section, I unfortunately do not own an Apple Developer license nor the required hardware to develop the application.
 However, there is still a way for you to install the iOS application, even on non-jailbroken devices!
@@ -49,7 +53,7 @@ However, there is still a way for you to install the iOS application, even on no
 - Download the .ipa file available on the [release page](https://github.com/Chatsen/chatsen/releases)
 - Open the .ipa file with AltStore on your iPhone
 
-Note: the .ipa file is not signed but will be signed automatically with AltStore on your device. -->
+Note: the .ipa file is not signed but will be signed automatically with AltStore on your device.
 
 # Build instructions
 
@@ -88,7 +92,7 @@ This project and it's releases are provided as-is, no support is provided. Use a
 # Privacy Policy
 
 Chatsen does not collect any personal or identifying information whatsoever. There are no servers, services or backend running related to the project either.  
-There might be completly anonymous and opt-in optional analytics in the future but nothing as of yet.
+Since Chatsen interfaces with Twitch however, you are subject to their Privacy Policy available at https://www.twitch.tv/p/en/legal/privacy-notice/
 
 # Contact
 
