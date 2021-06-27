@@ -2,6 +2,7 @@
 !*/
 !/lib/**
 !.github/workflows/**.yml
+!.github/FUNDING.yml
 !assets/**
 
 # Global avoids
