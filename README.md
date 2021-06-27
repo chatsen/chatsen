@@ -29,10 +29,10 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 
 - [x] Android 5+ (>=4.1 && <5.0 also supported but without login/video player)
 - [x] iOS 12.2+
-- [ ] Browser extension
+<!-- - [ ] Browser extension
 - [ ] Windows
 - [ ] macOS
-- [ ] Linux
+- [ ] Linux -->
 
 # Support and donations
 
