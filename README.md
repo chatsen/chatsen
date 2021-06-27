@@ -21,8 +21,7 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 
 - [x] [Play Store](https://play.google.com/store/apps/details?id=com.chatsen.chatsen)
 - [ ] F-Droid Store
-- [ ] App Store 
-<!-- (alternative installation method available down the readme, even for non-jailbroken users, in the iOS Installation Guide section) -->
+- [ ] App Store (awaiting acquiring an iOS device, alternative installation method available down the readme, even for non-jailbroken users, in the iOS Installation Guide section)
 
 [<img height="75" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png">](https://play.google.com/store/apps/details?id=com.chatsen.chatsen)
 
@@ -37,8 +36,8 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 
 # Support and donations
 
-Donations are currently not open but would be appreciated in the future!
-I currently do not own an iPhone and community members have had to test the application for me which makes eliminating bugs on the platform rather difficult, so the current primary goals would be to be able to afford Apple devices and pay for their high developer fees in order to deploy the application on the App Store.
+Support the project on Patreon and get some cool badges next to your username in return!
+https://www.patreon.com/chatsen
 
 <!-- # Features
 
