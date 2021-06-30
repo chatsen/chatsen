@@ -45,6 +45,7 @@ void main() async {
   Hive.registerAdapter(AccountModelAdapter());
 
   var settingsBox = await Hive.openBox('Settings');
+  var commandsBox = await Hive.openBox('Commands');
   var themeBox = await Hive.openBox('Theme');
   var accountsBox = await Hive.openBox('Accounts');
 
@@ -53,7 +54,7 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => CommandsCubit()),
+        BlocProvider(create: (BuildContext context) => CommandsCubit(commandsBox)),
         BlocProvider(create: (BuildContext context) => AccountsCubit(accountsBox)),
         BlocProvider(create: (BuildContext context) => FFZAPBadges()),
         BlocProvider(create: (BuildContext context) => FFZBadges()),

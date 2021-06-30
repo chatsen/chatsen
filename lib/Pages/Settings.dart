@@ -15,6 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'Commands.dart';
+
 class SettingsEntry extends StatelessWidget {
   final String? category;
   final String title;
@@ -274,6 +276,19 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 SettingsEntry(
+                  category: 'Commands',
+                  title: 'Configure custom commands',
+                  description: 'Allows you to create and configure custom commands to be used in chat',
+                  builder: (context, category, title, description) => Tile(
+                      leading: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.text_format),
+                      ),
+                      title: title,
+                      subtitle: description,
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommandsPage()))),
+                ),
+                SettingsEntry(
                   category: 'About',
                   title: 'Show open-source licenses',
                   description: 'Display the list of licenses used by dependencies',
@@ -287,7 +302,6 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: () => showLicensePage(context: context),
                   ),
                 ),
-
                 SettingsEntry(
                   category: 'About',
                   // title: 'Check for updates',

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
@@ -150,7 +151,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
           height: 1.0,
           color: Theme.of(context).dividerColor,
         ),
-        if (true || widget.channel?.transmitter?.credentials?.token != null) ...[
+        if (kDebugMode || widget.channel?.transmitter?.credentials?.token != null) ...[
           if (autocompletionCommands.isNotEmpty)
             Container(
               height: 32.0,

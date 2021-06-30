@@ -1017,28 +1017,11 @@ class Client {
 }
 
 class GQL {
-  static String endpoint = 'https://gql.twitch.tv/gql';
-
-  static Future<dynamic> request(String gql, {Credentials? credentials}) async {
-    var request = await http.post(
-      Uri.parse(endpoint),
-      body: jsonEncode({'query': gql}),
-      headers: {
-        // 'Authorization': 'OAuth xxx',
-        'Client-Id': 'kimne78kx3ncx6brgo4mv6wki5h1ko',
-        'Content-Type': 'application/json',
-      },
-    );
-    return jsonDecode(utf8.decode(request.bodyBytes));
-  }
-
   static Future<dynamic> request7(String gql, {Credentials? credentials}) async {
     var request = await http.post(
       Uri.parse('https://api.7tv.app/v2/gql'),
       body: jsonEncode({'query': gql}),
       headers: {
-        // 'Authorization': 'OAuth xxx',
-        // 'Client-Id': 'kimne78kx3ncx6brgo4mv6wki5h1ko',
         'Content-Type': 'application/json',
       },
     );

@@ -8,7 +8,7 @@ class AccountsCubit extends Cubit<List<AccountModel>> {
 
   static AccountModel defaultAccount = AccountModel(
     id: 0,
-    clientId: 'kimne78kx3ncx6brgo4mv6wki5h1ko',
+    clientId: 'vvxbprk8sfufgzd7k9wwr1478znf7b',
     login: 'justinfan64537',
   );
 
