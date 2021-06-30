@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/Components/WidgetTooltip.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:octo_image/octo_image.dart';
 import '/Components/UI/WidgetBlur.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import 'package:hive/hive.dart';
@@ -150,11 +152,18 @@ class _EmoteListModalState extends State<EmoteListModal> {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 4.0),
-              child: Image.network(
-                emote.mipmap!.last!,
-                isAntiAlias: true,
+              // child: Image.network(
+              //   emote.mipmap!.last!,
+              //   isAntiAlias: true,
+              //   filterQuality: FilterQuality.high,
+              //   height: 96.0,
+              //   fit: BoxFit.fitHeight,
+              // ),
+              child: OctoImage(
+                image: CachedNetworkImageProvider(emote.mipmap!.last!),
                 filterQuality: FilterQuality.high,
                 height: 96.0,
+                errorBuilder: OctoError.icon(color: Colors.red),
                 fit: BoxFit.fitHeight,
               ),
             ),
@@ -167,10 +176,15 @@ class _EmoteListModalState extends State<EmoteListModal> {
         onTap: () => widget.insertEmote(emote.name),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Image.network(
-            emote.mipmap!.last!,
+          // child: Image.network(
+          //   emote.mipmap!.last!,
+          //   filterQuality: FilterQuality.high,
+          //   isAntiAlias: true,
+          // ),
+          child: OctoImage(
+            image: CachedNetworkImageProvider(emote.mipmap!.last!),
             filterQuality: FilterQuality.high,
-            isAntiAlias: true,
+            errorBuilder: OctoError.icon(color: Colors.red),
           ),
         ),
       ),

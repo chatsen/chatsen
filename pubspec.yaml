@@ -34,6 +34,8 @@ dependencies:
   chatsen_resources:
     git: https://github.com/chatsen/resources.git
   file_picker_cross: ^4.4.2
+  cached_network_image: ^3.0.0
+  octo_image: ^1.0.0+1
 
 dev_dependencies:
   pedantic: ^1.11.0

@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/Components/ChatMessage.dart';
 import 'package:chatsen/Mentions/MentionsCubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:octo_image/octo_image.dart';
 import '/Components/UI/WidgetBlur.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
@@ -49,7 +51,18 @@ class HomeEndDrawer extends StatelessWidget {
                                       text: 'Mentions would go here\n...if you had any ',
                                       children: [
                                         WidgetSpan(
-                                          child: Image.network('https://cdn.frankerfacez.com/emote/425196/2', scale: 2.0),
+                                          // child: Image.network(
+                                          //   'https://cdn.frankerfacez.com/emote/425196/2',
+                                          //   scale: 2.0,
+                                          // ),
+                                          child: OctoImage(
+                                            image: CachedNetworkImageProvider(
+                                              'https://cdn.frankerfacez.com/emote/425196/2',
+                                              scale: 2.0,
+                                            ),
+                                            filterQuality: FilterQuality.high,
+                                            errorBuilder: OctoError.icon(color: Colors.red),
+                                          ),
                                         ),
                                       ],
                                     ),

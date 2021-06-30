@@ -13,7 +13,7 @@ class BlurModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) => WidgetBlur(
         child: Material(
-          color: Theme.of(context).colorScheme.surface,
+          color: Theme.of(context).colorScheme.surface.withAlpha(196),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -37,6 +37,7 @@ class BlurModal extends StatelessWidget {
     await showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       builder: (context) => SafeArea(
         child: Padding(
           padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),

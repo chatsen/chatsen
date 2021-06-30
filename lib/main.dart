@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Badges/ChatterinoBadges.dart';
 import 'package:chatsen/Badges/FFZBadges.dart';
+import 'package:chatsen/Commands/CommandsCubit.dart';
 import 'package:chatsen/Theme/ThemeBloc.dart';
 import 'package:dart_downloader/DownloadManager.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,7 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(create: (BuildContext context) => CommandsCubit()),
         BlocProvider(create: (BuildContext context) => AccountsCubit(accountsBox)),
         BlocProvider(create: (BuildContext context) => FFZAPBadges()),
         BlocProvider(create: (BuildContext context) => FFZBadges()),

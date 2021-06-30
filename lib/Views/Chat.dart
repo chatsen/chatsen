@@ -78,7 +78,7 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
               return ListView(
                 reverse: true,
                 controller: scrollController,
-                padding: MediaQuery.of(context).padding + (Platform.isMacOS ? EdgeInsets.only(top: 26.0) : EdgeInsets.zero) + EdgeInsets.only(bottom: (widget.channel?.transmitter?.credentials?.token != null ? 32.0 : 0.0) + 8.0, top: 8.0),
+                padding: MediaQuery.of(context).padding + (Platform.isMacOS ? EdgeInsets.only(top: 26.0) : EdgeInsets.zero) + EdgeInsets.only(bottom: (true || widget.channel?.transmitter?.credentials?.token != null ? 32.0 : 0.0) + 8.0, top: 8.0),
                 children: [
                   for (var message in widget.channel!.messages) ...[
                     if (state is SettingsLoaded && state.messageLines)

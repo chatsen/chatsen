@@ -669,7 +669,7 @@ class Connection {
         await updateUserEmotes();
         break;
       case 'PING':
-        send('PONG :${message!.parameters[1] ?? 'tmi.twitch.tv'}');
+        send('PONG :${message!.parameters[1]}'); //  ?? 'tmi.twitch.tv'
         break;
       case 'RECONNECT':
         // print('$name: Reconnect requested');
@@ -709,8 +709,8 @@ class Connection {
           tagEmotes: message.tags['emotes'],
         );
 
-        channel?.messages?.add(chatMessage);
-        if ((channel?.messages?.length ?? 0) > 1000) channel?.messages?.removeRange(0, (channel?.messages?.length ?? 0) - 1000);
+        channel?.messages.add(chatMessage);
+        if ((channel?.messages.length ?? 0) > 1000) channel?.messages.removeRange(0, (channel.messages.length) - 1000);
 
         client!.listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
         break;

@@ -515,17 +515,17 @@ class _TooltipOverlay extends StatelessWidget {
           delegate: _TooltipPositionDelegate(
             target: target,
             verticalOffset: verticalOffset!,
-            preferBelow: preferBelow!,
+            preferBelow: !preferBelow!,
           ),
-          child: WidgetBlur(
-            child: FadeTransition(
-              opacity: animation,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: height!),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: WidgetBlur(
+              child: FadeTransition(
+                opacity: animation,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: height!),
                   child: Container(
-                    color: Theme.of(context).cardColor.withAlpha(96),
+                    color: Theme.of(context).cardColor.withAlpha(196),
                     padding: padding,
                     margin: margin,
                     child: Center(
