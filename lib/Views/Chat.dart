@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '/Components/ChatInputBox.dart';
 import '/Components/ChatMessage.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
@@ -56,94 +57,98 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        NotificationListener<ScrollNotification>(
-          onNotification: (scrollNotification) {
-            if (scrollNotification is ScrollStartNotification) {
-              if (shouldScroll != false) {
-                shouldScroll = false;
-                setState(() {});
+    return KeyboardDismisser(
+      behavior: HitTestBehavior.translucent,
+      gestures: [GestureType.onPanUpdateDownDirection],
+      child: Stack(
+        children: [
+          NotificationListener<ScrollNotification>(
+            onNotification: (scrollNotification) {
+              if (scrollNotification is ScrollStartNotification) {
+                if (shouldScroll != false) {
+                  shouldScroll = false;
+                  setState(() {});
+                }
+              } else if (scrollNotification is ScrollUpdateNotification || scrollNotification is ScrollEndNotification) {
+                if (scrollController!.position.pixels == scrollController!.position.minScrollExtent && shouldScroll != true) {
+                  shouldScroll = true;
+                  setState(() {});
+                }
               }
-            } else if (scrollNotification is ScrollUpdateNotification || scrollNotification is ScrollEndNotification) {
-              if (scrollController!.position.pixels == scrollController!.position.minScrollExtent && shouldScroll != true) {
-                shouldScroll = true;
-                setState(() {});
-              }
-            }
-            return true;
-          },
-          child: BlocBuilder<Settings, SettingsState>(
-            builder: (context, state) {
-              var i = 0;
-              return ListView(
-                reverse: true,
-                controller: scrollController,
-                padding: MediaQuery.of(context).padding + (Platform.isMacOS ? EdgeInsets.only(top: 26.0) : EdgeInsets.zero) + EdgeInsets.only(bottom: (kDebugMode || widget.channel?.transmitter?.credentials?.token != null ? (32.0 + 4.0) : 0.0) + 8.0, top: 8.0),
-                children: [
-                  for (var message in widget.channel!.messages) ...[
-                    if (state is SettingsLoaded && state.messageLines)
-                      Container(
-                        color: Theme.of(context).dividerColor,
-                        height: 1.0,
-                      ),
-                    ChatMessage(
-                      backgroundColor: state is SettingsLoaded && state.messageAlternateBackground && (i++ % 2 == 0) ? Theme.of(context).dividerColor : null,
-                      message: message,
-                    ),
-                  ],
-                ].reversed.toList(),
-              );
+              return true;
             },
-          ),
-        ),
-        if ((Platform.isMacOS ? 0.0 : MediaQuery.of(context).padding.top) > 0.0 && (MediaQuery.of(context).size.aspectRatio > 1.0 ? true : BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed))
-          WidgetBlur(
-            child: Material(
-              color: Theme.of(context).canvasColor.withAlpha(196),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    // height: Platform.isMacOS ? 26.0 : MediaQuery.of(context).padding.top,
-                    height: MediaQuery.of(context).padding.top,
-                  ),
-                  Container(
-                    color: Theme.of(context).dividerColor,
-                    height: 1.0,
-                  ),
-                ],
-              ),
+            child: BlocBuilder<Settings, SettingsState>(
+              builder: (context, state) {
+                var i = 0;
+                return ListView(
+                  reverse: true,
+                  controller: scrollController,
+                  padding: MediaQuery.of(context).padding + (Platform.isMacOS ? EdgeInsets.only(top: 26.0) : EdgeInsets.zero) + EdgeInsets.only(bottom: (kDebugMode || widget.channel?.transmitter?.credentials?.token != null ? (32.0 + 4.0) : 0.0) + 8.0, top: 8.0),
+                  children: [
+                    for (var message in widget.channel!.messages) ...[
+                      if (state is SettingsLoaded && state.messageLines)
+                        Container(
+                          color: Theme.of(context).dividerColor,
+                          height: 1.0,
+                        ),
+                      ChatMessage(
+                        backgroundColor: state is SettingsLoaded && state.messageAlternateBackground && (i++ % 2 == 0) ? Theme.of(context).dividerColor : null,
+                        message: message,
+                      ),
+                    ],
+                  ].reversed.toList(),
+                );
+              },
             ),
           ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (!shouldScroll)
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: FloatingActionButton.extended(
-                    icon: Icon(Icons.arrow_downward),
-                    // mini: true,
-                    label: Text('Resume scrolling'),
-                    onPressed: () async => scrollToEnd(),
-                  ),
-                ),
-              WidgetBlur(
-                child: Material(
-                  color: Theme.of(context).colorScheme.surface.withAlpha(196),
-                  child: ChatInputBox(
-                    client: widget.client,
-                    channel: widget.channel,
-                  ),
+          if ((Platform.isMacOS ? 0.0 : MediaQuery.of(context).padding.top) > 0.0 && (MediaQuery.of(context).size.aspectRatio > 1.0 ? true : BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed))
+            WidgetBlur(
+              child: Material(
+                color: Theme.of(context).canvasColor.withAlpha(196),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      // height: Platform.isMacOS ? 26.0 : MediaQuery.of(context).padding.top,
+                      height: MediaQuery.of(context).padding.top,
+                    ),
+                    Container(
+                      color: Theme.of(context).dividerColor,
+                      height: 1.0,
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (!shouldScroll)
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: FloatingActionButton.extended(
+                      icon: Icon(Icons.arrow_downward),
+                      // mini: true,
+                      label: Text('Resume scrolling'),
+                      onPressed: () async => scrollToEnd(),
+                    ),
+                  ),
+                WidgetBlur(
+                  child: Material(
+                    color: Theme.of(context).colorScheme.surface.withAlpha(196),
+                    child: ChatInputBox(
+                      client: widget.client,
+                      channel: widget.channel,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
