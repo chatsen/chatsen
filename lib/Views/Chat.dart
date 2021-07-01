@@ -57,9 +57,9 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
 
   @override
   Widget build(BuildContext context) {
-    return KeyboardDismisser(
-      behavior: HitTestBehavior.translucent,
-      gestures: [GestureType.onPanUpdateDownDirection],
+    return Container(
+      // behavior: HitTestBehavior.translucent,
+      // gestures: [GestureType.onPanUpdateDownDirection],
       child: Stack(
         children: [
           NotificationListener<ScrollNotification>(

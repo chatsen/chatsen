@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
-import 'package:octo_image/octo_image.dart';
 import '/Components/EmoteListModal.dart';
 import 'Modal/UploadModal.dart';
+import 'UI/NetworkImageWrapper.dart';
 import 'WidgetTooltip.dart';
 import 'package:collection/collection.dart';
 
@@ -50,20 +50,10 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4.0),
-                        // child: Image.network(
-                        //   emote.mipmap!.last!,
-                        //   isAntiAlias: true,
-                        //   filterQuality: FilterQuality.high,
-                        //   height: 96.0,
-                        //   fit: BoxFit.fitHeight,
-                        // ),
-                        child: OctoImage(
-                          image: CachedNetworkImageProvider(
-                            emote.mipmap!.last!,
-                          ),
-                          filterQuality: FilterQuality.high,
+                        child: NetworkImageW(
+                          emote.mipmap!.last!,
                           height: 96.0,
-                          errorBuilder: OctoError.icon(color: Colors.red),
+                          fit: BoxFit.fitHeight,
                         ),
                       ),
                       Text(emote.name!),
@@ -85,14 +75,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       height: 32.0,
-                      // child: Image.network(emote.mipmap!.last!),
-                      child: OctoImage(
-                        image: CachedNetworkImageProvider(
-                          emote.mipmap!.last!,
-                        ),
-                        filterQuality: FilterQuality.high,
-                        errorBuilder: OctoError.icon(color: Colors.red),
-                      ),
+                      child: NetworkImageW(emote.mipmap!.last!),
                     ),
                   ),
                 ),
@@ -182,7 +165,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
               children: [
                 Expanded(
                   child: TextField(
-                    maxLines: null,
+                    maxLines: textEditingController.text.isEmpty ? 1 : null,
                     maxLength: 498,
                     key: key,
                     focusNode: focusNode,

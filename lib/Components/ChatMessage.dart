@@ -13,11 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
-import 'package:octo_image/octo_image.dart';
 import '/Pages/Search.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 import 'dart:async';
+
+import 'UI/NetworkImageWrapper.dart';
 
 /// [ChatMessage] is a Widget that takes a [twitch.Message] and renders into something readable and interactable.
 class ChatMessage extends StatelessWidget {
@@ -112,13 +113,7 @@ class ChatMessage extends StatelessWidget {
                     padding: const EdgeInsets.all(2.0),
                     child: InkWell(
                       onTap: () async => launch(token.data),
-                      // child: Image.network('${token.data}'),
-                      child: OctoImage(
-                        image: CachedNetworkImageProvider(token.data),
-                        filterQuality: FilterQuality.high,
-                        // height: 96.0,
-                        // errorBuilder: OctoError.icon(color: Colors.red),
-                      ),
+                      child: NetworkImageW(token.data),
                     ),
                   ),
                 ),
@@ -143,19 +138,9 @@ class ChatMessage extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(bottom: 4.0),
-                            // child: Image.network(
-                            //   (token.data as twitch.Emote).mipmap!.last!,
-                            //   isAntiAlias: true,
-                            //   filterQuality: FilterQuality.high,
-                            //   height: 96.0,
-                            //   fit: BoxFit.fitHeight,
-                            // ),
-                            child: OctoImage(
-                              image: CachedNetworkImageProvider((token.data as twitch.Emote).mipmap!.last!),
-                              filterQuality: FilterQuality.high,
+                            child: NetworkImageW(
+                              (token.data as twitch.Emote).mipmap!.last!,
                               height: 96.0,
-                              errorBuilder: OctoError.icon(color: Colors.red),
-                              fit: BoxFit.fitHeight,
                             ),
                           ),
                           Text((token.data as twitch.Emote).name!),
@@ -165,27 +150,9 @@ class ChatMessage extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 4.0),
-                      // child: Image.network(
-                      //   token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
-                      //   filterQuality: FilterQuality.high,
-                      //   isAntiAlias: true,
-                      //   scale: token.data.provider == 'Twitch' ? 2.0 : (token.data.mipmap.length == 1 ? 1.0 : 4.0),
-                      // ),
-                      // child: Image(
-                      //   image: CachedNetworkImageProvider(
-                      //     token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
-                      //     scale: token.data.provider == 'Twitch' ? 2.0 : (token.data.mipmap.length == 1 ? 1.0 : 4.0),
-                      //   ),
-                      //   filterQuality: FilterQuality.high,
-                      //   isAntiAlias: true,
-                      // ),
-                      child: OctoImage(
-                        image: CachedNetworkImageProvider(
-                          token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
-                          scale: token.data.provider == 'Twitch' ? 2.0 : (token.data.mipmap.length == 1 ? 1.0 : 4.0),
-                        ),
-                        filterQuality: FilterQuality.high,
-                        errorBuilder: OctoError.icon(color: Colors.red),
+                      child: NetworkImageW(
+                        token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
+                        scale: token.data.provider == 'Twitch' ? 2.0 : (token.data.mipmap.length == 1 ? 1.0 : 4.0),
                       ),
                     ),
                   ),
@@ -209,18 +176,9 @@ class ChatMessage extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(bottom: 4.0),
-                              // child: Image.network(
-                              //   (token.data as List<twitch.Emote>).first.mipmap!.last!,
-                              //   isAntiAlias: true,
-                              //   filterQuality: FilterQuality.high,
-                              //   height: 96.0,
-                              //   fit: BoxFit.fitHeight,
-                              // ),
-                              child: OctoImage(
-                                image: CachedNetworkImageProvider((token.data as List<twitch.Emote>).first.mipmap!.last!),
-                                filterQuality: FilterQuality.high,
+                              child: NetworkImageW(
+                                (token.data as List<twitch.Emote>).first.mipmap!.last!,
                                 height: 96.0,
-                                errorBuilder: OctoError.icon(color: Colors.red),
                                 fit: BoxFit.fitHeight,
                               ),
                             ),
@@ -234,12 +192,7 @@ class ChatMessage extends StatelessWidget {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(right: 8.0),
-                                      // child: Image.network(emote.mipmap!.first!),
-                                      child: OctoImage(
-                                        image: CachedNetworkImageProvider(emote.mipmap!.first!),
-                                        filterQuality: FilterQuality.high,
-                                        errorBuilder: OctoError.icon(color: Colors.red),
-                                      ),
+                                      child: NetworkImageW(emote.mipmap!.first!),
                                     ),
                                     Text(emote.name!),
                                   ],
@@ -250,19 +203,9 @@ class ChatMessage extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(right: 4.0),
-                        // child: Image.network(
-                        //   emote.provider == 'Twitch' ? emote.mipmap[1] : emote.mipmap.last,
-                        //   filterQuality: FilterQuality.high,
-                        //   isAntiAlias: true,
-                        //   scale: emote.provider == 'Twitch' ? 2.0 : 4.0,
-                        // ),
-                        child: OctoImage(
-                          image: CachedNetworkImageProvider(
-                            emote.provider == 'Twitch' ? emote.mipmap[1] : emote.mipmap.last,
-                            scale: emote.provider == 'Twitch' ? 2.0 : 4.0,
-                          ),
-                          filterQuality: FilterQuality.high,
-                          errorBuilder: OctoError.icon(color: Colors.red),
+                        child: NetworkImageW(
+                          emote.provider == 'Twitch' ? emote.mipmap[1] : emote.mipmap.last,
+                          scale: emote.provider == 'Twitch' ? 2.0 : 4.0,
                         ),
                       ),
                     ),
@@ -300,11 +243,8 @@ class ChatMessage extends StatelessWidget {
                     //     WidgetSpan(
                     //       child: Padding(
                     //         padding: const EdgeInsets.only(right: 4.0),
-                    //         child: Image.network(
+                    //         child: NetworkImageW(
                     //           data!.badges.firstWhere((element) => element.name == badge.badgeName).image,
-                    //           filterQuality: FilterQuality.high,
-                    //           isAntiAlias: true,
-                    //           // scale: 4.0,
                     //           height: 18.0,
                     //         ),
                     //       ),
@@ -323,18 +263,9 @@ class ChatMessage extends StatelessWidget {
                                     borderRadius: badge.color != null ? BorderRadius.circular(96.0 / 8.0) : BorderRadius.zero,
                                     child: Container(
                                       color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
-                                      // child: Image.network(
-                                      //   badge.mipmap!.last!,
-                                      //   isAntiAlias: true,
-                                      //   filterQuality: FilterQuality.high,
-                                      //   height: 96.0,
-                                      //   fit: BoxFit.fitHeight,
-                                      // ),
-                                      child: OctoImage(
-                                        image: CachedNetworkImageProvider(badge.mipmap!.last!),
-                                        filterQuality: FilterQuality.high,
+                                      child: NetworkImageW(
+                                        badge.mipmap!.last!,
                                         height: 96.0,
-                                        errorBuilder: OctoError.icon(color: Colors.red),
                                         fit: BoxFit.fitHeight,
                                       ),
                                     ),
@@ -351,19 +282,9 @@ class ChatMessage extends StatelessWidget {
                               borderRadius: badge.color != null ? BorderRadius.circular(2.0) : BorderRadius.zero,
                               child: Container(
                                 color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
-                                // child: Image.network(
-                                //   badge.mipmap!.last!,
-                                //   filterQuality: FilterQuality.high,
-                                //   isAntiAlias: true,
-                                //   scale: 4.0,
-                                //   height: 18.0,
-                                //   fit: BoxFit.fitHeight,
-                                // ),
-                                child: OctoImage(
-                                  image: CachedNetworkImageProvider(badge.mipmap!.last!),
-                                  filterQuality: FilterQuality.high,
+                                child: NetworkImageW(
+                                  badge.mipmap!.last!,
                                   height: 18.0,
-                                  errorBuilder: OctoError.icon(color: Colors.red),
                                   fit: BoxFit.fitHeight,
                                 ),
                               ),
