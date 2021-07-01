@@ -107,7 +107,7 @@ class UploadModal extends StatelessWidget {
                       if (response.statusCode == 200) channel.send(responseJson['data']['link']);
                       print('Upload: $responseBody');
                     },
-                    label: Text('Upload to Imgur'),
+                    label: Text('Imgur'),
                     icon: Icon(Icons.upload),
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
@@ -137,7 +137,7 @@ class UploadModal extends StatelessWidget {
                         if (response.statusCode == 200) channel.send(responseBody);
                         print('Upload: $responseBody');
                       },
-                      label: Text('Upload to catbox.moe'),
+                      label: Text('catbox.moe'),
                       icon: Icon(Icons.upload),
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
