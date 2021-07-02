@@ -107,7 +107,7 @@ class UploadModal extends StatelessWidget {
                       if (response.statusCode == 200) channel.send(responseJson['data']['link']);
                       print('Upload: $responseBody');
                     },
-                    label: Text('Imgur'),
+                    label: Text('imgur'),
                     icon: Icon(Icons.upload),
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
