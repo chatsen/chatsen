@@ -143,11 +143,11 @@ jobs:
         run: |
           flutter create --org com.chatsen .
           rm -rf test
-          # sed -i 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info.plist
-          sed -e 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info.plist > ./ios/Runner/Info2.plist
-          mv -f ./ios/Runner/Info2.plist ./ios/Runner/Info.plist
+          gsed -i '/-> Bool {/a \ \ \ \ if #available(iOS 10.0, *) {\ \ \ \ \ \ UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate\ \ \ \ }' ./ios/Runner/AppDelegate.swift
+          gsed -i 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info.plist
           flutter pub run flutter_launcher_icons:main
           flutter build ios --no-codesign
+          # '<key>UIBackgroundModes</key>\	\<array>\	\	<string>audio</string>\	\	<string>bluetooth-central</string>\	\	<string>bluetooth-peripheral</string>\	\	<string>external-accessory</string>\	\	<string>fetch</string>\	\	<string>location</string>\	\	<string>processing</string>\	\	<string>remote-notification</string>\	\	<string>voip</string>\	\</array>'
 
       - name: Prepare release files and converting .app to .ipa
         run: |

@@ -16,6 +16,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 
 import 'Accounts/AccountModel.dart';
 import 'App.dart';
+import 'AudioBackground/AudioBackgroundCubit.dart';
 import 'Badges/ChatsenBadges.dart';
 import 'Badges/FFZAPBadges.dart';
 import 'Badges/SevenTVBadges.dart';
@@ -55,6 +56,7 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
+        BlocProvider(create: (BuildContext context) => AudioBackgroundCubit()),
         BlocProvider(create: (BuildContext context) => CommandsCubit(commandsBox)),
         BlocProvider(create: (BuildContext context) => AccountsCubit(accountsBox)),
         BlocProvider(create: (BuildContext context) => FFZAPBadges()),
