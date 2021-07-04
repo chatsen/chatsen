@@ -26,15 +26,16 @@ import 'StreamOverlay/StreamOverlayBloc.dart';
 /// The main function is the entry point of our application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.transparent,
-  ));
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   systemNavigationBarColor: Colors.transparent,
+  // ));
+  // await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
 
-  if (Platform.isAndroid) {
-    var deviceInfo = DeviceInfoPlugin();
-    var androidInfo = await deviceInfo.androidInfo;
-    if (androidInfo.version.sdkInt! >= 21) await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-  }
+  // if (Platform.isAndroid) {
+  //   var deviceInfo = DeviceInfoPlugin();
+  //   var androidInfo = await deviceInfo.androidInfo;
+  //   // if (androidInfo.version.sdkInt! >= 21) await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+  // }
 
   if (Platform.isAndroid || Platform.isIOS) {
     await Hive.initFlutter();

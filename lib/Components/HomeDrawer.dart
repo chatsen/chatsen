@@ -1,4 +1,5 @@
 import 'package:chatsen/Pages/Settings.dart';
+import 'package:chatsen/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/Components/UI/WidgetBlur.dart';
@@ -105,7 +106,10 @@ class HomeDrawer extends StatelessWidget {
                               icon: Icon(Icons.settings),
                               onPressed: () => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (BuildContext context) => SettingsPage(),
+                                  builder: (BuildContext context) => ThemeManager.routeWrapper(
+                                    context: context,
+                                    child: SettingsPage(),
+                                  ),
                                 ),
                               ),
                               tooltip: 'Opens the settings page',
