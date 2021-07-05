@@ -1,7 +1,7 @@
 name: chatsen
 description: A new Flutter project.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev using `pub publish`
-version: 1.0.38+33
+version: 1.0.44+40
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

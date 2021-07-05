@@ -21,6 +21,23 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   late WebViewController webViewController;
 
+  void setupLoop() async {
+    await Future.delayed(Duration(seconds: 2));
+    await webViewController.evaluateJavascript('''
+      [...document.querySelectorAll('audio, video')].forEach(el => el.loop = true);
+    ''');
+    await Future.delayed(Duration(seconds: 8));
+    await webViewController.evaluateJavascript('''
+      [...document.querySelectorAll('audio, video')].forEach(el => el.loop = true);
+    ''');
+  }
+
+  @override
+  void initState() {
+    setupLoop();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) => BlocBuilder<Settings, SettingsState>(
         builder: (context, settingsState) => BlocBuilder<ThemeBloc, ThemeState>(
@@ -67,18 +84,30 @@ class _AppState extends State<App> {
                           SizedBox(
                             height: 0.0,
                             child: WebView(
-                                onWebViewCreated: (controller) {
-                                  webViewController = controller;
-                                  BlocProvider.of<AudioBackgroundCubit>(context).set(webViewController);
-                                },
-                                initialUrl: 'https://files.catbox.moe/gaydej.mp3',
-                                javascriptMode: JavascriptMode.unrestricted,
-                                onPageFinished: (url) {
-                                  webViewController.evaluateJavascript('''
-                                      [...document.querySelectorAll('audio, video')].forEach(el => el.loop = true);
-                                    ''');
-                                }),
+                              onWebViewCreated: (controller) {
+                                webViewController = controller;
+                                BlocProvider.of<AudioBackgroundCubit>(context).set(webViewController);
+                              },
+                              initialUrl: 'https://files.catbox.moe/gaydej.mp3',
+                              javascriptMode: JavascriptMode.unrestricted,
+                              onPageFinished: (url) async {
+                                // await Future.delayed(Duration(seconds: 10));
+                                // await webViewController.evaluateJavascript('''
+                                //   [...document.querySelectorAll('audio, video')].forEach(el => el.loop = true);
+                                // ''');
+                              },
+                            ),
                           ),
+
+                          // OutlinedButton(
+                          //   onPressed: () async {
+                          //     await webViewController.evaluateJavascript('''
+                          //             [...document.querySelectorAll('audio, video')].forEach(el => el.loop = true);
+                          //           ''');
+                          //   },
+                          //   child: Text('Setup loop'),
+                          // ),
+
                           // https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3
                           Expanded(child: HomePage()),
                         ],
