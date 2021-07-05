@@ -153,6 +153,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(setupScreen: !state.setupScreen))),
                     trailing: Switch.adaptive(
+                      activeColor: Theme.of(context).colorScheme.primary,
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(setupScreen: value))),
                       value: state.setupScreen,
                     ),
@@ -167,6 +168,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(notificationOnWhisper: !state.notificationOnWhisper))),
                     trailing: Switch.adaptive(
+                      activeColor: Theme.of(context).colorScheme.primary,
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(notificationOnWhisper: value))),
                       value: state.notificationOnWhisper,
                     ),
@@ -181,6 +183,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(notificationOnMention: !state.notificationOnMention))),
                     trailing: Switch.adaptive(
+                      activeColor: Theme.of(context).colorScheme.primary,
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(notificationOnMention: value))),
                       value: state.notificationOnMention,
                     ),
@@ -205,6 +208,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageTimestamp: !state.messageTimestamp))),
                     trailing: Switch.adaptive(
+                      activeColor: Theme.of(context).colorScheme.primary,
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageTimestamp: value))),
                       value: state.messageTimestamp,
                     ),
@@ -219,6 +223,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageImagePreview: !state.messageImagePreview))),
                     trailing: Switch.adaptive(
+                      activeColor: Theme.of(context).colorScheme.primary,
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageImagePreview: value))),
                       value: state.messageImagePreview,
                     ),
@@ -233,6 +238,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageLines: !state.messageLines))),
                     trailing: Switch.adaptive(
+                      activeColor: Theme.of(context).colorScheme.primary,
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageLines: value))),
                       value: state.messageLines,
                     ),
@@ -248,6 +254,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageAlternateBackground: !state.messageAlternateBackground))),
                     trailing: Switch.adaptive(
+                      activeColor: Theme.of(context).colorScheme.primary,
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(messageAlternateBackground: value))),
                       value: state.messageAlternateBackground,
                     ),
@@ -270,6 +277,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: description,
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyEnabled: !state.historyUseRecentMessages))),
                     trailing: Switch.adaptive(
+                      activeColor: Theme.of(context).colorScheme.primary,
                       onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyEnabled: value))),
                       value: state.historyUseRecentMessages,
                     ),
