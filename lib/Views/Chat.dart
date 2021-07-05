@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '/Components/ChatInputBox.dart';
 import '/Components/ChatMessage.dart';
@@ -44,25 +45,30 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
   @override
   void initState() {
     scrollController = ScrollController();
-    widget.client?.listeners?.add(this);
+    widget.client?.listeners.add(this);
     super.initState();
   }
 
   @override
   void dispose() {
     scrollController?.dispose();
-    widget.client?.listeners?.remove(this);
+    widget.client?.listeners.remove(this);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // behavior: HitTestBehavior.translucent,
-      // gestures: [GestureType.onPanUpdateDownDirection],
-      child: Stack(
-        children: [
-          NotificationListener<ScrollNotification>(
+    return Stack(
+      children: [
+        Listener(
+          behavior: HitTestBehavior.opaque,
+          onPointerDown: (e) {
+            final currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus && currentFocus.hasFocus) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            }
+          },
+          child: NotificationListener<ScrollNotification>(
             onNotification: (scrollNotification) {
               if (scrollNotification is ScrollStartNotification) {
                 if (shouldScroll != false) {
@@ -101,54 +107,54 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
               },
             ),
           ),
-          if ((Platform.isMacOS ? 0.0 : MediaQuery.of(context).padding.top) > 0.0 && (MediaQuery.of(context).size.aspectRatio > 1.0 ? true : BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed))
-            WidgetBlur(
-              child: Material(
-                color: Theme.of(context).canvasColor.withAlpha(196),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      // height: Platform.isMacOS ? 26.0 : MediaQuery.of(context).padding.top,
-                      height: MediaQuery.of(context).padding.top,
-                    ),
-                    Container(
-                      color: Theme.of(context).dividerColor,
-                      height: 1.0,
-                    ),
-                  ],
-                ),
+        ),
+        if ((Platform.isMacOS ? 0.0 : MediaQuery.of(context).padding.top) > 0.0 && (MediaQuery.of(context).size.aspectRatio > 1.0 ? true : BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed))
+          WidgetBlur(
+            child: Material(
+              color: Theme.of(context).canvasColor.withAlpha(196),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    // height: Platform.isMacOS ? 26.0 : MediaQuery.of(context).padding.top,
+                    height: MediaQuery.of(context).padding.top,
+                  ),
+                  Container(
+                    color: Theme.of(context).dividerColor,
+                    height: 1.0,
+                  ),
+                ],
               ),
             ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (!shouldScroll)
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: FloatingActionButton.extended(
-                      icon: Icon(Icons.arrow_downward),
-                      // mini: true,
-                      label: Text('Resume scrolling'),
-                      onPressed: () async => scrollToEnd(),
-                    ),
-                  ),
-                WidgetBlur(
-                  child: Material(
-                    color: Theme.of(context).colorScheme.surface.withAlpha(196),
-                    child: ChatInputBox(
-                      client: widget.client,
-                      channel: widget.channel,
-                    ),
+          ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (!shouldScroll)
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: FloatingActionButton.extended(
+                    icon: Icon(Icons.arrow_downward),
+                    // mini: true,
+                    label: Text('Resume scrolling'),
+                    onPressed: () async => scrollToEnd(),
                   ),
                 ),
-              ],
-            ),
+              WidgetBlur(
+                child: Material(
+                  color: Theme.of(context).colorScheme.surface.withAlpha(196),
+                  child: ChatInputBox(
+                    client: widget.client,
+                    channel: widget.channel,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

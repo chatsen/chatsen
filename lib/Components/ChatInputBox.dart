@@ -117,7 +117,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
     }
 
     widget.channel?.send(text);
-    textEditingController?.clear();
+    textEditingController.clear();
     setState(() {});
   }
 

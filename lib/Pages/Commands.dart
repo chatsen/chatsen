@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:chatsen/Accounts/AccountModel.dart';
@@ -5,6 +6,7 @@ import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Commands/Command.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
 import 'package:chatsen/Components/Modal/CommandModal.dart';
+import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
 import 'package:chatsen/Pages/OAuth.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +61,7 @@ class _CommandsPageState extends State<CommandsPage> {
         //   onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => OAuthPage())),
         //   child: Icon(Icons.add),
         // ),
+        appBar: NoAppBarBlur(),
         body: BlocBuilder<CommandsCubit, List<Command>>(
           builder: (context, state) {
             var listChildren = [
@@ -103,7 +106,7 @@ class _CommandsPageState extends State<CommandsPage> {
                             width: 24.0,
                             height: 24.0,
                             child: IconButton(
-                              icon: Icon(Icons.arrow_back),
+                              icon: Icon((Platform.isIOS || Platform.isMacOS) ? Icons.arrow_back_ios : Icons.arrow_back),
                               onPressed: () => Navigator.of(context).pop(),
                               padding: EdgeInsets.zero,
                               iconSize: 24.0,

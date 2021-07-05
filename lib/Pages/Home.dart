@@ -5,6 +5,7 @@ import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Components/HomeEndDrawer.dart';
 import 'package:chatsen/Components/Modal/SetupModal.dart';
 import 'package:chatsen/Components/Modal/UpdateModal.dart';
+import 'package:chatsen/Components/UI/WidgetBlur.dart';
 import 'package:chatsen/Mentions/MentionsCubit.dart';
 import 'package:chatsen/Settings/Settings.dart';
 import 'package:chatsen/Settings/SettingsEvent.dart';
@@ -136,95 +137,98 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
               ),
               endDrawer: HomeEndDrawer(),
               bottomNavigationBar: Builder(
-                builder: (context) => Material(
-                  color: client.channels.isEmpty ? Theme.of(context).colorScheme.surface.withAlpha(196) : Colors.transparent,
-                  child: SafeArea(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (client.channels.isEmpty) Ink(height: 1.0, color: Theme.of(context).dividerColor),
-                        SizedBox(
-                          height: 32.0,
-                          child: Row(
-                            children: [
-                              Builder(
-                                builder: (context) => InkWell(
-                                  onTap: () async => Scaffold.of(context).openDrawer(),
-                                  child: Container(
-                                    height: 32.0,
-                                    width: 32.0,
-                                    child: Icon(
-                                      Icons.menu,
-                                      color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                builder: (context) {
+                  var widget = Material(
+                    color: client.channels.isEmpty ? Theme.of(context).colorScheme.surface.withAlpha(196) : Colors.transparent,
+                    child: SafeArea(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (client.channels.isEmpty) Ink(height: 1.0, color: Theme.of(context).dividerColor),
+                          SizedBox(
+                            height: 32.0,
+                            child: Row(
+                              children: [
+                                Builder(
+                                  builder: (context) => InkWell(
+                                    onTap: () async => Scaffold.of(context).openDrawer(),
+                                    child: Container(
+                                      height: 32.0,
+                                      width: 32.0,
+                                      child: Icon(
+                                        Icons.menu,
+                                        color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                child: Material(
-                                  color: Colors.transparent,
-                                  child: TabBar(
-                                    labelPadding: EdgeInsets.only(left: 8.0),
-                                    isScrollable: true,
-                                    tabs: client.channels
-                                        .map(
-                                          (channel) => HomeTab(
-                                            client: client,
-                                            channel: channel,
-                                            refresh: () => setState(() {}),
-                                          ),
-                                        )
-                                        .toList(),
+                                Expanded(
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: TabBar(
+                                      labelPadding: EdgeInsets.only(left: 8.0),
+                                      isScrollable: true,
+                                      tabs: client.channels
+                                          .map(
+                                            (channel) => HomeTab(
+                                              client: client,
+                                              channel: channel,
+                                              refresh: () => setState(() {}),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Tooltip(
-                                message: 'Add/join a channel',
-                                child: InkWell(
-                                  onTap: () async {
-                                    await showModalBottomSheet(
-                                      context: context,
-                                      backgroundColor: Colors.transparent,
-                                      builder: (context) => SafeArea(
-                                        child: Padding(
-                                          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                                          child: ChannelJoinModal(
-                                            client: client,
-                                            refresh: () => setState(() {}),
+                                Tooltip(
+                                  message: 'Add/join a channel',
+                                  child: InkWell(
+                                    onTap: () async {
+                                      await showModalBottomSheet(
+                                        context: context,
+                                        backgroundColor: Colors.transparent,
+                                        builder: (context) => SafeArea(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                                            child: ChannelJoinModal(
+                                              client: client,
+                                              refresh: () => setState(() {}),
+                                            ),
                                           ),
                                         ),
+                                      );
+                                    },
+                                    child: Container(
+                                      height: 32.0,
+                                      width: 32.0,
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
                                       ),
-                                    );
-                                  },
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () async => Scaffold.of(context).openEndDrawer(),
                                   child: Container(
                                     height: 32.0,
                                     width: 32.0,
                                     child: Icon(
-                                      Icons.add,
+                                      Icons.alternate_email,
+                                      size: 20.0,
                                       color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
                                     ),
                                   ),
                                 ),
-                              ),
-                              InkWell(
-                                onTap: () async => Scaffold.of(context).openEndDrawer(),
-                                child: Container(
-                                  height: 32.0,
-                                  width: 32.0,
-                                  child: Icon(
-                                    Icons.alternate_email,
-                                    size: 20.0,
-                                    color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
-                                  ),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                  return client.channels.isEmpty ? WidgetBlur(child: widget) : widget;
+                },
               ),
               body: Stack(
                 children: [
@@ -353,82 +357,84 @@ class Tutorial extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          Icon(Icons.not_started, size: 48.0, color: Theme.of(context).colorScheme.primary),
-          Text('Getting started', style: Theme.of(context).textTheme.headline5),
-          // Text('To get started, you can join a channel by pressing the + button below.', textAlign: TextAlign.center),
-          // SizedBox(height: 32.0),
-          // Text('Help', style: Theme.of(context).textTheme.headline5),
-          SizedBox(height: 16.0),
-          Row(
-            children: [
-              Icon(Icons.add),
-              SizedBox(width: 16.0),
-              Expanded(child: Text('The add icon allows you to join channels by typing in their names. You can join multiple channels by separating the names with spaces: "forsen nymn vansamaofficial"')),
-            ],
-          ),
-          SizedBox(height: 16.0),
-          Row(
-            children: [
-              Icon(Icons.menu),
-              SizedBox(width: 16.0),
-              Expanded(child: Text('The menu icon will open the primary menu of the application. You can also hold-and-slide from the left edge to the right to open it!')),
-            ],
-          ),
-          SizedBox(height: 16.0),
-          Row(
-            children: [
-              Icon(Icons.alternate_email),
-              SizedBox(width: 16.0),
-              Expanded(child: Text('The email icon will open the mentions menu of the application. You can also hold-and-slide from the right edge to the left to open it!')),
-            ],
-          ),
-          SizedBox(height: 32.0),
-          Text('Quick actions', style: Theme.of(context).textTheme.headline5),
-          SizedBox(height: 16.0),
-          Container(
-            constraints: BoxConstraints(maxWidth: 128.0 * 1.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
+  Widget build(BuildContext context) => SafeArea(
+        child: Column(
+          children: [
+            Icon(Icons.not_started, size: 48.0, color: Theme.of(context).colorScheme.primary),
+            Text('Getting started', style: Theme.of(context).textTheme.headline5),
+            // Text('To get started, you can join a channel by pressing the + button below.', textAlign: TextAlign.center),
+            // SizedBox(height: 32.0),
+            // Text('Help', style: Theme.of(context).textTheme.headline5),
+            SizedBox(height: 16.0),
+            Row(
               children: [
-                ElevatedButton.icon(
-                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => AccountPage(
-                      client: client,
-                    ),
-                  )),
-                  icon: Icon(Icons.account_circle),
-                  label: Text('Add an account'),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                ElevatedButton.icon(
-                  onPressed: () async => await client.joinChannels(['#forsen']),
-                  icon: Icon(Icons.chat),
-                  label: Text('Join #forsen'),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                ElevatedButton.icon(
-                  onPressed: () => Scaffold.of(context).openEndDrawer(),
-                  icon: Icon(Icons.alternate_email),
-                  label: Text('Open mentions'),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
-                  ),
-                ),
+                Icon(Icons.add),
+                SizedBox(width: 16.0),
+                Expanded(child: Text('The add icon allows you to join channels by typing in their names. You can join multiple channels by separating the names with spaces: "forsen nymn vansamaofficial"')),
               ],
             ),
-          ),
-        ],
+            SizedBox(height: 16.0),
+            Row(
+              children: [
+                Icon(Icons.menu),
+                SizedBox(width: 16.0),
+                Expanded(child: Text('The menu icon will open the primary menu of the application. You can also hold-and-slide from the left edge to the right to open it!')),
+              ],
+            ),
+            SizedBox(height: 16.0),
+            Row(
+              children: [
+                Icon(Icons.alternate_email),
+                SizedBox(width: 16.0),
+                Expanded(child: Text('The email icon will open the mentions menu of the application. You can also hold-and-slide from the right edge to the left to open it!')),
+              ],
+            ),
+            SizedBox(height: 32.0),
+            Text('Quick actions', style: Theme.of(context).textTheme.headline5),
+            SizedBox(height: 16.0),
+            Container(
+              constraints: BoxConstraints(maxWidth: 128.0 * 1.5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AccountPage(
+                        client: client,
+                      ),
+                    )),
+                    icon: Icon(Icons.account_circle),
+                    label: Text('Add an account'),
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  ElevatedButton.icon(
+                    onPressed: () async => await client.joinChannels(['#forsen']),
+                    icon: Icon(Icons.chat),
+                    label: Text('Join #forsen'),
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  ElevatedButton.icon(
+                    onPressed: () => Scaffold.of(context).openEndDrawer(),
+                    icon: Icon(Icons.alternate_email),
+                    label: Text('Open mentions'),
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       );
 }

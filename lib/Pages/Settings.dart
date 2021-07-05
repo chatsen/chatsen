@@ -1,7 +1,10 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:chatsen/Components/UI/BlurModal.dart';
+import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
+import 'package:chatsen/Components/UI/WidgetBlur.dart';
 import 'package:chatsen/Settings/Settings.dart';
 import 'package:chatsen/Settings/SettingsEvent.dart';
 import 'package:chatsen/Settings/SettingsState.dart';
@@ -75,6 +78,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        appBar: NoAppBarBlur(),
         body: BlocBuilder<Settings, SettingsState>(
           builder: (context, state) {
             if (state is SettingsLoaded) {
@@ -88,25 +92,32 @@ class _SettingsPageState extends State<SettingsPage> {
                       context: context,
                       child: BlocBuilder<ThemeBloc, ThemeState>(
                         builder: (context, state) => SafeArea(
-                          child: Material(
-                            child: SizedBox(
-                              child: GridView.extent(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                maxCrossAxisExtent: 16.0 * 5.0,
-                                children: [
-                                  for (var colorScheme in ThemeManager.colors.entries)
-                                    Tooltip(
-                                      message: colorScheme.key,
-                                      child: InkWell(
-                                        onTap: () => BlocProvider.of<ThemeBloc>(context).add(ThemeColorSchemeChanged(colorScheme: colorScheme.key)),
-                                        child: Ink(
-                                          color: colorScheme.value.first,
+                          child: SizedBox(
+                            child: GridView.extent(
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              maxCrossAxisExtent: 16.0 * 5.0,
+                              children: [
+                                for (var colorScheme in ThemeManager.colors.entries)
+                                  Tooltip(
+                                    message: colorScheme.key,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Material(
+                                        borderRadius: BorderRadius.circular(32.0),
+                                        clipBehavior: Clip.antiAlias,
+                                        color: colorScheme.value.first,
+                                        child: InkWell(
+                                          borderRadius: BorderRadius.circular(32.0),
+                                          onTap: () {
+                                            BlocProvider.of<ThemeBloc>(context).add(ThemeColorSchemeChanged(colorScheme: colorScheme.key));
+                                            Navigator.of(context).pop();
+                                          },
                                         ),
                                       ),
                                     ),
-                                ],
-                              ),
+                                  ),
+                              ],
                             ),
                           ),
                         ),
@@ -358,7 +369,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               width: 24.0,
                               height: 24.0,
                               child: IconButton(
-                                icon: Icon(Icons.arrow_back),
+                                icon: Icon((Platform.isIOS || Platform.isMacOS) ? Icons.arrow_back_ios : Icons.arrow_back),
                                 onPressed: () => Navigator.of(context).pop(),
                                 padding: EdgeInsets.zero,
                                 iconSize: 24.0,
