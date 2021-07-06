@@ -145,7 +145,8 @@ jobs:
           rm -rf test
           gsed -i '/-> Bool {/a \ \ \ \ if #available(iOS 10.0, *) {\ \ \ \ \ \ UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate\ \ \ \ }' ./ios/Runner/AppDelegate.swift
           gsed -i 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info.plist
-          gsed -i '/<dict>/a \ \ <key>UIBackgroundModes</key>\n\ \ <array>\n\ \ \ \ <string>audio</string>\n\ \ \ \ <string>fetch</string>\n\ \ \ \ <string>processing</string>\n\ \ \ \ <string>remote-notification</string>\n\ \ \ \ <string>voip</string>\n\ \ </array>' ios/Runner/Info.plist
+          gsed -i '/<dict>/a \ \ <key>UIBackgroundModes</key>\n\ \ <array>\n\ \ \ \ <string>audio</string>\n\ \ </array>' ios/Runner/Info.plist
+          gsed -i '/<dict>/a \ \ <key>NSPhotoLibraryUsageDescription</key>\n\ \ <string>Chatsen requests to access your files to allow file selection.</string>' ios/Runner/Info.plist
           flutter pub run flutter_launcher_icons:main
           flutter build ios --no-codesign
           # '<key>UIBackgroundModes</key>\	\<array>\	\	<string>audio</string>\	\	<string>bluetooth-central</string>\	\	<string>bluetooth-peripheral</string>\	\	<string>external-accessory</string>\	\	<string>fetch</string>\	\	<string>location</string>\	\	<string>processing</string>\	\	<string>remote-notification</string>\	\	<string>voip</string>\	\</array>'
