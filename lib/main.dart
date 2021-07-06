@@ -7,16 +7,12 @@ import 'package:chatsen/Commands/CommandsCubit.dart';
 import 'package:chatsen/Theme/ThemeBloc.dart';
 import 'package:dart_downloader/DownloadManager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 
 import 'Accounts/AccountModel.dart';
 import 'App.dart';
-import 'AudioBackground/AudioBackgroundCubit.dart';
 import 'Badges/ChatsenBadges.dart';
 import 'Badges/FFZAPBadges.dart';
 import 'Badges/SevenTVBadges.dart';
@@ -27,17 +23,6 @@ import 'StreamOverlay/StreamOverlayBloc.dart';
 /// The main function is the entry point of our application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //   systemNavigationBarColor: Colors.transparent,
-  // ));
-  // await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-
-  // if (Platform.isAndroid) {
-  //   var deviceInfo = DeviceInfoPlugin();
-  //   var androidInfo = await deviceInfo.androidInfo;
-  //   // if (androidInfo.version.sdkInt! >= 21) await SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-  // }
-
   if (Platform.isAndroid || Platform.isIOS) {
     await Hive.initFlutter();
   } else {
@@ -56,7 +41,6 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => AudioBackgroundCubit()),
         BlocProvider(create: (BuildContext context) => CommandsCubit(commandsBox)),
         BlocProvider(create: (BuildContext context) => AccountsCubit(accountsBox)),
         BlocProvider(create: (BuildContext context) => FFZAPBadges()),

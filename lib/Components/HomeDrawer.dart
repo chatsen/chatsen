@@ -1,4 +1,4 @@
-import 'package:chatsen/AudioBackground/AudioBackgroundCubit.dart';
+import 'package:chatsen/BackgroundAudio/BackgroundAudioWrapper.dart';
 import 'package:chatsen/Pages/Settings.dart';
 import 'package:chatsen/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,6 @@ import '/StreamOverlay/StreamOverlayBloc.dart';
 import '/StreamOverlay/StreamOverlayEvent.dart';
 import '/StreamOverlay/StreamOverlayState.dart';
 import '/Views/Userlist.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 /// The [HomeDrawer] widget represents the drawer available on the home page. It features our [UserlistView] which displays all the users currently in a channel as well as giving us the way to access multiple options, accounts and features.
@@ -52,7 +51,7 @@ class HomeDrawer extends StatelessWidget {
                               IconButton(
                                 icon: Icon(Icons.play_arrow),
                                 onPressed: () async {
-                                  await BlocProvider.of<AudioBackgroundCubit>(context).state!.evaluateJavascript('''
+                                  await BackgroundAudioWrapper.getController(context)?.evaluateJavascript('''
                                       [...document.querySelectorAll('audio, video')].forEach(el => ${BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed ? 'el.pause()' : 'el.play()'});
                                   ''');
                                   (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) ? BlocProvider.of<StreamOverlayBloc>(context).add(StreamOverlayOpen(channelName: channel!.name!.substring(1))) : BlocProvider.of<StreamOverlayBloc>(context).add(StreamOVerlayClose());

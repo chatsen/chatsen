@@ -6,8 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import '/Components/ChatInputBox.dart';
 import '/Components/ChatMessage.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
