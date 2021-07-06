@@ -51,10 +51,12 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/logo.png
+    - assets/1234567777.png
 
 flutter_icons:
   android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/logo.png"
+  image_path: "assets/1234567777full.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/1234567777.png"

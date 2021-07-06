@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "logo-round.png",
+      "filename" : "output-onlinepngtools.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "logo-round-1.png",
+      "filename" : "output-onlinepngtools-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "logo-round-2.png",
+      "filename" : "output-onlinepngtools-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
