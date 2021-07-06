@@ -51,9 +51,9 @@ class HomeDrawer extends StatelessWidget {
                               IconButton(
                                 icon: Icon(Icons.play_arrow),
                                 onPressed: () async {
-                                  await BackgroundAudioWrapper.getController(context)?.evaluateJavascript('''
-                                      [...document.querySelectorAll('audio, video')].forEach(el => ${BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed ? 'el.pause()' : 'el.play()'});
-                                  ''');
+                                  // await BackgroundAudioWrapper.getController(context)?.evaluateJavascript('''
+                                  //     [...document.querySelectorAll('audio, video')].forEach(el => ${BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed ? 'el.pause()' : 'el.play()'});
+                                  // ''');
                                   (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) ? BlocProvider.of<StreamOverlayBloc>(context).add(StreamOverlayOpen(channelName: channel!.name!.substring(1))) : BlocProvider.of<StreamOverlayBloc>(context).add(StreamOVerlayClose());
                                 }, //launch('https://twitch.tv/${channel.name.substring(1)}'),
                                 tooltip: 'Open current channel\'s stream',

@@ -134,125 +134,134 @@ class _ChatInputBoxState extends State<ChatInputBox> {
           height: 1.0,
           color: Theme.of(context).dividerColor,
         ),
-        if (kDebugMode || widget.channel?.transmitter?.credentials?.token != null) ...[
-          if (autocompletionCommands.isNotEmpty)
-            Container(
-              height: 32.0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: autocompletionCommands,
-              ),
-            ),
-          if (autocompletionItemsUsers.isNotEmpty)
-            Container(
-              height: 32.0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: autocompletionItemsUsers,
-              ),
-            ),
-          if (autocompletionItems.isNotEmpty)
-            Container(
-              height: 48.0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: autocompletionItems,
-              ),
-            ),
-          Container(
-            // height: 64.0,
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    maxLines: textEditingController.text.isEmpty ? 1 : null,
-                    maxLength: 498,
-                    key: key,
-                    focusNode: focusNode,
-                    controller: textEditingController,
-                    autofocus: false,
-                    decoration: InputDecoration(
-                      // contentPadding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                      contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-                      filled: false,
-                      isDense: true,
-                      hintText: 'Message ${widget.channel!.name} as ${widget.channel!.transmitter!.credentials!.login}',
-                      counterText: '',
-                      // helperText: 'follow(420m)',
-                      border: InputBorder.none,
-                    ),
-                    onChanged: (text) async => setState(() {}),
-                    onSubmitted: send,
-                  ),
-                ),
-                Container(
-                  width: 32.0,
-                  height: 32.0,
-                  child: InkWell(
-                    onTap: () async {
-                      await UploadModal.show(
-                        context,
-                        channel: widget.channel!,
-                      );
-                    },
-                    child: Icon(
-                      Icons.file_present,
-                      color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+        Padding(
+          // MediaQuery.of(context).padding.
+          padding: EdgeInsets.only(left: MediaQuery.of(context).padding.left, right: MediaQuery.of(context).padding.right),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (kDebugMode || widget.channel?.transmitter?.credentials?.token != null) ...[
+                if (autocompletionCommands.isNotEmpty)
+                  Container(
+                    height: 32.0,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: autocompletionCommands,
                     ),
                   ),
-                ),
+                if (autocompletionItemsUsers.isNotEmpty)
+                  Container(
+                    height: 32.0,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: autocompletionItemsUsers,
+                    ),
+                  ),
+                if (autocompletionItems.isNotEmpty)
+                  Container(
+                    height: 48.0,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: autocompletionItems,
+                    ),
+                  ),
                 Container(
-                  width: 32.0,
-                  height: 32.0,
-                  child: InkWell(
-                    onTap: () async {
-                      await showModalBottomSheet(
-                        isScrollControlled: true,
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        builder: (context) => SafeArea(
-                          child: Padding(
-                            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                            child: EmoteListModal(
-                              client: widget.client,
-                              channel: widget.channel,
-                              insertEmote: (emote) {
-                                var splits = textEditingController.text.split(' ');
-                                splits.last = emote!;
-                                textEditingController.text = splits.join(' ') + ' ';
-                                textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
-                                focusNode.requestFocus();
-                                Navigator.of(context).pop();
-                                setState(() {});
-                              },
-                            ),
+                  // height: 64.0,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          maxLines: textEditingController.text.isEmpty ? 1 : null,
+                          maxLength: 498,
+                          key: key,
+                          focusNode: focusNode,
+                          controller: textEditingController,
+                          autofocus: false,
+                          decoration: InputDecoration(
+                            // contentPadding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                            filled: false,
+                            isDense: true,
+                            hintText: 'Message ${widget.channel!.name} as ${widget.channel!.transmitter!.credentials!.login}',
+                            counterText: '',
+                            // helperText: 'follow(420m)',
+                            border: InputBorder.none,
+                          ),
+                          onChanged: (text) async => setState(() {}),
+                          onSubmitted: send,
+                        ),
+                      ),
+                      Container(
+                        width: 32.0,
+                        height: 32.0,
+                        child: InkWell(
+                          onTap: () async {
+                            await UploadModal.show(
+                              context,
+                              channel: widget.channel!,
+                            );
+                          },
+                          child: Icon(
+                            Icons.file_present,
+                            color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
                           ),
                         ),
-                        // backgroundColor: Colors.transparent,
-                      );
-                    },
-                    child: Icon(
-                      Icons.emoji_emotions_outlined,
-                      color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 32.0,
-                  height: 32.0,
-                  child: InkWell(
-                    onTap: () => send(textEditingController.text),
-                    child: Icon(
-                      Icons.send,
-                      color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
-                    ),
+                      ),
+                      Container(
+                        width: 32.0,
+                        height: 32.0,
+                        child: InkWell(
+                          onTap: () async {
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) => SafeArea(
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                                  child: EmoteListModal(
+                                    client: widget.client,
+                                    channel: widget.channel,
+                                    insertEmote: (emote) {
+                                      var splits = textEditingController.text.split(' ');
+                                      splits.last = emote!;
+                                      textEditingController.text = splits.join(' ') + ' ';
+                                      textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
+                                      focusNode.requestFocus();
+                                      Navigator.of(context).pop();
+                                      setState(() {});
+                                    },
+                                  ),
+                                ),
+                              ),
+                              // backgroundColor: Colors.transparent,
+                            );
+                          },
+                          child: Icon(
+                            Icons.emoji_emotions_outlined,
+                            color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 32.0,
+                        height: 32.0,
+                        child: InkWell(
+                          onTap: () => send(textEditingController.text),
+                          child: Icon(
+                            Icons.send,
+                            color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
-            ),
+              SizedBox(height: MediaQuery.of(context).padding.bottom),
+            ],
           ),
-        ],
-        SizedBox(height: MediaQuery.of(context).padding.bottom),
+        ),
       ],
     );
   }

@@ -15,6 +15,7 @@ import 'package:chatsen/Theme/ThemeState.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -376,27 +377,57 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: SizedBox(
                       height: 128.0 * 1.5,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 24.0) + EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                        padding: EdgeInsets.symmetric(horizontal: 16.0) + EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 24.0),
-                            Container(
-                              width: 24.0,
-                              height: 24.0,
-                              child: IconButton(
-                                icon: Icon((Platform.isIOS || Platform.isMacOS) ? Icons.arrow_back_ios : Icons.arrow_back),
-                                onPressed: () => Navigator.of(context).pop(),
-                                padding: EdgeInsets.zero,
-                                iconSize: 24.0,
-                              ),
+                            Row(
+                              children: [
+                                // Container(
+                                //   width: 24.0,
+                                //   height: 24.0,
+                                //   child: IconButton(
+                                //     icon: Icon((Platform.isIOS || Platform.isMacOS) ? Icons.arrow_back_ios : Icons.arrow_back),
+                                //     onPressed: () => Navigator.of(context).pop(),
+                                //     padding: EdgeInsets.zero,
+                                //     iconSize: 24.0,
+                                //   ),
+                                // ),
+                                IconButton(
+                                  icon: Icon((Platform.isIOS || Platform.isMacOS) ? Icons.arrow_back_ios : Icons.arrow_back),
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  padding: EdgeInsets.zero,
+                                  iconSize: 24.0,
+                                ),
+                                Spacer(),
+                                IconButton(
+                                  icon: Icon(FontAwesomeIcons.discord),
+                                  onPressed: () => launch('https://discord.gg/5G8hpgHkXB'),
+                                ),
+                                // IconButton(
+                                //   icon: Icon(FontAwesomeIcons.twitter),
+                                //   onPressed: () {},
+                                // ),
+                                IconButton(
+                                  icon: Icon(FontAwesomeIcons.github),
+                                  onPressed: () => launch('https://github.com/chatsen/chatsen'),
+                                ),
+                                IconButton(
+                                  icon: Icon(FontAwesomeIcons.patreon),
+                                  onPressed: () => launch('https://patreon.com/chatsen'),
+                                ),
+                              ],
                             ),
                             Spacer(),
-                            Text(
-                              'Settings',
-                              style: Theme.of(context).textTheme.headline4!.copyWith(
-                                    color: Theme.of(context).colorScheme.onSurface,
-                                  ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                'Settings',
+                                style: Theme.of(context).textTheme.headline4!.copyWith(
+                                      color: Theme.of(context).colorScheme.onSurface,
+                                    ),
+                              ),
                             ),
                           ],
                         ),

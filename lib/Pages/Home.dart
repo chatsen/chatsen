@@ -282,13 +282,20 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                     ? Row(
                         children: [
                           Expanded(
-                            child: SafeArea(child: videoPlayer!),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top, bottom: MediaQuery.of(context).padding.bottom, left: MediaQuery.of(context).padding.left),
+                              child: videoPlayer!,
+                            ),
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(0.0),
                             child: SizedBox(
                               width: 340.0,
-                              child: scaffold,
+                              child: MediaQuery.removePadding(
+                                removeLeft: true,
+                                context: context,
+                                child: scaffold,
+                              ),
                             ),
                           ),
                         ],
