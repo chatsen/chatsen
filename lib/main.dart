@@ -49,7 +49,7 @@ void main() async {
         BlocProvider(create: (BuildContext context) => SevenTVBadges()),
         BlocProvider(create: (BuildContext context) => ChatsenBadges()),
         BlocProvider(create: (BuildContext context) => MentionsCubit()),
-        BlocProvider(create: (BuildContext context) => ThemeBloc(themeBox, mode: ThemeMode.dark, colorScheme: 'red')),
+        BlocProvider(create: (BuildContext context) => ThemeBloc(themeBox, mode: ThemeMode.dark, colorScheme: 'cyan')),
         BlocProvider(create: (BuildContext context) => DownloadManager()),
         BlocProvider(create: (BuildContext context) => StreamOverlayBloc()),
         BlocProvider(create: (BuildContext context) => Settings(settingsBox)),

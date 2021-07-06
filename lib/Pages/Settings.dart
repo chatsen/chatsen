@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:chatsen/Components/UI/BlurModal.dart';
 import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
-import 'package:chatsen/Components/UI/WidgetBlur.dart';
+import 'package:chatsen/Consts.dart';
 import 'package:chatsen/Settings/Settings.dart';
 import 'package:chatsen/Settings/SettingsEvent.dart';
 import 'package:chatsen/Settings/SettingsState.dart';
@@ -200,6 +200,22 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 ),
+                if (Platform.isIOS && !kPlayStoreRelease)
+                  SettingsEntry(
+                    category: 'Notifications',
+                    title: 'Background notifications',
+                    description: 'Creates an audio player that plays an empty/muted audio file to keep the application running on iOS. (note: the audio needs to not be paused in order for the application to keep running)',
+                    builder: (context, category, title, description) => Tile(
+                      title: title,
+                      subtitle: description,
+                      onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(notificationBackground: !state.notificationBackground))),
+                      trailing: Switch.adaptive(
+                        activeColor: Theme.of(context).colorScheme.primary,
+                        onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(notificationBackground: value))),
+                        value: state.notificationBackground,
+                      ),
+                    ),
+                  ),
                 // SettingsEntry(
                 //   category: 'Notifications',
                 //   title: 'Custom mentions',
@@ -286,10 +302,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     title: title,
                     subtitle: description,
-                    onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyEnabled: !state.historyUseRecentMessages))),
+                    onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyUseRecentMessages: !state.historyUseRecentMessages))),
                     trailing: Switch.adaptive(
                       activeColor: Theme.of(context).colorScheme.primary,
-                      onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyEnabled: value))),
+                      onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyUseRecentMessages: value))),
                       value: state.historyUseRecentMessages,
                     ),
                   ),

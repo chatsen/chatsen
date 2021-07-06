@@ -32,9 +32,11 @@ class _AppState extends State<App> {
                   child: Builder(
                     builder: (context) => ThemeManager.routeWrapper(
                       context: context,
-                      child: BackgroundAudioWrapper(
-                        child: HomePage(),
-                      ),
+                      child: settingsState.notificationBackground
+                          ? BackgroundAudioWrapper(
+                              child: HomePage(),
+                            )
+                          : HomePage(),
                     ),
                   ),
                 ),

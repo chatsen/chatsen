@@ -37,10 +37,10 @@ class SetupModal extends StatelessWidget {
                     ),
                     title: 'Enable chat history',
                     subtitle: 'Load the chat history from a 3rd-party service that receives the channel names you join to provide you the previous messages. To learn more, click the icon button.',
-                    onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyEnabled: !state.historyUseRecentMessages))),
+                    onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyUseRecentMessages: !state.historyUseRecentMessages))),
                     trailing: Switch.adaptive(
                       activeColor: Theme.of(context).colorScheme.primary,
-                      onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyEnabled: value))),
+                      onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyUseRecentMessages: value))),
                       value: state.historyUseRecentMessages,
                     ),
                   ),

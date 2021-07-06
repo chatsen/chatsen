@@ -41,24 +41,18 @@ class _BackgroundAudioWrapperState extends State<BackgroundAudioWrapper> {
   Widget build(BuildContext context) => Platform.isIOS
       ? Stack(
           children: [
-            Positioned.fill(child: widget.child),
             SizedBox(
-              height: 32.0,
+              height: 0.0,
               child: WebView(
                 onWebViewCreated: (controller) {
                   webViewController = controller;
-                  // BlocProvider.of<AudioBackgroundCubit>(context).set(webViewController);
                 },
                 initialUrl: 'https://files.catbox.moe/gaydej.mp3',
                 javascriptMode: JavascriptMode.unrestricted,
-                onPageFinished: (url) async {
-                  // await Future.delayed(Duration(seconds: 10));
-                  // await webViewController.evaluateJavascript('''
-                  //   [...document.querySelectorAll('audio, video')].forEach(el => el.loop = true);
-                  // ''');
-                },
+                onPageFinished: (url) async {},
               ),
             ),
+            Positioned.fill(child: widget.child),
           ],
         )
       : widget.child;

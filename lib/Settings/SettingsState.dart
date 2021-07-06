@@ -11,6 +11,7 @@ class SettingsLoaded extends SettingsState {
   final bool setupScreen;
   final bool notificationOnWhisper;
   final bool notificationOnMention;
+  final bool notificationBackground;
   final List<String> mentionCustom;
   final bool messageTimestamp;
   final bool messageImagePreview;
@@ -22,6 +23,7 @@ class SettingsLoaded extends SettingsState {
     required this.setupScreen,
     required this.notificationOnWhisper,
     required this.notificationOnMention,
+    required this.notificationBackground,
     required this.mentionCustom,
     required this.messageTimestamp,
     required this.messageImagePreview,
@@ -34,26 +36,28 @@ class SettingsLoaded extends SettingsState {
     bool? setupScreen,
     bool? notificationOnWhisper,
     bool? notificationOnMention,
+    bool? notificationBackground,
     List<String>? mentionCustom,
     bool? messageTimestamp,
     bool? messageImagePreview,
     bool? messageLines,
     bool? messageAlternateBackground,
-    bool? historyEnabled,
+    bool? historyUseRecentMessages,
   }) {
     return SettingsLoaded(
       setupScreen: setupScreen ?? this.setupScreen,
       notificationOnWhisper: notificationOnWhisper ?? this.notificationOnWhisper,
       notificationOnMention: notificationOnMention ?? this.notificationOnMention,
+      notificationBackground: notificationBackground ?? this.notificationBackground,
       mentionCustom: mentionCustom ?? this.mentionCustom,
       messageTimestamp: messageTimestamp ?? this.messageTimestamp,
       messageImagePreview: messageImagePreview ?? this.messageImagePreview,
       messageLines: messageLines ?? this.messageLines,
       messageAlternateBackground: messageAlternateBackground ?? this.messageAlternateBackground,
-      historyUseRecentMessages: historyEnabled ?? this.historyUseRecentMessages,
+      historyUseRecentMessages: historyUseRecentMessages ?? this.historyUseRecentMessages,
     );
   }
 
   @override
-  List<Object?> get props => [setupScreen, notificationOnWhisper, notificationOnMention, mentionCustom, messageTimestamp, messageImagePreview, messageLines, messageAlternateBackground, historyUseRecentMessages, ...super.props];
+  List<Object?> get props => [setupScreen, notificationOnWhisper, notificationOnMention, notificationBackground, mentionCustom, messageTimestamp, messageImagePreview, messageLines, messageAlternateBackground, historyUseRecentMessages, ...super.props];
 }

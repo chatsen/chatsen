@@ -18,23 +18,25 @@ class Settings extends Bloc<SettingsEvent, SettingsState> {
         setupScreen: settingsBox.get('setupScreen') ?? true,
         notificationOnWhisper: settingsBox.get('notificationOnWhisper') ?? false,
         notificationOnMention: settingsBox.get('notificationOnMention') ?? false,
+        notificationBackground: settingsBox.get('notificationBackground') ?? false,
         messageTimestamp: settingsBox.get('messageTimestamp') ?? false,
         messageImagePreview: settingsBox.get('messageImagePreview') ?? false,
         messageLines: settingsBox.get('messageLines') ?? false,
         messageAlternateBackground: settingsBox.get('messageAlternateBackground') ?? false,
         mentionCustom: settingsBox.get('mentionCustom') ?? [],
-        historyUseRecentMessages: settingsBox.get('historyEnabled') ?? true,
+        historyUseRecentMessages: settingsBox.get('historyUseRecentMessages') ?? true,
       );
     } else if (event is SettingsChange) {
       await settingsBox.put('setupScreen', event.state.setupScreen);
       await settingsBox.put('notificationOnWhisper', event.state.notificationOnWhisper);
       await settingsBox.put('notificationOnMention', event.state.notificationOnMention);
+      await settingsBox.put('notificationBackground', event.state.notificationBackground);
       await settingsBox.put('messageTimestamp', event.state.messageTimestamp);
       await settingsBox.put('messageImagePreview', event.state.messageImagePreview);
       await settingsBox.put('messageLines', event.state.messageLines);
       await settingsBox.put('messageAlternateBackground', event.state.messageAlternateBackground);
       await settingsBox.put('mentionCustom', event.state.mentionCustom);
-      await settingsBox.put('historyEnabled', event.state.historyUseRecentMessages);
+      await settingsBox.put('historyUseRecentMessages', event.state.historyUseRecentMessages);
       yield event.state;
     }
   }
