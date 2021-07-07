@@ -156,6 +156,7 @@ class Message {
 
   bool action = false;
   bool mention = false;
+  bool history = false; // TODO: Use a bitfield
 
   List<Badge> badges = [];
   List<MessageToken> tokens = [];
@@ -170,8 +171,8 @@ class Message {
     this.user,
     this.id,
     this.body,
-    this.mention = false,
     this.dateTime,
+    this.history = false,
   }) {
     if (body!.contains(RegExp('ACTION .*'))) action = true;
     if (action) body = body!.substring('ACTION '.length, body!.length - 1);
@@ -333,6 +334,7 @@ class Channel {
 
       var chatMessage = Message(
         channel: this,
+        history: true,
         user: User(
           login: message!.prefix.split('!').first.toLowerCase(),
           displayName: message.tags['display-name'],
@@ -341,7 +343,6 @@ class Channel {
         ),
         id: message.tags['id'],
         body: message.parameters[1],
-        mention: message.parameters[1].toLowerCase().contains(receiver!.credentials!.login.toLowerCase()), // TODO: Move to message's constructor
         tagBadges: message.tags['badges'],
         tagEmotes: message.tags['emotes'],
         dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? 0),
@@ -520,7 +521,6 @@ class Channel {
 
   void send(String message, {bool action = false}) async {
     // TODO: Setup buckets per account
-    // TODO: Setup per-channel spam bypass
     // TODO: Handle whispers
 
     if (action) return send('ACTION $message');
@@ -538,7 +538,6 @@ class Channel {
         ),
         id: null,
         body: message,
-        mention: message.toLowerCase().contains(receiver!.credentials!.login.toLowerCase()), // TODO: Move to message's constructor
         dateTime: DateTime.now(),
       );
 
@@ -704,7 +703,6 @@ class Connection {
           ),
           id: message.tags['id'],
           body: message.parameters[1],
-          mention: message.parameters[1].toLowerCase().contains(credentials!.login.toLowerCase()), // TODO: Move to message's constructor
           tagBadges: message.tags['badges'],
           tagEmotes: message.tags['emotes'],
         );
@@ -733,7 +731,6 @@ class Connection {
           ),
           id: message.tags['id'],
           body: message.parameters[1],
-          mention: message.parameters[1].toLowerCase().contains(credentials!.login.toLowerCase()), // TODO: Move to message's constructor
           // tagBadges: message.tags['badges'],
           tagEmotes: message.tags['emotes'],
         );
