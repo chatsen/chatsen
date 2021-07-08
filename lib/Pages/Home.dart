@@ -12,6 +12,7 @@ import 'package:chatsen/Settings/SettingsEvent.dart';
 import 'package:chatsen/Settings/SettingsState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/Components/ChannelJoinModal.dart';
 import '/Components/HomeDrawer.dart';
@@ -35,6 +36,36 @@ class HomePage extends StatefulWidget {
 
   @override
   _HomePageState createState() => _HomePageState();
+}
+
+class TitleBarHide extends StatefulWidget {
+  final Widget child;
+
+  const TitleBarHide({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  @override
+  State<TitleBarHide> createState() => _TitleBarHideState();
+}
+
+class _TitleBarHideState extends State<TitleBarHide> {
+  @override
+  void initState() {
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    // SystemChrome.restoreSystemUIOverlays();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }
 
 class _HomePageState extends State<HomePage> implements twitch.Listener {
@@ -108,6 +139,8 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
     super.dispose();
   }
 
+  var keyTest = GlobalKey();
+
   @override
   Widget build(BuildContext context) => DefaultTabController(
         length: client.channels.length,
@@ -117,7 +150,8 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
             // // var videoPlayer = Container(color: Theme.of(context).primaryColor);
             var videoPlayer = state is StreamOverlayOpened
                 ? WebView(
-                    initialUrl: 'https://player.twitch.tv/?channel=${state.channelName}&enableExtensions=true&muted=false&parent=pornhub.com',
+                    key: keyTest,
+                    initialUrl: 'https://player.twitch.tv/?channel=${state.channelName}&enableExtensions=true&muted=false&parent=chatsen.app',
                     javascriptMode: JavascriptMode.unrestricted,
                     allowsInlineMediaPlayback: true,
                   )
@@ -136,6 +170,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                 },
               ),
               endDrawer: HomeEndDrawer(),
+              backgroundColor: (state is StreamOverlayOpened && horizontal) ? Colors.transparent : null,
               bottomNavigationBar: Builder(
                 builder: (context) {
                   var widget = Material(
@@ -251,6 +286,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                           ChatView(
                             client: client,
                             channel: channel,
+                            shadow: (state is StreamOverlayOpened && horizontal),
                           ),
                       ],
                     ),
@@ -278,28 +314,101 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
             return state is StreamOverlayClosed
                 ? scaffold
+                // : Stack(
+                //     children: [
+                //       scaffold,
+                //       if (horizontal) videoPlayer!,
+                //       if (!horizontal)
+                //         SafeArea(
+                //           bottom: false,
+                //           child: AspectRatio(
+                //             aspectRatio: 16.0 / 9.0,
+                //             child: videoPlayer!,
+                //           ),
+                //         ),
+                //     ],
+                //   );
+                // : Padding(
+                //     padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                //     child: TitleBarHide(
+                //       child: Scaffold(
+                //         drawerScrimColor: Colors.transparent,
+                //         endDrawer: WidgetBlur(
+                //           child: Ink(
+                //             width: 320.0,
+                //             color: Colors.transparent,
+                //             // color: Theme.of(context).colorScheme.background.withAlpha(196),
+                //             child: ChatView(
+                //               channel: client.channels.first,
+                //               client: client,
+                //             ),
+                //           ),
+                //         ),
+                //         body: Builder(
+                //           builder: (context) => Stack(
+                //             children: [
+                //               videoPlayer!,
+                //               IconButton(
+                //                 icon: Icon(Icons.add),
+                //                 onPressed: () => Scaffold.of(context).openEndDrawer(),
+                //               ),
+                //               ResizebleWidget(
+                //                 child: ChatView(
+                //                   channel: client.channels.first,
+                //                   client: client,
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   );
                 : (horizontal
-                    ? Row(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top, bottom: MediaQuery.of(context).padding.bottom, left: MediaQuery.of(context).padding.left),
-                              child: videoPlayer!,
-                            ),
+                    ? Scaffold(
+                        drawerScrimColor: Colors.transparent,
+                        endDrawer: WidgetBlur(
+                          child: Ink(
+                            width: 320.0,
+                            color: Colors.transparent,
+                            // color: Theme.of(context).colorScheme.background.withAlpha(196),
+                            child: scaffold,
                           ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(0.0),
-                            child: SizedBox(
-                              width: 340.0,
-                              child: MediaQuery.removePadding(
-                                removeLeft: true,
-                                context: context,
-                                child: scaffold,
+                        ),
+                        body: Builder(
+                          builder: (context) => Stack(
+                            children: [
+                              videoPlayer!,
+                              IconButton(
+                                icon: Icon(Icons.add),
+                                onPressed: () => Scaffold.of(context).openEndDrawer(),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
+                        ),
                       )
+                    // ? Row(
+                    //     children: [
+                    //       Expanded(
+                    //         child: Padding(
+                    //           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top, bottom: MediaQuery.of(context).padding.bottom, left: MediaQuery.of(context).padding.left),
+                    //           child: videoPlayer!,
+                    //         ),
+                    //       ),
+                    //       ClipRRect(
+                    //         borderRadius: BorderRadius.circular(0.0),
+                    //         child: SizedBox(
+                    //           width: 340.0,
+                    //           child: MediaQuery.removePadding(
+                    //             removeLeft: true,
+                    //             context: context,
+                    //             child: scaffold,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   )
+
                     : Column(
                         children: [
                           SafeArea(

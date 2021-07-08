@@ -17,11 +17,13 @@ import '/StreamOverlay/StreamOverlayState.dart';
 class ChatView extends StatefulWidget {
   final twitch.Client? client;
   final twitch.Channel? channel;
+  final bool shadow;
 
   const ChatView({
     Key? key,
     required this.client,
     required this.channel,
+    this.shadow = false,
   }) : super(key: key);
 
   @override
@@ -98,6 +100,7 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
                       ChatMessage(
                         backgroundColor: state is SettingsLoaded && state.messageAlternateBackground && (i++ % 2 == 0) ? Theme.of(context).dividerColor : null,
                         message: message,
+                        shadow: widget.shadow,
                       ),
                     ],
                   ].reversed.toList(),

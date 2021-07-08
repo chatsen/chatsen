@@ -25,12 +25,14 @@ class ChatMessage extends StatelessWidget {
   final String? prefixText;
   final twitch.Message message;
   final Color? backgroundColor;
+  final bool shadow;
 
   const ChatMessage({
     Key? key,
     this.prefixText,
     required this.message,
     this.backgroundColor,
+    this.shadow = false,
   }) : super(key: key);
 
   Color getUserColor(BuildContext context, Color color) {
@@ -56,6 +58,15 @@ class ChatMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     var color = getUserColor(context, Color(int.tryParse(message.user!.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255));
     var spans = <InlineSpan>[];
+    var shadowSpread = 1.0;
+    var shadows = shadow
+        ? [
+            Shadow(offset: Offset(-shadowSpread, -shadowSpread), color: Colors.black),
+            Shadow(offset: Offset(shadowSpread, -shadowSpread), color: Colors.black),
+            Shadow(offset: Offset(shadowSpread, shadowSpread), color: Colors.black),
+            Shadow(offset: Offset(-shadowSpread, shadowSpread), color: Colors.black),
+          ]
+        : null;
 
     for (var token in message.tokens) {
       switch (token.type) {
@@ -63,7 +74,10 @@ class ChatMessage extends StatelessWidget {
           spans.add(
             TextSpan(
               text: '${token.data} ',
-              style: TextStyle(color: message.action ? color : null),
+              style: TextStyle(
+                color: message.action ? color : null,
+                shadows: shadows,
+              ),
             ),
           );
           break;
@@ -76,6 +90,7 @@ class ChatMessage extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.blue,
                     decoration: TextDecoration.underline,
+                    shadows: shadows,
                   ),
                   recognizer: TapGestureRecognizer()..onTap = () async => launch(token.data),
                 ),
@@ -94,6 +109,7 @@ class ChatMessage extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.blue,
                       decoration: TextDecoration.underline,
+                      shadows: shadows,
                     ),
                     recognizer: TapGestureRecognizer()..onTap = () async => launch(token.data),
                   ),
@@ -233,12 +249,18 @@ class ChatMessage extends StatelessWidget {
                       if (prefixText != null)
                         TextSpan(
                           text: '$prefixText ',
-                          style: TextStyle(fontStyle: FontStyle.italic),
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            shadows: shadows,
+                          ),
                         ),
                       if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).messageTimestamp)
                         TextSpan(
                           text: '${message.dateTime!.hour.toString().padLeft(2, '0')}:${message.dateTime!.minute.toString().padLeft(2, '0')} ',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            shadows: shadows,
+                          ),
                         ),
                       // if (first != null)
                       //   for (var badge in first.badges)
@@ -296,7 +318,11 @@ class ChatMessage extends StatelessWidget {
                         ),
                       TextSpan(
                         text: '${message.user!.displayName}' + (message.user!.displayName!.toLowerCase() != message.user!.login!.toLowerCase() ? ' (${message.user!.login})' : '') + (message.action ? ' ' : ': '),
-                        style: TextStyle(color: color, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          color: color,
+                          fontWeight: FontWeight.bold,
+                          shadows: shadows,
+                        ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async => Navigator.of(context).push(
                                 MaterialPageRoute(
