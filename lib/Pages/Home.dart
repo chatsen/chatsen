@@ -71,6 +71,7 @@ class _TitleBarHideState extends State<TitleBarHide> {
 class _HomePageState extends State<HomePage> implements twitch.Listener {
   twitch.Client client = twitch.Client();
   Future<bool>? updateFuture;
+  bool immersive = false;
 
   Future<void> loadChannelHistory() async {
     var channels = await Hive.openBox('Channels');
@@ -170,7 +171,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                 },
               ),
               endDrawer: HomeEndDrawer(),
-              backgroundColor: (state is StreamOverlayOpened && horizontal) ? Colors.transparent : null,
+              backgroundColor: (state is StreamOverlayOpened && horizontal && immersive) ? Colors.transparent : null,
               bottomNavigationBar: Builder(
                 builder: (context) {
                   var widget = Material(
@@ -286,7 +287,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                           ChatView(
                             client: client,
                             channel: channel,
-                            shadow: (state is StreamOverlayOpened && horizontal),
+                            shadow: (state is StreamOverlayOpened && horizontal && immersive),
                           ),
                       ],
                     ),
@@ -365,50 +366,100 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                 //     ),
                 //   );
                 : (horizontal
-                    ? Scaffold(
-                        drawerScrimColor: Colors.transparent,
-                        endDrawer: WidgetBlur(
-                          child: Ink(
-                            width: 320.0,
-                            color: Colors.transparent,
-                            // color: Theme.of(context).colorScheme.background.withAlpha(196),
-                            child: scaffold,
-                          ),
-                        ),
-                        body: Builder(
-                          builder: (context) => Stack(
+                    ? (immersive
+                        ? TitleBarHide(
+                            child: Scaffold(
+                              drawerScrimColor: Colors.transparent,
+                              endDrawer: WidgetBlur(
+                                child: Ink(
+                                  width: 320.0,
+                                  color: Colors.transparent,
+                                  // color: Theme.of(context).colorScheme.background.withAlpha(196),
+                                  child: scaffold,
+                                ),
+                              ),
+                              body: Builder(
+                                builder: (context) => Stack(
+                                  children: [
+                                    videoPlayer!,
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: SafeArea(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.fullscreen_exit,
+                                                color: Colors.white.withAlpha(192),
+                                              ),
+                                              onPressed: () => setState(() {
+                                                immersive = false;
+                                              }),
+                                            ),
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.menu,
+                                                color: Colors.white.withAlpha(192),
+                                              ),
+                                              onPressed: () => Scaffold.of(context).openEndDrawer(),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        : Row(
                             children: [
-                              videoPlayer!,
-                              IconButton(
-                                icon: Icon(Icons.add),
-                                onPressed: () => Scaffold.of(context).openEndDrawer(),
+                              Expanded(
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top, bottom: MediaQuery.of(context).padding.bottom, left: MediaQuery.of(context).padding.left),
+                                    child: Stack(
+                                      children: [
+                                        videoPlayer!,
+                                        Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: SafeArea(
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    Icons.fullscreen,
+                                                    color: Colors.white.withAlpha(192),
+                                                  ),
+                                                  onPressed: () => setState(() {
+                                                    immersive = true;
+                                                  }),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(0.0),
+                                child: SizedBox(
+                                  width: 340.0,
+                                  child: MediaQuery.removePadding(
+                                    removeLeft: true,
+                                    context: context,
+                                    child: scaffold,
+                                  ),
+                                ),
                               ),
                             ],
-                          ),
-                        ),
-                      )
-                    // ? Row(
-                    //     children: [
-                    //       Expanded(
-                    //         child: Padding(
-                    //           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top, bottom: MediaQuery.of(context).padding.bottom, left: MediaQuery.of(context).padding.left),
-                    //           child: videoPlayer!,
-                    //         ),
-                    //       ),
-                    //       ClipRRect(
-                    //         borderRadius: BorderRadius.circular(0.0),
-                    //         child: SizedBox(
-                    //           width: 340.0,
-                    //           child: MediaQuery.removePadding(
-                    //             removeLeft: true,
-                    //             context: context,
-                    //             child: scaffold,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   )
-
+                          ))
                     : Column(
                         children: [
                           SafeArea(

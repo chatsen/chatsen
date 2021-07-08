@@ -59,12 +59,13 @@ class ChatMessage extends StatelessWidget {
     var color = getUserColor(context, Color(int.tryParse(message.user!.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255));
     var spans = <InlineSpan>[];
     var shadowSpread = 1.0;
+    var shadowColor = Theme.of(context).colorScheme.background;
     var shadows = shadow
         ? [
-            Shadow(offset: Offset(-shadowSpread, -shadowSpread), color: Colors.black),
-            Shadow(offset: Offset(shadowSpread, -shadowSpread), color: Colors.black),
-            Shadow(offset: Offset(shadowSpread, shadowSpread), color: Colors.black),
-            Shadow(offset: Offset(-shadowSpread, shadowSpread), color: Colors.black),
+            Shadow(offset: Offset(-shadowSpread, -shadowSpread), color: shadowColor),
+            Shadow(offset: Offset(shadowSpread, -shadowSpread), color: shadowColor),
+            Shadow(offset: Offset(shadowSpread, shadowSpread), color: shadowColor),
+            Shadow(offset: Offset(-shadowSpread, shadowSpread), color: shadowColor),
           ]
         : null;
 
