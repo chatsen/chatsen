@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:chatsen/Accounts/AccountsCubit.dart';
@@ -24,6 +25,7 @@ import '/Views/Chat.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import 'package:hive/hive.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:http/http.dart' as http;
 
 import 'Account.dart';
 
@@ -141,6 +143,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
   }
 
   var keyTest = GlobalKey();
+  WebViewController? webViewController;
 
   @override
   Widget build(BuildContext context) => DefaultTabController(
@@ -155,6 +158,11 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                     initialUrl: 'https://player.twitch.tv/?channel=${state.channelName}&enableExtensions=true&muted=false&parent=chatsen.app',
                     javascriptMode: JavascriptMode.unrestricted,
                     allowsInlineMediaPlayback: true,
+                    onWebViewCreated: (controller) => webViewController = controller,
+                    onPageFinished: (url) async {
+                      var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
+                      await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes));
+                    },
                   )
                 : null;
 
