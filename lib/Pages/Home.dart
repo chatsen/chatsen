@@ -71,7 +71,7 @@ class _TitleBarHideState extends State<TitleBarHide> {
 class _HomePageState extends State<HomePage> implements twitch.Listener {
   twitch.Client client = twitch.Client();
   Future<bool>? updateFuture;
-  bool immersive = false;
+  bool immersive = true;
 
   Future<void> loadChannelHistory() async {
     var channels = await Hive.openBox('Channels');
