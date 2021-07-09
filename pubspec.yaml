@@ -15,7 +15,6 @@ dependencies:
   hive_flutter: ^1.0.0
   webview_flutter: ^2.0.8
   file_picker: ^3.0.2+2
-  dio: ^4.0.0
   flutter_local_notifications: ^6.0.0
   flutter_chatsen_irc:
     path: libraries/flutter_chatsen_irc
@@ -23,7 +22,6 @@ dependencies:
   flutter_bloc: ^7.0.1
   equatable: ^2.0.2
   collection: ^1.15.0
-  device_info_plus: ^1.0.1
   version: ^2.0.0
   package_info: ^2.0.2
   path_provider: ^2.0.2
@@ -49,13 +47,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/1234567777.png
+  # assets:
+  #   - assets/1234567777.png
 
 flutter_icons:
   android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/1234567777full.png"
-  adaptive_icon_background: "#FFFFFF"
-  adaptive_icon_foreground: "assets/1234567777.png"
+  image_path: "assets/Chatsen-logo-04.png"
+  adaptive_icon_background: "#262626"
+  adaptive_icon_foreground: "assets/Chatsen-logo-06.png"
