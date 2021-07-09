@@ -54,6 +54,6 @@ flutter_icons:
   android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/Chatsen-logo-04.png"
+  image_path: "assets/logo-ios.png"
   adaptive_icon_background: "#262626"
-  adaptive_icon_foreground: "assets/Chatsen-logo-06.png"
+  adaptive_icon_foreground: "assets/logo-adaptive.png"
