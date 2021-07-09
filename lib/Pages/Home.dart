@@ -74,6 +74,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
   twitch.Client client = twitch.Client();
   Future<bool>? updateFuture;
   bool immersive = true;
+  String ffz = '';
 
   Future<void> loadChannelHistory() async {
     var channels = await Hive.openBox('Channels');
@@ -132,6 +133,8 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
       }
     });
 
+    http.get(Uri.parse('https://cdn.frankerfacez.com/static/player.b1d9260ef2ad14f4e3e4.js')).then((rep) => ffz = utf8.decode(rep.bodyBytes));
+
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
@@ -153,22 +156,44 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
             var horizontal = MediaQuery.of(context).size.aspectRatio > 1.0;
             // // var videoPlayer = Container(color: Theme.of(context).primaryColor);
             var videoPlayer = state is StreamOverlayOpened
-                ? WebView(
-                    key: keyTest,
-                    initialUrl: 'https://player.twitch.tv/?channel=${state.channelName}&enableExtensions=true&muted=false&parent=chatsen.app',
-                    javascriptMode: JavascriptMode.unrestricted,
-                    allowsInlineMediaPlayback: true,
-                    onWebViewCreated: (controller) => webViewController = controller,
-                    onPageStarted: (url) async {
-                      var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
-                      await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes));
-                    },
-                    onPageFinished: (url) async {
-                      var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
-                      print(await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes)));
-                    },
-                    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-                    // userAgent: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0',
+                ? Stack(
+                    children: [
+                      WebView(
+                        key: keyTest,
+                        initialUrl: 'https://player.twitch.tv/?channel=${state.channelName}&enableExtensions=true&muted=false&parent=chatsen.app',
+                        javascriptMode: JavascriptMode.unrestricted,
+                        allowsInlineMediaPlayback: true,
+                        onWebViewCreated: (controller) => webViewController = controller,
+                        onPageStarted: (url) {
+                          webViewController!.evaluateJavascript(ffz);
+
+                          // var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
+                          // await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes));
+                        },
+                        onPageFinished: (url) async {
+                          // webViewController!.evaluateJavascript(ffz);
+                          // var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
+                          // print(await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes)));
+                          await webViewController!.evaluateJavascript('''
+                            document.getElementsByClassName("video-player__overlay")[0].hidden = true;
+                            document.getElementsByTagName("video")[0].controls = true;
+                          ''');
+                        },
+                        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                        // userAgent: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0',
+                      ),
+                      Positioned.fill(
+                        child: Listener(
+                          behavior: HitTestBehavior.translucent,
+                          onPointerDown: (e) {
+                            webViewController!.evaluateJavascript('''
+                                document.getElementsByClassName("video-player__overlay")[0].hidden = true;
+                                document.getElementsByTagName("video")[0].controls = true;
+                              ''');
+                          },
+                        ),
+                      ),
+                    ],
                   )
                 : null;
 
