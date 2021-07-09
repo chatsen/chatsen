@@ -159,6 +159,10 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                     javascriptMode: JavascriptMode.unrestricted,
                     allowsInlineMediaPlayback: true,
                     onWebViewCreated: (controller) => webViewController = controller,
+                    onPageStarted: (url) async {
+                      var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
+                      await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes));
+                    },
                     onPageFinished: (url) async {
                       var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
                       await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes));
