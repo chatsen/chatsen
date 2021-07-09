@@ -545,7 +545,7 @@ class Channel {
       client!.listeners.forEach((listener) => listener.onWhisper(this, chatMessage));
     } else {
       var lastMessageByTransmitter = messages.lastWhereOrNull((element) => element.user?.id == transmitter!.credentials!.id);
-      transmitter?.send('PRIVMSG $name :$message${(lastMessageByTransmitter?.body == message) ? utf8.decode([0xF3, 0xA0, 0x80, 0x80]) : ''}');
+      transmitter?.send('PRIVMSG $name :$message${(lastMessageByTransmitter?.body == message) ? ' ${utf8.decode([0xF3, 0xA0, 0x80, 0x80])}' : ''}');
     }
   }
 }
