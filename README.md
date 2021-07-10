@@ -1,4 +1,4 @@
-[<img height="64" src="assets/logo-round.png">](assets/logo-round.png)
+[<img height="48" src="assets/logo-transparent-nopadding.png">](assets/logo-round.png)
 Chatsen ![GitHub](https://img.shields.io/github/license/chatsen/chatsen) ![GitHub all releases](https://img.shields.io/github/downloads/chatsen/chatsen/total) ![Discord](https://img.shields.io/discord/758710852756570153) ![Discord2](https://discord-md-badge.vercel.app/api/shield/550839582963400715?style=flat)
 ============
 
