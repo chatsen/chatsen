@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                         allowsInlineMediaPlayback: true,
                         onWebViewCreated: (controller) => webViewController = controller,
                         onPageStarted: (url) {
-                          webViewController!.evaluateJavascript(ffz);
+                          // webViewController!.evaluateJavascript(ffz);
 
                           // var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
                           // await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes));
@@ -174,25 +174,25 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                           // webViewController!.evaluateJavascript(ffz);
                           // var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
                           // print(await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes)));
-                          await webViewController!.evaluateJavascript('''
-                            document.getElementsByClassName("video-player__overlay")[0].hidden = true;
-                            document.getElementsByTagName("video")[0].controls = true;
-                          ''');
+                          // await webViewController!.evaluateJavascript('''
+                          //   document.getElementsByClassName("video-player__overlay")[0].hidden = true;
+                          //   document.getElementsByTagName("video")[0].controls = true;
+                          // ''');
                         },
                         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
                         // userAgent: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0',
                       ),
-                      Positioned.fill(
-                        child: Listener(
-                          behavior: HitTestBehavior.translucent,
-                          onPointerDown: (e) {
-                            webViewController!.evaluateJavascript('''
-                                document.getElementsByClassName("video-player__overlay")[0].hidden = true;
-                                document.getElementsByTagName("video")[0].controls = true;
-                              ''');
-                          },
-                        ),
-                      ),
+                      // Positioned.fill(
+                      //   child: Listener(
+                      //     behavior: HitTestBehavior.translucent,
+                      //     onPointerDown: (e) {
+                      //       webViewController!.evaluateJavascript('''
+                      //           document.getElementsByClassName("video-player__overlay")[0].hidden = true;
+                      //           document.getElementsByTagName("video")[0].controls = true;
+                      //         ''');
+                      //     },
+                      //   ),
+                      // ),
                     ],
                   )
                 : null;
