@@ -408,6 +408,8 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                     ? (immersive
                         ? TitleBarHide(
                             child: Scaffold(
+                              extendBody: true,
+                              extendBodyBehindAppBar: true,
                               drawerScrimColor: Colors.transparent,
                               endDrawer: WidgetBlur(
                                 child: Ink(

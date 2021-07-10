@@ -259,8 +259,9 @@ class ChatMessage extends StatelessWidget {
                         TextSpan(
                           text: '${message.dateTime!.hour.toString().padLeft(2, '0')}:${message.dateTime!.minute.toString().padLeft(2, '0')} ',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            // fontWeight: FontWeight.bold,
                             shadows: shadows,
+                            color: Colors.grey[400],
                           ),
                         ),
                       // if (first != null)

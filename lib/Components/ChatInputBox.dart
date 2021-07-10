@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
 import 'package:flutter/foundation.dart';
@@ -29,12 +31,15 @@ class _ChatInputBoxState extends State<ChatInputBox> {
   GlobalKey key = GlobalKey();
   TextEditingController textEditingController = TextEditingController();
   FocusNode focusNode = FocusNode();
+  Timer? timer;
 
   @override
   void dispose() {
     textEditingController.dispose();
     focusNode.dispose();
     super.dispose();
+    timer?.cancel();
+    timer = null;
   }
 
   List<Widget> getAutoCompletionItems() => [
@@ -82,7 +87,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
               ),
       ];
 
-  void send(String text) {
+  void send(String text, {bool remove = true}) {
     text = text.trim();
 
     // Command parser
@@ -117,7 +122,7 @@ class _ChatInputBoxState extends State<ChatInputBox> {
     }
 
     widget.channel?.send(text);
-    textEditingController.clear();
+    if (remove) textEditingController.clear();
     setState(() {});
   }
 
@@ -246,11 +251,36 @@ class _ChatInputBoxState extends State<ChatInputBox> {
                       Container(
                         width: 32.0,
                         height: 32.0,
-                        child: InkWell(
-                          onTap: () => send(textEditingController.text),
-                          child: Icon(
-                            Icons.send,
-                            color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                        child: GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTapDown: (e) {
+                            print('pressed');
+                            timer?.cancel();
+                            timer = null;
+                            timer = Timer.periodic(
+                              Duration(seconds: 2),
+                              (timer) {
+                                print('2');
+                                send(textEditingController.text, remove: false);
+                              },
+                            );
+                          },
+                          onTapCancel: () {
+                            print('cancel');
+                            timer?.cancel();
+                            timer = null;
+                          },
+                          onTapUp: (e) {
+                            print('cancel');
+                            timer?.cancel();
+                            timer = null;
+                          },
+                          child: InkWell(
+                            onTap: () => send(textEditingController.text),
+                            child: Icon(
+                              Icons.send,
+                              color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                            ),
                           ),
                         ),
                       ),
