@@ -54,6 +54,6 @@ flutter_icons:
   android: true
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/logo-ios.png"
-  adaptive_icon_background: "#262626"
-  adaptive_icon_foreground: "assets/logo-adaptive.png"
+  image_path: "assets/ayyybubu/forsenShrimp/ios.png"
+  adaptive_icon_background: "#21123B" # "#262626"
+  adaptive_icon_foreground: "assets/ayyybubu/forsenShrimp/adaptive.png"
