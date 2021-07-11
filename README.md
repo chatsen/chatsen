@@ -1,23 +1,20 @@
 <p align="middle">
 <img align="middle" height="64" src="assets/ayyybubu/forsenShrimp/original.png">
 <p>
-<p font-size="64" align="middle" style="font-size:32px">Chatsen</p>
+<h1 align="middle">Chatsen</h1>
+
 <p align="middle" float="left">
-  <a href="https://discord.gg/chatsen"><img src="https://img.shields.io/discord/758710852756570153?color=7289da&label=discord"></a>
-  <a><img src="https://img.shields.io/github/downloads/chatsen/chatsen/total"></a>
+  <a href="https://discord.gg/chatsen"><img src="https://img.shields.io/discord/758710852756570153?color=5865F2&label=discord"></a>
+  <a><img src="https://img.shields.io/github/downloads/chatsen/chatsen/total?color=23B14D"></a>
   <a><img src="https://img.shields.io/github/license/chatsen/chatsen"></a>
 </p>
-
-
-
-Chatsen is a cross-platform application that allows you to chat on Twitch with support for 3rd-party services such as 7TV, BTTV and FFZ.  
-It also features a built-in video player and a variety of other features, such as auto-completion, notifications (on supported platforms), whispers, and more to come!
-
 <p align="middle" float="left">
   <a href="https://testflight.apple.com/join/I7Fm27MH"><img height="75" src="https://beatscratch.io/assets/testflight-badge.png"></a>
   <a href="https://play.google.com/store/apps/details?id=com.chatsen.chatsen"><img height="75" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"></a>
 </p>
 
+Chatsen is a cross-platform application that allows you to chat on Twitch with support for 3rd-party services such as 7TV, BTTV and FFZ.  
+It also features a built-in video player and a variety of other features, such as auto-completion, notifications (on supported platforms), whispers, and more to come!
 
 # Media
 <p align="middle" float="left">
@@ -32,8 +29,8 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 
 # Store Releases
 - [x] [Play Store](https://play.google.com/store/apps/details?id=com.chatsen.chatsen)
-- [x] [Apple Testflight](https://testflight.apple.com/join/I7Fm27MH)
-- [ ] App Store (release soon, available on Testflight or by sideloading)
+- [x] [Apple TestFlight](https://testflight.apple.com/join/I7Fm27MH)
+- [ ] App Store (release soon, available on TestFlight or by sideloading)
 - [ ] F-Droid Store
 
 # Supported platforms
