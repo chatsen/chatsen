@@ -1,5 +1,5 @@
 <p align="middle">
-<img align="middle" height="64" src="assets/ayyybubu/forsenShrimp/original.png">
+<img align="middle" height="96" src="assets/ayyybubu/forsenShrimp/original.png">
 <p>
 <h1 align="middle">Chatsen</h1>
 
