@@ -7,7 +7,6 @@ import 'package:chatsen/Badges/SevenTVBadges.dart';
 import 'package:chatsen/Components/WidgetTooltip.dart';
 import 'package:chatsen/Settings/Settings.dart';
 import 'package:chatsen/Settings/SettingsState.dart';
-import 'package:chatsen_resources/user.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
