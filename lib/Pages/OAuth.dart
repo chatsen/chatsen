@@ -79,12 +79,12 @@ class _OAuthPageState extends State<OAuthPage> {
                   existing.avatarBytes = imageBytes;
                   await existing.save();
                   await cubit.setActive(existing);
-                  widget.client.swapCredentials(
+                  await widget.client.swapCredentials(
                     twitch.Credentials(
-                      clientId: AccountsCubit.defaultAccount.clientId,
-                      id: AccountsCubit.defaultAccount.id,
-                      login: AccountsCubit.defaultAccount.login!,
-                      token: AccountsCubit.defaultAccount.token,
+                      clientId: existing.clientId,
+                      id: existing.id,
+                      login: existing.login!,
+                      token: existing.token,
                     ),
                   );
                 } else {
@@ -97,12 +97,12 @@ class _OAuthPageState extends State<OAuthPage> {
                   );
                   await cubit.add(model);
                   await cubit.setActive(model);
-                  widget.client.swapCredentials(
+                  await widget.client.swapCredentials(
                     twitch.Credentials(
-                      clientId: AccountsCubit.defaultAccount.clientId,
-                      id: AccountsCubit.defaultAccount.id,
-                      login: AccountsCubit.defaultAccount.login!,
-                      token: AccountsCubit.defaultAccount.token,
+                      clientId: model.clientId,
+                      id: model.id,
+                      login: model.login!,
+                      token: model.token,
                     ),
                   );
                 }

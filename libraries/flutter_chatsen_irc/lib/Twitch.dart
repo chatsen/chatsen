@@ -935,7 +935,7 @@ class Client {
     }
   }
 
-  void swapCredentials(Credentials newCredentials) async {
+  Future<void> swapCredentials(Credentials newCredentials) async {
     credentials = newCredentials;
     for (var receiver in receivers[null] ?? []) {
       receiver.connect(newCredentials);

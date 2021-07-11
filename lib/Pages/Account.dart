@@ -6,6 +6,7 @@ import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
 import 'package:chatsen/Pages/OAuth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
@@ -92,7 +93,7 @@ class _AccountPageState extends State<AccountPage> {
                             icon: Icon(Icons.delete),
                             onPressed: () async {
                               if (account.isActive == true) {
-                                widget.client.swapCredentials(
+                                await widget.client.swapCredentials(
                                   twitch.Credentials(
                                     clientId: AccountsCubit.defaultAccount.clientId,
                                     id: AccountsCubit.defaultAccount.id,
@@ -107,9 +108,9 @@ class _AccountPageState extends State<AccountPage> {
                         )
                       : null,
                   title: account.token != null ? '${account.login}' : 'Anonymous User',
-                  subtitle: account.token != null ? '${account.clientId}' : 'Login as ${account.login}',
+                  subtitle: !kDebugMode ? null : (account.token != null ? '${account.clientId}' : 'Login as ${account.login}'),
                   onTap: () async {
-                    widget.client.swapCredentials(
+                    await widget.client.swapCredentials(
                       twitch.Credentials(
                         clientId: account.clientId,
                         id: account.id,
