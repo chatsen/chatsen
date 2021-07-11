@@ -621,7 +621,12 @@ class Tutorial extends StatelessWidget {
                   ),
                   SizedBox(height: 8.0),
                   ElevatedButton.icon(
-                    onPressed: () async => await client.joinChannels(['#forsen']),
+                    onPressed: () async {
+                      await client.joinChannels(['#forsen']);
+                      var channelsBox = await Hive.openBox('Channels');
+                      await channelsBox.clear();
+                      await channelsBox.addAll(client.channels.map((channel) => channel.name));
+                    },
                     icon: Icon(Icons.chat),
                     label: Text('Join #forsen'),
                     style: ButtonStyle(

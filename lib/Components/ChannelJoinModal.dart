@@ -38,8 +38,8 @@ class _ChannelJoinModalState extends State<ChannelJoinModal> {
     channelNames.removeWhere((channelName) => widget.client!.channels.any((channel) => channel.name == channelName));
     await widget.client!.joinChannels(channelNames);
     var channelsBox = await Hive.openBox('Channels');
-    channelsBox.clear();
-    channelsBox.addAll(widget.client!.channels.map((channel) => channel.name));
+    await channelsBox.clear();
+    await channelsBox.addAll(widget.client!.channels.map((channel) => channel.name));
     Navigator.of(context).pop();
     textEditingController?.clear();
     widget.refresh();
