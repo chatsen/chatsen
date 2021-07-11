@@ -8,11 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 /// [OAuthPage] is the page that contains our login webview. It's used to be able to add accounts to the application.
 class OAuthPage extends StatefulWidget {
+  final twitch.Client client;
+
   const OAuthPage({
     Key? key,
+    required this.client,
   }) : super(key: key);
 
   @override
@@ -75,6 +79,14 @@ class _OAuthPageState extends State<OAuthPage> {
                   existing.avatarBytes = imageBytes;
                   await existing.save();
                   await cubit.setActive(existing);
+                  widget.client.swapCredentials(
+                    twitch.Credentials(
+                      clientId: AccountsCubit.defaultAccount.clientId,
+                      id: AccountsCubit.defaultAccount.id,
+                      login: AccountsCubit.defaultAccount.login!,
+                      token: AccountsCubit.defaultAccount.token,
+                    ),
+                  );
                 } else {
                   var model = AccountModel(
                     clientId: 'vvxbprk8sfufgzd7k9wwr1478znf7b',
@@ -85,6 +97,14 @@ class _OAuthPageState extends State<OAuthPage> {
                   );
                   await cubit.add(model);
                   await cubit.setActive(model);
+                  widget.client.swapCredentials(
+                    twitch.Credentials(
+                      clientId: AccountsCubit.defaultAccount.clientId,
+                      id: AccountsCubit.defaultAccount.id,
+                      login: AccountsCubit.defaultAccount.login!,
+                      token: AccountsCubit.defaultAccount.token,
+                    ),
+                  );
                 }
 
                 await webViewController.clearCache();

@@ -58,7 +58,13 @@ class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => OAuthPage())),
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => OAuthPage(
+                client: widget.client,
+              ),
+            ),
+          ),
           child: Icon(Icons.add),
         ),
         appBar: NoAppBarBlur(),
