@@ -153,6 +153,12 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
         length: client.channels.length,
         child: BlocBuilder<StreamOverlayBloc, StreamOverlayState>(
           builder: (context, state) {
+            // ignore: invalid_use_of_protected_member
+            if (!DefaultTabController.of(context)!.hasListeners) {
+              DefaultTabController.of(context)!.addListener(() {
+                setState(() {});
+              });
+            }
             var horizontal = MediaQuery.of(context).size.aspectRatio > 1.0;
             // // var videoPlayer = Container(color: Theme.of(context).primaryColor);
             var videoPlayer = state is StreamOverlayOpened
@@ -240,18 +246,61 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                 Expanded(
                                   child: Material(
                                     color: Colors.transparent,
-                                    child: TabBar(
-                                      labelPadding: EdgeInsets.only(left: 8.0),
-                                      isScrollable: true,
-                                      tabs: client.channels
-                                          .map(
-                                            (channel) => HomeTab(
-                                              client: client,
-                                              channel: channel,
-                                              refresh: () => setState(() {}),
+                                    // child: TabBar(
+                                    //   labelPadding: EdgeInsets.only(left: 8.0),
+                                    //   isScrollable: true,
+                                    //   tabs: client.channels
+                                    //       .map(
+                                    //         (channel) => HomeTab(
+                                    //           client: client,
+                                    //           channel: channel,
+                                    //           refresh: () => setState(() {}),
+                                    //         ),
+                                    //       )
+                                    //       .toList(),
+                                    // ),
+                                    child: ReorderableListView(
+                                      // labelPadding: EdgeInsets.only(left: 8.0),
+                                      // isScrollable: true,
+                                      scrollDirection: Axis.horizontal,
+                                      // children: client.channels
+                                      //     .map(
+                                      //       (channel) => HomeTab(
+                                      //         key: ValueKey(channel),
+                                      //         client: client,
+                                      //         channel: channel,
+                                      //         refresh: () => setState(() {}),
+                                      //       ),
+                                      //     )
+                                      //     .toList(),
+                                      children: [
+                                        for (var channel in client.channels)
+                                          InkWell(
+                                            key: ValueKey(channel),
+                                            onTap: () {
+                                              DefaultTabController.of(context)!.animateTo(client.channels.indexOf(channel));
+                                              // setState(() {});
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                '${channel.name!.replaceFirst('#', '')}',
+                                                style: TextStyle(
+                                                  color: DefaultTabController.of(context)!.index == client.channels.indexOf(channel) ? Colors.red : null,
+                                                ),
+                                              ),
                                             ),
-                                          )
-                                          .toList(),
+                                          ),
+                                      ],
+                                      onReorder: (int oldIndex, int newIndex) {
+                                        if (oldIndex < newIndex) {
+                                          newIndex -= 1;
+                                        }
+                                        final item = client.channels.removeAt(oldIndex);
+                                        client.channels.insert(newIndex, item);
+                                        setState(() {});
+                                      },
+                                      // children: [],
                                     ),
                                   ),
                                 ),

@@ -20,7 +20,7 @@ class HomeTab extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('${channel.name}'),
+            Text('${channel.name!.replaceFirst('#', '')}'),
             Container(
               width: 32.0,
               height: 32.0,
