@@ -57,10 +57,10 @@ class _CommandsPageState extends State<CommandsPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => OAuthPage())),
-        //   child: Icon(Icons.add),
-        // ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => CommandModal.show(context),
+          child: Icon(Icons.add),
+        ),
         appBar: NoAppBarBlur(),
         body: BlocBuilder<CommandsCubit, List<Command>>(
           builder: (context, state) {

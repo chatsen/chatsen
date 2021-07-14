@@ -22,7 +22,8 @@ class AccountModelAdapter extends TypeAdapter<AccountModel> {
       id: fields[2] as int?,
       clientId: fields[3] as String?,
       avatarBytes: fields[4] as Uint8List?,
-    )..isActive = fields[5] as bool?;
+      isActive: fields[5] as bool?,
+    );
   }
 
   @override

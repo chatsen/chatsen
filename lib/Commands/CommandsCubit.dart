@@ -17,16 +17,16 @@ class CommandsCubit extends Cubit<List<Command>> {
   }
 
   Future<void> load() async {
-    // emit(List<Command>.from(commandsBox.values));
+    emit(List<Command>.from(commandsBox.values));
   }
 
   Future<void> add(Command cmd) async {
-    // await commandsBox.add(cmd);
+    await commandsBox.add(cmd);
     emit([...state, cmd]);
   }
 
   Future<void> remove(Command cmd) async {
-    // await commandsBox.delete(cmd);
+    await commandsBox.delete(cmd);
     state.removeWhere((element) => element == cmd);
     emit([...state]);
   }
