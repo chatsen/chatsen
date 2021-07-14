@@ -5,10 +5,10 @@ part 'Command.g.dart';
 @HiveType(typeId: 1)
 class Command extends HiveObject {
   @HiveField(0)
-  final String trigger;
+  String trigger;
 
   @HiveField(1)
-  final String command;
+  String command;
 
   Command({
     required this.trigger,

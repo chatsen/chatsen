@@ -87,11 +87,19 @@ class _CommandModalState extends State<CommandModal> {
                         trigger: triggerController.text,
                       ),
                     );
+                  } else {
+                    widget.command!.command = commandController.text;
+                    widget.command!.trigger = triggerController.text;
+                    BlocProvider.of<CommandsCubit>(context).update(widget.command!);
                   }
                   Navigator.of(context).pop();
                 },
                 icon: Icon(Icons.save),
                 label: Text('Save'),
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                ),
               ),
             ],
           ),
