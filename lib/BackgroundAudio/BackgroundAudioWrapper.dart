@@ -47,7 +47,7 @@ class _BackgroundAudioWrapperState extends State<BackgroundAudioWrapper> {
                 onWebViewCreated: (controller) {
                   webViewController = controller;
                 },
-                initialUrl: 'https://files.catbox.moe/gaydej.mp3',
+                initialUrl: 'https://chatsen.app/assets/bgm.mp3',
                 javascriptMode: JavascriptMode.unrestricted,
                 onPageFinished: (url) async {},
               ),
