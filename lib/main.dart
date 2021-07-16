@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Badges/ChatterinoBadges.dart';
 import 'package:chatsen/Badges/FFZBadges.dart';
+import 'package:chatsen/Commands/Command.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
 import 'package:chatsen/Theme/ThemeBloc.dart';
 import 'package:dart_downloader/DownloadManager.dart';
@@ -36,6 +37,7 @@ void main() async {
       }
 
       Hive.registerAdapter(AccountModelAdapter());
+      Hive.registerAdapter(CommandAdapter());
 
       var settingsBox = await Hive.openBox('Settings');
       var commandsBox = await Hive.openBox('Commands');

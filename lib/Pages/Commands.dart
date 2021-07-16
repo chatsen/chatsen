@@ -57,15 +57,15 @@ class _CommandsPageState extends State<CommandsPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => OAuthPage())),
-        //   child: Icon(Icons.add),
-        // ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => CommandModal.show(context),
+          child: Icon(Icons.add),
+        ),
         appBar: NoAppBarBlur(),
         body: BlocBuilder<CommandsCubit, List<Command>>(
           builder: (context, state) {
             var listChildren = [
-              for (var command in state)
+              for (var command in state.where((x) => x.command.toLowerCase().contains(searchController.text.toLowerCase()) || x.trigger.toLowerCase().contains(searchController.text.toLowerCase())))
                 Tile(
                   // leading: Padding(
                   //   padding: EdgeInsets.all(8.0),
@@ -75,19 +75,15 @@ class _CommandsPageState extends State<CommandsPage> {
                     padding: EdgeInsets.all(0.0),
                     child: IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () async {
-                        await BlocProvider.of<CommandsCubit>(context).remove(command);
-                      },
+                      onPressed: () async => await BlocProvider.of<CommandsCubit>(context).remove(command),
                     ),
                   ),
                   title: command.trigger,
                   subtitle: command.command,
-                  onTap: () async {
-                    await CommandModal.show(
-                      context,
-                      command: command,
-                    );
-                  },
+                  onTap: () async => await CommandModal.show(
+                    context,
+                    command: command,
+                  ),
                 ),
             ];
 

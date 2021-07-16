@@ -1,20 +1,22 @@
 import 'dart:convert';
 
 import 'package:chatsen/Commands/Command.dart';
+import 'package:chatsen/Commands/CommandsCubit.dart';
 import 'package:chatsen/Components/UI/BlurModal.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
 import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' as http;
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 class CommandModal extends StatefulWidget {
-  final Command command;
+  final Command? command;
 
   const CommandModal({
     Key? key,
-    required this.command,
+    this.command,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,7 @@ class CommandModal extends StatefulWidget {
 
   static Future<void> show(
     BuildContext context, {
-    required Command command,
+    Command? command,
   }) async {
     await BlurModal.show(
       context: context,
@@ -39,8 +41,8 @@ class _CommandModalState extends State<CommandModal> {
 
   @override
   void initState() {
-    triggerController = TextEditingController(text: widget.command.trigger);
-    commandController = TextEditingController(text: widget.command.command);
+    triggerController = TextEditingController(text: widget.command?.trigger);
+    commandController = TextEditingController(text: widget.command?.command);
     super.initState();
   }
 
@@ -73,6 +75,30 @@ class _CommandModalState extends State<CommandModal> {
                 decoration: InputDecoration(
                   filled: true,
                   labelText: 'Command',
+                ),
+              ),
+              SizedBox(height: 8.0),
+              ElevatedButton.icon(
+                onPressed: () {
+                  if (widget.command == null) {
+                    BlocProvider.of<CommandsCubit>(context).add(
+                      Command(
+                        command: commandController.text,
+                        trigger: triggerController.text,
+                      ),
+                    );
+                  } else {
+                    widget.command!.command = commandController.text;
+                    widget.command!.trigger = triggerController.text;
+                    BlocProvider.of<CommandsCubit>(context).update(widget.command!);
+                  }
+                  Navigator.of(context).pop();
+                },
+                icon: Icon(Icons.save),
+                label: Text('Save'),
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
                 ),
               ),
             ],
