@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:chatsen/Accounts/AccountsCubit.dart';
-import 'package:chatsen/Components/HomeEndDrawer.dart';
-import 'package:chatsen/Components/Modal/SetupModal.dart';
-import 'package:chatsen/Components/Modal/UpdateModal.dart';
-import 'package:chatsen/Components/UI/WidgetBlur.dart';
-import 'package:chatsen/Mentions/MentionsCubit.dart';
-import 'package:chatsen/Settings/Settings.dart';
-import 'package:chatsen/Settings/SettingsEvent.dart';
-import 'package:chatsen/Settings/SettingsState.dart';
+import '/Accounts/AccountsCubit.dart';
+import '/Components/HomeEndDrawer.dart';
+import '/Components/Modal/SetupModal.dart';
+import '/Components/Modal/UpdateModal.dart';
+import '/Components/UI/WidgetBlur.dart';
+import '/Mentions/MentionsCubit.dart';
+import '/Settings/Settings.dart';
+import '/Settings/SettingsEvent.dart';
+import '/Settings/SettingsState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -246,62 +246,62 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                 Expanded(
                                   child: Material(
                                     color: Colors.transparent,
-                                    // child: TabBar(
-                                    //   labelPadding: EdgeInsets.only(left: 8.0),
-                                    //   isScrollable: true,
-                                    //   tabs: client.channels
-                                    //       .map(
-                                    //         (channel) => HomeTab(
-                                    //           client: client,
-                                    //           channel: channel,
-                                    //           refresh: () => setState(() {}),
-                                    //         ),
-                                    //       )
-                                    //       .toList(),
-                                    // ),
-                                    child: ReorderableListView(
-                                      // labelPadding: EdgeInsets.only(left: 8.0),
-                                      // isScrollable: true,
-                                      scrollDirection: Axis.horizontal,
-                                      // children: client.channels
-                                      //     .map(
-                                      //       (channel) => HomeTab(
-                                      //         key: ValueKey(channel),
-                                      //         client: client,
-                                      //         channel: channel,
-                                      //         refresh: () => setState(() {}),
-                                      //       ),
-                                      //     )
-                                      //     .toList(),
-                                      children: [
-                                        for (var channel in client.channels)
-                                          InkWell(
-                                            key: ValueKey(channel),
-                                            onTap: () {
-                                              DefaultTabController.of(context)!.animateTo(client.channels.indexOf(channel));
-                                              // setState(() {});
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                '${channel.name!.replaceFirst('#', '')}',
-                                                style: TextStyle(
-                                                  color: DefaultTabController.of(context)!.index == client.channels.indexOf(channel) ? Colors.red : null,
-                                                ),
-                                              ),
+                                    child: TabBar(
+                                      labelPadding: EdgeInsets.only(left: 8.0),
+                                      isScrollable: true,
+                                      tabs: client.channels
+                                          .map(
+                                            (channel) => HomeTab(
+                                              client: client,
+                                              channel: channel,
+                                              refresh: () => setState(() {}),
                                             ),
-                                          ),
-                                      ],
-                                      onReorder: (int oldIndex, int newIndex) {
-                                        if (oldIndex < newIndex) {
-                                          newIndex -= 1;
-                                        }
-                                        final item = client.channels.removeAt(oldIndex);
-                                        client.channels.insert(newIndex, item);
-                                        setState(() {});
-                                      },
-                                      // children: [],
+                                          )
+                                          .toList(),
                                     ),
+                                    // child: ReorderableListView(
+                                    //   // labelPadding: EdgeInsets.only(left: 8.0),
+                                    //   // isScrollable: true,
+                                    //   scrollDirection: Axis.horizontal,
+                                    //   // children: client.channels
+                                    //   //     .map(
+                                    //   //       (channel) => HomeTab(
+                                    //   //         key: ValueKey(channel),
+                                    //   //         client: client,
+                                    //   //         channel: channel,
+                                    //   //         refresh: () => setState(() {}),
+                                    //   //       ),
+                                    //   //     )
+                                    //   //     .toList(),
+                                    //   children: [
+                                    //     for (var channel in client.channels)
+                                    //       InkWell(
+                                    //         key: ValueKey(channel),
+                                    //         onTap: () {
+                                    //           DefaultTabController.of(context)!.animateTo(client.channels.indexOf(channel));
+                                    //           // setState(() {});
+                                    //         },
+                                    //         child: Padding(
+                                    //           padding: const EdgeInsets.all(8.0),
+                                    //           child: Text(
+                                    //             '${channel.name!.replaceFirst('#', '')}',
+                                    //             style: TextStyle(
+                                    //               color: DefaultTabController.of(context)!.index == client.channels.indexOf(channel) ? Colors.red : null,
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //   ],
+                                    //   onReorder: (int oldIndex, int newIndex) {
+                                    //     if (oldIndex < newIndex) {
+                                    //       newIndex -= 1;
+                                    //     }
+                                    //     final item = client.channels.removeAt(oldIndex);
+                                    //     client.channels.insert(newIndex, item);
+                                    //     setState(() {});
+                                    //   },
+                                    //   // children: [],
+                                    // ),
                                   ),
                                 ),
                                 Tooltip(
