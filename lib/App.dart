@@ -18,6 +18,8 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  Key globalKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) => BlocBuilder<Settings, SettingsState>(
         builder: (context, settingsState) => BlocBuilder<ThemeBloc, ThemeState>(
@@ -34,9 +36,9 @@ class _AppState extends State<App> {
                       context: context,
                       child: settingsState.notificationBackground
                           ? BackgroundAudioWrapper(
-                              child: HomePage(),
+                              child: HomePage(key: globalKey),
                             )
-                          : HomePage(),
+                          : HomePage(key: globalKey),
                     ),
                   ),
                 ),

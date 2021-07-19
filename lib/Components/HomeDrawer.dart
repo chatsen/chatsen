@@ -1,4 +1,5 @@
 import 'package:chatsen/BackgroundAudio/BackgroundAudioWrapper.dart';
+import 'package:chatsen/BackgroundDaemon/BackgroundDaemonCubit.dart';
 import 'package:chatsen/Pages/Settings.dart';
 import 'package:chatsen/Theme/ThemeManager.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,11 @@ class HomeDrawer extends StatelessWidget {
                                   // await BackgroundAudioWrapper.getController(context)?.evaluateJavascript('''
                                   //     [...document.querySelectorAll('audio, video')].forEach(el => ${BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed ? 'el.pause()' : 'el.play()'});
                                   // ''');
+                                  if (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) {
+                                    await BlocProvider.of<BackgroundDaemonCubit>(context).pause();
+                                  } else {
+                                    await BlocProvider.of<BackgroundDaemonCubit>(context).play();
+                                  }
                                   (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) ? BlocProvider.of<StreamOverlayBloc>(context).add(StreamOverlayOpen(channelName: channel!.name!.substring(1))) : BlocProvider.of<StreamOverlayBloc>(context).add(StreamOVerlayClose());
                                 }, //launch('https://twitch.tv/${channel.name.substring(1)}'),
                                 tooltip: 'Open current channel\'s stream',

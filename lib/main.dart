@@ -15,6 +15,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'Accounts/AccountModel.dart';
 import 'App.dart';
+import 'BackgroundDaemon/BackgroundDaemonCubit.dart';
 import 'Badges/ChatsenBadges.dart';
 import 'Badges/FFZAPBadges.dart';
 import 'Badges/SevenTVBadges.dart';
@@ -49,6 +50,7 @@ void main() async {
       runApp(
         MultiBlocProvider(
           providers: [
+            BlocProvider(create: (BuildContext context) => BackgroundDaemonCubit()),
             BlocProvider(create: (BuildContext context) => CommandsCubit(commandsBox)),
             BlocProvider(create: (BuildContext context) => AccountsCubit(accountsBox)),
             BlocProvider(create: (BuildContext context) => FFZAPBadges()),

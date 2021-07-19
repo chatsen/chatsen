@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:chatsen/Accounts/AccountModel.dart';
 import 'package:chatsen/Accounts/AccountsCubit.dart';
+import 'package:chatsen/Components/UI/CustomSliverAppBarDelegate.dart';
 import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
 import 'package:chatsen/Pages/OAuth.dart';
@@ -21,30 +22,6 @@ class AccountPage extends StatefulWidget {
 
   @override
   State<AccountPage> createState() => _AccountPageState();
-}
-
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-
-  _SliverAppBarDelegate({
-    required this.minHeight,
-    required this.maxHeight,
-    required this.child,
-  });
-
-  @override
-  double get minExtent => minHeight;
-
-  @override
-  double get maxExtent => max(maxHeight, minHeight);
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) => SizedBox.expand(child: child);
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) => maxHeight != oldDelegate.maxHeight || minHeight != oldDelegate.minHeight || child != oldDelegate.child;
 }
 
 class _AccountPageState extends State<AccountPage> {
@@ -160,7 +137,7 @@ class _AccountPageState extends State<AccountPage> {
                 SliverPersistentHeader(
                   // pinned: true,
                   floating: true,
-                  delegate: _SliverAppBarDelegate(
+                  delegate: CustomSliverAppBarDelegate(
                     minHeight: 64.0 + MediaQuery.of(context).padding.top,
                     maxHeight: 64.0 + MediaQuery.of(context).padding.top,
                     child: Padding(

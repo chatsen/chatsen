@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:chatsen/BackgroundDaemon/BackgroundDaemonCubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class BackgroundAudioWrapper extends StatefulWidget {
@@ -14,21 +16,16 @@ class BackgroundAudioWrapper extends StatefulWidget {
   @override
   State<BackgroundAudioWrapper> createState() => _BackgroundAudioWrapperState();
 
-  static WebViewController? getController(BuildContext context) => context.findAncestorStateOfType<_BackgroundAudioWrapperState>()!.webViewController;
+  // static WebViewController? getController(BuildContext context) => context.findAncestorStateOfType<_BackgroundAudioWrapperState>()!.webViewController;
 }
 
 class _BackgroundAudioWrapperState extends State<BackgroundAudioWrapper> {
-  WebViewController? webViewController;
-
   void setupLoop() async {
+    await BlocProvider.of<BackgroundDaemonCubit>(context).loop(true);
     await Future.delayed(Duration(seconds: 2));
-    await webViewController?.evaluateJavascript('''
-      [...document.querySelectorAll('audio, video')].forEach(el => el.loop = true);
-    ''');
+    await BlocProvider.of<BackgroundDaemonCubit>(context).loop(true);
     await Future.delayed(Duration(seconds: 8));
-    await webViewController?.evaluateJavascript('''
-      [...document.querySelectorAll('audio, video')].forEach(el => el.loop = true);
-    ''');
+    await BlocProvider.of<BackgroundDaemonCubit>(context).loop(true);
   }
 
   @override
@@ -45,11 +42,11 @@ class _BackgroundAudioWrapperState extends State<BackgroundAudioWrapper> {
               height: 0.0,
               child: WebView(
                 onWebViewCreated: (controller) {
-                  webViewController = controller;
+                  BlocProvider.of<BackgroundDaemonCubit>(context).emit(controller);
                 },
                 initialUrl: 'https://chatsen.app/assets/bgm.mp3',
                 javascriptMode: JavascriptMode.unrestricted,
-                onPageFinished: (url) async {},
+                onPageFinished: (url) => setupLoop(),
               ),
             ),
             Positioned.fill(child: widget.child),

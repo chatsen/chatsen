@@ -6,6 +6,7 @@ import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Commands/Command.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
 import 'package:chatsen/Components/Modal/CommandModal.dart';
+import 'package:chatsen/Components/UI/CustomSliverAppBarDelegate.dart';
 import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
 import 'package:chatsen/Pages/OAuth.dart';
@@ -20,30 +21,6 @@ class CommandsPage extends StatefulWidget {
 
   @override
   State<CommandsPage> createState() => _CommandsPageState();
-}
-
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-
-  _SliverAppBarDelegate({
-    required this.minHeight,
-    required this.maxHeight,
-    required this.child,
-  });
-
-  @override
-  double get minExtent => minHeight;
-
-  @override
-  double get maxExtent => max(maxHeight, minHeight);
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) => SizedBox.expand(child: child);
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) => maxHeight != oldDelegate.maxHeight || minHeight != oldDelegate.minHeight || child != oldDelegate.child;
 }
 
 class _CommandsPageState extends State<CommandsPage> {
@@ -123,7 +100,7 @@ class _CommandsPageState extends State<CommandsPage> {
                 SliverPersistentHeader(
                   // pinned: true,
                   floating: true,
-                  delegate: _SliverAppBarDelegate(
+                  delegate: CustomSliverAppBarDelegate(
                     minHeight: 64.0 + MediaQuery.of(context).padding.top,
                     maxHeight: 64.0 + MediaQuery.of(context).padding.top,
                     child: Padding(
