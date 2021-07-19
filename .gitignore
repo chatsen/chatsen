@@ -4,6 +4,7 @@
 !.github/workflows/**.yml
 !.github/FUNDING.yml
 !assets/**
+!ios/Runner/Assets.xcassets/LaunchImage.imageset/**
 
 # Global avoids
 .DS_Store

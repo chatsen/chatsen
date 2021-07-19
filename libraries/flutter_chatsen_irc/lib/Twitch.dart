@@ -49,6 +49,7 @@ class Badge {
   final String? title;
   final String? description;
   final String? color;
+  final bool cache;
 
   Badge({
     this.tag,
@@ -58,6 +59,7 @@ class Badge {
     this.title,
     this.description,
     this.color,
+    this.cache = true,
   });
 
   Badge.fromJson(String? typename, String? typeid, Map<String, dynamic> json)
@@ -71,7 +73,8 @@ class Badge {
         ],
         title = json['title'],
         description = json['description'],
-        color = null;
+        color = null,
+        cache = true;
 }
 
 class TwitchEmote {

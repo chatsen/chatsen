@@ -44,6 +44,7 @@ class FFZAPBadges extends Cubit<Map<String, List<twitch.Badge>>> {
             name: badgeData['id'].toString(),
             tag: badgeData['id'].toString(),
             // color: badgeData['badge_color']?.substring(1),
+            cache: false,
           ),
         ],
     };
