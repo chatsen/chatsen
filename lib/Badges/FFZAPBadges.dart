@@ -37,13 +37,14 @@ class FFZAPBadges extends Cubit<Map<String, List<twitch.Badge>>> {
             description: null,
             id: badgeData['id'].toString(),
             mipmap: [
-              'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/1',
-              'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/2',
-              'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/3',
+              'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/1?date=${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
+              'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/2?date=${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
+              'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/3?date=${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
             ],
             name: badgeData['id'].toString(),
             tag: badgeData['id'].toString(),
             // color: badgeData['badge_color']?.substring(1),
+            // cache: false,
           ),
         ],
     };

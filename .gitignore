@@ -4,12 +4,14 @@
 !.github/workflows/**.yml
 !.github/FUNDING.yml
 !assets/**
+!ios/Runner/Assets.xcassets/LaunchImage.imageset/**
 
 # Global avoids
 .DS_Store
 */.DS_Store
 **/.DS_Store
 /lib/generated_plugin_registrant.dart
+!ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage*
 
 # Single files to allow
 !/README.md
