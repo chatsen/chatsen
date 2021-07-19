@@ -7,6 +7,7 @@ class NetworkImageW extends StatelessWidget {
   final double? width;
   final double? height;
   final BoxFit? fit;
+  final bool cache;
 
   const NetworkImageW(
     this.url, {
@@ -15,6 +16,7 @@ class NetworkImageW extends StatelessWidget {
     this.width,
     this.height,
     this.fit,
+    this.cache = true,
   }) : super(key: key);
 
   @override
@@ -23,6 +25,7 @@ class NetworkImageW extends StatelessWidget {
         image: CachedNetworkImageProvider(
           url,
           scale: scale ?? 1.0,
+          cacheKey: cache ? null : '$url:${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
         ),
         filterQuality: FilterQuality.high,
         width: width,
