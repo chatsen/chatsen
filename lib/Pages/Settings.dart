@@ -201,11 +201,11 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 ),
-                if (Platform.isIOS && !kPlayStoreRelease)
+                if (Platform.isIOS) // && !kPlayStoreRelease)
                   SettingsEntry(
                     category: 'Notifications',
                     title: 'Background notifications',
-                    description: 'Creates an audio player that plays an empty/muted audio file to keep the application running on iOS. (note: the audio needs to not be paused in order for the application to keep running)',
+                    description: 'Creates an audio player that plays an empty/muted audio file to keep the application running on iOS. (note: the audio needs to be playing in order for the application to keep running)',
                     builder: (context, category, title, description) => Tile(
                       title: title,
                       subtitle: description,
