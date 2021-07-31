@@ -17,6 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 import 'dart:async';
 
+import 'ChatInputBox.dart';
 import 'UI/NetworkImageWrapper.dart';
 
 /// [ChatMessage] is a Widget that takes a [twitch.Message] and renders into something readable and interactable.
@@ -25,6 +26,7 @@ class ChatMessage extends StatelessWidget {
   final twitch.Message message;
   final Color? backgroundColor;
   final bool shadow;
+  final GlobalKey<ChatInputBoxState>? gkey;
 
   const ChatMessage({
     Key? key,
@@ -32,6 +34,7 @@ class ChatMessage extends StatelessWidget {
     required this.message,
     this.backgroundColor,
     this.shadow = false,
+    this.gkey,
   }) : super(key: key);
 
   Color getUserColor(BuildContext context, Color color) {
@@ -237,104 +240,150 @@ class ChatMessage extends StatelessWidget {
 
     return Opacity(
       opacity: message.history ? 0.5 : 1.0,
-      child: Container(
-        color: message.mention ? Theme.of(context).colorScheme.primary.withAlpha(48) : backgroundColor,
-        child: InkWell(
-          onLongPress: () async => await Clipboard.setData(ClipboardData(text: message.body)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-            child: Text.rich(
-              TextSpan(
-                children: <InlineSpan>[
-                      if (prefixText != null)
-                        TextSpan(
-                          text: '$prefixText ',
-                          style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            shadows: shadows,
+      child: Dismissible(
+        background: Container(
+          color: Colors.deepOrange,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Icon(
+                Icons.alternate_email,
+                size: 16.0,
+              ),
+            ),
+          ),
+        ),
+        secondaryBackground: Container(
+          color: Colors.deepPurple,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(
+                Icons.copy,
+                size: 16.0,
+              ),
+            ),
+          ),
+        ),
+        confirmDismiss: (d) async {
+          // ChatInputBox.appendText(context, 'test');
+          if (d == DismissDirection.startToEnd) {
+            gkey?.currentState?.appendText('@${message.user?.login ?? 'twitch'} ');
+          } else if (d == DismissDirection.endToStart) {
+            gkey?.currentState?.appendText(message.body!);
+            await Clipboard.setData(ClipboardData(text: message.body));
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   SnackBar(
+            //     behavior: SnackBarBehavior.floating,
+            //     content: Text('Text copied to clipboard!'),
+            //   ),
+            // );
+          }
+          return false;
+        },
+        key: ValueKey(message.id),
+        child: Container(
+          width: double.infinity,
+          color: message.mention ? Theme.of(context).colorScheme.primary.withAlpha(48) : backgroundColor,
+          child: InkWell(
+            onLongPress: () async => await Clipboard.setData(ClipboardData(text: message.body)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+              child: Text.rich(
+                TextSpan(
+                  children: <InlineSpan>[
+                        if (prefixText != null)
+                          TextSpan(
+                            text: '$prefixText ',
+                            style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              shadows: shadows,
+                            ),
                           ),
-                        ),
-                      if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).messageTimestamp)
-                        TextSpan(
-                          text: '${message.dateTime!.hour.toString().padLeft(2, '0')}:${message.dateTime!.minute.toString().padLeft(2, '0')} ',
-                          style: TextStyle(
-                            // fontWeight: FontWeight.bold,
-                            shadows: shadows,
-                            color: Colors.grey[400],
+                        if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).messageTimestamp)
+                          TextSpan(
+                            text: '${message.dateTime!.hour.toString().padLeft(2, '0')}:${message.dateTime!.minute.toString().padLeft(2, '0')} ',
+                            style: TextStyle(
+                              // fontWeight: FontWeight.bold,
+                              shadows: shadows,
+                              color: Colors.grey[400],
+                            ),
                           ),
-                        ),
-                      // if (first != null)
-                      //   for (var badge in first.badges)
-                      //     WidgetSpan(
-                      //       child: Padding(
-                      //         padding: const EdgeInsets.only(right: 4.0),
-                      //         child: NetworkImageW(
-                      //           data!.badges.firstWhere((element) => element.name == badge.badgeName).image,
-                      //           height: 18.0,
-                      //         ),
-                      //       ),
-                      //     ),
-                      for (var badge in message.badges + BlocProvider.of<FFZBadges>(context).getBadgesForUser('${message.user?.login?.toLowerCase()}') + BlocProvider.of<FFZAPBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatterinoBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'))
-                        WidgetSpan(
-                          child: WidgetTooltip(
-                            message: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 4.0),
-                                    child: ClipRRect(
-                                      borderRadius: badge.color != null ? BorderRadius.circular(96.0 / 8.0) : BorderRadius.zero,
-                                      child: Container(
-                                        color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
-                                        child: NetworkImageW(
-                                          badge.mipmap!.last!,
-                                          height: 96.0,
-                                          fit: BoxFit.fitHeight,
-                                          cache: badge.cache,
+                        // if (first != null)
+                        //   for (var badge in first.badges)
+                        //     WidgetSpan(
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.only(right: 4.0),
+                        //         child: NetworkImageW(
+                        //           data!.badges.firstWhere((element) => element.name == badge.badgeName).image,
+                        //           height: 18.0,
+                        //         ),
+                        //       ),
+                        //     ),
+                        for (var badge in message.badges + BlocProvider.of<FFZBadges>(context).getBadgesForUser('${message.user?.login?.toLowerCase()}') + BlocProvider.of<FFZAPBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatterinoBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'))
+                          WidgetSpan(
+                            child: WidgetTooltip(
+                              message: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 4.0),
+                                      child: ClipRRect(
+                                        borderRadius: badge.color != null ? BorderRadius.circular(96.0 / 8.0) : BorderRadius.zero,
+                                        child: Container(
+                                          color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
+                                          child: NetworkImageW(
+                                            badge.mipmap!.last!,
+                                            height: 96.0,
+                                            fit: BoxFit.fitHeight,
+                                            cache: badge.cache,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Text('${badge.title}'),
-                                  if (badge.title != badge.description && badge.description != null) Text('${badge.description}'),
-                                ],
+                                    Text('${badge.title}'),
+                                    if (badge.title != badge.description && badge.description != null) Text('${badge.description}'),
+                                  ],
+                                ),
                               ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 4.0),
-                              child: ClipRRect(
-                                borderRadius: badge.color != null ? BorderRadius.circular(2.0) : BorderRadius.zero,
-                                child: Container(
-                                  color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
-                                  child: NetworkImageW(
-                                    badge.mipmap!.last!,
-                                    height: 18.0,
-                                    fit: BoxFit.fitHeight,
-                                    cache: badge.cache,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 4.0),
+                                child: ClipRRect(
+                                  borderRadius: badge.color != null ? BorderRadius.circular(2.0) : BorderRadius.zero,
+                                  child: Container(
+                                    color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
+                                    child: NetworkImageW(
+                                      badge.mipmap!.last!,
+                                      height: 18.0,
+                                      fit: BoxFit.fitHeight,
+                                      cache: badge.cache,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      TextSpan(
-                        text: '${message.user!.displayName}' + (message.user!.displayName!.toLowerCase() != message.user!.login!.toLowerCase() ? ' (${message.user!.login})' : '') + (message.action ? ' ' : ': '),
-                        style: TextStyle(
-                          color: color,
-                          fontWeight: FontWeight.bold,
-                          shadows: shadows,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () async => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) => SearchPage(channel: message.channel, user: message.user),
+                        TextSpan(
+                          text: '${message.user!.displayName}' + (message.user!.displayName!.toLowerCase() != message.user!.login!.toLowerCase() ? ' (${message.user!.login})' : '') + (message.action ? ' ' : ': '),
+                          style: TextStyle(
+                            color: color,
+                            fontWeight: FontWeight.bold,
+                            shadows: shadows,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () async => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => SearchPage(channel: message.channel, user: message.user),
+                                  ),
                                 ),
-                              ),
-                      ),
-                    ] +
-                    spans,
+                        ),
+                      ] +
+                      spans,
+                ),
               ),
             ),
           ),

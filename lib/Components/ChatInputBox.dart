@@ -24,14 +24,20 @@ class ChatInputBox extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ChatInputBoxState createState() => _ChatInputBoxState();
+  ChatInputBoxState createState() => ChatInputBoxState();
 }
 
-class _ChatInputBoxState extends State<ChatInputBox> {
+class ChatInputBoxState extends State<ChatInputBox> {
   GlobalKey key = GlobalKey();
   TextEditingController textEditingController = TextEditingController();
   FocusNode focusNode = FocusNode();
   Timer? timer;
+
+  void appendText(String str) {
+    setState(() {
+      textEditingController.text = '${textEditingController.text}${textEditingController.text.isNotEmpty ? ' ' : ''}$str';
+    });
+  }
 
   @override
   void dispose() {

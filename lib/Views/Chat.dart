@@ -18,12 +18,14 @@ class ChatView extends StatefulWidget {
   final twitch.Client? client;
   final twitch.Channel? channel;
   final bool shadow;
+  // final Function(String)? addText;
 
   const ChatView({
     Key? key,
     required this.client,
     required this.channel,
     this.shadow = false,
+    // this.addText,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,7 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> implements twitch.Listener {
+  var gkey = GlobalKey<ChatInputBoxState>();
   bool shouldScroll = true;
   ScrollController? scrollController;
   double? scrollPosition;
@@ -98,9 +101,11 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
                           height: 1.0,
                         ),
                       ChatMessage(
+                        key: ObjectKey(message),
                         backgroundColor: state is SettingsLoaded && state.messageAlternateBackground && (i++ % 2 == 0) ? Theme.of(context).dividerColor : null,
                         message: message,
                         shadow: widget.shadow,
+                        gkey: gkey,
                       ),
                     ],
                   ].reversed.toList(),
@@ -147,6 +152,7 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
                 child: Material(
                   color: Theme.of(context).colorScheme.surface.withAlpha(196),
                   child: ChatInputBox(
+                    key: gkey,
                     client: widget.client,
                     channel: widget.channel,
                   ),
