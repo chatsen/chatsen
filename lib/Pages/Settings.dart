@@ -21,6 +21,7 @@ import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'Commands.dart';
+import 'CustomMentions.dart';
 
 class SettingsEntry extends StatelessWidget {
   final String? category;
@@ -204,6 +205,19 @@ class _SettingsPageState extends State<SettingsPage> {
                 //     onTap: () {},
                 //   ),
                 // ),
+                SettingsEntry(
+                  category: 'Mentions',
+                  title: 'Configure custom mentions',
+                  description: 'Allows you to create and configure custom commands to be used in chat',
+                  builder: (context, category, title, description) => Tile(
+                      leading: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.alternate_email),
+                      ),
+                      title: title,
+                      subtitle: description,
+                      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomMentionsPage()))),
+                ),
                 SettingsEntry(
                   category: 'Message',
                   title: 'Show timestamp',

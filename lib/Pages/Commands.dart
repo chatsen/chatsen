@@ -1,18 +1,13 @@
 import 'dart:io';
-import 'dart:math';
 
-import 'package:chatsen/Accounts/AccountModel.dart';
-import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Commands/Command.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
 import 'package:chatsen/Components/Modal/CommandModal.dart';
 import 'package:chatsen/Components/UI/CustomSliverAppBarDelegate.dart';
 import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
-import 'package:chatsen/Pages/OAuth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 
 class CommandsPage extends StatefulWidget {
   const CommandsPage({

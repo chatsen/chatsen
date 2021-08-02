@@ -5,6 +5,7 @@ import 'package:chatsen/Badges/ChatterinoBadges.dart';
 import 'package:chatsen/Badges/FFZBadges.dart';
 import 'package:chatsen/Commands/Command.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
+import 'package:chatsen/Mentions/CustomMention.dart';
 import 'package:chatsen/Theme/ThemeBloc.dart';
 import 'package:dart_downloader/DownloadManager.dart';
 import 'package:flutter/foundation.dart';
@@ -20,6 +21,7 @@ import 'BackgroundDaemon/BackgroundDaemonCubit.dart';
 import 'Badges/ChatsenBadges.dart';
 import 'Badges/FFZAPBadges.dart';
 import 'Badges/SevenTVBadges.dart';
+import 'Mentions/CustomMentionsCubit.dart';
 import 'Mentions/MentionsCubit.dart';
 import 'Settings/Settings.dart';
 import 'StreamOverlay/StreamOverlayBloc.dart';
@@ -34,9 +36,11 @@ Future<void> appRunner() async {
 
   Hive.registerAdapter(AccountModelAdapter());
   Hive.registerAdapter(CommandAdapter());
+  Hive.registerAdapter(CustomMentionAdapter());
 
   var settingsBox = await Hive.openBox('Settings');
   var commandsBox = await Hive.openBox('Commands');
+  var customMentionsBox = await Hive.openBox('CustomMentions');
   var themeBox = await Hive.openBox('Theme');
   var accountsBox = await Hive.openBox('Accounts');
 
@@ -47,6 +51,7 @@ Future<void> appRunner() async {
       providers: [
         BlocProvider(create: (BuildContext context) => BackgroundDaemonCubit()),
         BlocProvider(create: (BuildContext context) => CommandsCubit(commandsBox)),
+        BlocProvider(create: (BuildContext context) => CustomMentionsCubit(customMentionsBox)),
         BlocProvider(create: (BuildContext context) => AccountsCubit(accountsBox)),
         BlocProvider(create: (BuildContext context) => FFZAPBadges()),
         BlocProvider(create: (BuildContext context) => FFZBadges()),

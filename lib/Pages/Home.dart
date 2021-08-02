@@ -2,6 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chatsen/Mentions/CustomMentionsCubit.dart';
+import 'package:collection/src/iterable_extensions.dart';
+
 import '/Accounts/AccountsCubit.dart';
 import '/Components/HomeEndDrawer.dart';
 import '/Components/Modal/SetupModal.dart';
@@ -580,11 +583,14 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void onMessage(twitch.Channel? channel, twitch.Message message) {
+    // message.mention = true;
+    var contains = BlocProvider.of<CustomMentionsCubit>(context).state.firstWhereOrNull((customMention) => message.body!.toLowerCase().contains(customMention.pattern.toLowerCase()));
+    message.mention = message.mention || contains != null;
     if (message.mention) BlocProvider.of<MentionsCubit>(context).add(message);
     if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).notificationOnMention && message.mention) {
       NotificationWrapper.of(context)!.sendNotification(
         payload: message.body,
-        title: message.user!.login,
+        title: '${message.user!.login}\nin ${channel!.name}',
         subtitle: message.body,
       );
     }

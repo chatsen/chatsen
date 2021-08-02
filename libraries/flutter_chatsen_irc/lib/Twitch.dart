@@ -710,10 +710,10 @@ class Connection {
           tagEmotes: message.tags['emotes'],
         );
 
+        client!.listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
+
         channel?.messages.add(chatMessage);
         if ((channel?.messages.length ?? 0) > 1000) channel?.messages.removeRange(0, (channel.messages.length) - 1000);
-
-        client!.listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
         break;
       case 'WHISPER':
         if (!transmission) break;
