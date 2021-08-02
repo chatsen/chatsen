@@ -141,11 +141,43 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
               if (!shouldScroll)
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: FloatingActionButton.extended(
-                    icon: Icon(Icons.arrow_downward),
-                    // mini: true,
-                    label: Text('Resume scrolling'),
-                    onPressed: () async => scrollToEnd(),
+                  child: WidgetBlur(
+                    borderRadius: BorderRadius.circular(32.0),
+                    child: Material(
+                      color: Theme.of(context).colorScheme.surface.withAlpha(196),
+                      child: Container(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32.0),
+                            side: BorderSide(
+                              color: Theme.of(context).dividerColor.withAlpha(16),
+                              width: 1.0,
+                            ),
+                          ),
+                        ),
+                        child: InkWell(
+                          onTap: () async => scrollToEnd(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.arrow_downward, color: Theme.of(context).colorScheme.primary),
+                                SizedBox(width: 8.0),
+                                Text(
+                                  'Resume scrolling',
+                                  style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      // icon:
+                      // onPressed: () async => scrollToEnd(), child: null,
+                    ),
                   ),
                 ),
               WidgetBlur(
