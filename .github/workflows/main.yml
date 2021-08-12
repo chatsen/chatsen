@@ -2,8 +2,6 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: ${{matrix.os}}
-    runs-on: ${{matrix.os}}
     strategy:
       matrix:
         target: ["Android", "Windows", "Linux", "macOS", "iOS"]
@@ -18,6 +16,9 @@ jobs:
             os: macos-latest
           - target: iOS
             os: macos-latest
+
+    name: ${{matrix.os}}
+    runs-on: ${{matrix.os}}
 
     steps:
       - uses: actions/checkout@v2
