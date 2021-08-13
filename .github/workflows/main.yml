@@ -21,19 +21,17 @@ jobs:
     runs-on: ${{matrix.os}}
 
     steps:
-      - name: Print test
-        if: matrix.target == 'Android'
-        run: echo Android Build Ran
-
-      - uses: actions/checkout@v2
+      - name: Checking out sigining keys
+        uses: actions/checkout@v2
+        if: matrix.target == 'Android' && github.repository == 'chatsen/chatsen2'
         with:
           repository: chatsen/signingkeys
           token: ${{secrets.GHKEY}}
           path: signingkeys
 
-      - uses: actions/checkout@v2
+      - name: Checking out Chatsen source code
+        uses: actions/checkout@v2
         with:
-          token: ${{secrets.GHKEY}}
           path: chatsen
 
       - uses: actions/setup-java@v1
@@ -52,11 +50,16 @@ jobs:
           channel: "master"
 
       - name: Check for flutter updates
+        if: github.repository == 'chatsen/chatsen2'
         run: flutter upgrade
 
       - name: Patch a fix for gifs inside the Flutter framework
         run: |
           sed -i '/_frameDuration = _nextFrame!.duration;/a \ \ \ \ \ \ if (_frameDuration!.inMilliseconds <= 10) _frameDuration = Duration(milliseconds: 100);' $(which flutter | head -n 1 | sed -e 's/\\/\//g' -e 's/\/bin\/flutter.*//')/packages/flutter/lib/src/painting/image_stream.dart
+
+      # - name: Print test
+      #   if: matrix.target == 'Android'
+      #   run: echo Android Build Ran
 
       # - name: Generate project files and cleanup
       #   working-directory: ./chatsen
