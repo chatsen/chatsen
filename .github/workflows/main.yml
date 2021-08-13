@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Checking out sigining keys
         uses: actions/checkout@v2
-        if: matrix.target == 'Android' && github.org == 'chatsen' # && github.repository == 'chatsen/chatsen'
+        if: matrix.target == 'Android' && github.repository_owner == 'chatsen' # && github.repository == 'chatsen/chatsen'
         with:
           repository: chatsen/signingkeys
           token: ${{secrets.GHKEY}}
