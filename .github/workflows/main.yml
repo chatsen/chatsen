@@ -4,20 +4,27 @@ jobs:
   build:
     strategy:
       matrix:
-        target: [ubuntu, windows, ubuntu, macos, macos]
-        os:
-          [
-            ubuntu-latest,
-            windows-latest,
-            ubuntu-latest,
-            macos-latest,
-            macos-latest,
-          ]
+        target: ["Android", "Windows", "Linux", "macOS", "iOS"]
+        include:
+          - target: Android
+            os: ubuntu-latest
+          - target: Windows
+            os: windows-latest
+          - target: Linux
+            os: ubuntu-latest
+          - target: macOS
+            os: macos-latest
+          - target: iOS
+            os: macos-latest
 
     name: ${{matrix.target}}
     runs-on: ${{matrix.os}}
 
     steps:
+      - name: Print test
+        if: matrix.target == "Android"
+        run: echo Android Build Ran
+
       - uses: actions/checkout@v2
         with:
           repository: chatsen/signingkeys
