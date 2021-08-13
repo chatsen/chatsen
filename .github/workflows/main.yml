@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Print test
-        if: matrix.target == "Android"
+        if: matrix.target == 'Android'
         run: echo Android Build Ran
 
       - uses: actions/checkout@v2
