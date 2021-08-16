@@ -208,7 +208,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 SettingsEntry(
                   category: 'Mentions',
                   title: 'Configure custom mentions',
-                  description: 'Allows you to create and configure custom commands to be used in chat',
+                  description: 'Allows you to create and configure custom mention words and regexes to be pinged with',
                   builder: (context, category, title, description) => Tile(
                       leading: Padding(
                         padding: const EdgeInsets.all(8.0),
