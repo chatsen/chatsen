@@ -53,10 +53,10 @@ class _CustomMentionsPageState extends State<CustomMentionsPage> {
                   title: customMention.pattern,
                   // title: command.trigger,
                   // subtitle: command.command,
-                  // onTap: () async => await CommandModal.show(
-                  //   context,
-                  //   command: command,
-                  // ),
+                  onTap: () async => CustomMentionModal.show(
+                    context,
+                    customMention: customMention,
+                  ),
                 ),
             ];
 

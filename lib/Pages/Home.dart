@@ -584,7 +584,11 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
   @override
   void onMessage(twitch.Channel? channel, twitch.Message message) {
     // message.mention = true;
-    var contains = BlocProvider.of<CustomMentionsCubit>(context).state.firstWhereOrNull((customMention) => message.body!.toLowerCase().contains(customMention.pattern.toLowerCase()));
+    var contains = BlocProvider.of<CustomMentionsCubit>(context).state.firstWhereOrNull((customMention) {
+      if (customMention.enableRegex) return RegExp(customMention.pattern).hasMatch(message.body!);
+      if (customMention.caseSensitive) return message.body!.contains(customMention.pattern);
+      return message.body!.toLowerCase().contains(customMention.pattern.toLowerCase());
+    });
     message.mention = message.mention || contains != null;
     if (message.mention) BlocProvider.of<MentionsCubit>(context).add(message);
     if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).notificationOnMention && message.mention) {

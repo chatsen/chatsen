@@ -31,6 +31,16 @@ class NetworkImageW extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
+        // loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+        //   if (loadingProgress == null) {
+        //     return child;
+        //   }
+        //   return Center(
+        //     child: CircularProgressIndicator.adaptive(
+        //       value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
+        //     ),
+        //   );
+        // },
         // isAntiAlias: true,
       );
 }

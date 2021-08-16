@@ -131,8 +131,8 @@ class ChatMessage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: InkWell(
-                      onTap: () async => launch(token.data),
-                      child: NetworkImageW(token.data),
+                      onTap: () async => launch(token.data), //'https://cdn.imgproxify.com/image?url=${Uri.encodeComponent(token.data)}'),
+                      child: NetworkImageW(token.data), //'https://cdn.imgproxify.com/image?url=${Uri.encodeComponent(token.data)}'),
                     ),
                   ),
                 ),

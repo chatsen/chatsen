@@ -30,10 +30,14 @@ class CustomMentionModal extends StatefulWidget {
 
 class _CustomMentionModalState extends State<CustomMentionModal> {
   late TextEditingController patternController;
+  late bool enableRegex;
+  late bool caseSensitive;
 
   @override
   void initState() {
     patternController = TextEditingController(text: widget.customMention?.pattern);
+    enableRegex = widget.customMention?.enableRegex ?? false;
+    caseSensitive = widget.customMention?.caseSensitive ?? false;
     super.initState();
   }
 
@@ -58,6 +62,20 @@ class _CustomMentionModalState extends State<CustomMentionModal> {
                   labelText: 'Pattern',
                 ),
               ),
+              CheckboxListTile(
+                value: enableRegex,
+                onChanged: (v) => setState(() {
+                  enableRegex = v!;
+                }),
+                title: Text('Enable regex'),
+              ),
+              CheckboxListTile(
+                value: caseSensitive,
+                onChanged: (v) => setState(() {
+                  caseSensitive = v!;
+                }),
+                title: Text('Case sensitive'),
+              ),
               // SizedBox(height: 8.0),
               // TextField(
               //   controller: CustomMentionController,
@@ -74,10 +92,14 @@ class _CustomMentionModalState extends State<CustomMentionModal> {
                     BlocProvider.of<CustomMentionsCubit>(context).add(
                       CustomMention(
                         pattern: patternController.text,
+                        enableRegex: enableRegex,
+                        caseSensitive: caseSensitive,
                       ),
                     );
                   } else {
                     widget.customMention!.pattern = patternController.text;
+                    widget.customMention!.enableRegex = enableRegex;
+                    widget.customMention!.caseSensitive = caseSensitive;
                     BlocProvider.of<CustomMentionsCubit>(context).update(widget.customMention!);
                   }
                   Navigator.of(context).pop();
