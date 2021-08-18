@@ -742,6 +742,7 @@ class Connection {
         channel.messages.add(chatMessage);
         client!.listeners.forEach((listener) => listener.onWhisper(channel, chatMessage));
         break;
+
       case 'CLEARMSG':
         try {
           print(message?.raw);
@@ -786,6 +787,37 @@ class Connection {
 
           channel?.messages.add(chatMessage);
           if ((channel?.messages.length ?? 0) > 1000) channel?.messages.removeRange(0, (channel.messages.length) - 1000);
+        } catch (e) {}
+        break;
+      case 'USERNOTICE':
+        try {
+          // Raid:
+          // @badge-info=;badges=;color=#FF69B4;display-name=TimeClova;emotes=;flags=;id=02139f6a-5cc1-4515-8b0c-aca140a6d6cd;login=timeclova;mod=0;msg-id=raid;msg-param-displayName=TimeClova;msg-param-login=timeclova;msg-param-profileImageURL=https://static-cdn.jtvnw.net/jtv_user_pictures/85e6c1f6-ae9a-4534-a7b4-bcb89a05c1de-profile_image-70x70.png;msg-param-viewerCount=56;room-id=192434734;subscriber=0;system-msg=56\sraiders\sfrom\sTimeClova\shave\sjoined!;tmi-sent-ts=1627730280158;user-id=590368354;user-type= :tmi.twitch.tv USERNOTICE #aimsey
+
+          // Sub with message:
+          // @badge-info=subscriber/4;badges=subscriber/3,premium/1;color=#008000;display-name=surbeonxbox;emotes=;flags=;id=707c4e3c-3cb7-422e-9c1c-00bd431338bc;login=surbeonxbox;mod=0;msg-id=resub;msg-param-cumulative-months=4;msg-param-months=0;msg-param-multimonth-duration=0;msg-param-multimonth-tenure=0;msg-param-should-share-streak=1;msg-param-streak-months=4;msg-param-sub-plan-name=Channel\sSubscription\s(xqcow);msg-param-sub-plan=1000;msg-param-was-gifted=false;room-id=71092938;subscriber=1;system-msg=surbeonxbox\ssubscribed\sat\sTier\s1.\sThey've\ssubscribed\sfor\s4\smonths,\scurrently\son\sa\s4\smonth\sstreak!;tmi-sent-ts=1627730157904;user-id=514719264;user-type= :tmi.twitch.tv USERNOTICE #xqcow :YUP
+
+          // Gifted sub:
+          // @badge-info=subscriber/13;badges=subscriber/12,glhf-pledge/1;color=#A175B7;display-name=Tharus1337;emotes=;flags=;id=921661da-239e-462d-9a65-5779104816e1;login=tharus1337;mod=0;msg-id=subgift;msg-param-gift-months=1;msg-param-months=32;msg-param-origin-id=b3\s21\sd7\s86\s67\s5c\s59\sdd\sd3\s56\sde\s65\se7\s54\s36\s6e\s17\s76\s82\se0;msg-param-recipient-display-name=truncated_xD;msg-param-recipient-id=91434296;msg-param-recipient-user-name=truncated_xd;msg-param-sender-count=1;msg-param-sub-plan-name=Channel\sSubscription\s(forsenlol);msg-param-sub-plan=1000;room-id=22484632;subscriber=1;system-msg=Tharus1337\sgifted\sa\sTier\s1\ssub\sto\struncated_xD!\sThis\sis\stheir\sfirst\sGift\sSub\sin\sthe\schannel!;tmi-sent-ts=1627730596864;user-id=72864797;user-type= :tmi.twitch.tv USERNOTICE #forsen
+
+          // Sub with message 2:
+          // @badge-info=;badges=glhf-pledge/1;color=#FF1493;display-name=splizhh;emotes=;flags=;id=92a97eba-d684-406d-8ca3-21e95c1cc874;login=splizhh;mod=0;msg-id=resub;msg-param-cumulative-months=6;msg-param-months=0;msg-param-multimonth-duration=0;msg-param-multimonth-tenure=0;msg-param-should-share-streak=1;msg-param-streak-months=5;msg-param-sub-plan-name=Channel\sSubscription\s(xqcow);msg-param-sub-plan=Prime;msg-param-was-gifted=false;room-id=71092938;subscriber=1;system-msg=splizhh\ssubscribed\swith\sPrime.\sThey've\ssubscribed\sfor\s6\smonths,\scurrently\son\sa\s5\smonth\sstreak!;tmi-sent-ts=1627742216686;user-id=230654107;user-type= :tmi.twitch.tv USERNOTICE #xqcow :pog
+
+          var channel = channels.firstWhereOrNull((channel) => channel.name == message!.parameters[0]);
+
+          channel!.messages.add(
+            Message(
+              id: message!.tags['id'],
+              body: message.tags['system-msg'].replaceAll('\\s', ' ') + message.parameters.length >= 2 ? message.parameters[1] : '',
+              dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? 0),
+              user: User(
+                login: message.prefix.split('!').first,
+                displayName: message.tags['display-name'],
+                id: int.tryParse(message.tags['user-id']),
+                color: message.tags['color'],
+              ),
+            ),
+          );
         } catch (e) {}
         break;
     }
