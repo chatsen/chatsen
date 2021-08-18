@@ -58,7 +58,7 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var color = getUserColor(context, Color(int.tryParse(message.user!.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255));
+    var color = getUserColor(context, Color(int.tryParse(message.user?.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255));
     var spans = <InlineSpan>[];
     var shadowSpread = 1.0;
     var shadowColor = Theme.of(context).colorScheme.background;
@@ -78,7 +78,7 @@ class ChatMessage extends StatelessWidget {
             TextSpan(
               text: '${token.data} ',
               style: TextStyle(
-                color: message.action ? color : null,
+                color: (message.user == null || message.action) ? color : null,
                 shadows: shadows,
               ),
             ),
@@ -239,7 +239,7 @@ class ChatMessage extends StatelessWidget {
     }
 
     return Opacity(
-      opacity: message.history ? 0.5 : 1.0,
+      opacity: (message.history ? 0.5 : 1.0) * (message.deleted ? 0.25 : 1.0),
       // child: Dismissible(
       //   background: Container(
       //     color: Colors.deepOrange,
@@ -352,65 +352,67 @@ class ChatMessage extends StatelessWidget {
                       //         ),
                       //       ),
                       //     ),
-                      for (var badge in message.badges + BlocProvider.of<FFZBadges>(context).getBadgesForUser('${message.user?.login?.toLowerCase()}') + BlocProvider.of<FFZAPBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatterinoBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'))
-                        WidgetSpan(
-                          child: WidgetTooltip(
-                            message: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 4.0),
-                                    child: ClipRRect(
-                                      borderRadius: badge.color != null ? BorderRadius.circular(96.0 / 8.0) : BorderRadius.zero,
-                                      child: Container(
-                                        color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
-                                        child: NetworkImageW(
-                                          badge.mipmap!.last!,
-                                          height: 96.0,
-                                          fit: BoxFit.fitHeight,
-                                          cache: badge.cache,
+                      if (message.user != null)
+                        for (var badge in message.badges + BlocProvider.of<FFZBadges>(context).getBadgesForUser('${message.user?.login?.toLowerCase()}') + BlocProvider.of<FFZAPBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatterinoBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'))
+                          WidgetSpan(
+                            child: WidgetTooltip(
+                              message: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 4.0),
+                                      child: ClipRRect(
+                                        borderRadius: badge.color != null ? BorderRadius.circular(96.0 / 8.0) : BorderRadius.zero,
+                                        child: Container(
+                                          color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
+                                          child: NetworkImageW(
+                                            badge.mipmap!.last!,
+                                            height: 96.0,
+                                            fit: BoxFit.fitHeight,
+                                            cache: badge.cache,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Text('${badge.title}'),
-                                  if (badge.title != badge.description && badge.description != null) Text('${badge.description}'),
-                                ],
+                                    Text('${badge.title}'),
+                                    if (badge.title != badge.description && badge.description != null) Text('${badge.description}'),
+                                  ],
+                                ),
                               ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 4.0),
-                              child: ClipRRect(
-                                borderRadius: badge.color != null ? BorderRadius.circular(2.0) : BorderRadius.zero,
-                                child: Container(
-                                  color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
-                                  child: NetworkImageW(
-                                    badge.mipmap!.last!,
-                                    height: 18.0,
-                                    fit: BoxFit.fitHeight,
-                                    cache: badge.cache,
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 4.0),
+                                child: ClipRRect(
+                                  borderRadius: badge.color != null ? BorderRadius.circular(2.0) : BorderRadius.zero,
+                                  child: Container(
+                                    color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
+                                    child: NetworkImageW(
+                                      badge.mipmap!.last!,
+                                      height: 18.0,
+                                      fit: BoxFit.fitHeight,
+                                      cache: badge.cache,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      TextSpan(
-                        text: '${message.user!.displayName}' + (message.user!.displayName!.toLowerCase() != message.user!.login!.toLowerCase() ? ' (${message.user!.login})' : '') + (message.action ? ' ' : ': '),
-                        style: TextStyle(
-                          color: color,
-                          fontWeight: FontWeight.bold,
-                          shadows: shadows,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () async => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) => SearchPage(channel: message.channel, user: message.user),
+                      if (message.user != null)
+                        TextSpan(
+                          text: '${message.user!.displayName}' + (message.user!.displayName!.toLowerCase() != message.user!.login!.toLowerCase() ? ' (${message.user!.login})' : '') + (message.action ? ' ' : ': '),
+                          style: TextStyle(
+                            color: color,
+                            fontWeight: FontWeight.bold,
+                            shadows: shadows,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () async => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => SearchPage(channel: message.channel, user: message.user),
+                                  ),
                                 ),
-                              ),
-                      ),
+                        ),
                     ] +
                     spans,
               ),

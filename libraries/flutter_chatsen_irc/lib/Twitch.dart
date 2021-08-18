@@ -160,6 +160,7 @@ class Message {
   bool action = false;
   bool mention = false;
   bool history = false; // TODO: Use a bitfield
+  bool deleted = false;
 
   List<Badge> badges = [];
   List<MessageToken> tokens = [];
@@ -740,6 +741,52 @@ class Connection {
 
         channel.messages.add(chatMessage);
         client!.listeners.forEach((listener) => listener.onWhisper(channel, chatMessage));
+        break;
+      case 'CLEARMSG':
+        try {
+          print(message?.raw);
+          var channel = channels.firstWhereOrNull((channel) => channel.name == message!.parameters[0]);
+          // var channel = client.channels.state.firstWhere((channel) => channel.state is ChannelStateWithConnection && (channel.state as ChannelStateWithConnection).receiver == this && channel.name == channelName);
+
+          var chatMessage = Message(
+            id: message!.tags['id'],
+            body: 'A message from ${message.tags['login']} was deleted: ${message.parameters[1]}',
+            dateTime: DateTime.now(),
+          );
+
+          client!.listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
+
+          channel?.messages.add(chatMessage);
+          if ((channel?.messages.length ?? 0) > 1000) channel?.messages.removeRange(0, (channel.messages.length) - 1000);
+        } catch (e) {}
+        break;
+      case 'CLEARCHAT':
+        try {
+          var channel = channels.firstWhereOrNull((channel) => channel.name == message!.parameters[0]);
+          var duration = message!.tags['ban-duration'] == null ? null : Duration(seconds: int.tryParse(message.tags['ban-duration']) ?? 0);
+          var uid = int.tryParse(message.tags['target-user-id'] ?? '');
+
+          if (uid != null) {
+            channel?.messages.where((msg) => msg.user != null && msg.user!.id == uid).forEach((element) {
+              element.deleted = true;
+            });
+          } else {
+            channel?.messages.forEach((element) {
+              element.deleted = true;
+            });
+          }
+
+          var chatMessage = Message(
+            // id: message.tags['id'],
+            body: uid != null ? '${message.parameters[1]} has been ' + (duration != null ? 'timed out for $duration' : 'permabanned') : 'Chat has been cleared by a moderator',
+            dateTime: DateTime.now(),
+          );
+
+          client!.listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
+
+          channel?.messages.add(chatMessage);
+          if ((channel?.messages.length ?? 0) > 1000) channel?.messages.removeRange(0, (channel.messages.length) - 1000);
+        } catch (e) {}
         break;
     }
   }
