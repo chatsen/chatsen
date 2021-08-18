@@ -7,7 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
+
 class SetupModal extends StatelessWidget {
+  final twitch.Client client;
+
+  const SetupModal({
+    Key? key,
+    required this.client,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) => BlocBuilder<Settings, SettingsState>(
         builder: (context, state) => (state is SettingsLoaded)
@@ -40,7 +49,10 @@ class SetupModal extends StatelessWidget {
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyUseRecentMessages: !state.historyUseRecentMessages))),
                     trailing: Switch.adaptive(
                       activeColor: Theme.of(context).colorScheme.primary,
-                      onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyUseRecentMessages: value))),
+                      onChanged: (bool value) {
+                        BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyUseRecentMessages: value)));
+                        client.useRecentMessages = value;
+                      },
                       value: state.historyUseRecentMessages,
                     ),
                   ),
@@ -62,8 +74,10 @@ class SetupModal extends StatelessWidget {
               ),
       );
 
-  static Future<void> show(BuildContext context) async => await BlurModal.show(
+  static Future<void> show(BuildContext context, twitch.Client client) async => await BlurModal.show(
         context: context,
-        child: SetupModal(),
+        child: SetupModal(
+          client: client,
+        ),
       );
 }

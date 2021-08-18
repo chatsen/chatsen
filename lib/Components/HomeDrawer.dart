@@ -118,7 +118,9 @@ class HomeDrawer extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (BuildContext context) => ThemeManager.routeWrapper(
                                     context: context,
-                                    child: SettingsPage(),
+                                    child: SettingsPage(
+                                      client: client!,
+                                    ),
                                   ),
                                 ),
                               ),

@@ -20,6 +20,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
+
 import 'Commands.dart';
 import 'CustomMentions.dart';
 
@@ -42,6 +44,13 @@ class SettingsEntry extends StatelessWidget {
 }
 
 class SettingsPage extends StatefulWidget {
+  final twitch.Client client;
+
+  const SettingsPage({
+    Key? key,
+    required this.client,
+  }) : super(key: key);
+
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
@@ -297,7 +306,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyUseRecentMessages: !state.historyUseRecentMessages))),
                     trailing: Switch.adaptive(
                       activeColor: Theme.of(context).colorScheme.primary,
-                      onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyUseRecentMessages: value))),
+                      onChanged: (bool value) {
+                        BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(historyUseRecentMessages: value)));
+                        widget.client.useRecentMessages = value;
+                      },
                       value: state.historyUseRecentMessages,
                     ),
                   ),

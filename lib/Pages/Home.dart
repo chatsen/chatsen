@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
   twitch.Client client = twitch.Client();
   Future<bool>? updateFuture;
   bool immersive = true;
-  String ffz = '';
+  // String ffz = '';
 
   Future<void> loadChannelHistory() async {
     var channels = await Hive.openBox('Channels');
@@ -87,6 +87,17 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void initState() {
+    Future.delayed(Duration(seconds: 200)).then(
+      // Should observe events instead, serves as a quick fix.
+      (t) {
+        try {
+          var settings = BlocProvider.of<Settings>(context).state as SettingsLoaded;
+          client.useRecentMessages = settings.historyUseRecentMessages;
+        } catch (e) {}
+        loadChannelHistory();
+      },
+    );
+
     Future.delayed(Duration(seconds: 2)).then(
       (t) => BlocProvider.of<AccountsCubit>(context).getActive().then(
             (account) => client.swapCredentials(
@@ -114,8 +125,6 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
     //   },
     // );
 
-    loadChannelHistory();
-
     client.listeners.add(this);
 
     updateFuture = UpdateModal.hasUpdate();
@@ -131,12 +140,12 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
       UpdateModal.searchForUpdate(context);
       var settingsState = BlocProvider.of<Settings>(context).state;
       if (settingsState is SettingsLoaded && settingsState.setupScreen) {
-        await SetupModal.show(context);
+        await SetupModal.show(context, client);
         BlocProvider.of<Settings>(context).add(SettingsChange(state: settingsState.copyWith(setupScreen: false)));
       }
     });
 
-    http.get(Uri.parse('https://cdn.frankerfacez.com/static/player.b1d9260ef2ad14f4e3e4.js')).then((rep) => ffz = utf8.decode(rep.bodyBytes));
+    // http.get(Uri.parse('https://cdn.frankerfacez.com/static/player.b1d9260ef2ad14f4e3e4.js')).then((rep) => ffz = utf8.decode(rep.bodyBytes));
 
     super.initState();
     if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();

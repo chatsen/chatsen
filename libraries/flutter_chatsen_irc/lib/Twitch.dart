@@ -886,6 +886,7 @@ class Client {
   List<Channel> channels = [];
   List<Emote> emotes = [];
   List<Badge> badges = [];
+  bool useRecentMessages;
 
   Timer? timer;
 
@@ -1002,6 +1003,7 @@ class Client {
 
   Client({
     this.credentials = const Credentials(),
+    this.useRecentMessages = true,
   }) {
     updateEmotes();
     updateBadges();
