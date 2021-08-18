@@ -693,6 +693,18 @@ class Connection {
         var channel = channels.firstWhereOrNull((channel) => channel.name == message!.parameters[0]);
         if (message!.tags.containsKey('msg-id') ? message.tags['msg-id'] == 'msg_channel_suspended' : false) channel?.stateChanger = ChannelState.Suspended;
         if (message.tags.containsKey('msg-id') ? message.tags['msg-id'] == 'msg_banned' : false) channel?.stateChanger = ChannelState.Banned;
+        try {
+          var chatMessage = Message(
+            id: message.tags['id'],
+            body: message.parameters[1],
+            dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? 0),
+          );
+
+          client!.listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
+
+          channel?.messages.add(chatMessage);
+          if ((channel?.messages.length ?? 0) > 1000) channel?.messages.removeRange(0, (channel.messages.length) - 1000);
+        } catch (e) {}
         break;
       case 'PRIVMSG':
         var channel = channels.firstWhereOrNull((channel) => channel.name == message!.parameters[0]);
@@ -805,19 +817,22 @@ class Connection {
 
           var channel = channels.firstWhereOrNull((channel) => channel.name == message!.parameters[0]);
 
-          channel!.messages.add(
-            Message(
-              id: message!.tags['id'],
-              body: message.tags['system-msg'].replaceAll('\\s', ' ') + message.parameters.length >= 2 ? message.parameters[1] : '',
-              dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? 0),
-              user: User(
-                login: message.prefix.split('!').first,
-                displayName: message.tags['display-name'],
-                id: int.tryParse(message.tags['user-id']),
-                color: message.tags['color'],
-              ),
+          var chatMessage = Message(
+            id: message!.tags['id'],
+            body: message.tags['system-msg'].replaceAll('\\s', ' ') + message.parameters.length >= 2 ? message.parameters[1] : '',
+            dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? 0),
+            user: User(
+              login: message.prefix.split('!').first,
+              displayName: message.tags['display-name'],
+              id: int.tryParse(message.tags['user-id']),
+              color: message.tags['color'],
             ),
           );
+
+          client!.listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
+
+          channel?.messages.add(chatMessage);
+          if ((channel?.messages.length ?? 0) > 1000) channel?.messages.removeRange(0, (channel.messages.length) - 1000);
         } catch (e) {}
         break;
     }
