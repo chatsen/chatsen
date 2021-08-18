@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import 'package:hive/hive.dart';
 
+import 'Modal/ChannelCloseModal.dart';
+
 /// [HomeTab] is a widget that represents a channel as a simple tab.
 class HomeTab extends StatelessWidget {
   final twitch.Client? client;
@@ -26,11 +28,13 @@ class HomeTab extends StatelessWidget {
               height: 32.0,
               child: InkWell(
                 onTap: () async {
-                  client!.partChannels([channel]);
-                  var channelsBox = await Hive.openBox('Channels');
-                  await channelsBox.clear();
-                  await channelsBox.addAll(client!.channels.map((channel) => channel.name));
-                  refresh();
+                  await ChannelCloseModal.show(context, name: channel.name!, onLeave: () async {
+                    client!.partChannels([channel]);
+                    var channelsBox = await Hive.openBox('Channels');
+                    await channelsBox.clear();
+                    await channelsBox.addAll(client!.channels.map((channel) => channel.name));
+                    refresh();
+                  });
                 },
                 child: Icon(Icons.close),
               ),
