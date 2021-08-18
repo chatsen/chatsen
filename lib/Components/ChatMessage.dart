@@ -288,7 +288,37 @@ class ChatMessage extends StatelessWidget {
         width: double.infinity,
         color: message.mention ? Theme.of(context).colorScheme.primary.withAlpha(48) : backgroundColor,
         child: InkWell(
-          onLongPress: () async => await Clipboard.setData(ClipboardData(text: message.body)),
+          onDoubleTap: () async {
+            await Clipboard.setData(ClipboardData(text: message.body));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: Text('Message copied to clipboard!'),
+                action: SnackBarAction(
+                  label: 'Paste',
+                  onPressed: () {
+                    gkey?.currentState?.appendText(message.body!);
+                  },
+                ),
+              ),
+            );
+          },
+          onLongPress: () async {
+            await Clipboard.setData(ClipboardData(text: message.body));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: Text('Message copied to clipboard!'),
+                action: SnackBarAction(
+                  label: 'Paste',
+                  onPressed: () {
+                    gkey?.currentState?.appendText(message.body!);
+                  },
+                ),
+              ),
+            );
+          },
+          // onLongPress: () async => await Clipboard.setData(ClipboardData(text: message.body)),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
             child: Text.rich(
