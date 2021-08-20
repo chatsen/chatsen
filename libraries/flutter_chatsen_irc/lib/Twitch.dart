@@ -328,7 +328,18 @@ class Channel {
   }
 
   Future<void> loadHistory() async {
-    if (!client!.useRecentMessages) return;
+    if (!client!.useRecentMessages) {
+      var chatMessage = Message(
+        channel: this,
+        body: 'Chat history is disabled because you have opted-out. Head over to Chatsen\'s settings if you wish to turn it on.',
+        dateTime: DateTime.now(),
+      );
+
+      messages.add(chatMessage);
+      if (messages.length > 1000) messages.removeRange(0, messages.length - 1000);
+      client!.listeners.forEach((listener) => listener.onHistoryLoaded(this));
+      return;
+    }
 
     // https://recent-messages.robotty.de/api/v2/recent-messages/
     var response = await http.get(Uri.parse('https://recent-messages.robotty.de/api/v2/recent-messages/${name!.substring(1)}'));
