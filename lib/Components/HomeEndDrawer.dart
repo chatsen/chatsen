@@ -68,7 +68,7 @@ class HomeEndDrawer extends StatelessWidget {
                                 children: [
                                   for (var message in state.reversed)
                                     ChatMessage(
-                                      prefixText: message.channel!.name,
+                                      prefixText: '${message.channel?.name}',
                                       message: message,
                                     ),
                                 ],

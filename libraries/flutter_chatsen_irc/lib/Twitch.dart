@@ -759,6 +759,7 @@ class Connection {
         if (message.tags.containsKey('msg-id') ? message.tags['msg-id'] == 'msg_banned' : false) channel?.stateChanger = ChannelState.Banned;
         try {
           var chatMessage = Message(
+            channel: channel,
             id: message.tags['id'],
             body: message.parameters[1],
             dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? 0),
@@ -826,6 +827,7 @@ class Connection {
           // var channel = client.channels.state.firstWhere((channel) => channel.state is ChannelStateWithConnection && (channel.state as ChannelStateWithConnection).receiver == this && channel.name == channelName);
 
           var chatMessage = Message(
+            channel: channel,
             id: message!.tags['id'],
             body: 'A message from ${message.tags['login']} was deleted: ${message.parameters[1]}',
             dateTime: DateTime.now(),
@@ -854,6 +856,7 @@ class Connection {
           }
 
           var chatMessage = Message(
+            channel: channel,
             // id: message.tags['id'],
             body: uid != null ? '${message.parameters[1]} has been ' + (duration != null ? 'timed out for $duration' : 'permabanned') : 'Chat has been cleared by a moderator',
             dateTime: DateTime.now(),
@@ -882,6 +885,7 @@ class Connection {
           var channel = channels.firstWhereOrNull((channel) => channel.name == message!.parameters[0]);
 
           var chatMessage = Message(
+            channel: channel,
             id: message!.tags['id'],
             body: message.tags['system-msg'].replaceAll('\\s', ' ') + message.parameters.length >= 2 ? message.parameters[1] : '',
             dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? 0),
