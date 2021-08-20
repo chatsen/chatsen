@@ -328,6 +328,8 @@ class Channel {
   }
 
   Future<void> loadHistory() async {
+    if (!client!.useRecentMessages) return;
+
     // https://recent-messages.robotty.de/api/v2/recent-messages/
     var response = await http.get(Uri.parse('https://recent-messages.robotty.de/api/v2/recent-messages/${name!.substring(1)}'));
     var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
