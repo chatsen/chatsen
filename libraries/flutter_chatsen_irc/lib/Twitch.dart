@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -21,12 +22,14 @@ class Emote {
   final String? name;
   final String? id;
   final String? provider;
+  final String? set;
   final List<String?>? mipmap;
 
   Emote({
     this.name,
     this.id,
     this.provider,
+    this.set,
     this.mipmap,
   });
 }
@@ -408,7 +411,6 @@ class Channel {
   // TODO: Rework this
   Future<void> updateBadges() async {
     badges.clear();
-    print('hi');
 
     try {
       var request = await http.get(Uri.parse('https://badges.twitch.tv/v1/badges/channels/$id/display?language=en'));
@@ -595,40 +597,86 @@ class Connection {
 
   List<Emote> emotes = [];
 
-  Future<void> updateUserEmotes() async {
-    emotes.clear();
-
+  Future<void> updateUserEmotes({
+    List<String> emoteSets = const [],
+  }) async {
     if (credentials == null || credentials!.token == null || credentials!.clientId == null || credentials!.id == null) {
+      emotes.clear();
       return;
     }
 
-    var emotesRequest = await http.get(
-      Uri.parse('https://api.twitch.tv/kraken/users/${credentials!.id}/emotes'),
-      headers: {
-        'Client-ID': credentials!.clientId!,
-        'Accept': 'application/vnd.twitchtv.v5+json',
-        'Authorization': 'OAuth ${credentials!.token}',
-      },
-    );
+    if (emoteSets.isEmpty) {
+      emotes.clear();
+      // This is legacy af and will be deprecated
+      var emotesRequest = await http.get(
+        Uri.parse('https://api.twitch.tv/kraken/users/${credentials!.id}/emotes'),
+        headers: {
+          'Client-ID': credentials!.clientId!,
+          'Accept': 'application/vnd.twitchtv.v5+json',
+          'Authorization': 'OAuth ${credentials!.token}',
+        },
+      );
 
-    var jsonRequest = jsonDecode(emotesRequest.body);
+      var jsonRequest = jsonDecode(emotesRequest.body);
 
-    for (var emoticonSet in jsonRequest['emoticon_sets'].entries) {
-      for (var emoteData in emoticonSet.value) {
-        emotes.add(
-          Emote(
-            name: emoteData['code'],
-            id: emoteData['id'].toString(),
-            provider: 'Twitch',
-            mipmap: [
-              'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/1.0',
-              'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/2.0',
-              'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/3.0',
-              // 'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/4.0',
-            ],
-          ),
-        );
+      for (var emoticonSet in jsonRequest['emoticon_sets'].entries) {
+        for (var emoteData in emoticonSet.value) {
+          emotes.add(
+            Emote(
+              name: emoteData['code'],
+              id: emoteData['id'].toString(),
+              provider: 'Twitch',
+              mipmap: [
+                'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/1.0',
+                'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/2.0',
+                'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/3.0',
+                // 'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/4.0',
+              ],
+            ),
+          );
+        }
       }
+    } else {
+      var newEmotes = <Emote>[];
+      const maxSets = 25;
+      while (emoteSets.isNotEmpty) {
+        var emoteSetsPack = emoteSets.take(maxSets);
+
+        // print('== $emoteSetsPack');
+
+        var emotesRequest = await http.get(
+          Uri.parse('https://api.twitch.tv/helix/chat/emotes/set?${emoteSetsPack.map((x) => 'emote_set_id=$x').join('&')}'),
+          headers: {
+            'Client-ID': credentials!.clientId!,
+            'Authorization': 'Bearer ${credentials!.token}',
+          },
+        );
+
+        var jsonRequest = jsonDecode(emotesRequest.body);
+        // print(jsonRequest);
+
+        for (var emoteData in jsonRequest['data']) {
+          newEmotes.add(
+            Emote(
+              name: emoteData['name'],
+              id: emoteData['id'].toString(),
+              set: emoteData['emote_set_id'],
+              provider: 'Twitch',
+              mipmap: [
+                'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/1.0',
+                'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/2.0',
+                'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/3.0',
+                // // 'https://static-cdn.jtvnw.net/emoticons/v2/${emoteData['id']}/default/dark/4.0',
+                // for (var url in emoteData['images'].values) url,
+              ],
+              // mipmap: List<String>.from(emoteData['images'].values),
+            ),
+          );
+        }
+
+        emoteSets = emoteSets.sublist(min(emoteSets.length, maxSets));
+      }
+      emotes = newEmotes;
     }
   }
 
@@ -669,7 +717,10 @@ class Connection {
     switch (message?.command) {
       case '372':
         stateChanger = ConnectionState.Connected;
-        await updateUserEmotes();
+        // await updateUserEmotes();
+        break;
+      case 'GLOBALUSERSTATE':
+        if (transmission) await updateUserEmotes(emoteSets: message!.tags['emote-sets'].split(','));
         break;
       case 'PING':
         send('PONG :${message!.parameters[1]}'); //  ?? 'tmi.twitch.tv'

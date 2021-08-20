@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 200)).then(
+    Future.delayed(Duration(milliseconds: 200)).then(
       // Should observe events instead, serves as a quick fix.
       (t) {
         try {
