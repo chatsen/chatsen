@@ -59,7 +59,7 @@ class _ChannelCloseModalState extends State<ChannelCloseModal> {
                   widget.onLeave();
                 },
                 icon: Icon(Icons.close),
-                label: Text('Leave chanel'),
+                label: Text('Leave channel'),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.redAccent),
                   padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),

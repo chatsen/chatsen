@@ -24,6 +24,7 @@ class Emote {
   final String? provider;
   final String? set;
   final List<String?>? mipmap;
+  final bool zeroWidth; // Flag set/Bitfield would be better, for chatsen2 Copesen
 
   Emote({
     this.name,
@@ -31,6 +32,7 @@ class Emote {
     this.provider,
     this.set,
     this.mipmap,
+    this.zeroWidth = false,
   });
 }
 
@@ -277,9 +279,10 @@ class Message {
           tokens.add(MessageToken.link(messageSplit));
         }
       } else if (emote != null) {
-        if (tokens.isNotEmpty && tokens.last.type == MessageTokenType.Emote && zeroWidthEmotes.contains(emote.name)) {
+        bool isZeroWidth = (zeroWidthEmotes.contains(emote.name) || emote.zeroWidth);
+        if (tokens.isNotEmpty && tokens.last.type == MessageTokenType.Emote && isZeroWidth) {
           tokens.last = MessageToken.emoteStack([tokens.last.data as Emote, emote]);
-        } else if (tokens.isNotEmpty && tokens.last.type == MessageTokenType.EmoteStack && zeroWidthEmotes.contains(emote.name)) {
+        } else if (tokens.isNotEmpty && tokens.last.type == MessageTokenType.EmoteStack && isZeroWidth) {
           (tokens.last.data as List<Emote>).add(emote);
         } else {
           tokens.add(MessageToken.emote(emote));
@@ -506,6 +509,7 @@ class Channel {
               name
               urls
               provider
+              visibility
             }
           }
         }
@@ -519,6 +523,7 @@ class Channel {
           mipmap: [
             for (var url in emoteData['urls']) url.last,
           ],
+          zeroWidth: (emoteData['visibility'] & (1 << 7)) == (1 << 7),
         );
 
         emotes.add(emote);
@@ -1043,6 +1048,7 @@ class Client {
               name
               urls
               provider
+              visibility
             }
           }
         ''');
@@ -1057,6 +1063,7 @@ class Client {
             mipmap: [
               for (var url in emoteData['urls']) url.last,
             ],
+            zeroWidth: (emoteData['visibility'] & (1 << 7)) == (1 << 7),
           );
 
           emotes.add(emote);
