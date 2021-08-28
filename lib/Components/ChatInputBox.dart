@@ -156,7 +156,7 @@ class ChatInputBoxState extends State<ChatInputBox> {
               if (kDebugMode || widget.channel?.transmitter?.credentials?.token != null) ...[
                 if (autocompletionCommands.isNotEmpty)
                   Container(
-                    height: 32.0,
+                    height: 40.0,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: autocompletionCommands,
@@ -164,7 +164,7 @@ class ChatInputBoxState extends State<ChatInputBox> {
                   ),
                 if (autocompletionItemsUsers.isNotEmpty)
                   Container(
-                    height: 32.0,
+                    height: 40.0,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: autocompletionItemsUsers,
@@ -172,7 +172,7 @@ class ChatInputBoxState extends State<ChatInputBox> {
                   ),
                 if (autocompletionItems.isNotEmpty)
                   Container(
-                    height: 48.0,
+                    height: 56.0,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: autocompletionItems,
@@ -205,8 +205,8 @@ class ChatInputBoxState extends State<ChatInputBox> {
                         ),
                       ),
                       Container(
-                        width: 32.0,
-                        height: 32.0,
+                        width: 40.0,
+                        height: 40.0,
                         child: InkWell(
                           onTap: () async {
                             await UploadModal.show(
@@ -221,8 +221,8 @@ class ChatInputBoxState extends State<ChatInputBox> {
                         ),
                       ),
                       Container(
-                        width: 32.0,
-                        height: 32.0,
+                        width: 40.0,
+                        height: 40.0,
                         child: InkWell(
                           onTap: () async {
                             await showModalBottomSheet(
@@ -257,8 +257,8 @@ class ChatInputBoxState extends State<ChatInputBox> {
                         ),
                       ),
                       Container(
-                        width: 32.0,
-                        height: 32.0,
+                        width: 40.0,
+                        height: 40.0,
                         child: GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           onTapDown: (e) {
@@ -317,9 +317,11 @@ class ChatInputBoxState extends State<ChatInputBox> {
                   focusNode.requestFocus();
                   setState(() {});
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(user),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(user),
+                  ),
                 ),
               ),
       ];
@@ -347,9 +349,11 @@ class ChatInputBoxState extends State<ChatInputBox> {
                     ],
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(cmd.trigger),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(cmd.trigger),
+                  ),
                 ),
               ),
             ),

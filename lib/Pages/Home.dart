@@ -240,15 +240,15 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                         children: [
                           if (client.channels.isEmpty) Ink(height: 1.0, color: Theme.of(context).dividerColor),
                           SizedBox(
-                            height: 32.0,
+                            height: 40.0,
                             child: Row(
                               children: [
                                 Builder(
                                   builder: (context) => InkWell(
                                     onTap: () async => Scaffold.of(context).openDrawer(),
                                     child: Container(
-                                      height: 32.0,
-                                      width: 32.0,
+                                      height: 40.0,
+                                      width: 40.0,
                                       child: Icon(
                                         Icons.menu,
                                         color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
@@ -336,8 +336,8 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                       );
                                     },
                                     child: Container(
-                                      height: 32.0,
-                                      width: 32.0,
+                                      height: 40.0,
+                                      width: 40.0,
                                       child: Icon(
                                         (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.plus : Icons.add,
                                         color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
@@ -348,8 +348,8 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                 InkWell(
                                   onTap: () async => Scaffold.of(context).openEndDrawer(),
                                   child: Container(
-                                    height: 32.0,
-                                    width: 32.0,
+                                    height: 40.0,
+                                    width: 40.0,
                                     child: Icon(
                                       (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.bell : Icons.alternate_email,
                                       size: 20.0,
