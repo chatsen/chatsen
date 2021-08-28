@@ -14,6 +14,7 @@ import 'package:chatsen/Theme/ThemeEvent.dart';
 import 'package:chatsen/Theme/ThemeManager.dart';
 import 'package:chatsen/Theme/ThemeState.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -132,7 +133,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   builder: (context, category, title, description) => Tile(
                     leading: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.wb_sunny_outlined),
+                      child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.sun_max : Icons.wb_sunny_outlined),
                     ),
                     onTap: () => BlocProvider.of<ThemeBloc>(context).add(
                       ThemeModeChanged(
@@ -221,7 +222,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   builder: (context, category, title, description) => Tile(
                       leading: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.alternate_email),
+                        child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.bell : Icons.alternate_email),
                       ),
                       title: title,
                       subtitle: description,
@@ -298,7 +299,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       onTap: () => launch('https://recent-messages.robotty.de/'),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.history),
+                        child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.clock : Icons.history),
                       ),
                     ),
                     title: title,
@@ -321,7 +322,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   builder: (context, category, title, description) => Tile(
                       leading: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.text_format),
+                        child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.chevron_left_slash_chevron_right : Icons.text_format),
                       ),
                       title: title,
                       subtitle: description,
@@ -334,7 +335,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   builder: (context, category, title, description) => Tile(
                     leading: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.info),
+                      child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.info_circle_fill : Icons.info),
                     ),
                     title: title,
                     subtitle: description,
@@ -351,7 +352,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     builder: (context, snapshot) => Tile(
                       leading: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.system_security_update),
+                        child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.device_phone_portrait : Icons.system_security_update),
                       ),
                       title: title,
                       subtitle: snapshot.hasData ? 'Running ${snapshot.data!.packageName} ${snapshot.data!.version}+${snapshot.data!.buildNumber}' : null,

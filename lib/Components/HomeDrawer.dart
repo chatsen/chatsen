@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:chatsen/BackgroundAudio/BackgroundAudioWrapper.dart';
 import 'package:chatsen/BackgroundDaemon/BackgroundDaemonCubit.dart';
 import 'package:chatsen/Pages/Settings.dart';
 import 'package:chatsen/Theme/ThemeManager.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/Components/UI/WidgetBlur.dart';
@@ -50,7 +53,7 @@ class HomeDrawer extends StatelessWidget {
                           children: [
                             if (channel != null)
                               IconButton(
-                                icon: Icon(Icons.play_arrow),
+                                icon: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.play_fill : Icons.play_arrow),
                                 onPressed: () async {
                                   var toggle = BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed;
                                   (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) ? BlocProvider.of<StreamOverlayBloc>(context).add(StreamOverlayOpen(channelName: channel!.name!.substring(1))) : BlocProvider.of<StreamOverlayBloc>(context).add(StreamOVerlayClose());
@@ -65,7 +68,7 @@ class HomeDrawer extends StatelessWidget {
                               ),
                             if (channel != null)
                               IconButton(
-                                icon: Icon(Icons.search),
+                                icon: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.search : Icons.search),
                                 onPressed: () => Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (BuildContext context) => SearchPage(
@@ -82,7 +85,7 @@ class HomeDrawer extends StatelessWidget {
                                 color: Theme.of(context).dividerColor,
                               ),
                             IconButton(
-                              icon: Icon(Icons.inbox),
+                              icon: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.envelope_fill : Icons.inbox),
                               onPressed: () => Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (BuildContext context) => WhispersPage(
@@ -93,7 +96,7 @@ class HomeDrawer extends StatelessWidget {
                               tooltip: 'Open whispers',
                             ),
                             IconButton(
-                              icon: Icon(Icons.switch_account),
+                              icon: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.person_crop_circle_fill_badge_plus : Icons.switch_account),
                               onPressed: () => Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (BuildContext context) => AccountPage(
@@ -113,7 +116,7 @@ class HomeDrawer extends StatelessWidget {
                             //   tooltip: 'Get your profile information',
                             // ),
                             IconButton(
-                              icon: Icon(Icons.settings),
+                              icon: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.gear_alt_fill : Icons.settings),
                               onPressed: () => Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (BuildContext context) => ThemeManager.routeWrapper(

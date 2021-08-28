@@ -6,6 +6,7 @@ import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
 import 'package:chatsen/Mentions/CustomMention.dart';
 import 'package:chatsen/Mentions/CustomMentionsCubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,7 +47,7 @@ class _CustomMentionsPageState extends State<CustomMentionsPage> {
                   trailing: Padding(
                     padding: EdgeInsets.all(0.0),
                     child: IconButton(
-                      icon: Icon(Icons.delete),
+                      icon: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.trash_fill : Icons.delete),
                       onPressed: () async => await BlocProvider.of<CustomMentionsCubit>(context).remove(customMention),
                     ),
                   ),

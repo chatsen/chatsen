@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:chatsen/Mentions/CustomMentionsCubit.dart';
 import 'package:collection/src/iterable_extensions.dart';
+import 'package:flutter/cupertino.dart';
 
 import '/Accounts/AccountsCubit.dart';
 import '/Components/HomeEndDrawer.dart';
@@ -338,7 +339,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                       height: 32.0,
                                       width: 32.0,
                                       child: Icon(
-                                        Icons.add,
+                                        (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.plus : Icons.add,
                                         color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
                                       ),
                                     ),
@@ -350,7 +351,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                     height: 32.0,
                                     width: 32.0,
                                     child: Icon(
-                                      Icons.alternate_email,
+                                      (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.bell : Icons.alternate_email,
                                       size: 20.0,
                                       color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
                                     ),
@@ -501,7 +502,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                             ),
                                             IconButton(
                                               icon: Icon(
-                                                Icons.menu,
+                                                (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.line_horizontal_3 : Icons.menu,
                                                 color: Colors.white.withAlpha(192),
                                               ),
                                               onPressed: () => Scaffold.of(context).openEndDrawer(),

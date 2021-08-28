@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -213,7 +215,7 @@ class ChatInputBoxState extends State<ChatInputBox> {
                             );
                           },
                           child: Icon(
-                            Icons.file_present,
+                            (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.photo_fill : Icons.file_present,
                             color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
                           ),
                         ),
@@ -249,7 +251,7 @@ class ChatInputBoxState extends State<ChatInputBox> {
                             );
                           },
                           child: Icon(
-                            Icons.emoji_emotions_outlined,
+                            (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.smiley : Icons.emoji_emotions_outlined,
                             color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
                           ),
                         ),
@@ -284,7 +286,7 @@ class ChatInputBoxState extends State<ChatInputBox> {
                           child: InkWell(
                             onTap: () => send(textEditingController.text),
                             child: Icon(
-                              Icons.send,
+                              (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.arrow_right_circle : Icons.send,
                               color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
                             ),
                           ),

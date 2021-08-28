@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import 'package:hive/hive.dart';
@@ -36,7 +39,10 @@ class HomeTab extends StatelessWidget {
                     refresh();
                   });
                 },
-                child: Icon(Icons.close),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 1.0),
+                  child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.xmark : Icons.close),
+                ),
               ),
             ),
           ],
