@@ -72,7 +72,7 @@ flutter build ios --no-codesign
 You may also check the Github Actions file [here](https://github.com/chatsen/chatsen/blob/master/.github/workflows/main.yml) for more details.
 
 # Licensing
-Chatsen is distributed under the AGPLv3 licence. A copy may be found in the LICENCE file in that repository. All the dependencies remain under their original licenses.
+Chatsen is distributed under the AGPLv3 licence. A copy may be found in the LICENSE file in that repository. All the dependencies remain under their original licenses.
 
 # Usage
 This project and its releases are provided as-is, no support is provided. Use at your own discretion.
