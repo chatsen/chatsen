@@ -18,7 +18,9 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'Accounts/AccountModel.dart';
 import 'App.dart';
 import 'BackgroundDaemon/BackgroundDaemonCubit.dart';
+import 'Badges/BTTVBadges.dart';
 import 'Badges/ChatsenBadges.dart';
+import 'Badges/ChattyBadges.dart';
 import 'Badges/FFZAPBadges.dart';
 import 'Badges/SevenTVBadges.dart';
 import 'Mentions/CustomMentionsCubit.dart';
@@ -55,6 +57,8 @@ Future<void> appRunner() async {
         BlocProvider(create: (BuildContext context) => AccountsCubit(accountsBox)),
         BlocProvider(create: (BuildContext context) => FFZAPBadges()),
         BlocProvider(create: (BuildContext context) => FFZBadges()),
+        BlocProvider(create: (BuildContext context) => BTTVBadges()),
+        BlocProvider(create: (BuildContext context) => ChattyBadges()),
         BlocProvider(create: (BuildContext context) => ChatterinoBadges()),
         BlocProvider(create: (BuildContext context) => SevenTVBadges()),
         BlocProvider(create: (BuildContext context) => ChatsenBadges()),

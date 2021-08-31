@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chatsen/Badges/BTTVBadges.dart';
 import 'package:chatsen/Badges/ChatsenBadges.dart';
 import 'package:chatsen/Badges/ChatterinoBadges.dart';
+import 'package:chatsen/Badges/ChattyBadges.dart';
 import 'package:chatsen/Badges/FFZAPBadges.dart';
 import 'package:chatsen/Badges/FFZBadges.dart';
 import 'package:chatsen/Badges/SevenTVBadges.dart';
@@ -12,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
+import 'package:flutter_svg/svg.dart';
 import '/Pages/Search.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
@@ -353,7 +356,7 @@ class ChatMessage extends StatelessWidget {
                       //       ),
                       //     ),
                       if (message.user != null)
-                        for (var badge in message.badges + BlocProvider.of<FFZBadges>(context).getBadgesForUser('${message.user?.login?.toLowerCase()}') + BlocProvider.of<FFZAPBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatterinoBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'))
+                        for (var badge in message.badges + BlocProvider.of<BTTVBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<FFZBadges>(context).getBadgesForUser('${message.user?.login?.toLowerCase()}') + BlocProvider.of<FFZAPBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatterinoBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChattyBadges>(context).getBadgesForUser('${message.user?.login}') + BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'))
                           WidgetSpan(
                             child: WidgetTooltip(
                               message: Padding(
@@ -367,12 +370,18 @@ class ChatMessage extends StatelessWidget {
                                         borderRadius: badge.color != null ? BorderRadius.circular(96.0 / 8.0) : BorderRadius.zero,
                                         child: Container(
                                           color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
-                                          child: NetworkImageW(
-                                            badge.mipmap!.last!,
-                                            height: 96.0,
-                                            fit: BoxFit.fitHeight,
-                                            cache: badge.cache,
-                                          ),
+                                          child: badge.mipmap!.last!.endsWith('.svg')
+                                              ? SvgPicture.network(
+                                                  badge.mipmap!.last!,
+                                                  height: 96.0,
+                                                  fit: BoxFit.fitHeight,
+                                                )
+                                              : NetworkImageW(
+                                                  badge.mipmap!.last!,
+                                                  height: 96.0,
+                                                  fit: BoxFit.fitHeight,
+                                                  cache: badge.cache,
+                                                ),
                                         ),
                                       ),
                                     ),
@@ -387,12 +396,17 @@ class ChatMessage extends StatelessWidget {
                                   borderRadius: badge.color != null ? BorderRadius.circular(2.0) : BorderRadius.zero,
                                   child: Container(
                                     color: badge.color != null ? Color(int.tryParse(badge.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255) : null,
-                                    child: NetworkImageW(
-                                      badge.mipmap!.last!,
-                                      height: 18.0,
-                                      fit: BoxFit.fitHeight,
-                                      cache: badge.cache,
-                                    ),
+                                    child: badge.mipmap!.last!.endsWith('.svg')
+                                        ? SvgPicture.network(
+                                            badge.mipmap!.last!,
+                                            height: 18.0,
+                                          )
+                                        : NetworkImageW(
+                                            badge.mipmap!.last!,
+                                            height: 18.0,
+                                            fit: BoxFit.fitHeight,
+                                            cache: badge.cache,
+                                          ),
                                   ),
                                 ),
                               ),

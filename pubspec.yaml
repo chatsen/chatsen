@@ -37,7 +37,8 @@ dependencies:
       url: https://github.com/chatsen/flutter_cached_network_image
       ref: develop
   font_awesome_flutter: ^9.1.0
-  sentry_flutter: ^5.1.0
+  sentry_flutter: ^5.1.0 
+  flutter_svg: ^0.22.0
 
 dev_dependencies:
   pedantic: ^1.11.0
