@@ -49,7 +49,7 @@ https://www.patreon.com/chatsen
 Note: the .ipa file is not signed but will be signed automatically with AltStore on your device.
 
 # Build instructions
-To build Chatsen, all you should need is the Flutter SDK on the **master** branch and it's require dependencies for your platform (Android Studio for Android and XCode for iOS).  
+To build Chatsen, all you should need is the Flutter SDK on the **master** branch and its required dependencies for your platform (Android Studio for Android and XCode for iOS).  
 Running the following commands should allow you to build the application successfully:
 
 ```bash
@@ -75,7 +75,7 @@ You may also check the Github Actions file [here](https://github.com/chatsen/cha
 Chatsen is distributed under the AGPLv3 licence. A copy may be found in the LICENCE file in that repository. All the dependencies remain under their original licenses.
 
 # Usage
-This project and it's releases are provided as-is, no support is provided. Use at your own discretion.
+This project and its releases are provided as-is, no support is provided. Use at your own discretion.
 
 # Privacy Policy
 Chatsen does not collect any personal or identifying information whatsoever. There are no servers, services or backend running related to the project either.  
