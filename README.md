@@ -4,12 +4,12 @@
 <h1 align="middle">Chatsen</h1>
 
 <p align="middle" float="left">
-  <a href="https://discord.gg/chatsen"><img src="https://img.shields.io/discord/758710852756570153?color=5865F2&label=discord"></a>
+  <a href="https://chatsen.app/discord"><img src="https://img.shields.io/discord/758710852756570153.svg?label=&logo=discord&logoColor=ffffff&color=5865F2&labelColor=5C5C5C"></a>
   <a href="https://hanadigital.github.io/grev/?user=chatsen&repo=chatsen"><img src="https://img.shields.io/github/downloads/chatsen/chatsen/total?color=23B14D"></a>
   <a><img src="https://img.shields.io/github/license/chatsen/chatsen"></a>
 </p>
 <p align="middle" float="left">
-  <a href="https://testflight.apple.com/join/I7Fm27MH"><img height="75" src="https://beatscratch.io/assets/testflight-badge.png"></a>
+  <a href="https://testflight.apple.com/join/I7Fm27MH"><img height="75" src="assets/testflight.png"></a>
   <a href="https://play.google.com/store/apps/details?id=com.chatsen.chatsen"><img height="75" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"></a>
 </p>
 
@@ -49,7 +49,7 @@ https://www.patreon.com/chatsen
 Note: the .ipa file is not signed but will be signed automatically with AltStore on your device.
 
 # Build instructions
-To build Chatsen, all you should need is the Flutter SDK on the **master** branch and it's require dependencies for your platform (Android Studio for Android and XCode for iOS).  
+To build Chatsen, all you should need is the Flutter SDK on the **master** branch and it's required dependencies for your platform (Android Studio for Android and Xcode for iOS).  
 Running the following commands should allow you to build the application successfully:
 
 ```bash
@@ -82,4 +82,4 @@ Chatsen does not collect any personal or identifying information whatsoever. The
 Since Chatsen interfaces with Twitch however, you are subject to their Privacy Policy available at https://www.twitch.tv/p/en/legal/privacy-notice/
 
 # Contact
-- Discord: https://discord.gg/chatsen
+- Discord: https://chatsen.app/discord - https://discord.gg/chatsen

@@ -52,7 +52,7 @@ class ChatInputBoxState extends State<ChatInputBox> {
 
   List<Widget> getAutoCompletionItems() => [
         if (textEditingController.text.split(' ').last.length >= 2 && !textEditingController.text.endsWith(' '))
-          for (var emote in widget.client!.emotes + widget.channel!.emotes + widget.channel!.transmitter!.emotes)
+          for (var emote in widget.client!.emotes + widget.channel!.emotes + widget.channel!.transmitter!.emotes + widget.client!.emojis)
             if ('${false ? ':' : ''}${emote.name}'.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()) && (false ? textEditingController.text.startsWith(':') : true))
               WidgetTooltip(
                 // message: '${emote.name}',
@@ -78,7 +78,7 @@ class ChatInputBoxState extends State<ChatInputBox> {
                 child: InkWell(
                   onTap: () async {
                     List<String?> splits = textEditingController.text.split(' ');
-                    splits.last = emote.name;
+                    splits.last = (emote.alt ?? emote.name); // emote.name;
                     textEditingController.text = splits.join(' ') + ' ';
                     textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
                     focusNode.requestFocus();

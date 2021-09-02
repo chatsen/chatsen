@@ -42,7 +42,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
 
   @override
   Widget build(BuildContext context) => DefaultTabController(
-        length: 3,
+        length: 4,
         child: Builder(builder: (context) {
           return WidgetBlur(
             child: Material(
@@ -67,6 +67,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
                               Tab(text: 'Channel'),
                               Tab(text: 'Twitch'),
                               Tab(text: 'Global'),
+                              Tab(text: 'Emojis'),
                             ],
                           ),
                         ),
@@ -113,6 +114,12 @@ class _EmoteListModalState extends State<EmoteListModal> {
                                       ],
                                     ),
                                   ],
+                                ],
+                              ),
+                              GridView.extent(
+                                maxCrossAxisExtent: 48.0,
+                                children: [
+                                  for (var emote in widget.client!.emojis.where((x) => x.name!.toLowerCase().contains(textEditingController!.text.toLowerCase()))) buildEmoteButton(emote),
                                 ],
                               ),
                             ],

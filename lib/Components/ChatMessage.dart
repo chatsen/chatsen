@@ -175,6 +175,7 @@ class ChatMessage extends StatelessWidget {
                       child: NetworkImageW(
                         token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
                         scale: token.data.provider == 'Twitch' ? 2.0 : (token.data.mipmap.length == 1 ? 1.0 : 4.0),
+                        height: token.data.provider == 'Emoji' ? 24.0 : null,
                       ),
                     ),
                   ),
@@ -186,52 +187,68 @@ class ChatMessage extends StatelessWidget {
         case twitch.MessageTokenType.EmoteStack:
           spans.add(
             WidgetSpan(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  for (var emote in token.data)
-                    WidgetTooltip(
-                      message: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
+              child: WidgetTooltip(
+                message: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4.0),
+                        // child: ,
+                        child: Stack(
+                          alignment: Alignment.center,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 4.0),
-                              child: NetworkImageW(
-                                (token.data as List<twitch.Emote>).first.mipmap!.last!,
+                            for (var emote in token.data)
+                              NetworkImageW(
+                                emote.mipmap!.last!,
                                 height: 96.0,
                                 fit: BoxFit.fitHeight,
                               ),
-                            ),
-                            Text((token.data as List<twitch.Emote>).first.name!),
-                            Text((token.data as List<twitch.Emote>).first.provider!),
-                            for (var emote in (token.data as List<twitch.Emote>).sublist(1))
-                              Padding(
-                                padding: const EdgeInsets.only(top: 4.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 8.0),
-                                      child: NetworkImageW(emote.mipmap!.first!),
-                                    ),
-                                    Text(emote.name!),
-                                  ],
-                                ),
-                              ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(right: 4.0),
+                            //   // child: NetworkImageW(
+                            //   //   emote.provider == 'Twitch' ? emote.mipmap[1] : emote.mipmap.last,
+                            //   //   scale: emote.provider == 'Twitch' ? 2.0 : 4.0,
+                            //   //   height: emote.provider == 'Emoji' ? 24.0 : null,
+                            //   // ),
+                            // ),
                           ],
                         ),
                       ),
-                      child: Padding(
+                      Text((token.data as List<twitch.Emote>).first.name!),
+                      Text((token.data as List<twitch.Emote>).first.provider!),
+                      for (var emote in (token.data as List<twitch.Emote>))
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 8.0),
+                                child: NetworkImageW(emote.mipmap!.first!),
+                              ),
+                              Text(emote.name!),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    for (var emote in token.data)
+                      Padding(
                         padding: const EdgeInsets.only(right: 4.0),
                         child: NetworkImageW(
                           emote.provider == 'Twitch' ? emote.mipmap[1] : emote.mipmap.last,
                           scale: emote.provider == 'Twitch' ? 2.0 : 4.0,
+                          height: emote.provider == 'Emoji' ? 24.0 : null,
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             ),
           );

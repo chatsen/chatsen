@@ -25,6 +25,7 @@ class Emote {
   final String? set;
   final List<String?>? mipmap;
   final bool zeroWidth; // Flag set/Bitfield would be better, for chatsen2 Copesen
+  final String? alt;
 
   Emote({
     this.name,
@@ -33,6 +34,7 @@ class Emote {
     this.set,
     this.mipmap,
     this.zeroWidth = false,
+    this.alt,
   });
 }
 
@@ -267,9 +269,10 @@ class Message {
         );
       }
 
-      var channelEmote = channel?.emotes.firstWhereOrNull((emote) => emote.name == messageSplit);
-      var globalEmote = client?.emotes.firstWhereOrNull((emote) => emote.name == messageSplit);
-      var emote = twitchEmote ?? channelEmote ?? globalEmote;
+      var channelEmote = channel?.emotes.firstWhereOrNull((emote) => (emote.alt ?? emote.name) == messageSplit);
+      var globalEmote = client?.emotes.firstWhereOrNull((emote) => (emote.alt ?? emote.name) == messageSplit);
+      var emojiEmote = client?.emojis.firstWhereOrNull((emote) => (emote.alt ?? emote.name) == messageSplit);
+      var emote = twitchEmote ?? channelEmote ?? globalEmote ?? emojiEmote;
       var lowSplit = messageSplit.toLowerCase();
 
       if (lowSplit.startsWith('http://') || lowSplit.startsWith('https://')) {
@@ -958,6 +961,7 @@ class Client {
   Map<Credentials?, Connection> transmitters = {};
   List<Channel> channels = [];
   List<Emote> emotes = [];
+  List<Emote> emojis = [];
   List<Badge> badges = [];
   bool useRecentMessages;
 
@@ -990,6 +994,33 @@ class Client {
   // TODO: Rework this to not clear emotes before they are acquired and only clear if we can receive new ones, maybe return difference?
   void updateEmotes() async {
     emotes.clear();
+    emojis.clear();
+
+    try {
+      var response = await http.get(Uri.parse('https://raw.githubusercontent.com/iamcal/emoji-data/master/emoji.json'));
+      var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+
+      for (var entry in jsonResponse.where((entry) => entry['has_img_twitter'] == true)) {
+        var emote = Emote(
+          alt: entry['unified'].split('-').map((x) => String.fromCharCode(int.parse(x, radix: 16))).join(),
+          name: entry['short_name'],
+          // id: emoteData['id'],
+          provider: 'Emoji',
+          // mipmap: List<String>.from(
+          //   emoteData['urls'].values.map(
+          //         (url) => 'https:$url',
+          //       ),
+          // ),
+          mipmap: [
+            'https://raw.githubusercontent.com/iamcal/emoji-data/master/img-twitter-72/${entry['image']}',
+          ],
+        );
+
+        emojis.add(emote);
+      }
+    } catch (e) {
+      print(e);
+    }
 
     try {
       var emotesRequest = await http.get(Uri.parse('https://api.frankerfacez.com/v1/set/global'));
@@ -1089,7 +1120,9 @@ class Client {
   }
 
   void consumeChannelBucket() async {
-    var tokens = (50.0 * 0.95 / 15.0 * 2.0).floor() - 2;
+    var attemptsPerSecond = 20.0 / 10.0;
+    var tokens = ((attemptsPerSecond * 2.0) - 1.0).floor();
+    // var tokens = (50.0 * 0.95 / 15.0 * 2.0).floor() - 2;
 
     var channelsToJoin = channels.where((channel) => channel.state == ChannelState.Disconnected && channel.receiver!.state == ConnectionState.Connected).take(tokens);
     var channelsToJoinGroups = groupBy(channelsToJoin, (Channel channel) => channel.receiver);
