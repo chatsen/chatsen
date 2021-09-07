@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -12,6 +13,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
+import 'package:http/http.dart' as http;
 
 class AccountPage extends StatefulWidget {
   final twitch.Client client;
@@ -88,6 +90,48 @@ class _AccountPageState extends State<AccountPage> {
                   title: account.token != null ? '${account.login}' : 'Anonymous User',
                   subtitle: !kDebugMode ? null : (account.token != null ? '${account.clientId}' : 'Login as ${account.login}'),
                   onTap: () async {
+                    if (account.token == null) return;
+
+                    var response = await http.get(
+                      Uri.parse('https://id.twitch.tv/oauth2/validate'),
+                      headers: {
+                        'Authorization': 'Bearer ${account.token}',
+                      },
+                    );
+                    var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+                    print(jsonResponse);
+
+                    if (jsonResponse['expires_in'] != null && Duration(seconds: (jsonResponse['expires_in'] ?? -1)) <= Duration(days: 7)) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Your login will expire soon! Please login again to refresh it.'),
+                        behavior: SnackBarBehavior.floating,
+                        action: SnackBarAction(
+                          label: 'Re-login',
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (BuildContext context) => OAuthPage(client: widget.client)),
+                            );
+                          },
+                        ),
+                      ));
+                    }
+
+                    if (jsonResponse['expires_in'] == null || (jsonResponse['expires_in'] ?? -1) < 0) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Your login has expired! Please login again to refresh it.'),
+                        behavior: SnackBarBehavior.floating,
+                        action: SnackBarAction(
+                          label: 'Re-login',
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (BuildContext context) => OAuthPage(client: widget.client)),
+                            );
+                          },
+                        ),
+                      ));
+                      return;
+                    }
+
                     await widget.client.swapCredentials(
                       twitch.Credentials(
                         clientId: account.clientId,

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:chatsen/Mentions/CustomMentionsCubit.dart';
+import 'package:chatsen/Pages/OAuth.dart';
 import 'package:collection/src/iterable_extensions.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -99,17 +100,61 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
       },
     );
 
-    Future.delayed(Duration(seconds: 2)).then(
+    Future.delayed(Duration(seconds: 1)).then(
       (t) => BlocProvider.of<AccountsCubit>(context).getActive().then(
-            (account) => client.swapCredentials(
-              twitch.Credentials(
-                clientId: account.clientId,
-                id: account.id,
-                login: account.login!,
-                token: account.token,
+        (account) async {
+          if (account.token == null) return;
+
+          var response = await http.get(
+            Uri.parse('https://id.twitch.tv/oauth2/validate'),
+            headers: {
+              'Authorization': 'Bearer ${account.token}',
+            },
+          );
+          var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+          print(jsonResponse);
+
+          if (jsonResponse['expires_in'] != null && Duration(seconds: (jsonResponse['expires_in'] ?? -1)) <= Duration(days: 7)) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Your login will expire soon! Please login again to refresh it.'),
+              behavior: SnackBarBehavior.floating,
+              action: SnackBarAction(
+                label: 'Re-login',
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (BuildContext context) => OAuthPage(client: client)),
+                  );
+                },
               ),
+            ));
+          }
+
+          if (jsonResponse['expires_in'] == null || (jsonResponse['expires_in'] ?? -1) < 0) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Your login has expired! Please login again to refresh it.'),
+              behavior: SnackBarBehavior.floating,
+              action: SnackBarAction(
+                label: 'Re-login',
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (BuildContext context) => OAuthPage(client: client)),
+                  );
+                },
+              ),
+            ));
+            return;
+          }
+
+          return client.swapCredentials(
+            twitch.Credentials(
+              clientId: account.clientId,
+              id: account.id,
+              login: account.login!,
+              token: account.token,
             ),
-          ),
+          );
+        },
+      ),
     );
 
     // AccountPresenter.findCurrentAccount().then(
@@ -131,7 +176,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
     updateFuture = UpdateModal.hasUpdate();
 
     Timer.periodic(Duration(minutes: 5), (timer) {
-      print('Checking for updates...');
+      // print('Checking for updates...');
       setState(() {
         updateFuture = UpdateModal.hasUpdate();
       });
