@@ -98,7 +98,10 @@ class ChatMessage extends StatelessWidget {
                     decoration: TextDecoration.underline,
                     shadows: shadows,
                   ),
-                  recognizer: TapGestureRecognizer()..onTap = () async => launch(Uri.encodeComponent(token.data)),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () async {
+                      await launch(Uri.parse(token.data).toString());
+                    },
                 ),
                 TextSpan(text: ' '),
               ],
@@ -117,7 +120,7 @@ class ChatMessage extends StatelessWidget {
                       decoration: TextDecoration.underline,
                       shadows: shadows,
                     ),
-                    recognizer: TapGestureRecognizer()..onTap = () async => launch(Uri.encodeComponent(token.data)),
+                    recognizer: TapGestureRecognizer()..onTap = () async => launch(Uri.parse(token.data).toString())),
                   ),
                   TextSpan(text: ' '),
                 ],
@@ -134,8 +137,8 @@ class ChatMessage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: InkWell(
-                      onTap: () async => launch(Uri.encodeComponent(token.data)), //'https://cdn.imgproxify.com/image?url=${Uri.encodeComponent(token.data)}'),
-                      child: NetworkImageW(Uri.encodeComponent(token.data)), //'https://cdn.imgproxify.com/image?url=${Uri.encodeComponent(token.data)}'),
+                      onTap: () async => launch(Uri.parse(token.data).toString()), //'https://cdn.imgproxify.com/image?url=${Uri.encodeComponent(token.data)}'),
+                      child: NetworkImageW(Uri.parse(token.data).toString()), //'https://cdn.imgproxify.com/image?url=${Uri.encodeComponent(token.data)}'),
                     ),
                   ),
                 ),
