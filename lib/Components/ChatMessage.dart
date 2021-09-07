@@ -120,7 +120,7 @@ class ChatMessage extends StatelessWidget {
                       decoration: TextDecoration.underline,
                       shadows: shadows,
                     ),
-                    recognizer: TapGestureRecognizer()..onTap = () async => launch(Uri.parse(token.data).toString())),
+                    recognizer: TapGestureRecognizer()..onTap = () async => launch(Uri.parse(token.data).toString()),
                   ),
                   TextSpan(text: ' '),
                 ],
