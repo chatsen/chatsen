@@ -55,13 +55,14 @@ class HomeDrawer extends StatelessWidget {
                               IconButton(
                                 icon: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.play_fill : Icons.play_arrow),
                                 onPressed: () async {
+                                  var bgDaemon = BlocProvider.of<BackgroundDaemonCubit>(context);
                                   var toggle = BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed;
                                   (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) ? BlocProvider.of<StreamOverlayBloc>(context).add(StreamOverlayOpen(channelName: channel!.name!.substring(1))) : BlocProvider.of<StreamOverlayBloc>(context).add(StreamOVerlayClose());
                                   await Future.delayed(Duration(seconds: 2));
                                   if (toggle) {
-                                    await BlocProvider.of<BackgroundDaemonCubit>(context).pause();
+                                    await bgDaemon.pause();
                                   } else {
-                                    await BlocProvider.of<BackgroundDaemonCubit>(context).play();
+                                    await bgDaemon.play();
                                   }
                                 }, //launch('https://twitch.tv/${channel.name.substring(1)}'),
                                 tooltip: 'Open current channel\'s stream',
