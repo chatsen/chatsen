@@ -354,7 +354,7 @@ class Channel {
     for (var raw in jsonResponse['messages'] ?? []) {
       var message = IRCMessage.fromData(raw);
       if (message?.command != 'PRIVMSG') {
-        print(raw);
+        // print(raw);
         continue;
       }
 
@@ -1019,7 +1019,8 @@ class Client {
         emojis.add(emote);
       }
     } catch (e) {
-      print(e);
+      // print(e);
+      print('Couldn\'t load emojis');
     }
 
     try {

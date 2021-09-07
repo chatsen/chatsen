@@ -29,18 +29,6 @@ import 'Settings/Settings.dart';
 import 'StreamOverlay/StreamOverlayBloc.dart';
 
 Future<void> appRunner() async {
-  try {
-    print('throwing');
-    throw 'hello';
-  } catch (exception, stackTrace) {
-    print('catching');
-    await Sentry.captureException(
-      exception,
-      stackTrace: stackTrace,
-    );
-    print('caught');
-  }
-
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isAndroid || Platform.isIOS) {
     await Hive.initFlutter();
@@ -88,7 +76,7 @@ Future<void> appRunner() async {
 
 /// The main function is the entry point of our application.
 void main() async {
-  if (true || kReleaseMode) {
+  if (kReleaseMode) {
     await SentryFlutter.init(
       (options) {
         options.dsn = 'https://046d255bbfc44688882f87afca19327b@sentry.chatsen.app/2'; //'http://f88a8d7567a94091aa548941a9b1980b@94.130.182.111:9000/2'; // 'https://b799b7980e924209ae8631129e72320e@o917111.ingest.sentry.io/5859161';

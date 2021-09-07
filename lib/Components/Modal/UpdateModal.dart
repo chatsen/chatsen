@@ -45,9 +45,7 @@ class GithubReleaseProvider {
             versionName: tagData['name'],
           ),
         );
-      } catch (e) {
-        print(e);
-      }
+      } catch (e) {}
     }
 
     return result;

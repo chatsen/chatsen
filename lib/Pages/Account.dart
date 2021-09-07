@@ -99,6 +99,7 @@ class _AccountPageState extends State<AccountPage> {
                       },
                     );
                     var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+                    print('Verifying ${account.login} -> ${account.token} @ ${account.clientId}');
                     print(jsonResponse);
 
                     if (jsonResponse['expires_in'] != null && Duration(seconds: (jsonResponse['expires_in'] ?? -1)) <= Duration(days: 7)) {

@@ -262,24 +262,20 @@ class ChatInputBoxState extends State<ChatInputBox> {
                         child: GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           onTapDown: (e) {
-                            print('pressed');
                             timer?.cancel();
                             timer = null;
                             timer = Timer.periodic(
                               Duration(seconds: 2),
                               (timer) {
-                                print('2');
                                 send(textEditingController.text, remove: false);
                               },
                             );
                           },
                           onTapCancel: () {
-                            print('cancel');
                             timer?.cancel();
                             timer = null;
                           },
                           onTapUp: (e) {
-                            print('cancel');
                             timer?.cancel();
                             timer = null;
                           },
