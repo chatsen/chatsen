@@ -169,13 +169,18 @@ class UploadModal extends StatelessWidget {
     BuildContext context, {
     required twitch.Channel channel,
   }) async {
-    var selectedFile = await FilePickerCross.importFromStorage(type: Platform.isIOS ? FileTypeCross.image : FileTypeCross.any);
-    await BlurModal.show(
-      context: context,
-      child: UploadModal(
-        file: selectedFile,
-        channel: channel,
-      ),
-    );
+    try {
+      var selectedFile = await FilePickerCross.importFromStorage(type: Platform.isIOS ? FileTypeCross.image : FileTypeCross.any);
+      await BlurModal.show(
+        context: context,
+        child: UploadModal(
+          file: selectedFile,
+          channel: channel,
+        ),
+      );
+      // ignore: empty_catches
+    } catch (e) {
+      print(e);
+    }
   }
 }

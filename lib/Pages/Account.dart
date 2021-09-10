@@ -92,6 +92,9 @@ class _AccountPageState extends State<AccountPage> {
                   onTap: () async {
                     if (account.token == null) return;
 
+                    var accountsCubit = BlocProvider.of<AccountsCubit>(context);
+                    var navigator = Navigator.of(context);
+
                     var response = await http.get(
                       Uri.parse('https://id.twitch.tv/oauth2/validate'),
                       headers: {
@@ -141,8 +144,8 @@ class _AccountPageState extends State<AccountPage> {
                         token: account.token,
                       ),
                     );
-                    if (account.token != null) await BlocProvider.of<AccountsCubit>(context).setActive(account);
-                    Navigator.of(context).pop();
+                    if (account.token != null) await accountsCubit.setActive(account);
+                    if (navigator.canPop()) navigator.pop();
                   },
                 ),
             ];
