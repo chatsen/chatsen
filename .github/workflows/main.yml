@@ -87,17 +87,23 @@ jobs:
       - name: Create project for Windows
         working-directory: ./chatsen
         if: matrix.target == 'Windows'
-        run: flutter create --platforms windows --org com.chatsen .
+        run: |
+          flutter config --enable-windows-desktop
+          flutter create --platforms windows --org com.chatsen .
 
       - name: Create project for Linux
         working-directory: ./chatsen
         if: matrix.target == 'Linux'
-        run: flutter create --platforms linux --org com.chatsen .
+        run: |
+          flutter config --enable-linux-desktop
+          flutter create --platforms linux --org com.chatsen .
 
       - name: Create project for macOS
         working-directory: ./chatsen
         if: matrix.target == 'macOS'
-        run: flutter create --platforms macos --org com.chatsen .
+        run: |
+          flutter config --enable-macos-desktop
+          flutter create --platforms macos --org com.chatsen .
 
       # - name: Print test
       #   if: matrix.target == 'Android'
