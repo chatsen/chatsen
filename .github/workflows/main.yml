@@ -74,6 +74,31 @@ jobs:
         run: |
           ${{env.sed}} -i '/_frameDuration = _nextFrame!.duration;/a \ \ \ \ \ \ if (_frameDuration!.inMilliseconds <= 10) _frameDuration = Duration(milliseconds: 100);' $(which flutter | head -n 1 | ${{env.sed}} -e 's/\\/\//g' -e 's/\/bin\/flutter.*//')/packages/flutter/lib/src/painting/image_stream.dart
 
+      - name: Create project for Android
+        working-directory: ./chatsen
+        if: matrix.target == 'Android'
+        run: flutter create --platforms android --org com.chatsen .
+
+      - name: Create project for iOS
+        working-directory: ./chatsen
+        if: matrix.target == 'iOS'
+        run: flutter create --platforms ios --org com.chatsen .
+
+      - name: Create project for Windows
+        working-directory: ./chatsen
+        if: matrix.target == 'Windows'
+        run: flutter create --platforms windows --org com.chatsen .
+
+      - name: Create project for Linux
+        working-directory: ./chatsen
+        if: matrix.target == 'Linux'
+        run: flutter create --platforms linux --org com.chatsen .
+
+      - name: Create project for macOS
+        working-directory: ./chatsen
+        if: matrix.target == 'macOS'
+        run: flutter create --platforms macos --org com.chatsen .
+
       # - name: Print test
       #   if: matrix.target == 'Android'
       #   run: echo Android Build Ran
