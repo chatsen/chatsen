@@ -148,7 +148,9 @@ jobs:
       - name: Build on Linux
         if: matrix.target == 'Linux'
         working-directory: ./chatsen
-        run: flutter build linux
+        run: |
+          apt install libgtk-3-dev ninja-build
+          flutter build linux
 
       - name: Build on macOS
         if: matrix.target == 'macOS'
