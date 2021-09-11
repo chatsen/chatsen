@@ -126,9 +126,9 @@ jobs:
         working-directory: ./chatsen
         run: rm -rf test
 
-      - name: Building the launcher icon
-        working-directory: ./chatsen
-        run: flutter pub run flutter_launcher_icons:main
+      # - name: Building the launcher icon
+      #   working-directory: ./chatsen
+      #   run: flutter pub run flutter_launcher_icons:main
 
       - name: Build on Android
         if: matrix.target == 'Android'
