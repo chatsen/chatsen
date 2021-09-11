@@ -172,7 +172,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
         ),
       ),
       child: InkWell(
-        onTap: () => widget.insertEmote(emote.name),
+        onTap: () => widget.insertEmote((emote.alt ?? emote.name)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: NetworkImageW(emote.mipmap!.last!),
