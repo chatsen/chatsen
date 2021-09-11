@@ -140,10 +140,20 @@ jobs:
         working-directory: ./chatsen
         run: flutter build ios --no-codesign
 
-      - name: Build on iOS
-        if: matrix.target != 'Android' && matrix.target != 'iOS'
+      - name: Build on Windows
+        if: matrix.target == 'Windows'
         working-directory: ./chatsen
-        run: flutter build
+        run: flutter build windows
+        
+      - name: Build on Linux
+        if: matrix.target == 'Linux'
+        working-directory: ./chatsen
+        run: flutter build linux
+
+      - name: Build on macOS
+        if: matrix.target == 'macOS'
+        working-directory: ./chatsen
+        run: flutter build macos
 
       # - name: Print test
       #   if: matrix.target == 'Android'
