@@ -149,7 +149,7 @@ jobs:
         if: matrix.target == 'Linux'
         working-directory: ./chatsen
         run: |
-          apt install libgtk-3-dev ninja-build
+          sudo apt install libgtk-3-dev ninja-build
           flutter build linux
 
       - name: Build on macOS
