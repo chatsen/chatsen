@@ -141,10 +141,10 @@ jobs:
         working-directory: ./chatsen
         run: rm -rf test
 
-      - name: Building the launcher icon
-        working-directory: ./chatsen
-        if: matrix.target == 'Android' || matrix.target == 'iOS'
-        run: flutter pub run flutter_launcher_icons:main
+      # - name: Building the launcher icon
+      #   working-directory: ./chatsen
+      #   if: matrix.target == 'Android' || matrix.target == 'iOS'
+      #   run: flutter pub run flutter_launcher_icons:main
 
       - name: Build on Android
         if: matrix.target == 'Android'
@@ -223,7 +223,7 @@ jobs:
         if: matrix.target == 'Windows'
         run: |
           # mkdir -p release
-          cp -rf ./build/windows/runner/Release ./release
+          cp -rf ./chatsen/build/windows/runner/Release ./release
           powershell Compress-Archive * Windows.zip
       
       - name: Uploading Windows artifact
