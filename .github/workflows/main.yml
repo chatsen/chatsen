@@ -224,7 +224,7 @@ jobs:
         run: |
           # mkdir -p release
           cp -rf ./chatsen/build/windows/runner/Release ./release
-          echo "powershell Compress-Archive release/* Windows.zip" | powershell
+          echo "powershell Compress-Archive release/* release/Windows.zip" | powershell
       
       - name: Uploading Windows artifact
         if: matrix.target == 'Windows'
