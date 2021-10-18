@@ -9,14 +9,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["Android", "Windows", "Linux", "macOS", "iOS"]
+        target: ["Android", "Windows", "macOS", "iOS"] # , "Linux"
         include:
           - target: Android
             os: ubuntu-latest
           - target: Windows
             os: windows-latest
-          - target: Linux
-            os: ubuntu-latest
+          # - target: Linux
+          #   os: ubuntu-latest
           - target: macOS
             os: macos-latest
           - target: iOS
@@ -224,7 +224,7 @@ jobs:
         run: |
           # mkdir -p release
           cp -rf ./chatsen/build/windows/runner/Release ./release
-          powershell Compress-Archive * Windows.zip
+          echo "powershell Compress-Archive release/* Windows.zip" | powershell
       
       - name: Uploading Windows artifact
         if: matrix.target == 'Windows'
