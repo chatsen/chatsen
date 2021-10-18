@@ -82,4 +82,4 @@ Chatsen does not collect any personal or identifying information whatsoever. The
 Since Chatsen interfaces with Twitch however, you are subject to their Privacy Policy available at https://www.twitch.tv/p/en/legal/privacy-notice/
 
 # Contact
-- Discord: https://chatsen.app/discord - https://discord.gg/chatsen
+- Discord: https://chatsen.app/discord
