@@ -38,9 +38,10 @@ jobs:
 
       - name: Checking out sigining keys
         uses: actions/checkout@v2
-        if: matrix.target == 'Android' && github.repository_owner == 'chatsen' # && github.repository == 'chatsen/chatsen'
+        if: matrix.target == 'Android' && github.repository_owner == 'chatsen'
         with:
           repository: chatsen/signingkeys
+          ref: 'master'
           token: ${{secrets.GHKEY}}
           path: signingkeys
 
@@ -214,5 +215,28 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'Android' && github.repository_owner == 'chatsen'
         with:
           files: ./release/Android.apk
+        env:
+          GITHUB_TOKEN: ${{secrets.GHKEY}}
+
+      # Windows release
+      - name: Preparing Windows release
+        if: matrix.target == 'Windows'
+        run: |
+          # mkdir -p release
+          cp -rf ./build/windows/runner/Release ./release
+          powershell Compress-Archive * Windows.zip
+      
+      - name: Uploading Windows artifact
+        if: matrix.target == 'Windows'
+        uses: actions/upload-artifact@v2
+        with:
+          name: Windows.zip
+          path: ./release/Windows.zip
+
+      - name: Uploading Windows tagged release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'Windows' && github.repository_owner == 'chatsen'
+        with:
+          files: ./release/Windows.zip
         env:
           GITHUB_TOKEN: ${{secrets.GHKEY}}
