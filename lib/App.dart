@@ -1,51 +1,40 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:chatsen/Pages/Home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_acrylic/flutter_acrylic.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '/Components/Notification.dart';
-import 'BackgroundAudio/BackgroundAudioWrapper.dart';
-import 'Pages/Home.dart';
-import 'Settings/Settings.dart';
-import 'Settings/SettingsState.dart';
-import 'Theme/ThemeBloc.dart';
-import 'Theme/ThemeManager.dart';
-import 'Theme/ThemeState.dart';
+class App extends StatelessWidget {
+  const App({
+    Key? key,
+  }) : super(key: key);
 
-/// Our [App] class. It represents our MaterialApp and will redirect us to our app's homepage.
-class App extends StatefulWidget {
+  ThemeData buildThemeData() {
+    // theme: ThemeData.from(
+    //       colorScheme: ColorScheme.highContrastDark(),
+    //     ).copyWith(
+    //       textTheme:
+    //     ),
+    var themeData = ThemeData.from(
+      colorScheme: ColorScheme.dark(),
+    );
+    themeData = themeData.copyWith(
+      // textTheme: GoogleFonts.latoTextTheme(themeData.textTheme),
+      textTheme: GoogleFonts.openSansTextTheme(themeData.textTheme),
+    );
+    // Window.setEffect(
+    //   effect: WindowEffect.mica,
+    //   dark: themeData.brightness == Brightness.dark,
+    // );
+    return themeData;
+  }
+
   @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  Key globalKey = GlobalKey();
-
-  @override
-  Widget build(BuildContext context) => BlocBuilder<Settings, SettingsState>(
-        builder: (context, settingsState) => BlocBuilder<ThemeBloc, ThemeState>(
-          builder: (context, themeState) {
-            if (themeState is ThemeLoaded && settingsState is SettingsLoaded) {
-              return MaterialApp(
-                darkTheme: ThemeManager.buildTheme(Brightness.dark, themeState.colorScheme),
-                theme: ThemeManager.buildTheme(Brightness.light, themeState.colorScheme),
-                themeMode: themeState.mode,
-                debugShowCheckedModeBanner: false,
-                home: NotificationWrapper(
-                  child: Builder(
-                    builder: (context) => ThemeManager.routeWrapper(
-                      context: context,
-                      child: settingsState.notificationBackground
-                          ? BackgroundAudioWrapper(
-                              child: HomePage(key: globalKey),
-                            )
-                          : HomePage(key: globalKey),
-                    ),
-                  ),
-                ),
-              );
-            }
-            return Center(child: CircularProgressIndicator.adaptive());
-          },
-        ),
+  Widget build(BuildContext context) => MaterialApp(
+        // theme: ThemeData(fontFamily: 'Raleway'),
+        // theme: ThemeData.dark(),
+        theme: buildThemeData(),
+        home: HomePage(),
+        debugShowCheckedModeBanner: false,
       );
 }
