@@ -49,6 +49,7 @@ jobs:
           sed -i '/.*package=".*".*/a \ \ \ <uses-permission android:name="android.permission.INTERNET"/>' ./android/app/src/main/AndroidManifest.xml
           sed -i '/.*release {.*/a \ \ \ \ \ \ \ \ \ \ \ \ shrinkResources false\n\ \ \ \ \ \ \ \ \ \ \ \ minifyEnabled false' ./android/app/build.gradle
           # sed -i 's/minSdkVersion 16/minSdkVersion 19/' ./android/app/build.gradle
+          sed -i 's/minSdkVersion .*/minSdkVersion 21/' ./android/app/build.gradle
           sed -i '/android {/i def keystoreProperties = new Properties()\ndef keystorePropertiesFile = rootProject.file('\''../../signingkeys/key.properties'\'')\nif (keystorePropertiesFile.exists()) {\n    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))\n}\n' ./android/app/build.gradle
           sed -i '/.*buildTypes {/i \ \ \ \ signingConfigs {\n\ \ \ \ \ \ \ \ release {\n\ \ \ \ \ \ \ \ \ \ \ \ keyAlias keystoreProperties['\''keyAlias'\'']\n\ \ \ \ \ \ \ \ \ \ \ \ keyPassword keystoreProperties['\''keyPassword'\'']\n\ \ \ \ \ \ \ \ \ \ \ \ storeFile keystoreProperties['\''storeFile'\''] ? file(keystoreProperties['\''storeFile'\'']) : null\n\ \ \ \ \ \ \ \ \ \ \ \ storePassword keystoreProperties['\''storePassword'\'']\n\ \ \ \ \ \ \ \ }\n\ \ \ \ }' ./android/app/build.gradle
           sed -i 's/signingConfig signingConfigs.debug/signingConfig signingConfigs.release/' ./android/app/build.gradle
@@ -147,6 +148,7 @@ jobs:
           gsed -i 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info.plist
           gsed -i '/<dict>/a \ \ <key>UIBackgroundModes</key>\n\ \ <array>\n\ \ \ \ <string>audio</string>\n\ \ </array>' ios/Runner/Info.plist
           gsed -i '/<dict>/a \ \ <key>NSPhotoLibraryUsageDescription</key>\n\ \ <string>Chatsen requests to access your files to allow file selection.</string>' ios/Runner/Info.plist
+          gsed -i 's/minSdkVersion .*/minSdkVersion 21/' ./android/app/build.gradle
           flutter pub run flutter_launcher_icons:main
           flutter build ios --no-codesign
           # '<key>UIBackgroundModes</key>\	\<array>\	\	<string>audio</string>\	\	<string>bluetooth-central</string>\	\	<string>bluetooth-peripheral</string>\	\	<string>external-accessory</string>\	\	<string>fetch</string>\	\	<string>location</string>\	\	<string>processing</string>\	\	<string>remote-notification</string>\	\	<string>voip</string>\	\</array>'
