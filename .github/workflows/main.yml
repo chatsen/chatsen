@@ -148,6 +148,7 @@ jobs:
           gsed -i 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info.plist
           gsed -i '/<dict>/a \ \ <key>UIBackgroundModes</key>\n\ \ <array>\n\ \ \ \ <string>audio</string>\n\ \ </array>' ios/Runner/Info.plist
           gsed -i '/<dict>/a \ \ <key>NSPhotoLibraryUsageDescription</key>\n\ \ <string>Chatsen requests to access your files to allow file selection.</string>' ios/Runner/Info.plist
+          gsed -i '/<dict>/a \ \ <key>CADisableMinimumFrameDurationOnPhone</key><true/>' ios/Runner/Info.plist
           gsed -i 's/minSdkVersion .*/minSdkVersion 21/' ./android/app/build.gradle
           flutter pub run flutter_launcher_icons:main
           flutter build ios --no-codesign
