@@ -96,7 +96,7 @@ jobs:
           name: PlayStore.aab
           path: ./release/PlayStore.aab
 
-      - uses: r0adkll/upload-google-play@v1.0.16
+      - uses: r0adkll/upload-google-play@v1.0.15
         if: startsWith(github.ref, 'refs/tags/')
         with:
           packageName: com.chatsen.chatsen
