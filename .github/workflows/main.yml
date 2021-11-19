@@ -9,14 +9,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["Android", "Windows", "macOS", "iOS"] # , "Linux"
+        target: ["Android", "Windows", "Linux", "macOS", "iOS"]
         include:
           - target: Android
             os: ubuntu-latest
           - target: Windows
             os: windows-latest
-          # - target: Linux
-          #   os: ubuntu-latest
+          - target: Linux
+            os: ubuntu-latest
           - target: macOS
             os: macos-latest
           - target: iOS
@@ -35,6 +35,11 @@ jobs:
         run: |
           brew install gnu-sed
           echo "sed=gsed" >> $GITHUB_ENV
+
+      - name: Set up zip for Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          apt install zip
 
       - name: Checking out sigining keys
         uses: actions/checkout@v2
@@ -252,9 +257,9 @@ jobs:
       - name: Preparing macOS release
         if: matrix.target == 'macOS'
         run: |
-          mkdir -p release/Payload
+          mkdir -p release
           cp -rf ./chatsen/build/macos/Build/Products/Release/chatsen.app ./release/Chatsen.app
-          cd release && zip -r ./macOS.zip ./release/Chatsen.app
+          cd release && zip -r ./macOS.zip ./Chatsen.app
 
       - name: Uploading macOS artifact
         if: matrix.target == 'macOS'
@@ -268,5 +273,28 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'macOS'
         with:
           files: ./release/macOS.zip
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      # Linux release
+      - name: Preparing Linux release
+        if: matrix.target == 'Linux'
+        run: |
+          mkdir -p release
+          cp -rf ./chatsen/build/linux/x64/release/bundle/* ./release
+          cd release && zip -r ./Linux.zip .
+
+      - name: Uploading Linux artifact
+        if: matrix.target == 'Linux'
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux.zip
+          path: ./release/Linux.zip
+
+      - name: Uploading Linux tagged release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'Linux'
+        with:
+          files: ./release/Linux.zip
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
