@@ -99,12 +99,6 @@ jobs:
           ${{env.sed}} -i "/io.flutter.embedding.android.FlutterActivity/a import android.os.Bundle\nimport android.os.Build\nimport androidx.annotation.NonNull\nimport io.flutter.embedding.android.FlutterActivityLaunchConfigs.BackgroundMode.transparent\nimport io.flutter.embedding.engine.FlutterEngine\nimport io.flutter.plugins.GeneratedPluginRegistrant" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
           ${{env.sed}} -i "/FlutterActivity()/a \ \ \ \ override fun onCreate(savedInstanceState: Bundle?) {\n\ \ \ \ \ \ \ \ super.onCreate(savedInstanceState)\n\ \ \ \ \ \ \ \ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {\n\ \ \ \ \ \ \ \ \ \ \ \ window.setDecorFitsSystemWindows(false)\n\ \ \ \ \ \ \ \ }\n\ \ \ \ }" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
 
-      - name: Temporarily fix generating icons for the app
-        working-directory: ./chatsen
-        if: matrix.target == 'Android' || matrix.target == 'iOS'
-        run: |
-          ${{env.sed}} -i 's/minSdkVersion .*/minSdkVersion 21/' ./android/app/build.gradle
-
       - name: Add signing to the project for Android
         working-directory: ./chatsen
         if: matrix.target == 'Android' && github.repository_owner == 'chatsen'
@@ -159,6 +153,12 @@ jobs:
       - name: Cleaning up the test directory
         working-directory: ./chatsen
         run: rm -rf test
+
+      - name: Temporarily fix generating icons for the app
+        working-directory: ./chatsen
+        if: matrix.target == 'Android' || matrix.target == 'iOS'
+        run: |
+          ${{env.sed}} -i 's/minSdkVersion .*/minSdkVersion 21/' ./android/app/build.gradle
 
       - name: Building the launcher icon
         working-directory: ./chatsen
