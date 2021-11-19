@@ -79,7 +79,7 @@ void main() async {
   if (kReleaseMode) {
     await SentryFlutter.init(
       (options) {
-        options.dsn = 'https://3688ab432c4e4662a641eec1be8691d4@sentry.chatsen.app/2'; //'http://f88a8d7567a94091aa548941a9b1980b@94.130.182.111:9000/2'; // 'https://b799b7980e924209ae8631129e72320e@o917111.ingest.sentry.io/5859161';
+        options.dsn = 'https://27538e5be8ea45bd97bf0875ba6e756c@sentry.chatsen.app/4';
       },
       appRunner: appRunner,
     );

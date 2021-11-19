@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:chatsen/Accounts/AccountModel.dart';
 import 'package:chatsen/Accounts/AccountsCubit.dart';
+import 'package:chatsen/Components/Modal/TokenModal.dart';
 import 'package:chatsen/Components/UI/CustomSliverAppBarDelegate.dart';
 import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
 import 'package:chatsen/Components/UI/Tile.dart';
@@ -38,15 +39,22 @@ class _AccountPageState extends State<AccountPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => OAuthPage(
-                client: widget.client,
+        floatingActionButton: InkWell(
+          onLongPress: () async => TokenModal.show(
+            context,
+            client: widget.client,
+          ),
+          child: FloatingActionButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => OAuthPage(
+                  client: widget.client,
+                ),
               ),
             ),
+            // : () {},
+            child: Icon(Icons.add),
           ),
-          child: Icon(Icons.add),
         ),
         appBar: NoAppBarBlur(),
         body: BlocBuilder<AccountsCubit, List<AccountModel>>(
