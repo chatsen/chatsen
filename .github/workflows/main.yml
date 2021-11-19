@@ -8,12 +8,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: chatsen/signingkeys
-          token: ${{secrets.GHKEY}}
+          token: ${{secrets.GITHUB_TOKEN}}
           path: signingkeys
 
       - uses: actions/checkout@v2
         with:
-          token: ${{secrets.GHKEY}}
+          token: ${{secrets.GITHUB_TOKEN}}
           path: chatsen
 
       - uses: actions/setup-java@v1
@@ -73,7 +73,7 @@ jobs:
         with:
           files: ./release/Android.apk
         env:
-          GITHUB_TOKEN: ${{secrets.GHKEY}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Generate project files and cleanup
         if: startsWith(github.ref, 'refs/tags/')
@@ -112,7 +112,7 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          token: ${{secrets.GHKEY}}
+          token: ${{secrets.GITHUB_TOKEN}}
           path: chatsen
 
       - uses: actions/setup-java@v1
@@ -168,4 +168,4 @@ jobs:
         with:
           files: ./release/iOS.ipa
         env:
-          GITHUB_TOKEN: ${{secrets.GHKEY}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
