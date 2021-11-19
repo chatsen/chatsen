@@ -92,7 +92,7 @@ jobs:
           # Add support for drawing behind the navbar on Android 11+
           ${{env.sed}} -i "/io.flutter.embedding.android.FlutterActivity/a import android.os.Bundle\nimport android.os.Build\nimport androidx.annotation.NonNull\nimport io.flutter.embedding.android.FlutterActivityLaunchConfigs.BackgroundMode.transparent\nimport io.flutter.embedding.engine.FlutterEngine\nimport io.flutter.plugins.GeneratedPluginRegistrant" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
           ${{env.sed}} -i "/FlutterActivity()/a \ \ \ \ override fun onCreate(savedInstanceState: Bundle?) {\n\ \ \ \ \ \ \ \ super.onCreate(savedInstanceState)\n\ \ \ \ \ \ \ \ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {\n\ \ \ \ \ \ \ \ \ \ \ \ window.setDecorFitsSystemWindows(false)\n\ \ \ \ \ \ \ \ }\n\ \ \ \ }" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
-          
+
       - name: Add signing to the project for Android
         working-directory: ./chatsen
         if: matrix.target == 'Android' && github.repository_owner == 'chatsen'
@@ -160,7 +160,7 @@ jobs:
         if: matrix.target == 'Windows'
         working-directory: ./chatsen
         run: flutter build windows
-        
+
       - name: Build on Linux
         if: matrix.target == 'Linux'
         working-directory: ./chatsen
@@ -180,7 +180,7 @@ jobs:
           mkdir -p release/Payload
           cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
           ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS.ipa
-      
+
       - name: Uploading iOS artifact
         if: matrix.target == 'iOS'
         uses: actions/upload-artifact@v2
@@ -190,11 +190,11 @@ jobs:
 
       - name: Uploading iOS tagged release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'iOS' && github.repository_owner == 'chatsen'
+        if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'iOS'
         with:
           files: ./release/iOS.ipa
         env:
-          GITHUB_TOKEN: ${{secrets.GHKEY}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       # Android release
       - name: Preparing Android release
@@ -212,11 +212,11 @@ jobs:
 
       - name: Uploading Android tagged release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'Android' && github.repository_owner == 'chatsen'
+        if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'Android'
         with:
           files: ./release/Android.apk
         env:
-          GITHUB_TOKEN: ${{secrets.GHKEY}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       # Windows release
       - name: Preparing Windows release
@@ -225,7 +225,7 @@ jobs:
           # mkdir -p release
           cp -rf ./chatsen/build/windows/runner/Release ./release
           echo "powershell Compress-Archive release/* release/Windows.zip" | powershell
-      
+
       - name: Uploading Windows artifact
         if: matrix.target == 'Windows'
         uses: actions/upload-artifact@v2
@@ -235,8 +235,8 @@ jobs:
 
       - name: Uploading Windows tagged release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'Windows' && github.repository_owner == 'chatsen'
+        if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'Windows'
         with:
           files: ./release/Windows.zip
         env:
-          GITHUB_TOKEN: ${{secrets.GHKEY}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
