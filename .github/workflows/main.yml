@@ -36,7 +36,7 @@ jobs:
           brew install gnu-sed
           echo "sed=gsed" >> $GITHUB_ENV
 
-      - name: Set up zip for Ubuntu
+      - name: Set up Ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt update
@@ -99,6 +99,12 @@ jobs:
           ${{env.sed}} -i "/io.flutter.embedding.android.FlutterActivity/a import android.os.Bundle\nimport android.os.Build\nimport androidx.annotation.NonNull\nimport io.flutter.embedding.android.FlutterActivityLaunchConfigs.BackgroundMode.transparent\nimport io.flutter.embedding.engine.FlutterEngine\nimport io.flutter.plugins.GeneratedPluginRegistrant" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
           ${{env.sed}} -i "/FlutterActivity()/a \ \ \ \ override fun onCreate(savedInstanceState: Bundle?) {\n\ \ \ \ \ \ \ \ super.onCreate(savedInstanceState)\n\ \ \ \ \ \ \ \ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {\n\ \ \ \ \ \ \ \ \ \ \ \ window.setDecorFitsSystemWindows(false)\n\ \ \ \ \ \ \ \ }\n\ \ \ \ }" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
 
+      - name: Temporarily fix generating icons for the app
+        working-directory: ./chatsen
+        if: matrix.target == 'Android' || matrix.target == 'iOS'
+        run: |
+          ${{env.sed}} -i 's/minSdkVersion .*/minSdkVersion 21/' ./android/app/build.gradle
+
       - name: Add signing to the project for Android
         working-directory: ./chatsen
         if: matrix.target == 'Android' && github.repository_owner == 'chatsen'
@@ -154,10 +160,10 @@ jobs:
         working-directory: ./chatsen
         run: rm -rf test
 
-      # - name: Building the launcher icon
-      #   working-directory: ./chatsen
-      #   if: matrix.target == 'Android' || matrix.target == 'iOS'
-      #   run: flutter pub run flutter_launcher_icons:main
+      - name: Building the launcher icon
+        working-directory: ./chatsen
+        if: matrix.target == 'Android' || matrix.target == 'iOS'
+        run: flutter pub run flutter_launcher_icons:main
 
       - name: Build on Android
         if: matrix.target == 'Android'
