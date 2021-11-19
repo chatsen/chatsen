@@ -10,7 +10,7 @@ jobs:
           repository: chatsen/signingkeys
           token: ${{secrets.GITHUB_TOKEN}}
           path: signingkeys
-          branch: master
+          ref: master
 
       - uses: actions/checkout@v2
         with:
