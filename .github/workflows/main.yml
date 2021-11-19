@@ -136,6 +136,13 @@ jobs:
         run: |
           flutter config --enable-macos-desktop
           flutter create --platforms macos --org com.chatsen .
+          # Add permissions for networking and file picker
+          ${{env.sed}} -i '/<dict>/a \ \ <key>com.apple.security.network.client</key>\n\ \ <true/>' macos/Runner/Release.entitlements
+          ${{env.sed}} -i '/<dict>/a \ \ <key>com.apple.security.files.user-selected.read-only</key>\n\ \ <true/>' macos/Runner/Release.entitlements
+          ${{env.sed}} -i '/<dict>/a \ \ <key>com.apple.security.network.client</key>\n\ \ <true/>' macos/Runner/DebugProfile.entitlements
+          ${{env.sed}} -i '/<dict>/a \ \ <key>com.apple.security.files.user-selected.read-only</key>\n\ \ <true/>' macos/Runner/DebugProfile.entitlements
+          # Change the app title
+          ${{env.sed}} -i 's/<string>$(PRODUCT_NAME)<\/string>/<string>Chatsen<\/string>/' ./macos/Runner/Info.plist
 
       - name: Cleaning up the test directory
         working-directory: ./chatsen
@@ -247,7 +254,7 @@ jobs:
         run: |
           mkdir -p release/Payload
           cp -rf ./chatsen/build/macos/Build/Products/Release/chatsen.app ./release/Chatsen.app
-          zip -r ./release/macOS.zip ./release/Chatsen.app
+          cd release && zip -r ./macOS.zip ./release/Chatsen.app
 
       - name: Uploading macOS artifact
         if: matrix.target == 'macOS'
