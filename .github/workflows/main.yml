@@ -240,3 +240,26 @@ jobs:
           files: ./release/Windows.zip
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      # macOS release
+      - name: Preparing macOS release
+        if: matrix.target == 'macOS'
+        run: |
+          mkdir -p release/Payload
+          cp -rf ./chatsen/build/macos/Build/Products/Release/chatsen.app ./release/Chatsen.app
+          zip -r ./release/macOS.zip ./release/Chatsen.app
+
+      - name: Uploading macOS artifact
+        if: matrix.target == 'macOS'
+        uses: actions/upload-artifact@v2
+        with:
+          name: macOS.zip
+          path: ./release/macOS.zip
+
+      - name: Uploading macOS tagged release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/') && matrix.target == 'macOS'
+        with:
+          files: ./release/macOS.zip
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
