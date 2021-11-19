@@ -39,7 +39,7 @@ jobs:
       - name: Set up zip for Ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: |
-          apt install zip
+          sudo apt install zip
 
       - name: Checking out sigining keys
         uses: actions/checkout@v2
