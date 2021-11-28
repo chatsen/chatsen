@@ -7,6 +7,7 @@ import 'package:chatsen/Theme/ThemeManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../Consts.dart';
 import '/Components/UI/WidgetBlur.dart';
 import '/Pages/Account.dart';
 import '/Pages/Search.dart';
@@ -55,14 +56,18 @@ class HomeDrawer extends StatelessWidget {
                               IconButton(
                                 icon: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.play_fill : Icons.play_arrow),
                                 onPressed: () async {
-                                  var bgDaemon = BlocProvider.of<BackgroundDaemonCubit>(context);
-                                  var toggle = BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed;
-                                  (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) ? BlocProvider.of<StreamOverlayBloc>(context).add(StreamOverlayOpen(channelName: channel!.name!.substring(1))) : BlocProvider.of<StreamOverlayBloc>(context).add(StreamOVerlayClose());
-                                  await Future.delayed(Duration(seconds: 2));
-                                  if (toggle) {
-                                    await bgDaemon.pause();
+                                  if (!kPlayStoreRelease) {
+                                    var bgDaemon = BlocProvider.of<BackgroundDaemonCubit>(context);
+                                    var toggle = BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed;
+                                    (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) ? BlocProvider.of<StreamOverlayBloc>(context).add(StreamOverlayOpen(channelName: channel!.name!.substring(1))) : BlocProvider.of<StreamOverlayBloc>(context).add(StreamOVerlayClose());
+                                    await Future.delayed(Duration(seconds: 2));
+                                    if (toggle) {
+                                      await bgDaemon.pause();
+                                    } else {
+                                      await bgDaemon.play();
+                                    }
                                   } else {
-                                    await bgDaemon.play();
+                                    (BlocProvider.of<StreamOverlayBloc>(context).state is StreamOverlayClosed) ? BlocProvider.of<StreamOverlayBloc>(context).add(StreamOverlayOpen(channelName: channel!.name!.substring(1))) : BlocProvider.of<StreamOverlayBloc>(context).add(StreamOVerlayClose());
                                   }
                                 }, //launch('https://twitch.tv/${channel.name.substring(1)}'),
                                 tooltip: 'Open current channel\'s stream',

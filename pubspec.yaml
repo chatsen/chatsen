@@ -39,6 +39,7 @@ dependencies:
   font_awesome_flutter: ^9.1.0
   sentry_flutter: ^6.1.2
   flutter_svg: ^0.23.0+1
+  wakelock: ^0.5.6
 
 dev_dependencies:
   pedantic: ^1.11.0

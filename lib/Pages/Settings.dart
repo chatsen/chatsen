@@ -189,7 +189,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 ),
-                if (Platform.isIOS) // && !kPlayStoreRelease)
+                if (Platform.isIOS && !kPlayStoreRelease)
                   SettingsEntry(
                     category: 'Notifications',
                     title: 'Background notifications',
@@ -472,6 +472,53 @@ class _SettingsPageState extends State<SettingsPage> {
                                 ],
                               ),
                             ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.orange.withAlpha(64),
+                          borderRadius: BorderRadius.circular(8.0),
+                          border: Border.all(
+                            width: 2.0,
+                            color: Colors.orange,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              SizedBox(width: 8.0),
+                              Icon(Icons.info),
+                              SizedBox(width: 16.0),
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Chatsen is currently in beta!',
+                                      style: Theme.of(context).textTheme.subtitle1,
+                                    ),
+                                    SizedBox(height: 2.0),
+                                    Text(
+                                      'Create an issue on GitHub or ask on Discord if you encounter a problem.',
+                                      style: Theme.of(context).textTheme.subtitle2,
+                                    ),
+                                    SizedBox(height: 4.0),
+                                    Text(
+                                      'You can support the project on Patreon if you appreciate my work!',
+                                      // style: Theme.of(context).textTheme.subtitle2,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

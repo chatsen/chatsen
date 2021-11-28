@@ -5,6 +5,7 @@ import 'package:chatsen/Badges/ChatterinoBadges.dart';
 import 'package:chatsen/Badges/FFZBadges.dart';
 import 'package:chatsen/Commands/Command.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
+import 'package:chatsen/Consts.dart';
 import 'package:chatsen/Mentions/CustomMention.dart';
 import 'package:chatsen/Theme/ThemeBloc.dart';
 import 'package:dart_downloader/DownloadManager.dart';
@@ -27,9 +28,13 @@ import 'Mentions/CustomMentionsCubit.dart';
 import 'Mentions/MentionsCubit.dart';
 import 'Settings/Settings.dart';
 import 'StreamOverlay/StreamOverlayBloc.dart';
+import 'package:wakelock/wakelock.dart';
 
 Future<void> appRunner() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Wakelock.enable();
+
   if (Platform.isAndroid || Platform.isIOS) {
     await Hive.initFlutter();
   } else {
@@ -51,7 +56,7 @@ Future<void> appRunner() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => BackgroundDaemonCubit()),
+        if (!kPlayStoreRelease) BlocProvider(create: (BuildContext context) => BackgroundDaemonCubit()),
         BlocProvider(create: (BuildContext context) => CommandsCubit(commandsBox)),
         BlocProvider(create: (BuildContext context) => CustomMentionsCubit(customMentionsBox)),
         BlocProvider(create: (BuildContext context) => AccountsCubit(accountsBox)),

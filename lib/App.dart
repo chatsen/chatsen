@@ -1,3 +1,4 @@
+import 'package:chatsen/Consts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +35,7 @@ class _AppState extends State<App> {
                   child: Builder(
                     builder: (context) => ThemeManager.routeWrapper(
                       context: context,
-                      child: settingsState.notificationBackground
+                      child: settingsState.notificationBackground && !kPlayStoreRelease
                           ? BackgroundAudioWrapper(
                               child: HomePage(key: globalKey),
                             )
