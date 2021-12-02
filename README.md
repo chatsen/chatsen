@@ -32,7 +32,7 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 # Store Releases
 - [x] [Play Store](https://play.google.com/store/apps/details?id=com.chatsen.chatsen)
 - [x] [Apple TestFlight](https://testflight.apple.com/join/I7Fm27MH)
-- [ ] App Store (release soon, available on TestFlight)
+- [x] [App Store](https://apps.apple.com/us/app/chatsen/id1574037007)
 <!-- - [ ]  or by sideloading) -->
 - [ ] F-Droid Store
 
