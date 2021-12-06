@@ -699,7 +699,7 @@ class Tutorial extends StatelessWidget {
               children: [
                 Icon(Icons.add),
                 SizedBox(width: 16.0),
-                Expanded(child: Text('The add icon allows you to join channels by typing in their names. You can join multiple channels by separating the names with spaces: "forsen nymn vansamaofficial"')),
+                Expanded(child: Text('The add icon allows you to join channels by typing in their names. You can join multiple channels by separating the names with spaces: "chatsen btmc twitch"')),
               ],
             ),
             SizedBox(height: 16.0),
@@ -743,13 +743,13 @@ class Tutorial extends StatelessWidget {
                   SizedBox(height: 8.0),
                   ElevatedButton.icon(
                     onPressed: () async {
-                      await client.joinChannels(['#forsen']);
+                      await client.joinChannels(['#chatsen']);
                       var channelsBox = await Hive.openBox('Channels');
                       await channelsBox.clear();
                       await channelsBox.addAll(client.channels.map((channel) => channel.name));
                     },
                     icon: Icon(Icons.chat),
-                    label: Text('Join #forsen'),
+                    label: Text('Join #chatsen'),
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
                       padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),

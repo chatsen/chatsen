@@ -32,7 +32,8 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 # Store Releases
 - [x] [Play Store](https://play.google.com/store/apps/details?id=com.chatsen.chatsen)
 - [x] [Apple TestFlight](https://testflight.apple.com/join/I7Fm27MH)
-- [ ] App Store (release soon, available on TestFlight or by sideloading)
+- [ ] App Store (release soon, available on TestFlight)
+<!-- - [ ]  or by sideloading) -->
 - [ ] F-Droid Store
 
 # Supported platforms
@@ -43,12 +44,12 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 Support the project on Patreon and get some cool badges next to your username in return!
 https://www.patreon.com/chatsen
   
-# iOS Sideloading Guide
+<!-- # iOS Sideloading Guide
 - Install AltStore on your device https://altstore.io/
 - Download the .ipa file available on the [release page](https://github.com/Chatsen/chatsen/releases)
 - Open the .ipa file with AltStore on your iPhone
 
-Note: the .ipa file is not signed but will be signed automatically with AltStore on your device.
+Note: the .ipa file is not signed but will be signed automatically with AltStore on your device. -->
 
 # Build instructions
 To build Chatsen, all you should need is the Flutter SDK on the **master** branch and it's required dependencies for your platform (Android Studio for Android and Xcode for iOS).  

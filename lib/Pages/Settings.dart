@@ -405,14 +405,18 @@ class _SettingsPageState extends State<SettingsPage> {
                                   iconSize: 24.0,
                                 ),
                                 Spacer(),
+                                // IconButton(
+                                //   icon: Icon(Icons.web),
+                                //   onPressed: () => launch('https://twitter.com/chatsenapp'),
+                                // ),
+                                IconButton(
+                                  icon: Icon(FontAwesomeIcons.twitter),
+                                  onPressed: () => launch('https://twitter.com/chatsenapp'),
+                                ),
                                 IconButton(
                                   icon: Icon(FontAwesomeIcons.discord),
-                                  onPressed: () => launch('https://discord.gg/5G8hpgHkXB'),
+                                  onPressed: () => launch('https://chatsen.app/discord'),
                                 ),
-                                // IconButton(
-                                //   icon: Icon(FontAwesomeIcons.twitter),
-                                //   onPressed: () {},
-                                // ),
                                 IconButton(
                                   icon: Icon(FontAwesomeIcons.github),
                                   onPressed: () => launch('https://github.com/chatsen/chatsen'),
@@ -514,6 +518,48 @@ class _SettingsPageState extends State<SettingsPage> {
                                     Text(
                                       'You can support the project on Patreon if you appreciate my work!',
                                       // style: Theme.of(context).textTheme.subtitle2,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.green.withAlpha(64),
+                          borderRadius: BorderRadius.circular(8.0),
+                          border: Border.all(
+                            width: 2.0,
+                            color: Colors.green,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              SizedBox(width: 8.0),
+                              Icon(Icons.translate),
+                              SizedBox(width: 16.0),
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Chatsen is looking for translators!',
+                                      style: Theme.of(context).textTheme.subtitle1,
+                                    ),
+                                    SizedBox(height: 2.0),
+                                    Text(
+                                      'Join the Discord server if you are interested in translating Chatsen to your language.',
+                                      style: Theme.of(context).textTheme.subtitle2,
                                     ),
                                   ],
                                 ),
