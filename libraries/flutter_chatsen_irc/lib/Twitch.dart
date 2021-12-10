@@ -359,7 +359,7 @@ class Channel {
       }
 
       if (message!.parameters.length > 2) {
-        print(message.parameters[1]);
+        // print(message.parameters[1]);
         message.parameters = [
           message.parameters[0],
           message.parameters.sublist(1).join(':'),

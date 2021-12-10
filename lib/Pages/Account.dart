@@ -98,50 +98,52 @@ class _AccountPageState extends State<AccountPage> {
                   title: account.token != null ? '${account.login}' : 'Anonymous User',
                   subtitle: !kDebugMode ? null : (account.token != null ? '${account.clientId}' : 'Login as ${account.login}'),
                   onTap: () async {
-                    if (account.token == null) return;
+                    print(account.login);
 
                     var accountsCubit = BlocProvider.of<AccountsCubit>(context);
                     var navigator = Navigator.of(context);
 
-                    var response = await http.get(
-                      Uri.parse('https://id.twitch.tv/oauth2/validate'),
-                      headers: {
-                        'Authorization': 'Bearer ${account.token}',
-                      },
-                    );
-                    var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
-                    print('Verifying ${account.login} -> ${account.token} @ ${account.clientId}');
-                    print(jsonResponse);
+                    if (account.token != null) {
+                      var response = await http.get(
+                        Uri.parse('https://id.twitch.tv/oauth2/validate'),
+                        headers: {
+                          'Authorization': 'Bearer ${account.token}',
+                        },
+                      );
+                      var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+                      print('Verifying ${account.login} -> ${account.token} @ ${account.clientId}');
+                      print(jsonResponse);
 
-                    if (jsonResponse['expires_in'] != null && Duration(seconds: (jsonResponse['expires_in'] ?? -1)) <= Duration(days: 7)) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Your login will expire soon! Please login again to refresh it.'),
-                        behavior: SnackBarBehavior.floating,
-                        action: SnackBarAction(
-                          label: 'Re-login',
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (BuildContext context) => OAuthPage(client: widget.client)),
-                            );
-                          },
-                        ),
-                      ));
-                    }
+                      if (jsonResponse['expires_in'] != null && Duration(seconds: (jsonResponse['expires_in'] ?? -1)) <= Duration(days: 7)) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Your login will expire soon! Please login again to refresh it.'),
+                          behavior: SnackBarBehavior.floating,
+                          action: SnackBarAction(
+                            label: 'Re-login',
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (BuildContext context) => OAuthPage(client: widget.client)),
+                              );
+                            },
+                          ),
+                        ));
+                      }
 
-                    if (jsonResponse['expires_in'] == null || (jsonResponse['expires_in'] ?? -1) < 0) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Your login has expired! Please login again to refresh it.'),
-                        behavior: SnackBarBehavior.floating,
-                        action: SnackBarAction(
-                          label: 'Re-login',
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(builder: (BuildContext context) => OAuthPage(client: widget.client)),
-                            );
-                          },
-                        ),
-                      ));
-                      return;
+                      if (jsonResponse['expires_in'] == null || (jsonResponse['expires_in'] ?? -1) < 0) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Your login has expired! Please login again to refresh it.'),
+                          behavior: SnackBarBehavior.floating,
+                          action: SnackBarAction(
+                            label: 'Re-login',
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(builder: (BuildContext context) => OAuthPage(client: widget.client)),
+                              );
+                            },
+                          ),
+                        ));
+                        return;
+                      }
                     }
 
                     await widget.client.swapCredentials(

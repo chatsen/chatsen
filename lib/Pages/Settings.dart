@@ -145,6 +145,21 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 SettingsEntry(
+                  category: 'Theme',
+                  title: 'High Contrast',
+                  description: 'Enable a darker dark theme',
+                  builder: (context, category, title, description) => Tile(
+                    title: title,
+                    subtitle: description,
+                    onTap: () => BlocProvider.of<ThemeBloc>(context).add(ThemeHighContrastChanged(highContrast: !(BlocProvider.of<ThemeBloc>(context).state as ThemeLoaded).highContrast)),
+                    trailing: Switch.adaptive(
+                      activeColor: Theme.of(context).colorScheme.primary,
+                      onChanged: (bool value) => BlocProvider.of<ThemeBloc>(context).add(ThemeHighContrastChanged(highContrast: value)),
+                      value: (BlocProvider.of<ThemeBloc>(context).state as ThemeLoaded).highContrast,
+                    ),
+                  ),
+                ),
+                SettingsEntry(
                   category: 'Setup',
                   title: 'Setup screen',
                   description: 'Show the setup screen next startup',

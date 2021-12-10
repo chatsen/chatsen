@@ -21,15 +21,15 @@ class ThemeManager {
     'deepOrange': [Colors.deepOrange, Colors.deepOrangeAccent],
   };
 
-  static ThemeData buildTheme(Brightness brightness, String color) {
+  static ThemeData buildTheme(Brightness brightness, String color, {bool highContrast = false}) {
     var baseColorScheme = brightness == Brightness.light ? ColorScheme.light() : ColorScheme.dark();
     var colorScheme = ColorScheme.fromSwatch(
       primarySwatch: colors[color]!.first,
       accentColor: colors[color]!.last,
       brightness: brightness,
-      backgroundColor: brightness == Brightness.dark ? Colors.grey[900] : Colors.grey[100],
+      backgroundColor: brightness == Brightness.dark ? (highContrast ? Colors.black : Colors.grey[900]) : Colors.grey[100],
     ).copyWith(
-      surface: brightness == Brightness.dark ? Colors.grey[850] : baseColorScheme.surface,
+      surface: brightness == Brightness.dark ? (highContrast ? Color.fromARGB(255, 16, 16, 16) : Colors.grey[850]) : baseColorScheme.surface,
     );
     var themeData = ThemeData.from(colorScheme: colorScheme);
     return themeData.copyWith(

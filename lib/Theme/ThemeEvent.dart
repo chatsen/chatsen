@@ -31,3 +31,15 @@ class ThemeColorSchemeChanged extends ThemeEvent {
   @override
   List<Object> get props => [colorScheme];
 }
+
+// ThemeHighContrastChanged
+class ThemeHighContrastChanged extends ThemeEvent {
+  final bool highContrast;
+
+  const ThemeHighContrastChanged({
+    required this.highContrast,
+  }) : super();
+
+  @override
+  List<Object> get props => [highContrast];
+}
