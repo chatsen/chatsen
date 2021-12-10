@@ -1000,7 +1000,7 @@ class Client {
   }
 
   // TODO: Rework this to not clear emotes before they are acquired and only clear if we can receive new ones, maybe return difference?
-  void updateEmotes() async {
+  Future<void> updateEmotes() async {
     emotes.clear();
     emojis.clear();
 
