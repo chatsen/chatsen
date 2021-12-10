@@ -140,6 +140,9 @@ jobs:
         run: |
           gsed -i '/_frameDuration = _nextFrame!.duration;/a \ \ \ \ \ \ if (_frameDuration!.inMilliseconds <= 10) _frameDuration = Duration(milliseconds: 100);' $(which flutter | head -n 1 | sed -e 's/\\/\//g' -e 's/\/bin\/flutter.*//')/packages/flutter/lib/src/painting/image_stream.dart
 
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+
       - name: Generate project files and cleanup
         working-directory: ./chatsen
         run: |
