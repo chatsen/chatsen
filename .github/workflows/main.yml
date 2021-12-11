@@ -114,6 +114,13 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
+          repository: chatsen/signingkeys
+          token: ${{secrets.GHKEY}}
+          path: signingkeys
+          ref: master
+
+      - uses: actions/checkout@v2
+        with:
           token: ${{secrets.GITHUB_TOKEN}}
           path: chatsen
 
