@@ -110,7 +110,10 @@ jobs:
     name: iOS Build
     runs-on: macos-latest
     steps:
-      - run: brew install gnu-sed
+      - run: |
+        sudo gem install nomad-cli
+        brew install gnu-sed
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
       - uses: actions/checkout@v2
         with:
@@ -204,14 +207,29 @@ jobs:
           # Fix partitions
           security set-key-partition-list -S "apple-tool:,apple:,codesign: -s -k $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain"
 
+          # 
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp signingkeys/apple/Chatsen.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles
+
+          # Get entitlements
+          security cms -D -i signingkeys/apple/Chatsen.mobileprovision > signingkeys/apple/Chatsen.mobileprovision.plist && /usr/libexec/PlistBuddy -x -c 'Print:Entitlements' signingkeys/apple/Chatsen.mobileprovision.plist > signingkeys/apple/entitlements.plist
+
           # Sign the application
-          time codesign -f -s "$(cat signingkeys/apple/signingcertname)" chatsen/build/ios/iphoneos/Runner.app -v
+          # codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" chatsen/build/ios/iphoneos/Runner.app/Frameworks/* -v
+          # codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" chatsen/build/ios/iphoneos/Runner.app -v
+
+          # Optional: remove keychain
+          # security delete-keychain signingkeys/apple/build.keychain
 
       - name: Prepare signed release files and converting .app to .ipa
         run: |
           rm -rf release
           mkdir -p release/Payload
           cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
+          
+          codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/* -v
+          codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app -v
+
           ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS-signed.ipa
 
       - name: Upload .ipa to App Store Connect
