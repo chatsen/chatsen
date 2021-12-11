@@ -358,11 +358,19 @@ class Channel {
         continue;
       }
 
+      if (message!.parameters.length > 2) {
+        // print(message.parameters[1]);
+        message.parameters = [
+          message.parameters[0],
+          message.parameters.sublist(1).join(':'),
+        ];
+      }
+
       var chatMessage = Message(
         channel: this,
         history: true,
         user: User(
-          login: message!.prefix.split('!').first.toLowerCase(),
+          login: message.prefix.split('!').first.toLowerCase(),
           displayName: message.tags['display-name'],
           id: int.tryParse(message.tags['user-id'] ?? '0'),
           color: (message.tags['color'] == null || message.tags['color'].trim().isEmpty ? null : message.tags['color'].substring(1)),
@@ -992,7 +1000,7 @@ class Client {
   }
 
   // TODO: Rework this to not clear emotes before they are acquired and only clear if we can receive new ones, maybe return difference?
-  void updateEmotes() async {
+  Future<void> updateEmotes() async {
     emotes.clear();
     emojis.clear();
 

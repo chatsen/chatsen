@@ -114,6 +114,13 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
+          repository: chatsen/signingkeys
+          token: ${{secrets.GHKEY}}
+          path: signingkeys
+          ref: master
+
+      - uses: actions/checkout@v2
+        with:
           token: ${{secrets.GITHUB_TOKEN}}
           path: chatsen
 
@@ -154,6 +161,9 @@ jobs:
           flutter pub run flutter_launcher_icons:main
           flutter build ios --no-codesign
           # '<key>UIBackgroundModes</key>\	\<array>\	\	<string>audio</string>\	\	<string>bluetooth-central</string>\	\	<string>bluetooth-peripheral</string>\	\	<string>external-accessory</string>\	\	<string>fetch</string>\	\	<string>location</string>\	\	<string>processing</string>\	\	<string>remote-notification</string>\	\	<string>voip</string>\	\</array>'
+
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
 
       - name: Prepare release files and converting .app to .ipa
         run: |

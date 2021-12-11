@@ -129,17 +129,40 @@ class _EmoteListModalState extends State<EmoteListModal> {
                     ),
                   ),
                   Container(
-                    height: 32.0,
-                    child: TextField(
-                      controller: textEditingController,
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-                        filled: false,
-                        isDense: true,
-                        hintText: 'Search emotes',
-                        border: InputBorder.none,
-                      ),
-                      onChanged: (text) async => setState(() {}),
+                    height: 48.0,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.search),
+                          onPressed: () => setState(() {}),
+                          enableFeedback: false,
+                        ),
+                        Expanded(
+                          child: TextField(
+                            controller: textEditingController,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 0.0),
+                              filled: false,
+                              isDense: true,
+                              hintText: 'Search emotes',
+                              border: InputBorder.none,
+                            ),
+                            onChanged: (text) async => setState(() {}),
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.refresh),
+                          onPressed: () async {
+                            await widget.client?.updateEmotes();
+                            await widget.client?.updateBadges();
+                            await widget.channel?.updateEmotes();
+                            await widget.channel?.updateBadges();
+                            await widget.channel?.transmitter?.updateUserEmotes();
+                            setState(() {});
+                          },
+                          tooltip: 'Refresh emotes',
+                        ),
+                      ],
                     ),
                   ),
                   Container(height: 1.0, color: Theme.of(context).dividerColor),

@@ -23,8 +23,10 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     if (event is ThemeInitialized) {
       var themeMode = themeBox.get('themeMode');
       var themeColorScheme = themeBox.get('themeColorScheme');
+      var themeHighContrast = themeBox.get('themeHighContrast');
       yield ThemeLoaded(
         mode: themeMode != null ? ThemeMode.values[themeMode] : mode,
+        highContrast: themeHighContrast ?? false,
         colorScheme: themeColorScheme ?? colorScheme,
       );
     } else if (event is ThemeModeChanged && state is ThemeLoaded) {
@@ -35,6 +37,10 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       var previousState = state as ThemeLoaded;
       await themeBox.put('themeColorScheme', event.colorScheme);
       yield previousState.copyWith(colorScheme: event.colorScheme);
+    } else if (event is ThemeHighContrastChanged && state is ThemeLoaded) {
+      var previousState = state as ThemeLoaded;
+      await themeBox.put('themeHighContrast', event.highContrast);
+      yield previousState.copyWith(highContrast: event.highContrast);
     }
   }
 }
