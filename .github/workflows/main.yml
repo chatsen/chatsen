@@ -192,14 +192,14 @@ jobs:
           security unlock-keychain -p $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain
 
           # Load distribution certificate
-          security import signingkeys/apple/ios_distribution.cer -k signingkeys/apple/build.keychain
+          security import signingkeys/apple/ios_distribution.p12 -P "$(cat signingkeys/apple/keychainpassword)" -A -t cert -f pkcs12 -k signingkeys/apple/build.keychain
 
           # List identities
           security find-identity
 
           # Sign the application
           # time codesign -f -s "$(cat signingkeys/apple/signingcertname)" chatsen/build/ios/iphoneos/Runner.app -v
-          
+
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
 
@@ -213,5 +213,3 @@ jobs:
       - name: Upload .ipa to App Store Connect
         run: |
           xcrun altool --upload-app --type ios --file release/iOS-signed.ipa --username "$(cat signingkeys/apple/account/email)" --password "$(cat signingkeys/apple/account/password)"
-
-
