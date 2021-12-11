@@ -181,6 +181,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+
       - name: Sign the iOS application
         run: |
           # Copy provisioning profile
@@ -215,5 +218,3 @@ jobs:
         run: |
           xcrun altool --upload-app --type ios --file release/iOS-signed.ipa --username "$(cat signingkeys/apple/account/email)" --password "$(cat signingkeys/apple/account/password)"
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
