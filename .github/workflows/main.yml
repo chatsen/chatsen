@@ -192,11 +192,14 @@ jobs:
           security unlock-keychain -p $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain
 
           # Load distribution certificate
-          security import signingkeys/apple/ios_distribution.p12 -P "$(cat signingkeys/apple/keychainpassword)" -A -t cert -f pkcs12 -k signingkeys/apple/build.keychain -T /usr/bin/codesign
-          security set-key-partition-list -S "apple-tool:,apple:,codesign: -s -k $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain"
+          security import signingkeys/apple/ios_distribution.p12 -P "$(cat signingkeys/apple/keychainpassword)" -k signingkeys/apple/build.keychain -T /usr/bin/codesign
+          # security import signingkeys/apple/ios_distribution.p12 -P "$(cat signingkeys/apple/keychainpassword)" -A -t cert -f pkcs12 -k signingkeys/apple/build.keychain -T /usr/bin/codesign
 
           # List identities
           security find-identity
+
+          # Fix partitions
+          security set-key-partition-list -S "apple-tool:,apple:,codesign: -s -k $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain"
 
           # Sign the application
           time codesign -f -s "$(cat signingkeys/apple/signingcertname)" chatsen/build/ios/iphoneos/Runner.app -v
