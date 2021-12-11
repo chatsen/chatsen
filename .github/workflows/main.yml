@@ -194,8 +194,14 @@ jobs:
           # Load distribution certificate
           security import signingkeys/apple/ios_distribution.cer -k signingkeys/apple/build.keychain
 
+          # List identities
+          security find-identity
+
           # Sign the application
-          time codesign -f -s "$(cat signingkeys/apple/signingcertname)" chatsen/build/ios/iphoneos/Runner.app -v
+          # time codesign -f -s "$(cat signingkeys/apple/signingcertname)" chatsen/build/ios/iphoneos/Runner.app -v
+          
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
 
       - name: Prepare signed release files and converting .app to .ipa
         run: |
@@ -208,5 +214,4 @@ jobs:
         run: |
           xcrun altool --upload-app --type ios --file release/iOS-signed.ipa --username "$(cat signingkeys/apple/account/email)" --password "$(cat signingkeys/apple/account/password)"
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
+
