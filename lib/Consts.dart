@@ -1,1 +1,1 @@
-bool kPlayStoreRelease = false;
+bool kPlayStoreRelease = true;

@@ -162,9 +162,6 @@ jobs:
           flutter build ios --no-codesign
           # '<key>UIBackgroundModes</key>\	\<array>\	\	<string>audio</string>\	\	<string>bluetooth-central</string>\	\	<string>bluetooth-peripheral</string>\	\	<string>external-accessory</string>\	\	<string>fetch</string>\	\	<string>location</string>\	\	<string>processing</string>\	\	<string>remote-notification</string>\	\	<string>voip</string>\	\</array>'
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-
       - name: Prepare release files and converting .app to .ipa
         run: |
           mkdir -p release/Payload
@@ -183,3 +180,23 @@ jobs:
           files: ./release/iOS.ipa
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Sign the iOS application
+        run: |
+          cp signingkeys/Chatsen_App_Store_Provisioning_Profile.mobileprovision chatsen/build/ios/iphoneos/Runner.app/embedded.mobileprovision
+          security create-keychain -p $(cat signingkeys/AppleDistributionPassword) signingkeys/build.keychain
+          security default-keychain -s signingkeys/build.keychain
+          security unlock-keychain -p $(cat signingkeys/AppleDistributionPassword) signingkeys/build.keychain
+          security import signingkeys/AppleDistribution.p12 -k signingkeys/build.keychain -P $(cat signingkeys/AppleDistributionPassword) -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $(cat signingkeys/AppleDistributionPassword) signingkeys/build.keychain
+          time codesign -f -s "$(cat signingkeys/AppleDistributionName)" chatsen/build/ios/iphoneos/Runner.app -v
+
+      - name: Prepare signed release files and converting .app to .ipa
+        run: |
+          rm -rf release
+          mkdir -p release/Payload
+          cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
+          ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS-signed.ipa
+
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
