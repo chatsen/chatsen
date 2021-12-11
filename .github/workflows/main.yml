@@ -111,9 +111,9 @@ jobs:
     runs-on: macos-latest
     steps:
       - run: |
-        sudo gem install nomad-cli
-        brew install gnu-sed
-        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+          sudo gem install nomad-cli
+          brew install gnu-sed
+          sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
       - uses: actions/checkout@v2
         with:
@@ -189,8 +189,6 @@ jobs:
 
       - name: Sign the iOS application
         run: |
-          # Copy provisioning profile
-          cp -f signingkeys/apple/Chatsen.mobileprovision chatsen/build/ios/iphoneos/Runner.app/embedded.mobileprovision
 
           # Create a new keychain
           security create-keychain -p $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain
@@ -204,6 +202,7 @@ jobs:
           # List identities
           security find-identity
 
+
           # Fix partitions
           security set-key-partition-list -S "apple-tool:,apple:,codesign: -s -k $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain"
 
@@ -214,9 +213,18 @@ jobs:
           # Get entitlements
           security cms -D -i signingkeys/apple/Chatsen.mobileprovision > signingkeys/apple/Chatsen.mobileprovision.plist && /usr/libexec/PlistBuddy -x -c 'Print:Entitlements' signingkeys/apple/Chatsen.mobileprovision.plist > signingkeys/apple/entitlements.plist
 
+          # AAAAAAAAAAAAAAAAa
+
+          rm -rf release
+          mkdir -p release/Payload
+          cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
+
+          # Copy provisioning profile
+          cp -f signingkeys/apple/Chatsen.mobileprovision release/Payload/Runner.app/embedded.mobileprovision
+
           # Sign the application
-          # codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" chatsen/build/ios/iphoneos/Runner.app/Frameworks/* -v
-          # codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" chatsen/build/ios/iphoneos/Runner.app -v
+          codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/* -v
+          codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app -v
 
           # Optional: remove keychain
           # security delete-keychain signingkeys/apple/build.keychain
