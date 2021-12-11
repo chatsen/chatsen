@@ -183,13 +183,19 @@ jobs:
 
       - name: Sign the iOS application
         run: |
-          cp signingkeys/Chatsen_App_Store_Provisioning_Profile.mobileprovision chatsen/build/ios/iphoneos/Runner.app/embedded.mobileprovision
-          security create-keychain -p $(cat signingkeys/AppleDistributionPassword) signingkeys/build.keychain
-          security default-keychain -s signingkeys/build.keychain
-          security unlock-keychain -p $(cat signingkeys/AppleDistributionPassword) signingkeys/build.keychain
-          security import signingkeys/AppleDistribution.p12 -k signingkeys/build.keychain -P $(cat signingkeys/AppleDistributionPassword) -T /usr/bin/codesign
-          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $(cat signingkeys/AppleDistributionPassword) signingkeys/build.keychain
-          time codesign -f -s "$(cat signingkeys/AppleDistributionName)" chatsen/build/ios/iphoneos/Runner.app -v
+          # Copy provisioning profile
+          cp -f signingkeys/apple/Chatsen.mobileprovision chatsen/build/ios/iphoneos/Runner.app/embedded.mobileprovision
+
+          # Create a new keychain
+          security create-keychain -p $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain
+          security default-keychain -s signingkeys/apple/build.keychain
+          security unlock-keychain -p $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain
+
+          # Load distribution certificate
+          security import signingkeys/apple/ios_distribution.cer -k signingkeys/apple/build.keychain
+
+          # Sign the application
+          time codesign -f -s "$(cat signingkeys/apple/signingcertname)" chatsen/build/ios/iphoneos/Runner.app -v
 
       - name: Prepare signed release files and converting .app to .ipa
         run: |
@@ -197,6 +203,10 @@ jobs:
           mkdir -p release/Payload
           cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
           ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS-signed.ipa
+
+      - name: Upload .ipa to App Store Connect
+        run: |
+          xcrun altool --upload-app --type ios --file release/iOS-signed.ipa --username "$(cat signingkeys/apple/account/email)" --password "$(cat signingkeys/apple/account/password)"
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
