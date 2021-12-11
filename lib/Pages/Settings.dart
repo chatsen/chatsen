@@ -506,7 +506,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Chatsen is currently in beta!',
+                                      'Chatsen is currently work-in-progress!',
                                       style: Theme.of(context).textTheme.subtitle1,
                                     ),
                                     SizedBox(height: 2.0),
