@@ -179,10 +179,10 @@ jobs:
         working-directory: ./chatsen
         run: |
           # create variables
-          KEYCHAIN_PASSWORD=$(cat signingkeys/apple/keychainpassword)
-          P12_PASSWORD=$(cat signingkeys/apple/keychainpassword)
-          CERTIFICATE_PATH=signingkeys/apple/ios_distribution.p12
-          PP_PATH=signingkeys/apple/Chatsen.mobileprovision
+          KEYCHAIN_PASSWORD=$(cat ../signingkeys/apple/keychainpassword)
+          P12_PASSWORD=$(cat ../signingkeys/apple/keychainpassword)
+          CERTIFICATE_PATH=../signingkeys/apple/ios_distribution.p12
+          PP_PATH=../signingkeys/apple/Chatsen.mobileprovision
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
           # create temporary keychain
