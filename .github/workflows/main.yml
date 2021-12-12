@@ -131,6 +131,31 @@ jobs:
         with:
           java-version: "12.x"
 
+      - name: Import certificate to the keychain and provisioning profile
+        run: |
+          # create variables
+          KEYCHAIN_PASSWORD=$(cat signingkeys/apple/keychainpassword)
+          P12_PASSWORD=$(cat signingkeys/apple/keychainpassword)
+          CERTIFICATE_PATH=signingkeys/apple/ios_distribution.p12
+          PP_PATH=signingkeys/apple/Chatsen.mobileprovision
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+
+          # apply provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
+
+          # list identities
+          security find-identity
+
       - name: Changing version number and build number to the Github Tag
         if: startsWith(github.ref, 'refs/tags/')
         working-directory: ./chatsen
@@ -184,63 +209,91 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
+      # - name: Setup upterm session
+      #   uses: lhotari/action-upterm@v1
 
-      - name: Sign the iOS application
-        run: |
+      # - name: Sign the iOS application
+      #   run: |
 
-          # Create a new keychain
-          security create-keychain -p $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain
-          security default-keychain -s signingkeys/apple/build.keychain
-          security unlock-keychain -p $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain
+      #     # Create a new keychain
+      #     security create-keychain -p $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain
+      #     security default-keychain -s signingkeys/apple/build.keychain
+      #     security unlock-keychain -p $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain
 
-          # Load distribution certificate
-          security import signingkeys/apple/ios_distribution.p12 -P "$(cat signingkeys/apple/keychainpassword)" -k signingkeys/apple/build.keychain -T /usr/bin/codesign
-          # security import signingkeys/apple/ios_distribution.p12 -P "$(cat signingkeys/apple/keychainpassword)" -A -t cert -f pkcs12 -k signingkeys/apple/build.keychain -T /usr/bin/codesign
+      #     # Load distribution certificate
+      #     security import signingkeys/apple/ios_distribution.p12 -P "$(cat signingkeys/apple/keychainpassword)" -k signingkeys/apple/build.keychain -T /usr/bin/codesign
+      #     # security import signingkeys/apple/ios_distribution.p12 -P "$(cat signingkeys/apple/keychainpassword)" -A -t cert -f pkcs12 -k signingkeys/apple/build.keychain -T /usr/bin/codesign
 
-          # List identities
-          security find-identity
+      #     # List identities
+      #     security find-identity
 
 
-          # Fix partitions
-          security set-key-partition-list -S "apple-tool:,apple:,codesign: -s -k $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain"
+      #     # Fix partitions
+      #     security set-key-partition-list -S "apple-tool:,apple:,codesign: -s -k $(cat signingkeys/apple/keychainpassword) signingkeys/apple/build.keychain"
 
-          # 
-          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp signingkeys/apple/Chatsen.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles
+      #     #
+      #     mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+      #     cp signingkeys/apple/Chatsen.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles
 
-          # Get entitlements
-          security cms -D -i signingkeys/apple/Chatsen.mobileprovision > signingkeys/apple/Chatsen.mobileprovision.plist && /usr/libexec/PlistBuddy -x -c 'Print:Entitlements' signingkeys/apple/Chatsen.mobileprovision.plist > signingkeys/apple/entitlements.plist
+      #     # Get entitlements
+      #     security cms -D -i signingkeys/apple/Chatsen.mobileprovision > signingkeys/apple/Chatsen.mobileprovision.plist && /usr/libexec/PlistBuddy -x -c 'Print:Entitlements' signingkeys/apple/Chatsen.mobileprovision.plist > signingkeys/apple/entitlements.plist
 
-          # AAAAAAAAAAAAAAAAa
+      #     # AAAAAAAAAAAAAAAAa
 
-          rm -rf release
-          mkdir -p release/Payload
-          cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
+      #     rm -rf release
+      #     mkdir -p release/Payload
+      #     cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
 
-          # Copy provisioning profile
-          cp -f signingkeys/apple/Chatsen.mobileprovision release/Payload/Runner.app/embedded.mobileprovision
+      #     # Copy provisioning profile
+      #     cp -f signingkeys/apple/Chatsen.mobileprovision release/Payload/Runner.app/embedded.mobileprovision
 
-          # Sign the application
-          codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/* -v
-          codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app -v
+      #     # Sign the application
+      #     # codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/* -v
+      #     codesign --deep -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app
+      #     codesign --deep -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Runner
 
-          # Optional: remove keychain
-          # security delete-keychain signingkeys/apple/build.keychain
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/App.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/disk_space.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/DKImagePickerController.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/DKPhotoGallery.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/file_picker.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/Flutter.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/flutter_local_notifications.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/FMDB.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/open_file.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/package_info.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/package_info_plus.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/path_provider_ios.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/SDWebImage.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/Sentry.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/sentry_flutter.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/share.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/sqflite.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/SwiftyGif.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/url_launcher_ios.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/wakelock.framework
+      #     codesign -v --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/webview_flutter_wkwebview.framework
 
-      - name: Prepare signed release files and converting .app to .ipa
-        run: |
-          rm -rf release
-          mkdir -p release/Payload
-          cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
-          
-          codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/* -v
-          codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app -v
 
-          ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS-signed.ipa
+      #   # /usr/bin/codesign --force --sign - --entitlements /Users/user2020/Library/Developer/Xcode/DerivedData/Runner-epqpftwmoicslfeecsrrgqoweeja/Build/Intermediates.noindex/Runner.build/Debug-iphonesimulator/Runner.build/ExitNews.app.xcent --timestamp=none ExitNews.app
 
-      - name: Upload .ipa to App Store Connect
-        run: |
-          xcrun altool --upload-app --type ios --file release/iOS-signed.ipa --username "$(cat signingkeys/apple/account/email)" --password "$(cat signingkeys/apple/account/password)"
+      #     ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS-signed.ipa
+      #     xcrun altool --upload-app --type ios --file release/iOS-signed.ipa --username "$(cat signingkeys/apple/account/email)" --password "$(cat signingkeys/apple/account/password)"
 
+      #     # Optional: remove keychain
+      #     # security delete-keychain signingkeys/apple/build.keychain
+
+      # - name: Prepare signed release files and converting .app to .ipa
+      #   run: |
+      #     rm -rf release
+      #     mkdir -p release/Payload
+      #     cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
+
+      #     codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app/Frameworks/* -v
+      #     codesign --entitlements signingkeys/apple/entitlements.plist -f -s "$(cat signingkeys/apple/signingcertname)" release/Payload/Runner.app -v
+
+      #     ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS-signed.ipa
+
+      # - name: Upload .ipa to App Store Connect
+      #   run: |
+      #     xcrun altool --upload-app --type ios --file release/iOS-signed.ipa --username "$(cat signingkeys/apple/account/email)" --password "$(cat signingkeys/apple/account/password)"
