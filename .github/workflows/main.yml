@@ -110,6 +110,11 @@ jobs:
     name: iOS Build
     runs-on: macos-latest
     steps:
+      - run: |
+          sudo gem install nomad-cli
+          brew install gnu-sed
+          sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
       - uses: actions/checkout@v2
         with:
           repository: chatsen/signingkeys
