@@ -157,7 +157,7 @@ jobs:
           gsed -i '/<dict>/a \ \ <key>CADisableMinimumFrameDurationOnPhone</key><true/>' ios/Runner/Info.plist
           gsed -i 's/minSdkVersion .*/minSdkVersion 21/' ./android/app/build.gradle
           flutter pub run flutter_launcher_icons:main
-          flutter build ipa
+          flutter build ios --no-codesign
           # '<key>UIBackgroundModes</key>\	\<array>\	\	<string>audio</string>\	\	<string>bluetooth-central</string>\	\	<string>bluetooth-peripheral</string>\	\	<string>external-accessory</string>\	\	<string>fetch</string>\	\	<string>location</string>\	\	<string>processing</string>\	\	<string>remote-notification</string>\	\	<string>voip</string>\	\</array>'
 
       - name: Prepare release files and converting .app to .ipa
