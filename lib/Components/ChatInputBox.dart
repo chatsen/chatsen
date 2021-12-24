@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
+import 'package:chatsen/Settings/Settings.dart';
+import 'package:chatsen/Settings/SettingsState.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -306,8 +308,9 @@ class ChatInputBoxState extends State<ChatInputBox> {
             if ('${false ? '@' : ''}$user'.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()) && (false ? textEditingController.text.startsWith('@') : true))
               InkWell(
                 onTap: () async {
+                  var settings = BlocProvider.of<Settings>(context).state as SettingsLoaded;
                   var splits = textEditingController.text.split(' ');
-                  splits.last = user;
+                  splits.last = (settings.mentionWithAt ? '@' : '') + user;
                   textEditingController.text = splits.join(' ') + ' ';
                   textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
                   focusNode.requestFocus();

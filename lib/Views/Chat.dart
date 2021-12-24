@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chatsen/BlockedUsers/BlockedUsersCubit.dart';
 import 'package:chatsen/Settings/Settings.dart';
 import 'package:chatsen/Settings/SettingsState.dart';
 import 'package:flutter/foundation.dart';
@@ -89,12 +90,13 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
             child: BlocBuilder<Settings, SettingsState>(
               builder: (context, state) {
                 var i = 0;
+                var blockedUsers = List<String>.from(BlocProvider.of<BlockedUsersCubit>(context).state).map((element) => element.toLowerCase()).toList();
                 return ListView(
                   reverse: true,
                   controller: scrollController,
                   padding: MediaQuery.of(context).padding + (Platform.isMacOS ? EdgeInsets.only(top: 26.0) : EdgeInsets.zero) + EdgeInsets.only(bottom: (kDebugMode || widget.channel?.transmitter?.credentials?.token != null ? (36.0 + 4.0) : 0.0) + 8.0, top: 8.0),
                   children: [
-                    for (var message in widget.channel!.messages) ...[
+                    for (var message in widget.channel!.messages.where((element) => !blockedUsers.contains(element.user?.login?.toLowerCase()))) ...[
                       if (state is SettingsLoaded && state.messageLines)
                         Container(
                           color: Theme.of(context).dividerColor,

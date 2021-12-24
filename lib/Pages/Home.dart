@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:chatsen/BlockedTerms/BlockedTermsCubit.dart';
 import 'package:chatsen/Mentions/CustomMentionsCubit.dart';
 import 'package:chatsen/Pages/OAuth.dart';
 import 'package:collection/src/iterable_extensions.dart';
@@ -639,6 +640,24 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
   @override
   void onMessage(twitch.Channel? channel, twitch.Message message) {
     var splits = message.body!.split(' ').where((split) => split.isNotEmpty);
+
+    message.blocked = BlocProvider.of<BlockedTermsCubit>(context).state.firstWhereOrNull((customTerm) {
+          if (customTerm.regex) return RegExp(customTerm.pattern).hasMatch(message.body!);
+          if (customTerm.caseSensitive) {
+            return message.body!.contains(customTerm.pattern);
+            // return splits.any(
+            //   (split) => (split == customTerm.pattern),
+            // );
+          }
+          return message.body!.toLowerCase().contains(customTerm.pattern.toLowerCase());
+          // return splits.any(
+          // (split) => (split.toLowerCase() == customTerm.pattern.toLowerCase()),
+          // );
+        }) !=
+        null;
+
+    if (message.blocked) return;
+
     // message.mention = true;
     var contains = BlocProvider.of<CustomMentionsCubit>(context).state.firstWhereOrNull((customMention) {
       if (customMention.enableRegex) return RegExp(customMention.pattern).hasMatch(message.body!);

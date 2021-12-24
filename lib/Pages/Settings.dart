@@ -13,6 +13,8 @@ import 'package:chatsen/Theme/ThemeBloc.dart';
 import 'package:chatsen/Theme/ThemeEvent.dart';
 import 'package:chatsen/Theme/ThemeManager.dart';
 import 'package:chatsen/Theme/ThemeState.dart';
+import 'package:chatsen/pages/BlockedTerms.dart';
+import 'package:chatsen/pages/BlockedUsers.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -235,13 +237,33 @@ class _SettingsPageState extends State<SettingsPage> {
                   title: 'Configure custom mentions',
                   description: 'Allows you to create and configure custom mention words and regexes to be pinged with',
                   builder: (context, category, title, description) => Tile(
-                      leading: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.bell : Icons.alternate_email),
+                    leading: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.bell : Icons.alternate_email),
+                    ),
+                    title: title,
+                    subtitle: description,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CustomMentionsPage(),
                       ),
-                      title: title,
-                      subtitle: description,
-                      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomMentionsPage()))),
+                    ),
+                  ),
+                ),
+                SettingsEntry(
+                  category: 'Mentions',
+                  title: 'Add a @ in front of user mentions',
+                  description: 'When using autocompletion, clicking a username will add a @ in front of the username.',
+                  builder: (context, category, title, description) => Tile(
+                    title: title,
+                    subtitle: description,
+                    onTap: () => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(mentionWithAt: !state.mentionWithAt))),
+                    trailing: Switch.adaptive(
+                      activeColor: Theme.of(context).colorScheme.primary,
+                      onChanged: (bool value) => BlocProvider.of<Settings>(context).add(SettingsChange(state: state.copyWith(mentionWithAt: value))),
+                      value: state.mentionWithAt,
+                    ),
+                  ),
                 ),
                 SettingsEntry(
                   category: 'Message',
@@ -304,6 +326,42 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                 ),
+                SettingsEntry(
+                  category: 'Message',
+                  title: 'Blocked users',
+                  description: 'Allows you to block users so that you cannot see their messages',
+                  builder: (context, category, title, description) => Tile(
+                    leading: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.nosign : Icons.block),
+                    ),
+                    title: title,
+                    subtitle: description,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => BlockedUsersPage(),
+                      ),
+                    ),
+                  ),
+                ),
+                // SettingsEntry(
+                //   category: 'Message',
+                //   title: 'Blocked terms',
+                //   description: 'Allows you to block terms so that the messages don\'t show up in chat',
+                //   builder: (context, category, title, description) => Tile(
+                //     leading: Padding(
+                //       padding: const EdgeInsets.all(8.0),
+                //       child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.nosign : Icons.block),
+                //     ),
+                //     title: title,
+                //     subtitle: description,
+                //     onTap: () => Navigator.of(context).push(
+                //       MaterialPageRoute(
+                //         builder: (context) => BlockedTermsPage(),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 SettingsEntry(
                   category: '3rd-party services',
                   title: 'Load chat history from recent-messages',

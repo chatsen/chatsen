@@ -166,6 +166,7 @@ class Message {
 
   bool action = false;
   bool mention = false;
+  bool blocked = false;
   bool history = false; // TODO: Use a bitfield
   bool deleted = false;
 

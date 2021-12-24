@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Badges/ChatterinoBadges.dart';
 import 'package:chatsen/Badges/FFZBadges.dart';
+import 'package:chatsen/BlockedTerms/BlockedTermsCubit.dart';
+import 'package:chatsen/BlockedUsers/BlockedUsersCubit.dart';
 import 'package:chatsen/Commands/Command.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
 import 'package:chatsen/Consts.dart';
@@ -48,6 +50,8 @@ Future<void> appRunner() async {
   var settingsBox = await Hive.openBox('Settings');
   var commandsBox = await Hive.openBox('Commands');
   var customMentionsBox = await Hive.openBox('CustomMentions');
+  var blockedTermsBox = await Hive.openBox('BlockedTerms');
+  var blockedUsersBox = await Hive.openBox('BlockedUsers');
   var themeBox = await Hive.openBox('Theme');
   var accountsBox = await Hive.openBox('Accounts');
 
@@ -72,6 +76,8 @@ Future<void> appRunner() async {
         BlocProvider(create: (BuildContext context) => DownloadManager()),
         BlocProvider(create: (BuildContext context) => StreamOverlayBloc()),
         BlocProvider(create: (BuildContext context) => Settings(settingsBox)),
+        BlocProvider(create: (BuildContext context) => BlockedUsersCubit(blockedUsersBox)),
+        BlocProvider(create: (BuildContext context) => BlockedTermsCubit(blockedTermsBox)),
       ],
       child: App(),
     ),
