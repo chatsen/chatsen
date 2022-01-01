@@ -660,7 +660,10 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
     // message.mention = true;
     var contains = BlocProvider.of<CustomMentionsCubit>(context).state.firstWhereOrNull((customMention) {
-      if (customMention.enableRegex) return RegExp(customMention.pattern).hasMatch(message.body!);
+      try {
+        if (customMention.enableRegex) return RegExp(customMention.pattern).hasMatch(message.body!);
+        // ignore: empty_catches
+      } catch (e) {}
       if (customMention.caseSensitive) {
         return splits.any(
           (split) => (split == customMention.pattern || split == '@${customMention.pattern}' || split == '${customMention.pattern},' || split == '@${customMention.pattern},'),
@@ -671,6 +674,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
       );
     });
     message.mention = message.mention || contains != null;
+
     if (message.mention) BlocProvider.of<MentionsCubit>(context).add(message);
     if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).notificationOnMention && message.mention) {
       NotificationWrapper.of(context)!.sendNotification(
