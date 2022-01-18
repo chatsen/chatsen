@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:chatsen/Accounts/AccountsCubit.dart';
 import 'package:chatsen/Badges/ChatterinoBadges.dart';
+import 'package:chatsen/Badges/DankChatBadges.dart';
 import 'package:chatsen/Badges/FFZBadges.dart';
 import 'package:chatsen/BlockedTerms/BlockedTermsCubit.dart';
 import 'package:chatsen/BlockedUsers/BlockedUsersCubit.dart';
@@ -69,6 +70,7 @@ Future<void> appRunner() async {
         BlocProvider(create: (BuildContext context) => BTTVBadges()),
         BlocProvider(create: (BuildContext context) => ChattyBadges()),
         BlocProvider(create: (BuildContext context) => ChatterinoBadges()),
+        BlocProvider(create: (BuildContext context) => DankChatBadges()),
         BlocProvider(create: (BuildContext context) => SevenTVBadges()),
         BlocProvider(create: (BuildContext context) => ChatsenBadges()),
         BlocProvider(create: (BuildContext context) => MentionsCubit()),

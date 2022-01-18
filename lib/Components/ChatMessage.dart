@@ -3,6 +3,7 @@ import 'package:chatsen/Badges/BTTVBadges.dart';
 import 'package:chatsen/Badges/ChatsenBadges.dart';
 import 'package:chatsen/Badges/ChatterinoBadges.dart';
 import 'package:chatsen/Badges/ChattyBadges.dart';
+import 'package:chatsen/Badges/DankChatBadges.dart';
 import 'package:chatsen/Badges/FFZAPBadges.dart';
 import 'package:chatsen/Badges/FFZBadges.dart';
 import 'package:chatsen/Badges/SevenTVBadges.dart';
@@ -376,7 +377,18 @@ class ChatMessage extends StatelessWidget {
                       //       ),
                       //     ),
                       if (message.user != null)
-                        for (var badge in message.badges + BlocProvider.of<BTTVBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<FFZBadges>(context).getBadgesForUser('${message.user?.login?.toLowerCase()}') + BlocProvider.of<FFZAPBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatterinoBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChattyBadges>(context).getBadgesForUser('${message.user?.login}') + BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}') + BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'))
+                        // Good god chatsen2 will need something better than this
+                        for (var badge in [
+                          ...message.badges,
+                          ...BlocProvider.of<BTTVBadges>(context).getBadgesForUser('${message.user?.id}'),
+                          ...BlocProvider.of<FFZBadges>(context).getBadgesForUser('${message.user?.login?.toLowerCase()}'),
+                          ...BlocProvider.of<FFZAPBadges>(context).getBadgesForUser('${message.user?.id}'),
+                          ...BlocProvider.of<ChatterinoBadges>(context).getBadgesForUser('${message.user?.id}'),
+                          ...BlocProvider.of<DankChatBadges>(context).getBadgesForUser('${message.user?.id}'),
+                          ...BlocProvider.of<ChattyBadges>(context).getBadgesForUser('${message.user?.login}'),
+                          ...BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}'),
+                          ...BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'),
+                        ])
                           WidgetSpan(
                             child: WidgetTooltip(
                               message: Padding(
