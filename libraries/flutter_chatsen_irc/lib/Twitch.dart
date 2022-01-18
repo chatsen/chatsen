@@ -186,6 +186,12 @@ class Message {
     this.dateTime,
     this.history = false,
   }) {
+    // replace U+200D (ZERO WIDTH JOINER) with U+E0002
+    // alternative regex for replacement: (?<!\U000E0002)\U000E0002
+    var replacement = String.fromCharCodes(Runes('\u{e0002}'));
+    var zeroWidthJoiner = String.fromCharCodes(Runes('\u{200d}'));
+    body = body?.replaceAll(replacement, zeroWidthJoiner);
+
     if (body!.contains(RegExp('ACTION .*'))) action = true;
     if (action) body = body!.substring('ACTION '.length, body!.length - 1);
 
@@ -558,6 +564,10 @@ class Channel {
   void send(String message, {bool action = false}) async {
     // TODO: Setup buckets per account
     // TODO: Handle whispers
+
+    var replacement = String.fromCharCodes(Runes('\u{e0002}'));
+    var zeroWidthJoiner = String.fromCharCodes(Runes('\u{200d}'));
+    message = message.replaceAll(zeroWidthJoiner, replacement);
 
     if (action) return send('ACTION $message');
 
