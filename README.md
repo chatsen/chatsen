@@ -31,10 +31,8 @@ You can find the latest release for supported platforms (iOS, Android) [here](ht
 
 # Store Releases
 - [x] [Play Store](https://play.google.com/store/apps/details?id=com.chatsen.chatsen)
+- [x] [App Store](https://apps.apple.com/us/app/chatsen/id1574037007)
 - [x] [Apple TestFlight](https://testflight.apple.com/join/I7Fm27MH)
-- [ ] App Store (release soon, available on TestFlight)
-<!-- - [ ]  or by sideloading) -->
-- [ ] F-Droid Store
 
 # Supported platforms
 - [x] Android 5+ (>=4.1 && <5.0 also supported but without login/video player)
