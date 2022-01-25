@@ -302,28 +302,31 @@ class ChatInputBoxState extends State<ChatInputBox> {
     );
   }
 
-  List<Widget> getAutoCompletionUsers() => [
-        if (textEditingController.text.split(' ').last.length >= 2 && !textEditingController.text.endsWith(' '))
-          for (var user in widget.channel!.users.values.expand((element) => element))
-            if ('${false ? '@' : ''}$user'.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()) && (false ? textEditingController.text.startsWith('@') : true))
-              InkWell(
-                onTap: () async {
-                  var settings = BlocProvider.of<Settings>(context).state as SettingsLoaded;
-                  var splits = textEditingController.text.split(' ');
-                  splits.last = (settings.mentionWithAt ? '@' : '') + user;
-                  textEditingController.text = splits.join(' ') + ' ';
-                  textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
-                  focusNode.requestFocus();
-                  setState(() {});
-                },
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(user),
-                  ),
+  List<Widget> getAutoCompletionUsers() {
+    final startsWithAt = textEditingController.text.split(' ').last.toLowerCase().startsWith('@');
+    return [
+      if (textEditingController.text.split(' ').last.length >= 2 && !textEditingController.text.endsWith(' '))
+        for (var user in widget.channel!.users.values.expand((element) => element))
+          if ('${startsWithAt ? '@' : ''}$user'.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()) && (startsWithAt ? textEditingController.text.startsWith('@') : true))
+            InkWell(
+              onTap: () async {
+                var settings = BlocProvider.of<Settings>(context).state as SettingsLoaded;
+                var splits = textEditingController.text.split(' ');
+                splits.last = ((settings.mentionWithAt || startsWithAt) ? '@' : '') + user;
+                textEditingController.text = splits.join(' ') + ' ';
+                textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
+                focusNode.requestFocus();
+                setState(() {});
+              },
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(user),
                 ),
               ),
-      ];
+            ),
+    ];
+  }
 
   List<Widget> getAutoCompletionCommands() => [
         if (textEditingController.text.split(' ').last.isNotEmpty && !textEditingController.text.endsWith(' '))
