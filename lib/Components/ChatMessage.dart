@@ -6,6 +6,7 @@ import 'package:chatsen/Badges/ChattyBadges.dart';
 import 'package:chatsen/Badges/DankChatBadges.dart';
 import 'package:chatsen/Badges/FFZAPBadges.dart';
 import 'package:chatsen/Badges/FFZBadges.dart';
+import 'package:chatsen/Badges/HomiesBadges.dart';
 import 'package:chatsen/Badges/SevenTVBadges.dart';
 import 'package:chatsen/Components/WidgetTooltip.dart';
 import 'package:chatsen/Settings/Settings.dart';
@@ -388,6 +389,7 @@ class ChatMessage extends StatelessWidget {
                           ...BlocProvider.of<ChattyBadges>(context).getBadgesForUser('${message.user?.login}'),
                           ...BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}'),
                           ...BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'),
+                          ...BlocProvider.of<HomiesBadges>(context).getBadgesForUser('${message.user?.id}'),
                         ])
                           WidgetSpan(
                             child: WidgetTooltip(

@@ -24,6 +24,7 @@ import 'App.dart';
 import 'BackgroundDaemon/BackgroundDaemonCubit.dart';
 import 'Badges/BTTVBadges.dart';
 import 'Badges/ChatsenBadges.dart';
+import 'Badges/HomiesBadges.dart';
 import 'Badges/ChattyBadges.dart';
 import 'Badges/FFZAPBadges.dart';
 import 'Badges/SevenTVBadges.dart';
@@ -73,6 +74,7 @@ Future<void> appRunner() async {
         BlocProvider(create: (BuildContext context) => DankChatBadges()),
         BlocProvider(create: (BuildContext context) => SevenTVBadges()),
         BlocProvider(create: (BuildContext context) => ChatsenBadges()),
+        BlocProvider(create: (BuildContext context) => HomiesBadges()),
         BlocProvider(create: (BuildContext context) => MentionsCubit()),
         BlocProvider(create: (BuildContext context) => ThemeBloc(themeBox, mode: ThemeMode.dark, colorScheme: 'cyan')),
         BlocProvider(create: (BuildContext context) => DownloadManager()),
