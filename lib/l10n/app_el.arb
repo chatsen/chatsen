@@ -1,0 +1,42 @@
+{
+    "chatsen": "Chatsen",
+    "loggedInVia": "Συνδέθηκε μέσω {provider}",
+    "@loggedInVia": {
+        "placeholders": {
+            "provider": {}
+        }
+    },
+    "termsOfService": "Όροι Χρήσης",
+    "privacyPolicy": "Πολιτική Απορρήτου",
+    "settings": "Ρυθμίσεις",
+    "expiresNever": "Δεν λήγει ποτέ",
+    "expiresIn": "Λήγει σε {time}",
+    "@expiresIn": {
+        "placeholders": {
+            "time": {}
+        }
+    },
+    "close": "Κλείσιμο",
+    "add": "Προσθήκη",
+    "cancel": "Ακύρωση",
+    "tokenInput": "Εισαγωγή token",
+    "account": "Λογαριασμός",
+    "refreshAccount": "Ανανέωση λογαριασμού",
+    "removeAccount": "Αφαίρεση λογαριασμού",
+    "addAnotherAccount": "Προσθήκη άλλου λογαριασμού",
+    "verifiedUserData": "Επαληθεύτηκαν τα δεδομένα χρήστη!",
+    "loggedInAs": "Συνδεθήκατε ως {user}",
+    "@loggedInAs": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "anErrorHasOccuredWhenVerifyingUserData": "Ένα σφάλμα συνέβη κατά την επαλήθευση δεδομένων χρήστη:",
+    "verifyingUserData": "Επαλήθευση δεδομένων χρήστη...",
+    "verifiedUserToken": "Επαληθεύτηκε το token χρήστη!",
+    "anErrorHasOccuredWhenVerifyingUserToken": "Ένα σφάλμα συνέβη κατά την επαλήθευση του token χρήστη:",
+    "verifyingUserToken": "Επαλήθευση token χρήστη...",
+    "searchForChannels": "Αναζήτηση για κανάλια",
+    "recommendedChannels": "Προτεινόμενα κανάλια",
+    "popularChannels": "Δημοφιλή κανάλια"
+}

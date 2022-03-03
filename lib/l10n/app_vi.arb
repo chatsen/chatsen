@@ -1,0 +1,42 @@
+{
+    "chatsen": "Chatsen",
+    "loggedInVia": "Đã đăng nhập qua {provider}",
+    "@loggedInVia": {
+        "placeholders": {
+            "provider": {}
+        }
+    },
+    "termsOfService": "Điều khoản dịch vụ",
+    "privacyPolicy": "Chính sách quyền riêng tư",
+    "settings": "Cài đặt",
+    "expiresNever": "Không bao giờ hết hạn",
+    "expiresIn": "Hết hạn trong {time}",
+    "@expiresIn": {
+        "placeholders": {
+            "time": {}
+        }
+    },
+    "close": "Đóng",
+    "add": "Thêm",
+    "cancel": "Hủy bỏ",
+    "tokenInput": "Nhập Token",
+    "account": "Tài khoản",
+    "refreshAccount": "Làm mới tài khoản",
+    "removeAccount": "Gỡ bỏ tài khoản",
+    "addAnotherAccount": "Thêm tài khoản khác",
+    "verifiedUserData": "Đã xác nhận dữ liệu người dùng!",
+    "loggedInAs": "Đã đăng nhập với tư cách là {user}",
+    "@loggedInAs": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "anErrorHasOccuredWhenVerifyingUserData": "Đã có lỗi xảy ra khi xác thực dữ liệu người dùng:",
+    "verifyingUserData": "Đang xác thực dữ liệu người dùng...",
+    "verifiedUserToken": "Đã xác nhận Token người dùng!",
+    "anErrorHasOccuredWhenVerifyingUserToken": "Đã có lỗi xảy ra khi xác thực mã Token người dùng:",
+    "verifyingUserToken": "Đang xác thực mã Token người dùng...",
+    "searchForChannels": "Tìm kiếm kênh",
+    "recommendedChannels": "Các kênh đề xuất",
+    "popularChannels": "Các kênh phổ biến"
+}

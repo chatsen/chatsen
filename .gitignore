@@ -1,0 +1,22 @@
+# Use the .gitignore as a whitelist instead of a blacklist
+*
+!*/
+
+# Fonts
+!/fonts/**/*.ttf
+
+# Source files
+!/lib/**/*.dart
+
+# Localization files
+!/lib/l10n/**/*.arb
+
+# Flutter and dart project files
+!/analysis_options.yaml
+!/pubspec.yaml
+!/l10n.yaml
+
+# Repository related files
+!/.gitignore
+!/README.md
+!/crowdin.yml

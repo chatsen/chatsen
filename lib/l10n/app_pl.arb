@@ -1,0 +1,42 @@
+{
+    "chatsen": "Chatsen",
+    "loggedInVia": "Zalogowano przez {provider}",
+    "@loggedInVia": {
+        "placeholders": {
+            "provider": {}
+        }
+    },
+    "termsOfService": "Regulamin",
+    "privacyPolicy": "Polityka Prywatności",
+    "settings": "Ustawienia",
+    "expiresNever": "Nigdy nie wygasa",
+    "expiresIn": "Wygasa za {time}",
+    "@expiresIn": {
+        "placeholders": {
+            "time": {}
+        }
+    },
+    "close": "Zamknij",
+    "add": "Dodaj",
+    "cancel": "Anuluj",
+    "tokenInput": "Dodaj token",
+    "account": "Konto",
+    "refreshAccount": "Odśwież konto",
+    "removeAccount": "Usuń konto",
+    "addAnotherAccount": "Dodaj kolejne konto",
+    "verifiedUserData": "Zweryfikowano dane użytkownika!",
+    "loggedInAs": "Zalogowano jako {user}",
+    "@loggedInAs": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "anErrorHasOccuredWhenVerifyingUserData": "Wystąpił problem podczas weryfikacji danych użytkownika:",
+    "verifyingUserData": "Weryfikowanie danych użytkownika...",
+    "verifiedUserToken": "Zwerifikowano token użytkownika!",
+    "anErrorHasOccuredWhenVerifyingUserToken": "Wystąpił problem podczas weryfikacji tokenu użytkownika:",
+    "verifyingUserToken": "Weryfikowanie tokenu użytkownika...",
+    "searchForChannels": "Wyszukaj kanały",
+    "recommendedChannels": "Polecane kanały",
+    "popularChannels": "Popularne kanały"
+}

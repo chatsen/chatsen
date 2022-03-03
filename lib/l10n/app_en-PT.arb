@@ -1,0 +1,42 @@
+{
+    "chatsen": "Chatsen",
+    "loggedInVia": "Logged in via {provider}",
+    "@loggedInVia": {
+        "placeholders": {
+            "provider": {}
+        }
+    },
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "settings": "Settings",
+    "expiresNever": "Never expires",
+    "expiresIn": "Expires in {time}",
+    "@expiresIn": {
+        "placeholders": {
+            "time": {}
+        }
+    },
+    "close": "Close",
+    "add": "Add",
+    "cancel": "Cancel",
+    "tokenInput": "Token input",
+    "account": "Account",
+    "refreshAccount": "Refresh account",
+    "removeAccount": "Remove account",
+    "addAnotherAccount": "Add another account",
+    "verifiedUserData": "Verified user data!",
+    "loggedInAs": "Logged in as {user}",
+    "@loggedInAs": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "anErrorHasOccuredWhenVerifyingUserData": "An error has occurred when verifying user data:",
+    "verifyingUserData": "Verifying user data...",
+    "verifiedUserToken": "Verified user token!",
+    "anErrorHasOccuredWhenVerifyingUserToken": "An error has occurred when verifying user token:",
+    "verifyingUserToken": "Verifying user token...",
+    "searchForChannels": "Search for channels",
+    "recommendedChannels": "Recommended channels",
+    "popularChannels": "Popular channels"
+}
