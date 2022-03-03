@@ -8,7 +8,7 @@
 
 <div align="middle" float="left">
   <a href="https://apps.apple.com/us/app/chatsen/id1574037007"><img height="75" src="assets/app_store_badge.png"></a>
-  <a href="https://play.google.com/store/apps/details?id=com.chatsen.chatsen"><img height="75" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"></a>
+  <a href="https://play.google.com/store/apps/details?id=com.chatsen.chatsen"><img height="75" src="assets/play_store_badge.png"></a>
 </div>
 
 # Licensing
