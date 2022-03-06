@@ -38,5 +38,6 @@
     "verifyingUserToken": "Bekræfter dine data...",
     "searchForChannels": "Søg efter kanaler",
     "recommendedChannels": "Anbefalede kanaler",
-    "popularChannels": "Populære kanaler"
+    "popularChannels": "Populære kanaler",
+    "channel": "Channel"
 }
