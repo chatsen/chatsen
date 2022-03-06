@@ -39,5 +39,12 @@
     "searchForChannels": "Zoeken naar kanalen",
     "recommendedChannels": "Aanbevolen kanalen",
     "popularChannels": "Populaire kanalen",
-    "channel": "Channel"
+    "channel": "Channel",
+    "leaveChannel": "Leave channel",
+    "joinUser": "Join {user}",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    }
 }
