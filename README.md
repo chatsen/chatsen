@@ -4,6 +4,7 @@
   <a href="https://chatsen.app/discord"><img src="https://img.shields.io/discord/758710852756570153.svg?label=&logo=discord&logoColor=ffffff&color=5865F2&labelColor=5C5C5C"></a>
   <a href="https://hanadigital.github.io/grev/?user=chatsen&repo=chatsen"><img src="https://img.shields.io/github/downloads/chatsen/chatsen/total?color=23B14D"></a>
   <a><img src="https://img.shields.io/github/license/chatsen/chatsen"></a>
+  <img src="https://badges.crowdin.net/chatsen/localized.svg">
 </div>
 
 <div align="middle" float="left">
