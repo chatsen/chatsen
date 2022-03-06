@@ -2,13 +2,19 @@ import 'package:bloc/bloc.dart';
 
 import '../channel/channel.dart';
 import '../channel/channel_state.dart';
+import 'client.dart';
 
 class ClientChannels extends Cubit<List<Channel>> {
-  ClientChannels() : super([]);
+  Client client;
+
+  ClientChannels(this.client) : super([]);
 
   void join(String channelName) => emit([
         ...state,
-        Channel(name: channelName),
+        Channel(
+          client: client,
+          name: channelName,
+        ),
       ]);
 
   void part(Channel channel) {
@@ -23,6 +29,10 @@ class ClientChannels extends Cubit<List<Channel>> {
 
   void joinAll(List<String> channelNames) => emit([
         ...state,
-        for (var channelName in channelNames) Channel(name: channelName),
+        for (var channelName in channelNames)
+          Channel(
+            client: client,
+            name: channelName,
+          ),
       ]);
 }

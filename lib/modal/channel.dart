@@ -2,7 +2,6 @@ import 'package:chatsen/tmi/channel/channel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../components/separator.dart';
 import '../tmi/client/client.dart';
 
 class ChannelModal extends StatelessWidget {

@@ -2,16 +2,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../data/emote.dart';
 import '../tmi/channel/channel_message.dart';
 import 'chat_message.dart';
-import '/providers/betterttv.dart';
-import '/providers/emote_provider.dart';
-import '/providers/frankerfacez.dart';
-import '/providers/seventv.dart';
 import '/tmi/channel/channel.dart';
 import '/tmi/channel/channel_messages.dart';
-import '/tmi/client/client.dart';
 
 class ChatView extends StatefulWidget {
   final Channel channel;
@@ -27,33 +21,11 @@ class ChatView extends StatefulWidget {
 
 class _ChatViewState extends State<ChatView> {
   final TextEditingController textEditingController = TextEditingController();
-  List<Emote> emotes = [];
   bool spamming = false;
   bool emoteKeyboard = false;
 
-  Future<void> loadEmotes() async {
-    for (final emoteProvider in context.read<Client>().providers.whereType<EmoteProvider>()) {
-      try {
-        final globalEmotes = await emoteProvider.globalEmotes();
-        emotes.addAll(globalEmotes);
-      } catch (e) {
-        print('Couldn\'t fetch global emotes from ${emoteProvider.name}');
-      }
-
-      try {
-        final channelEmotes = await emoteProvider.channelEmotes(widget.channel.id!);
-        emotes.addAll(channelEmotes);
-      } catch (e) {
-        print('Couldn\'t fetch channel emotes from ${emoteProvider.name} for channel ${widget.channel.name}');
-      }
-    }
-
-    setState(() {});
-  }
-
   @override
   void initState() {
-    loadEmotes();
     super.initState();
   }
 
@@ -72,7 +44,6 @@ class _ChatViewState extends State<ChatView> {
                 itemBuilder: (BuildContext context, int index) => ChatMessage(
                   key: ObjectKey(state.reversed.elementAt(index)),
                   message: state.reversed.elementAt(index),
-                  emotes: emotes,
                 ),
               ),
             ),
@@ -90,7 +61,7 @@ class _ChatViewState extends State<ChatView> {
                           padding: MediaQuery.of(context).padding.copyWith(top: 0.0, bottom: 0.0),
                           maxCrossAxisExtent: 32.0 + 24.0,
                           children: [
-                            for (final emote in emotes)
+                            for (final emote in (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state))
                               InkWell(
                                 onTap: () {
                                   // textEditingController.text = textEditingController.text + emote.code;
@@ -106,13 +77,13 @@ class _ChatViewState extends State<ChatView> {
                           ],
                         ),
                       ),
-                    if (textEditingController.text.split(' ').last.length >= 2 && emotes.any((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase())))
+                    if (textEditingController.text.split(' ').last.length >= 2 && (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).any((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase())))
                       SizedBox(
                         height: 32.0 + 24.0,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: [
-                            for (final emote in emotes.where((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase())))
+                            for (final emote in (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).where((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase())))
                               Tooltip(
                                 message: emote.name,
                                 child: InkWell(

@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:collection/collection.dart';
 
+import '../../data/emote.dart';
+import '../../providers/emote_provider.dart';
+import '../emotes.dart';
 import '/providers/betterttv.dart';
 import '/api/recentmessages/recentmessages.dart';
 import '/tmi/channel/channel_event.dart';
@@ -19,21 +22,44 @@ import 'client_channels.dart';
 class Client {
   Connection receiver = Connection();
   Connection transmitter = Connection();
-  ClientChannels channels = ClientChannels();
+
   List<Provider> providers = [
     SevenTVProvider(),
     BetterTTVProvider(),
     FrankerFaceZProvider(),
   ];
 
+  late ClientChannels channels;
+
+  Emotes globalEmotes = Emotes();
+  Emotes emojis = Emotes();
+
   Client({
     TwitchAccount? twitchAccount,
   }) {
+    channels = ClientChannels(this);
+
     receiver.onReceive = receive;
     transmitter.onReceive = receive;
     receiver.onStateChange = stateChange;
 
     if (twitchAccount != null) connectAs(twitchAccount);
+
+    refreshGlobalEmotes();
+  }
+
+  Future<void> refreshGlobalEmotes() async {
+    final emotes = <Emote>[];
+    final emoteProviders = providers.whereType<EmoteProvider>();
+    for (final emoteProvider in emoteProviders) {
+      try {
+        emotes.addAll(await emoteProvider.globalEmotes());
+      } catch (e) {
+        print('Couldn\'t get ${emoteProvider.name} global emotes');
+      }
+    }
+
+    globalEmotes.emit(emotes);
   }
 
   Future<void> connectAs(TwitchAccount twitchAccount) async {
@@ -83,6 +109,7 @@ class Client {
           ChannelMessageChat(
             message: event,
             dateTime: DateTime.now(),
+            channel: channel,
           ),
         );
         break;
@@ -94,6 +121,7 @@ class Client {
         }
 
         channel.id = event.tags['room-id'];
+        channel.refreshEmotes();
         break;
     }
   }

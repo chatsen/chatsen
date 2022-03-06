@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:chatsen/providers/emote_provider.dart';
 
+import '../../data/emote.dart';
+import '../client/client.dart';
+import '../emotes.dart';
 import '/tmi/channel/channel_event.dart';
 import '/tmi/channel/channel_messages.dart';
 import '/tmi/channel/channel_state.dart';
@@ -9,12 +13,15 @@ import '/tmi/channel/messages/channel_message_event.dart';
 import '/tmi/channel/messages/channel_message_state_change.dart';
 
 class Channel extends Bloc<ChannelEvent, ChannelState> {
+  Client client;
   String? id;
   String name;
   Timer? suspensionTimer;
   ChannelMessages channelMessages = ChannelMessages();
+  Emotes channelEmotes = Emotes();
 
   Channel({
+    required this.client,
     required this.name,
   }) : super(ChannelDisconnected()) {
     on<ChannelJoin>((event, emit) async {
@@ -88,5 +95,21 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
 
     final realState = state as ChannelStateWithConnection;
     realState.transmitter.send('PRIVMSG $name :$message');
+  }
+
+  Future<void> refreshEmotes() async {
+    if (id == null) throw 'invalid channel id';
+
+    final emotes = <Emote>[];
+    final emoteProviders = client.providers.whereType<EmoteProvider>();
+    for (final emoteProvider in emoteProviders) {
+      try {
+        emotes.addAll(await emoteProvider.channelEmotes(id!));
+      } catch (e) {
+        print('Couldn\'t get ${emoteProvider.name} channel emotes for $name ($id)');
+      }
+    }
+
+    channelEmotes.emit(emotes);
   }
 }

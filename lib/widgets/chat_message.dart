@@ -6,12 +6,10 @@ import '/tmi/channel/messages/channel_message_chat.dart';
 
 class ChatMessage extends StatefulWidget {
   final ChannelMessage message;
-  final List<Emote> emotes;
 
   const ChatMessage({
     Key? key,
     required this.message,
-    required this.emotes,
   }) : super(key: key);
 
   @override
@@ -36,18 +34,17 @@ class _ChatMessageState extends State<ChatMessage> {
                       color: ((widget.message as ChannelMessageChat).message.tags['color']?.isEmpty ?? true) ? Theme.of(context).colorScheme.primary : Color(int.parse('FF${(widget.message as ChannelMessageChat).message.tags['color']!.substring(1)}', radix: 16)),
                     ),
                   ),
-                  for (final split in ((widget.message as ChannelMessageChat).message.parameters.skip(1).join(' ')).split(' ')) ...[
-                    if (widget.emotes.any((e) => e.name == split))
-                      WidgetSpan(
-                        child: Image.network(
-                          widget.emotes.firstWhere((e) => e.name == split).mipmap.last,
-                          // scale: widget.emotes.firstWhere((e) => e.name == split).name == 'BetterTTV' ? 3 : 4,
-                          scale: 4,
-                        ),
-                      ),
-                    if (!widget.emotes.any((e) => e.name == split))
+                  for (final split in (widget.message as ChannelMessageChat).splits) ...[
+                    if (split is String)
                       TextSpan(
                         text: '$split ',
+                      ),
+                    if (split is Emote)
+                      WidgetSpan(
+                        child: Image.network(
+                          split.mipmap.last,
+                          scale: 4,
+                        ),
                       ),
                   ],
                 ],

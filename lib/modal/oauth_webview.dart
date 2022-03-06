@@ -33,7 +33,6 @@ class _OAuthWebViewModalState extends State<OAuthWebViewModal> {
         children: [
           WebView(
             onPageFinished: (url) async {
-              print(url);
               if (!url.contains('access_token')) return;
 
               final fragmentParameters = {

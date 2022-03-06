@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../components/modal.dart';
+import '../modal/chatsen.dart';
 import '../tmi/channel/channel.dart';
 import '../tmi/client/client.dart';
 import '../tmi/client/client_channels.dart';
@@ -29,9 +30,17 @@ class HomePage extends StatelessWidget {
                   child: TabBar(
                     isScrollable: true,
                     tabs: [
-                      const SizedBox(
-                        height: 48.0,
-                        child: Icon(Icons.home_outlined),
+                      GestureDetector(
+                        onLongPress: () {
+                          Modal.show(
+                            context: context,
+                            child: const ChatsenModal(),
+                          );
+                        },
+                        child: const SizedBox(
+                          height: 48.0,
+                          child: Icon(Icons.home_outlined),
+                        ),
                       ),
                       for (final channel in state)
                         GestureDetector(
