@@ -1,6 +1,6 @@
 {
     "chatsen": "Chatsen",
-    "loggedInVia": "S'ha iniciat la sessió com {provider}",
+    "loggedInVia": "S'ha iniciat la sessió mitjançant {provider}",
     "@loggedInVia": {
         "placeholders": {
             "provider": {}
@@ -18,26 +18,26 @@
     },
     "close": "Tanca",
     "add": "Afegeix",
-    "cancel": "Cancel",
-    "tokenInput": "Token input",
-    "account": "Account",
-    "refreshAccount": "Refresh account",
-    "removeAccount": "Remove account",
-    "addAnotherAccount": "Add another account",
-    "verifiedUserData": "Verified user data!",
-    "loggedInAs": "Logged in as {user}",
+    "cancel": "Cancel·la",
+    "tokenInput": "Introdueix el token",
+    "account": "Compte",
+    "refreshAccount": "Actualitza el compte",
+    "removeAccount": "Suprimeix el compte",
+    "addAnotherAccount": "Afegeix un altre compte",
+    "verifiedUserData": "Dades d'usuari verificades!",
+    "loggedInAs": "S'ha iniciat la sessió com {user}",
     "@loggedInAs": {
         "placeholders": {
             "user": {}
         }
     },
-    "anErrorHasOccuredWhenVerifyingUserData": "An error has occurred when verifying user data:",
-    "verifyingUserData": "Verifying user data...",
-    "verifiedUserToken": "Verified user token!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "An error has occurred when verifying user token:",
-    "verifyingUserToken": "Verifying user token...",
-    "searchForChannels": "Search for channels",
-    "recommendedChannels": "Recommended channels",
-    "popularChannels": "Popular channels",
-    "channel": "Channel"
+    "anErrorHasOccuredWhenVerifyingUserData": "S'ha produït un error en verificar les dades de l'usuari:",
+    "verifyingUserData": "Verificant les dades de l'usuari...",
+    "verifiedUserToken": "Token de l'usuari verificat!",
+    "anErrorHasOccuredWhenVerifyingUserToken": "S'ha produït un error en verificar el token de l'usuari:",
+    "verifyingUserToken": "Verificant el token de l'usuari...",
+    "searchForChannels": "Cerca canals",
+    "recommendedChannels": "Canals recomanats",
+    "popularChannels": "Canals populars",
+    "channel": "Canal"
 }
