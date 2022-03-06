@@ -39,5 +39,12 @@
     "searchForChannels": "Søg efter kanaler",
     "recommendedChannels": "Anbefalede kanaler",
     "popularChannels": "Populære kanaler",
-    "channel": "Channel"
+    "channel": "Channel",
+    "leaveChannel": "Leave channel",
+    "joinUser": "Join {user}",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    }
 }
