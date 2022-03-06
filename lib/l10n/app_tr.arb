@@ -38,5 +38,6 @@
     "verifyingUserToken": "Kullanıcı belirteci onaylanıyor...",
     "searchForChannels": "Kanal ara",
     "recommendedChannels": "Önerilen kanallar",
-    "popularChannels": "Popüler kanallar"
+    "popularChannels": "Popüler kanallar",
+    "channel": "Channel"
 }
