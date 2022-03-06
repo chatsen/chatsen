@@ -39,5 +39,12 @@
     "searchForChannels": "Tìm kiếm kênh",
     "recommendedChannels": "Các kênh đề xuất",
     "popularChannels": "Các kênh phổ biến",
-    "channel": "Channel"
+    "channel": "Channel",
+    "leaveChannel": "Leave channel",
+    "joinUser": "Join {user}",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    }
 }
