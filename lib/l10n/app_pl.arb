@@ -39,5 +39,12 @@
     "searchForChannels": "Wyszukaj kanały",
     "recommendedChannels": "Polecane kanały",
     "popularChannels": "Popularne kanały",
-    "channel": "Channel"
+    "channel": "Channel",
+    "leaveChannel": "Leave channel",
+    "joinUser": "Join {user}",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    }
 }
