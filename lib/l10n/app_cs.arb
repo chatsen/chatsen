@@ -38,5 +38,6 @@
     "verifyingUserToken": "Ověřuji user token...",
     "searchForChannels": "Procházet kanály",
     "recommendedChannels": "Doporučené kanály",
-    "popularChannels": "Populární kanály"
+    "popularChannels": "Populární kanály",
+    "channel": "Channel"
 }
