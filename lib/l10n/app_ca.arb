@@ -1,23 +1,23 @@
 {
     "chatsen": "Chatsen",
-    "loggedInVia": "Logged in via {provider}",
+    "loggedInVia": "S'ha iniciat la sessió com {provider}",
     "@loggedInVia": {
         "placeholders": {
             "provider": {}
         }
     },
-    "termsOfService": "Terms of Service",
-    "privacyPolicy": "Privacy Policy",
-    "settings": "Settings",
-    "expiresNever": "Never expires",
-    "expiresIn": "Expires in {time}",
+    "termsOfService": "Condicions del Servei",
+    "privacyPolicy": "Política de Privacitat",
+    "settings": "Configuració",
+    "expiresNever": "No caduca mai",
+    "expiresIn": "Caduca en {time}",
     "@expiresIn": {
         "placeholders": {
             "time": {}
         }
     },
-    "close": "Close",
-    "add": "Add",
+    "close": "Tanca",
+    "add": "Afegeix",
     "cancel": "Cancel",
     "tokenInput": "Token input",
     "account": "Account",
