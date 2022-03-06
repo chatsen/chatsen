@@ -1,6 +1,8 @@
+import 'package:chatsen/modal/channel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../components/modal.dart';
 import '../tmi/channel/channel.dart';
 import '../tmi/client/client.dart';
 import '../tmi/client/client_channels.dart';
@@ -32,9 +34,17 @@ class HomePage extends StatelessWidget {
                         child: Icon(Icons.home_outlined),
                       ),
                       for (final channel in state)
-                        SizedBox(
-                          height: 48.0,
-                          child: Center(child: Text(channel.name)),
+                        GestureDetector(
+                          onLongPress: () {
+                            Modal.show(
+                              context: context,
+                              child: ChannelModal(channel: channel),
+                            );
+                          },
+                          child: SizedBox(
+                            height: 48.0,
+                            child: Center(child: Text(channel.name)),
+                          ),
                         ),
                       const SizedBox(
                           // height: 48.0,

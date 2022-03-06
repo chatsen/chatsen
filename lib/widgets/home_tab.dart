@@ -24,18 +24,27 @@ class HomeTab extends StatefulWidget {
 class _HomeTabState extends State<HomeTab> {
   late Future<http.Response> recommendedStreams;
   late Future<http.Response> streams;
+  Future<http.Response>? search;
+  TwitchAccount? account;
+  TextEditingController searchTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    searchTextController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
-    var twitchAccountsBox = Hive.box('TwitchAccounts');
-    var accountSettingsBox = Hive.box('AccountSettings');
-    var account = twitchAccountsBox.values.firstWhere((element) => (element as TwitchAccount).tokenData.hash == accountSettingsBox.get('activeTwitchAccount')) as TwitchAccount;
+    final twitchAccountsBox = Hive.box('TwitchAccounts');
+    final accountSettingsBox = Hive.box('AccountSettings');
+    account = twitchAccountsBox.values.firstWhere((element) => (element as TwitchAccount).tokenData.hash == accountSettingsBox.get('activeTwitchAccount')) as TwitchAccount;
 
     streams = http.get(
       Uri.parse('https://api.twitch.tv/helix/streams?first=100'),
       headers: {
-        'Client-ID': '${account.tokenData.clientId}',
-        'Authorization': 'Bearer ${account.tokenData.accessToken}',
+        'Client-ID': '${account?.tokenData.clientId}',
+        'Authorization': 'Bearer ${account?.tokenData.accessToken}',
       },
     );
     recommendedStreams = http.get(
@@ -50,16 +59,11 @@ class _HomeTabState extends State<HomeTab> {
             (e) => 'user_login=$e',
           )).join('&')),
       headers: {
-        'Client-ID': '${account.tokenData.clientId}',
-        'Authorization': 'Bearer ${account.tokenData.accessToken}',
+        'Client-ID': '${account?.tokenData.clientId}',
+        'Authorization': 'Bearer ${account?.tokenData.accessToken}',
       },
     );
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -107,6 +111,7 @@ class _HomeTabState extends State<HomeTab> {
                             const SizedBox(width: 12.0),
                             Expanded(
                               child: TextField(
+                                controller: searchTextController,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: AppLocalizations.of(context)!.searchForChannels,
@@ -114,6 +119,23 @@ class _HomeTabState extends State<HomeTab> {
                                     color: Theme.of(context).colorScheme.onBackground,
                                   ),
                                 ),
+                                onChanged: (text) {
+                                  setState(() {
+                                    if (text.isEmpty) {
+                                      search = null;
+                                    } else {
+                                      search?.ignore();
+                                      search = null;
+                                      search = http.get(
+                                        Uri.parse('https://api.twitch.tv/helix/search/channels?query=$text'),
+                                        headers: {
+                                          'Client-ID': '${account?.tokenData.clientId}',
+                                          'Authorization': 'Bearer ${account?.tokenData.accessToken}',
+                                        },
+                                      );
+                                    }
+                                  });
+                                },
                               ),
                             ),
                             const AvatarButton(),
@@ -123,22 +145,87 @@ class _HomeTabState extends State<HomeTab> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.recommendedChannels,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                if (search != null) ...[
+                  FutureBuilder<http.Response>(
+                    future: search,
+                    builder: (context, snapshotSearch) {
+                      if (snapshotSearch.data == null) {
+                        return const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        );
+                      }
+
+                      final responseJsonSearch = json.decode(utf8.decode(snapshotSearch.data!.bodyBytes));
+
+                      return Column(
+                        // shrinkWrap: true,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          for (var stream in responseJsonSearch['data'])
+                            InkWell(
+                              onTap: () {
+                                final client = context.read<Client>();
+                                final channelName = '#${stream['broadcaster_login']}';
+                                client.channels.join(channelName);
+                                client.receiver.send('JOIN $channelName');
+                                client.channels.state.firstWhereOrNull((channelSelect) => channelSelect.name == channelName)?.add(ChannelJoin(client.receiver, client.transmitter));
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 48.0,
+                                      height: 48.0,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(48.0),
+                                        clipBehavior: Clip.antiAlias,
+                                        child: Material(
+                                          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+                                          child: Image.network(
+                                            '${stream['thumbnail_url']}',
+                                            height: 48.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 8.0),
+                                    Expanded(
+                                      child: Text(
+                                        '${stream['display_name']}',
+                                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                        ],
+                      );
+                    },
                   ),
-                ),
-                for (var stream in responseJson['data']) StreamPreviewLarge(stream: stream),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.popularChannels,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                ],
+                if (search == null) ...[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.recommendedChannels,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
                   ),
-                ),
-                for (var stream in responseJsonAll['data']) StreamPreviewLarge(stream: stream),
+                  for (var stream in responseJson['data']) StreamPreviewSmall(stream: stream),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.popularChannels,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ),
+                  for (var stream in responseJsonAll['data']) StreamPreviewSmall(stream: stream),
+                ],
               ],
             );
           },
