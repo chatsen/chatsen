@@ -38,5 +38,6 @@
   "verifyingUserToken": "Verifying user token...",
   "searchForChannels": "Search for channels",
   "recommendedChannels": "Recommended channels",
-  "popularChannels": "Popular channels"
+  "popularChannels": "Popular channels",
+  "channel": "Channel"
 }
