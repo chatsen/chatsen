@@ -38,5 +38,6 @@
     "verifyingUserToken": "Benutzertoken wird verifiziert...",
     "searchForChannels": "Suche nach Kanälen",
     "recommendedChannels": "Empfohlene Kanäle",
-    "popularChannels": "Beliebte Kanäle"
+    "popularChannels": "Beliebte Kanäle",
+    "channel": "Channel"
 }

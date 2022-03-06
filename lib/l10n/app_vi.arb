@@ -38,5 +38,6 @@
     "verifyingUserToken": "Đang xác thực mã Token người dùng...",
     "searchForChannels": "Tìm kiếm kênh",
     "recommendedChannels": "Các kênh đề xuất",
-    "popularChannels": "Các kênh phổ biến"
+    "popularChannels": "Các kênh phổ biến",
+    "channel": "Channel"
 }

@@ -38,5 +38,6 @@
     "verifyingUserToken": "유저 토큰 확인중...",
     "searchForChannels": "채널을 찾는 중",
     "recommendedChannels": "추천 채널",
-    "popularChannels": "인기있는 채널"
+    "popularChannels": "인기있는 채널",
+    "channel": "Channel"
 }

@@ -38,5 +38,6 @@
     "verifyingUserToken": "Επαλήθευση token χρήστη...",
     "searchForChannels": "Αναζήτηση για κανάλια",
     "recommendedChannels": "Προτεινόμενα κανάλια",
-    "popularChannels": "Δημοφιλή κανάλια"
+    "popularChannels": "Δημοφιλή κανάλια",
+    "channel": "Channel"
 }

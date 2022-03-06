@@ -38,5 +38,6 @@
     "verifyingUserToken": "Gebruikerstoken verifiëren...",
     "searchForChannels": "Zoeken naar kanalen",
     "recommendedChannels": "Aanbevolen kanalen",
-    "popularChannels": "Populaire kanalen"
+    "popularChannels": "Populaire kanalen",
+    "channel": "Channel"
 }

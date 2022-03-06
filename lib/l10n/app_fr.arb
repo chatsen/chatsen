@@ -38,5 +38,6 @@
     "verifyingUserToken": "Vérification du token utilisateur...",
     "searchForChannels": "Rechercher une chaîne",
     "recommendedChannels": "Chaînes recommandées",
-    "popularChannels": "Chaînes populaires"
+    "popularChannels": "Chaînes populaires",
+    "channel": "Channel"
 }
