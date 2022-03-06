@@ -39,5 +39,12 @@
     "searchForChannels": "Cerca canals",
     "recommendedChannels": "Canals recomanats",
     "popularChannels": "Canals populars",
-    "channel": "Canal"
+    "channel": "Canal",
+    "leaveChannel": "Leave channel",
+    "joinUser": "Join {user}",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    }
 }
