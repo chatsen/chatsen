@@ -23,7 +23,7 @@
     "account": "Compte",
     "refreshAccount": "Actualitza el compte",
     "removeAccount": "Suprimeix el compte",
-    "addAnotherAccount": "Afegeix un altre compte",
+    "addAnotherAccount": "Afegeix un compte",
     "verifiedUserData": "Dades d'usuari verificades!",
     "loggedInAs": "S'ha iniciat la sessió com {user}",
     "@loggedInAs": {
