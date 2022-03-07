@@ -40,8 +40,8 @@
     "recommendedChannels": "Canals recomanats",
     "popularChannels": "Canals populars",
     "channel": "Canal",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
+    "leaveChannel": "Deixa el canal",
+    "joinUser": "Uneix-te a {user}",
     "@joinUser": {
         "placeholders": {
             "user": {}
