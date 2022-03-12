@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
         bloc: context.read<Client>().channels,
         builder: (context, state) {
           return DefaultTabController(
-            length: 2 + state.length,
+            length: 1 + state.length,
             child: Scaffold(
               extendBody: true,
               extendBodyBehindAppBar: true,
@@ -55,10 +55,10 @@ class HomePage extends StatelessWidget {
                             child: Center(child: Text(channel.name)),
                           ),
                         ),
-                      const SizedBox(
-                          // height: 48.0,
-                          // child: Icon(Icons.info_outline),
-                          ),
+                      // const SizedBox(
+                      //     // height: 48.0,
+                      //     // child: Icon(Icons.info_outline),
+                      //     ),
                     ],
                   ),
                 ),
@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
                     ChatView(
                       channel: channel,
                     ),
-                  ConnectionLogsDisplay(),
+                  // ConnectionLogsDisplay(),
                 ],
               ),
               // floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,

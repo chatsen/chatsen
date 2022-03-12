@@ -26,6 +26,19 @@ class _ChatMessageState extends State<ChatMessage> {
             child: Text.rich(
               TextSpan(
                 children: [
+                  for (final badge in (widget.message as ChannelMessageChat).badges)
+                    WidgetSpan(
+                      child: Tooltip(
+                        message: badge.name,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 4.0),
+                          child: Image.network(
+                            badge.mipmap.last,
+                            scale: 4,
+                          ),
+                        ),
+                      ),
+                    ),
                   TextSpan(
                     text: '${(widget.message as ChannelMessageChat).message.tags['display-name']}: ',
                     style: TextStyle(
@@ -41,9 +54,15 @@ class _ChatMessageState extends State<ChatMessage> {
                       ),
                     if (split is Emote)
                       WidgetSpan(
-                        child: Image.network(
-                          split.mipmap.last,
-                          scale: 4,
+                        child: Tooltip(
+                          message: split.name,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 4.0),
+                            child: Image.network(
+                              split.mipmap.last,
+                              scale: 4,
+                            ),
+                          ),
                         ),
                       ),
                   ],

@@ -1,7 +1,6 @@
 import '../providers/provider.dart';
 
-// TODO: Have code field for emotes/emojis
-class Emote {
+class Badge {
   String id;
   String name;
   String? description;
@@ -9,7 +8,7 @@ class Emote {
   int flags;
   Provider provider;
 
-  Emote({
+  Badge({
     required this.id,
     required this.name,
     this.description,
