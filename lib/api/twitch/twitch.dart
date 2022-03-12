@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:chatsen/api/twitch/twitch_badge.dart';
 import 'package:http/http.dart' as http;
 
 import '/data/twitch/token_data.dart';
@@ -13,7 +14,6 @@ class Twitch {
       },
     );
     var responseJson = json.decode(utf8.decode(response.bodyBytes));
-
     return TokenData(
       clientId: responseJson['client_id'],
       login: responseJson['login'],
@@ -37,11 +37,38 @@ class Twitch {
       },
     );
     var responseJson = json.decode(utf8.decode(response.bodyBytes));
-
     return UserData(
       displayName: responseJson['data'][0]['display_name'],
       avatarUrl: responseJson['data'][0]['profile_image_url'],
       offlineUrl: responseJson['data'][0]['offline_image_url'],
     );
+  }
+
+  static Future<Map<String, Map<String, TwitchBadge>>> globalBadges() async {
+    var response = await http.get(Uri.parse('https://badges.twitch.tv/v1/badges/global/display'));
+    var responseJson = json.decode(utf8.decode(response.bodyBytes));
+    return {
+      for (final badgeData in responseJson['badge_sets'].entries)
+        badgeData.key: {
+          for (final badgeVersion in badgeData.value['versions'].entries)
+            badgeVersion.key: TwitchBadge.fromJson(
+              badgeVersion.value,
+            ),
+        },
+    };
+  }
+
+  static Future<Map<String, Map<String, TwitchBadge>>> channelBadges(String uid) async {
+    var response = await http.get(Uri.parse('https://badges.twitch.tv/v1/badges/channels/$uid/display')); // ?language=en
+    var responseJson = json.decode(utf8.decode(response.bodyBytes));
+    return {
+      for (final badgeData in responseJson['badge_sets'].entries)
+        badgeData.key: {
+          for (final badgeVersion in badgeData.value['versions'].entries)
+            badgeVersion.key: TwitchBadge.fromJson(
+              badgeVersion.value,
+            ),
+        },
+    };
   }
 }

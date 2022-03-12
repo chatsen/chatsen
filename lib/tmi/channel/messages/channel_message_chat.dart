@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:chatsen/data/badge.dart';
 import 'package:collection/collection.dart';
 
 import '../../../data/emote.dart';
@@ -24,6 +25,7 @@ class ChannelMessageChat extends ChannelMessage {
   irc.Message message;
   bool action = false;
   List<dynamic> splits = [];
+  List<Badge> badges = [];
 
   ChannelMessageChat({
     required this.message,
@@ -68,8 +70,15 @@ class ChannelMessageChat extends ChannelMessage {
       print('Couldn\'t parse Twitch emote data: ${message.tags['emotes']} -> $e');
     }
 
+    final allBadges = (channel?.channelBadges.state ?? []) + (channel?.client.globalBadges.state ?? []);
+    final twitchBadges = message.tags['badges']?.split(',') ?? [];
+    for (final twitchBadgeId in twitchBadges) {
+      final badge = allBadges.firstWhereOrNull((badge) => badge.id == twitchBadgeId);
+      if (badge != null) badges.add(badge);
+    }
+
     final emotes = (channel?.channelEmotes.state ?? []) + (channel?.client.globalEmotes.state ?? []);
-    final textSplits = messageText.split(' ');
+    final textSplits = messageText.split(' ').where((split) => split.isNotEmpty);
     for (final textSplit in textSplits) {
       var emote = emotes.firstWhereOrNull((emote) => emote.name == textSplit);
       if (textSplit.startsWith('')) {

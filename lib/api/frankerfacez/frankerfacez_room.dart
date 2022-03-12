@@ -17,10 +17,10 @@ class FrankerFaceZRoom {
   int setId;
 
   @JsonKey(name: 'vip_badge')
-  Map<String, String>? vipBadge;
+  Map<String, String?>? vipBadge;
 
   @JsonKey(name: 'mod_urls')
-  Map<String, String>? modUrls;
+  Map<String, String?>? modUrls;
 
   FrankerFaceZRoom({
     required this.id,

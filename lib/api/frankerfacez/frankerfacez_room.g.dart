@@ -13,10 +13,10 @@ FrankerFaceZRoom _$FrankerFaceZRoomFromJson(Map<String, dynamic> json) =>
       youtubeId: json['youtube_id'],
       setId: json['set'] as int,
       vipBadge: (json['vip_badge'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String),
+        (k, e) => MapEntry(k, e as String?),
       ),
       modUrls: (json['mod_urls'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String),
+        (k, e) => MapEntry(k, e as String?),
       ),
     );
 

@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:chatsen/providers/badge_provider.dart';
 import 'package:chatsen/providers/emote_provider.dart';
+import 'package:chatsen/tmi/badges.dart';
 
+import '../../data/badge.dart';
 import '../../data/emote.dart';
 import '../client/client.dart';
 import '../emotes.dart';
@@ -19,6 +22,7 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
   Timer? suspensionTimer;
   ChannelMessages channelMessages = ChannelMessages();
   Emotes channelEmotes = Emotes();
+  Badges channelBadges = Badges();
 
   Channel({
     required this.client,
@@ -111,5 +115,21 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
     }
 
     channelEmotes.emit(emotes);
+  }
+
+  Future<void> refreshBadges() async {
+    if (id == null) throw 'invalid channel id';
+
+    final badges = <Badge>[];
+    final badgeProviders = client.providers.whereType<BadgeProvider>();
+    for (final badgeProvider in badgeProviders) {
+      try {
+        badges.addAll(await badgeProvider.channelBadges(id!));
+      } catch (e) {
+        print('Couldn\'t get ${badgeProvider.name} channel badges for $name ($id)');
+      }
+    }
+
+    channelBadges.emit(badges);
   }
 }
