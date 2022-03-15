@@ -1,47 +1,47 @@
 {
     "chatsen": "Chatsen",
-    "loggedInVia": "Logged in via {provider}",
+    "loggedInVia": "Entrou via {provider}",
     "@loggedInVia": {
         "placeholders": {
             "provider": {}
         }
     },
-    "termsOfService": "Terms of Service",
-    "privacyPolicy": "Privacy Policy",
-    "settings": "Settings",
-    "expiresNever": "Never expires",
-    "expiresIn": "Expires in {time}",
+    "termsOfService": "Termos de serviço",
+    "privacyPolicy": "Política de privacidade",
+    "settings": "Definições",
+    "expiresNever": "Nunca expira",
+    "expiresIn": "Expira em{time}",
     "@expiresIn": {
         "placeholders": {
             "time": {}
         }
     },
-    "close": "Close",
-    "add": "Add",
-    "cancel": "Cancel",
-    "tokenInput": "Token input",
-    "account": "Account",
-    "refreshAccount": "Refresh account",
-    "removeAccount": "Remove account",
-    "addAnotherAccount": "Add another account",
-    "verifiedUserData": "Verified user data!",
-    "loggedInAs": "Logged in as {user}",
+    "close": "Fechar",
+    "add": "Adicionar",
+    "cancel": "Cancelar",
+    "tokenInput": "Entrada de token",
+    "account": "Conta",
+    "refreshAccount": "Atualizar conta",
+    "removeAccount": "Remover conta",
+    "addAnotherAccount": "Adicionar nova conta",
+    "verifiedUserData": "Dados de utilizador verificados!",
+    "loggedInAs": "Entrou como {user}",
     "@loggedInAs": {
         "placeholders": {
             "user": {}
         }
     },
-    "anErrorHasOccuredWhenVerifyingUserData": "An error has occurred when verifying user data:",
-    "verifyingUserData": "Verifying user data...",
-    "verifiedUserToken": "Verified user token!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "An error has occurred when verifying user token:",
-    "verifyingUserToken": "Verifying user token...",
-    "searchForChannels": "Search for channels",
-    "recommendedChannels": "Recommended channels",
-    "popularChannels": "Popular channels",
-    "channel": "Channel",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
+    "anErrorHasOccuredWhenVerifyingUserData": "Ocorreu um erro ao verificar dados de utilizador:",
+    "verifyingUserData": "A verificar dados de utilizador...",
+    "verifiedUserToken": "Token de utilizador verificada!",
+    "anErrorHasOccuredWhenVerifyingUserToken": "Ocorreu um erro ao verificar o token do utilizador:",
+    "verifyingUserToken": "A verificar token do utilizador...",
+    "searchForChannels": "Procurar canais",
+    "recommendedChannels": "Canais recomendados",
+    "popularChannels": "Canais populares",
+    "channel": "Canal",
+    "leaveChannel": "Sair do canal",
+    "joinUser": "Juntar-se{user}",
     "@joinUser": {
         "placeholders": {
             "user": {}
