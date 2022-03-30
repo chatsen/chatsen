@@ -111,7 +111,7 @@ class _HomeTabState extends State<HomeTab> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Twitchat',
+                    'Chatsen',
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                           color: Theme.of(context).colorScheme.onBackground,
                         ),
