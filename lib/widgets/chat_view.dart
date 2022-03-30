@@ -1,3 +1,7 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:chatsen/api/catbox/catbox.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -183,10 +187,11 @@ class _ChatViewState extends State<ChatView> {
                             final picker = await FilePicker.platform.pickFiles();
                             final splits = textEditingController.text.split(' ');
                             for (PlatformFile file in picker?.files ?? []) {
-                              splits.add('${file.path}');
-                              // print(File(file.path!).readAsStringSync());
+                              final uploadedFile = await Catbox.uploadFile(file.name, File(file.path!).readAsBytesSync());
+                              splits.add(uploadedFile.url);
                             }
-                            textEditingController.text = splits.join(' ') + ' ';
+                            splits.removeWhere((element) => element.isEmpty);
+                            if (splits.isNotEmpty) textEditingController.text = splits.join(' ') + ' ';
                           },
                           child: SizedBox(
                             width: 48.0,
@@ -197,7 +202,7 @@ class _ChatViewState extends State<ChatView> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 12.0),
+                        // const SizedBox(width: 12.0),
                         Expanded(
                           child: TextField(
                             controller: textEditingController,
