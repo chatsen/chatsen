@@ -178,25 +178,25 @@ class _ChatViewState extends State<ChatView> {
                       ),
                     Row(
                       children: [
-                        // InkWell(
-                        //   onTap: () async {
-                        //     final picker = await FilePicker.platform.pickFiles();
-                        //     final splits = textEditingController.text.split(' ');
-                        //     for (PlatformFile file in picker?.files ?? []) {
-                        //       splits.add('${file.path}');
-                        //       // print(File(file.path!).readAsStringSync());
-                        //     }
-                        //     textEditingController.text = splits.join(' ') + ' ';
-                        //   },
-                        //   child: SizedBox(
-                        //     width: 48.0,
-                        //     height: 48.0,
-                        //     child: Icon(
-                        //       Icons.photo_size_select_actual_outlined,
-                        //       color: Theme.of(context).colorScheme.onPrimaryContainer,
-                        //     ),
-                        //   ),
-                        // ),
+                        InkWell(
+                          onTap: () async {
+                            final picker = await FilePicker.platform.pickFiles();
+                            final splits = textEditingController.text.split(' ');
+                            for (PlatformFile file in picker?.files ?? []) {
+                              splits.add('${file.path}');
+                              // print(File(file.path!).readAsStringSync());
+                            }
+                            textEditingController.text = splits.join(' ') + ' ';
+                          },
+                          child: SizedBox(
+                            width: 48.0,
+                            height: 48.0,
+                            child: Icon(
+                              Icons.photo_size_select_actual_outlined,
+                              color: Theme.of(context).colorScheme.onPrimaryContainer,
+                            ),
+                          ),
+                        ),
                         const SizedBox(width: 12.0),
                         Expanded(
                           child: TextField(

@@ -1,11 +1,19 @@
-class UploadedMedia {
+import 'package:hive/hive.dart';
+
+@HiveType(typeId: 5)
+class UploadedMedia extends HiveObject {
+  @HiveField(0)
   final String url;
-  final String deletionUrl;
+
+  @HiveField(1)
+  final String? deletionUrl;
+
+  @HiveField(2)
   final DateTime time;
 
   UploadedMedia({
     required this.url,
-    required this.deletionUrl,
+    this.deletionUrl,
     required this.time,
   });
 }
