@@ -1,3 +1,4 @@
+import 'package:chatsen/modal/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -157,7 +158,13 @@ class ChatsenModalHeader extends StatelessWidget {
           ),
           const Spacer(),
           InkWell(
-            onTap: () async => Navigator.of(context).pop(),
+            onTap: () async {
+              Navigator.of(context).pop();
+              await Modal.show(
+                context: context,
+                child: const SettingsModal(),
+              );
+            },
             borderRadius: BorderRadius.circular(24.0),
             child: const SizedBox(
               width: 40.0,

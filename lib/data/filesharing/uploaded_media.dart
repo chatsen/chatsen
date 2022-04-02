@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
 
+part 'uploaded_media.g.dart';
+
 @HiveType(typeId: 5)
 class UploadedMedia extends HiveObject {
   @HiveField(0)

@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'token_data.g.dart';
 
 @HiveType(typeId: 2)
-class TokenData {
+class TokenData extends HiveObject {
   @HiveField(0)
   String? clientId;
 

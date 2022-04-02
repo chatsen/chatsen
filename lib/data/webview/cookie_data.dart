@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 part 'cookie_data.g.dart';
 
 @HiveType(typeId: 4)
-class CookieData {
+class CookieData extends HiveObject {
   @HiveField(0)
   String name;
 

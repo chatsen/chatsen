@@ -1,38 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../data/emote.dart';
+import '../data/settings/message_appearance.dart';
 import '/tmi/channel/channel_message.dart';
 import '/tmi/channel/messages/channel_message_chat.dart';
 
-class ChatMessage extends StatefulWidget {
+// ignore: must_be_immutable
+class ChatMessage extends StatelessWidget {
   final ChannelMessage message;
+  late MessageAppearance messageAppearance;
 
-  const ChatMessage({
+  ChatMessage({
     Key? key,
     required this.message,
-  }) : super(key: key);
+  }) : super(key: key) {
+    messageAppearance = Hive.box('Settings').get('messageAppearance');
+  }
 
   @override
-  State<ChatMessage> createState() => _ChatMessageState();
-}
-
-class _ChatMessageState extends State<ChatMessage> {
-  @override
-  Widget build(BuildContext context) => widget.message is ChannelMessageChat
+  Widget build(BuildContext context) => message is ChannelMessageChat
       ? InkWell(
           onTap: () async {},
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (messageAppearance.compact ? 1.0 : 2.0)),
             child: Text.rich(
               TextSpan(
                 children: [
-                  TextSpan(
-                    text: '${widget.message.dateTime.hour}:${widget.message.dateTime.minute.toString().padLeft(2, '0')}  ',
-                    style: const TextStyle(
-                      color: Colors.grey,
+                  if (messageAppearance.timestamps)
+                    TextSpan(
+                      text: '${message.dateTime.hour}:${message.dateTime.minute.toString().padLeft(2, '0')}  ',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                      ),
                     ),
-                  ),
-                  for (final badge in (widget.message as ChannelMessageChat).badges)
+                  for (final badge in (message as ChannelMessageChat).badges)
                     WidgetSpan(
                       child: Tooltip(
                         message: badge.name,
@@ -40,23 +43,26 @@ class _ChatMessageState extends State<ChatMessage> {
                           padding: const EdgeInsets.only(right: 4.0),
                           child: Image.network(
                             badge.mipmap.last,
-                            scale: 4,
+                            scale: (1.0 / messageAppearance.scale) * 4.0,
                           ),
                         ),
                       ),
                     ),
                   TextSpan(
-                    text: '${(widget.message as ChannelMessageChat).message.tags['display-name']}: ',
+                    text: '${(message as ChannelMessageChat).message.tags['display-name']}: ',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      // color: Theme.of(context).colorScheme.primary,
-                      color: ((widget.message as ChannelMessageChat).message.tags['color']?.isEmpty ?? true) ? Theme.of(context).colorScheme.primary : Color(int.parse('FF${(widget.message as ChannelMessageChat).message.tags['color']!.substring(1)}', radix: 16)),
+                      fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                      color: ((message as ChannelMessageChat).message.tags['color']?.isEmpty ?? true) ? Theme.of(context).colorScheme.primary : Color(int.parse('FF${(message as ChannelMessageChat).message.tags['color']!.substring(1)}', radix: 16)),
                     ),
                   ),
-                  for (final split in (widget.message as ChannelMessageChat).splits) ...[
+                  for (final split in (message as ChannelMessageChat).splits) ...[
                     if (split is String)
                       TextSpan(
                         text: '$split ',
+                        style: TextStyle(
+                          fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                        ),
                       ),
                     if (split is Emote)
                       WidgetSpan(
@@ -66,7 +72,7 @@ class _ChatMessageState extends State<ChatMessage> {
                             padding: const EdgeInsets.only(right: 4.0),
                             child: Image.network(
                               split.mipmap.last,
-                              scale: 4,
+                              scale: (1.0 / messageAppearance.scale) * 4.0,
                             ),
                           ),
                         ),
