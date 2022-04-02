@@ -26,6 +26,12 @@ class _ChatMessageState extends State<ChatMessage> {
             child: Text.rich(
               TextSpan(
                 children: [
+                  TextSpan(
+                    text: '${widget.message.dateTime.hour}:${widget.message.dateTime.minute.toString().padLeft(2, '0')}  ',
+                    style: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
                   for (final badge in (widget.message as ChannelMessageChat).badges)
                     WidgetSpan(
                       child: Tooltip(
