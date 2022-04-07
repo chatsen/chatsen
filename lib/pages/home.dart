@@ -7,6 +7,7 @@ import '../modal/chatsen.dart';
 import '../tmi/channel/channel.dart';
 import '../tmi/client/client.dart';
 import '../tmi/client/client_channels.dart';
+import '../widgets/channel_view.dart';
 import '../widgets/chat_view.dart';
 import '../widgets/home_tab.dart';
 import '/widgets/connection_logs.dart';
@@ -67,7 +68,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   const HomeTab(),
                   for (final channel in state)
-                    ChatView(
+                    ChannelView(
                       channel: channel,
                     ),
                   // ConnectionLogsDisplay(),

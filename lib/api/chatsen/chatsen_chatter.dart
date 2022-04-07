@@ -7,7 +7,7 @@ class ChatsenChatter {
   String id;
   String login;
   String displayName;
-  String chatColor;
+  String? chatColor;
   String profileImageURL;
 
   ChatsenChatter({

@@ -11,7 +11,7 @@ ChatsenChatter _$ChatsenChatterFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       login: json['login'] as String,
       displayName: json['displayName'] as String,
-      chatColor: json['chatColor'] as String,
+      chatColor: json['chatColor'] as String?,
       profileImageURL: json['profileImageURL'] as String,
     );
 

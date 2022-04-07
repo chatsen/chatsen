@@ -1,6 +1,9 @@
+import 'package:chatsen/modal/user.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../components/modal.dart';
 import '../data/emote.dart';
 import '../data/settings/message_appearance.dart';
 import '/tmi/channel/channel_message.dart';
@@ -55,6 +58,16 @@ class ChatMessage extends StatelessWidget {
                       fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
                       color: ((message as ChannelMessageChat).message.tags['color']?.isEmpty ?? true) ? Theme.of(context).colorScheme.primary : Color(int.parse('FF${(message as ChannelMessageChat).message.tags['color']!.substring(1)}', radix: 16)),
                     ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () async {
+                        Modal.show(
+                          context: context,
+                          child: UserModal(
+                            login: (message as ChannelMessageChat).message.prefix!.split('!').first,
+                            channel: message.channel,
+                          ),
+                        );
+                      },
                   ),
                   for (final split in (message as ChannelMessageChat).splits) ...[
                     if (split is String)

@@ -13,14 +13,14 @@ class ChatsenUser {
   String login;
   String displayName;
   String profileImageURL;
-  String bannerImageURL;
-  String offlineImageURL;
-  String profileViewCount;
-  String primaryColorHex;
-  ChatsenStream stream;
+  String? bannerImageURL;
+  String? offlineImageURL;
+  int profileViewCount;
+  String? primaryColorHex;
+  ChatsenStream? stream;
   ChatsenBroadcastSettings broadcastSettings;
   ChatsenFollowers followers;
-  ChatsenChannel channel;
+  ChatsenChannel? channel;
 
   ChatsenUser({
     required this.id,

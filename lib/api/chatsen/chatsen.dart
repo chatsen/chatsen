@@ -9,13 +9,13 @@ class Chatsen {
   static Future<ChatsenUser> userWithViewers(String login) async {
     final response = await http.get(Uri.parse('https://api.chatsen.app/v1/channel/$login'));
     final responseJson = await json.decode(utf8.decode(response.bodyBytes));
-    return responseJson;
+    return ChatsenUser.fromJson(responseJson);
   }
 
   static Future<ChatsenUser> user(String login) async {
     final response = await http.get(Uri.parse('https://api.chatsen.app/v1/user/$login'));
     final responseJson = await json.decode(utf8.decode(response.bodyBytes));
-    return responseJson;
+    return ChatsenUser.fromJson(responseJson);
   }
 
   static Future<List<ChatsenBadge>> badges() async {

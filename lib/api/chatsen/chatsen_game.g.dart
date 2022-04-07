@@ -8,7 +8,7 @@ part of 'chatsen_game.dart';
 
 ChatsenGame _$ChatsenGameFromJson(Map<String, dynamic> json) => ChatsenGame(
       displayName: json['displayName'] as String,
-      description: json['description'] as String,
+      description: json['description'] as String?,
       name: json['name'] as String,
       avatarURL: json['avatarURL'] as String,
     );

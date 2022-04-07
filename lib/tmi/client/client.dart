@@ -145,6 +145,8 @@ class Client {
         for (final message in (await RecentMessages.channel(channel.name.substring(1)))) {
           receive(connection, irc.Message.fromEvent(message));
         }
+        await channel.refreshChannelUser();
+        await channel.refreshChannelChatters();
         break;
     }
   }

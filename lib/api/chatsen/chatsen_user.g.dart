@@ -11,16 +11,20 @@ ChatsenUser _$ChatsenUserFromJson(Map<String, dynamic> json) => ChatsenUser(
       login: json['login'] as String,
       displayName: json['displayName'] as String,
       profileImageURL: json['profileImageURL'] as String,
-      bannerImageURL: json['bannerImageURL'] as String,
-      offlineImageURL: json['offlineImageURL'] as String,
-      profileViewCount: json['profileViewCount'] as String,
-      primaryColorHex: json['primaryColorHex'] as String,
-      stream: ChatsenStream.fromJson(json['stream'] as Map<String, dynamic>),
+      bannerImageURL: json['bannerImageURL'] as String?,
+      offlineImageURL: json['offlineImageURL'] as String?,
+      profileViewCount: json['profileViewCount'] as int,
+      primaryColorHex: json['primaryColorHex'] as String?,
+      stream: json['stream'] == null
+          ? null
+          : ChatsenStream.fromJson(json['stream'] as Map<String, dynamic>),
       broadcastSettings: ChatsenBroadcastSettings.fromJson(
           json['broadcastSettings'] as Map<String, dynamic>),
       followers:
           ChatsenFollowers.fromJson(json['followers'] as Map<String, dynamic>),
-      channel: ChatsenChannel.fromJson(json['channel'] as Map<String, dynamic>),
+      channel: json['channel'] == null
+          ? null
+          : ChatsenChannel.fromJson(json['channel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ChatsenUserToJson(ChatsenUser instance) =>

@@ -5,7 +5,7 @@ part 'chatsen_game.g.dart';
 @JsonSerializable()
 class ChatsenGame {
   String displayName;
-  String description;
+  String? description;
   String name;
   String avatarURL;
 

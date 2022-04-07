@@ -8,8 +8,8 @@ part 'chatsen_stream.g.dart';
 class ChatsenStream {
   ChatsenGame game;
   String previewImageURL;
-  String viewersCount;
-  String createdAt;
+  int viewersCount;
+  DateTime createdAt;
 
   ChatsenStream({
     required this.game,

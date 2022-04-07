@@ -10,8 +10,8 @@ ChatsenStream _$ChatsenStreamFromJson(Map<String, dynamic> json) =>
     ChatsenStream(
       game: ChatsenGame.fromJson(json['game'] as Map<String, dynamic>),
       previewImageURL: json['previewImageURL'] as String,
-      viewersCount: json['viewersCount'] as String,
-      createdAt: json['createdAt'] as String,
+      viewersCount: json['viewersCount'] as int,
+      createdAt: DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$ChatsenStreamToJson(ChatsenStream instance) =>
@@ -19,5 +19,5 @@ Map<String, dynamic> _$ChatsenStreamToJson(ChatsenStream instance) =>
       'game': instance.game,
       'previewImageURL': instance.previewImageURL,
       'viewersCount': instance.viewersCount,
-      'createdAt': instance.createdAt,
+      'createdAt': instance.createdAt.toIso8601String(),
     };

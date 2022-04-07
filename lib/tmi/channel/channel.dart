@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:chatsen/providers/badge_provider.dart';
-import 'package:chatsen/providers/emote_provider.dart';
-import 'package:chatsen/tmi/badges.dart';
+import 'package:chatsen/tmi/channel/channel_chatters.dart';
 
+import '../../api/chatsen/chatsen.dart';
 import '../../data/badge.dart';
 import '../../data/emote.dart';
 import '../client/client.dart';
@@ -14,6 +13,10 @@ import '/tmi/channel/channel_messages.dart';
 import '/tmi/channel/channel_state.dart';
 import '/tmi/channel/messages/channel_message_event.dart';
 import '/tmi/channel/messages/channel_message_state_change.dart';
+import '/providers/badge_provider.dart';
+import '/providers/emote_provider.dart';
+import '/tmi/badges.dart';
+import '/tmi/channel/channel_info.dart';
 
 class Channel extends Bloc<ChannelEvent, ChannelState> {
   Client client;
@@ -23,6 +26,8 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
   ChannelMessages channelMessages = ChannelMessages();
   Emotes channelEmotes = Emotes();
   Badges channelBadges = Badges();
+  ChannelInfo channelInfo = ChannelInfo();
+  ChannelChatters channelChatters = ChannelChatters();
 
   Channel({
     required this.client,
@@ -131,5 +136,19 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
     }
 
     channelBadges.emit(badges);
+  }
+
+  Future<void> refreshChannelUser() async {
+    channelInfo.emit(await Chatsen.user(name.replaceFirst('#', '')));
+    try {} catch (e) {
+      print('Couldn\'t get channel info for $name');
+    }
+  }
+
+  Future<void> refreshChannelChatters() async {
+    channelChatters.emit((await Chatsen.userWithViewers(name.replaceFirst('#', ''))).channel?.chatters);
+    try {} catch (e) {
+      print('Couldn\'t get channel chatters for $name');
+    }
   }
 }
