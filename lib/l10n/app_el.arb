@@ -39,9 +39,9 @@
     "searchForChannels": "Αναζήτηση για κανάλια",
     "recommendedChannels": "Προτεινόμενα κανάλια",
     "popularChannels": "Δημοφιλή κανάλια",
-    "channel": "Channel",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
+    "channel": "Κανάλι",
+    "leaveChannel": "Αποχώρηση από κανάλι",
+    "joinUser": "Συμμετοχή με {user}",
     "@joinUser": {
         "placeholders": {
             "user": {}
