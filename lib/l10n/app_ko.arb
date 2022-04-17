@@ -39,9 +39,9 @@
     "searchForChannels": "채널을 찾는 중",
     "recommendedChannels": "추천 채널",
     "popularChannels": "인기있는 채널",
-    "channel": "Channel",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
+    "channel": "채널",
+    "leaveChannel": "채널 나가기",
+    "joinUser": "{user} 로 접속",
     "@joinUser": {
         "placeholders": {
             "user": {}
