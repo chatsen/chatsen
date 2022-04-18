@@ -23,23 +23,17 @@ Future<void> main() async {
 
   await Hive.initFlutter();
 
-  final adapters = <TypeAdapter>[
-    TwitchAccountAdapter(),
-    TokenDataAdapter(),
-    UserDataAdapter(),
-    CookieDataAdapter(),
-    UploadedMediaAdapter(),
-    MessageAppearanceAdapter(),
-    ApplicationAppearanceAdapter(),
-    BlockedMessageAdapter(),
-    BlockedUserAdapter(),
-    MentionMessageAdapter(),
-    MentionUserAdapter(),
-  ];
-
-  for (final adapter in adapters) {
-    Hive.registerAdapter(adapter);
-  }
+  Hive.registerAdapter(TwitchAccountAdapter());
+  Hive.registerAdapter(TokenDataAdapter());
+  Hive.registerAdapter(UserDataAdapter());
+  Hive.registerAdapter(CookieDataAdapter());
+  Hive.registerAdapter(UploadedMediaAdapter());
+  Hive.registerAdapter(MessageAppearanceAdapter());
+  Hive.registerAdapter(ApplicationAppearanceAdapter());
+  Hive.registerAdapter(BlockedMessageAdapter());
+  Hive.registerAdapter(BlockedUserAdapter());
+  Hive.registerAdapter(MentionMessageAdapter());
+  Hive.registerAdapter(MentionUserAdapter());
 
   final twitchAccountsBox = await Hive.openBox('TwitchAccounts');
   final accountSettingsBox = await Hive.openBox('AccountSettings');
