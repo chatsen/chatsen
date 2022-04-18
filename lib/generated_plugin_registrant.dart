@@ -7,11 +7,17 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:file_picker/_internal/file_picker_web.dart';
+import 'package:url_launcher_web/url_launcher_web.dart';
+import 'package:video_player_web/video_player_web.dart';
+import 'package:wakelock_web/wakelock_web.dart';
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 // ignore: public_member_api_docs
-void registerPlugins(Registrar registrar) {
+void registerPlugins(final Registrar registrar) {
   FilePickerWeb.registerWith(registrar);
+  UrlLauncherPlugin.registerWith(registrar);
+  VideoPlayerPlugin.registerWith(registrar);
+  WakelockWeb.registerWith(registrar);
   registrar.registerMessageHandler();
 }

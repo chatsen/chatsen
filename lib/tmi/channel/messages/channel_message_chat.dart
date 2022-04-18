@@ -1,13 +1,20 @@
 import 'dart:convert';
 
 import 'package:chatsen/data/badge.dart';
+import 'package:chatsen/data/inline_url.dart';
+import 'package:chatsen/tmi/channel/messages/channel_message_user.dart';
+import 'package:chatsen/tmi/channel/messages/embeds/image_embed.dart';
+import 'package:chatsen/tmi/channel/messages/embeds/video_embed.dart';
+import 'package:chatsen/tmi/user.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 
 import '../../../data/emote.dart';
 import '../../../providers/twitch.dart';
 import '../channel.dart';
 import '../channel_message.dart';
 import '/irc/message.dart' as irc;
+import 'channel_message_embeds.dart';
 
 class TwitchEmoteInstance {
   final String code;
@@ -21,7 +28,7 @@ class TwitchEmoteInstance {
   });
 }
 
-class ChannelMessageChat extends ChannelMessage {
+class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, ChannelMessageEmbeds {
   irc.Message message;
   bool action = false;
   List<dynamic> splits = [];
@@ -35,6 +42,13 @@ class ChannelMessageChat extends ChannelMessage {
           dateTime: dateTime,
           channel: channel,
         ) {
+    user = User(
+      login: message.prefix!.split('!').first,
+      displayName: message.tags['display-name'],
+      id: message.tags['user-id'],
+      color: (message.tags['color']?.isEmpty ?? true) ? null : Color(int.parse('FF${message.tags['color']!.substring(1)}', radix: 16)),
+    );
+
     var messageText = message.parameters.skip(1).join(':');
 
     if (messageText.contains(RegExp('ACTION .*'))) action = true;
@@ -94,8 +108,20 @@ class ChannelMessageChat extends ChannelMessage {
           provider: TwitchProvider(),
         );
       }
+
+      final uri = Uri.tryParse(textSplit);
+      final imageRegex = RegExp(r'\.(png|apng|gif|webp|jpg|jpeg)$');
+      final videoRegex = RegExp(r'\.(webm|mp4)$');
+
       if (emote != null) {
         splits.add(emote);
+      } else if (uri != null && uri.isAbsolute) {
+        splits.add(InlineUrl(url: '$uri'));
+        if (imageRegex.hasMatch('${uri.removeFragment()}')) {
+          embeds.add(ImageEmbed(url: '$uri'));
+        } else if (videoRegex.hasMatch('${uri.removeFragment()}')) {
+          embeds.add(VideoEmbed(url: '$uri'));
+        }
       } else {
         splits.add(textSplit);
       }

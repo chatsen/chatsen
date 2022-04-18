@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart' as http;
 
 import 'package:chatsen/data/filesharing/uploaded_media.dart';
 

@@ -143,7 +143,9 @@ class Client {
         await channel.refreshEmotes();
         await channel.refreshBadges();
         for (final message in (await RecentMessages.channel(channel.name.substring(1)))) {
-          receive(connection, irc.Message.fromEvent(message));
+          final ircMessage = irc.Message.fromEvent(message);
+          if (ircMessage.command == 'ROOMSTATE') continue;
+          receive(connection, ircMessage);
         }
         await channel.refreshChannelUser();
         await channel.refreshChannelChatters();

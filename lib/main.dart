@@ -3,6 +3,7 @@ import 'package:chatsen/data/settings/message_appearance.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:wakelock/wakelock.dart';
 
 import '/data/twitch/token_data.dart';
 import '/data/twitch/user_data.dart';
@@ -13,6 +14,9 @@ import 'data/filesharing/uploaded_media.dart';
 import 'tmi/client/client.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Wakelock.enable();
+
   await Hive.initFlutter();
 
   Hive.registerAdapter(TwitchAccountAdapter());
