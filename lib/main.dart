@@ -1,4 +1,8 @@
 import 'package:chatsen/data/settings/application_appearance.dart';
+import 'package:chatsen/data/settings/blocked_message.dart';
+import 'package:chatsen/data/settings/blocked_user.dart';
+import 'package:chatsen/data/settings/mention_message.dart';
+import 'package:chatsen/data/settings/mention_user.dart';
 import 'package:chatsen/data/settings/message_appearance.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -19,17 +23,31 @@ Future<void> main() async {
 
   await Hive.initFlutter();
 
-  Hive.registerAdapter(TwitchAccountAdapter());
-  Hive.registerAdapter(TokenDataAdapter());
-  Hive.registerAdapter(UserDataAdapter());
-  Hive.registerAdapter(CookieDataAdapter());
-  Hive.registerAdapter(UploadedMediaAdapter());
-  Hive.registerAdapter(MessageAppearanceAdapter());
-  Hive.registerAdapter(ApplicationAppearanceAdapter());
+  final adapters = <TypeAdapter>[
+    TwitchAccountAdapter(),
+    TokenDataAdapter(),
+    UserDataAdapter(),
+    CookieDataAdapter(),
+    UploadedMediaAdapter(),
+    MessageAppearanceAdapter(),
+    ApplicationAppearanceAdapter(),
+    BlockedMessageAdapter(),
+    BlockedUserAdapter(),
+    MentionMessageAdapter(),
+    MentionUserAdapter(),
+  ];
+
+  for (final adapter in adapters) {
+    Hive.registerAdapter(adapter);
+  }
 
   final twitchAccountsBox = await Hive.openBox('TwitchAccounts');
   final accountSettingsBox = await Hive.openBox('AccountSettings');
   final settingsBox = await Hive.openBox('Settings');
+  final blockedMessagesBox = await Hive.openBox('BlockedMessages');
+  final blockedUsersBox = await Hive.openBox('BlockedUsers');
+  final mentionMessagesBox = await Hive.openBox('MentionMessages');
+  final mentionUsersBox = await Hive.openBox('MentionUsers');
 
   await settingsBox.clear();
 
