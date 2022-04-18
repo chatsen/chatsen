@@ -198,18 +198,26 @@ class _EmbeddedVideoState extends State<EmbeddedVideo> {
   }
 
   @override
-  Widget build(BuildContext context) => ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Material(
-          color: Color.alphaBlend(Theme.of(context).colorScheme.onSurface.withOpacity(0.075), Theme.of(context).colorScheme.surface),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 128.0 * 2.5) * widget.scale,
-            child: AspectRatio(
-              aspectRatio: 16.0 / 9.0,
-              child: Chewie(
-                controller: ChewieController(
-                  customControls: const MaterialDesktopControls(),
-                  videoPlayerController: controller,
+  Widget build(BuildContext context) => MediaQuery.removePadding(
+        context: context,
+        removeLeft: true,
+        removeTop: true,
+        removeRight: true,
+        removeBottom: true,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: Material(
+            color: Color.alphaBlend(Theme.of(context).colorScheme.onSurface.withOpacity(0.075), Theme.of(context).colorScheme.surface),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 128.0 * 2.5) * widget.scale,
+              child: AspectRatio(
+                aspectRatio: 16.0 / 9.0,
+                child: Chewie(
+                  controller: ChewieController(
+                    aspectRatio: 16.0 / 9.0,
+                    customControls: const MaterialDesktopControls(),
+                    videoPlayerController: controller,
+                  ),
                 ),
               ),
             ),
