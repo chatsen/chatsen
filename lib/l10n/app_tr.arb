@@ -39,9 +39,9 @@
     "searchForChannels": "Kanal ara",
     "recommendedChannels": "Önerilen kanallar",
     "popularChannels": "Popüler kanallar",
-    "channel": "Channel",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
+    "channel": "Kanal",
+    "leaveChannel": "Kanaldan ayrıl",
+    "joinUser": "{user} katıl",
     "@joinUser": {
         "placeholders": {
             "user": {}
