@@ -52,5 +52,11 @@
     "placeholders": {
       "username": {}
     }
+  },
+  "joinChannelName": "Join {channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
   }
 }

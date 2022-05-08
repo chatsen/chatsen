@@ -286,7 +286,7 @@ class _HomeTabState extends State<HomeTab> {
                                 const SizedBox(width: 8.0),
                                 Expanded(
                                   child: Text(
-                                    'Join #${searchTextController.text}',
+                                    AppLocalizations.of(context)!.joinChannelName('#${searchTextController.text}'),
                                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                           fontWeight: FontWeight.bold,
                                         ),
