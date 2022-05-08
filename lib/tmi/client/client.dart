@@ -113,9 +113,12 @@ class Client {
         final loginSource = event.prefix?.split('!').first;
         if (loginSource == credentials.tokenData.login) {
           channel.add(ChannelConnect());
-          // TODO: Restore chat history here
+          for (final message in (await RecentMessages.channel(channel.name.substring(1)))) {
+            final ircMessage = irc.Message.fromEvent(message);
+            if (ircMessage.command == 'ROOMSTATE') continue;
+            receive(connection, ircMessage);
+          }
         }
-
         break;
       case 'PRIVMSG':
         final channelName = event.parameters[0];
@@ -140,15 +143,7 @@ class Client {
         }
 
         channel.id = event.tags['room-id'];
-        await channel.refreshEmotes();
-        await channel.refreshBadges();
-        for (final message in (await RecentMessages.channel(channel.name.substring(1)))) {
-          final ircMessage = irc.Message.fromEvent(message);
-          if (ircMessage.command == 'ROOMSTATE') continue;
-          receive(connection, ircMessage);
-        }
-        await channel.refreshChannelUser();
-        await channel.refreshChannelChatters();
+        await channel.refresh();
         break;
     }
   }

@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/modal.dart';
+import '../components/separator.dart';
 import '../data/twitch_account.dart';
 import '../modal/chatsen.dart';
 import '../tmi/channel/channel_event.dart';
@@ -220,6 +221,86 @@ class _HomeTabState extends State<HomeTab> {
                         ),
                       ),
                       if (search != null) ...[
+                        if (searchTextController.text == 'xqcow')
+                          InkWell(
+                            onTap: () {
+                              search?.ignore();
+                              search = null;
+                              search = http.get(
+                                Uri.parse('https://api.twitch.tv/helix/search/channels?query=forsen'),
+                                headers: {
+                                  'Client-ID': '${account?.tokenData.clientId}',
+                                  'Authorization': 'Bearer ${account?.tokenData.accessToken}',
+                                },
+                              );
+                              setState(() => searchTextController.text = 'forsen');
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+                              child: Text(
+                                AppLocalizations.of(context)!.spellCheckFailed('forsen'),
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        InkWell(
+                          onTap: () {
+                            final client = context.read<Client>();
+                            final channelName = '#${searchTextController.text}';
+                            if (client.channels.state.any((channel) => channel.name == channelName)) {
+                              DefaultTabController.of(context)?.animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
+                              return;
+                            }
+                            client.channels.join(channelName);
+                            client.receiver.send('JOIN $channelName');
+                            client.channels.state.firstWhereOrNull((channelSelect) => channelSelect.name == channelName)?.add(ChannelJoin(client.receiver, client.transmitter));
+                            WidgetsBinding.instance.scheduleFrameCallback((_) {
+                              WidgetsBinding.instance.scheduleFrameCallback((_) {
+                                final defaultTabController = DefaultTabController.of(context);
+                                defaultTabController?.animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
+                              });
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 48.0,
+                                  height: 48.0,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(48.0),
+                                    clipBehavior: Clip.antiAlias,
+                                    child: Material(
+                                      color: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+                                      // child: Image.network(
+                                      //   '${stream['thumbnail_url']}',
+                                      //   height: 48.0,
+                                      // ),
+                                      child: const Icon(Icons.add_circle_outline),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 8.0),
+                                Expanded(
+                                  child: Text(
+                                    'Join #${searchTextController.text}',
+                                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                          child: Separator(),
+                        ),
                         FutureBuilder<http.Response>(
                           future: search,
                           builder: (context, snapshotSearch) {

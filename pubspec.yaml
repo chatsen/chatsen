@@ -4,7 +4,8 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.0-168.0.dev <3.0.0"
+  # sdk: ">=2.17.0-168.0.dev <3.0.0"
+  sdk: '>=2.18.0-97.0.dev <3.0.0'
 
 dependencies:
   flutter:
@@ -38,6 +39,7 @@ dev_dependencies:
   json_serializable: ^6.1.4
   hive_generator: ^1.1.2
   build_runner: ^2.1.7 # flutter packages pub run build_runner build
+  analyzer: any
 
 flutter:
   generate: true

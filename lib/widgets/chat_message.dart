@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:chatsen/data/inline_url.dart';
 import 'package:chatsen/modal/user.dart';
 import 'package:chatsen/tmi/channel/messages/channel_message_embeds.dart';
@@ -17,6 +19,32 @@ import '../tmi/channel/messages/embeds/image_embed.dart';
 import '/tmi/channel/channel_message.dart';
 import '/tmi/channel/messages/channel_message_chat.dart';
 
+class SizeBuilder extends StatelessWidget {
+  final ValueNotifier<Rect> notifier = ValueNotifier(const Rect.fromLTWH(0, 0, 0, 0));
+  final Widget Function(BuildContext context, Rect paintBounds, Widget? child) builder;
+  final Widget? child;
+
+  SizeBuilder({
+    super.key,
+    required this.builder,
+    this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        notifier.value = (context.findRenderObject() as RenderBox).paintBounds;
+      },
+    );
+    return ValueListenableBuilder(
+      valueListenable: notifier,
+      builder: builder,
+      child: child,
+    );
+  }
+}
+
 // ignore: must_be_immutable
 class ChatMessage extends StatelessWidget {
   final ChannelMessage message;
@@ -27,6 +55,11 @@ class ChatMessage extends StatelessWidget {
     required this.message,
   }) : super(key: key) {
     messageAppearance = Hive.box('Settings').get('messageAppearance');
+  }
+
+  Size _textSize(String text, TextStyle style) {
+    final TextPainter textPainter = TextPainter(text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)..layout(minWidth: 0, maxWidth: double.infinity);
+    return textPainter.size;
   }
 
   @override
@@ -63,12 +96,67 @@ class ChatMessage extends StatelessWidget {
                             ),
                           ),
                         ),
+                      // WidgetSpan(
+                      //   child: Builder(builder: (context) {
+                      //     final text = Text(
+                      //       '${(message as ChannelMessageChat).user.displayName}: ',
+                      //       style: TextStyle(
+                      //         fontWeight: FontWeight.bold,
+                      //         fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                      //         color: (message as ChannelMessageChat).user.color ?? Theme.of(context).colorScheme.primary,
+                      //       ),
+                      //     );
+
+                      //     return true || (message as ChannelMessageChat).user.id == '100221397'
+                      //         ? ShaderMask(
+                      //             blendMode: BlendMode.srcIn,
+                      //             shaderCallback: (Rect bounds) {
+                      //               return const LinearGradient(
+                      //                 transform: GradientRotation(45.0 * pi / 180.0),
+                      //                 colors: <Color>[
+                      //                   Color.fromARGB(255, 147, 197, 253),
+                      //                   Color.fromARGB(255, 187, 247, 208),
+                      //                   Color.fromARGB(255, 253, 224, 71),
+                      //                 ],
+                      //               ).createShader(bounds);
+                      //             },
+                      //             child: text,
+                      //           )
+                      //         : text;
+                      //   }),
+                      // ),
                       TextSpan(
                         text: '${(message as ChannelMessageChat).user.displayName}: ',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
                           color: (message as ChannelMessageChat).user.color ?? Theme.of(context).colorScheme.primary,
+                          // foreground: Paint()
+                          //   ..shader = const LinearGradient(
+                          //     transform: GradientRotation(180.0 * pi / 180.0),
+                          //     begin: Alignment.topCenter,
+                          //     end: Alignment.bottomCenter,
+                          //     colors: <Color>[
+                          //       Color.fromARGB(255, 147, 197, 253),
+                          //       Color.fromARGB(255, 187, 247, 208),
+                          //       Color.fromARGB(255, 253, 224, 71),
+                          //     ],
+                          //   ).createShader(Rect.fromLTWH(
+                          //     0.0,
+                          //     0.0,
+                          //     _textSize(
+                          //         '${(message as ChannelMessageChat).user.displayName}: ',
+                          //         TextStyle(
+                          //           fontWeight: FontWeight.bold,
+                          //           fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                          //         )).width,
+                          //     _textSize(
+                          //         '${(message as ChannelMessageChat).user.displayName}: ',
+                          //         TextStyle(
+                          //           fontWeight: FontWeight.bold,
+                          //           fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                          //         )).height,
+                          //   )),
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () async {

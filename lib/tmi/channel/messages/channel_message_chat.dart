@@ -42,6 +42,14 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
           dateTime: dateTime,
           channel: channel,
         ) {
+    build();
+  }
+
+  void build() {
+    badges.clear();
+    splits.clear();
+    embeds.clear();
+
     user = User(
       login: message.prefix!.split('!').first,
       displayName: message.tags['display-name'],

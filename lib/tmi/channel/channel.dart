@@ -17,6 +17,7 @@ import '/providers/badge_provider.dart';
 import '/providers/emote_provider.dart';
 import '/tmi/badges.dart';
 import '/tmi/channel/channel_info.dart';
+import 'messages/channel_message_chat.dart';
 
 class Channel extends Bloc<ChannelEvent, ChannelState> {
   Client client;
@@ -104,6 +105,22 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
 
     final realState = state as ChannelStateWithConnection;
     realState.transmitter.send('PRIVMSG $name :$message');
+  }
+
+  Future<void> refresh() async {
+    final emotesFuture = refreshEmotes();
+    final badgesFuture = refreshBadges();
+    final refreshChannelFuture = refreshChannelUser();
+    final refreshChattersFuture = refreshChannelChatters();
+
+    await Future.wait([emotesFuture, badgesFuture]);
+
+    for (final message in channelMessages.state.whereType<ChannelMessageChat>()) {
+      message.build();
+    }
+    channelMessages.emit([...channelMessages.state]);
+
+    await Future.wait([refreshChannelFuture, refreshChattersFuture]);
   }
 
   Future<void> refreshEmotes() async {
