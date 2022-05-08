@@ -1,16 +1,16 @@
 {
     "chatsen": "Chatsen",
-    "loggedInVia": "Entrou via {provider}",
+    "loggedInVia": "Logado via {provider}",
     "@loggedInVia": {
         "placeholders": {
             "provider": {}
         }
     },
-    "termsOfService": "Termos de serviço",
-    "privacyPolicy": "Política de privacidade",
-    "settings": "Definições",
+    "termsOfService": "Termos de Serviço",
+    "privacyPolicy": "Política de Privacidade",
+    "settings": "Configurações",
     "expiresNever": "Nunca expira",
-    "expiresIn": "Expira em{time}",
+    "expiresIn": "Expira em {time}",
     "@expiresIn": {
         "placeholders": {
             "time": {}
@@ -23,25 +23,25 @@
     "account": "Conta",
     "refreshAccount": "Atualizar conta",
     "removeAccount": "Remover conta",
-    "addAnotherAccount": "Adicionar nova conta",
-    "verifiedUserData": "Dados de utilizador verificados!",
-    "loggedInAs": "Entrou como {user}",
+    "addAnotherAccount": "Adicionar outra conta",
+    "verifiedUserData": "Dados do usuário verificados!",
+    "loggedInAs": "Logado como {user}",
     "@loggedInAs": {
         "placeholders": {
             "user": {}
         }
     },
-    "anErrorHasOccuredWhenVerifyingUserData": "Ocorreu um erro ao verificar dados de utilizador:",
-    "verifyingUserData": "A verificar dados de utilizador...",
-    "verifiedUserToken": "Token de utilizador verificada!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "Ocorreu um erro ao verificar o token do utilizador:",
-    "verifyingUserToken": "A verificar token do utilizador...",
-    "searchForChannels": "Procurar canais",
+    "anErrorHasOccuredWhenVerifyingUserData": "Ocorreu um erro ao verificar os dados do usuário:",
+    "verifyingUserData": "Verificando dados do usuário...",
+    "verifiedUserToken": "Token do usuário verificado!",
+    "anErrorHasOccuredWhenVerifyingUserToken": "Ocorreu um erro ao verificar o token do usuário:",
+    "verifyingUserToken": "Verificando token de usuário...",
+    "searchForChannels": "Procurar por canais",
     "recommendedChannels": "Canais recomendados",
     "popularChannels": "Canais populares",
-    "channel": "Canal",
-    "leaveChannel": "Sair do canal",
-    "joinUser": "Juntar-se{user}",
+    "channel": "Channel",
+    "leaveChannel": "Leave channel",
+    "joinUser": "Join {user}",
     "@joinUser": {
         "placeholders": {
             "user": {}
@@ -51,6 +51,12 @@
     "@spellCheckFailed": {
         "placeholders": {
             "username": {}
+        }
+    },
+    "joinChannelName": "Join {channel}",
+    "@joinChannelName": {
+        "placeholders": {
+            "channel": {}
         }
     }
 }
