@@ -40,20 +40,20 @@
     "recommendedChannels": "Canales recomendados",
     "popularChannels": "Canales populares",
     "channel": "Canal",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
+    "leaveChannel": "Salir del canal",
+    "joinUser": "Unirse a {user}",
     "@joinUser": {
         "placeholders": {
             "user": {}
         }
     },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+    "spellCheckFailed": "La revisión ortográfica falló! Quizás quisiste buscar {username}?",
     "@spellCheckFailed": {
         "placeholders": {
             "username": {}
         }
     },
-    "joinChannelName": "Join {channel}",
+    "joinChannelName": "Unirse a {channel}",
     "@joinChannelName": {
         "placeholders": {
             "channel": {}
