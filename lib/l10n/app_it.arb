@@ -39,15 +39,15 @@
     "searchForChannels": "Cerca un canale",
     "recommendedChannels": "Canali Raccomandati",
     "popularChannels": "Canali Popolari",
-    "channel": "Channel",
-    "leaveChannel": "Leave channel",
+    "channel": "Canale",
+    "leaveChannel": "Lascia il canale",
     "joinUser": "Join {user}",
     "@joinUser": {
         "placeholders": {
             "user": {}
         }
     },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+    "spellCheckFailed": "Controllo ortografico fallito! Intendevi forse cercare {username}?",
     "@spellCheckFailed": {
         "placeholders": {
             "username": {}
