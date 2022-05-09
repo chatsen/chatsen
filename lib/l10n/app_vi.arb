@@ -47,13 +47,13 @@
             "user": {}
         }
     },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+    "spellCheckFailed": "Kiểm tra chính tả thất bại! Có phải bạn muốn tìm {username}?",
     "@spellCheckFailed": {
         "placeholders": {
             "username": {}
         }
     },
-    "joinChannelName": "Join {channel}",
+    "joinChannelName": "Tham gia vào {channel}",
     "@joinChannelName": {
         "placeholders": {
             "channel": {}
