@@ -41,7 +41,7 @@
     "popularChannels": "Canali Popolari",
     "channel": "Canale",
     "leaveChannel": "Lascia il canale",
-    "joinUser": "Join {user}",
+    "joinUser": "Unisciti a {user}",
     "@joinUser": {
         "placeholders": {
             "user": {}
@@ -53,7 +53,7 @@
             "username": {}
         }
     },
-    "joinChannelName": "Join {channel}",
+    "joinChannelName": "Partecipa in {channel}",
     "@joinChannelName": {
         "placeholders": {
             "channel": {}
