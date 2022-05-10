@@ -47,13 +47,13 @@
             "user": {}
         }
     },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+    "spellCheckFailed": "Yazım denetimi başarısız oldu! {username} için mi arama yapmak istemiştiniz?",
     "@spellCheckFailed": {
         "placeholders": {
             "username": {}
         }
     },
-    "joinChannelName": "Join {channel}",
+    "joinChannelName": "{channel} katıl",
     "@joinChannelName": {
         "placeholders": {
             "channel": {}
