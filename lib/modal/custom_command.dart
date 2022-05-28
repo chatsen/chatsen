@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 
 import '../components/separator.dart';
 import '../data/custom_command.dart';
+import 'components/modal_header.dart';
 
 class CustomCommandModal extends StatefulWidget {
   final CustomCommand? customCommand;
@@ -39,47 +40,30 @@ class _CustomCommandModalState extends State<CustomCommandModal> {
   Widget build(BuildContext context) => ListView(
         shrinkWrap: true,
         children: [
+          const ModalHeader(title: 'Custom Command'),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                InkWell(
-                  onTap: () async => Navigator.of(context).pop(),
-                  borderRadius: BorderRadius.circular(24.0),
-                  child: const SizedBox(
-                    width: 40.0,
-                    height: 40.0,
-                    child: Icon(Icons.close),
-                  ),
-                ),
-                const Spacer(),
-                const Text(
-                  'Custom Command',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                  ),
-                ),
-                const Spacer(),
-                const SizedBox(
-                  width: 40.0,
-                  height: 40.0,
-                ),
-              ],
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
+            child: TextField(
+              controller: triggerController,
+              decoration: const InputDecoration(
+                labelText: 'Trigger',
+                border: InputBorder.none,
+                filled: true,
+              ),
+              onChanged: (text) => setState(() {}),
             ),
           ),
-          TextField(
-            controller: triggerController,
-            decoration: const InputDecoration(
-              labelText: 'Trigger',
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
+            child: TextField(
+              controller: commandController,
+              decoration: const InputDecoration(
+                labelText: 'Command',
+                border: InputBorder.none,
+                filled: true,
+              ),
+              onChanged: (text) => setState(() {}),
             ),
-            onChanged: (text) => setState(() {}),
-          ),
-          TextField(
-            controller: commandController,
-            decoration: const InputDecoration(
-              labelText: 'Command',
-            ),
-            onChanged: (text) => setState(() {}),
           ),
           Row(
             children: [
@@ -118,7 +102,7 @@ class _CustomCommandModalState extends State<CustomCommandModal> {
 
                           final customCommandsBox = Hive.box('CustomCommands');
                           if (widget.customCommand == null) {
-                            customCommandsBox.add(
+                            await customCommandsBox.add(
                               CustomCommand(
                                 trigger: triggerController.text,
                                 command: commandController.text,
@@ -129,14 +113,6 @@ class _CustomCommandModalState extends State<CustomCommandModal> {
                             widget.customCommand!.command = commandController.text;
                             await widget.customCommand!.save();
                           }
-
-                          // Modal.show(
-                          //   context: context,
-                          //   child: VerifyTokenModal(
-                          //     token: controller.text,
-                          //     cookies: null,
-                          //   ),
-                          // );
                         },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -154,14 +130,6 @@ class _CustomCommandModalState extends State<CustomCommandModal> {
               ),
             ],
           ),
-          // for (final customCommand in box.values.cast<CustomCommand>()) ...[
-          //   Text(
-          //     '${customCommand.trigger}',
-          //   ),
-          //   Text(
-          //     '${customCommand.command}',
-          //   ),
-          // ],
         ],
       );
 }

@@ -4,6 +4,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import '../components/modal.dart';
 import '../data/webview/cookie_data.dart';
+import 'components/modal_header.dart';
 import 'verify_token.dart';
 
 class OAuthWebViewModal extends StatefulWidget {
@@ -103,27 +104,7 @@ class _OAuthWebViewModalState extends State<OAuthWebViewModal> {
             javascriptMode: JavascriptMode.unrestricted,
             userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Material(
-                  borderRadius: BorderRadius.circular(24.0),
-                  clipBehavior: Clip.antiAlias,
-                  color: Theme.of(context).colorScheme.background,
-                  child: InkWell(
-                    onTap: () async => Navigator.of(context).pop(),
-                    child: const SizedBox(
-                      width: 40.0,
-                      height: 40.0,
-                      child: Icon(Icons.close),
-                    ),
-                  ),
-                ),
-                const Spacer(),
-              ],
-            ),
-          ),
+          const ModalHeader(),
         ],
       ),
     );

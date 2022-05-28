@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '/components/separator.dart';
+import 'components/modal_header.dart';
 import 'verify_token.dart';
 import '/components/modal.dart';
 
@@ -27,34 +28,7 @@ class _TwitchTokenInputModalState extends State<TwitchTokenInputModal> {
   Widget build(BuildContext context) => ListView(
         shrinkWrap: true,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                InkWell(
-                  onTap: () async => Navigator.of(context).pop(),
-                  borderRadius: BorderRadius.circular(24.0),
-                  child: const SizedBox(
-                    width: 40.0,
-                    height: 40.0,
-                    child: Icon(Icons.close),
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  AppLocalizations.of(context)!.tokenInput,
-                  style: const TextStyle(
-                    fontSize: 24.0,
-                  ),
-                ),
-                const Spacer(),
-                const SizedBox(
-                  width: 40.0,
-                  height: 40.0,
-                ),
-              ],
-            ),
-          ),
+          ModalHeader(title: AppLocalizations.of(context)!.tokenInput),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
             child: TextField(

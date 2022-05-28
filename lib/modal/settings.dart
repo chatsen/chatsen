@@ -4,7 +4,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../components/modal.dart';
 import '../components/separator.dart';
+import '../components/tile.dart';
 import '../data/settings/message_appearance.dart';
+import 'components/modal_header.dart';
 import 'custom_commands.dart';
 
 class SettingsModal extends StatelessWidget {
@@ -20,34 +22,7 @@ class SettingsModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () async => Navigator.of(context).pop(),
-                      borderRadius: BorderRadius.circular(24.0),
-                      child: const SizedBox(
-                        width: 40.0,
-                        height: 40.0,
-                        child: Icon(Icons.close),
-                      ),
-                    ),
-                    const Spacer(),
-                    const Text(
-                      'Settings',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                      ),
-                    ),
-                    const Spacer(),
-                    const SizedBox(
-                      width: 40.0,
-                      height: 40.0,
-                    ),
-                  ],
-                ),
-              ),
+              const ModalHeader(title: 'Settings'),
               const Separator(),
               SwitchListTile.adaptive(
                 value: messageAppearance.timestamps,
@@ -76,12 +51,13 @@ class SettingsModal extends StatelessWidget {
                   messageAppearance.save();
                 },
               ),
-              InkWell(
-                child: Text('Custom Commands'),
+              Tile(
+                title: 'Custom Commands',
+                prefix: const Icon(Icons.terminal_rounded),
                 onTap: () {
                   Modal.show(
                     context: context,
-                    child: CustomCommandsModal(),
+                    child: const CustomCommandsModal(),
                   );
                 },
               ),

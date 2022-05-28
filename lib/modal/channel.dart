@@ -21,10 +21,7 @@ class ChannelModal extends StatelessWidget {
         builder: (context, state) => ListView(
           shrinkWrap: true,
           children: [
-            if (state != null)
-              UserModalHeader(
-                user: state,
-              ),
+            if (state != null) UserModalHeader(user: state),
             InkWell(
               onTap: () async {
                 context.read<Client>().channels.part(channel);

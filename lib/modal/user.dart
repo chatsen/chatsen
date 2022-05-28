@@ -29,9 +29,7 @@ class UserModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              UserModalHeader(
-                user: snapshot.data!,
-              ),
+              UserModalHeader(user: snapshot.data!),
               if (channel != null)
                 SizedBox(
                   width: double.infinity,

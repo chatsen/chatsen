@@ -1,3 +1,4 @@
+import 'package:chatsen/modal/components/modal_header.dart';
 import 'package:chatsen/modal/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 
+import '../components/tile.dart';
 import '/tmi/client/client.dart';
 import '/components/boxlistener.dart';
 import '/components/modal.dart';
@@ -30,7 +32,27 @@ class ChatsenModal extends StatelessWidget {
             return ListView(
               shrinkWrap: true,
               children: [
-                const ChatsenModalHeader(),
+                ModalHeader(
+                  title: AppLocalizations.of(context)!.chatsen,
+                  trailing: Tooltip(
+                    message: 'Settings',
+                    child: InkWell(
+                      onTap: () async {
+                        Navigator.of(context).pop();
+                        await Modal.show(
+                          context: context,
+                          child: const SettingsModal(),
+                        );
+                      },
+                      borderRadius: BorderRadius.circular(24.0),
+                      child: const SizedBox(
+                        width: 40.0,
+                        height: 40.0,
+                        child: Icon(Icons.settings_outlined),
+                      ),
+                    ),
+                  ),
+                ),
                 if (accountSettingsBox.get('activeTwitchAccount') != null) ...[
                   TwitchAccountButton(
                     active: true,
@@ -44,7 +66,7 @@ class ChatsenModal extends StatelessWidget {
                     // key: ObjectKey(twitchAccount),
                     twitchAccount: twitchAccount,
                   ),
-                InkWell(
+                Tile(
                   onTap: () {
                     Modal.show(
                       enableDrag: false,
@@ -58,20 +80,8 @@ class ChatsenModal extends StatelessWidget {
                       child: const TwitchTokenInputModal(),
                     );
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 40.0,
-                          height: 40.0,
-                          child: Icon(Icons.person_add_alt),
-                        ),
-                        const SizedBox(width: 16.0),
-                        Text(AppLocalizations.of(context)!.addAnotherAccount),
-                      ],
-                    ),
-                  ),
+                  prefix: const Icon(Icons.person_add_alt),
+                  title: AppLocalizations.of(context)!.addAnotherAccount,
                 ),
                 const Separator(),
                 Padding(
@@ -125,55 +135,6 @@ class ChatsenModal extends StatelessWidget {
           },
         );
       },
-    );
-  }
-}
-
-class ChatsenModalHeader extends StatelessWidget {
-  const ChatsenModalHeader({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          InkWell(
-            onTap: () async => Navigator.of(context).pop(),
-            borderRadius: BorderRadius.circular(24.0),
-            child: const SizedBox(
-              width: 40.0,
-              height: 40.0,
-              child: Icon(Icons.close),
-            ),
-          ),
-          const Spacer(),
-          Text(
-            AppLocalizations.of(context)!.chatsen,
-            style: const TextStyle(
-              fontSize: 24.0,
-            ),
-          ),
-          const Spacer(),
-          InkWell(
-            onTap: () async {
-              Navigator.of(context).pop();
-              await Modal.show(
-                context: context,
-                child: const SettingsModal(),
-              );
-            },
-            borderRadius: BorderRadius.circular(24.0),
-            child: const SizedBox(
-              width: 40.0,
-              height: 40.0,
-              child: Icon(Icons.settings_outlined),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
