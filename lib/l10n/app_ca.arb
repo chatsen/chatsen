@@ -58,5 +58,11 @@
         "placeholders": {
             "channel": {}
         }
+    },
+    "sendMessageIn": "Send message in {channel}",
+    "@sendMessageIn": {
+        "placeholders": {
+            "channel": {}
+        }
     }
 }
