@@ -28,8 +28,8 @@ class App extends StatelessWidget {
           ),
           child: const HomePage(),
         ),
-        theme: M3Parser.parse(M3Themes.themes['blue']!, dark: false),
-        darkTheme: M3Parser.parse(M3Themes.themes['blue']!, dark: true),
+        theme: M3Parser.parse(M3Themes.themes['itto']!, dark: false),
+        darkTheme: M3Parser.parse(M3Themes.themes['itto']!, dark: true),
         themeMode: ThemeMode.dark,
       );
 }

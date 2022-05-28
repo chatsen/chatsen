@@ -1,3 +1,4 @@
+import 'package:chatsen/data/custom_command.dart';
 import 'package:chatsen/data/settings/application_appearance.dart';
 import 'package:chatsen/data/settings/blocked_message.dart';
 import 'package:chatsen/data/settings/blocked_user.dart';
@@ -34,10 +35,12 @@ Future<void> main() async {
   Hive.registerAdapter(BlockedUserAdapter());
   Hive.registerAdapter(MentionMessageAdapter());
   Hive.registerAdapter(MentionUserAdapter());
+  Hive.registerAdapter(CustomCommandAdapter());
 
   final twitchAccountsBox = await Hive.openBox('TwitchAccounts');
   final accountSettingsBox = await Hive.openBox('AccountSettings');
   final settingsBox = await Hive.openBox('Settings');
+  final customCommands = await Hive.openBox('CustomCommands');
   final blockedMessagesBox = await Hive.openBox('BlockedMessages');
   final blockedUsersBox = await Hive.openBox('BlockedUsers');
   final mentionMessagesBox = await Hive.openBox('MentionMessages');

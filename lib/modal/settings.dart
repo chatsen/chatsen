@@ -2,8 +2,10 @@ import 'package:chatsen/components/boxlistener.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../components/modal.dart';
 import '../components/separator.dart';
 import '../data/settings/message_appearance.dart';
+import 'custom_commands.dart';
 
 class SettingsModal extends StatelessWidget {
   const SettingsModal({
@@ -72,6 +74,15 @@ class SettingsModal extends StatelessWidget {
                 onChanged: (value) {
                   messageAppearance.scale = value;
                   messageAppearance.save();
+                },
+              ),
+              InkWell(
+                child: Text('Custom Commands'),
+                onTap: () {
+                  Modal.show(
+                    context: context,
+                    child: CustomCommandsModal(),
+                  );
                 },
               ),
             ],
