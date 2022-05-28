@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:chatsen/providers/emojis.dart';
 import 'package:chatsen/providers/twitch.dart';
 import 'package:chatsen/tmi/badges.dart';
 import 'package:collection/collection.dart';
@@ -32,6 +33,7 @@ class Client {
     BetterTTVProvider(),
     FrankerFaceZProvider(),
     TwitchProvider(),
+    EmojiProvider(),
   ];
 
   late ClientChannels channels;

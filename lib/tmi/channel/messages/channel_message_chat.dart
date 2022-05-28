@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:chatsen/api/anonfiles/anonfiles.dart';
 import 'package:chatsen/data/badge.dart';
 import 'package:chatsen/data/inline_url.dart';
 import 'package:chatsen/tmi/channel/messages/channel_message_user.dart';
+import 'package:chatsen/tmi/channel/messages/embeds/file_embed.dart';
 import 'package:chatsen/tmi/channel/messages/embeds/image_embed.dart';
 import 'package:chatsen/tmi/channel/messages/embeds/video_embed.dart';
 import 'package:chatsen/tmi/user.dart';
@@ -62,6 +64,12 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
     if (messageText.contains(RegExp('ACTION .*'))) action = true;
     if (action) messageText = messageText.substring('ACTION '.length, messageText.length - 1);
 
+    // replace U+200D (ZERO WIDTH JOINER) with U+E0002
+    // alternative regex for replacement: (?<!\U000E0002)\U000E0002
+    final replacement = String.fromCharCodes(Runes('\u{e0002}'));
+    final zeroWidthJoiner = String.fromCharCodes(Runes('\u{200d}'));
+    // messageText = messageText.replaceAll(replacement, zeroWidthJoiner);
+
     final messageRunes = messageText.runes.toList();
 
     try {
@@ -102,7 +110,7 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
     final emotes = (channel?.channelEmotes.state ?? []) + (channel?.client.globalEmotes.state ?? []);
     final textSplits = messageText.split(' ').where((split) => split.isNotEmpty);
     for (final textSplit in textSplits) {
-      var emote = emotes.firstWhereOrNull((emote) => emote.name == textSplit);
+      var emote = emotes.firstWhereOrNull((emote) => (emote.code ?? emote.name) == textSplit);
       if (textSplit.startsWith('')) {
         final emoteData = textSplit.substring(1).split('|');
         emote = Emote(
@@ -129,6 +137,17 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
           embeds.add(ImageEmbed(url: '$uri'));
         } else if (videoRegex.hasMatch('${uri.removeFragment()}')) {
           embeds.add(VideoEmbed(url: '$uri'));
+        } else if (uri.host == 'anonfiles.com') {
+          Anonfiles.getFileInfo(uri.path.split('/')[1]).then((fileInfo) {
+            if (fileInfo == null) return;
+            embeds.add(
+              FileEmbed(
+                name: fileInfo.metadata.name,
+                url: fileInfo.url.short,
+                size: fileInfo.metadata.size.bytes,
+              ),
+            );
+          });
         }
       } else {
         splits.add(textSplit);

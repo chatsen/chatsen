@@ -103,6 +103,10 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
       return;
     }
 
+    final replacement = String.fromCharCodes(Runes('\u{e0002}'));
+    final zeroWidthJoiner = String.fromCharCodes(Runes('\u{200d}'));
+    message = message.replaceAll(replacement, zeroWidthJoiner);
+
     final realState = state as ChannelStateWithConnection;
     realState.transmitter.send('PRIVMSG $name :$message');
   }

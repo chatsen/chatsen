@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../api/catbox/catbox.dart';
 import '../tmi/channel/channel.dart';
@@ -60,7 +61,7 @@ class _ChannelViewState extends State<ChannelView> {
                                   onTap: () {
                                     final splits = textEditingController.text.split(' ');
                                     splits.removeLast();
-                                    splits.add('${emote.name} ');
+                                    splits.add('${emote.code ?? emote.name} ');
                                     textEditingController.text = splits.join(' ');
                                     textEditingController.selection = TextSelection.fromPosition(
                                       TextPosition(
@@ -93,7 +94,7 @@ class _ChannelViewState extends State<ChannelView> {
                               message: emote.name,
                               child: InkWell(
                                 onTap: () {
-                                  textEditingController.text = (textEditingController.text.split(' ') + [emote.name]).where((element) => element.isNotEmpty).join(' ') + ' ';
+                                  textEditingController.text = (textEditingController.text.split(' ') + [emote.code ?? emote.name]).where((element) => element.isNotEmpty).join(' ') + ' ';
                                   textEditingController.selection = TextSelection.fromPosition(
                                     TextPosition(
                                       offset: textEditingController.text.length,
@@ -141,7 +142,7 @@ class _ChannelViewState extends State<ChannelView> {
                           controller: textEditingController,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                            hintText: 'Send message in ${widget.channel.name}',
+                            hintText: AppLocalizations.of(context)!.sendMessageIn(widget.channel.name), //'Send message in ',
                             border: InputBorder.none,
                           ),
                           onSubmitted: (text) {

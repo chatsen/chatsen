@@ -11,10 +11,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/src/material/material_desktop_controls.dart';
+import 'package:filesize/filesize.dart';
 
 import '../components/modal.dart';
 import '../data/emote.dart';
 import '../data/settings/message_appearance.dart';
+import '../tmi/channel/messages/embeds/file_embed.dart';
 import '../tmi/channel/messages/embeds/image_embed.dart';
 import '/tmi/channel/channel_message.dart';
 import '/tmi/channel/messages/channel_message_chat.dart';
@@ -186,6 +188,7 @@ class ChatMessage extends StatelessWidget {
                                 child: Image.network(
                                   split.mipmap.last,
                                   scale: (1.0 / messageAppearance.scale) * 4.0,
+                                  height: split.provider.name == 'Emoji' ? 24.0 : null,
                                 ),
                               ),
                             ),
@@ -210,6 +213,7 @@ class ChatMessage extends StatelessWidget {
                   for (final embed in (message as ChannelMessageEmbeds).embeds) ...[
                     if (embed is ImageEmbed) EmbeddedImage(embed: embed, scale: messageAppearance.scale),
                     if (embed is VideoEmbed) EmbeddedVideo(embed: embed, scale: messageAppearance.scale),
+                    if (embed is FileEmbed) EmbeddedFile(embed: embed, scale: messageAppearance.scale),
                     SizedBox(height: 8.0 * messageAppearance.scale),
                   ],
                 ],
@@ -251,6 +255,62 @@ class EmbeddedImage extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      );
+}
+
+class EmbeddedFile extends StatelessWidget {
+  final FileEmbed embed;
+  final double scale;
+
+  const EmbeddedFile({
+    super.key,
+    required this.embed,
+    this.scale = 1,
+  });
+
+  @override
+  Widget build(BuildContext context) => ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 128.0 * 2.5) * scale,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0 * scale),
+            color: Colors.black,
+            border: Border.all(color: Colors.grey[300]!, width: 1.0 * scale),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0) * scale,
+            child: Row(
+              children: [
+                Icon(
+                  Icons.file_copy,
+                  size: 32.0 * scale,
+                ),
+                SizedBox(width: 8.0 * scale),
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        embed.name,
+                        style: TextStyle(
+                          fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize ?? 14.0) * scale,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(filesize(embed.size)),
+                    ],
+                  ),
+                ),
+                SizedBox(width: 8.0 * scale),
+                Icon(
+                  Icons.download_outlined,
+                  size: 32.0 * scale,
+                ),
+              ],
+            ),
+          ),
         ),
       );
 }
