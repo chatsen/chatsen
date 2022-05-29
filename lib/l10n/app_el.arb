@@ -53,13 +53,13 @@
             "username": {}
         }
     },
-    "joinChannelName": "Συμμετοχή στο κανάλι {channel}",
+    "joinChannelName": "Συμμετοχή στο {channel}",
     "@joinChannelName": {
         "placeholders": {
             "channel": {}
         }
     },
-    "sendMessageIn": "Send message in {channel}",
+    "sendMessageIn": "Στείλτε μήνυμα στο {channel}",
     "@sendMessageIn": {
         "placeholders": {
             "channel": {}
