@@ -47,19 +47,19 @@
             "user": {}
         }
     },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+    "spellCheckFailed": "스펠링 체크에 실패했습니다! 혹시 {username} 을 찾으셨나요?",
     "@spellCheckFailed": {
         "placeholders": {
             "username": {}
         }
     },
-    "joinChannelName": "Join {channel}",
+    "joinChannelName": "{channel} 참가하기",
     "@joinChannelName": {
         "placeholders": {
             "channel": {}
         }
     },
-    "sendMessageIn": "Send message in {channel}",
+    "sendMessageIn": "{channel} 에 메세지를 보내기",
     "@sendMessageIn": {
         "placeholders": {
             "channel": {}
