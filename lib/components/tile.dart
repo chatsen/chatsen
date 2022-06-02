@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class Tile extends StatelessWidget {
   final String title;
@@ -19,36 +20,6 @@ class Tile extends StatelessWidget {
     this.onTap,
     this.onLongPress,
   });
-
-  // Padding(
-  // padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-  // child: Row(
-  // children: [
-  // const SizedBox(
-  // width: 40.0,
-  // height: 40.0,
-  // child: Icon(Icons.person_add_alt),
-  // ),
-  // const SizedBox(width: 16.0),
-  // Text(AppLocalizations.of(context)!.addAnotherAccount),
-  // ],
-  // ),
-  // ),
-
-  // Material(
-  //   borderRadius: BorderRadius.circular(24.0),
-  //   clipBehavior: Clip.antiAlias,
-  //   child: SizedBox(
-  //     width: active ? 40.0 : 36.0,
-  //     height: active ? 40.0 : 36.0,
-  //     child: twitchAccount.userData != null
-  //         ? Ink.image(
-  //             image: NetworkImage(twitchAccount.userData!.avatarUrl),
-  //             fit: BoxFit.cover,
-  //           )
-  //         : const Icon(Icons.question_mark_outlined),
-  //   ),
-  // ),
 
   @override
   Widget build(BuildContext context) => InkWell(
@@ -91,4 +62,44 @@ class Tile extends StatelessWidget {
           ),
         ),
       );
+}
+
+class BoxSwitchTile extends StatelessWidget {
+  final Box box;
+  final String boxKey;
+  final bool boxDefault;
+
+  final String title;
+  final String? subtitle;
+  final Widget? prefix;
+  final bool primary;
+  final void Function()? onLongPress;
+
+  const BoxSwitchTile({
+    super.key,
+    required this.box,
+    required this.boxKey,
+    required this.boxDefault,
+    required this.title,
+    this.subtitle,
+    this.prefix,
+    this.primary = false,
+    this.onLongPress,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    bool value = (box.get(boxKey) as bool?) ?? boxDefault;
+    return Tile(
+      title: title,
+      subtitle: subtitle,
+      prefix: const Icon(Icons.history),
+      suffix: Switch.adaptive(
+        value: value,
+        onChanged: (newValue) => box.put(boxKey, newValue),
+      ),
+      onTap: () => box.put(boxKey, !value),
+      onLongPress: onLongPress,
+    );
+  }
 }
