@@ -8,7 +8,7 @@
     },
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy",
-    "settings": "Settings",
+    "settings": "הגדרות",
     "expiresNever": "Never expires",
     "expiresIn": "Expires in {time}",
     "@expiresIn": {
