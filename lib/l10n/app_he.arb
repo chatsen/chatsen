@@ -1,65 +1,65 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "Logged in via {provider}",
+    "chatsen": "צ'טסן",
+    "loggedInVia": "מחובר דרך {provider}",
     "@loggedInVia": {
         "placeholders": {
             "provider": {}
         }
     },
-    "termsOfService": "Terms of Service",
-    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "תנאי השירות",
+    "privacyPolicy": "מדיניות פרטיות",
     "settings": "הגדרות",
-    "expiresNever": "Never expires",
-    "expiresIn": "Expires in {time}",
+    "expiresNever": "לעולם לא יפוג",
+    "expiresIn": "פג תוקף ב-{time}",
     "@expiresIn": {
         "placeholders": {
             "time": {}
         }
     },
-    "close": "Close",
-    "add": "Add",
-    "cancel": "Cancel",
-    "tokenInput": "Token input",
-    "account": "Account",
-    "refreshAccount": "Refresh account",
-    "removeAccount": "Remove account",
-    "addAnotherAccount": "Add another account",
-    "verifiedUserData": "Verified user data!",
-    "loggedInAs": "Logged in as {user}",
+    "close": "סגור",
+    "add": "הוסף",
+    "cancel": "ביטול",
+    "tokenInput": "טוקן",
+    "account": "חשבון",
+    "refreshAccount": "רענן חשבון",
+    "removeAccount": "הסר חשבון",
+    "addAnotherAccount": "הוסף חשבון נוסף",
+    "verifiedUserData": "נתוני משתמש מאומתים!",
+    "loggedInAs": "מחובר כ{user}",
     "@loggedInAs": {
         "placeholders": {
             "user": {}
         }
     },
-    "anErrorHasOccuredWhenVerifyingUserData": "An error has occurred when verifying user data:",
-    "verifyingUserData": "Verifying user data...",
-    "verifiedUserToken": "Verified user token!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "An error has occurred when verifying user token:",
-    "verifyingUserToken": "Verifying user token...",
-    "searchForChannels": "Search for channels",
-    "recommendedChannels": "Recommended channels",
-    "popularChannels": "Popular channels",
-    "channel": "Channel",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
+    "anErrorHasOccuredWhenVerifyingUserData": "שגיאה בעת אימות נתוני משתמש:",
+    "verifyingUserData": "מאמת את נתוני המשתמש...",
+    "verifiedUserToken": "טוקן משתמש מאומת!",
+    "anErrorHasOccuredWhenVerifyingUserToken": "שגיאה בעת אימות טוקן משתמש:",
+    "verifyingUserToken": "מאמת טוקן משתמש...",
+    "searchForChannels": "חפש ערוצים",
+    "recommendedChannels": "ערוצים מומלצים",
+    "popularChannels": "ערוצים פופולרים",
+    "channel": "ערוץ",
+    "leaveChannel": "עזוב ערוץ",
+    "joinUser": "הצטרף ל-{user}",
     "@joinUser": {
         "placeholders": {
             "user": {}
         }
     },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+    "spellCheckFailed": "בדיקת האיות נכשלה! האם התכוונת לחפש את {username}?",
     "@spellCheckFailed": {
         "placeholders": {
             "username": {}
         }
     },
-    "joinChannelName": "Join {channel}",
+    "joinChannelName": "הצטרף ל-{channel}",
     "@joinChannelName": {
         "placeholders": {
             "channel": {}
         }
     },
-    "sendMessageIn": "Send message in {channel}",
+    "sendMessageIn": "שלח הודעה ב-{channel}",
     "@sendMessageIn": {
         "placeholders": {
             "channel": {}
