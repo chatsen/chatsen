@@ -1,5 +1,5 @@
 import 'package:chatsen/components/boxlistener.dart';
-import 'package:chatsen/modal/message_mentions.dart';
+import 'package:chatsen/modal/message_triggers.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -58,9 +58,9 @@ class SettingsModal extends StatelessWidget {
                 onTap: () => Modal.show(context: context, child: const CustomCommandsModal()),
               ),
               Tile(
-                title: 'Message Mentions',
-                prefix: const Icon(Icons.alternate_email_rounded),
-                onTap: () => Modal.show(context: context, child: const CustomMentionsModal()),
+                title: 'Message Triggers',
+                prefix: const Icon(Icons.message_rounded),
+                onTap: () => Modal.show(context: context, child: const MessageTriggersModal()),
               ),
               BoxSwitchTile(
                 title: 'Chat history',

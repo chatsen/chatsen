@@ -1,9 +1,14 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-part 'custom_mention.g.dart';
+part 'message_trigger.g.dart';
+
+enum MessageTriggerType {
+  Mention,
+  Block,
+}
 
 @HiveType(typeId: 13)
-class CustomMention extends HiveObject {
+class MessageTrigger extends HiveObject {
   @HiveField(0)
   String pattern;
 
@@ -22,12 +27,16 @@ class CustomMention extends HiveObject {
   @HiveField(5)
   bool playSound;
 
-  CustomMention({
+  @HiveField(6)
+  MessageTriggerType type;
+
+  MessageTrigger({
     required this.pattern,
     this.enableRegex = false,
     this.caseSensitive = false,
     this.showInMentions = true,
     this.sendNotification = true,
     this.playSound = true,
+    this.type = MessageTriggerType.Mention,
   });
 }

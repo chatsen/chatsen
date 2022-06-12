@@ -4,31 +4,31 @@ import 'package:hive/hive.dart';
 
 import '../components/separator.dart';
 import '../components/tile.dart';
-import '../data/custom_mention.dart';
+import '../data/message_trigger.dart';
 import 'components/modal_header.dart';
 
-class CustomMentionModal extends StatefulWidget {
-  final CustomMention? customMention;
+class MessageTriggerModal extends StatefulWidget {
+  final MessageTrigger? messageTrigger;
 
-  const CustomMentionModal({
-    this.customMention,
+  const MessageTriggerModal({
+    this.messageTrigger,
     super.key,
   });
 
   @override
-  State<CustomMentionModal> createState() => _CustomMentionModalState();
+  State<MessageTriggerModal> createState() => _MessageTriggerModalState();
 }
 
-class _CustomMentionModalState extends State<CustomMentionModal> {
+class _MessageTriggerModalState extends State<MessageTriggerModal> {
   TextEditingController patternController = TextEditingController();
   bool enableRegex = false;
   bool caseSensitive = false;
 
   @override
   void initState() {
-    patternController.text = widget.customMention?.pattern ?? '';
-    enableRegex = widget.customMention?.enableRegex ?? false;
-    caseSensitive = widget.customMention?.caseSensitive ?? false;
+    patternController.text = widget.messageTrigger?.pattern ?? '';
+    enableRegex = widget.messageTrigger?.enableRegex ?? false;
+    caseSensitive = widget.messageTrigger?.caseSensitive ?? false;
     super.initState();
   }
 
@@ -42,7 +42,7 @@ class _CustomMentionModalState extends State<CustomMentionModal> {
   Widget build(BuildContext context) => ListView(
         shrinkWrap: true,
         children: [
-          const ModalHeader(title: 'Message Mention'),
+          const ModalHeader(title: 'Message Trigger'),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
             child: TextField(
@@ -103,20 +103,20 @@ class _CustomMentionModalState extends State<CustomMentionModal> {
 
                           patternController.text = patternController.text.trim();
 
-                          final customMentionsBox = Hive.box('MessageMentions');
-                          if (widget.customMention == null) {
-                            await customMentionsBox.add(
-                              CustomMention(
+                          final messageTriggersBox = Hive.box('MessageTriggers');
+                          if (widget.messageTrigger == null) {
+                            await messageTriggersBox.add(
+                              MessageTrigger(
                                 pattern: patternController.text,
                                 enableRegex: enableRegex,
                                 caseSensitive: caseSensitive,
                               ),
                             );
                           } else {
-                            widget.customMention!.pattern = patternController.text;
-                            widget.customMention!.enableRegex = enableRegex;
-                            widget.customMention!.caseSensitive = caseSensitive;
-                            await widget.customMention!.save();
+                            widget.messageTrigger!.pattern = patternController.text;
+                            widget.messageTrigger!.enableRegex = enableRegex;
+                            widget.messageTrigger!.caseSensitive = caseSensitive;
+                            await widget.messageTrigger!.save();
                           }
                         },
                   child: Padding(

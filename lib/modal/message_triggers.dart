@@ -1,5 +1,4 @@
-import 'package:chatsen/data/custom_command.dart';
-import 'package:chatsen/data/custom_mention.dart';
+import 'package:chatsen/data/message_trigger.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -7,41 +6,40 @@ import '../components/boxlistener.dart';
 import '../components/modal.dart';
 import '../components/tile.dart';
 import 'components/modal_header.dart';
-import 'custom_command.dart';
-import 'message_mention.dart';
+import 'message_trigger.dart';
 
-class CustomMentionsModal extends StatelessWidget {
-  const CustomMentionsModal({super.key});
+class MessageTriggersModal extends StatelessWidget {
+  const MessageTriggersModal({super.key});
 
   @override
   Widget build(BuildContext context) => BoxListener(
-        box: Hive.box('MessageMentions'),
+        box: Hive.box('MessageTriggers'),
         builder: (context, box) {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: 'Message Mentions'),
-              for (final customMention in box.values.cast<CustomMention>()) ...[
+              const ModalHeader(title: 'Message Triggers'),
+              for (final messageTrigger in box.values.cast<MessageTrigger>()) ...[
                 Tile(
                   onTap: () => Modal.show(
                     context: context,
-                    child: CustomMentionModal(customMention: customMention),
+                    child: MessageTriggerModal(messageTrigger: messageTrigger),
                   ),
                   prefix: InkWell(
                     borderRadius: BorderRadius.circular(24.0),
-                    onTap: () => customMention.delete(),
+                    onTap: () => messageTrigger.delete(),
                     child: const Icon(Icons.delete_forever_rounded),
                   ),
-                  title: customMention.pattern,
+                  title: messageTrigger.pattern,
                 ),
               ],
               Tile(
                 onTap: () => Modal.show(
                   context: context,
-                  child: const CustomMentionModal(),
+                  child: const MessageTriggerModal(),
                 ),
                 prefix: const Icon(Icons.add_rounded),
-                title: 'Create new message mention',
+                title: 'Create new message trigger',
               ),
             ],
           );

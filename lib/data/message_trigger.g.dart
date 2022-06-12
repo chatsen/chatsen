@@ -1,35 +1,36 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'custom_mention.dart';
+part of 'message_trigger.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CustomMentionAdapter extends TypeAdapter<CustomMention> {
+class MessageTriggerAdapter extends TypeAdapter<MessageTrigger> {
   @override
   final int typeId = 13;
 
   @override
-  CustomMention read(BinaryReader reader) {
+  MessageTrigger read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return CustomMention(
+    return MessageTrigger(
       pattern: fields[0] as String,
       enableRegex: fields[1] as bool,
       caseSensitive: fields[2] as bool,
       showInMentions: fields[3] as bool,
       sendNotification: fields[4] as bool,
       playSound: fields[5] as bool,
+      type: fields[6] as MessageTriggerType,
     );
   }
 
   @override
-  void write(BinaryWriter writer, CustomMention obj) {
+  void write(BinaryWriter writer, MessageTrigger obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.pattern)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class CustomMentionAdapter extends TypeAdapter<CustomMention> {
       ..writeByte(4)
       ..write(obj.sendNotification)
       ..writeByte(5)
-      ..write(obj.playSound);
+      ..write(obj.playSound)
+      ..writeByte(6)
+      ..write(obj.type);
   }
 
   @override
@@ -50,7 +53,7 @@ class CustomMentionAdapter extends TypeAdapter<CustomMention> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CustomMentionAdapter &&
+      other is MessageTriggerAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
