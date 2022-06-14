@@ -984,7 +984,194 @@ class Client {
   List<Badge> badges = [];
   bool useRecentMessages;
 
+  WebSocketChannel? eventsWebSocket;
+  Stream? eventsStream;
+  StreamSubscription? eventsSubscription;
+  List<String> eventsSubscribedChannels = [];
+
   Timer? timer;
+
+  void receiveEvent(String data) async {
+    var event = json.decode(data);
+    if (event['action'] == 'update') {
+      final payload = json.decode(event['payload']);
+      for (var channel in channels) {
+
+        // 7tv does not prefix channels with #
+        if (channel.name!.substring(1) == payload['channel']) {
+          String message;
+
+          if (payload['action'] == 'ADD') {
+            message = '[7TV] ${payload['actor']} added the emote \'${payload['name']}\'';
+            var emote = Emote(
+              name: payload['name'],
+              id: payload['emote_id'],
+              provider: '7TV',
+              mipmap: [
+                for (var url in payload['emote']['urls']) url.last,
+              ],
+              zeroWidth: (payload['emote']['visibility'] & (1 << 7)) == (1 << 7),
+            );
+            channel.emotes.add(emote);
+
+          } else if (payload['action'] == 'REMOVE') {
+            message = '[7TV] ${payload['actor']} removed the emote \'${payload['name']}\'';
+            for (var emote in channel.emotes) {
+              if (emote.id == payload['emote_id'] && emote.provider == '7TV') {
+                channel.emotes.remove(emote);
+                break;
+              }
+            }
+
+          } else if (payload['action'] == 'UPDATE') {
+            // NOTE: The emote we're removing might already have an alias, which
+            // isn't sent in the payload data; it's only available in the name
+            // attribute of the current emote. This is setting a default message
+            // in the event we don't find the emote in the current emotes for
+            // some weird reason.
+            message = '[7TV] ${payload['actor']} renamed the emote '
+                '\'${payload['emote']['name']}\' to \'${payload['name']}\'';
+            var emoteFound = false;
+            for (var emote in channel.emotes) {
+              if (emote.id == payload['emote_id'] && emote.provider == '7TV') {
+                message = '[7TV] ${payload['actor']} renamed the emote '
+                  '\'${emote.name}\' to \'${payload['name']}\'';
+                var newEmote = Emote(
+                  name: payload['name'],
+                  id: emote.id,
+                  provider: '7TV',
+                  mipmap: emote.mipmap,
+                  zeroWidth: emote.zeroWidth,
+                );
+                channel.emotes.remove(emote);
+                channel.emotes.add(newEmote);
+                break;
+              }
+            }
+            if (!emoteFound) {
+              // Some weird internal inconsistency, so reload emotes
+              await channel.updateEmotes();
+            }
+
+          } else {
+            // unknown event, so return.
+            return;
+          }
+
+          var chatMessage = Message(
+            channel: channel,
+            body: message,
+          );
+          listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
+          channel.messages.add(chatMessage);
+          if (channel.messages.length > 1000) channel.messages.removeRange(0, (channel.messages.length) - 1000);
+          break;
+        }
+      }
+    }
+  }
+
+  void addChannelToEvents(String channelList) async {
+    var joinChannel = json.encode({
+      'action': 'join',
+      'payload': channelList,
+    });
+    try {
+      var result = eventsStream!.firstWhere((data) {
+        var event = json.decode(data);
+        return event['action'] != 'ping';
+      });
+      eventsWebSocket!.sink.add(joinChannel);
+      await result.then((data) async {
+        final event = json.decode(data);
+        if (event['payload'] == 'join' && event['action'] == 'success') {
+          // split the concat'd string and store the channels individually so that we
+          // can more easily keep track of which ones we're listening to
+          for (var channel in channelList.split(',')) {
+            // when rejoining channels, it'll already be part of the list
+            if (!eventsSubscribedChannels.contains(channel)) {
+              eventsSubscribedChannels.add(channel);
+            }
+          }
+        } else {
+          throw Error();
+        }
+      });
+    } catch (e) {
+      // We'll hit this catch if either the websocket isn't connected or the 7tv
+      // API returns an error
+      await Future.delayed(Duration(seconds: 4));
+      addChannelToEvents(channelList);
+    }
+  }
+
+  void removeChannelFromEvents(String channelList) async {
+    if (channelList == '') {
+      return;
+    }
+    var partChannel = json.encode({
+      'action': 'part',
+      'payload': channelList,
+    });
+    try {
+      var result = eventsStream!.firstWhere((data) {
+        var event = json.decode(data);
+        return event['action'] != 'ping';
+      });
+      eventsWebSocket!.sink.add(partChannel);
+      await result.then((data) async {
+        final event = json.decode(data);
+        if (event['payload'] == 'part' && event['action'] == 'success') {
+          // individually tracking channels makes for easier diff'ing
+          for (var channel in channelList.split(',')) {
+            eventsSubscribedChannels.remove(channel);
+          }
+        } else {
+          throw Error();
+        }
+      });
+    } catch (e) {
+      // We'll hit this catch if either the websocket isn't connected or the 7tv
+      // API returns an error
+      await Future.delayed(Duration(seconds: 4));
+      removeChannelFromEvents(channelList);
+    }
+  }
+
+  void connectEvents() async {
+    await disposeEvents();
+
+    eventsWebSocket = await connectWebSocket('wss://events.7tv.app/v1/channel-emotes');
+    // the websocket stream is single-listener, and we need more listeners to handle
+    // errors when joining/parting so we make it a broadcast stream.
+    eventsStream = eventsWebSocket!.stream.asBroadcastStream();
+    eventsSubscription = eventsStream!.listen(
+      (event) async {
+        receiveEvent(event);
+      },
+      onError: (e) async {
+        // print('An error has occurred connecting to events websocket: $e');
+        await Future.delayed(Duration(seconds: 4));
+        connectEvents();
+      },
+      onDone: () async {
+        // print('Events connection terminated');
+        await Future.delayed(Duration(seconds: 4));
+        connectEvents();
+        // need to rejoin the events stream for joined channels, so queue 'em up.
+        // this will keep erroring/retrying until it succeeds.
+        addChannelToEvents(eventsSubscribedChannels.join(','));
+      },
+      cancelOnError: true,
+    );
+  }
+
+  Future<void> disposeEvents() async {
+    await eventsSubscription?.cancel();
+    eventsWebSocket = null;
+    eventsStream = null;
+    eventsSubscribedChannels = [];
+  }
 
   // TODO: Rework this
   Future<void> updateBadges() async {
@@ -1131,6 +1318,7 @@ class Client {
     this.credentials = const Credentials(),
     this.useRecentMessages = true,
   }) {
+    connectEvents();
     updateEmotes();
     updateBadges();
     timer = Timer.periodic(
@@ -1223,6 +1411,7 @@ class Client {
       channels.add(channel);
       joinedChannels.add(channel);
     }
+    addChannelToEvents(channelsToJoin.map((e) => e.substring(1)).join(','));
 
     return joinedChannels;
   }
@@ -1233,6 +1422,8 @@ class Client {
       channels.remove(channelToLeave);
       // TODO: Kill connection if there are no channels left
     }
+    removeChannelFromEvents(channelsToPart.where((channel) => channel.name != null)
+        .map((channel) => channel.name!.substring(1)).join(','));
   }
 
   void dispose() async {
