@@ -59,7 +59,7 @@
             "channel": {}
         }
     },
-    "sendMessageIn": "Send message in {channel}",
+    "sendMessageIn": "{channel} kanalına mesaj gönder",
     "@sendMessageIn": {
         "placeholders": {
             "channel": {}
