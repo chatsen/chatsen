@@ -1,19 +1,19 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-part 'message_trigger.g.dart';
+part 'user_trigger.g.dart';
 
-enum MessageTriggerType {
+enum UserTriggerType {
   mention,
   block,
 }
 
-@HiveType(typeId: 13)
-class MessageTrigger extends HiveObject {
+@HiveType(typeId: 14)
+class UserTrigger extends HiveObject {
   @HiveField(0)
   int type;
 
   @HiveField(1)
-  String pattern;
+  String login;
 
   @HiveField(2)
   bool enableRegex;
@@ -30,9 +30,9 @@ class MessageTrigger extends HiveObject {
   @HiveField(6)
   bool playSound;
 
-  MessageTrigger({
+  UserTrigger({
     required this.type,
-    required this.pattern,
+    required this.login,
     this.enableRegex = false,
     this.caseSensitive = false,
     this.showInMentions = true,

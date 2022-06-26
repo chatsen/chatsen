@@ -9,6 +9,7 @@ import '../components/tile.dart';
 import '../data/settings/message_appearance.dart';
 import 'components/modal_header.dart';
 import 'custom_commands.dart';
+import 'user_triggers.dart';
 
 class SettingsModal extends StatelessWidget {
   const SettingsModal({
@@ -61,6 +62,11 @@ class SettingsModal extends StatelessWidget {
                 title: 'Message Triggers',
                 prefix: const Icon(Icons.message_rounded),
                 onTap: () => Modal.show(context: context, child: const MessageTriggersModal()),
+              ),
+              Tile(
+                title: 'User Triggers',
+                prefix: const Icon(Icons.person_outline_rounded),
+                onTap: () => Modal.show(context: context, child: const UserTriggersModal()),
               ),
               BoxSwitchTile(
                 title: 'Chat history',

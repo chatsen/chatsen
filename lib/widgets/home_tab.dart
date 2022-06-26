@@ -83,15 +83,18 @@ class _HomeTabState extends State<HomeTab> {
       );
       recommendedStreams = http.get(
         Uri.parse('https://api.twitch.tv/helix/streams?' +
-            List<String>.from([
+            [
               'forsen',
               'btmc',
               'nymn',
               'shigetora',
               'enviosity',
-            ].map(
-              (e) => 'user_login=$e',
-            )).join('&')),
+              'theactingmale',
+            ]
+                .map(
+                  (e) => 'user_login=$e',
+                )
+                .join('&')),
         headers: {
           'Client-ID': '${account?.tokenData.clientId}',
           'Authorization': 'Bearer ${account?.tokenData.accessToken}',
@@ -221,7 +224,7 @@ class _HomeTabState extends State<HomeTab> {
                         ),
                       ),
                       if (search != null) ...[
-                        if (searchTextController.text == 'xqcow')
+                        if (searchTextController.text == 'xqc' || searchTextController.text == 'xqcow')
                           InkWell(
                             onTap: () {
                               search?.ignore();

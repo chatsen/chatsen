@@ -25,7 +25,8 @@ class MessageTriggersModal extends StatelessWidget {
                     context: context,
                     child: MessageTriggerModal(messageTrigger: messageTrigger),
                   ),
-                  prefix: InkWell(
+                  prefix: Icon(messageTrigger.type == MessageTriggerType.mention.index ? Icons.alternate_email_rounded : Icons.block_rounded),
+                  suffix: InkWell(
                     borderRadius: BorderRadius.circular(24.0),
                     onTap: () => messageTrigger.delete(),
                     child: const Icon(Icons.delete_forever_rounded),

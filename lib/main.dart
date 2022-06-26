@@ -6,6 +6,7 @@ import 'package:chatsen/data/settings/blocked_user.dart';
 import 'package:chatsen/data/settings/mention_message.dart';
 import 'package:chatsen/data/settings/mention_user.dart';
 import 'package:chatsen/data/settings/message_appearance.dart';
+import 'package:chatsen/data/user_trigger.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -38,13 +39,14 @@ Future<void> main() async {
   Hive.registerAdapter(MentionUserAdapter());
   Hive.registerAdapter(CustomCommandAdapter());
   Hive.registerAdapter(MessageTriggerAdapter());
+  Hive.registerAdapter(UserTriggerAdapter());
 
   final twitchAccountsBox = await Hive.openBox('TwitchAccounts');
   final accountSettingsBox = await Hive.openBox('AccountSettings');
   final settingsBox = await Hive.openBox('Settings');
 
   final messageTriggers = await Hive.openBox('MessageTriggers');
-  final userTriggesr = await Hive.openBox('UserTriggers');
+  final userTriggers = await Hive.openBox('UserTriggers');
   final customCommands = await Hive.openBox('CustomCommands');
 
   await settingsBox.clear();

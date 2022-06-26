@@ -4,33 +4,29 @@ import 'package:hive/hive.dart';
 
 import '../components/separator.dart';
 import '../components/tile.dart';
-import '../data/message_trigger.dart';
+import '../data/user_trigger.dart';
 import 'components/modal_header.dart';
 
-class MessageTriggerModal extends StatefulWidget {
-  final MessageTrigger? messageTrigger;
+class UserTriggerModal extends StatefulWidget {
+  final UserTrigger? userTrigger;
 
-  const MessageTriggerModal({
-    this.messageTrigger,
+  const UserTriggerModal({
+    this.userTrigger,
     super.key,
   });
 
   @override
-  State<MessageTriggerModal> createState() => _MessageTriggerModalState();
+  State<UserTriggerModal> createState() => _UserTriggerModalState();
 }
 
-class _MessageTriggerModalState extends State<MessageTriggerModal> {
-  MessageTriggerType type = MessageTriggerType.mention;
+class _UserTriggerModalState extends State<UserTriggerModal> {
+  UserTriggerType type = UserTriggerType.mention;
   TextEditingController patternController = TextEditingController();
-  bool enableRegex = false;
-  bool caseSensitive = false;
 
   @override
   void initState() {
-    type = MessageTriggerType.values[widget.messageTrigger?.type ?? MessageTriggerType.mention.index];
-    patternController.text = widget.messageTrigger?.pattern ?? '';
-    enableRegex = widget.messageTrigger?.enableRegex ?? false;
-    caseSensitive = widget.messageTrigger?.caseSensitive ?? false;
+    type = UserTriggerType.values[widget.userTrigger?.type ?? UserTriggerType.mention.index];
+    patternController.text = widget.userTrigger?.login ?? '';
     super.initState();
   }
 
@@ -44,13 +40,13 @@ class _MessageTriggerModalState extends State<MessageTriggerModal> {
   Widget build(BuildContext context) => ListView(
         shrinkWrap: true,
         children: [
-          const ModalHeader(title: 'Message Trigger'),
+          const ModalHeader(title: 'User Trigger'),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
             child: TextField(
               controller: patternController,
               decoration: const InputDecoration(
-                labelText: 'Pattern',
+                labelText: 'Login',
                 border: InputBorder.none,
                 filled: true,
               ),
@@ -62,35 +58,19 @@ class _MessageTriggerModalState extends State<MessageTriggerModal> {
             children: [
               ChoiceChip(
                 label: const Text('Mention'),
-                selected: type == MessageTriggerType.mention,
+                selected: type == UserTriggerType.mention,
                 onSelected: (bool selected) => setState(() {
-                  type = MessageTriggerType.mention;
+                  type = UserTriggerType.mention;
                 }),
               ),
               ChoiceChip(
                 label: const Text('Block'),
-                selected: type == MessageTriggerType.block,
+                selected: type == UserTriggerType.block,
                 onSelected: (bool selected) => setState(() {
-                  type = MessageTriggerType.block;
+                  type = UserTriggerType.block;
                 }),
               ),
             ],
-          ),
-          Tile(
-            title: 'Enable Regex',
-            prefix: Checkbox(
-              value: enableRegex,
-              onChanged: (bool? value) => setState(() => enableRegex = value ?? !enableRegex),
-            ),
-            onTap: () => setState(() => enableRegex = !enableRegex),
-          ),
-          Tile(
-            title: 'Case Sensitive',
-            prefix: Checkbox(
-              value: caseSensitive,
-              onChanged: (bool? value) => setState(() => caseSensitive = value ?? !caseSensitive),
-            ),
-            onTap: () => setState(() => caseSensitive = !caseSensitive),
           ),
           Row(
             children: [
@@ -124,22 +104,18 @@ class _MessageTriggerModalState extends State<MessageTriggerModal> {
 
                           patternController.text = patternController.text.trim();
 
-                          final messageTriggersBox = Hive.box('MessageTriggers');
-                          if (widget.messageTrigger == null) {
-                            await messageTriggersBox.add(
-                              MessageTrigger(
-                                pattern: patternController.text,
-                                enableRegex: enableRegex,
-                                caseSensitive: caseSensitive,
+                          final userTriggersBox = Hive.box('UserTriggers');
+                          if (widget.userTrigger == null) {
+                            await userTriggersBox.add(
+                              UserTrigger(
+                                login: patternController.text,
                                 type: type.index,
                               ),
                             );
                           } else {
-                            widget.messageTrigger!.type = type.index;
-                            widget.messageTrigger!.pattern = patternController.text;
-                            widget.messageTrigger!.enableRegex = enableRegex;
-                            widget.messageTrigger!.caseSensitive = caseSensitive;
-                            await widget.messageTrigger!.save();
+                            widget.userTrigger!.type = type.index;
+                            widget.userTrigger!.login = patternController.text;
+                            await widget.userTrigger!.save();
                           }
                         },
                   child: Padding(

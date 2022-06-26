@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'message_trigger.dart';
+part of 'user_trigger.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MessageTriggerAdapter extends TypeAdapter<MessageTrigger> {
+class UserTriggerAdapter extends TypeAdapter<UserTrigger> {
   @override
-  final int typeId = 13;
+  final int typeId = 14;
 
   @override
-  MessageTrigger read(BinaryReader reader) {
+  UserTrigger read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return MessageTrigger(
+    return UserTrigger(
       type: fields[0] as int,
-      pattern: fields[1] as String,
+      login: fields[1] as String,
       enableRegex: fields[2] as bool,
       caseSensitive: fields[3] as bool,
       showInMentions: fields[4] as bool,
@@ -28,13 +28,13 @@ class MessageTriggerAdapter extends TypeAdapter<MessageTrigger> {
   }
 
   @override
-  void write(BinaryWriter writer, MessageTrigger obj) {
+  void write(BinaryWriter writer, UserTrigger obj) {
     writer
       ..writeByte(7)
       ..writeByte(0)
       ..write(obj.type)
       ..writeByte(1)
-      ..write(obj.pattern)
+      ..write(obj.login)
       ..writeByte(2)
       ..write(obj.enableRegex)
       ..writeByte(3)
@@ -53,7 +53,7 @@ class MessageTriggerAdapter extends TypeAdapter<MessageTrigger> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MessageTriggerAdapter &&
+      other is UserTriggerAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
