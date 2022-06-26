@@ -26,7 +26,7 @@ class Tile extends StatelessWidget {
         onTap: onTap,
         onLongPress: onLongPress,
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
           child: Row(
             children: [
               SizedBox(width: primary ? 0.0 : 2.0),
@@ -93,7 +93,7 @@ class BoxSwitchTile extends StatelessWidget {
     return Tile(
       title: title,
       subtitle: subtitle,
-      prefix: const Icon(Icons.history),
+      prefix: prefix,
       suffix: Switch.adaptive(
         value: value,
         onChanged: (newValue) => box.put(boxKey, newValue),

@@ -35,6 +35,7 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
   bool action = false;
   List<dynamic> splits = [];
   List<Badge> badges = [];
+  String body = '';
 
   ChannelMessageChat({
     required this.message,
@@ -68,7 +69,9 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
     // alternative regex for replacement: (?<!\U000E0002)\U000E0002
     final replacement = String.fromCharCodes(Runes('\u{e0002}'));
     final zeroWidthJoiner = String.fromCharCodes(Runes('\u{200d}'));
-    // messageText = messageText.replaceAll(replacement, zeroWidthJoiner);
+    messageText = messageText.replaceAll(replacement, zeroWidthJoiner);
+
+    body = messageText;
 
     final messageRunes = messageText.runes.toList();
 
@@ -138,16 +141,19 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
         } else if (videoRegex.hasMatch('${uri.removeFragment()}')) {
           embeds.add(VideoEmbed(url: '$uri'));
         } else if (uri.host == 'anonfiles.com') {
-          Anonfiles.getFileInfo(uri.path.split('/')[1]).then((fileInfo) {
-            if (fileInfo == null) return;
-            embeds.add(
-              FileEmbed(
-                name: fileInfo.metadata.name,
-                url: fileInfo.url.short,
-                size: fileInfo.metadata.size.bytes,
-              ),
-            );
-          });
+          try {
+            Anonfiles.getFileInfo(uri.path.split('/')[1]).then((fileInfo) {
+              if (fileInfo == null) return;
+              embeds.add(
+                FileEmbed(
+                  name: fileInfo.metadata.name,
+                  url: fileInfo.url.short,
+                  size: fileInfo.metadata.size.bytes,
+                ),
+              );
+            });
+            // ignore: empty_catches
+          } catch (e) {}
         }
       } else {
         splits.add(textSplit);

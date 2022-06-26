@@ -7,6 +7,7 @@ import 'package:chatsen/tmi/channel/messages/embeds/video_embed.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
@@ -16,6 +17,7 @@ import 'package:filesize/filesize.dart';
 import '../components/modal.dart';
 import '../data/emote.dart';
 import '../data/settings/message_appearance.dart';
+import '../modal/message.dart';
 import '../tmi/channel/messages/embeds/file_embed.dart';
 import '../tmi/channel/messages/embeds/image_embed.dart';
 import '/tmi/channel/channel_message.dart';
@@ -68,6 +70,12 @@ class ChatMessage extends StatelessWidget {
   Widget build(BuildContext context) => message is ChannelMessageChat
       ? InkWell(
           onTap: () async {},
+          onLongPress: () => Modal.show(
+            context: context,
+            child: MessageModal(
+              message: message as ChannelMessageChat,
+            ),
+          ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (messageAppearance.compact ? 1.0 : 2.0)),
             child: Column(
@@ -202,21 +210,32 @@ class ChatMessage extends StatelessWidget {
                               decorationColor: Colors.blue,
                               fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
                             ),
-                            recognizer: TapGestureRecognizer()..onTap = () => launch(split.url),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => launchUrl(
+                                    Uri.parse(split.url),
+                                    mode: LaunchMode.externalApplication,
+                                  ),
                           ),
                       ],
                     ],
                   ),
                 ),
-                if (message is ChannelMessageEmbeds && (message as ChannelMessageEmbeds).embeds.isNotEmpty) ...[
-                  SizedBox(height: 8.0 * messageAppearance.scale),
-                  for (final embed in (message as ChannelMessageEmbeds).embeds) ...[
-                    if (embed is ImageEmbed) EmbeddedImage(embed: embed, scale: messageAppearance.scale),
-                    if (embed is VideoEmbed) EmbeddedVideo(embed: embed, scale: messageAppearance.scale),
-                    if (embed is FileEmbed) EmbeddedFile(embed: embed, scale: messageAppearance.scale),
-                    SizedBox(height: 8.0 * messageAppearance.scale),
-                  ],
-                ],
+                if (message is ChannelMessageEmbeds)
+                  BlocBuilder<ChannelMessageEmbedsCubit, List<dynamic>>(
+                    bloc: (message as ChannelMessageEmbeds).embeds,
+                    builder: (BuildContext context, state) => Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(height: 8.0 * messageAppearance.scale),
+                        for (final embed in state) ...[
+                          if (embed is ImageEmbed) EmbeddedImage(embed: embed, scale: messageAppearance.scale),
+                          if (embed is VideoEmbed) EmbeddedVideo(embed: embed, scale: messageAppearance.scale),
+                          if (embed is FileEmbed) EmbeddedFile(embed: embed, scale: messageAppearance.scale),
+                          SizedBox(height: 8.0 * messageAppearance.scale),
+                        ],
+                      ],
+                    ),
+                  ),
               ],
             ),
           ),
@@ -250,7 +269,10 @@ class EmbeddedImage extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: () => launch(embed.url),
+                  onTap: () => launchUrl(
+                    Uri.parse(embed.url),
+                    mode: LaunchMode.externalApplication,
+                  ),
                 ),
               ),
             ),

@@ -132,7 +132,7 @@ class Client {
         channel.channelMessages.add(
           ChannelMessageChat(
             message: event,
-            dateTime: DateTime.now(),
+            dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(event.tags['tmi-sent-ts'] ?? 'null') ?? DateTime.now().millisecondsSinceEpoch),
             channel: channel,
           ),
         );

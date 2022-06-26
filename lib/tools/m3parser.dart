@@ -93,6 +93,7 @@ class M3Parser {
         ),
       ),
       useMaterial3: true,
+      splashFactory: InkSparkle.splashFactory,
     );
     return newThemeData;
   }
