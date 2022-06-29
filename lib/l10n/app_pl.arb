@@ -39,27 +39,27 @@
     "searchForChannels": "Wyszukaj kanały",
     "recommendedChannels": "Polecane kanały",
     "popularChannels": "Popularne kanały",
-    "channel": "Channel",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
+    "channel": "Kanał",
+    "leaveChannel": "Opuść kanał",
+    "joinUser": "Dołącz {user}",
     "@joinUser": {
         "placeholders": {
             "user": {}
         }
     },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+    "spellCheckFailed": "Sprawdzanie pisowni nie powiodło się. Czy chciałeś wyszukać {username}?",
     "@spellCheckFailed": {
         "placeholders": {
             "username": {}
         }
     },
-    "joinChannelName": "Join {channel}",
+    "joinChannelName": "Dołącz {channel}",
     "@joinChannelName": {
         "placeholders": {
             "channel": {}
         }
     },
-    "sendMessageIn": "Send message in {channel}",
+    "sendMessageIn": "Wyślij wiadomość w {channel}",
     "@sendMessageIn": {
         "placeholders": {
             "channel": {}
