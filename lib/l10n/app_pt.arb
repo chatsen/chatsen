@@ -59,7 +59,7 @@
             "channel": {}
         }
     },
-    "sendMessageIn": "Send message in {channel}",
+    "sendMessageIn": "Enviar mensagem em {channel}",
     "@sendMessageIn": {
         "placeholders": {
             "channel": {}
