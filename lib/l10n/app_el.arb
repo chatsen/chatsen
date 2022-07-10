@@ -39,5 +39,30 @@
     "searchForChannels": "Αναζήτηση για κανάλια",
     "recommendedChannels": "Προτεινόμενα κανάλια",
     "popularChannels": "Δημοφιλή κανάλια",
-    "channel": "Channel"
+    "channel": "Κανάλι",
+    "leaveChannel": "Αποχώρηση από κανάλι",
+    "joinUser": "Συμμετοχή στο {user}",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "spellCheckFailed": "Ο ορθογραφικός έλεγχος απέτυχε! Μήπως εννοούσατε να αναζητήσετε για {username};",
+    "@spellCheckFailed": {
+        "placeholders": {
+            "username": {}
+        }
+    },
+    "joinChannelName": "Συμμετοχή στο {channel}",
+    "@joinChannelName": {
+        "placeholders": {
+            "channel": {}
+        }
+    },
+    "sendMessageIn": "Στείλτε μήνυμα στο {channel}",
+    "@sendMessageIn": {
+        "placeholders": {
+            "channel": {}
+        }
+    }
 }

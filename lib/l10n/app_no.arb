@@ -39,5 +39,30 @@
     "searchForChannels": "Søk for kanaler",
     "recommendedChannels": "Anbefalte kanaler",
     "popularChannels": "Populære kanaler",
-    "channel": "Channel"
+    "channel": "Channel",
+    "leaveChannel": "Leave channel",
+    "joinUser": "Join {user}",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+    "@spellCheckFailed": {
+        "placeholders": {
+            "username": {}
+        }
+    },
+    "joinChannelName": "Join {channel}",
+    "@joinChannelName": {
+        "placeholders": {
+            "channel": {}
+        }
+    },
+    "sendMessageIn": "Send message in {channel}",
+    "@sendMessageIn": {
+        "placeholders": {
+            "channel": {}
+        }
+    }
 }

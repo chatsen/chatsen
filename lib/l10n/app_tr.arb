@@ -39,5 +39,30 @@
     "searchForChannels": "Kanal ara",
     "recommendedChannels": "Önerilen kanallar",
     "popularChannels": "Popüler kanallar",
-    "channel": "Channel"
+    "channel": "Kanal",
+    "leaveChannel": "Kanaldan ayrıl",
+    "joinUser": "{user} katıl",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "spellCheckFailed": "Yazım denetimi başarısız oldu! {username} için mi arama yapmak istemiştiniz?",
+    "@spellCheckFailed": {
+        "placeholders": {
+            "username": {}
+        }
+    },
+    "joinChannelName": "{channel} katıl",
+    "@joinChannelName": {
+        "placeholders": {
+            "channel": {}
+        }
+    },
+    "sendMessageIn": "{channel} kanalına mesaj gönder",
+    "@sendMessageIn": {
+        "placeholders": {
+            "channel": {}
+        }
+    }
 }

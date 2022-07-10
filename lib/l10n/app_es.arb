@@ -39,5 +39,30 @@
     "searchForChannels": "Buscar canales",
     "recommendedChannels": "Canales recomendados",
     "popularChannels": "Canales populares",
-    "channel": "Canal"
+    "channel": "Canal",
+    "leaveChannel": "Salir del canal",
+    "joinUser": "Unirse a {user}",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "spellCheckFailed": "La revisión ortográfica falló! Quizás quisiste buscar {username}?",
+    "@spellCheckFailed": {
+        "placeholders": {
+            "username": {}
+        }
+    },
+    "joinChannelName": "Unirse a {channel}",
+    "@joinChannelName": {
+        "placeholders": {
+            "channel": {}
+        }
+    },
+    "sendMessageIn": "Send message in {channel}",
+    "@sendMessageIn": {
+        "placeholders": {
+            "channel": {}
+        }
+    }
 }

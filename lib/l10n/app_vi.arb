@@ -39,5 +39,30 @@
     "searchForChannels": "Tìm kiếm kênh",
     "recommendedChannels": "Các kênh đề xuất",
     "popularChannels": "Các kênh phổ biến",
-    "channel": "Channel"
+    "channel": "Kênh",
+    "leaveChannel": "Rời kênh",
+    "joinUser": "Tham gia vào {user}",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "spellCheckFailed": "Kiểm tra chính tả thất bại! Có phải bạn muốn tìm {username}?",
+    "@spellCheckFailed": {
+        "placeholders": {
+            "username": {}
+        }
+    },
+    "joinChannelName": "Tham gia vào {channel}",
+    "@joinChannelName": {
+        "placeholders": {
+            "channel": {}
+        }
+    },
+    "sendMessageIn": "Send message in {channel}",
+    "@sendMessageIn": {
+        "placeholders": {
+            "channel": {}
+        }
+    }
 }

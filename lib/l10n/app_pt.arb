@@ -1,6 +1,6 @@
 {
     "chatsen": "Chatsen",
-    "loggedInVia": "Logado via {provider}",
+    "loggedInVia": "Conectado via {provider}",
     "@loggedInVia": {
         "placeholders": {
             "provider": {}
@@ -39,5 +39,30 @@
     "searchForChannels": "Procurar por canais",
     "recommendedChannels": "Canais recomendados",
     "popularChannels": "Canais populares",
-    "channel": "Channel"
+    "channel": "Canal",
+    "leaveChannel": "Sair do canal",
+    "joinUser": "Entrar {user}",
+    "@joinUser": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "spellCheckFailed": "A verificação ortográfica falhou! Você queria pesquisar por {username}?",
+    "@spellCheckFailed": {
+        "placeholders": {
+            "username": {}
+        }
+    },
+    "joinChannelName": "Conectar {channel}",
+    "@joinChannelName": {
+        "placeholders": {
+            "channel": {}
+        }
+    },
+    "sendMessageIn": "Enviar mensagem em {channel}",
+    "@sendMessageIn": {
+        "placeholders": {
+            "channel": {}
+        }
+    }
 }
