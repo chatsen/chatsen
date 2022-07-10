@@ -82,5 +82,8 @@ This project and it's releases are provided as-is, no support is provided. Use a
 Chatsen does not collect any personal or identifying information whatsoever. There are no servers, services or backend running related to the project either.  
 Since Chatsen interfaces with Twitch however, you are subject to their Privacy Policy available at https://www.twitch.tv/p/en/legal/privacy-notice/
 
+# Contributions
+Chatsen currently does *not* take any pull requests or contributions. When this may change in the future, this notice will be updated and PR guidelines will be defined.
+
 # Contact
 - Discord: https://chatsen.app/discord
