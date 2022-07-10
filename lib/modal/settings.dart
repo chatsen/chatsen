@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../components/modal.dart';
-import '../components/separator.dart';
 import '../components/tile.dart';
-import '../data/settings/message_appearance.dart';
 import 'components/modal_header.dart';
 import 'custom_commands.dart';
 import 'user_triggers.dart';

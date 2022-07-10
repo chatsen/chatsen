@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../components/boxlistener.dart';
-import '../irc/message.dart';
 import '../tmi/channel/channel_message.dart';
 import 'chat_message.dart';
 import '/tmi/channel/channel.dart';

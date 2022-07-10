@@ -1,4 +1,3 @@
-import 'package:chatsen/widgets/chat_message.dart';
 import 'package:flutter/material.dart';
 
 import '../api/chatsen/chatsen.dart';
@@ -35,12 +34,15 @@ class UserModal extends StatelessWidget {
                   color: Theme.of(context).colorScheme.secondaryContainer,
                   child: Row(
                     children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.block_rounded,
-                          color: Colors.red,
+                      Tooltip(
+                        message: 'Ban',
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.block_rounded,
+                            color: Colors.red,
+                          ),
+                          onPressed: () => channel?.send('/ban ${snapshot.data!.login}'),
                         ),
-                        onPressed: () => channel?.send('/ban ${snapshot.data!.login}'),
                       ),
                       Expanded(
                         child: Center(
@@ -72,12 +74,15 @@ class UserModal extends StatelessWidget {
                           ),
                         ),
                       ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.block_rounded,
-                          color: Colors.green,
+                      Tooltip(
+                        message: 'Unban',
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.block_rounded,
+                            color: Colors.green,
+                          ),
+                          onPressed: () => channel?.send('/unban ${snapshot.data!.login}'),
                         ),
-                        onPressed: () => channel?.send('/unban ${snapshot.data!.login}'),
                       ),
                     ],
                   ),

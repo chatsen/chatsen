@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:chatsen/api/anonfiles/anonfiles.dart';
 import 'package:chatsen/data/badge.dart';
@@ -17,6 +18,7 @@ import '../channel.dart';
 import '../channel_message.dart';
 import '/irc/message.dart' as irc;
 import 'channel_message_embeds.dart';
+import 'channel_message_id.dart';
 
 class TwitchEmoteInstance {
   final String code;
@@ -30,7 +32,7 @@ class TwitchEmoteInstance {
   });
 }
 
-class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, ChannelMessageEmbeds {
+class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, ChannelMessageEmbeds, ChannelMessageId {
   irc.Message message;
   bool action = false;
   List<dynamic> splits = [];
@@ -52,6 +54,9 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
     badges.clear();
     splits.clear();
     embeds.clear();
+
+    // TODO: Ensure there is always an id at this stage?
+    id = message.tags['id']!;
 
     user = User(
       login: message.prefix!.split('!').first,
@@ -100,7 +105,7 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
 
       messageText = String.fromCharCodes(messageRunes).replaceAll(utf8.decode([0xF3, 0xA0, 0x80, 0x80]), '');
     } catch (e) {
-      print('Couldn\'t parse Twitch emote data: ${message.tags['emotes']} -> $e');
+      log('Couldn\'t parse Twitch emote data: ${message.tags['emotes']} -> $e');
     }
 
     final allBadges = (channel?.channelBadges.state ?? []) + (channel?.client.globalBadges.state ?? []);

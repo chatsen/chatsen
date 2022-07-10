@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:chatsen/data/inline_url.dart';
 import 'package:chatsen/modal/user.dart';
 import 'package:chatsen/tmi/channel/messages/channel_message_embeds.dart';
@@ -11,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
+// ignore: implementation_imports
 import 'package:chewie/src/material/material_desktop_controls.dart';
 import 'package:filesize/filesize.dart';
 
@@ -61,10 +60,10 @@ class ChatMessage extends StatelessWidget {
     messageAppearance = Hive.box('Settings').get('messageAppearance');
   }
 
-  Size _textSize(String text, TextStyle style) {
-    final TextPainter textPainter = TextPainter(text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)..layout(minWidth: 0, maxWidth: double.infinity);
-    return textPainter.size;
-  }
+  // Size _textSize(String text, TextStyle style) {
+  //   final TextPainter textPainter = TextPainter(text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)..layout(minWidth: 0, maxWidth: double.infinity);
+  //   return textPainter.size;
+  // }
 
   @override
   Widget build(BuildContext context) => message is ChannelMessageChat
@@ -226,10 +225,10 @@ class ChatMessage extends StatelessWidget {
                     builder: (BuildContext context, state) => Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SizedBox(height: 8.0 * messageAppearance.scale),
+                        if (state.isNotEmpty) SizedBox(height: 8.0 * messageAppearance.scale),
                         for (final embed in state) ...[
                           if (embed is ImageEmbed) EmbeddedImage(embed: embed, scale: messageAppearance.scale),
-                          if (embed is VideoEmbed) EmbeddedVideo(embed: embed, scale: messageAppearance.scale),
+                          // if (embed is VideoEmbed) EmbeddedVideo(embed: embed, scale: messageAppearance.scale),
                           if (embed is FileEmbed) EmbeddedFile(embed: embed, scale: messageAppearance.scale),
                           SizedBox(height: 8.0 * messageAppearance.scale),
                         ],

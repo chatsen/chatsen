@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../api/catbox/catbox.dart';
+import '../components/separator.dart';
 import '../tmi/channel/channel.dart';
 import 'chat_view.dart';
 
@@ -136,7 +137,7 @@ class _ChannelViewState extends State<ChannelView> {
                           ),
                         ),
                       ),
-                      // const SizedBox(width: 12.0),
+                      const Separator(axis: Axis.vertical),
                       Expanded(
                         child: TextField(
                           controller: textEditingController,
@@ -169,6 +170,7 @@ class _ChannelViewState extends State<ChannelView> {
                           ),
                         ),
                       ),
+                      const Separator(axis: Axis.vertical),
                       InkWell(
                         onTap: () {
                           widget.channel.send(textEditingController.text);

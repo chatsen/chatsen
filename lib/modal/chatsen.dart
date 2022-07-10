@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:chatsen/modal/components/modal_header.dart';
 import 'package:chatsen/modal/settings.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +70,14 @@ class ChatsenModal extends StatelessWidget {
                   ),
                 Tile(
                   onTap: () {
+                    if (!Platform.isAndroid && !Platform.isIOS) {
+                      Modal.show(
+                        context: context,
+                        child: const TwitchTokenInputModal(),
+                      );
+                      return;
+                    }
+
                     Modal.show(
                       enableDrag: false,
                       context: context,

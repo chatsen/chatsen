@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:chatsen/providers/emojis.dart';
 import 'package:chatsen/providers/twitch.dart';
@@ -64,11 +66,11 @@ class Client {
       try {
         emotes.addAll(await emoteProvider.globalEmotes());
       } catch (e) {
-        print('Couldn\'t get ${emoteProvider.name} global emotes');
+        log('Couldn\'t get ${emoteProvider.name} global emotes');
       }
     }
 
-    globalEmotes.emit(emotes);
+    globalEmotes.change(emotes);
   }
 
   Future<void> refreshGlobalBadges() async {
@@ -78,11 +80,11 @@ class Client {
       try {
         badges.addAll(await badgeProvider.globalBadges());
       } catch (e) {
-        print('Couldn\'t get ${badgeProvider.name} global badges');
+        log('Couldn\'t get ${badgeProvider.name} global badges');
       }
     }
 
-    globalBadges.emit(badges);
+    globalBadges.change(badges);
   }
 
   Future<void> connectAs(TwitchAccount twitchAccount) async {

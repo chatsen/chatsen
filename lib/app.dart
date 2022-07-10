@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import '/tools/m3parser.dart';
 import '/tools/m3themes.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +26,8 @@ class App extends StatelessWidget {
           ),
           child: const HomePage(),
         ),
-        theme: M3Parser.parse(M3Themes.themes['itto']!, dark: false),
-        darkTheme: M3Parser.parse(M3Themes.themes['itto']!, dark: true),
+        theme: M3Parser.parse(M3Themes.themes['green']!, dark: false),
+        darkTheme: M3Parser.parse(M3Themes.themes['green']!, dark: true),
         themeMode: ThemeMode.dark,
       );
 }

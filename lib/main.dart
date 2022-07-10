@@ -45,9 +45,9 @@ Future<void> main() async {
   final accountSettingsBox = await Hive.openBox('AccountSettings');
   final settingsBox = await Hive.openBox('Settings');
 
-  final messageTriggers = await Hive.openBox('MessageTriggers');
-  final userTriggers = await Hive.openBox('UserTriggers');
-  final customCommands = await Hive.openBox('CustomCommands');
+  await Hive.openBox('MessageTriggers');
+  await Hive.openBox('UserTriggers');
+  await Hive.openBox('CustomCommands');
 
   await settingsBox.clear();
 

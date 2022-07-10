@@ -15,13 +15,13 @@ class AvatarButton extends StatefulWidget {
 }
 
 enum AvatarButtonDirection {
-  Up,
-  Down,
-  None,
+  up,
+  down,
+  none,
 }
 
 class _AvatarButtonState extends State<AvatarButton> {
-  AvatarButtonDirection direction = AvatarButtonDirection.None;
+  AvatarButtonDirection direction = AvatarButtonDirection.none;
 
   @override
   Widget build(BuildContext context) {
@@ -38,34 +38,34 @@ class _AvatarButtonState extends State<AvatarButton> {
               clipBehavior: Clip.antiAlias,
               child: GestureDetector(
                 onPanStart: (details) {
-                  direction = AvatarButtonDirection.None;
+                  direction = AvatarButtonDirection.none;
                 },
                 onPanUpdate: (details) {
                   if (details.delta.dy > 1.0) {
-                    direction = AvatarButtonDirection.Down;
+                    direction = AvatarButtonDirection.down;
                   } else if (details.delta.dy < -1.0) {
-                    direction = AvatarButtonDirection.Up;
+                    direction = AvatarButtonDirection.up;
                   } else {
-                    direction = AvatarButtonDirection.None;
+                    direction = AvatarButtonDirection.none;
                   }
                 },
                 onPanEnd: (details) {
                   var activeAccountHash = accountSettingsBox.get('activeTwitchAccount');
                   var indexOfActiveAccountHash = twitchAccountsBox.keys.toList().indexOf(activeAccountHash);
                   switch (direction) {
-                    case AvatarButtonDirection.Up:
+                    case AvatarButtonDirection.up:
                       ++indexOfActiveAccountHash;
                       if (indexOfActiveAccountHash >= twitchAccountsBox.length) indexOfActiveAccountHash = 0;
                       break;
-                    case AvatarButtonDirection.Down:
+                    case AvatarButtonDirection.down:
                       --indexOfActiveAccountHash;
                       if (indexOfActiveAccountHash < 0) indexOfActiveAccountHash = twitchAccountsBox.keys.toList().length - 1;
                       break;
-                    case AvatarButtonDirection.None:
+                    case AvatarButtonDirection.none:
                       break;
                   }
                   accountSettingsBox.put('activeTwitchAccount', twitchAccountsBox.keys.elementAt(indexOfActiveAccountHash));
-                  direction = AvatarButtonDirection.None;
+                  direction = AvatarButtonDirection.none;
                 },
                 child: InkWell(
                   onTap: () async {

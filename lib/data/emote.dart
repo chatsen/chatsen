@@ -1,6 +1,5 @@
 import '../providers/provider.dart';
 
-// TODO: Have code field for emotes/emojis
 class Emote {
   String id;
   String name;

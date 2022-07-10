@@ -3,7 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive/hive.dart';
 
 import '../components/separator.dart';
-import '../components/tile.dart';
 import '../data/user_trigger.dart';
 import 'components/modal_header.dart';
 

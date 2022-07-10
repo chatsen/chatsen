@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:chatsen/tmi/channel/channel_chatters.dart';
@@ -136,7 +137,7 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
       try {
         emotes.addAll(await emoteProvider.channelEmotes(id!));
       } catch (e) {
-        print('Couldn\'t get ${emoteProvider.name} channel emotes for $name ($id)');
+        log('Couldn\'t get ${emoteProvider.name} channel emotes for $name ($id)');
       }
     }
 
@@ -152,7 +153,7 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
       try {
         badges.addAll(await badgeProvider.channelBadges(id!));
       } catch (e) {
-        print('Couldn\'t get ${badgeProvider.name} channel badges for $name ($id)');
+        log('Couldn\'t get ${badgeProvider.name} channel badges for $name ($id)');
       }
     }
 
@@ -160,16 +161,18 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
   }
 
   Future<void> refreshChannelUser() async {
-    channelInfo.emit(await Chatsen.user(name.replaceFirst('#', '')));
-    try {} catch (e) {
-      print('Couldn\'t get channel info for $name');
+    try {
+      channelInfo.emit(await Chatsen.user(name.replaceFirst('#', '')));
+    } catch (e) {
+      log('Couldn\'t get channel info for $name');
     }
   }
 
   Future<void> refreshChannelChatters() async {
-    channelChatters.emit((await Chatsen.userWithViewers(name.replaceFirst('#', ''))).channel?.chatters);
-    try {} catch (e) {
-      print('Couldn\'t get channel chatters for $name');
+    try {
+      channelChatters.emit((await Chatsen.userWithViewers(name.replaceFirst('#', ''))).channel?.chatters);
+    } catch (e) {
+      log('Couldn\'t get channel chatters for $name');
     }
   }
 }
