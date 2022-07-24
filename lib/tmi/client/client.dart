@@ -1,16 +1,20 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:chatsen/providers/dankchat.dart';
 import 'package:chatsen/providers/emojis.dart';
 import 'package:chatsen/providers/twitch.dart';
 import 'package:chatsen/tmi/badges.dart';
 import 'package:collection/collection.dart';
 
 import '../../data/badge.dart';
+import '../../data/badge_users.dart';
 import '../../data/emote.dart';
 import '../../providers/badge_provider.dart';
+import '../../providers/chatsen.dart';
 import '../../providers/emote_provider.dart';
 import '../emotes.dart';
+import '../user_badges.dart';
 import '/providers/betterttv.dart';
 import '/api/recentmessages/recentmessages.dart';
 import '/tmi/channel/channel_event.dart';
@@ -31,9 +35,11 @@ class Client {
   Connection transmitter = Connection();
 
   List<Provider> providers = [
+    ChatsenProvider(),
     SevenTVProvider(),
     BetterTTVProvider(),
     FrankerFaceZProvider(),
+    DankChatProvider(),
     TwitchProvider(),
     EmojiProvider(),
   ];
@@ -43,6 +49,7 @@ class Client {
   Emotes globalEmotes = Emotes();
   Badges globalBadges = Badges();
   Emotes emojis = Emotes();
+  UserBadges globalUserBadges = UserBadges();
 
   Client({
     TwitchAccount? twitchAccount,
@@ -57,6 +64,7 @@ class Client {
 
     refreshGlobalEmotes();
     refreshGlobalBadges();
+    refreshGlobalUserBadges();
   }
 
   Future<void> refreshGlobalEmotes() async {
@@ -85,6 +93,20 @@ class Client {
     }
 
     globalBadges.change(badges);
+  }
+
+  Future<void> refreshGlobalUserBadges() async {
+    final badges = <BadgeUsers>[];
+    final badgeProviders = providers.whereType<BadgeProvider>();
+    for (final badgeProvider in badgeProviders) {
+      try {
+        badges.addAll(await badgeProvider.globalUserBadges());
+      } catch (e) {
+        log('Couldn\'t get ${badgeProvider.name} global badges');
+      }
+    }
+
+    globalUserBadges.change(badges);
   }
 
   Future<void> connectAs(TwitchAccount twitchAccount) async {

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:chatsen/modal/channel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +13,33 @@ import '../tmi/client/client_channels.dart';
 import '../widgets/channel_view.dart';
 import '../widgets/home_tab.dart';
 
+class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  Widget build(BuildContext context) => Container(
+        height: preferredSize.height,
+        // color: Colors.red.withAlpha(64),
+        child: Row(
+          children: [
+            Expanded(child: MoveWindow()),
+            InkWell(
+              child: SizedBox(
+                height: preferredSize.height,
+                width: preferredSize.height,
+                child: Icon(
+                  Icons.close_rounded,
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+              ),
+              onTap: () => appWindow.close(),
+            ),
+          ],
+        ),
+      );
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight / 2.0);
+}
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -20,6 +50,9 @@ class HomePage extends StatelessWidget {
           return DefaultTabController(
             length: 1 + state.length,
             child: Scaffold(
+              // backgroundColor: Theme.of(context).colorScheme.background.withOpacity(0.80),
+              backgroundColor: Colors.transparent,
+              appBar: Platform.isWindows ? MyAppBar() : null,
               extendBody: true,
               extendBodyBehindAppBar: true,
               bottomNavigationBar: Material(

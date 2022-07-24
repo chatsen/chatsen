@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:chatsen/data/custom_command.dart';
 import 'package:chatsen/data/message_trigger.dart';
 import 'package:chatsen/data/settings/application_appearance.dart';
@@ -8,6 +11,7 @@ import 'package:chatsen/data/settings/mention_user.dart';
 import 'package:chatsen/data/settings/message_appearance.dart';
 import 'package:chatsen/data/user_trigger.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wakelock/wakelock.dart';
@@ -22,6 +26,11 @@ import 'tmi/client/client.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (Platform.isWindows) {
+    await Window.initialize();
+  }
+
   await Wakelock.enable();
 
   await Hive.initFlutter();
@@ -66,4 +75,14 @@ Future<void> main() async {
       child: const App(),
     ),
   );
+
+  if (Platform.isWindows) {
+    doWhenWindowReady(() {
+      const initialSize = Size(240 + 128, 720);
+      appWindow.minSize = initialSize;
+      appWindow.size = initialSize;
+      appWindow.alignment = Alignment.center;
+      appWindow.show();
+    });
+  }
 }

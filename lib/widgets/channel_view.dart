@@ -39,6 +39,7 @@ class _ChannelViewState extends State<ChannelView> {
             child: ChatView(
               channel: widget.channel,
             ),
+            // child: Container(),
           ),
           Material(
             color: Theme.of(context).colorScheme.primaryContainer,
@@ -115,82 +116,85 @@ class _ChannelViewState extends State<ChannelView> {
                         ],
                       ),
                     ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () async {
-                          final picker = await FilePicker.platform.pickFiles();
-                          final splits = textEditingController.text.split(' ');
-                          for (PlatformFile file in picker?.files ?? []) {
-                            final uploadedFile = await Catbox.uploadFile(file.name, File(file.path!).readAsBytesSync());
-                            splits.add(uploadedFile.url);
-                          }
-                          splits.removeWhere((element) => element.isEmpty);
-                          if (splits.isNotEmpty) textEditingController.text = splits.join(' ') + ' ';
-                        },
-                        child: SizedBox(
-                          width: 48.0,
-                          height: 48.0,
-                          child: Icon(
-                            Icons.photo_size_select_actual_outlined,
-                            color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  SizedBox(
+                    height: 48.0,
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            final picker = await FilePicker.platform.pickFiles();
+                            final splits = textEditingController.text.split(' ');
+                            for (PlatformFile file in picker?.files ?? []) {
+                              final uploadedFile = await Catbox.uploadFile(file.name, File(file.path!).readAsBytesSync());
+                              splits.add(uploadedFile.url);
+                            }
+                            splits.removeWhere((element) => element.isEmpty);
+                            if (splits.isNotEmpty) textEditingController.text = splits.join(' ') + ' ';
+                          },
+                          child: SizedBox(
+                            width: 48.0,
+                            height: 48.0,
+                            child: Icon(
+                              Icons.photo_size_select_actual_outlined,
+                              color: Theme.of(context).colorScheme.onPrimaryContainer,
+                            ),
                           ),
                         ),
-                      ),
-                      const Separator(axis: Axis.vertical),
-                      Expanded(
-                        child: TextField(
-                          controller: textEditingController,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                            hintText: AppLocalizations.of(context)!.sendMessageIn(widget.channel.name), //'Send message in ',
-                            border: InputBorder.none,
+                        // const Separator(axis: Axis.vertical),
+                        Expanded(
+                          child: TextField(
+                            controller: textEditingController,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                              hintText: AppLocalizations.of(context)!.sendMessageIn(widget.channel.name), //'Send message in ',
+                              border: InputBorder.none,
+                            ),
+                            onSubmitted: (text) {
+                              widget.channel.send(text);
+                              textEditingController.clear();
+                            },
+                            onChanged: (text) {
+                              setState(() {});
+                            },
                           ),
-                          onSubmitted: (text) {
-                            widget.channel.send(text);
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              emoteKeyboard = !emoteKeyboard;
+                            });
+                          },
+                          child: SizedBox(
+                            width: 48.0,
+                            height: 48.0,
+                            child: Icon(
+                              Icons.emoji_emotions_outlined,
+                              color: Theme.of(context).colorScheme.onPrimaryContainer,
+                            ),
+                          ),
+                        ),
+                        // const Separator(axis: Axis.vertical),
+                        InkWell(
+                          onTap: () {
+                            widget.channel.send(textEditingController.text);
                             textEditingController.clear();
                           },
-                          onChanged: (text) {
-                            setState(() {});
+                          onLongPress: () {
+                            setState(() {
+                              spamming = !spamming;
+                            });
                           },
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            emoteKeyboard = !emoteKeyboard;
-                          });
-                        },
-                        child: SizedBox(
-                          width: 48.0,
-                          height: 48.0,
-                          child: Icon(
-                            Icons.emoji_emotions_outlined,
-                            color: Theme.of(context).colorScheme.onPrimaryContainer,
+                          child: SizedBox(
+                            width: 48.0,
+                            height: 48.0,
+                            child: Icon(
+                              spamming ? Icons.send_and_archive_outlined : Icons.send_outlined,
+                              color: Theme.of(context).colorScheme.onPrimaryContainer,
+                            ),
                           ),
                         ),
-                      ),
-                      const Separator(axis: Axis.vertical),
-                      InkWell(
-                        onTap: () {
-                          widget.channel.send(textEditingController.text);
-                          textEditingController.clear();
-                        },
-                        onLongPress: () {
-                          setState(() {
-                            spamming = !spamming;
-                          });
-                        },
-                        child: SizedBox(
-                          width: 48.0,
-                          height: 48.0,
-                          child: Icon(
-                            spamming ? Icons.send_and_archive_outlined : Icons.send_outlined,
-                            color: Theme.of(context).colorScheme.onPrimaryContainer,
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),

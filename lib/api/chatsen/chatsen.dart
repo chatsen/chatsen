@@ -19,7 +19,7 @@ class Chatsen {
   }
 
   static Future<List<ChatsenBadge>> badges() async {
-    final response = await http.get(Uri.parse('https://api.chatsen.app/v1/cosmetics'));
+    final response = await http.get(Uri.parse('https://api.chatsen.app/account/badges')); // https://api.chatsen.app/v1/cosmetics
     final responseJson = await json.decode(utf8.decode(response.bodyBytes));
     return [
       for (final badge in responseJson) ChatsenBadge.fromJson(badge),

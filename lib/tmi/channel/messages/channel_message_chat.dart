@@ -115,6 +115,10 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
       if (badge != null) badges.add(badge);
     }
 
+    for (final badgeUsers in (channel?.client.globalUserBadges.state ?? [])) {
+      if (badgeUsers.users.contains(user.id)) badges.add(badgeUsers.badge);
+    }
+
     final emotes = (channel?.channelEmotes.state ?? []) + (channel?.client.globalEmotes.state ?? []);
     final textSplits = messageText.split(' ').where((split) => split.isNotEmpty);
     for (final textSplit in textSplits) {

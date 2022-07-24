@@ -4,13 +4,8 @@ part 'dankchat_badge.g.dart';
 
 @JsonSerializable()
 class DankChatBadge {
-  @JsonKey(name: 'type')
   String type;
-
-  @JsonKey(name: 'url')
   String url;
-
-  @JsonKey(name: 'users')
   List<String> users;
 
   DankChatBadge({
@@ -20,6 +15,5 @@ class DankChatBadge {
   });
 
   factory DankChatBadge.fromJson(Map<String, dynamic> json) => _$DankChatBadgeFromJson(json);
-
   Map<String, dynamic> toJson() => _$DankChatBadgeToJson(this);
 }

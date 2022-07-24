@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:chatsen/api/frankerfacez/frankerfacez_badges.dart';
 import 'package:http/http.dart' as http;
 
 import '/api/frankerfacez/frankerfacez_set.dart';
@@ -18,5 +19,11 @@ class FrankerFaceZ {
     return [
       for (final setData in responseJson['sets'].values) FrankerFaceZSet.fromJson(setData),
     ];
+  }
+
+  static Future<FrankerFaceZBadges> badges() async {
+    final response = await http.get(Uri.parse('https://api.frankerfacez.com/v1/badges/ids'));
+    final responseJson = json.decode(utf8.decode(response.bodyBytes));
+    return FrankerFaceZBadges.fromJson(responseJson);
   }
 }

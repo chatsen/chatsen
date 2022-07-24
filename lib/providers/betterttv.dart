@@ -1,9 +1,13 @@
+import 'package:chatsen/providers/badge_provider.dart';
+
+import '../data/badge.dart';
+import '../data/badge_users.dart';
 import '/api/betterttv/betterttv.dart';
 import '/data/emote.dart';
 import 'emote_provider.dart';
 import 'provider.dart';
 
-class BetterTTVProvider extends Provider with EmoteProvider {
+class BetterTTVProvider extends Provider with EmoteProvider, BadgeProvider {
   @override
   String get name => 'BetterTTV';
 
@@ -42,6 +46,36 @@ class BetterTTVProvider extends Provider with EmoteProvider {
             'https://cdn.betterttv.net/emote/${emote.id}/3x',
           ],
           provider: this,
+        ),
+    ];
+  }
+
+  @override
+  Future<List<Badge>> globalBadges() async => [];
+
+  @override
+  Future<List<Badge>> channelBadges(String uid) async => [];
+
+  @override
+  Future<List<Badge>> userBadges(String uid) async => [];
+
+  @override
+  Future<List<BadgeUsers>> globalUserBadges() async {
+    final badges = await BetterTTV.badges();
+    return [
+      for (final badge in badges)
+        BadgeUsers(
+          badge: Badge(
+            id: badge.id,
+            name: badge.badge.description,
+            mipmap: [
+              badge.badge.svg,
+            ],
+            provider: this,
+          ),
+          users: [
+            badge.providerId,
+          ],
         ),
     ];
   }

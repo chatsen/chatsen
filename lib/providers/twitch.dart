@@ -2,6 +2,7 @@ import 'package:chatsen/providers/badge_provider.dart';
 
 import '../api/twitch/twitch.dart';
 import '../data/badge.dart';
+import '../data/badge_users.dart';
 import 'provider.dart';
 
 class TwitchProvider extends Provider with BadgeProvider {
@@ -53,4 +54,7 @@ class TwitchProvider extends Provider with BadgeProvider {
 
   @override
   Future<List<Badge>> userBadges(String uid) async => [];
+
+  @override
+  Future<List<BadgeUsers>> globalUserBadges() async => [];
 }

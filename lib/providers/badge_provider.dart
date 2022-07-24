@@ -1,3 +1,5 @@
+import 'package:chatsen/data/badge_users.dart';
+
 import 'provider.dart';
 import '/data/badge.dart';
 
@@ -6,4 +8,5 @@ mixin BadgeProvider on Provider {
   Future<List<Badge>> globalBadges() async => throw UnimplementedError();
   Future<List<Badge>> channelBadges(String uid) async => throw UnimplementedError();
   Future<List<Badge>> userBadges(String uid) async => throw UnimplementedError();
+  Future<List<BadgeUsers>> globalUserBadges() async => throw UnimplementedError();
 }

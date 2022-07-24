@@ -62,6 +62,8 @@ class _HomeTabState extends State<HomeTab> {
                 'nymn',
                 'shigetora',
                 'enviosity',
+                'theactingmale',
+                'kitboga',
               ].map(
                 (e) => 'user_login=$e',
               )).join('&')),
@@ -90,6 +92,7 @@ class _HomeTabState extends State<HomeTab> {
               'shigetora',
               'enviosity',
               'theactingmale',
+              'kitboga',
             ]
                 .map(
                   (e) => 'user_login=$e',

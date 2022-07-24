@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:flutter_acrylic/flutter_acrylic.dart';
+
 import '/tools/m3parser.dart';
 import '/tools/m3themes.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +28,19 @@ class App extends StatelessWidget {
             statusBarBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.light : Brightness.dark,
             statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
           ),
-          child: const HomePage(),
+          child: Builder(builder: (context) {
+            if (Platform.isWindows) {
+              Window.setEffect(
+                effect: WindowEffect.mica,
+                dark: Theme.of(context).brightness == Brightness.dark,
+                color: Theme.of(context).colorScheme.primary,
+              );
+            }
+            return const HomePage();
+          }),
         ),
         theme: M3Parser.parse(M3Themes.themes['green']!, dark: false),
         darkTheme: M3Parser.parse(M3Themes.themes['green']!, dark: true),
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.dark, // TODO: Default to system theme
       );
 }

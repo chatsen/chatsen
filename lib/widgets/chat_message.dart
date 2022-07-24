@@ -6,6 +6,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
@@ -98,10 +99,16 @@ class ChatMessage extends StatelessWidget {
                             message: badge.name,
                             child: Padding(
                               padding: const EdgeInsets.only(right: 4.0),
-                              child: Image.network(
-                                badge.mipmap.last,
-                                scale: (1.0 / messageAppearance.scale) * 4.0,
-                              ),
+                              child: badge.mipmap.last.endsWith('.svg')
+                                  ? SvgPicture.network(
+                                      badge.mipmap.last,
+                                      height: 20.0,
+                                    )
+                                  : Image.network(
+                                      badge.mipmap.last,
+                                      height: 20.0,
+                                      scale: (1.0 / messageAppearance.scale) * 4.0,
+                                    ),
                             ),
                           ),
                         ),
