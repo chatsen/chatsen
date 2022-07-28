@@ -534,6 +534,10 @@ class Channel {
       ''');
 
       for (var emoteData in data['data']['user']['emotes']) {
+        if (emoteData['urls'].isEmpty) {
+          continue;
+        }
+
         var emote = Emote(
           name: emoteData['name'],
           id: emoteData['id'],
@@ -1107,6 +1111,10 @@ class Client {
         var emotesData = data['data']['search_emotes'];
 
         for (var emoteData in emotesData) {
+          if (emoteData['urls'].isEmpty) {
+            continue;
+          }
+
           var emote = Emote(
             name: emoteData['name'],
             id: emoteData['id'],
