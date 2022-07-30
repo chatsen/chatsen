@@ -5,7 +5,7 @@ import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class CookiesManager extends StatefulWidget {
-  const CookiesManager({Key? key}) : super(key: key);
+  const CookiesManager({super.key});
 
   @override
   State<CookiesManager> createState() => _CookiesManagerState();
@@ -66,9 +66,9 @@ class _CookiesManagerState extends State<CookiesManager> {
 
 class CookieWidget extends StatelessWidget {
   const CookieWidget({
-    Key? key,
+    super.key,
     required this.cookie,
-  }) : super(key: key);
+  });
 
   final Cookie cookie;
 

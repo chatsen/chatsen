@@ -55,9 +55,9 @@ class ChatMessage extends StatelessWidget {
   late MessageAppearance messageAppearance;
 
   ChatMessage({
-    Key? key,
+    super.key,
     required this.message,
-  }) : super(key: key) {
+  }) {
     messageAppearance = Hive.box('Settings').get('messageAppearance');
   }
 
@@ -98,16 +98,16 @@ class ChatMessage extends StatelessWidget {
                           child: Tooltip(
                             message: badge.name,
                             child: Padding(
-                              padding: const EdgeInsets.only(right: 4.0),
+                              padding: EdgeInsets.only(right: 4.0 * messageAppearance.scale),
                               child: badge.mipmap.last.endsWith('.svg')
                                   ? SvgPicture.network(
                                       badge.mipmap.last,
-                                      height: 20.0,
+                                      height: 20.0 * messageAppearance.scale,
                                     )
                                   : Image.network(
                                       badge.mipmap.last,
-                                      height: 20.0,
-                                      scale: (1.0 / messageAppearance.scale) * 4.0,
+                                      height: 20.0 * messageAppearance.scale,
+                                      // scale: (1.0 / messageAppearance.scale) * 4.0,
                                     ),
                             ),
                           ),

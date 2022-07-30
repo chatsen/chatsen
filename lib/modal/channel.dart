@@ -11,9 +11,9 @@ class ChannelModal extends StatelessWidget {
   final Channel channel;
 
   const ChannelModal({
-    Key? key,
+    super.key,
     required this.channel,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => BlocBuilder<ChannelInfo, ChatsenUser?>(

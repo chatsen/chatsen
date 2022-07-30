@@ -14,11 +14,11 @@ class ChatView extends StatefulWidget {
   final EdgeInsets? padding;
 
   const ChatView({
-    Key? key,
+    super.key,
     required this.channel,
     this.filter,
     this.padding,
-  }) : super(key: key);
+  });
 
   @override
   State<ChatView> createState() => _ChatViewState();

@@ -1,4 +1,7 @@
 import 'package:chatsen/components/boxlistener.dart';
+import 'package:chatsen/modal/application_appearance.dart';
+import 'package:chatsen/modal/application_theme.dart';
+import 'package:chatsen/modal/message_appearance.dart';
 import 'package:chatsen/modal/message_triggers.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -10,9 +13,7 @@ import 'custom_commands.dart';
 import 'user_triggers.dart';
 
 class SettingsModal extends StatelessWidget {
-  const SettingsModal({
-    Key? key,
-  }) : super(key: key);
+  const SettingsModal({super.key});
 
   @override
   Widget build(BuildContext context) => BoxListener(
@@ -24,33 +25,21 @@ class SettingsModal extends StatelessWidget {
             children: [
               const ModalHeader(title: 'Settings'),
               // const Separator(),
-              // SwitchListTile.adaptive(
-              //   value: messageAppearance.timestamps,
-              //   onChanged: (value) {
-              //     messageAppearance.timestamps = value;
-              //     messageAppearance.save();
-              //   },
-              //   title: const Text('Show timestamps'),
-              // ),
-              // SwitchListTile.adaptive(
-              //   value: messageAppearance.compact,
-              //   onChanged: (value) {
-              //     messageAppearance.compact = value;
-              //     messageAppearance.save();
-              //   },
-              //   title: const Text('Compact messages'),
-              // ),
-              // Slider(
-              //   divisions: 16,
-              //   min: 1.0,
-              //   max: 4.0,
-              //   value: messageAppearance.scale,
-              //   label: '${messageAppearance.scale}',
-              //   onChanged: (value) {
-              //     messageAppearance.scale = value;
-              //     messageAppearance.save();
-              //   },
-              // ),
+              Tile(
+                title: 'Appearance',
+                prefix: const Icon(Icons.palette_outlined),
+                onTap: () => Modal.show(context: context, child: const ApplicationAppearanceModal()),
+              ),
+              Tile(
+                title: 'Theme',
+                prefix: const Icon(Icons.palette_outlined),
+                onTap: () => Modal.show(context: context, child: const ApplicationThemeModal()),
+              ),
+              Tile(
+                title: 'Message Appearance',
+                prefix: const Icon(Icons.font_download_rounded),
+                onTap: () => Modal.show(context: context, child: const MessageAppearanceModal()),
+              ),
               Tile(
                 title: 'Custom Commands',
                 prefix: const Icon(Icons.terminal_rounded),

@@ -14,10 +14,11 @@ import '../widgets/channel_view.dart';
 import '../widgets/home_tab.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const MyAppBar({super.key});
+
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
         height: preferredSize.height,
-        // color: Colors.red.withAlpha(64),
         child: Row(
           children: [
             Expanded(child: MoveWindow()),
@@ -41,7 +42,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) => BlocBuilder<ClientChannels, List<Channel>>(
@@ -51,8 +52,8 @@ class HomePage extends StatelessWidget {
             length: 1 + state.length,
             child: Scaffold(
               // backgroundColor: Theme.of(context).colorScheme.background.withOpacity(0.80),
-              backgroundColor: Colors.transparent,
-              appBar: Platform.isWindows ? MyAppBar() : null,
+              backgroundColor: Platform.isWindows ? Colors.transparent : null,
+              appBar: Platform.isWindows ? const MyAppBar() : null,
               extendBody: true,
               extendBodyBehindAppBar: true,
               bottomNavigationBar: Material(

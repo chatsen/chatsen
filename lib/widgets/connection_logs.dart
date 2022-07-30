@@ -15,9 +15,9 @@ class ConnectionLogEntry extends StatelessWidget {
   final Log log;
 
   const ConnectionLogEntry({
-    Key? key,
+    super.key,
     required this.log,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => InkWell(
@@ -44,9 +44,7 @@ class ConnectionLogsDisplay extends StatelessWidget {
   final TextEditingController controller = TextEditingController();
   final TextEditingController channelController = TextEditingController();
 
-  ConnectionLogsDisplay({
-    Key? key,
-  }) : super(key: key);
+  ConnectionLogsDisplay({super.key});
 
   @override
   Widget build(BuildContext context) => BlocBuilder<Logs, List<Log>>(

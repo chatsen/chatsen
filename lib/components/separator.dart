@@ -4,9 +4,9 @@ class Separator extends StatelessWidget {
   final Axis axis;
 
   const Separator({
-    Key? key,
+    super.key,
     this.axis = Axis.horizontal,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => Padding(

@@ -6,9 +6,7 @@ import '../modal/chatsen.dart';
 import '/components/boxlistener.dart';
 
 class AvatarButton extends StatefulWidget {
-  const AvatarButton({
-    Key? key,
-  }) : super(key: key);
+  const AvatarButton({super.key});
 
   @override
   State<AvatarButton> createState() => _AvatarButtonState();

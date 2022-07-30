@@ -6,4 +6,10 @@ part 'application_appearance.g.dart';
 class ApplicationAppearance extends HiveObject {
   @HiveField(0)
   bool compact = false;
+
+  @HiveField(1)
+  String themeMode = 'dark';
+
+  @HiveField(2)
+  bool highContrast = false;
 }

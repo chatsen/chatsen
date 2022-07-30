@@ -19,9 +19,7 @@ import 'twitch_token_input.dart';
 import 'twitch_account.dart';
 
 class ChatsenModal extends StatelessWidget {
-  const ChatsenModal({
-    Key? key,
-  }) : super(key: key);
+  const ChatsenModal({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -154,10 +152,10 @@ class TwitchAccountButton extends StatelessWidget {
   final bool active;
 
   const TwitchAccountButton({
-    Key? key,
+    super.key,
     required this.twitchAccount,
     this.active = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

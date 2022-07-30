@@ -10,8 +10,8 @@ class UserTriggerModal extends StatefulWidget {
   final UserTrigger? userTrigger;
 
   const UserTriggerModal({
-    this.userTrigger,
     super.key,
+    this.userTrigger,
   });
 
   @override

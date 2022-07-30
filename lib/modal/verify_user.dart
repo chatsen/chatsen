@@ -14,10 +14,10 @@ class VerifyUserModal extends StatefulWidget {
   final List<CookieData>? cookies;
 
   const VerifyUserModal({
-    Key? key,
+    super.key,
     required this.tokenData,
     required this.cookies,
-  }) : super(key: key);
+  });
 
   @override
   State<VerifyUserModal> createState() => _VerifyUserModalState();

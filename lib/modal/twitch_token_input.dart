@@ -7,9 +7,7 @@ import 'verify_token.dart';
 import '/components/modal.dart';
 
 class TwitchTokenInputModal extends StatefulWidget {
-  const TwitchTokenInputModal({
-    Key? key,
-  }) : super(key: key);
+  const TwitchTokenInputModal({super.key});
 
   @override
   State<TwitchTokenInputModal> createState() => _TwitchTokenInputModalState();

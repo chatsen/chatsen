@@ -70,6 +70,10 @@ class M3Parser {
             ),
     );
 
+    return patchTheme(baseTheme);
+  }
+
+  static ThemeData patchTheme(ThemeData baseTheme) {
     final newThemeData = baseTheme.copyWith(
       textTheme: baseTheme.textTheme.apply(
         fontFamily: 'ProductSans',
@@ -91,6 +95,14 @@ class M3Parser {
         hintStyle: (baseTheme.inputDecorationTheme.hintStyle ?? const TextStyle()).copyWith(
           color: baseTheme.colorScheme.onPrimaryContainer.withOpacity(0.75),
         ),
+      ),
+      switchTheme: baseTheme.switchTheme.copyWith(
+        thumbColor: MaterialStateProperty.all(baseTheme.colorScheme.primary),
+        trackColor: MaterialStateProperty.all(baseTheme.colorScheme.primaryContainer),
+      ),
+      checkboxTheme: baseTheme.checkboxTheme.copyWith(
+        fillColor: MaterialStateProperty.all(baseTheme.colorScheme.primary),
+        checkColor: MaterialStateProperty.all(baseTheme.colorScheme.primaryContainer),
       ),
       useMaterial3: true,
       splashFactory: InkSparkle.splashFactory,

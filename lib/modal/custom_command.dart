@@ -10,8 +10,8 @@ class CustomCommandModal extends StatefulWidget {
   final CustomCommand? customCommand;
 
   const CustomCommandModal({
-    this.customCommand,
     super.key,
+    this.customCommand,
   });
 
   @override

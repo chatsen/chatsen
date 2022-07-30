@@ -58,7 +58,7 @@ Future<void> main() async {
   await Hive.openBox('UserTriggers');
   await Hive.openBox('CustomCommands');
 
-  await settingsBox.clear();
+  // await settingsBox.clear();
 
   final activeTwitchAccount = twitchAccountsBox.values.firstWhere(
     (element) => accountSettingsBox.get('activeTwitchAccount') == element.tokenData.hash,
@@ -66,6 +66,7 @@ Future<void> main() async {
   );
 
   if (!settingsBox.containsKey('messageAppearance')) await settingsBox.put('messageAppearance', MessageAppearance());
+  if (!settingsBox.containsKey('applicationAppearance')) await settingsBox.put('applicationAppearance', ApplicationAppearance());
 
   runApp(
     MultiProvider(
@@ -78,7 +79,7 @@ Future<void> main() async {
 
   if (Platform.isWindows) {
     doWhenWindowReady(() {
-      const initialSize = Size(240 + 128, 720);
+      const initialSize = Size(240 + 128, 768);
       appWindow.minSize = initialSize;
       appWindow.size = initialSize;
       appWindow.alignment = Alignment.center;

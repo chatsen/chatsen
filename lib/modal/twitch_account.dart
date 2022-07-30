@@ -13,9 +13,9 @@ class TwitchAccountModal extends StatelessWidget {
   final TwitchAccount twitchAccount;
 
   const TwitchAccountModal({
-    Key? key,
+    super.key,
     required this.twitchAccount,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => ListView(
@@ -115,9 +115,9 @@ class TwitchAccountModal extends StatelessWidget {
 
 class ExpirationText extends StatefulWidget {
   const ExpirationText({
-    Key? key,
+    super.key,
     required this.twitchAccount,
-  }) : super(key: key);
+  });
 
   final TwitchAccount twitchAccount;
 

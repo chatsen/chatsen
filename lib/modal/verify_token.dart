@@ -12,10 +12,10 @@ class VerifyTokenModal extends StatefulWidget {
   final List<CookieData>? cookies;
 
   const VerifyTokenModal({
-    Key? key,
+    super.key,
     required this.token,
     required this.cookies,
-  }) : super(key: key);
+  });
 
   @override
   State<VerifyTokenModal> createState() => _VerifyTokenModalState();

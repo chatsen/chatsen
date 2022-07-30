@@ -17,9 +17,7 @@ import '../tmi/client/client.dart';
 import '/widgets/avatar_button.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({
-    Key? key,
-  }) : super(key: key);
+  const HomeTab({super.key});
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -409,9 +407,9 @@ class _HomeTabState extends State<HomeTab> {
 
 class StreamPreviewSmall extends StatelessWidget {
   const StreamPreviewSmall({
-    Key? key,
+    super.key,
     required this.stream,
-  }) : super(key: key);
+  });
 
   final dynamic stream;
 
@@ -518,9 +516,9 @@ class StreamPreviewSmall extends StatelessWidget {
 
 class StreamPreviewLarge extends StatelessWidget {
   const StreamPreviewLarge({
-    Key? key,
+    super.key,
     required this.stream,
-  }) : super(key: key);
+  });
 
   final dynamic stream;
 

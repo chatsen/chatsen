@@ -11,8 +11,8 @@ class MessageTriggerModal extends StatefulWidget {
   final MessageTrigger? messageTrigger;
 
   const MessageTriggerModal({
-    this.messageTrigger,
     super.key,
+    this.messageTrigger,
   });
 
   @override

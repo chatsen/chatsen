@@ -8,9 +8,7 @@ import 'components/modal_header.dart';
 import 'verify_token.dart';
 
 class OAuthWebViewModal extends StatefulWidget {
-  const OAuthWebViewModal({
-    Key? key,
-  }) : super(key: key);
+  const OAuthWebViewModal({super.key});
 
   @override
   State<OAuthWebViewModal> createState() => _OAuthWebViewModalState();

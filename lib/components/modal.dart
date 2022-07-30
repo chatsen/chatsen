@@ -5,10 +5,10 @@ class Modal extends StatelessWidget {
   final Clip clipBehavior;
 
   const Modal({
-    Key? key,
+    super.key,
     required this.child,
     this.clipBehavior = Clip.antiAlias,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

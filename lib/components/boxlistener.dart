@@ -8,11 +8,11 @@ class BoxListener<T> extends StatefulWidget {
   final List<dynamic>? keys;
 
   const BoxListener({
-    Key? key,
+    super.key,
     required this.box,
     required this.builder,
     this.keys,
-  }) : super(key: key);
+  });
 
   @override
   State<BoxListener> createState() => _BoxListenerState();
