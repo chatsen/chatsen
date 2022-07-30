@@ -29,15 +29,18 @@ class MessageModal extends StatelessWidget {
           Tile(
             title: 'Copy text',
             prefix: const Icon(Icons.copy_rounded),
-            onTap: () {
-              Clipboard.setData(ClipboardData(text: message.body));
+            onTap: () async {
               Navigator.of(context).pop();
+              await Clipboard.setData(ClipboardData(text: message.body));
             },
           ),
           Tile(
             title: 'Delete message',
             prefix: const Icon(Icons.delete_outline_outlined),
-            onTap: () {},
+            onTap: () async {
+              Navigator.of(context).pop();
+              await message.channel?.send('/delete ${message.id}');
+            },
           ),
           Tile(
             title: 'Mention',
@@ -47,7 +50,10 @@ class MessageModal extends StatelessWidget {
           Tile(
             title: 'Copy message ID',
             prefix: const Icon(Icons.medical_information_outlined),
-            onTap: () {},
+            onTap: () async {
+              Navigator.of(context).pop();
+              await Clipboard.setData(ClipboardData(text: message.id));
+            },
           ),
         ],
       );
