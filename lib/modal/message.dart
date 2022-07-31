@@ -28,10 +28,15 @@ class MessageModal extends StatelessWidget {
           ),
           Tile(
             title: 'Copy text',
+            subtitle: 'Hold to copy message text with username',
             prefix: const Icon(Icons.copy_rounded),
             onTap: () async {
               Navigator.of(context).pop();
               await Clipboard.setData(ClipboardData(text: message.body));
+            },
+            onLongPress: () async {
+              Navigator.of(context).pop();
+              await Clipboard.setData(ClipboardData(text: '${message.dateTime.hour}:${message.dateTime.minute.toString().padLeft(2, '0')} ${message.user.displayName}: ${message.body}'));
             },
           ),
           Tile(

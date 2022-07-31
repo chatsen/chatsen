@@ -36,21 +36,23 @@ class Tile extends StatelessWidget {
                 child: prefix,
               ),
               SizedBox(width: 16.0 + (primary ? 0.0 : 2.0)),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title),
-                  if (subtitle != null)
-                    Text(
-                      subtitle!,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onBackground.withOpacity(0.75),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title),
+                    if (subtitle != null)
+                      Text(
+                        subtitle!,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.75),
+                        ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
-              const Spacer(),
+              // const Spacer(),
               SizedBox(width: 16.0 + (primary ? 0.0 : 2.0)),
               SizedBox(
                 width: primary ? 40.0 : 36.0,

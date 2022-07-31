@@ -99,9 +99,17 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
     super.onChange(change);
   }
 
-  Future<void> send(String message) async {
+  Future<void> send(
+    String message, {
+    Map<String, String>? tags,
+  }) async {
     if (state is! ChannelStateWithConnection) {
       return;
+    }
+
+    var ircMessageToSend = 'PRIVMSG $name :$message';
+    if (tags != null) {
+      ircMessageToSend = '@${tags.entries.map((entry) => '${entry.key}=${entry.value}').join(';')} $ircMessageToSend';
     }
 
     final replacement = String.fromCharCodes(Runes('\u{e0002}'));
@@ -109,7 +117,7 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
     message = message.replaceAll(replacement, zeroWidthJoiner);
 
     final realState = state as ChannelStateWithConnection;
-    realState.transmitter.send('PRIVMSG $name :$message');
+    realState.transmitter.send(ircMessageToSend);
   }
 
   Future<void> refresh() async {

@@ -14,7 +14,6 @@ import 'package:flutter/material.dart';
 
 import '../../../data/emote.dart';
 import '../../../providers/twitch.dart';
-import '../channel.dart';
 import '../channel_message.dart';
 import '/irc/message.dart' as irc;
 import 'channel_message_embeds.dart';
@@ -32,21 +31,46 @@ class TwitchEmoteInstance {
   });
 }
 
+class ChannelMessageChatReplyInfo {
+  String replyParentDisplayName; // SupDos
+  String replyParentMsgBody; // peepoLeave
+  String replyParentMsgId; // a11f6f0d-e4ad-4f61-a5b8-58a848ef2f7e
+  String replyParentUserId; // 43983992
+  String replyParentUserLogin; // supdos
+
+  ChannelMessageChatReplyInfo({
+    required this.replyParentDisplayName,
+    required this.replyParentMsgBody,
+    required this.replyParentMsgId,
+    required this.replyParentUserId,
+    required this.replyParentUserLogin,
+  });
+}
+
+class ChannelMessageChatSubInfo {
+  String systemMsg;
+  bool msgParamWasGifted;
+
+  ChannelMessageChatSubInfo({
+    required this.systemMsg,
+    required this.msgParamWasGifted,
+  });
+}
+
 class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, ChannelMessageEmbeds, ChannelMessageId {
   irc.Message message;
   bool action = false;
   List<dynamic> splits = [];
   List<Badge> badges = [];
   String body = '';
+  ChannelMessageChatReplyInfo? replyInfo;
+  ChannelMessageChatSubInfo? subInfo;
 
   ChannelMessageChat({
     required this.message,
-    required DateTime dateTime,
-    Channel? channel,
-  }) : super(
-          dateTime: dateTime,
-          channel: channel,
-        ) {
+    required super.dateTime,
+    super.channel,
+  }) {
     build();
   }
 
@@ -57,6 +81,27 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
 
     // TODO: Ensure there is always an id at this stage?
     id = message.tags['id']!;
+
+    try {
+      replyInfo = ChannelMessageChatReplyInfo(
+        replyParentDisplayName: message.tags['reply-parent-display-name']!,
+        replyParentMsgBody: message.tags['reply-parent-msg-body']!,
+        replyParentMsgId: message.tags['reply-parent-msg-id']!,
+        replyParentUserId: message.tags['reply-parent-user-id']!,
+        replyParentUserLogin: message.tags['reply-parent-user-login']!,
+      );
+    } catch (e) {
+      // ignore
+    }
+
+    try {
+      subInfo = ChannelMessageChatSubInfo(
+        systemMsg: message.tags['system-msg']!,
+        msgParamWasGifted: message.tags['msg-param-was-gifted']! != 'false',
+      );
+    } catch (e) {
+      // ignore
+    }
 
     user = User(
       login: message.prefix!.split('!').first,

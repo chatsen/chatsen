@@ -1,5 +1,4 @@
 import 'package:chatsen/data/settings/application_appearance.dart';
-import 'package:chatsen/widgets/avatar_button.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

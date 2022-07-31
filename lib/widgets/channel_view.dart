@@ -36,6 +36,7 @@ class _ChannelViewState extends State<ChannelView> {
         children: [
           Expanded(
             child: ChatView(
+              padding: MediaQuery.of(context).viewPadding,
               channel: widget.channel,
             ),
             // child: Container(),
@@ -175,7 +176,9 @@ class _ChannelViewState extends State<ChannelView> {
                         // const Separator(axis: Axis.vertical),
                         InkWell(
                           onTap: () {
-                            widget.channel.send(textEditingController.text);
+                            // TODO: Implement replies here
+                            // TODO: Implement reactions here
+                            widget.channel.send(textEditingController.text, tags: {'reply-parent-msg-id': '00000000-0000-0000-0000-000000000000'});
                             textEditingController.clear();
                           },
                           onLongPress: () {

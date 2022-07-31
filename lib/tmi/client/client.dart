@@ -13,6 +13,8 @@ import '../../data/emote.dart';
 import '../../providers/badge_provider.dart';
 import '../../providers/chatsen.dart';
 import '../../providers/emote_provider.dart';
+import '../channel/messages/channel_message_ban.dart';
+import '../channel/messages/channel_message_notice.dart';
 import '../emotes.dart';
 import '../user_badges.dart';
 import '/providers/betterttv.dart';
@@ -146,7 +148,10 @@ class Client {
           }
         }
         break;
+      case 'USERNOTICE':
       case 'PRIVMSG':
+        if (event.command == 'USERNOTICE') log(event.raw);
+
         final channelName = event.parameters[0];
         final channel = channels.state.firstWhereOrNull((channel) => channel.name == channelName);
         if (channel == null) {
@@ -170,6 +175,39 @@ class Client {
 
         channel.id = event.tags['room-id'];
         await channel.refresh();
+        break;
+      case 'CLEARCHAT':
+        final channelName = event.parameters[0];
+        final channel = channels.state.firstWhereOrNull((channel) => channel.name == channelName);
+        if (channel == null) {
+          break;
+        }
+
+        channel.channelMessages.add(
+          ChannelMessageBan(
+            message: event,
+            dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(event.tags['tmi-sent-ts'] ?? 'null') ?? DateTime.now().millisecondsSinceEpoch),
+            channel: channel,
+          ),
+        );
+        break;
+      case 'NOTICE':
+        final channelName = event.parameters[0];
+        final channel = channels.state.firstWhereOrNull((channel) => channel.name == channelName);
+        if (channel == null) {
+          break;
+        }
+
+        channel.channelMessages.add(
+          ChannelMessageNotice(
+            message: event,
+            dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(event.tags['tmi-sent-ts'] ?? 'null') ?? DateTime.now().millisecondsSinceEpoch),
+            channel: channel,
+          ),
+        );
+        break;
+      default:
+        log(event.raw);
         break;
     }
   }

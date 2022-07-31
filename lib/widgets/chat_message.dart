@@ -1,53 +1,29 @@
 import 'package:chatsen/data/inline_url.dart';
 import 'package:chatsen/modal/user.dart';
 import 'package:chatsen/tmi/channel/messages/channel_message_embeds.dart';
-import 'package:chatsen/tmi/channel/messages/embeds/video_embed.dart';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:video_player/video_player.dart';
-// ignore: implementation_imports
-import 'package:chewie/src/material/material_desktop_controls.dart';
-import 'package:filesize/filesize.dart';
 
 import '../components/modal.dart';
+import '../components/surface.dart';
 import '../data/emote.dart';
 import '../data/settings/message_appearance.dart';
 import '../modal/message.dart';
+import '../tmi/channel/messages/channel_message_ban.dart';
+import '../tmi/channel/messages/channel_message_notice.dart';
 import '../tmi/channel/messages/embeds/file_embed.dart';
 import '../tmi/channel/messages/embeds/image_embed.dart';
 import '/tmi/channel/channel_message.dart';
 import '/tmi/channel/messages/channel_message_chat.dart';
-
-class SizeBuilder extends StatelessWidget {
-  final ValueNotifier<Rect> notifier = ValueNotifier(const Rect.fromLTWH(0, 0, 0, 0));
-  final Widget Function(BuildContext context, Rect paintBounds, Widget? child) builder;
-  final Widget? child;
-
-  SizeBuilder({
-    super.key,
-    required this.builder,
-    this.child,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        notifier.value = (context.findRenderObject() as RenderBox).paintBounds;
-      },
-    );
-    return ValueListenableBuilder(
-      valueListenable: notifier,
-      builder: builder,
-      child: child,
-    );
-  }
-}
+import 'chat/chat_ban_chip.dart';
+import 'chat/chat_notice_chip.dart';
+import 'chat/reply_painter.dart';
+import 'embeds/embedded_file.dart';
+import 'embeds/embedded_image.dart';
 
 // ignore: must_be_immutable
 class ChatMessage extends StatelessWidget {
@@ -61,95 +37,260 @@ class ChatMessage extends StatelessWidget {
     messageAppearance = Hive.box('Settings').get('messageAppearance');
   }
 
-  // Size _textSize(String text, TextStyle style) {
-  //   final TextPainter textPainter = TextPainter(text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)..layout(minWidth: 0, maxWidth: double.infinity);
-  //   return textPainter.size;
-  // }
-
   @override
-  Widget build(BuildContext context) => message is ChannelMessageChat
-      ? InkWell(
-          onTap: () async {},
-          onLongPress: () => Modal.show(
-            context: context,
-            child: MessageModal(
-              message: message as ChannelMessageChat,
+  Widget build(BuildContext context) => Builder(
+        builder: (context) {
+          if (message is ChannelMessageChat) {
+            final chatMessage = message as ChannelMessageChat;
+            if (chatMessage.subInfo != null) {
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (messageAppearance.compact ? 1.0 : 2.0)),
+                child: Wrap(
+                  alignment: WrapAlignment.start,
+                  children: [
+                    Surface(
+                      type: SurfaceType.tertiary,
+                      borderRadius: BorderRadius.circular(18.0 * messageAppearance.scale),
+                      onTap: () async {},
+                      onLongPress: () => Modal.show(
+                        context: context,
+                        child: MessageModal(message: chatMessage),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.0 * messageAppearance.scale, vertical: 8.0 * messageAppearance.scale),
+                        child: Wrap(
+                          alignment: WrapAlignment.start,
+                          children: [
+                            Text.rich(
+                              TextSpan(
+                                children: [
+                                  WidgetSpan(child: Icon(chatMessage.subInfo!.msgParamWasGifted ? Icons.card_giftcard_outlined : Icons.star_border_outlined, size: Theme.of(context).textTheme.titleLarge!.fontSize! * messageAppearance.scale)),
+                                  WidgetSpan(child: SizedBox(height: 8.0 * messageAppearance.scale, width: 8.0 * messageAppearance.scale)),
+                                  TextSpan(text: '${chatMessage.subInfo?.systemMsg.replaceAll('\\s', ' ')}'),
+                                ],
+                              ),
+                              style: TextStyle(fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize! * messageAppearance.scale),
+                            ),
+                            buildMessageContent(context, chatMessage, messageAppearance),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            return InkWell(
+              onTap: () async {},
+              onLongPress: () => Modal.show(
+                context: context,
+                child: MessageModal(message: chatMessage),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (messageAppearance.compact ? 1.0 : 2.0)),
+                child: buildMessageContent(context, chatMessage, messageAppearance),
+              ),
+            );
+          } else if (message is ChannelMessageBan) {
+            return ChatBanChip(messageAppearance: messageAppearance, message: message as ChannelMessageBan);
+          } else if (message is ChannelMessageNotice) {
+            return ChatNoticeChip(messageAppearance: messageAppearance, message: message as ChannelMessageNotice);
+          }
+          return Text('Unknown message type: ${message.runtimeType}');
+        },
+      );
+
+  static Widget buildMessageContent(BuildContext context, ChannelMessageChat message, MessageAppearance messageAppearance) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (message.replyInfo != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4.0),
+            child: Row(
+              children: [
+                if (messageAppearance.timestamps) SizedBox(width: 8.0 * messageAppearance.scale),
+                CustomPaint(
+                  painter: ReplyPainter(
+                    color: Theme.of(context).colorScheme.secondary,
+                    width: 2.0 * messageAppearance.scale,
+                  ),
+                  child: SizedBox(
+                    height: 15.0 * messageAppearance.scale,
+                    width: 30.0 * messageAppearance.scale,
+                  ),
+                ),
+                SizedBox(width: 8.0 * messageAppearance.scale),
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(text: '@${message.replyInfo?.replyParentDisplayName}: ', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        TextSpan(text: '${message.replyInfo?.replyParentMsgBody.replaceAll('\\s', ' ')}'),
+                      ],
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (messageAppearance.compact ? 1.0 : 2.0)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        Text.rich(
+          TextSpan(
+            children: [
+              if (messageAppearance.timestamps)
+                TextSpan(
+                  text: '${message.dateTime.hour}:${message.dateTime.minute.toString().padLeft(2, '0')}  ',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                  ),
+                ),
+              for (final badge in message.badges)
+                WidgetSpan(
+                  child: Tooltip(
+                    message: badge.name,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 4.0 * messageAppearance.scale),
+                      child: badge.mipmap.last.endsWith('.svg')
+                          ? SvgPicture.network(
+                              badge.mipmap.last,
+                              height: 20.0 * messageAppearance.scale,
+                            )
+                          : Image.network(
+                              badge.mipmap.last,
+                              height: 20.0 * messageAppearance.scale,
+                              // scale: (1.0 / messageAppearance.scale) * 4.0,
+                            ),
+                    ),
+                  ),
+                ),
+              TextSpan(
+                text: '${message.user.displayName}: ',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                  color: message.user.color ?? Theme.of(context).colorScheme.primary,
+                ),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () async {
+                    Modal.show(
+                      context: context,
+                      child: UserModal(
+                        login: message.message.prefix!.split('!').first,
+                        channel: message.channel,
+                      ),
+                    );
+                  },
+              ),
+              for (final split in message.splits) ...[
+                if (split is String)
+                  TextSpan(
+                    text: '$split ',
+                    style: TextStyle(
+                      fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                    ),
+                  ),
+                if (split is Emote)
+                  WidgetSpan(
+                    child: Tooltip(
+                      message: split.name,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 4.0) * messageAppearance.scale,
+                        child: Image.network(
+                          split.mipmap.last,
+                          scale: (1.0 / messageAppearance.scale) * 4.0,
+                          height: split.provider.name == 'Emoji' ? 24.0 : null,
+                        ),
+                      ),
+                    ),
+                  ),
+                if (split is InlineUrl)
+                  TextSpan(
+                    text: '${split.url} ',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.blue,
+                      fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => launchUrl(
+                            Uri.parse(split.url),
+                            mode: LaunchMode.externalApplication,
+                          ),
+                  ),
+              ],
+            ],
+          ),
+        ),
+        if (message is ChannelMessageEmbeds)
+          BlocBuilder<ChannelMessageEmbedsCubit, List<dynamic>>(
+            bloc: message.embeds,
+            builder: (BuildContext context, state) => Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text.rich(
-                  TextSpan(
-                    children: [
-                      if (messageAppearance.timestamps)
-                        TextSpan(
-                          text: '${message.dateTime.hour}:${message.dateTime.minute.toString().padLeft(2, '0')}  ',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
-                          ),
-                        ),
-                      for (final badge in (message as ChannelMessageChat).badges)
-                        WidgetSpan(
-                          child: Tooltip(
-                            message: badge.name,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 4.0 * messageAppearance.scale),
-                              child: badge.mipmap.last.endsWith('.svg')
-                                  ? SvgPicture.network(
-                                      badge.mipmap.last,
-                                      height: 20.0 * messageAppearance.scale,
-                                    )
-                                  : Image.network(
-                                      badge.mipmap.last,
-                                      height: 20.0 * messageAppearance.scale,
-                                      // scale: (1.0 / messageAppearance.scale) * 4.0,
-                                    ),
-                            ),
-                          ),
-                        ),
-                      // WidgetSpan(
-                      //   child: Builder(builder: (context) {
-                      //     final text = Text(
-                      //       '${(message as ChannelMessageChat).user.displayName}: ',
-                      //       style: TextStyle(
-                      //         fontWeight: FontWeight.bold,
-                      //         fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
-                      //         color: (message as ChannelMessageChat).user.color ?? Theme.of(context).colorScheme.primary,
-                      //       ),
-                      //     );
+                if (state.isNotEmpty) SizedBox(height: 8.0 * messageAppearance.scale),
+                for (final embed in state) ...[
+                  if (embed is ImageEmbed) EmbeddedImage(embed: embed, scale: messageAppearance.scale),
+                  // if (embed is VideoEmbed) EmbeddedVideo(embed: embed, scale: messageAppearance.scale),
+                  if (embed is FileEmbed) EmbeddedFile(embed: embed, scale: messageAppearance.scale),
+                  SizedBox(height: 8.0 * messageAppearance.scale),
+                ],
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+}
 
-                      //     return true || (message as ChannelMessageChat).user.id == '100221397'
-                      //         ? ShaderMask(
-                      //             blendMode: BlendMode.srcIn,
-                      //             shaderCallback: (Rect bounds) {
-                      //               return const LinearGradient(
-                      //                 transform: GradientRotation(45.0 * pi / 180.0),
-                      //                 colors: <Color>[
-                      //                   Color.fromARGB(255, 147, 197, 253),
-                      //                   Color.fromARGB(255, 187, 247, 208),
-                      //                   Color.fromARGB(255, 253, 224, 71),
-                      //                 ],
-                      //               ).createShader(bounds);
-                      //             },
-                      //             child: text,
-                      //           )
-                      //         : text;
-                      //   }),
-                      // ),
-                      TextSpan(
-                        text: '${(message as ChannelMessageChat).user.displayName}: ',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
-                          color: (message as ChannelMessageChat).user.color ?? Theme.of(context).colorScheme.primary,
-                          // foreground: Paint()
+/*
+  Size _textSize(String text, TextStyle style) {
+    final TextPainter textPainter = TextPainter(text: TextSpan(text: text, style: style), maxLines: 1, textDirection: TextDirection.ltr)..layout(minWidth: 0, maxWidth: double.infinity);
+    return textPainter.size;
+  }
+
+WidgetSpan(
+                        child: Builder(builder: (context) {
+                          final text = Text(
+                            '${(message as ChannelMessageChat).user.displayName}: ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
+                              color: (message as ChannelMessageChat).user.color ?? Theme.of(context).colorScheme.primary,
+                            ),
+                          );
+
+                          return true || (message as ChannelMessageChat).user.id == '100221397'
+                              ? ShaderMask(
+                                  blendMode: BlendMode.srcIn,
+                                  shaderCallback: (Rect bounds) {
+                                    return const LinearGradient(
+                                      transform: GradientRotation(45.0 * 3.1415 / 180.0),
+                                      colors: <Color>[
+                                        Color.fromARGB(255, 147, 197, 253),
+                                        Color.fromARGB(255, 187, 247, 208),
+                                        Color.fromARGB(255, 253, 224, 71),
+                                      ],
+                                    ).createShader(bounds);
+                                  },
+                                  child: text,
+                                )
+                              : text;
+                        }),
+                      ),
+
+
+                                                // foreground: Paint()
                           //   ..shader = const LinearGradient(
-                          //     transform: GradientRotation(180.0 * pi / 180.0),
+                          //     transform: GradientRotation(180.0 * 3.1415 / 180.0),
                           //     begin: Alignment.topCenter,
                           //     end: Alignment.bottomCenter,
                           //     colors: <Color>[
@@ -173,231 +314,4 @@ class ChatMessage extends StatelessWidget {
                           //           fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
                           //         )).height,
                           //   )),
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () async {
-                            Modal.show(
-                              context: context,
-                              child: UserModal(
-                                login: (message as ChannelMessageChat).message.prefix!.split('!').first,
-                                channel: message.channel,
-                              ),
-                            );
-                          },
-                      ),
-                      for (final split in (message as ChannelMessageChat).splits) ...[
-                        if (split is String)
-                          TextSpan(
-                            text: '$split ',
-                            style: TextStyle(
-                              fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
-                            ),
-                          ),
-                        if (split is Emote)
-                          WidgetSpan(
-                            child: Tooltip(
-                              message: split.name,
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 4.0) * messageAppearance.scale,
-                                child: Image.network(
-                                  split.mipmap.last,
-                                  scale: (1.0 / messageAppearance.scale) * 4.0,
-                                  height: split.provider.name == 'Emoji' ? 24.0 : null,
-                                ),
-                              ),
-                            ),
-                          ),
-                        if (split is InlineUrl)
-                          TextSpan(
-                            text: '${split.url} ',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline,
-                              decorationColor: Colors.blue,
-                              fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * messageAppearance.scale,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => launchUrl(
-                                    Uri.parse(split.url),
-                                    mode: LaunchMode.externalApplication,
-                                  ),
-                          ),
-                      ],
-                    ],
-                  ),
-                ),
-                if (message is ChannelMessageEmbeds)
-                  BlocBuilder<ChannelMessageEmbedsCubit, List<dynamic>>(
-                    bloc: (message as ChannelMessageEmbeds).embeds,
-                    builder: (BuildContext context, state) => Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        if (state.isNotEmpty) SizedBox(height: 8.0 * messageAppearance.scale),
-                        for (final embed in state) ...[
-                          if (embed is ImageEmbed) EmbeddedImage(embed: embed, scale: messageAppearance.scale),
-                          // if (embed is VideoEmbed) EmbeddedVideo(embed: embed, scale: messageAppearance.scale),
-                          if (embed is FileEmbed) EmbeddedFile(embed: embed, scale: messageAppearance.scale),
-                          SizedBox(height: 8.0 * messageAppearance.scale),
-                        ],
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        )
-      : Container();
-}
-
-class EmbeddedImage extends StatelessWidget {
-  final ImageEmbed embed;
-  final double scale;
-
-  const EmbeddedImage({
-    super.key,
-    required this.embed,
-    this.scale = 1,
-  });
-
-  @override
-  Widget build(BuildContext context) => ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Stack(
-          children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 128.0 * 2.5) * scale,
-              child: Image.network(
-                embed.url,
-                filterQuality: FilterQuality.high,
-              ),
-            ),
-            Positioned.fill(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () => launchUrl(
-                    Uri.parse(embed.url),
-                    mode: LaunchMode.externalApplication,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-}
-
-class EmbeddedFile extends StatelessWidget {
-  final FileEmbed embed;
-  final double scale;
-
-  const EmbeddedFile({
-    super.key,
-    required this.embed,
-    this.scale = 1,
-  });
-
-  @override
-  Widget build(BuildContext context) => ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 128.0 * 2.5) * scale,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0 * scale),
-            color: Colors.black,
-            border: Border.all(color: Colors.grey[300]!, width: 1.0 * scale),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0) * scale,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.file_copy,
-                  size: 32.0 * scale,
-                ),
-                SizedBox(width: 8.0 * scale),
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        embed.name,
-                        style: TextStyle(
-                          fontSize: (Theme.of(context).textTheme.bodyLarge?.fontSize ?? 14.0) * scale,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(filesize(embed.size)),
-                    ],
-                  ),
-                ),
-                SizedBox(width: 8.0 * scale),
-                Icon(
-                  Icons.download_outlined,
-                  size: 32.0 * scale,
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-}
-
-class EmbeddedVideo extends StatefulWidget {
-  final VideoEmbed embed;
-  final double scale;
-
-  const EmbeddedVideo({
-    super.key,
-    required this.embed,
-    this.scale = 1,
-  });
-
-  @override
-  State<EmbeddedVideo> createState() => _EmbeddedVideoState();
-}
-
-class _EmbeddedVideoState extends State<EmbeddedVideo> {
-  late VideoPlayerController controller;
-
-  @override
-  void initState() {
-    controller = VideoPlayerController.network(widget.embed.url);
-    controller.initialize().then((value) => setState(() {}));
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => MediaQuery.removePadding(
-        context: context,
-        removeLeft: true,
-        removeTop: true,
-        removeRight: true,
-        removeBottom: true,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: Material(
-            color: Color.alphaBlend(Theme.of(context).colorScheme.onSurface.withOpacity(0.075), Theme.of(context).colorScheme.surface),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 128.0 * 2.5) * widget.scale,
-              child: AspectRatio(
-                aspectRatio: 16.0 / 9.0,
-                child: Chewie(
-                  controller: ChewieController(
-                    aspectRatio: 16.0 / 9.0,
-                    customControls: const MaterialDesktopControls(),
-                    videoPlayerController: controller,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-}
+*/

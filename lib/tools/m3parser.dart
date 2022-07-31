@@ -97,8 +97,8 @@ class M3Parser {
         ),
       ),
       switchTheme: baseTheme.switchTheme.copyWith(
-        thumbColor: MaterialStateProperty.all(baseTheme.colorScheme.primary),
         trackColor: MaterialStateProperty.all(baseTheme.colorScheme.primaryContainer),
+        thumbColor: MaterialStateProperty.all(baseTheme.colorScheme.primaryContainer),
       ),
       checkboxTheme: baseTheme.checkboxTheme.copyWith(
         fillColor: MaterialStateProperty.all(baseTheme.colorScheme.primary),
