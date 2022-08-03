@@ -519,13 +519,11 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                               extendBody: true,
                               extendBodyBehindAppBar: true,
                               drawerScrimColor: Colors.transparent,
-                              endDrawer: WidgetBlur(
-                                child: Ink(
-                                  width: 320.0,
-                                  color: Colors.transparent,
-                                  // color: Theme.of(context).colorScheme.background.withAlpha(196),
-                                  child: scaffold,
-                                ),
+                              endDrawer: Ink(
+                                width: 320.0,
+                                color: Colors.transparent,
+                                // color: Theme.of(context).colorScheme.background.withAlpha(196),
+                                child: scaffold,
                               ),
                               body: Builder(
                                 builder: (context) => Stack(
