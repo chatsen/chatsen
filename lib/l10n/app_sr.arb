@@ -1,65 +1,65 @@
 {
     "chatsen": "Chatsen",
-    "loggedInVia": "Пријављен преко {provider}",
+    "loggedInVia": "Prijavljen preko {provider}",
     "@loggedInVia": {
         "placeholders": {
             "provider": {}
         }
     },
-    "termsOfService": "Услови Коришћена",
-    "privacyPolicy": "Правила о Приватности",
-    "settings": "Подешавања",
-    "expiresNever": "Никад не истиче",
-    "expiresIn": "Истиче за {time}",
+    "termsOfService": "Uslovi Korišćenja",
+    "privacyPolicy": "Pravila Privatnosti",
+    "settings": "Podešavanja",
+    "expiresNever": "Nikad ne ističe",
+    "expiresIn": "Ističe za {time}",
     "@expiresIn": {
         "placeholders": {
             "time": {}
         }
     },
-    "close": "Затвори",
-    "add": "Додај",
-    "cancel": "Откажи",
-    "tokenInput": "Унос токена",
-    "account": "Налог",
-    "refreshAccount": "Освежи налог",
-    "removeAccount": "Уклони налог",
-    "addAnotherAccount": "Додај нови налог",
-    "verifiedUserData": "Верификовани кориснички подаци!",
-    "loggedInAs": "Улогован/а као {user}",
+    "close": "Zatvori",
+    "add": "Dodaj",
+    "cancel": "Otkaži",
+    "tokenInput": "Unos tokena",
+    "account": "Nalog",
+    "refreshAccount": "Osveži nalog",
+    "removeAccount": "Ukloni nalog",
+    "addAnotherAccount": "Dodaj novi nalog",
+    "verifiedUserData": "Verifikovani korisnički podaci!",
+    "loggedInAs": "Prijavljen/a kao {user}",
     "@loggedInAs": {
         "placeholders": {
             "user": {}
         }
     },
-    "anErrorHasOccuredWhenVerifyingUserData": "Грешка се појавила током верификације корисничких података:",
-    "verifyingUserData": "Верификовање корисничких података...",
-    "verifiedUserToken": "Верификован кориснички токен!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "Грешка се појавила током верификовања корисничког токена:",
-    "verifyingUserToken": "Верификовање корисничког токена...",
-    "searchForChannels": "Потражи канале",
-    "recommendedChannels": "Препоручени канали",
-    "popularChannels": "Популарни канали",
-    "channel": "Канал",
-    "leaveChannel": "Напусти канал",
-    "joinUser": "Придружи {user}",
+    "anErrorHasOccuredWhenVerifyingUserData": "Greška se pojavila tokom verifikacije korisničkih podataka:",
+    "verifyingUserData": "Verifikovanje korisničkih podataka...",
+    "verifiedUserToken": "Verifikovan korisnički token!",
+    "anErrorHasOccuredWhenVerifyingUserToken": "Greška se pojavila tokom verifikovanja korisničkog tokena:",
+    "verifyingUserToken": "Verifikovanje korisničkog tokena...",
+    "searchForChannels": "Potraži kanale",
+    "recommendedChannels": "Preporučeni kanali",
+    "popularChannels": "Popularni kanali",
+    "channel": "Kanal",
+    "leaveChannel": "Napusti kanal",
+    "joinUser": "Pridruži se {user}",
     "@joinUser": {
         "placeholders": {
             "user": {}
         }
     },
-    "spellCheckFailed": "Правописна грешка! Да ли сте мислили да потражите {username}?",
+    "spellCheckFailed": "Pravopis neispravan! Da li ste misli da potražite {username}?",
     "@spellCheckFailed": {
         "placeholders": {
             "username": {}
         }
     },
-    "joinChannelName": "Придружи се {channel}",
+    "joinChannelName": "Pridruži se {channel}",
     "@joinChannelName": {
         "placeholders": {
             "channel": {}
         }
     },
-    "sendMessageIn": "Пошаљи поруку у {channel}",
+    "sendMessageIn": "Pošalji poruku u {channel}",
     "@sendMessageIn": {
         "placeholders": {
             "channel": {}
