@@ -18,6 +18,12 @@
 !/pubspec.yaml
 !/l10n.yaml
 
+# Fastlane
+!/ios/fastlane/Appfile
+!/ios/fastlane/Fastfile
+!/ios/fastlane/Matchfile
+!/ios/Gemfile
+
 # GitHub CI/CD workflow files
 !/.github/workflows/**/*.yml
 
