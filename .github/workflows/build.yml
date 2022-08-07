@@ -44,14 +44,15 @@ jobs:
           echo "sed=gsed" >> $GITHUB_ENV
 
       - name: Checking out ${{env.APP_TITLE}} source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: ${{env.APP_PATH}}
 
       - name: Checking out Flutter
-        uses: chatsen/flutter-action@master
+        uses: subosito/flutter-action@v2
         with:
-          channel: "master"
+          channel: 'master'
+          architecture: x64
 
       - name: Check for flutter updates
         run: flutter upgrade
