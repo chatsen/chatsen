@@ -7,6 +7,8 @@
 
 # Source files
 !/lib/**/*.dart
+/lib/generated_plugin_registrant.dart
+/lib/**/*.g.dart
 
 # Localization files
 !/lib/l10n/**/*.arb
