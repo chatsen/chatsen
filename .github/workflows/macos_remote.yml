@@ -22,6 +22,8 @@ jobs:
           brew install code-server
           brew install ngrok
           brew install tmux
+          brew install flutter
+          brew install fastlane
 
       - name: Configure and start code-server
         run: |
