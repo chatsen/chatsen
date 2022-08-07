@@ -24,6 +24,9 @@ jobs:
           brew install tmux
           brew install flutter
           brew install fastlane
+          flutter channel master
+          flutter upgrade
+          cd ~/work/chatsen/chatsen && flutter create --org com.chatsen . && rm -rf test && flutter pub run build_runner build
 
       - name: Configure and start code-server
         run: |
