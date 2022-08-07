@@ -1,3 +1,5 @@
+name: macOS Remote
+
 on:
   workflow_dispatch:
 
