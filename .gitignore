@@ -18,6 +18,9 @@
 !/pubspec.yaml
 !/l10n.yaml
 
+# GitHub CI/CD workflow files
+!/.github/workflows/**/*.yml
+
 # Repository related files
 !/.gitignore
 !/README.md

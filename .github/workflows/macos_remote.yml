@@ -1,0 +1,32 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  macos_remote:
+    name: macOS Remote
+    runs-on: macos-latest
+    steps:
+      - name: Checking out repository
+        uses: actions/checkout@v2
+
+      - name: Checking out Flutter
+        uses: chatsen/flutter-action@master
+        with:
+          channel: "master"
+
+      - name: Install dependencies
+        run: |
+          brew install code-server
+          brew install ngrok
+          brew install tmux
+
+      - name: Configure and start code-server
+        run: |
+          mkdir ~/.config/code-server
+          echo -e "bind-addr: 0.0.0.0:${{secrets.PORT}}\nauth: password\npassword: ${{secrets.CODE_SERVER_PASSWORD}}\ncert: false" > ~/.config/code-server/config.yaml
+          brew services restart code-server
+
+      - name: Configure and start ngrok
+        run: |
+          ngrok config add-authtoken ${{secrets.NGROK_AUTH_TOKEN}}
+          ngrok --log stdout http ${{secrets.PORT}}

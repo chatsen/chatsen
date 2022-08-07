@@ -1,0 +1,59 @@
+on: [push, pull_request]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ["Android", "Windows", "Linux", "macOS", "iOS"]
+        include:
+          - target: Android
+            os: ubuntu-latest
+          - target: Windows
+            os: windows-latest
+          - target: Linux
+            os: ubuntu-latest
+          - target: macOS
+            os: macos-latest
+          - target: iOS
+            os: macos-latest
+
+    name: ${{matrix.target}}
+    runs-on: ${{matrix.os}}
+    env:
+      APP_TITLE: Chatsen
+      APP_NAME: chatsen
+      APP_PATH: chatsen
+      APP_ORG: com.chatsen
+
+    steps:
+      - name: Set up sed
+        if: matrix.os != 'macos-latest'
+        run: echo "sed=sed" >> $GITHUB_ENV
+
+      - name: Set up sed for macOS
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install gnu-sed
+          echo "sed=gsed" >> $GITHUB_ENV
+
+      - name: Checking out ${{env.APP_TITLE}} source code
+        uses: actions/checkout@v2
+        with:
+          path: ${{env.APP_PATH}}
+
+      - name: Checking out Flutter
+        uses: chatsen/flutter-action@master
+        with:
+          channel: "master"
+
+      - name: Check for flutter updates
+        run: flutter upgrade
+
+      # - name: Cleaning up the test directory
+      #   working-directory: ${{env.APP_PATH}}
+      #   run: rm -rf test
