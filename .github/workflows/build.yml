@@ -57,6 +57,6 @@ jobs:
       - name: Check for flutter updates
         run: flutter upgrade
 
-      # - name: Cleaning up the test directory
-      #   working-directory: ${{env.APP_PATH}}
-      #   run: rm -rf test
+      - name: Cleaning up the test directory
+        working-directory: ${{env.APP_PATH}}
+        run: rm -rf test

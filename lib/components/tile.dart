@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'toggle.dart';
+
 class Tile extends StatelessWidget {
   final String title;
   final String? subtitle;
@@ -55,8 +57,8 @@ class Tile extends StatelessWidget {
               // const Spacer(),
               SizedBox(width: 16.0 + (primary ? 0.0 : 2.0)),
               SizedBox(
-                width: primary ? 40.0 : 36.0,
-                height: primary ? 40.0 : 36.0,
+                // width: primary ? 40.0 : 36.0,
+                // height: primary ? 40.0 : 36.0,
                 child: suffix,
               ),
               SizedBox(width: primary ? 0.0 : 2.0),
@@ -96,7 +98,7 @@ class BoxSwitchTile extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       prefix: prefix,
-      suffix: Switch.adaptive(
+      suffix: Toggle(
         value: value,
         onChanged: (newValue) => box.put(boxKey, newValue),
       ),

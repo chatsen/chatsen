@@ -1,3 +1,4 @@
+import 'package:chatsen/components/toggle.dart';
 import 'package:chatsen/data/settings/application_appearance.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -49,7 +50,7 @@ class ApplicationAppearanceModal extends StatelessWidget {
                   applicationAppearance.highContrast = !applicationAppearance.highContrast;
                   applicationAppearance.save();
                 },
-                suffix: Switch(
+                suffix: Toggle(
                   value: applicationAppearance.highContrast,
                   onChanged: (value) {
                     applicationAppearance.highContrast = value;

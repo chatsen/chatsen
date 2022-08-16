@@ -1,4 +1,5 @@
 import 'package:chatsen/components/tile.dart';
+import 'package:chatsen/components/toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -21,7 +22,7 @@ class MessageAppearanceModal extends StatelessWidget {
               Tile(
                 prefix: const Icon(Icons.av_timer_rounded),
                 title: 'Show timestamps',
-                suffix: Switch(
+                suffix: Toggle(
                   value: messageAppearance.timestamps,
                   onChanged: (value) {
                     messageAppearance.timestamps = value;
@@ -36,7 +37,7 @@ class MessageAppearanceModal extends StatelessWidget {
               Tile(
                 prefix: const Icon(Icons.view_compact_outlined),
                 title: 'Compact messages',
-                suffix: Switch(
+                suffix: Toggle(
                   value: messageAppearance.compact,
                   onChanged: (value) {
                     messageAppearance.compact = value;
