@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
 
+const _kToggleWidth = 52.0;
+const _kToggleHeight = 32.0;
+const _kToggleInactiveSize = 16.0;
+const _kToggleActiveSize = 24.0;
+const _kTrackOpacity = 0.12;
+const _kThumbOpacity = 0.38;
+const _kOutlineWidth = 2.0;
+const _kAnimationDuration = Duration(milliseconds: 100);
+const _kAnimationCurve = Curves.decelerate;
+final _kBorderRadius = BorderRadius.circular(_kToggleWidth);
+
 class Toggle extends StatelessWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
@@ -13,28 +24,31 @@ class Toggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Material(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(64.0),
-          side: value ? BorderSide.none : BorderSide(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.33), width: 2),
+          borderRadius: _kBorderRadius,
+          side: value ? BorderSide.none : BorderSide(color: Theme.of(context).colorScheme.onBackground.withOpacity(_kThumbOpacity), width: _kOutlineWidth),
         ),
-        color: value ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onBackground.withOpacity(0.25 / 2.0),
+        color: value ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onBackground.withOpacity(_kTrackOpacity),
         child: InkWell(
-          borderRadius: BorderRadius.circular(64.0),
+          borderRadius: _kBorderRadius,
           onTap: () => onChanged(!value),
           child: SizedBox(
-            width: (48.0 + 64.0) / 2.0,
-            height: 32.0,
+            width: _kToggleWidth,
+            height: _kToggleHeight,
             child: AnimatedAlign(
               alignment: value ? Alignment.centerRight : Alignment.centerLeft,
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.decelerate,
+              duration: _kAnimationDuration,
+              curve: _kAnimationCurve,
               child: AnimatedContainer(
                 alignment: value ? Alignment.centerRight : Alignment.centerLeft,
-                duration: const Duration(milliseconds: 100),
-                curve: Curves.decelerate,
-                width: value ? 24.0 : 16.0,
-                height: value ? 24.0 : 16.0,
+                duration: _kAnimationDuration,
+                curve: _kAnimationCurve,
+                width: value ? _kToggleActiveSize : _kToggleInactiveSize,
+                height: value ? _kToggleActiveSize : _kToggleInactiveSize,
                 margin: const EdgeInsets.only(right: 4.0, left: 8.0),
-                decoration: BoxDecoration(color: value ? Theme.of(context).colorScheme.primaryContainer : Theme.of(context).colorScheme.onBackground.withOpacity(0.33), shape: BoxShape.circle),
+                decoration: BoxDecoration(
+                  color: value ? Theme.of(context).colorScheme.primaryContainer : Theme.of(context).colorScheme.onBackground.withOpacity(_kThumbOpacity),
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
           ),

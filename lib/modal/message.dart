@@ -1,3 +1,4 @@
+import 'package:chatsen/widgets/channel_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,10 +8,12 @@ import '../widgets/chat_message.dart';
 
 class MessageModal extends StatelessWidget {
   final ChannelMessageChat message;
+  final ChannelViewState? channelViewState;
 
   const MessageModal({
     super.key,
     required this.message,
+    this.channelViewState,
   });
 
   @override
@@ -24,7 +27,10 @@ class MessageModal extends StatelessWidget {
           Tile(
             title: 'Reply',
             prefix: const Icon(Icons.reply_outlined),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop();
+              channelViewState?.setReplyChannelMessageChat(message);
+            },
           ),
           Tile(
             title: 'Copy text',
@@ -50,7 +56,10 @@ class MessageModal extends StatelessWidget {
           Tile(
             title: 'Mention',
             prefix: const Icon(Icons.alternate_email_outlined),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop();
+              channelViewState?.addSplit('@${message.user.login}');
+            },
           ),
           Tile(
             title: 'Copy message ID',

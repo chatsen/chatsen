@@ -107,6 +107,8 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
       return;
     }
 
+    if (tags?.isEmpty == true) tags = null;
+
     var ircMessageToSend = 'PRIVMSG $name :$message';
     if (tags != null) {
       ircMessageToSend = '@${tags.entries.map((entry) => '${entry.key}=${entry.value}').join(';')} $ircMessageToSend';

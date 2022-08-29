@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:chatsen/widgets/chat_message.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../api/catbox/catbox.dart';
+import '../components/surface.dart';
 import '../tmi/channel/channel.dart';
+import '../tmi/channel/messages/channel_message_chat.dart';
 import 'chat_view.dart';
 
 class ChannelView extends StatefulWidget {
@@ -17,13 +20,22 @@ class ChannelView extends StatefulWidget {
   });
 
   @override
-  State<ChannelView> createState() => _ChannelViewState();
+  State<ChannelView> createState() => ChannelViewState();
+
+  static ChannelViewState? of(BuildContext context) => context.findAncestorStateOfType<ChannelViewState>();
 }
 
-class _ChannelViewState extends State<ChannelView> {
+class ChannelViewState extends State<ChannelView> {
   final TextEditingController textEditingController = TextEditingController();
   bool spamming = false;
   bool emoteKeyboard = false;
+  ChannelMessageChat? replyChannelMessageChat;
+
+  void setReplyChannelMessageChat(ChannelMessageChat? channelMessageChat) {
+    setState(() {
+      replyChannelMessageChat = channelMessageChat;
+    });
+  }
 
   @override
   void dispose() {
@@ -48,6 +60,37 @@ class _ChannelViewState extends State<ChannelView> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  if (replyChannelMessageChat != null)
+                    Surface(
+                      type: SurfaceType.error,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (true ? 1.0 : 2.0)),
+                                  child: Text('@ Replying to'),
+                                ),
+                                ChatMessage(message: replyChannelMessageChat!),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: 40.0,
+                            height: 40.0,
+                            child: Surface(
+                              onTap: () => setReplyChannelMessageChat(null),
+                              borderRadius: BorderRadius.circular(40.0),
+                              // type: SurfaceType.error,
+                              child: const Icon(Icons.close_outlined),
+                            ),
+                          ),
+                          const SizedBox(width: 12.0),
+                        ],
+                      ),
+                    ),
                   if (textEditingController.text.split(' ').last.length >= 2 && (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).any((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase())))
                     Ink(
                       color: Theme.of(context).colorScheme.secondaryContainer,
@@ -150,7 +193,10 @@ class _ChannelViewState extends State<ChannelView> {
                               border: InputBorder.none,
                             ),
                             onSubmitted: (text) {
-                              widget.channel.send(text);
+                              widget.channel.send(text, tags: {
+                                if (replyChannelMessageChat != null) 'reply-parent-msg-id': replyChannelMessageChat!.id,
+                              });
+                              setReplyChannelMessageChat(null);
                               textEditingController.clear();
                             },
                             onChanged: (text) {
@@ -178,8 +224,10 @@ class _ChannelViewState extends State<ChannelView> {
                           onTap: () {
                             // TODO: Implement replies here
                             // TODO: Implement reactions here
-                            // widget.channel.send(textEditingController.text, tags: {'reply-parent-msg-id': '00000000-0000-0000-0000-000000000000'});
-                            widget.channel.send(textEditingController.text);
+                            widget.channel.send(textEditingController.text, tags: {
+                              if (replyChannelMessageChat != null) 'reply-parent-msg-id': replyChannelMessageChat!.id,
+                            });
+                            setReplyChannelMessageChat(null);
                             textEditingController.clear();
                           },
                           onLongPress: () {
@@ -205,4 +253,19 @@ class _ChannelViewState extends State<ChannelView> {
           ),
         ],
       );
+
+  void addSplit(String? text) {
+    if (text == null) return;
+    setState(() {
+      var splits = textEditingController.text.split(' ');
+      splits.add(text);
+      splits.removeWhere((element) => element.isEmpty);
+      textEditingController.text = splits.join(' ');
+      textEditingController.selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: textEditingController.text.length,
+        ),
+      );
+    });
+  }
 }

@@ -19,6 +19,7 @@ import '../tmi/channel/messages/embeds/file_embed.dart';
 import '../tmi/channel/messages/embeds/image_embed.dart';
 import '/tmi/channel/channel_message.dart';
 import '/tmi/channel/messages/channel_message_chat.dart';
+import 'channel_view.dart';
 import 'chat/chat_ban_chip.dart';
 import 'chat/chat_notice_chip.dart';
 import 'chat/reply_painter.dart';
@@ -54,7 +55,10 @@ class ChatMessage extends StatelessWidget {
                       onTap: () async {},
                       onLongPress: () => Modal.show(
                         context: context,
-                        child: MessageModal(message: chatMessage),
+                        child: MessageModal(
+                          message: chatMessage,
+                          channelViewState: ChannelView.of(context),
+                        ),
                       ),
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12.0 * messageAppearance.scale, vertical: 8.0 * messageAppearance.scale),
@@ -85,7 +89,10 @@ class ChatMessage extends StatelessWidget {
               onTap: () async {},
               onLongPress: () => Modal.show(
                 context: context,
-                child: MessageModal(message: chatMessage),
+                child: MessageModal(
+                  message: chatMessage,
+                  channelViewState: ChannelView.of(context),
+                ),
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (messageAppearance.compact ? 1.0 : 2.0)),
@@ -129,6 +136,7 @@ class ChatMessage extends StatelessWidget {
                       children: [
                         TextSpan(text: '@${message.replyInfo?.replyParentDisplayName}: ', style: const TextStyle(fontWeight: FontWeight.bold)),
                         TextSpan(text: '${message.replyInfo?.replyParentMsgBody.replaceAll('\\s', ' ')}'),
+                        // TextSpan(text: '${message.replyInfo?.replyParentMsgBody}'),
                       ],
                     ),
                     overflow: TextOverflow.ellipsis,

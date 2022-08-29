@@ -85,7 +85,7 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
     try {
       replyInfo = ChannelMessageChatReplyInfo(
         replyParentDisplayName: message.tags['reply-parent-display-name']!,
-        replyParentMsgBody: message.tags['reply-parent-msg-body']!,
+        replyParentMsgBody: message.tags['reply-parent-msg-body']!, //.split('\\s').skip(0).join('\\s'),
         replyParentMsgId: message.tags['reply-parent-msg-id']!,
         replyParentUserId: message.tags['reply-parent-user-id']!,
         replyParentUserLogin: message.tags['reply-parent-user-login']!,
@@ -165,7 +165,9 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
     }
 
     final emotes = (channel?.channelEmotes.state ?? []) + (channel?.client.globalEmotes.state ?? []);
-    final textSplits = messageText.split(' ').where((split) => split.isNotEmpty);
+    var textSplits = messageText.split(' ').where((split) => split.isNotEmpty);
+    if (replyInfo != null) textSplits = textSplits.skip(1);
+
     for (final textSplit in textSplits) {
       var emote = emotes.firstWhereOrNull((emote) => (emote.code ?? emote.name) == textSplit);
       if (textSplit.startsWith('')) {
