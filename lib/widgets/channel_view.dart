@@ -178,7 +178,8 @@ class _ChannelViewState extends State<ChannelView> {
                           onTap: () {
                             // TODO: Implement replies here
                             // TODO: Implement reactions here
-                            widget.channel.send(textEditingController.text, tags: {'reply-parent-msg-id': '00000000-0000-0000-0000-000000000000'});
+                            // widget.channel.send(textEditingController.text, tags: {'reply-parent-msg-id': '00000000-0000-0000-0000-000000000000'});
+                            widget.channel.send(textEditingController.text);
                             textEditingController.clear();
                           },
                           onLongPress: () {
