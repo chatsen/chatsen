@@ -78,6 +78,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Remove updater dependency
+        run: |
+          gsed -i '/open_file/d' ./lib/Components/Modal/UpdateModal.dart
+          gsed -i '/OpenFile/d' ./lib/Components/Modal/UpdateModal.dart
+          gsed -i '/open_file/d' ./pubspec.yaml
+          flutter pub get
+
       - name: Generate project files and cleanup
         if: startsWith(github.ref, 'refs/tags/')
         working-directory: ./chatsen
