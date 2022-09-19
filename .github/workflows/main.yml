@@ -79,10 +79,11 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Remove updater dependency
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
-          gsed -i '/open_file/d' ./lib/Components/Modal/UpdateModal.dart
-          gsed -i '/OpenFile/d' ./lib/Components/Modal/UpdateModal.dart
-          gsed -i '/open_file/d' ./pubspec.yaml
+          sed -i '/open_file/d' ./lib/Components/Modal/UpdateModal.dart
+          sed -i '/OpenFile/d' ./lib/Components/Modal/UpdateModal.dart
+          sed -i '/open_file/d' ./pubspec.yaml
           flutter pub get
 
       - name: Generate project files and cleanup
