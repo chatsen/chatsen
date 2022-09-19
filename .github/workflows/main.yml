@@ -80,6 +80,7 @@ jobs:
 
       - name: Remove updater dependency
         if: startsWith(github.ref, 'refs/tags/')
+        working-directory: ./chatsen
         run: |
           sed -i '/open_file/d' ./lib/Components/Modal/UpdateModal.dart
           sed -i '/OpenFile/d' ./lib/Components/Modal/UpdateModal.dart
