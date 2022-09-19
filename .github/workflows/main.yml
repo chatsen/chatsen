@@ -28,9 +28,9 @@ jobs:
           sed -i "s/^version: .*$/version: ${GITHUB_REF/refs\/tags\//}/" ./pubspec.yaml
           cat ./pubspec.yaml
 
-      - uses: chatsen/flutter-action@master
+      - uses: subosito/flutter-action@v2.7.1
         with:
-          channel: "dev"
+          channel: "stable"
 
       - name: Check for flutter updates
         run: flutter upgrade
@@ -139,9 +139,9 @@ jobs:
           mv -f ./pubspec2.yaml ./pubspec.yaml
           cat ./pubspec.yaml
 
-      - uses: chatsen/flutter-action@master
+      - uses: subosito/flutter-action@v2.7.1
         with:
-          channel: "master"
+          channel: "stable"
 
       - name: Check for flutter updates
         run: flutter upgrade
