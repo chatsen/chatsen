@@ -519,22 +519,26 @@ class Channel {
     }
 
     try {
-      var data = await GQL.request7('''
-        query {
-          user(id: "${name!.substring(1).toLowerCase()}") {
-            emotes {
-              id
-              name
-              urls
-              provider
-              visibility
-            }
-          }
-        }
-      ''');
+      // var data = await GQL.request7('''
+      //   query {
+      //     user(id: "${name!.substring(1).toLowerCase()}") {
+      //       emotes {
+      //         id
+      //         name
+      //         urls
+      //         provider
+      //         visibility
+      //       }
+      //     }
+      //   }
+      // ''');
 
-      for (var emoteData in data['data']['user']['emotes']) {
-        if (emoteData['urls'].isEmpty) {
+      final response = await http.get(Uri.parse('https://api.7tv.app/v3/users/twitch/$id'));
+      final responseJson = json.decode(utf8.decode(response.bodyBytes));
+
+      for (var emoteData in responseJson['emote_set']['emotes']) {
+        final emoteUrls = List<dynamic>.from(emoteData['data']['host']['files']).where((x) => x['format'].toUpperCase() == 'WEBP');
+        if (emoteUrls.isEmpty) {
           continue;
         }
 
@@ -543,9 +547,9 @@ class Channel {
           id: emoteData['id'],
           provider: '7TV',
           mipmap: [
-            for (var url in emoteData['urls']) url.last,
+            for (var url in emoteUrls) 'https:${emoteData['data']['host']['url']}/${url['name']}',
           ],
-          zeroWidth: (emoteData['visibility'] & (1 << 7)) == (1 << 7),
+          zeroWidth: (emoteData['data']['flags'] & (1 << 8)) == (1 << 8),
         );
 
         emotes.add(emote);
