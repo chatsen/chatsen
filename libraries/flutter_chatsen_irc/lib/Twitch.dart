@@ -536,7 +536,7 @@ class Channel {
       final response = await http.get(Uri.parse('https://api.7tv.app/v3/users/twitch/$id'));
       final responseJson = json.decode(utf8.decode(response.bodyBytes));
 
-      for (var emoteData in responseJson['emote_set']['emotes']) {
+      for (var emoteData in responseJson['emote_set']['emotes'] ?? responseJson['emote_set']['emote']) {
         final emoteUrls = List<dynamic>.from(emoteData['data']['host']['files']).where((x) => x['format'].toUpperCase() == 'WEBP');
         if (emoteUrls.isEmpty) {
           continue;
