@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/split.dart';
@@ -12,7 +13,7 @@ class StreamContainer extends StatelessWidget {
   const StreamContainer({
     super.key,
     required this.child,
-    this.theater = false,
+    this.theater = true,
   });
 
   double verticalAspectRatioCalculation(BuildContext context) {
@@ -31,9 +32,41 @@ class StreamContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocBuilder<BrowserState, List<String>>(
         builder: (context, state) {
+          if (state.isEmpty) {
+            SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+            return child;
+          }
+
           final mediaQuery = MediaQuery.of(context);
           bool horizontal = mediaQuery.size.width > mediaQuery.size.height;
-          if (state.isEmpty) return child;
+          final browser = Browser(
+            key: const ValueKey('stream-player'),
+            urls: state,
+          );
+          if (theater && horizontal) {
+            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+            return Stack(
+              children: [
+                browser,
+                Split(
+                  axis: Axis.horizontal,
+                  initialFractions: [0.75, 0.25],
+                  children: [
+                    Container(),
+                    MediaQuery.removePadding(
+                      context: context,
+                      removeLeft: horizontal,
+                      removeTop: !horizontal,
+                      child: child,
+                    ),
+                  ],
+                ),
+              ],
+            );
+          } else {
+            SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+          }
+
           return Split(
             minSizes: const [100, 100],
             axis: horizontal ? Axis.horizontal : Axis.vertical,
@@ -48,10 +81,7 @@ class StreamContainer extends StatelessWidget {
                   ],
             children: [
               SafeArea(
-                child: Browser(
-                  key: const ValueKey('stream-player'),
-                  urls: state,
-                ),
+                child: browser,
                 right: !horizontal,
                 bottom: horizontal,
               ),
