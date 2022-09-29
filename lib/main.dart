@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:chatsen/data/browser_state.dart';
 import 'package:chatsen/data/custom_command.dart';
 import 'package:chatsen/data/message_trigger.dart';
 import 'package:chatsen/data/settings/application_appearance.dart';
@@ -72,6 +73,7 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         Provider<Client>(create: (context) => Client(twitchAccount: activeTwitchAccount)),
+        Provider<BrowserState>(create: (context) => BrowserState()),
       ],
       child: const App(),
     ),
