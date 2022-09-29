@@ -7,38 +7,58 @@ import 'browser.dart';
 
 class StreamContainer extends StatelessWidget {
   final Widget child;
+  final bool theater;
 
   const StreamContainer({
     super.key,
     required this.child,
+    this.theater = false,
   });
 
   double verticalAspectRatioCalculation(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final deviceSize = mediaQuery.size;
-    return (deviceSize.width * (9.0 / 16.0) + mediaQuery.viewPadding.vertical) / (deviceSize.height - mediaQuery.viewPadding.vertical);
+    return ((deviceSize.width + mediaQuery.viewPadding.top) * (9.0 / 16.0)) / (deviceSize.height - mediaQuery.viewPadding.vertical);
+  }
+
+  double horizontalAspectRatioCalculation(BuildContext context) {
+    return 0.75;
+    final mediaQuery = MediaQuery.of(context);
+    final deviceSize = mediaQuery.size;
+    return ((deviceSize.width + mediaQuery.viewPadding.top) * (9.0 / 16.0)) / (deviceSize.height - mediaQuery.viewPadding.vertical);
   }
 
   @override
   Widget build(BuildContext context) => BlocBuilder<BrowserState, List<String>>(
         builder: (context, state) {
+          final mediaQuery = MediaQuery.of(context);
+          bool horizontal = mediaQuery.size.width > mediaQuery.size.height;
           if (state.isEmpty) return child;
           return Split(
-            axis: Axis.vertical,
-            initialFractions: [
-              verticalAspectRatioCalculation(context),
-              1.0 - verticalAspectRatioCalculation(context),
-            ],
+            minSizes: const [100, 100],
+            axis: horizontal ? Axis.horizontal : Axis.vertical,
+            initialFractions: horizontal
+                ? [
+                    horizontalAspectRatioCalculation(context),
+                    1.0 - horizontalAspectRatioCalculation(context),
+                  ]
+                : [
+                    verticalAspectRatioCalculation(context),
+                    1.0 - verticalAspectRatioCalculation(context),
+                  ],
             children: [
               SafeArea(
                 child: Browser(
                   key: const ValueKey('stream-player'),
                   urls: state,
                 ),
+                right: !horizontal,
+                bottom: horizontal,
               ),
               MediaQuery.removePadding(
                 context: context,
-                removeTop: true,
+                removeLeft: horizontal,
+                removeTop: !horizontal,
                 child: child,
               ),
             ],

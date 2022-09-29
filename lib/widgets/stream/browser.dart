@@ -16,8 +16,8 @@ class Browser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Surface(
-      type: SurfaceType.tertiary,
+    return Material(
+      color: Colors.black,
       child: DefaultTabController(
         length: urls.length,
         child: TabBarView(
