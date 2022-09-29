@@ -249,18 +249,21 @@ class _SplitState extends State<Split> {
           child: widget.children[i],
         ),
         if (i < widget.children.length - 1)
-          MouseRegion(
-            cursor: isHorizontal ? SystemMouseCursors.resizeColumn : SystemMouseCursors.resizeRow,
-            child: GestureDetector(
-              key: widget.dividerKey(i),
-              behavior: HitTestBehavior.translucent,
-              onHorizontalDragUpdate: (details) => isHorizontal ? updateSpacing(details, i) : null,
-              onVerticalDragUpdate: (details) => isHorizontal ? null : updateSpacing(details, i),
-              // DartStartBehavior.down is needed to keep the mouse pointer stuck to
-              // the drag bar. There still appears to be a few frame lag before the
-              // drag action triggers which is't ideal but isn't a launch blocker.
-              dragStartBehavior: DragStartBehavior.down,
-              child: widget.splitters != null ? widget.splitters![i] : DefaultSplitter(isHorizontal: isHorizontal),
+          Material(
+            color: Color.lerp(Theme.of(context).colorScheme.surface, Theme.of(context).colorScheme.inverseSurface, 0.1),
+            child: MouseRegion(
+              cursor: isHorizontal ? SystemMouseCursors.resizeColumn : SystemMouseCursors.resizeRow,
+              child: GestureDetector(
+                key: widget.dividerKey(i),
+                behavior: HitTestBehavior.translucent,
+                onHorizontalDragUpdate: (details) => isHorizontal ? updateSpacing(details, i) : null,
+                onVerticalDragUpdate: (details) => isHorizontal ? null : updateSpacing(details, i),
+                // DartStartBehavior.down is needed to keep the mouse pointer stuck to
+                // the drag bar. There still appears to be a few frame lag before the
+                // drag action triggers which is't ideal but isn't a launch blocker.
+                dragStartBehavior: DragStartBehavior.down,
+                child: widget.splitters != null ? widget.splitters![i] : DefaultSplitter(isHorizontal: isHorizontal),
+              ),
             ),
           ),
       ]);
@@ -304,7 +307,7 @@ class DefaultSplitter extends StatelessWidget {
         child: Icon(
           Icons.drag_handle,
           size: iconSize,
-          color: Theme.of(context).focusColor,
+          color: Color.lerp(Theme.of(context).colorScheme.onSurface, Theme.of(context).colorScheme.onInverseSurface, 0.1),
         ),
       ),
     );
@@ -320,53 +323,4 @@ void _verifyFractionsSumTo1(List<double> fractions) {
     (1.0 - sumFractions).abs() < defaultEpsilon,
     'Fractions should sum to 1.0, but instead sum to $sumFractions:\n$fractions',
   );
-}
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  final String title;
-
-  const MyHomePage({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Split(
-        children: [Material(color: Colors.red), Material(color: Colors.blue)],
-        axis: Axis.horizontal,
-        initialFractions: [0.5, 0.5],
-      ),
-    );
-  }
 }
