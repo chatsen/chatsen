@@ -1,7 +1,12 @@
 import 'dart:io';
 
+import 'package:chatsen/tmi/channel/channel_message.dart';
+import 'package:chatsen/tmi/client/client.dart';
+import 'package:chatsen/tmi/client/client_listener.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
 import '/tools/m3parser.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +16,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'components/boxlistener.dart';
 import 'data/settings/application_appearance.dart';
 import 'pages/home.dart';
+import 'tmi/channel/messages/channel_message_chat.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
 
   static int windowsBuildVersion() {
@@ -23,6 +29,31 @@ class App extends StatelessWidget {
     } catch (e) {
       return 0;
     }
+  }
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> implements ClientListener {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((ts) => context.read<Client>().listeners.add(this));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    context.read<Client>().listeners.remove(this);
+  }
+
+  @override
+  Future<ChannelMessage> onMessageReceived(ChannelMessage message) async {
+    if (message is ChannelMessageChat) {
+      // print(message.body);
+    }
+    return message;
   }
 
   @override
@@ -37,7 +68,7 @@ class App extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: Builder(builder: (context) {
               if (Platform.isWindows) {
-                int winver = windowsBuildVersion();
+                int winver = App.windowsBuildVersion();
                 if (winver < 22000) {
                   Window.setEffect(
                     effect: WindowEffect.acrylic,

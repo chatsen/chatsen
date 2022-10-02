@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:chatsen/data/browser_state.dart';
+import 'package:chatsen/data/browser/browser_state.dart';
 import 'package:chatsen/data/custom_command.dart';
 import 'package:chatsen/data/message_trigger.dart';
 import 'package:chatsen/data/settings/application_appearance.dart';

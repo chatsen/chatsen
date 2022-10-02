@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../data/browser_state.dart';
+import '../../data/browser/browser_state.dart';
+import '../../data/browser/browser_tab.dart';
 
 class Browser extends StatelessWidget {
-  final List<String> urls;
+  final List<BrowserTab> tabs;
 
   const Browser({
     super.key,
-    required this.urls,
+    required this.tabs,
   });
 
   @override
@@ -19,12 +20,12 @@ class Browser extends StatelessWidget {
     return Material(
       color: Colors.black,
       child: DefaultTabController(
-        length: urls.length,
+        length: tabs.length,
         child: TabBarView(
           children: [
-            for (final channel in urls)
+            for (final tab in tabs)
               WebView(
-                initialUrl: channel, // ?? 'https://player.twitch.tv/?channel=forsen&enableExtensions=true&muted=true&parent=chatsen.app&player=popout&volume=1.0',
+                initialUrl: tab.url, // ?? 'https://player.twitch.tv/?channel=forsen&enableExtensions=true&muted=true&parent=chatsen.app&player=popout&volume=1.0',
                 javascriptMode: JavascriptMode.unrestricted,
                 allowsInlineMediaPlayback: true,
                 userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',

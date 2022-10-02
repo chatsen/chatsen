@@ -5,6 +5,8 @@ import 'package:chatsen/providers/dankchat.dart';
 import 'package:chatsen/providers/emojis.dart';
 import 'package:chatsen/providers/twitch.dart';
 import 'package:chatsen/tmi/badges.dart';
+import 'package:chatsen/tmi/channel/channel_message.dart';
+import 'package:chatsen/tmi/client/client_listener.dart';
 import 'package:collection/collection.dart';
 
 import '../../data/badge.dart';
@@ -47,6 +49,8 @@ class Client {
   ];
 
   late ClientChannels channels;
+
+  List<ClientListener> listeners = [];
 
   Emotes globalEmotes = Emotes();
   Badges globalBadges = Badges();
@@ -158,13 +162,17 @@ class Client {
           break;
         }
 
-        channel.channelMessages.add(
-          ChannelMessageChat(
-            message: event,
-            dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(event.tags['tmi-sent-ts'] ?? 'null') ?? DateTime.now().millisecondsSinceEpoch),
-            channel: channel,
-          ),
+        ChannelMessage message = ChannelMessageChat(
+          message: event,
+          dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(event.tags['tmi-sent-ts'] ?? 'null') ?? DateTime.now().millisecondsSinceEpoch),
+          channel: channel,
         );
+
+        for (final listener in listeners) {
+          listener.onMessageReceived(message);
+        }
+
+        channel.channelMessages.add(message);
         break;
       case 'ROOMSTATE':
         final channelName = event.parameters[0];
