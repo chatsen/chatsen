@@ -61,6 +61,7 @@ class _OAuthWebViewModalState extends State<OAuthWebViewModal> {
             onWebViewCreated: (webViewController) {
               controller = webViewController;
             },
+            // https://id.twitch.tv/oauth2/authorize?client_id=vvxbprk8sfufgzd7k9wwr1478znf7b&redirect_uri=https://chatsen.app/oauth&response_type=token&scope=chat:edit%20chat:read%20channel:moderate%20channel:read:redemptions%20moderator:manage:automod%20channel:manage:broadcast%20whispers:read%20whispers:edit%20user_subscriptions%20user_blocks_edit%20user_blocks_read%20user:read:blocked_users%20user:manage:blocked_users%20channel_editor
             initialUrl: 'https://id.twitch.tv/oauth2/authorize?client_id=vvxbprk8sfufgzd7k9wwr1478znf7b&redirect_uri=https://chatsen.app/oauth&response_type=token&scope=' +
                 [
                   // Chat
@@ -100,7 +101,7 @@ class _OAuthWebViewModalState extends State<OAuthWebViewModal> {
                 ].join('%20'),
             // initialUrl: 'https://google.com',
             javascriptMode: JavascriptMode.unrestricted,
-            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
+            // userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
           ),
           const ModalHeader(),
         ],
