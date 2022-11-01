@@ -9,6 +9,7 @@ import 'package:chatsen/tmi/badges.dart';
 import 'package:chatsen/tmi/channel/channel_message.dart';
 import 'package:chatsen/tmi/client/client_listener.dart';
 import 'package:collection/collection.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../data/badge.dart';
 import '../../data/badge_users.dart';
@@ -60,8 +61,12 @@ class Client {
 
   Client({
     TwitchAccount? twitchAccount,
+    required Box channelsBox,
   }) {
-    channels = ClientChannels(this);
+    channels = ClientChannels(
+      this,
+      channelsBox: channelsBox,
+    );
 
     Timer.periodic(
       const Duration(seconds: 2),

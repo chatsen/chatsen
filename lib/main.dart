@@ -54,6 +54,7 @@ Future<void> main() async {
   final twitchAccountsBox = await Hive.openBox('TwitchAccounts');
   final accountSettingsBox = await Hive.openBox('AccountSettings');
   final settingsBox = await Hive.openBox('Settings');
+  final channelsBox = await Hive.openBox('Channels');
 
   await Hive.openBox('MessageTriggers');
   await Hive.openBox('UserTriggers');
@@ -72,7 +73,12 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        Provider<Client>(create: (context) => Client(twitchAccount: activeTwitchAccount)),
+        Provider<Client>(
+          create: (context) => Client(
+            twitchAccount: activeTwitchAccount,
+            channelsBox: channelsBox,
+          ),
+        ),
         Provider<BrowserState>(create: (context) => BrowserState()),
       ],
       child: const App(),
