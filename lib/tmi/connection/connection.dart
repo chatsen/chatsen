@@ -75,7 +75,7 @@ class Connection extends Bloc<ConnectionEvent, ConnectionState> {
         await Future.delayed(const Duration(seconds: 4));
         add(ConnectionReconnect());
       },
-      cancelOnError: true,
+      // cancelOnError: true,
     );
 
     send('CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership');

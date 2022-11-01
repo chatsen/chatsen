@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -61,6 +62,20 @@ class Client {
     TwitchAccount? twitchAccount,
   }) {
     channels = ClientChannels(this);
+
+    Timer.periodic(
+      const Duration(seconds: 2),
+      (timer) {
+        if (receiver.state is ConnectionConnected) {
+          const double tmiJoinPerSecond = 20.0 / 30.0;
+          final channelsToJoin = channels.state.where((channel) => channel.state is ChannelDisconnected).take((tmiJoinPerSecond * 2).floor());
+          if (channelsToJoin.isEmpty) return;
+          print(channelsToJoin.map((e) => e.name).join(','));
+          for (final channel in channelsToJoin) channel.add(ChannelJoin(receiver, transmitter));
+          receiver.send('JOIN ${channelsToJoin.map((e) => e.name).join(',')}');
+        }
+      },
+    );
 
     receiver.onReceive = receive;
     transmitter.onReceive = receive;
@@ -130,6 +145,9 @@ class Client {
   Future<void> receive(Connection connection, irc.Message event) async {
     // print('$connection: ${event.raw}');
     switch (event.command) {
+      case '001':
+        if (connection.state is ConnectionConnecting) connection.emit(ConnectionConnected((connection.state as ConnectionConnecting).twitchAccount));
+        break;
       case 'JOIN':
         final channelName = event.parameters[0];
         final channel = channels.state.firstWhereOrNull((channel) => channel.name == channelName);
