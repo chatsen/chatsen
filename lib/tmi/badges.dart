@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 
-import '/data/badge.dart';
+import '../data/custom_badge.dart';
 
-class Badges extends Cubit<List<Badge>> {
+class Badges extends Cubit<List<CustomBadge>> {
   Badges() : super([]);
 
-  void change(List<Badge> badges) {
+  void change(List<CustomBadge> badges) {
     emit(badges);
   }
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:chatsen/api/anonfiles/anonfiles.dart';
-import 'package:chatsen/data/badge.dart';
+import 'package:chatsen/data/custom_badge.dart';
 import 'package:chatsen/data/inline_url.dart';
 import 'package:chatsen/tmi/channel/messages/channel_message_user.dart';
 import 'package:chatsen/tmi/channel/messages/embeds/file_embed.dart';
@@ -61,7 +61,7 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
   irc.Message message;
   bool action = false;
   List<dynamic> splits = [];
-  List<Badge> badges = [];
+  List<CustomBadge> badges = [];
   String body = '';
   ChannelMessageChatReplyInfo? replyInfo;
   ChannelMessageChatSubInfo? subInfo;

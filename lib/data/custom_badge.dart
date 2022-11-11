@@ -1,6 +1,6 @@
 import '../providers/provider.dart';
 
-class Badge {
+class CustomBadge {
   String id;
   String name;
   String? description;
@@ -8,7 +8,7 @@ class Badge {
   int flags;
   Provider provider;
 
-  Badge({
+  CustomBadge({
     required this.id,
     required this.name,
     this.description,

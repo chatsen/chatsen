@@ -11,7 +11,7 @@ import 'package:chatsen/tmi/client/client_listener.dart';
 import 'package:collection/collection.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../data/badge.dart';
+import '../../data/custom_badge.dart';
 import '../../data/badge_users.dart';
 import '../../data/emote.dart';
 import '../../providers/badge_provider.dart';
@@ -108,7 +108,7 @@ class Client {
   }
 
   Future<void> refreshGlobalBadges() async {
-    final badges = <Badge>[];
+    final badges = <CustomBadge>[];
     final badgeProviders = providers.whereType<BadgeProvider>();
     for (final badgeProvider in badgeProviders) {
       try {

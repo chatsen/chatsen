@@ -1,4 +1,4 @@
-import '../data/badge.dart';
+import '../data/custom_badge.dart';
 import '../data/badge_users.dart';
 import '/api/frankerfacez/frankerfacez.dart';
 import '/data/emote.dart';
@@ -48,13 +48,13 @@ class FrankerFaceZProvider extends Provider with EmoteProvider, BadgeProvider {
   }
 
   @override
-  Future<List<Badge>> globalBadges() async => [];
+  Future<List<CustomBadge>> globalBadges() async => [];
 
   @override
-  Future<List<Badge>> channelBadges(String uid) async => [];
+  Future<List<CustomBadge>> channelBadges(String uid) async => [];
 
   @override
-  Future<List<Badge>> userBadges(String uid) async => [];
+  Future<List<CustomBadge>> userBadges(String uid) async => [];
 
   @override
   Future<List<BadgeUsers>> globalUserBadges() async {
@@ -62,7 +62,7 @@ class FrankerFaceZProvider extends Provider with EmoteProvider, BadgeProvider {
     return [
       for (final badge in badges.badges)
         BadgeUsers(
-          badge: Badge(
+          badge: CustomBadge(
             id: '${badge.id}',
             name: badge.title,
             mipmap: badge.urls.values.map((e) => 'http:$e').toList(),

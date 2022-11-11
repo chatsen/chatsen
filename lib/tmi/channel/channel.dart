@@ -5,7 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:chatsen/tmi/channel/channel_chatters.dart';
 
 import '../../api/chatsen/chatsen.dart';
-import '../../data/badge.dart';
+import '../../data/custom_badge.dart';
 import '../../data/emote.dart';
 import '../client/client.dart';
 import '../emotes.dart';
@@ -157,7 +157,7 @@ class Channel extends Bloc<ChannelEvent, ChannelState> {
   Future<void> refreshBadges() async {
     if (id == null) throw 'invalid channel id';
 
-    final badges = <Badge>[];
+    final badges = <CustomBadge>[];
     final badgeProviders = client.providers.whereType<BadgeProvider>();
     for (final badgeProvider in badgeProviders) {
       try {

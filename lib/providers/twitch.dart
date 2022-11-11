@@ -1,7 +1,7 @@
 import 'package:chatsen/providers/badge_provider.dart';
 
 import '../api/twitch/twitch.dart';
-import '../data/badge.dart';
+import '../data/custom_badge.dart';
 import '../data/badge_users.dart';
 import 'provider.dart';
 
@@ -13,12 +13,12 @@ class TwitchProvider extends Provider with BadgeProvider {
   String? get description => null;
 
   @override
-  Future<List<Badge>> globalBadges() async {
+  Future<List<CustomBadge>> globalBadges() async {
     final twitchBadges = await Twitch.globalBadges();
     return [
       for (final twitchBadgeData in twitchBadges.entries)
         for (final twitchBadgeVersion in twitchBadgeData.value.entries)
-          Badge(
+          CustomBadge(
             id: '${twitchBadgeData.key}/${twitchBadgeVersion.key}',
             name: twitchBadgeVersion.value.title,
             description: twitchBadgeVersion.value.description,
@@ -33,12 +33,12 @@ class TwitchProvider extends Provider with BadgeProvider {
   }
 
   @override
-  Future<List<Badge>> channelBadges(String uid) async {
+  Future<List<CustomBadge>> channelBadges(String uid) async {
     final twitchBadges = await Twitch.channelBadges(uid);
     return [
       for (final twitchBadgeData in twitchBadges.entries)
         for (final twitchBadgeVersion in twitchBadgeData.value.entries)
-          Badge(
+          CustomBadge(
             id: '${twitchBadgeData.key}/${twitchBadgeVersion.key}',
             name: twitchBadgeVersion.value.title,
             description: twitchBadgeVersion.value.description,
@@ -53,7 +53,7 @@ class TwitchProvider extends Provider with BadgeProvider {
   }
 
   @override
-  Future<List<Badge>> userBadges(String uid) async => [];
+  Future<List<CustomBadge>> userBadges(String uid) async => [];
 
   @override
   Future<List<BadgeUsers>> globalUserBadges() async => [];

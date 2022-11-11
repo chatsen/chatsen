@@ -1,6 +1,6 @@
 import 'package:chatsen/api/chatsen/chatsen.dart';
 
-import '../data/badge.dart';
+import '../data/custom_badge.dart';
 import '../data/badge_users.dart';
 import 'badge_provider.dart';
 import 'provider.dart';
@@ -13,13 +13,13 @@ class ChatsenProvider extends Provider with BadgeProvider {
   String? get description => null;
 
   @override
-  Future<List<Badge>> globalBadges() async => [];
+  Future<List<CustomBadge>> globalBadges() async => [];
 
   @override
-  Future<List<Badge>> channelBadges(String uid) async => [];
+  Future<List<CustomBadge>> channelBadges(String uid) async => [];
 
   @override
-  Future<List<Badge>> userBadges(String uid) async => [];
+  Future<List<CustomBadge>> userBadges(String uid) async => [];
 
   @override
   Future<List<BadgeUsers>> globalUserBadges() async {
@@ -27,7 +27,7 @@ class ChatsenProvider extends Provider with BadgeProvider {
     return [
       for (final badge in badges)
         BadgeUsers(
-          badge: Badge(
+          badge: CustomBadge(
             id: badge.id,
             name: badge.name,
             mipmap: badge.mipmap,

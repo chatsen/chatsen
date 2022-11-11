@@ -1,7 +1,7 @@
-import 'badge.dart';
+import 'custom_badge.dart';
 
 class BadgeUsers {
-  Badge badge;
+  CustomBadge badge;
   List<String> users;
 
   BadgeUsers({
