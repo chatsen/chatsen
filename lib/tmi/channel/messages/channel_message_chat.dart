@@ -11,9 +11,13 @@ import 'package:chatsen/tmi/channel/messages/embeds/video_embed.dart';
 import 'package:chatsen/tmi/user.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../data/emote.dart';
+import '../../../data/message_trigger.dart';
+import '../../../data/user_trigger.dart';
 import '../../../providers/twitch.dart';
+import '../../connection/connection_state.dart';
 import '../channel_message.dart';
 import '/irc/message.dart' as irc;
 import 'channel_message_embeds.dart';
@@ -65,6 +69,8 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
   String body = '';
   ChannelMessageChatReplyInfo? replyInfo;
   ChannelMessageChatSubInfo? subInfo;
+  bool mentionned = false;
+  bool blocked = false;
 
   ChannelMessageChat({
     required this.message,
@@ -213,6 +219,67 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
         }
       } else {
         splits.add(textSplit);
+      }
+    }
+
+    // Check whether the user got mentionned or if the message should be blocked
+    mentionned = false;
+    blocked = false;
+
+    final receiver = channel?.client.receiver;
+    if (receiver != null) {
+      // Check user triggers
+      final userTriggers = Hive.box('UserTriggers').values.cast<UserTrigger>();
+      final userTrigger = userTriggers.firstWhereOrNull((element) => element.login.toLowerCase() == user.login?.toLowerCase());
+      if (userTrigger != null) {
+        switch (UserTriggerType.values[userTrigger.type]) {
+          case UserTriggerType.mention:
+            mentionned = true;
+            break;
+          case UserTriggerType.block:
+            blocked = true;
+            break;
+        }
+      }
+
+      // Check message triggers
+      final messageTriggers = Hive.box('MessageTriggers').values.cast<MessageTrigger>();
+      final messageTrigger = messageTriggers.firstWhereOrNull((messageTrigger) {
+        if (messageTrigger.enableRegex) {
+          return RegExp(messageTrigger.pattern).hasMatch(body);
+        } else {
+          var pattern = messageTrigger.pattern;
+          if (!messageTrigger.caseSensitive) {
+            pattern = messageTrigger.pattern.toLowerCase();
+            if (textSplits.length > 1) {
+              return body.toLowerCase().contains(pattern);
+            } else {
+              return textSplits.whereType<String>().map((e) => e.toLowerCase()).any((split) => (split == pattern || split == '@$pattern' || split == '$pattern,' || split == '@$pattern,'));
+            }
+          } else {
+            if (textSplits.length > 1) {
+              return body.contains(pattern);
+            } else {
+              return textSplits.whereType<String>().any((split) => (split == pattern || split == '@$pattern' || split == '$pattern,' || split == '@$pattern,'));
+            }
+          }
+        }
+      });
+      if (messageTrigger != null) {
+        switch (MessageTriggerType.values[messageTrigger.type]) {
+          case MessageTriggerType.mention:
+            mentionned = true;
+            break;
+          case MessageTriggerType.block:
+            blocked = true;
+            break;
+        }
+      }
+
+      if (receiver.state is ConnectionConnected) {
+        final connectedState = (receiver.state as ConnectionConnected);
+        blocked = blocked || connectedState.blockedUserIds.contains(user.id);
+        mentionned = mentionned || textSplits.whereType<String>().map((e) => e.toLowerCase()).any((split) => (split == connectedState.twitchAccount.tokenData.login || split == '@${connectedState.twitchAccount.tokenData.login}' || split == '${connectedState.twitchAccount.tokenData.login},' || split == '@${connectedState.twitchAccount.tokenData.login},'));
       }
     }
   }

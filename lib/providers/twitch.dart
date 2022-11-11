@@ -3,9 +3,11 @@ import 'package:chatsen/providers/badge_provider.dart';
 import '../api/twitch/twitch.dart';
 import '../data/custom_badge.dart';
 import '../data/badge_users.dart';
+import '../data/emote.dart';
+import 'emote_provider.dart';
 import 'provider.dart';
 
-class TwitchProvider extends Provider with BadgeProvider {
+class TwitchProvider extends Provider with EmoteProvider, BadgeProvider {
   @override
   String get name => 'Twitch';
 
@@ -57,4 +59,13 @@ class TwitchProvider extends Provider with BadgeProvider {
 
   @override
   Future<List<BadgeUsers>> globalUserBadges() async => [];
+
+  @override
+  Future<List<Emote>> globalEmotes() async => [];
+
+  @override
+  Future<List<Emote>> channelEmotes(String uid) async => [];
+
+  @override
+  String? emoteUrl(String id) => null;
 }

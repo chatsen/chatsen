@@ -72,4 +72,7 @@ class SevenTVProvider extends Provider with EmoteProvider, BadgeProvider {
         ),
     ];
   }
+
+  @override
+  String? emoteUrl(String id) => 'https://7tv.app/emotes/$id';
 }

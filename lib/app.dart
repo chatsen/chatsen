@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chatsen/tmi/channel/channel_message.dart';
 import 'package:chatsen/tmi/client/client.dart';
 import 'package:chatsen/tmi/client/client_listener.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -14,7 +15,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'components/boxlistener.dart';
+import 'data/message_trigger.dart';
 import 'data/settings/application_appearance.dart';
+import 'data/user_trigger.dart';
 import 'pages/home.dart';
 import 'tmi/channel/messages/channel_message_chat.dart';
 
@@ -50,9 +53,19 @@ class _AppState extends State<App> implements ClientListener {
 
   @override
   Future<ChannelMessage> onMessageReceived(ChannelMessage message) async {
-    if (message is ChannelMessageChat) {
-      // print(message.body);
-    }
+    // if (message is ChannelMessageChat) {
+    //   final receiver = message.channel?.client.receiver;
+    //   if (receiver == null) return message;
+    //   final userTriggers = Hive.box('UserTriggers').values.cast<UserTrigger>();
+    //   final userTrigger = userTriggers.firstWhereOrNull((element) => element.login.toLowerCase() == message.user.login?.toLowerCase());
+    //   final messageTriggers = Hive.box('MessageTriggers').values.cast<MessageTrigger>();
+    //   final messageTrigger = messageTriggers.firstWhereOrNull((element) => element.toLowerCase() == message.message.toLowerCase());
+
+    //   // if () {
+
+    //   // }
+    //   // print(message.body);
+    // }
     return message;
   }
 

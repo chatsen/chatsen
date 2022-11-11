@@ -35,4 +35,7 @@ class EmojiProvider extends Provider with EmoteProvider {
   Future<List<Emote>> channelEmotes(String uid) async {
     return [];
   }
+
+  @override
+  String? emoteUrl(String id) => null;
 }

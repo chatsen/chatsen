@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:chatsen/api/twitch/twitch.dart';
 import 'package:chatsen/providers/dankchat.dart';
 import 'package:chatsen/providers/emojis.dart';
 import 'package:chatsen/providers/twitch.dart';
@@ -39,6 +40,7 @@ import 'client_channels.dart';
 class Client {
   Connection receiver = Connection();
   Connection transmitter = Connection();
+  List<String> blockedUserIds = [];
 
   List<Provider> providers = [
     ChatsenProvider(),
@@ -151,7 +153,13 @@ class Client {
     // print('$connection: ${event.raw}');
     switch (event.command) {
       case '001':
-        if (connection.state is ConnectionConnecting) connection.emit(ConnectionConnected((connection.state as ConnectionConnecting).twitchAccount));
+        if (connection.state is ConnectionConnecting) {
+          final stateTwitchAccount = (connection.state as ConnectionConnecting).twitchAccount;
+          connection.emit(ConnectionConnected(
+            stateTwitchAccount,
+            blockedUserIds: stateTwitchAccount.tokenData.accessToken == null ? [] : await Twitch.blockedUsers(stateTwitchAccount.tokenData),
+          ));
+        }
         break;
       case 'JOIN':
         final channelName = event.parameters[0];

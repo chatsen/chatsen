@@ -79,4 +79,7 @@ class BetterTTVProvider extends Provider with EmoteProvider, BadgeProvider {
         ),
     ];
   }
+
+  @override
+  String? emoteUrl(String id) => 'https://betterttv.com/emotes/$id';
 }

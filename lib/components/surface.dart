@@ -5,6 +5,7 @@ enum SurfaceType {
   secondary,
   tertiary,
   error,
+  transparent,
 }
 
 class Surface extends StatelessWidget {
@@ -31,14 +32,19 @@ class Surface extends StatelessWidget {
             ? Theme.of(context).colorScheme.secondaryContainer
             : type == SurfaceType.tertiary
                 ? Theme.of(context).colorScheme.tertiaryContainer
-                : Theme.of(context).colorScheme.errorContainer;
+                : type == SurfaceType.error
+                    ? Theme.of(context).colorScheme.errorContainer
+                    : Colors.transparent;
+
     final foregroundColor = type == SurfaceType.primary
         ? Theme.of(context).colorScheme.primary
         : type == SurfaceType.secondary
             ? Theme.of(context).colorScheme.secondary
             : type == SurfaceType.tertiary
                 ? Theme.of(context).colorScheme.tertiary
-                : Theme.of(context).colorScheme.error;
+                : type == SurfaceType.error
+                    ? Theme.of(context).colorScheme.error
+                    : null;
 
     return Theme(
       data: Theme.of(context).copyWith(
@@ -51,16 +57,23 @@ class Surface extends StatelessWidget {
               color: foregroundColor,
             ),
       ),
-      child: Material(
-        borderRadius: borderRadius,
-        color: backgroundColor,
-        child: InkWell(
-          borderRadius: borderRadius,
-          onTap: onTap,
-          onLongPress: onLongPress,
-          child: child,
-        ),
-      ),
+      child: type == SurfaceType.transparent
+          ? InkWell(
+              borderRadius: borderRadius,
+              onTap: onTap,
+              onLongPress: onLongPress,
+              child: child,
+            )
+          : Material(
+              borderRadius: borderRadius,
+              color: backgroundColor,
+              child: InkWell(
+                borderRadius: borderRadius,
+                onTap: onTap,
+                onLongPress: onLongPress,
+                child: child,
+              ),
+            ),
     );
   }
 }

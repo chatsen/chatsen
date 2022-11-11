@@ -1,4 +1,5 @@
 import 'package:chatsen/data/inline_url.dart';
+import 'package:chatsen/modal/emote.dart';
 import 'package:chatsen/modal/user.dart';
 import 'package:chatsen/tmi/channel/messages/channel_message_embeds.dart';
 import 'package:flutter/gestures.dart';
@@ -25,6 +26,59 @@ import 'chat/chat_notice_chip.dart';
 import 'chat/reply_painter.dart';
 import 'embeds/embedded_file.dart';
 import 'embeds/embedded_image.dart';
+
+class BlockedChatMessage extends StatefulWidget {
+  final Widget widget;
+  final MessageAppearance messageAppearance;
+
+  const BlockedChatMessage({
+    super.key,
+    required this.widget,
+    required this.messageAppearance,
+  });
+
+  @override
+  State<BlockedChatMessage> createState() => _BlockedChatMessageState();
+}
+
+class _BlockedChatMessageState extends State<BlockedChatMessage> {
+  bool hidden = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (widget.messageAppearance.compact ? 1.0 : 2.0)),
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(text: 'Blocked message '),
+                    TextSpan(
+                      text: hidden ? 'Show message' : 'Hide message',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      // recognizer: TapGestureRecognizer()
+                      //   ..onTap = () => setState
+                    ),
+                  ],
+                ),
+                style: TextStyle(fontSize: (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14.0) * widget.messageAppearance.scale),
+              ),
+            ),
+            if (!hidden) widget.widget,
+          ],
+        ),
+        onTap: () => setState(() => hidden = !hidden),
+      ),
+    );
+  }
+}
 
 // ignore: must_be_immutable
 class ChatMessage extends StatelessWidget {
@@ -85,7 +139,12 @@ class ChatMessage extends StatelessWidget {
               );
             }
 
-            return InkWell(
+            final widget = Surface(
+              type: chatMessage.blocked
+                  ? SurfaceType.error
+                  : chatMessage.mentionned
+                      ? SurfaceType.primary
+                      : SurfaceType.transparent,
               onTap: () async {},
               onLongPress: () => Modal.show(
                 context: context,
@@ -99,6 +158,14 @@ class ChatMessage extends StatelessWidget {
                 child: buildMessageContent(context, chatMessage, messageAppearance),
               ),
             );
+            if (chatMessage.blocked) {
+              return BlockedChatMessage(
+                widget: widget,
+                messageAppearance: messageAppearance,
+              );
+            }
+
+            return widget;
           } else if (message is ChannelMessageBan) {
             return ChatBanChip(messageAppearance: messageAppearance, message: message as ChannelMessageBan);
           } else if (message is ChannelMessageNotice) {
@@ -207,14 +274,17 @@ class ChatMessage extends StatelessWidget {
                   ),
                 if (split is Emote)
                   WidgetSpan(
-                    child: Tooltip(
-                      message: split.name,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 4.0) * messageAppearance.scale,
-                        child: Image.network(
-                          split.mipmap.last,
-                          scale: (1.0 / messageAppearance.scale) * 4.0,
-                          height: split.provider.name == 'Emoji' ? 24.0 : null,
+                    child: GestureDetector(
+                      onTap: () => Modal.show(context: context, child: EmoteModal(emote: split)),
+                      child: Tooltip(
+                        message: split.name,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 4.0) * messageAppearance.scale,
+                          child: Image.network(
+                            split.mipmap.last,
+                            scale: (1.0 / messageAppearance.scale) * 4.0,
+                            height: split.provider.name == 'Emoji' ? 24.0 : null,
+                          ),
                         ),
                       ),
                     ),

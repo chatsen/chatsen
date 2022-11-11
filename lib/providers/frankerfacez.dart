@@ -72,4 +72,7 @@ class FrankerFaceZProvider extends Provider with EmoteProvider, BadgeProvider {
         ),
     ];
   }
+
+  @override
+  String? emoteUrl(String id) => 'https://www.frankerfacez.com/emoticon/$id';
 }

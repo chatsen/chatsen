@@ -23,7 +23,14 @@ class ConnectionConnecting extends ConnectionStateWithCredentials {
 }
 
 class ConnectionConnected extends ConnectionStateWithCredentials {
-  ConnectionConnected(TwitchAccount credentials) : super(credentials);
+  final List<String> blockedUserIds;
+
+  ConnectionConnected(
+    TwitchAccount credentials, {
+    required this.blockedUserIds,
+  }) : super(credentials) {
+    print(blockedUserIds);
+  }
 }
 
 class ConnectionReconnecting extends ConnectionStateWithCredentials {
