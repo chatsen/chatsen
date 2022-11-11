@@ -15,7 +15,7 @@ class ChatsenUser {
   String profileImageURL;
   String? bannerImageURL;
   String? offlineImageURL;
-  int profileViewCount;
+  int? profileViewCount;
   String? primaryColorHex;
   ChatsenStream? stream;
   ChatsenBroadcastSettings broadcastSettings;
