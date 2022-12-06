@@ -39,42 +39,42 @@
   "searchForChannels": "Rechercher une chaîne",
   "recommendedChannels": "Chaînes recommandées",
   "popularChannels": "Chaînes populaires",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
-  "joinUser": "Join {user}",
+  "channel": "Chaîne",
+  "leaveChannel": "Quitter la chaîne",
+  "joinUser": "Joindre {user}",
   "@joinUser": {
     "placeholders": {
       "user": {}
     }
   },
-  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "spellCheckFailed": "Saisie potentiellement incorrecte ! Essayez-vous de rechercher {username} ?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "Joindre {channel}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Envoyer un message dans {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
+  "light": "Clair",
+  "dark": "Sombre",
   "system": "Système",
   "appearance": "Apparence",
   "highContrast": "Contraste élevé",
   "playStream": "Visionner le stream",
   "stopStream": "Arrêter le stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "customCommand": "Commande personnalisée",
+  "customCommands": "Commandes personnalisées",
+  "commandTrigger": "Déclencheur",
+  "command": "Commande",
+  "save": "Sauvegarder"
 }
