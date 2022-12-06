@@ -1,68 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "Inloggad via {provider}",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "Användarvillkor",
-    "privacyPolicy": "Integritetspolicy",
-    "settings": "Inställningar",
-    "expiresNever": "Går aldrig ut",
-    "expiresIn": "Upphör att gälla om {time}",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "Stäng",
-    "add": "Lägg till",
-    "cancel": "Avbryt",
-    "tokenInput": "Tokeninmatning",
-    "account": "Konto",
-    "refreshAccount": "Uppdatera konto",
-    "removeAccount": "Ta bort konto",
-    "addAnotherAccount": "Lägg till annat konto",
-    "verifiedUserData": "Verifierad användardata!",
-    "loggedInAs": "Inloggad som {user}",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "Ett fel har uppstått vid verifiering av användardata:",
-    "verifyingUserData": "Veriferar användardata...",
-    "verifiedUserToken": "Veriferar användar-token!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "Ett fel har uppstått med veriferiring vid användar-token:",
-    "verifyingUserToken": "Veriferar använder-token...",
-    "searchForChannels": "Söker efter kanaler",
-    "recommendedChannels": "Rekommenderad kanaler",
-    "popularChannels": "Populära kanaler",
-    "channel": "Channel",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
-    "@joinUser": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
-    "@spellCheckFailed": {
-        "placeholders": {
-            "username": {}
-        }
-    },
-    "joinChannelName": "Join {channel}",
-    "@joinChannelName": {
-        "placeholders": {
-            "channel": {}
-        }
-    },
-    "sendMessageIn": "Send message in {channel}",
-    "@sendMessageIn": {
-        "placeholders": {
-            "channel": {}
-        }
+  "chatsen": "Chatsen",
+  "loggedInVia": "Inloggad via {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
     }
+  },
+  "termsOfService": "Användarvillkor",
+  "privacyPolicy": "Integritetspolicy",
+  "settings": "Inställningar",
+  "expiresNever": "Går aldrig ut",
+  "expiresIn": "Upphör att gälla om {time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "Stäng",
+  "add": "Lägg till",
+  "cancel": "Avbryt",
+  "tokenInput": "Tokeninmatning",
+  "account": "Konto",
+  "refreshAccount": "Uppdatera konto",
+  "removeAccount": "Ta bort konto",
+  "addAnotherAccount": "Lägg till annat konto",
+  "verifiedUserData": "Verifierad användardata!",
+  "loggedInAs": "Inloggad som {user}",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "Ett fel har uppstått vid verifiering av användardata:",
+  "verifyingUserData": "Veriferar användardata...",
+  "verifiedUserToken": "Veriferar användar-token!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Ett fel har uppstått med veriferiring vid användar-token:",
+  "verifyingUserToken": "Veriferar använder-token...",
+  "searchForChannels": "Söker efter kanaler",
+  "recommendedChannels": "Rekommenderad kanaler",
+  "popularChannels": "Populära kanaler",
+  "channel": "Channel",
+  "leaveChannel": "Leave channel",
+  "joinUser": "Join {user}",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "Join {channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "Send message in {channel}",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }
