@@ -1,0 +1,80 @@
+{
+  "chatsen": "צ'אטסן",
+  "loggedInVia": "מחובר דרך {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
+    }
+  },
+  "termsOfService": "תנאי השירות",
+  "privacyPolicy": "מדיניות פרטיות",
+  "settings": "הגדרות",
+  "expiresNever": "לעולם לא יפוג",
+  "expiresIn": "פג תוקף ב-{time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "סגור",
+  "add": "הוסף",
+  "cancel": "ביטול",
+  "tokenInput": "טוקן",
+  "account": "חשבון",
+  "refreshAccount": "רענן חשבון",
+  "removeAccount": "הסר חשבון",
+  "addAnotherAccount": "הוסף חשבון נוסף",
+  "verifiedUserData": "נתוני משתמש מאומתים!",
+  "loggedInAs": "מחובר כ{user}",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "שגיאה בעת אימות נתוני משתמש:",
+  "verifyingUserData": "מאמת את נתוני המשתמש...",
+  "verifiedUserToken": "טוקן משתמש מאומת!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "שגיאה בעת אימות טוקן משתמש:",
+  "verifyingUserToken": "מאמת טוקן משתמש...",
+  "searchForChannels": "חפש ערוצים",
+  "recommendedChannels": "ערוצים מומלצים",
+  "popularChannels": "ערוצים פופולרים",
+  "channel": "ערוץ",
+  "leaveChannel": "עזוב ערוץ",
+  "joinUser": "הצטרף ל-{user}",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "בדיקת האיות נכשלה! האם התכוונת לחפש את {username}?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "הצטרף ל-{channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "שלח הודעה ב-{channel}",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
+}

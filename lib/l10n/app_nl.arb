@@ -1,43 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "Ingelogd via {provider}",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "Servicevoorwaarden",
-    "privacyPolicy": "Privacybeleid",
-    "settings": "Instellingen",
-    "expiresNever": "Verloopt nooit",
-    "expiresIn": "Verloopt in {time}",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "Sluiten",
-    "add": "Toevoegen",
-    "cancel": "Annuleren",
-    "tokenInput": "Token input",
-    "account": "Account",
-    "refreshAccount": "Ververs account",
-    "removeAccount": "Verwijder account",
-    "addAnotherAccount": "Ander account toevoegen",
-    "verifiedUserData": "Geverifieerde gebruikersgegevens!",
-    "loggedInAs": "Ingelogd als {user}",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "Er is een fout opgetreden bij het verifiëren van gebruikersgegevens:",
-    "verifyingUserData": "Gebruikersgegevens verifiëren...",
-    "verifiedUserToken": "Geverifieerde gebruikerstoken!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "Er is een fout opgetreden bij het verifiëren van de gebruikerstoken:",
-    "verifyingUserToken": "Gebruikerstoken verifiëren...",
-    "searchForChannels": "Zoeken naar kanalen",
-    "recommendedChannels": "Aanbevolen kanalen",
-    "popularChannels": "Populaire kanalen",
-    "channel": "Channel"
+  "chatsen": "Chatsen",
+  "loggedInVia": "Ingelogd via {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
+    }
+  },
+  "termsOfService": "Servicevoorwaarden",
+  "privacyPolicy": "Privacybeleid",
+  "settings": "Instellingen",
+  "expiresNever": "Verloopt nooit",
+  "expiresIn": "Verloopt in {time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "Sluiten",
+  "add": "Toevoegen",
+  "cancel": "Annuleren",
+  "tokenInput": "Token input",
+  "account": "Account",
+  "refreshAccount": "Ververs account",
+  "removeAccount": "Verwijder account",
+  "addAnotherAccount": "Ander account toevoegen",
+  "verifiedUserData": "Geverifieerde gebruikersgegevens!",
+  "loggedInAs": "Ingelogd als {user}",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "Er is een fout opgetreden bij het verifiëren van gebruikersgegevens:",
+  "verifyingUserData": "Gebruikersgegevens verifiëren...",
+  "verifiedUserToken": "Geverifieerde gebruikerstoken!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Er is een fout opgetreden bij het verifiëren van de gebruikerstoken:",
+  "verifyingUserToken": "Gebruikerstoken verifiëren...",
+  "searchForChannels": "Zoeken naar kanalen",
+  "recommendedChannels": "Aanbevolen kanalen",
+  "popularChannels": "Populaire kanalen",
+  "channel": "Channel",
+  "leaveChannel": "Leave channel",
+  "joinUser": "Join {user}",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "Join {channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "Send message in {channel}",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }

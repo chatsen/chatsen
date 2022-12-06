@@ -1,43 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "Eingeloggt über {provider}",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "Nutzungsbedingungen",
-    "privacyPolicy": "Datenschutzrichtlinie",
-    "settings": "Einstellungen",
-    "expiresNever": "Läuft nie ab",
-    "expiresIn": "Läuft ab in {time}",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "Schließen",
-    "add": "Hinzufügen",
-    "cancel": "Abbrechen",
-    "tokenInput": "Token eingeben",
-    "account": "Benutzerkonto",
-    "refreshAccount": "Benutzerkonto aktualisieren",
-    "removeAccount": "Benutzerkonto entfernen",
-    "addAnotherAccount": "Weiteren Account hinzufügen",
-    "verifiedUserData": "Benutzerdaten verifiziert!",
-    "loggedInAs": "Eingeloggt als {user}",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "Bei der Verifizierung der Benutzerdaten ist ein Fehler aufgetreten:",
-    "verifyingUserData": "Benutzerdaten werden verifiziert...",
-    "verifiedUserToken": "Benutzertoken verifiziert!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "Bei der Verifizierung des Benutzertokens ist ein Fehler aufgetreten:",
-    "verifyingUserToken": "Benutzertoken wird verifiziert...",
-    "searchForChannels": "Suche nach Kanälen",
-    "recommendedChannels": "Empfohlene Kanäle",
-    "popularChannels": "Beliebte Kanäle",
-    "channel": "Channel"
+  "chatsen": "Chatsen",
+  "loggedInVia": "Eingeloggt über {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
+    }
+  },
+  "termsOfService": "Nutzungsbedingungen",
+  "privacyPolicy": "Datenschutzrichtlinie",
+  "settings": "Einstellungen",
+  "expiresNever": "Läuft nie ab",
+  "expiresIn": "Läuft ab in {time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "Schließen",
+  "add": "Hinzufügen",
+  "cancel": "Abbrechen",
+  "tokenInput": "Token eingeben",
+  "account": "Benutzerkonto",
+  "refreshAccount": "Benutzerkonto aktualisieren",
+  "removeAccount": "Benutzerkonto entfernen",
+  "addAnotherAccount": "Weiteren Account hinzufügen",
+  "verifiedUserData": "Benutzerdaten verifiziert!",
+  "loggedInAs": "Eingeloggt als {user}",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "Bei der Verifizierung der Benutzerdaten ist ein Fehler aufgetreten:",
+  "verifyingUserData": "Benutzerdaten werden verifiziert...",
+  "verifiedUserToken": "Benutzertoken verifiziert!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Bei der Verifizierung des Benutzertokens ist ein Fehler aufgetreten:",
+  "verifyingUserToken": "Benutzertoken wird verifiziert...",
+  "searchForChannels": "Suche nach Kanälen",
+  "recommendedChannels": "Empfohlene Kanäle",
+  "popularChannels": "Beliebte Kanäle",
+  "channel": "Channel",
+  "leaveChannel": "Leave channel",
+  "joinUser": "Join {user}",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "Join {channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "Send message in {channel}",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }

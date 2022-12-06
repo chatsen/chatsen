@@ -1,43 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "Logado via {provider}",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "Termos de Serviço",
-    "privacyPolicy": "Política de Privacidade",
-    "settings": "Configurações",
-    "expiresNever": "Nunca expira",
-    "expiresIn": "Expira em {time}",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "Fechar",
-    "add": "Adicionar",
-    "cancel": "Cancelar",
-    "tokenInput": "Entrada de token",
-    "account": "Conta",
-    "refreshAccount": "Atualizar conta",
-    "removeAccount": "Remover conta",
-    "addAnotherAccount": "Adicionar outra conta",
-    "verifiedUserData": "Dados do usuário verificados!",
-    "loggedInAs": "Logado como {user}",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "Ocorreu um erro ao verificar os dados do usuário:",
-    "verifyingUserData": "Verificando dados do usuário...",
-    "verifiedUserToken": "Token do usuário verificado!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "Ocorreu um erro ao verificar o token do usuário:",
-    "verifyingUserToken": "Verificando token de usuário...",
-    "searchForChannels": "Procurar por canais",
-    "recommendedChannels": "Canais recomendados",
-    "popularChannels": "Canais populares",
-    "channel": "Channel"
+  "chatsen": "Chatsen",
+  "loggedInVia": "Conectado via {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
+    }
+  },
+  "termsOfService": "Termos de Serviço",
+  "privacyPolicy": "Política de Privacidade",
+  "settings": "Configurações",
+  "expiresNever": "Nunca expira",
+  "expiresIn": "Expira em {time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "Fechar",
+  "add": "Adicionar",
+  "cancel": "Cancelar",
+  "tokenInput": "Entrada de token",
+  "account": "Conta",
+  "refreshAccount": "Atualizar conta",
+  "removeAccount": "Remover conta",
+  "addAnotherAccount": "Adicionar outra conta",
+  "verifiedUserData": "Dados do usuário verificados!",
+  "loggedInAs": "Logado como {user}",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "Ocorreu um erro ao verificar os dados do usuário:",
+  "verifyingUserData": "Verificando dados do usuário...",
+  "verifiedUserToken": "Token do usuário verificado!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Ocorreu um erro ao verificar o token do usuário:",
+  "verifyingUserToken": "Verificando token de usuário...",
+  "searchForChannels": "Procurar por canais",
+  "recommendedChannels": "Canais recomendados",
+  "popularChannels": "Canais populares",
+  "channel": "Canal",
+  "leaveChannel": "Sair do canal",
+  "joinUser": "Entrar {user}",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "A verificação ortográfica falhou! Você queria pesquisar por {username}?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "Conectar {channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "Enviar mensagem em {channel}",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }

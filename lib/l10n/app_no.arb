@@ -1,43 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "Logget inn som {provider}",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "Vilkår for Bruk",
-    "privacyPolicy": "Personvernerklæring",
-    "settings": "Innstillinger",
-    "expiresNever": "Utgår aldri",
-    "expiresIn": "Utgår om {time}",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "Lukk",
-    "add": "Legg til",
-    "cancel": "Avbryt",
-    "tokenInput": "Tast inn token",
-    "account": "Profil",
-    "refreshAccount": "Last inn profil på nytt",
-    "removeAccount": "Fjern bruker",
-    "addAnotherAccount": "Legg til bruker",
-    "verifiedUserData": "Verifisert bruker data!",
-    "loggedInAs": "Logget inn som {user}",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "Det oppsto en feil med verifisering av bruker data:",
-    "verifyingUserData": "Verifiserer bruker data...",
-    "verifiedUserToken": "Verifisert bruker token!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "Det oppsto en feil med verifisering av bruker token:",
-    "verifyingUserToken": "Verifiserer bruker token...",
-    "searchForChannels": "Søk for kanaler",
-    "recommendedChannels": "Anbefalte kanaler",
-    "popularChannels": "Populære kanaler",
-    "channel": "Channel"
+  "chatsen": "Chatsen",
+  "loggedInVia": "Logget inn som {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
+    }
+  },
+  "termsOfService": "Vilkår for Bruk",
+  "privacyPolicy": "Personvernerklæring",
+  "settings": "Innstillinger",
+  "expiresNever": "Utgår aldri",
+  "expiresIn": "Utgår om {time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "Lukk",
+  "add": "Legg til",
+  "cancel": "Avbryt",
+  "tokenInput": "Tast inn token",
+  "account": "Profil",
+  "refreshAccount": "Last inn profil på nytt",
+  "removeAccount": "Fjern bruker",
+  "addAnotherAccount": "Legg til bruker",
+  "verifiedUserData": "Verifisert bruker data!",
+  "loggedInAs": "Logget inn som {user}",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "Det oppsto en feil med verifisering av bruker data:",
+  "verifyingUserData": "Verifiserer bruker data...",
+  "verifiedUserToken": "Verifisert bruker token!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Det oppsto en feil med verifisering av bruker token:",
+  "verifyingUserToken": "Verifiserer bruker token...",
+  "searchForChannels": "Søk for kanaler",
+  "recommendedChannels": "Anbefalte kanaler",
+  "popularChannels": "Populære kanaler",
+  "channel": "Channel",
+  "leaveChannel": "Leave channel",
+  "joinUser": "Join {user}",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "Join {channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "Send message in {channel}",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }
