@@ -1,68 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "Přihlášen jako {provider}",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "Podmínky služby",
-    "privacyPolicy": "Zásady ochrany osobních údajů",
-    "settings": "Nastavení",
-    "expiresNever": "Nikdy nevyprší",
-    "expiresIn": "Vyprší v {time}",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "Zavřít",
-    "add": "Přidat",
-    "cancel": "Zrušit",
-    "tokenInput": "Vložení tokenu",
-    "account": "Účet",
-    "refreshAccount": "Načíst účet",
-    "removeAccount": "Zrušit účet",
-    "addAnotherAccount": "Přidat jiný účet",
-    "verifiedUserData": "Data úspěšně ověřena!",
-    "loggedInAs": "Přihlášen jako {user}",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "Při ověřování osobních dat se objevil problém:",
-    "verifyingUserData": "Ověřuji user data...",
-    "verifiedUserToken": "Token úspěšně ověřen!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "Při ověřování user tokenu se objevil problém:",
-    "verifyingUserToken": "Ověřuji user token...",
-    "searchForChannels": "Procházet kanály",
-    "recommendedChannels": "Doporučené kanály",
-    "popularChannels": "Populární kanály",
-    "channel": "Channel",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
-    "@joinUser": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
-    "@spellCheckFailed": {
-        "placeholders": {
-            "username": {}
-        }
-    },
-    "joinChannelName": "Join {channel}",
-    "@joinChannelName": {
-        "placeholders": {
-            "channel": {}
-        }
-    },
-    "sendMessageIn": "Send message in {channel}",
-    "@sendMessageIn": {
-        "placeholders": {
-            "channel": {}
-        }
+  "chatsen": "Chatsen",
+  "loggedInVia": "Přihlášen jako {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
     }
+  },
+  "termsOfService": "Podmínky služby",
+  "privacyPolicy": "Zásady ochrany osobních údajů",
+  "settings": "Nastavení",
+  "expiresNever": "Nikdy nevyprší",
+  "expiresIn": "Vyprší v {time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "Zavřít",
+  "add": "Přidat",
+  "cancel": "Zrušit",
+  "tokenInput": "Vložení tokenu",
+  "account": "Účet",
+  "refreshAccount": "Načíst účet",
+  "removeAccount": "Zrušit účet",
+  "addAnotherAccount": "Přidat jiný účet",
+  "verifiedUserData": "Data úspěšně ověřena!",
+  "loggedInAs": "Přihlášen jako {user}",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "Při ověřování osobních dat se objevil problém:",
+  "verifyingUserData": "Ověřuji user data...",
+  "verifiedUserToken": "Token úspěšně ověřen!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Při ověřování user tokenu se objevil problém:",
+  "verifyingUserToken": "Ověřuji user token...",
+  "searchForChannels": "Procházet kanály",
+  "recommendedChannels": "Doporučené kanály",
+  "popularChannels": "Populární kanály",
+  "channel": "Channel",
+  "leaveChannel": "Leave channel",
+  "joinUser": "Join {user}",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "Join {channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "Send message in {channel}",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }
