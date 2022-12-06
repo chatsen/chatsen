@@ -65,16 +65,16 @@
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "light": "라이트",
+  "dark": "다크",
+  "system": "시스템",
+  "appearance": "모양새",
+  "highContrast": "고대비",
+  "playStream": "스트림 재생",
+  "stopStream": "스트림 중지",
+  "customCommand": "커스텀 커맨드",
+  "customCommands": "커스텀 커맨드",
+  "commandTrigger": "트리거",
+  "command": "커맨드",
+  "save": "세이브"
 }
