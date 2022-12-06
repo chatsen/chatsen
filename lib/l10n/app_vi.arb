@@ -59,22 +59,22 @@
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Gửi tin nhắn vào {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "light": "Sáng",
+  "dark": "Tối",
+  "system": "Hệ thống",
+  "appearance": "Giao diện",
+  "highContrast": "Độ tương phản cao",
+  "playStream": "Phát",
+  "stopStream": "Ngừng phát",
+  "customCommand": "Lệnh tùy chỉnh",
+  "customCommands": "Các lệnh tùy chỉnh",
+  "commandTrigger": "Kích hoạt",
+  "command": "Lệnh",
+  "save": "Lưu"
 }
