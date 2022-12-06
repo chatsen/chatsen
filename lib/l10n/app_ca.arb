@@ -1,68 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "S'ha iniciat la sessió mitjançant {provider}",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "Condicions del Servei",
-    "privacyPolicy": "Política de Privacitat",
-    "settings": "Configuració",
-    "expiresNever": "No caduca mai",
-    "expiresIn": "Caduca en {time}",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "Tanca",
-    "add": "Afegeix",
-    "cancel": "Cancel·la",
-    "tokenInput": "Introdueix el token",
-    "account": "Compte",
-    "refreshAccount": "Actualitza el compte",
-    "removeAccount": "Suprimeix el compte",
-    "addAnotherAccount": "Afegeix un compte",
-    "verifiedUserData": "Dades d'usuari verificades!",
-    "loggedInAs": "S'ha iniciat la sessió com {user}",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "S'ha produït un error en verificar les dades de l'usuari:",
-    "verifyingUserData": "Verificant les dades de l'usuari...",
-    "verifiedUserToken": "Token de l'usuari verificat!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "S'ha produït un error en verificar el token de l'usuari:",
-    "verifyingUserToken": "Verificant el token de l'usuari...",
-    "searchForChannels": "Cerca canals",
-    "recommendedChannels": "Canals recomanats",
-    "popularChannels": "Canals populars",
-    "channel": "Canal",
-    "leaveChannel": "Deixa el canal",
-    "joinUser": "Uneix-te a {user}",
-    "@joinUser": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
-    "@spellCheckFailed": {
-        "placeholders": {
-            "username": {}
-        }
-    },
-    "joinChannelName": "Join {channel}",
-    "@joinChannelName": {
-        "placeholders": {
-            "channel": {}
-        }
-    },
-    "sendMessageIn": "Send message in {channel}",
-    "@sendMessageIn": {
-        "placeholders": {
-            "channel": {}
-        }
+  "chatsen": "Chatsen",
+  "loggedInVia": "S'ha iniciat la sessió mitjançant {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
     }
+  },
+  "termsOfService": "Condicions del Servei",
+  "privacyPolicy": "Política de Privacitat",
+  "settings": "Configuració",
+  "expiresNever": "No caduca mai",
+  "expiresIn": "Caduca en {time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "Tanca",
+  "add": "Afegeix",
+  "cancel": "Cancel·la",
+  "tokenInput": "Introdueix el token",
+  "account": "Compte",
+  "refreshAccount": "Actualitza el compte",
+  "removeAccount": "Suprimeix el compte",
+  "addAnotherAccount": "Afegeix un compte",
+  "verifiedUserData": "Dades d'usuari verificades!",
+  "loggedInAs": "S'ha iniciat la sessió com {user}",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "S'ha produït un error en verificar les dades de l'usuari:",
+  "verifyingUserData": "Verificant les dades de l'usuari...",
+  "verifiedUserToken": "Token de l'usuari verificat!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "S'ha produït un error en verificar el token de l'usuari:",
+  "verifyingUserToken": "Verificant el token de l'usuari...",
+  "searchForChannels": "Cerca canals",
+  "recommendedChannels": "Canals recomanats",
+  "popularChannels": "Canals populars",
+  "channel": "Canal",
+  "leaveChannel": "Deixa el canal",
+  "joinUser": "Uneix-te a {user}",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "Join {channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "Send message in {channel}",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }
