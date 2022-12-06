@@ -1,68 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "Logget ind som {provider}",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "Servicevilkår",
-    "privacyPolicy": "Fortrolighedspolitik",
-    "settings": "Indstillinger",
-    "expiresNever": "Aldrig udløber",
-    "expiresIn": "Udløber om {time}",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "Luk",
-    "add": "Tilføj",
-    "cancel": "Afbryd",
-    "tokenInput": "Token indsat",
-    "account": "Konto",
-    "refreshAccount": "Opdatere konto",
-    "removeAccount": "Fjern Konto",
-    "addAnotherAccount": "Tilføj en anden kanal",
-    "verifiedUserData": "Verificeret bruger data!",
-    "loggedInAs": "Logget ind som {user}",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "En fejl har opstået, da verificering af brugerdata:",
-    "verifyingUserData": "Verificere dine data...",
-    "verifiedUserToken": "Verificere bruger-token!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "En systemfejl af indlæsning af konto:",
-    "verifyingUserToken": "Bekræfter dine data...",
-    "searchForChannels": "Søg efter kanaler",
-    "recommendedChannels": "Anbefalede kanaler",
-    "popularChannels": "Populære kanaler",
-    "channel": "Channel",
-    "leaveChannel": "Leave channel",
-    "joinUser": "Join {user}",
-    "@joinUser": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
-    "@spellCheckFailed": {
-        "placeholders": {
-            "username": {}
-        }
-    },
-    "joinChannelName": "Join {channel}",
-    "@joinChannelName": {
-        "placeholders": {
-            "channel": {}
-        }
-    },
-    "sendMessageIn": "Send message in {channel}",
-    "@sendMessageIn": {
-        "placeholders": {
-            "channel": {}
-        }
+  "chatsen": "Chatsen",
+  "loggedInVia": "Logget ind som {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
     }
+  },
+  "termsOfService": "Servicevilkår",
+  "privacyPolicy": "Fortrolighedspolitik",
+  "settings": "Indstillinger",
+  "expiresNever": "Aldrig udløber",
+  "expiresIn": "Udløber om {time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "Luk",
+  "add": "Tilføj",
+  "cancel": "Afbryd",
+  "tokenInput": "Token indsat",
+  "account": "Konto",
+  "refreshAccount": "Opdatere konto",
+  "removeAccount": "Fjern Konto",
+  "addAnotherAccount": "Tilføj en anden kanal",
+  "verifiedUserData": "Verificeret bruger data!",
+  "loggedInAs": "Logget ind som {user}",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "En fejl har opstået, da verificering af brugerdata:",
+  "verifyingUserData": "Verificere dine data...",
+  "verifiedUserToken": "Verificere bruger-token!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "En systemfejl af indlæsning af konto:",
+  "verifyingUserToken": "Bekræfter dine data...",
+  "searchForChannels": "Søg efter kanaler",
+  "recommendedChannels": "Anbefalede kanaler",
+  "popularChannels": "Populære kanaler",
+  "channel": "Channel",
+  "leaveChannel": "Leave channel",
+  "joinUser": "Join {user}",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "Join {channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "Send message in {channel}",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }
