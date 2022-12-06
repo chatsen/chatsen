@@ -64,5 +64,17 @@
     "placeholders": {
       "channel": {}
     }
-  }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }
