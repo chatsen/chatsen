@@ -1,6 +1,7 @@
 import 'package:chatsen/data/custom_command.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/boxlistener.dart';
 import '../components/modal.dart';
@@ -18,7 +19,7 @@ class CustomCommandsModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: 'Custom Commands'),
+              ModalHeader(title: AppLocalizations.of(context)!.customCommands),
               for (final customCommand in box.values.cast<CustomCommand>()) ...[
                 Tile(
                   onTap: () => Modal.show(

@@ -40,13 +40,13 @@ class _CustomCommandModalState extends State<CustomCommandModal> {
   Widget build(BuildContext context) => ListView(
         shrinkWrap: true,
         children: [
-          const ModalHeader(title: 'Custom Command'),
+          ModalHeader(title: AppLocalizations.of(context)!.customCommand),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
             child: TextField(
               controller: triggerController,
-              decoration: const InputDecoration(
-                labelText: 'Trigger',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.commandTrigger,
                 border: InputBorder.none,
                 filled: true,
               ),
@@ -57,8 +57,8 @@ class _CustomCommandModalState extends State<CustomCommandModal> {
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
             child: TextField(
               controller: commandController,
-              decoration: const InputDecoration(
-                labelText: 'Command',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.command,
                 border: InputBorder.none,
                 filled: true,
               ),
@@ -118,7 +118,7 @@ class _CustomCommandModalState extends State<CustomCommandModal> {
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: Center(
                       child: Text(
-                        'Save',
+                        AppLocalizations.of(context)!.save,
                         style: TextStyle(
                           color: (triggerController.text.isEmpty || commandController.text.isEmpty) ? Theme.of(context).colorScheme.error : Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,

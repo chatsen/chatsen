@@ -2,6 +2,7 @@ import 'package:chatsen/components/toggle.dart';
 import 'package:chatsen/data/settings/application_appearance.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/boxlistener.dart';
 import '../components/tile.dart';
@@ -18,10 +19,10 @@ class ApplicationAppearanceModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: 'Appearance'),
+              ModalHeader(title: AppLocalizations.of(context)!.appearance),
               Tile(
                 prefix: const Icon(Icons.light_mode_outlined),
-                title: 'Light',
+                title: AppLocalizations.of(context)!.light,
                 onTap: () {
                   applicationAppearance.themeMode = 'light';
                   applicationAppearance.save();
@@ -29,7 +30,7 @@ class ApplicationAppearanceModal extends StatelessWidget {
               ),
               Tile(
                 prefix: const Icon(Icons.dark_mode_outlined),
-                title: 'Dark',
+                title: AppLocalizations.of(context)!.dark,
                 onTap: () {
                   applicationAppearance.themeMode = 'dark';
                   applicationAppearance.save();
@@ -37,7 +38,7 @@ class ApplicationAppearanceModal extends StatelessWidget {
               ),
               Tile(
                 prefix: const Icon(Icons.phone_android_outlined),
-                title: 'System',
+                title: AppLocalizations.of(context)!.system,
                 onTap: () {
                   applicationAppearance.themeMode = 'system';
                   applicationAppearance.save();
@@ -45,7 +46,7 @@ class ApplicationAppearanceModal extends StatelessWidget {
               ),
               Tile(
                 prefix: const Icon(Icons.blinds_closed_outlined),
-                title: 'High Contrast (Amoled)',
+                title: AppLocalizations.of(context)!.highContrast,
                 onTap: () {
                   applicationAppearance.highContrast = !applicationAppearance.highContrast;
                   applicationAppearance.save();
