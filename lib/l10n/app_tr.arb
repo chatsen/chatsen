@@ -1,68 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "{provider} aracılığıyla giriş yapıldı",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "Kullanım Şartları",
-    "privacyPolicy": "Gizlilik Politikası",
-    "settings": "Ayarlar",
-    "expiresNever": "Asla sona ermez",
-    "expiresIn": "{time} sonra sona erecek",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "Kapat",
-    "add": "Ekle",
-    "cancel": "İptal",
-    "tokenInput": "Belirteç girişi",
-    "account": "Hesap",
-    "refreshAccount": "Hesabı yenile",
-    "removeAccount": "Hesabı kaldır",
-    "addAnotherAccount": "Başka bir hesap ekle",
-    "verifiedUserData": "Kullanıcı verisi onaylandı!",
-    "loggedInAs": "{user} olarak giriş yapıldı",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "Kullanıcı verisi onaylanırken bir sorun yaşandı:",
-    "verifyingUserData": "Kullanıcı verisi onaylanıyor...",
-    "verifiedUserToken": "Kullanıcı belirteci onaylandı!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "Kullanıcı belirteci onaylanırken bir sorun yaşandı:",
-    "verifyingUserToken": "Kullanıcı belirteci onaylanıyor...",
-    "searchForChannels": "Kanal ara",
-    "recommendedChannels": "Önerilen kanallar",
-    "popularChannels": "Popüler kanallar",
-    "channel": "Kanal",
-    "leaveChannel": "Kanaldan ayrıl",
-    "joinUser": "{user} katıl",
-    "@joinUser": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "spellCheckFailed": "Yazım denetimi başarısız oldu! {username} için mi arama yapmak istemiştiniz?",
-    "@spellCheckFailed": {
-        "placeholders": {
-            "username": {}
-        }
-    },
-    "joinChannelName": "{channel} katıl",
-    "@joinChannelName": {
-        "placeholders": {
-            "channel": {}
-        }
-    },
-    "sendMessageIn": "{channel} kanalına mesaj gönder",
-    "@sendMessageIn": {
-        "placeholders": {
-            "channel": {}
-        }
+  "chatsen": "Chatsen",
+  "loggedInVia": "{provider} aracılığıyla giriş yapıldı",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
     }
+  },
+  "termsOfService": "Kullanım Şartları",
+  "privacyPolicy": "Gizlilik Politikası",
+  "settings": "Ayarlar",
+  "expiresNever": "Asla sona ermez",
+  "expiresIn": "{time} sonra sona erecek",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "Kapat",
+  "add": "Ekle",
+  "cancel": "İptal",
+  "tokenInput": "Belirteç girişi",
+  "account": "Hesap",
+  "refreshAccount": "Hesabı yenile",
+  "removeAccount": "Hesabı kaldır",
+  "addAnotherAccount": "Başka bir hesap ekle",
+  "verifiedUserData": "Kullanıcı verisi onaylandı!",
+  "loggedInAs": "{user} olarak giriş yapıldı",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "Kullanıcı verisi onaylanırken bir sorun yaşandı:",
+  "verifyingUserData": "Kullanıcı verisi onaylanıyor...",
+  "verifiedUserToken": "Kullanıcı belirteci onaylandı!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Kullanıcı belirteci onaylanırken bir sorun yaşandı:",
+  "verifyingUserToken": "Kullanıcı belirteci onaylanıyor...",
+  "searchForChannels": "Kanal ara",
+  "recommendedChannels": "Önerilen kanallar",
+  "popularChannels": "Popüler kanallar",
+  "channel": "Kanal",
+  "leaveChannel": "Kanaldan ayrıl",
+  "joinUser": "{user} katıl",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "Yazım denetimi başarısız oldu! {username} için mi arama yapmak istemiştiniz?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "{channel} katıl",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "{channel} kanalına mesaj gönder",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }
