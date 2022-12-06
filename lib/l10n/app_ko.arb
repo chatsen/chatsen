@@ -1,68 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "다음 방식으로 로그인하기 {provider}",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "이용 약관",
-    "privacyPolicy": "개인정보처리방침",
-    "settings": "설정",
-    "expiresNever": "절대 만료되지 않음",
-    "expiresIn": "{time} 후 만료",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "닫기",
-    "add": "추가",
-    "cancel": "취소",
-    "tokenInput": "토큰 입력",
-    "account": "계정",
-    "refreshAccount": "계정 새로고침",
-    "removeAccount": "계정 삭제",
-    "addAnotherAccount": "다른 계정 추가",
-    "verifiedUserData": "유저 데이터 확인됨!",
-    "loggedInAs": "{user} 으로 로그인 됨",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "유저 데이터를 확인하는데 오류가 발생하였습니다:",
-    "verifyingUserData": "유저 데이터 확인중...",
-    "verifiedUserToken": "유저 토큰 확인됨!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "유저 토큰을 확인하는데 오류가 발생하였습니다:",
-    "verifyingUserToken": "유저 토큰 확인중...",
-    "searchForChannels": "채널을 찾는 중",
-    "recommendedChannels": "추천 채널",
-    "popularChannels": "인기있는 채널",
-    "channel": "채널",
-    "leaveChannel": "채널 나가기",
-    "joinUser": "{user} 로 접속",
-    "@joinUser": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "spellCheckFailed": "스펠링 체크에 실패했습니다! 혹시 {username} 을 찾으셨나요?",
-    "@spellCheckFailed": {
-        "placeholders": {
-            "username": {}
-        }
-    },
-    "joinChannelName": "{channel} 참가하기",
-    "@joinChannelName": {
-        "placeholders": {
-            "channel": {}
-        }
-    },
-    "sendMessageIn": "{channel} 에 메세지를 보내기",
-    "@sendMessageIn": {
-        "placeholders": {
-            "channel": {}
-        }
+  "chatsen": "Chatsen",
+  "loggedInVia": "다음 방식으로 로그인하기 {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
     }
+  },
+  "termsOfService": "이용 약관",
+  "privacyPolicy": "개인정보처리방침",
+  "settings": "설정",
+  "expiresNever": "절대 만료되지 않음",
+  "expiresIn": "{time} 후 만료",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "닫기",
+  "add": "추가",
+  "cancel": "취소",
+  "tokenInput": "토큰 입력",
+  "account": "계정",
+  "refreshAccount": "계정 새로고침",
+  "removeAccount": "계정 삭제",
+  "addAnotherAccount": "다른 계정 추가",
+  "verifiedUserData": "유저 데이터 확인됨!",
+  "loggedInAs": "{user} 으로 로그인 됨",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "유저 데이터를 확인하는데 오류가 발생하였습니다:",
+  "verifyingUserData": "유저 데이터 확인중...",
+  "verifiedUserToken": "유저 토큰 확인됨!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "유저 토큰을 확인하는데 오류가 발생하였습니다:",
+  "verifyingUserToken": "유저 토큰 확인중...",
+  "searchForChannels": "채널을 찾는 중",
+  "recommendedChannels": "추천 채널",
+  "popularChannels": "인기있는 채널",
+  "channel": "채널",
+  "leaveChannel": "채널 나가기",
+  "joinUser": "{user} 로 접속",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "스펠링 체크에 실패했습니다! 혹시 {username} 을 찾으셨나요?",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "{channel} 참가하기",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "{channel} 에 메세지를 보내기",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }
