@@ -4,9 +4,12 @@ import 'package:chatsen/widgets/chat_message.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../api/catbox/catbox.dart';
 import '../components/surface.dart';
+import '../components/tile.dart';
+import '../data/custom_command.dart';
 import '../tmi/channel/channel.dart';
 import '../tmi/channel/messages/channel_message_chat.dart';
 import 'chat_view.dart';
@@ -25,6 +28,31 @@ class ChannelView extends StatefulWidget {
   static ChannelViewState? of(BuildContext context) => context.findAncestorStateOfType<ChannelViewState>();
 }
 
+enum AutocompletionType {
+  emote,
+  customCommand,
+}
+
+class AutocompletionItem {
+  final Widget? prefix;
+  final String title;
+  final String? subtitle;
+  final Function()? onTap;
+  final Function()? onLongPress;
+  final Widget? shortened;
+  final AutocompletionType type;
+
+  AutocompletionItem({
+    this.prefix,
+    required this.title,
+    this.subtitle,
+    this.onTap,
+    this.onLongPress,
+    this.shortened,
+    required this.type,
+  });
+}
+
 class ChannelViewState extends State<ChannelView> {
   final TextEditingController textEditingController = TextEditingController();
   bool spamming = false;
@@ -41,6 +69,53 @@ class ChannelViewState extends State<ChannelView> {
   void dispose() {
     textEditingController.dispose();
     super.dispose();
+  }
+
+  List<AutocompletionItem> getAutocompletionItems() {
+    if (textEditingController.text.split(' ').last.length < 2) return [];
+    final matchingEmotes = (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).where((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()));
+    return [
+      for (final customCommand in Hive.box('CustomCommands').values.cast<CustomCommand>())
+        AutocompletionItem(
+          type: AutocompletionType.customCommand,
+          prefix: Icon(Icons.keyboard_command_key_rounded),
+          shortened: Text(customCommand.trigger),
+          title: customCommand.trigger,
+          subtitle: customCommand.command,
+          onTap: () {
+            // final splits = textEditingController.text.split(' ');
+            // splits.removeLast();
+            // splits.add('${emote.code ?? emote.name} ');
+            // textEditingController.text = splits.join(' ');
+            // textEditingController.selection = TextSelection.fromPosition(
+            //   TextPosition(
+            //     offset: textEditingController.text.length,
+            //   ),
+            // );
+            // setState(() {});
+          },
+        ),
+      for (final emote in matchingEmotes)
+        AutocompletionItem(
+          type: AutocompletionType.emote,
+          prefix: Image.network(emote.mipmap.last, width: 24.0, height: 24.0),
+          shortened: Image.network(emote.mipmap.last, width: 24.0, height: 24.0),
+          title: emote.name,
+          subtitle: emote.provider.name,
+          onTap: () {
+            final splits = textEditingController.text.split(' ');
+            splits.removeLast();
+            splits.add('${emote.code ?? emote.name} ');
+            textEditingController.text = splits.join(' ');
+            textEditingController.selection = TextSelection.fromPosition(
+              TextPosition(
+                offset: textEditingController.text.length,
+              ),
+            );
+            setState(() {});
+          },
+        ),
+    ];
   }
 
   @override
@@ -91,42 +166,88 @@ class ChannelViewState extends State<ChannelView> {
                         ],
                       ),
                     ),
-                  if (textEditingController.text.split(' ').last.length >= 2 && (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).any((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase())))
-                    Ink(
-                      color: Theme.of(context).colorScheme.secondaryContainer,
-                      child: SizedBox(
-                        height: 32.0 + 24.0,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            for (final emote in (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).where((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase())))
-                              Tooltip(
-                                message: emote.name,
-                                child: InkWell(
-                                  onTap: () {
-                                    final splits = textEditingController.text.split(' ');
-                                    splits.removeLast();
-                                    splits.add('${emote.code ?? emote.name} ');
-                                    textEditingController.text = splits.join(' ');
-                                    textEditingController.selection = TextSelection.fromPosition(
-                                      TextPosition(
-                                        offset: textEditingController.text.length,
-                                      ),
-                                    );
-                                    setState(() {});
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Image.network(
-                                      emote.mipmap.last,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
+                  Surface(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxHeight: 56.0 * 4.5),
+                      child: ListView(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          for (final autocompletionItem in getAutocompletionItems())
+                            Tile(
+                              onTap: autocompletionItem.onTap,
+                              onLongPress: autocompletionItem.onLongPress,
+                              prefix: autocompletionItem.prefix,
+                              title: autocompletionItem.title,
+                              subtitle: autocompletionItem.subtitle,
+                            ),
+                        ],
                       ),
                     ),
+                  ),
+                  Surface(
+                    type: SurfaceType.tertiary,
+                    child: SizedBox(
+                      height: 56.0,
+                      child: ListView(
+                        padding: EdgeInsets.zero,
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          for (final autocompletionItem in getAutocompletionItems())
+                            InkWell(
+                              onTap: autocompletionItem.onTap,
+                              onLongPress: autocompletionItem.onLongPress,
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(minWidth: 56.0),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: autocompletionItem.shortened,
+                                ),
+                              ),
+                              // title: autocompletionItem.title,
+                              // subtitle: autocompletionItem.subtitle,
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  // if (textEditingController.text.split(' ').last.length >= 2 && (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).any((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase())))
+                  //   Ink(
+                  //     color: Theme.of(context).colorScheme.secondaryContainer,
+                  //     child: SizedBox(
+                  //       height: 32.0 + 24.0,
+                  //       child: ListView(
+                  //         scrollDirection: Axis.horizontal,
+                  //         children: [
+                  //           for (final emote in (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).where((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase())))
+                  //             Tooltip(
+                  //               message: emote.name,
+                  //               child: InkWell(
+                  //                 onTap: () {
+                  //                   final splits = textEditingController.text.split(' ');
+                  //                   splits.removeLast();
+                  //                   splits.add('${emote.code ?? emote.name} ');
+                  //                   textEditingController.text = splits.join(' ');
+                  //                   textEditingController.selection = TextSelection.fromPosition(
+                  //                     TextPosition(
+                  //                       offset: textEditingController.text.length,
+                  //                     ),
+                  //                   );
+                  //                   setState(() {});
+                  //                 },
+                  //                 child: Padding(
+                  //                   padding: const EdgeInsets.all(12.0),
+                  //                   child: Image.network(
+                  //                     emote.mipmap.last,
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
                   if (emoteKeyboard)
                     SizedBox(
                       height: 200.0,
