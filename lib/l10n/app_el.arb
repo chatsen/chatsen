@@ -1,68 +1,80 @@
 {
-    "chatsen": "Chatsen",
-    "loggedInVia": "Συνδέθηκε μέσω {provider}",
-    "@loggedInVia": {
-        "placeholders": {
-            "provider": {}
-        }
-    },
-    "termsOfService": "Όροι Χρήσης",
-    "privacyPolicy": "Πολιτική Απορρήτου",
-    "settings": "Ρυθμίσεις",
-    "expiresNever": "Δεν λήγει ποτέ",
-    "expiresIn": "Λήγει σε {time}",
-    "@expiresIn": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "close": "Κλείσιμο",
-    "add": "Προσθήκη",
-    "cancel": "Ακύρωση",
-    "tokenInput": "Εισαγωγή token",
-    "account": "Λογαριασμός",
-    "refreshAccount": "Ανανέωση λογαριασμού",
-    "removeAccount": "Αφαίρεση λογαριασμού",
-    "addAnotherAccount": "Προσθήκη άλλου λογαριασμού",
-    "verifiedUserData": "Επαληθεύτηκαν τα δεδομένα χρήστη!",
-    "loggedInAs": "Συνδεθήκατε ως {user}",
-    "@loggedInAs": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "anErrorHasOccuredWhenVerifyingUserData": "Ένα σφάλμα συνέβη κατά την επαλήθευση δεδομένων χρήστη:",
-    "verifyingUserData": "Επαλήθευση δεδομένων χρήστη...",
-    "verifiedUserToken": "Επαληθεύτηκε το token χρήστη!",
-    "anErrorHasOccuredWhenVerifyingUserToken": "Ένα σφάλμα συνέβη κατά την επαλήθευση του token χρήστη:",
-    "verifyingUserToken": "Επαλήθευση token χρήστη...",
-    "searchForChannels": "Αναζήτηση για κανάλια",
-    "recommendedChannels": "Προτεινόμενα κανάλια",
-    "popularChannels": "Δημοφιλή κανάλια",
-    "channel": "Κανάλι",
-    "leaveChannel": "Αποχώρηση από κανάλι",
-    "joinUser": "Συμμετοχή στο {user}",
-    "@joinUser": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "spellCheckFailed": "Ο ορθογραφικός έλεγχος απέτυχε! Μήπως εννοούσατε να αναζητήσετε για {username};",
-    "@spellCheckFailed": {
-        "placeholders": {
-            "username": {}
-        }
-    },
-    "joinChannelName": "Συμμετοχή στο {channel}",
-    "@joinChannelName": {
-        "placeholders": {
-            "channel": {}
-        }
-    },
-    "sendMessageIn": "Στείλτε μήνυμα στο {channel}",
-    "@sendMessageIn": {
-        "placeholders": {
-            "channel": {}
-        }
+  "chatsen": "Chatsen",
+  "loggedInVia": "Συνδέθηκε μέσω {provider}",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
     }
+  },
+  "termsOfService": "Όροι Χρήσης",
+  "privacyPolicy": "Πολιτική Απορρήτου",
+  "settings": "Ρυθμίσεις",
+  "expiresNever": "Δεν λήγει ποτέ",
+  "expiresIn": "Λήγει σε {time}",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "Κλείσιμο",
+  "add": "Προσθήκη",
+  "cancel": "Ακύρωση",
+  "tokenInput": "Εισαγωγή token",
+  "account": "Λογαριασμός",
+  "refreshAccount": "Ανανέωση λογαριασμού",
+  "removeAccount": "Αφαίρεση λογαριασμού",
+  "addAnotherAccount": "Προσθήκη άλλου λογαριασμού",
+  "verifiedUserData": "Επαληθεύτηκαν τα δεδομένα χρήστη!",
+  "loggedInAs": "Συνδεθήκατε ως {user}",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "Ένα σφάλμα συνέβη κατά την επαλήθευση δεδομένων χρήστη:",
+  "verifyingUserData": "Επαλήθευση δεδομένων χρήστη...",
+  "verifiedUserToken": "Επαληθεύτηκε το token χρήστη!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Ένα σφάλμα συνέβη κατά την επαλήθευση του token χρήστη:",
+  "verifyingUserToken": "Επαλήθευση token χρήστη...",
+  "searchForChannels": "Αναζήτηση για κανάλια",
+  "recommendedChannels": "Προτεινόμενα κανάλια",
+  "popularChannels": "Δημοφιλή κανάλια",
+  "channel": "Κανάλι",
+  "leaveChannel": "Αποχώρηση από κανάλι",
+  "joinUser": "Συμμετοχή στο {user}",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "Ο ορθογραφικός έλεγχος απέτυχε! Μήπως εννοούσατε να αναζητήσετε για {username};",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "Συμμετοχή στο {channel}",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "Στείλτε μήνυμα στο {channel}",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }
