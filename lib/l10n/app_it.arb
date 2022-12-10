@@ -65,9 +65,9 @@
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
+  "light": "Chiaro",
+  "dark": "Scuro",
+  "system": "Sistema",
   "appearance": "Appearance",
   "highContrast": "High contrast",
   "playStream": "Play stream",
@@ -76,5 +76,5 @@
   "customCommands": "Custom commands",
   "commandTrigger": "Trigger",
   "command": "Command",
-  "save": "Save"
+  "save": "Salva"
 }
