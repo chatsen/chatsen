@@ -39,9 +39,9 @@
   "searchForChannels": "Suche nach Kanälen",
   "recommendedChannels": "Empfohlene Kanäle",
   "popularChannels": "Beliebte Kanäle",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
-  "joinUser": "Join {user}",
+  "channel": "Kanal",
+  "leaveChannel": "Kanal verlassen",
+  "joinUser": "{user} öffnen",
   "@joinUser": {
     "placeholders": {
       "user": {}
@@ -53,7 +53,7 @@
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "{channel} öffnen",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
@@ -70,11 +70,11 @@
   "system": "System",
   "appearance": "Darstellung",
   "highContrast": "Hoher Kontrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "playStream": "Stream starten",
+  "stopStream": "Stream stoppen",
+  "customCommand": "Eigener Befehl",
+  "customCommands": "Eigene Befehle",
+  "commandTrigger": "Auslöser",
+  "command": "Befehl",
+  "save": "Speichern"
 }
