@@ -39,34 +39,34 @@
   "searchForChannels": "Söker efter kanaler",
   "recommendedChannels": "Rekommenderad kanaler",
   "popularChannels": "Populära kanaler",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
-  "joinUser": "Join {user}",
+  "channel": "Kanal",
+  "leaveChannel": "Lämna Kanal",
+  "joinUser": "Användare {user}",
   "@joinUser": {
     "placeholders": {
       "user": {}
     }
   },
-  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "spellCheckFailed": "Stavningsfel misslyckades! Menade du att söka efter {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "Delta {channel}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Skicka meddelande i {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
+  "light": "Ljus",
+  "dark": "Mörk",
   "system": "System",
   "appearance": "Appearance",
   "highContrast": "High contrast",
