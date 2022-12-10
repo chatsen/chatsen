@@ -59,17 +59,17 @@
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Nachricht in {channel} senden",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
+  "light": "Hell",
+  "dark": "Dunkel",
   "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
+  "appearance": "Darstellung",
+  "highContrast": "Hoher Kontrast",
   "playStream": "Play stream",
   "stopStream": "Stop stream",
   "customCommand": "Custom command",
