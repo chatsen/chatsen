@@ -68,13 +68,13 @@
   "light": "Ljus",
   "dark": "Mörk",
   "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "appearance": "Utseende",
+  "highContrast": "Hög kontrast",
+  "playStream": "Spela ström",
+  "stopStream": "Sluta ström",
+  "customCommand": "Anpassat kommando",
+  "customCommands": "Anpassade kommandon",
+  "commandTrigger": "Utlösare",
+  "command": "Kommandot",
+  "save": "Spara"
 }
