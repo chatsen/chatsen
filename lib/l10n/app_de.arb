@@ -1,13 +1,13 @@
 {
   "chatsen": "Chatsen",
-  "loggedInVia": "Eingeloggt über {provider}",
+  "loggedInVia": "Mit {provider} angemeldet",
   "@loggedInVia": {
     "placeholders": {
       "provider": {}
     }
   },
   "termsOfService": "Nutzungsbedingungen",
-  "privacyPolicy": "Datenschutzrichtlinie",
+  "privacyPolicy": "Datenschutzerklärung",
   "settings": "Einstellungen",
   "expiresNever": "Läuft nie ab",
   "expiresIn": "Läuft ab in {time}",
@@ -20,9 +20,9 @@
   "add": "Hinzufügen",
   "cancel": "Abbrechen",
   "tokenInput": "Token eingeben",
-  "account": "Benutzerkonto",
-  "refreshAccount": "Benutzerkonto aktualisieren",
-  "removeAccount": "Benutzerkonto entfernen",
+  "account": "Account",
+  "refreshAccount": "Login aktualisieren",
+  "removeAccount": "Account entfernen",
   "addAnotherAccount": "Weiteren Account hinzufügen",
   "verifiedUserData": "Benutzerdaten verifiziert!",
   "loggedInAs": "Eingeloggt als {user}",
@@ -47,7 +47,7 @@
       "user": {}
     }
   },
-  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "spellCheckFailed": "Rechtschreibprüfung fehlgeschlagen! Meinen Sie {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
