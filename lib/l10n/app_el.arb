@@ -65,16 +65,16 @@
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "light": "Φωτεινό",
+  "dark": "Σκοτεινό",
+  "system": "Σύστημα",
+  "appearance": "Εμφάνιση",
+  "highContrast": "Υψηλή αντίθεση",
+  "playStream": "Αναπαραγωγή ροής",
+  "stopStream": "Διακοπή ροής",
+  "customCommand": "Προσαρμοσμένη εντολή",
+  "customCommands": "Προσαρμοσμένες εντολές",
+  "commandTrigger": "Ενεργοποίηση",
+  "command": "Εντολή",
+  "save": "Αποθήκευση"
 }
