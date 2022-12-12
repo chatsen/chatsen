@@ -59,22 +59,22 @@
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Enviar mensaje en {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
+  "light": "Claro",
+  "dark": "Oscuro",
+  "system": "Sistema",
   "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
+  "highContrast": "Contraste alto",
+  "playStream": "Reproducir stream",
+  "stopStream": "Detener stream",
+  "customCommand": "Comando personalizado",
+  "customCommands": "Comandos personalizados",
   "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "command": "Comando",
+  "save": "Guardar"
 }
