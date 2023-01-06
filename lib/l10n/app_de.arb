@@ -1,6 +1,6 @@
 {
   "chatsen": "Chatsen",
-  "loggedInVia": "Mit {provider} angemeldet",
+  "loggedInVia": "Eingeloggt über {provider}",
   "@loggedInVia": {
     "placeholders": {
       "provider": {}
@@ -21,7 +21,7 @@
   "cancel": "Abbrechen",
   "tokenInput": "Token eingeben",
   "account": "Account",
-  "refreshAccount": "Login aktualisieren",
+  "refreshAccount": "Account aktualisieren",
   "removeAccount": "Account entfernen",
   "addAnotherAccount": "Weiteren Account hinzufügen",
   "verifiedUserData": "Benutzerdaten verifiziert!",
@@ -41,7 +41,7 @@
   "popularChannels": "Beliebte Kanäle",
   "channel": "Kanal",
   "leaveChannel": "Kanal verlassen",
-  "joinUser": "{user} öffnen",
+  "joinUser": "{user} beitreten",
   "@joinUser": {
     "placeholders": {
       "user": {}
@@ -53,7 +53,7 @@
       "username": {}
     }
   },
-  "joinChannelName": "{channel} hinzufügen",
+  "joinChannelName": "{channel} beitreten",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
@@ -70,7 +70,7 @@
   "system": "System",
   "appearance": "Darstellung",
   "highContrast": "Hoher Kontrast",
-  "playStream": "Stream starten",
+  "playStream": "Stream abspielen",
   "stopStream": "Stream stoppen",
   "customCommand": "Eigener Befehl",
   "customCommands": "Eigene Befehle",
