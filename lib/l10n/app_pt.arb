@@ -47,33 +47,33 @@
       "user": {}
     }
   },
-  "spellCheckFailed": "A verificação ortográfica falhou! Querias pesquisar por {username}?",
+  "spellCheckFailed": "A verificação ortográfica falhou! Querias pesquisar por {nome do usuário}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "Junte-se ao {canal}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Envia mensagem no {canal}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
+  "light": "Claro",
+  "dark": "Escuro",
+  "system": "Sistema",
+  "appearance": "Aparência",
+  "highContrast": "Alto contraste",
+  "playStream": "Reproduzir a transmissão",
+  "stopStream": "Parar transmissão",
+  "customCommand": "Comando personalizado",
+  "customCommands": "Comandos personalizados",
   "commandTrigger": "Trigger",
   "command": "Command",
   "save": "Save"
