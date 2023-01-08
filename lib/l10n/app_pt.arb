@@ -1,16 +1,16 @@
 {
   "chatsen": "Chatsen",
-  "loggedInVia": "Conectado via {provider}",
+  "loggedInVia": "Entrou via {provider}",
   "@loggedInVia": {
     "placeholders": {
       "provider": {}
     }
   },
-  "termsOfService": "Termos de Serviço",
-  "privacyPolicy": "Política de Privacidade",
-  "settings": "Configurações",
+  "termsOfService": "Termos de serviço",
+  "privacyPolicy": "Política de privacidade",
+  "settings": "Definições",
   "expiresNever": "Nunca expira",
-  "expiresIn": "Expira em {time}",
+  "expiresIn": "Expira em{time}",
   "@expiresIn": {
     "placeholders": {
       "time": {}
@@ -23,58 +23,58 @@
   "account": "Conta",
   "refreshAccount": "Atualizar conta",
   "removeAccount": "Remover conta",
-  "addAnotherAccount": "Adicionar outra conta",
-  "verifiedUserData": "Dados do usuário verificados!",
-  "loggedInAs": "Logado como {user}",
+  "addAnotherAccount": "Adicionar nova conta",
+  "verifiedUserData": "Dados de utilizador verificados!",
+  "loggedInAs": "Entrou como {user}",
   "@loggedInAs": {
     "placeholders": {
       "user": {}
     }
   },
-  "anErrorHasOccuredWhenVerifyingUserData": "Ocorreu um erro ao verificar os dados do usuário:",
-  "verifyingUserData": "Verificando dados do usuário...",
-  "verifiedUserToken": "Token do usuário verificado!",
-  "anErrorHasOccuredWhenVerifyingUserToken": "Ocorreu um erro ao verificar o token do usuário:",
-  "verifyingUserToken": "Verificando token de usuário...",
-  "searchForChannels": "Procurar por canais",
+  "anErrorHasOccuredWhenVerifyingUserData": "Ocorreu um erro ao verificar dados de utilizador:",
+  "verifyingUserData": "A verificar dados de utilizador...",
+  "verifiedUserToken": "Token de utilizador verificada!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Ocorreu um erro ao verificar o token do utilizador:",
+  "verifyingUserToken": "A verificar token do utilizador...",
+  "searchForChannels": "Procurar canais",
   "recommendedChannels": "Canais recomendados",
   "popularChannels": "Canais populares",
   "channel": "Canal",
   "leaveChannel": "Sair do canal",
-  "joinUser": "Entrar {user}",
+  "joinUser": "Juntar-se{user}",
   "@joinUser": {
     "placeholders": {
       "user": {}
     }
   },
-  "spellCheckFailed": "A verificação ortográfica falhou! Você queria pesquisar por {username}?",
+  "spellCheckFailed": "A verificação ortográfica falhou! Querias pesquisar por {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Conectar {channel}",
+  "joinChannelName": "Join {channel}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
     }
   },
-  "sendMessageIn": "Enviar mensagem em {channel}",
+  "sendMessageIn": "Send message in {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Claro",
-  "dark": "Escuro",
-  "system": "Sistema",
-  "appearance": "Aparência",
-  "highContrast": "Alto contraste",
-  "playStream": "Reproduzir transmissão",
-  "stopStream": "Parar transmissão",
-  "customCommand": "Comando personalizado",
-  "customCommands": "Comandos personalizados",
-  "commandTrigger": "Gatilho",
-  "command": "Comando",
-  "save": "Salvar"
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save"
 }
