@@ -1,6 +1,6 @@
 {
   "chatsen": "Chatsen",
-  "loggedInVia": "Logged in via {provider}",
+  "loggedInVia": "Prijavljeno preko {provider}",
   "@loggedInVia": {
     "placeholders": {
       "provider": {}
