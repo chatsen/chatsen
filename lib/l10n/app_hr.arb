@@ -6,75 +6,75 @@
       "provider": {}
     }
   },
-  "termsOfService": "Terms of Service",
-  "privacyPolicy": "Privacy Policy",
-  "settings": "Settings",
-  "expiresNever": "Never expires",
-  "expiresIn": "Expires in {time}",
+  "termsOfService": "Uvjeti korištenja",
+  "privacyPolicy": "Pravila o zaštiti privatnosti",
+  "settings": "Postavke",
+  "expiresNever": "Nikada ne ističe",
+  "expiresIn": "Ističe za {time}",
   "@expiresIn": {
     "placeholders": {
       "time": {}
     }
   },
-  "close": "Close",
-  "add": "Add",
-  "cancel": "Cancel",
-  "tokenInput": "Token input",
-  "account": "Account",
-  "refreshAccount": "Refresh account",
-  "removeAccount": "Remove account",
-  "addAnotherAccount": "Add another account",
-  "verifiedUserData": "Verified user data!",
-  "loggedInAs": "Logged in as {user}",
+  "close": "Zatvori",
+  "add": "Dodaj",
+  "cancel": "Poništi",
+  "tokenInput": "Unos tokena",
+  "account": "Račun",
+  "refreshAccount": "Osvježavanje računa",
+  "removeAccount": "Ukloni račun",
+  "addAnotherAccount": "Dodaj drugi račun",
+  "verifiedUserData": "Provjereni korisnički podaci!",
+  "loggedInAs": "Prijavljen kao {user}",
   "@loggedInAs": {
     "placeholders": {
       "user": {}
     }
   },
-  "anErrorHasOccuredWhenVerifyingUserData": "An error has occurred when verifying user data:",
-  "verifyingUserData": "Verifying user data...",
-  "verifiedUserToken": "Verified user token!",
-  "anErrorHasOccuredWhenVerifyingUserToken": "An error has occurred when verifying user token:",
-  "verifyingUserToken": "Verifying user token...",
-  "searchForChannels": "Search for channels",
-  "recommendedChannels": "Recommended channels",
-  "popularChannels": "Popular channels",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
-  "joinUser": "Join {user}",
+  "anErrorHasOccuredWhenVerifyingUserData": "Došlo je do pogreške prilikom provjere korisničkih podataka:",
+  "verifyingUserData": "Provjera korisničkih podataka...",
+  "verifiedUserToken": "Potvrđen korisnički token!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Dogodila se greška prilikom provjere korisničkog tokena:",
+  "verifyingUserToken": "Provjera korisničkog tokena...",
+  "searchForChannels": "Pretraži kanale",
+  "recommendedChannels": "Preporučeni kanali",
+  "popularChannels": "Popularni kanali",
+  "channel": "Kanal",
+  "leaveChannel": "Napusti kanal",
+  "joinUser": "Pridruži se {user}",
   "@joinUser": {
     "placeholders": {
       "user": {}
     }
   },
-  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "spellCheckFailed": "Provjerite pravopis! Jeste li mislili {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "Pridruži se {channel}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Pošalji poruku u {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "light": "Svjetla",
+  "dark": "Tamna",
+  "system": "Tema sustava",
+  "appearance": "Izgled",
+  "highContrast": "Visoki kontrast",
+  "playStream": "Reproduciraj stream",
+  "stopStream": "Zaustavi stream",
+  "customCommand": "Prilagođena naredba",
+  "customCommands": "Prilagođene naredbe",
+  "commandTrigger": "Okidač",
+  "command": "Naredba",
+  "save": "Spremi"
 }
