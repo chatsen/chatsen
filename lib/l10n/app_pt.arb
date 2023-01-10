@@ -74,7 +74,7 @@
   "stopStream": "Parar transmissão",
   "customCommand": "Comando personalizado",
   "customCommands": "Comandos personalizados",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "commandTrigger": "Desencadear",
+  "command": "Comando",
+  "save": "Salvar"
 }
