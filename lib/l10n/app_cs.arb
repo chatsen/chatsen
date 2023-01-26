@@ -72,9 +72,9 @@
   "highContrast": "High contrast",
   "playStream": "Play stream",
   "stopStream": "Stop stream",
-  "customCommand": "Custom command",
+  "customCommand": "Vlastní příkaz",
   "customCommands": "Custom commands",
   "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "command": "Příkaz",
+  "save": "Uložit"
 }
