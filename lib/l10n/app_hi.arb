@@ -6,25 +6,25 @@
       "provider": {}
     }
   },
-  "termsOfService": "Terms of Service",
-  "privacyPolicy": "Privacy Policy",
-  "settings": "Settings",
-  "expiresNever": "Never expires",
+  "termsOfService": "सेवा की शर्तें",
+  "privacyPolicy": "गोपनीयता नीति",
+  "settings": "सेटिंग्स",
+  "expiresNever": "कभी समाप्त नहीं",
   "expiresIn": "Expires in {time}",
   "@expiresIn": {
     "placeholders": {
       "time": {}
     }
   },
-  "close": "Close",
-  "add": "Add",
-  "cancel": "Cancel",
+  "close": "बंद करें",
+  "add": "जोडें",
+  "cancel": "कैंसिल",
   "tokenInput": "Token input",
-  "account": "Account",
-  "refreshAccount": "Refresh account",
-  "removeAccount": "Remove account",
-  "addAnotherAccount": "Add another account",
-  "verifiedUserData": "Verified user data!",
+  "account": "खाता",
+  "refreshAccount": "खाते रिफ्रेश हो रहें हैं",
+  "removeAccount": "खाता हटाएं",
+  "addAnotherAccount": "एक और खाता जोड़ें",
+  "verifiedUserData": "लोग इन डेटा को परखना",
   "loggedInAs": "Logged in as {user}",
   "@loggedInAs": {
     "placeholders": {
@@ -32,16 +32,16 @@
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "An error has occurred when verifying user data:",
-  "verifyingUserData": "Verifying user data...",
-  "verifiedUserToken": "Verified user token!",
+  "verifyingUserData": "लोग इन डेटा को परखना",
+  "verifiedUserToken": "लोग इन डेटा को परखना",
   "anErrorHasOccuredWhenVerifyingUserToken": "An error has occurred when verifying user token:",
-  "verifyingUserToken": "Verifying user token...",
-  "searchForChannels": "Search for channels",
-  "recommendedChannels": "Recommended channels",
-  "popularChannels": "Popular channels",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
-  "joinUser": "Join {user}",
+  "verifyingUserToken": "लोग इन डेटा को परखना",
+  "searchForChannels": "किसी चैनल को खोजें",
+  "recommendedChannels": "अनुशंसित चैनल",
+  "popularChannels": "लोकप्रिय लाइव चैनल",
+  "channel": "चैनल्स",
+  "leaveChannel": "चैनल छोड़ दें?",
+  "joinUser": "{user} चैनल से जुड़े",
   "@joinUser": {
     "placeholders": {
       "user": {}
@@ -53,7 +53,7 @@
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "{channel} चैनल से जुड़े",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
@@ -65,16 +65,16 @@
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
+  "light": "लाइट",
+  "dark": "डार्क",
+  "system": "सिस्टम",
+  "appearance": "स्वरूप",
+  "highContrast": "जादा कॉन्ट्रास्ट",
   "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
+  "stopStream": "स्ट्रीम रोक दें?",
+  "customCommand": "कस्टम कमांड्स",
+  "customCommands": "कस्टम कमांड्स",
   "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "command": "आदेश:",
+  "save": "सेव करें"
 }
