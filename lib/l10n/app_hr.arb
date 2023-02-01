@@ -74,7 +74,62 @@
   "stopStream": "Zaustavi stream",
   "customCommand": "Prilagođena naredba",
   "customCommands": "Prilagođene naredbe",
+  "newCustomCommand": "New custom command",
   "commandTrigger": "Okidač",
   "command": "Naredba",
-  "save": "Spremi"
+  "save": "Spremi",
+  "browserStreamSettings": "Browser/Stream Settings",
+  "addPage": "Add page",
+  "channelStream": "{channel}'s stream",
+  "@channelStream": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "openInBrowser": "Open in browser",
+  "messageAppearance": "Message appearance",
+  "showTimestamps": "Show timestamps",
+  "compactMessages": "Compact messages",
+  "messageTrigger": "Message trigger",
+  "pattern": "Pattern",
+  "mention": "Mention",
+  "block": "Block",
+  "enableRegex": "Enable regex",
+  "caseSensitive": "Case sensitive",
+  "messageTriggers": "Message triggers",
+  "newMessageTrigger": "New message trigger",
+  "reply": "Reply",
+  "copyText": "Copy text",
+  "copyTextSubtitle": "Hold to copy message text with username",
+  "deleteMessage": "Delete message",
+  "mentionUser": "Mention user",
+  "copyMessageId": "Copy message ID",
+  "theme": "Theme",
+  "userTrigger": "User trigger",
+  "userTriggers": "User triggers",
+  "chatHistory": "Chat history",
+  "login": "Login",
+  "newUserTrigger": "New user trigger",
+  "ban": "Ban",
+  "unban": "Unban",
+  "timeoutUserForDuration": "Timeout user for {duration}",
+  "@timeoutUserForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "chatCleared": "Chat was cleared",
+  "permabanned": "permabanned",
+  "bannedForDuration": "banned for {duration}",
+  "@bannedForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "replyingTo": "Replying to",
+  "blockedMessage": "Blocked message",
+  "showMessage": "Show message",
+  "hideMessage": "Hide message",
+  "scrollToBottom": "Scroll to bottom",
+  "startUsingTheApp": "To start using the app, add an account below."
 }
