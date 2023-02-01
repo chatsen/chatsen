@@ -75,7 +75,7 @@
   "customCommand": "Προσαρμοσμένη εντολή",
   "customCommands": "Προσαρμοσμένες εντολές",
   "newCustomCommand": "Νέα προσαρμοσμένη εντολή",
-  "commandTrigger": "Ενεργοποίηση",
+  "commandTrigger": "Trigger",
   "command": "Εντολή",
   "save": "Αποθήκευση",
   "browserStreamSettings": "Ρυθμίσεις Περιηγητή/Ροής",
