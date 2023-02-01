@@ -5,6 +5,7 @@ import 'package:chatsen/modal/message_appearance.dart';
 import 'package:chatsen/modal/message_triggers.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/modal.dart';
 import '../components/tile.dart';
@@ -23,40 +24,40 @@ class SettingsModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: 'Settings'),
+              const ModalHeader(title: AppLocalizations.of(context)!.settings),
               // const Separator(),
               Tile(
-                title: 'Appearance',
+                title: AppLocalizations.of(context)!.appearance,
                 prefix: const Icon(Icons.palette_outlined),
                 onTap: () => Modal.show(context: context, child: const ApplicationAppearanceModal()),
               ),
               Tile(
-                title: 'Theme',
+                title: AppLocalizations.of(context)!.theme,
                 prefix: const Icon(Icons.palette_outlined),
                 onTap: () => Modal.show(context: context, child: const ApplicationThemeModal()),
               ),
               Tile(
-                title: 'Message Appearance',
+                title: AppLocalizations.of(context)!.messageAppearance,
                 prefix: const Icon(Icons.font_download_rounded),
                 onTap: () => Modal.show(context: context, child: const MessageAppearanceModal()),
               ),
               Tile(
-                title: 'Custom Commands',
+                title: AppLocalizations.of(context)!.customCommands,
                 prefix: const Icon(Icons.terminal_rounded),
                 onTap: () => Modal.show(context: context, child: const CustomCommandsModal()),
               ),
               Tile(
-                title: 'Message Triggers',
+                title: AppLocalizations.of(context)!.messageTriggers,
                 prefix: const Icon(Icons.message_rounded),
                 onTap: () => Modal.show(context: context, child: const MessageTriggersModal()),
               ),
               Tile(
-                title: 'User Triggers',
+                title: AppLocalizations.of(context)!.userTriggers,
                 prefix: const Icon(Icons.person_outline_rounded),
                 onTap: () => Modal.show(context: context, child: const UserTriggersModal()),
               ),
               BoxSwitchTile(
-                title: 'Chat history',
+                title: AppLocalizations.of(context)!.chatHistory,
                 prefix: const Icon(Icons.history),
                 box: box,
                 boxDefault: true,

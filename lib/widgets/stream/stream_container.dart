@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'dart:math' as math;
 
@@ -141,7 +142,7 @@ class _FloatingStreamButtonState extends State<FloatingStreamButton> {
       left: x.clamp(mediaQuery.viewPadding.left, mediaQuery.size.width - mediaQuery.viewPadding.right - 32.0),
       top: y.clamp(mediaQuery.viewPadding.top, mediaQuery.size.height - mediaQuery.viewPadding.bottom - 32.0),
       child: Tooltip(
-        message: 'Browser/Stream Settings',
+        message: AppLocalizations.of(context)!.browserStreamSettings,
         child: GestureDetector(
           onPanUpdate: (details) {
             setState(() {

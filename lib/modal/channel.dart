@@ -35,7 +35,7 @@ class ChannelModal extends StatelessWidget {
                 browserState.emit([
                   ...browserState.state,
                   BrowserTab(
-                    name: '${channel.name}\'s stream',
+                    name: AppLocalizations.of(context)!.channelStream(channel.name),
                     url: 'https://player.twitch.tv/?channel=${channel.name.substring(1)}&enableExtensions=true&muted=true&parent=chatsen.app&player=popout&volume=1.0',
                   ),
                 ]);

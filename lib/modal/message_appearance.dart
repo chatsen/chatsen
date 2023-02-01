@@ -2,6 +2,7 @@ import 'package:chatsen/components/tile.dart';
 import 'package:chatsen/components/toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/boxlistener.dart';
 import '../data/settings/message_appearance.dart';
@@ -18,10 +19,10 @@ class MessageAppearanceModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: 'Message Settings'),
+              const ModalHeader(title: AppLocalizations.of(context)!.messageAppearance),
               Tile(
                 prefix: const Icon(Icons.av_timer_rounded),
-                title: 'Show timestamps',
+                title: AppLocalizations.of(context)!.showTimestamps,
                 suffix: Toggle(
                   value: messageAppearance.timestamps,
                   onChanged: (value) {
@@ -36,7 +37,7 @@ class MessageAppearanceModal extends StatelessWidget {
               ),
               Tile(
                 prefix: const Icon(Icons.view_compact_outlined),
-                title: 'Compact messages',
+                title: AppLocalizations.of(context)!.compactMessages,
                 suffix: Toggle(
                   value: messageAppearance.compact,
                   onChanged: (value) {

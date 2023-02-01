@@ -1,6 +1,7 @@
 import 'package:chatsen/data/user_trigger.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/boxlistener.dart';
 import '../components/modal.dart';
@@ -18,7 +19,7 @@ class UserTriggersModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: 'User Triggers'),
+              const ModalHeader(title: AppLocalizations.of(context)!.userTriggers),
               for (final userTrigger in box.values.cast<UserTrigger>()) ...[
                 Tile(
                   onTap: () => Modal.show(
@@ -40,7 +41,7 @@ class UserTriggersModal extends StatelessWidget {
                   child: const UserTriggerModal(),
                 ),
                 prefix: const Icon(Icons.add_rounded),
-                title: 'Create new user trigger',
+                title: AppLocalizations.of(context)!.newUserTrigger,
               ),
             ],
           );

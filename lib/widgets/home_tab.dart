@@ -122,7 +122,7 @@ class _HomeTabState extends State<HomeTab> {
                         ),
                   ),
                   Text(
-                    'To start using the app, add an account below.',
+                    AppLocalizations.of(context)!.startUsingTheApp,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           color: Theme.of(context).colorScheme.onBackground,
                         ),

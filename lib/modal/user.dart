@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../api/chatsen/chatsen.dart';
 import '../api/chatsen/chatsen_user.dart';
@@ -35,7 +36,7 @@ class UserModal extends StatelessWidget {
                   child: Row(
                     children: [
                       Tooltip(
-                        message: 'Ban',
+                        message: AppLocalizations.of(context)!.ban,
                         child: IconButton(
                           icon: const Icon(
                             Icons.block_rounded,
@@ -63,7 +64,7 @@ class UserModal extends StatelessWidget {
                                   '1w': const Duration(days: 7),
                                 }.entries)
                                   Tooltip(
-                                    message: 'Timeout user for ${time.value.toString().split('.').first}',
+                                    message: AppLocalizations.of(context)!.timeoutUserForDuration(time.value.toString().split('.').first),
                                     child: TextButton(
                                       child: Text(time.key),
                                       onPressed: () => channel?.send('/timeout ${snapshot.data!.login} ${time.value.inSeconds}'),
@@ -75,7 +76,7 @@ class UserModal extends StatelessWidget {
                         ),
                       ),
                       Tooltip(
-                        message: 'Unban',
+                        message: AppLocalizations.of(context)!.unban,
                         child: IconButton(
                           icon: const Icon(
                             Icons.block_rounded,

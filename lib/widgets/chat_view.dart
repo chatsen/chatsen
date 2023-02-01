@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/boxlistener.dart';
 import '../tmi/channel/channel_message.dart';
@@ -103,7 +104,7 @@ class _ChatViewState extends State<ChatView> {
                                 ),
                                 const SizedBox(width: 4.0),
                                 Text(
-                                  'Scroll to bottom',
+                                  AppLocalizations.of(context)!.scrollToBottom,
                                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                         color: Theme.of(context).colorScheme.onTertiaryContainer,
                                       ),

@@ -39,13 +39,13 @@ class _UserTriggerModalState extends State<UserTriggerModal> {
   Widget build(BuildContext context) => ListView(
         shrinkWrap: true,
         children: [
-          const ModalHeader(title: 'User Trigger'),
+          const ModalHeader(title: AppLocalizations.of(context)!.userTrigger),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
             child: TextField(
               controller: patternController,
               decoration: const InputDecoration(
-                labelText: 'Login',
+                labelText: AppLocalizations.of(context)!.login,
                 border: InputBorder.none,
                 filled: true,
               ),
@@ -56,14 +56,14 @@ class _UserTriggerModalState extends State<UserTriggerModal> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ChoiceChip(
-                label: const Text('Mention'),
+                label: const Text(AppLocalizations.of(context)!.mention),
                 selected: type == UserTriggerType.mention,
                 onSelected: (bool selected) => setState(() {
                   type = UserTriggerType.mention;
                 }),
               ),
               ChoiceChip(
-                label: const Text('Block'),
+                label: const Text(AppLocalizations.of(context)!.block),
                 selected: type == UserTriggerType.block,
                 onSelected: (bool selected) => setState(() {
                   type = UserTriggerType.block;
@@ -121,7 +121,7 @@ class _UserTriggerModalState extends State<UserTriggerModal> {
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: Center(
                       child: Text(
-                        'Save',
+                        AppLocalizations.of(context)!.save,
                         style: TextStyle(
                           color: patternController.text.isEmpty ? Theme.of(context).colorScheme.error : Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.bold,

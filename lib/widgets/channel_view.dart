@@ -146,7 +146,7 @@ class ChannelViewState extends State<ChannelView> {
                               children: [
                                 const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (true ? 1.0 : 2.0)),
-                                  child: Text('@ Replying to'),
+                                  child: Text(AppLocalizations.of(context)!.replyingTo),
                                 ),
                                 ChatMessage(message: replyChannelMessageChat!),
                               ],

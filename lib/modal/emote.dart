@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../data/emote.dart';
 import '../providers/emote_provider.dart';
@@ -45,7 +46,7 @@ class EmoteModal extends StatelessWidget {
                   Uri.parse(url!),
                   mode: LaunchMode.externalApplication,
                 ),
-                child: Text('Open in browser'),
+                child: Text(AppLocalizations.of(context)!.openInBrowser),
               ),
           ],
         ),

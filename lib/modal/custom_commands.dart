@@ -42,7 +42,7 @@ class CustomCommandsModal extends StatelessWidget {
                   child: const CustomCommandModal(),
                 ),
                 prefix: const Icon(Icons.add_rounded),
-                title: 'Create new custom command',
+                title: AppLocalizations.of(context)!.newCustomCommand,
               ),
             ],
           );

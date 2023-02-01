@@ -1,6 +1,7 @@
 import 'package:chatsen/data/message_trigger.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/boxlistener.dart';
 import '../components/modal.dart';
@@ -18,7 +19,7 @@ class MessageTriggersModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: 'Message Triggers'),
+              const ModalHeader(title: AppLocalizations.of(context)!.messageTriggers),
               for (final messageTrigger in box.values.cast<MessageTrigger>()) ...[
                 Tile(
                   onTap: () => Modal.show(
@@ -40,7 +41,7 @@ class MessageTriggersModal extends StatelessWidget {
                   child: const MessageTriggerModal(),
                 ),
                 prefix: const Icon(Icons.add_rounded),
-                title: 'Create new message trigger',
+                title: AppLocalizations.of(context)!.newMessageTrigger,
               ),
             ],
           );

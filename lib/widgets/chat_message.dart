@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/modal.dart';
 import '../components/surface.dart';
@@ -57,9 +58,10 @@ class _BlockedChatMessageState extends State<BlockedChatMessage> {
               child: Text.rich(
                 TextSpan(
                   children: [
-                    TextSpan(text: 'Blocked message '),
+                    TextSpan(text: AppLocalizations.of(context)!.blockedMessage),
+                    TextSpan(text: ''),
                     TextSpan(
-                      text: hidden ? 'Show message' : 'Hide message',
+                      text: hidden ? AppLocalizations.of(context)!.showMessage : AppLocalizations.of(context)!.hideMessage,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.primary,
                       ),
@@ -171,7 +173,7 @@ class ChatMessage extends StatelessWidget {
           } else if (message is ChannelMessageNotice) {
             return ChatNoticeChip(messageAppearance: messageAppearance, message: message as ChannelMessageNotice);
           }
-          return Text('Unknown message type: ${message.runtimeType}');
+          return Text('Unhandled message type: ${message.runtimeType}');
         },
       );
 

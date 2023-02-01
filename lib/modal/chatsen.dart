@@ -35,7 +35,7 @@ class ChatsenModal extends StatelessWidget {
                 ModalHeader(
                   title: AppLocalizations.of(context)!.chatsen,
                   trailing: Tooltip(
-                    message: 'Settings',
+                    message: AppLocalizations.of(context)!.settings,
                     child: InkWell(
                       onTap: () async {
                         Navigator.of(context).pop();
