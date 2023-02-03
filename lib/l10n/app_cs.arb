@@ -74,12 +74,12 @@
   "stopStream": "Zastavit vysílání",
   "customCommand": "Vlastní příkaz",
   "customCommands": "Vlastní příkazy",
-  "newCustomCommand": "New custom command",
+  "newCustomCommand": "Nový vlastní příkaz",
   "commandTrigger": "Spouštěč",
   "command": "Příkaz",
   "save": "Uložit",
-  "browserStreamSettings": "Browser/Stream Settings",
-  "addPage": "Add page",
+  "browserStreamSettings": "Prohlížeč/Nastavení Vysílání",
+  "addPage": "Přidat stranu",
   "channelStream": "{channel}'s stream",
   "@channelStream": {
     "placeholders": {
