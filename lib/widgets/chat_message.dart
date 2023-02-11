@@ -10,15 +10,15 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../components/modal.dart';
-import '../components/surface.dart';
-import '../data/emote.dart';
-import '../data/settings/message_appearance.dart';
-import '../modal/message.dart';
-import '../tmi/channel/messages/channel_message_ban.dart';
-import '../tmi/channel/messages/channel_message_notice.dart';
-import '../tmi/channel/messages/embeds/file_embed.dart';
-import '../tmi/channel/messages/embeds/image_embed.dart';
+import '/components/modal.dart';
+import '/components/surface.dart';
+import '/data/emote.dart';
+import '/data/settings/message_appearance.dart';
+import '/modal/message.dart';
+import '/tmi/channel/messages/channel_message_ban.dart';
+import '/tmi/channel/messages/channel_message_notice.dart';
+import '/tmi/channel/messages/embeds/file_embed.dart';
+import '/tmi/channel/messages/embeds/image_embed.dart';
 import '/tmi/channel/channel_message.dart';
 import '/tmi/channel/messages/channel_message_chat.dart';
 import 'channel_view.dart';
@@ -59,7 +59,7 @@ class _BlockedChatMessageState extends State<BlockedChatMessage> {
                 TextSpan(
                   children: [
                     TextSpan(text: AppLocalizations.of(context)!.blockedMessage),
-                    TextSpan(text: ''),
+                    const TextSpan(text: ''),
                     TextSpan(
                       text: hidden ? AppLocalizations.of(context)!.showMessage : AppLocalizations.of(context)!.hideMessage,
                       style: TextStyle(

@@ -1,10 +1,6 @@
-import 'package:chatsen/components/surface.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../data/browser/browser_state.dart';
 import '../../data/browser/browser_tab.dart';
 
 class Browser extends StatelessWidget {

@@ -19,7 +19,7 @@ class MessageAppearanceModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: AppLocalizations.of(context)!.messageAppearance),
+              ModalHeader(title: AppLocalizations.of(context)!.messageAppearance),
               Tile(
                 prefix: const Icon(Icons.av_timer_rounded),
                 title: AppLocalizations.of(context)!.showTimestamps,

@@ -168,7 +168,7 @@ class ChannelViewState extends State<ChannelView> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                const Padding(
+                                Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (true ? 1.0 : 2.0)),
                                   child: Text(AppLocalizations.of(context)!.replyingTo),
                                 ),

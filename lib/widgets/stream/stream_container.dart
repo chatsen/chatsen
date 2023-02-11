@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'dart:math' as math;
-
 import '../../components/modal.dart';
 import '../../components/split.dart';
 import '../../data/browser/browser_state.dart';
@@ -59,7 +57,7 @@ class StreamContainer extends StatelessWidget {
                     browser,
                     Split(
                       axis: Axis.horizontal,
-                      initialFractions: [0.75, 0.25],
+                      initialFractions: const [0.75, 0.25],
                       children: [
                         Container(),
                         MediaQuery.removePadding(
@@ -90,9 +88,9 @@ class StreamContainer extends StatelessWidget {
                       ],
                 children: [
                   SafeArea(
-                    child: browser,
                     right: !horizontal,
                     bottom: horizontal,
+                    child: browser,
                   ),
                   MediaQuery.removePadding(
                     context: context,

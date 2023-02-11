@@ -19,7 +19,7 @@ class UserTriggersModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: AppLocalizations.of(context)!.userTriggers),
+              ModalHeader(title: AppLocalizations.of(context)!.userTriggers),
               for (final userTrigger in box.values.cast<UserTrigger>()) ...[
                 Tile(
                   onTap: () => Modal.show(

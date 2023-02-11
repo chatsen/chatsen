@@ -24,7 +24,7 @@ class SettingsModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: AppLocalizations.of(context)!.settings),
+              ModalHeader(title: AppLocalizations.of(context)!.settings),
               // const Separator(),
               Tile(
                 title: AppLocalizations.of(context)!.appearance,

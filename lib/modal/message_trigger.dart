@@ -44,12 +44,12 @@ class _MessageTriggerModalState extends State<MessageTriggerModal> {
   Widget build(BuildContext context) => ListView(
         shrinkWrap: true,
         children: [
-          const ModalHeader(title: AppLocalizations.of(context)!.messageTrigger),
+          ModalHeader(title: AppLocalizations.of(context)!.messageTrigger),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
             child: TextField(
               controller: patternController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: AppLocalizations.of(context)!.pattern,
                 border: InputBorder.none,
                 filled: true,
@@ -61,14 +61,14 @@ class _MessageTriggerModalState extends State<MessageTriggerModal> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ChoiceChip(
-                label: const Text(AppLocalizations.of(context)!.mention),
+                label: Text(AppLocalizations.of(context)!.mention),
                 selected: type == MessageTriggerType.mention,
                 onSelected: (bool selected) => setState(() {
                   type = MessageTriggerType.mention;
                 }),
               ),
               ChoiceChip(
-                label: const Text(AppLocalizations.of(context)!.block),
+                label: Text(AppLocalizations.of(context)!.block),
                 selected: type == MessageTriggerType.block,
                 onSelected: (bool selected) => setState(() {
                   type = MessageTriggerType.block;

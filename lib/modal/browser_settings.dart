@@ -16,10 +16,10 @@ class BrowserSettingsModal extends StatelessWidget {
           return ListView(
             shrinkWrap: true,
             children: [
-              const ModalHeader(title: AppLocalizations.of(context)!.browserStreamSettings),
+              ModalHeader(title: AppLocalizations.of(context)!.browserStreamSettings),
               for (final tab in state)
                 Tile(
-                  prefix: Icon(Icons.web_asset),
+                  prefix: const Icon(Icons.web_asset),
                   suffix: InkWell(
                     borderRadius: BorderRadius.circular(24.0),
                     onTap: () {

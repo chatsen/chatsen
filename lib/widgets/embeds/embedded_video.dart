@@ -2,8 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 // ignore: implementation_imports
-import 'package:chewie/src/material/material_desktop_controls.dart';
-import '../../tmi/channel/messages/embeds/video_embed.dart';
+import '/tmi/channel/messages/embeds/video_embed.dart';
 
 class EmbeddedVideo extends StatefulWidget {
   final VideoEmbed embed;
