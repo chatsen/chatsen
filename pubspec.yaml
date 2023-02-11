@@ -1,7 +1,7 @@
 name: chatsen
 description: 3rd party client for Twitch
 publish_to: 'none'
-version: 1.1.75+80
+version: 1.1.75+83
 
 environment:
   # sdk: ">=2.17.0-168.0.dev <3.0.0"
@@ -35,6 +35,7 @@ dependencies:
   flutter_acrylic: ^1.0.0+2
   bitsdojo_window: ^0.1.5
   flutter_svg: ^1.1.5
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:

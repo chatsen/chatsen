@@ -5,12 +5,16 @@ enum SurfaceType {
   secondary,
   tertiary,
   error,
+  background,
+  surface,
+  surfaceVariant,
   transparent,
 }
 
 class Surface extends StatelessWidget {
   final Widget child;
   final SurfaceType type;
+  final bool shouldClip;
   final Function()? onTap;
   final Function()? onLongPress;
   final BorderRadius? borderRadius;
@@ -18,6 +22,7 @@ class Surface extends StatelessWidget {
   const Surface({
     super.key,
     required this.child,
+    this.shouldClip = false,
     this.onTap,
     this.onLongPress,
     this.borderRadius,
@@ -26,25 +31,39 @@ class Surface extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = type == SurfaceType.primary
-        ? Theme.of(context).colorScheme.primaryContainer
-        : type == SurfaceType.secondary
-            ? Theme.of(context).colorScheme.secondaryContainer
-            : type == SurfaceType.tertiary
-                ? Theme.of(context).colorScheme.tertiaryContainer
-                : type == SurfaceType.error
-                    ? Theme.of(context).colorScheme.errorContainer
-                    : Colors.transparent;
+    var backgroundColor = Theme.of(context).colorScheme.errorContainer;
+    var foregroundColor = Theme.of(context).colorScheme.error;
 
-    final foregroundColor = type == SurfaceType.primary
-        ? Theme.of(context).colorScheme.primary
-        : type == SurfaceType.secondary
-            ? Theme.of(context).colorScheme.secondary
-            : type == SurfaceType.tertiary
-                ? Theme.of(context).colorScheme.tertiary
-                : type == SurfaceType.error
-                    ? Theme.of(context).colorScheme.error
-                    : null;
+    switch (type) {
+      case SurfaceType.primary:
+        backgroundColor = Theme.of(context).colorScheme.primaryContainer;
+        foregroundColor = Theme.of(context).colorScheme.primary;
+        break;
+      case SurfaceType.secondary:
+        backgroundColor = Theme.of(context).colorScheme.secondaryContainer;
+        foregroundColor = Theme.of(context).colorScheme.secondary;
+        break;
+      case SurfaceType.tertiary:
+        backgroundColor = Theme.of(context).colorScheme.tertiaryContainer;
+        foregroundColor = Theme.of(context).colorScheme.tertiary;
+        break;
+      case SurfaceType.error:
+        backgroundColor = Theme.of(context).colorScheme.errorContainer;
+        foregroundColor = Theme.of(context).colorScheme.error;
+        break;
+      case SurfaceType.background:
+        backgroundColor = Theme.of(context).colorScheme.background;
+        foregroundColor = Theme.of(context).colorScheme.onBackground;
+        break;
+      case SurfaceType.surface:
+        backgroundColor = Theme.of(context).colorScheme.surface;
+        foregroundColor = Theme.of(context).colorScheme.onSurface;
+        break;
+      case SurfaceType.surfaceVariant:
+        backgroundColor = Theme.of(context).colorScheme.surfaceVariant;
+        foregroundColor = Theme.of(context).colorScheme.onSurfaceVariant;
+        break;
+    }
 
     return Theme(
       data: Theme.of(context).copyWith(
@@ -65,6 +84,7 @@ class Surface extends StatelessWidget {
               child: child,
             )
           : Material(
+              clipBehavior: shouldClip ? Clip.antiAlias : Clip.none,
               borderRadius: borderRadius,
               color: backgroundColor,
               child: InkWell(

@@ -1,6 +1,10 @@
 import 'dart:convert';
 
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:chatsen/api/twitch/twitch.dart';
 import 'package:chatsen/components/boxlistener.dart';
+import 'package:chatsen/components/tile.dart';
+import 'package:chatsen/data/twitch/search_data.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -10,11 +14,37 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/modal.dart';
 import '../components/separator.dart';
+import '../components/surface.dart';
+import '../data/twitch/stream_data.dart';
 import '../data/twitch_account.dart';
 import '../modal/chatsen.dart';
 import '../tmi/channel/channel_event.dart';
 import '../tmi/client/client.dart';
 import '/widgets/avatar_button.dart';
+
+class HomeSearchBar extends StatelessWidget implements PreferredSizeWidget {
+  const HomeSearchBar({super.key});
+
+  @override
+  Widget build(BuildContext context) => const Placeholder();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(48.0);
+}
+
+class SliverSearchBar extends SliverPersistentHeaderDelegate {
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) => SafeArea(child: Placeholder());
+
+  @override
+  double get maxExtent => 256.0;
+
+  @override
+  double get minExtent => 256.0;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) => true;
+}
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -24,11 +54,27 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  Future<http.Response>? recommendedStreams;
-  Future<http.Response>? streams;
-  Future<http.Response>? search;
   TwitchAccount? account;
   TextEditingController searchTextController = TextEditingController();
+  Future<List<StreamData>>? recommendedStreams;
+  Future<List<StreamData>>? topStreams;
+  Future<List<SearchData>>? searchResults;
+
+  Future<void> refresh() async {
+    recommendedStreams = Twitch.streams(
+      account!.tokenData,
+      userLogins: [
+        'forsen',
+        'btmc',
+        'nymn',
+        'shigetora',
+        'enviosity',
+        // 'theactingmale',
+        'kitboga',
+      ],
+    );
+    topStreams = Twitch.streams(account!.tokenData);
+  }
 
   @override
   void dispose() {
@@ -45,62 +91,12 @@ class _HomeTabState extends State<HomeTab> {
     accountSettingsBox.listenable().addListener(() {
       account = twitchAccountsBox.values.firstWhereOrNull((element) => (element as TwitchAccount).tokenData.hash == accountSettingsBox.get('activeTwitchAccount')) as TwitchAccount?;
       setState(() {
-        streams = http.get(
-          Uri.parse('https://api.twitch.tv/helix/streams?first=100'),
-          headers: {
-            'Client-ID': '${account?.tokenData.clientId}',
-            'Authorization': 'Bearer ${account?.tokenData.accessToken}',
-          },
-        );
-        recommendedStreams = http.get(
-          Uri.parse('https://api.twitch.tv/helix/streams?' +
-              List<String>.from([
-                'forsen',
-                'btmc',
-                'nymn',
-                'shigetora',
-                'enviosity',
-                'theactingmale',
-                'kitboga',
-              ].map(
-                (e) => 'user_login=$e',
-              )).join('&')),
-          headers: {
-            'Client-ID': '${account?.tokenData.clientId}',
-            'Authorization': 'Bearer ${account?.tokenData.accessToken}',
-          },
-        );
+        refresh();
       });
     });
 
     if (account != null) {
-      streams = http.get(
-        Uri.parse('https://api.twitch.tv/helix/streams?first=100'),
-        headers: {
-          'Client-ID': '${account?.tokenData.clientId}',
-          'Authorization': 'Bearer ${account?.tokenData.accessToken}',
-        },
-      );
-      recommendedStreams = http.get(
-        Uri.parse('https://api.twitch.tv/helix/streams?' +
-            [
-              'forsen',
-              'btmc',
-              'nymn',
-              'shigetora',
-              'enviosity',
-              'theactingmale',
-              'kitboga',
-            ]
-                .map(
-                  (e) => 'user_login=$e',
-                )
-                .join('&')),
-        headers: {
-          'Client-ID': '${account?.tokenData.clientId}',
-          'Authorization': 'Bearer ${account?.tokenData.accessToken}',
-        },
-      );
+      refresh();
     }
     super.initState();
   }
@@ -146,262 +142,271 @@ class _HomeTabState extends State<HomeTab> {
             );
           }
 
-          return FutureBuilder<http.Response>(
-            future: recommendedStreams,
-            builder: (context, snapshot) {
-              return FutureBuilder<http.Response>(
-                future: streams,
-                builder: (context, snapshotAll) {
-                  if (snapshot.data == null || snapshotAll.data == null) {
-                    return const Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    );
-                  }
-
-                  var responseJson = json.decode(utf8.decode(snapshot.data!.bodyBytes));
-                  var responseJsonAll = json.decode(utf8.decode(snapshotAll.data!.bodyBytes));
-
-                  return ListView(
-                    children: [
-                      // const AspectRatio(
-                      //   aspectRatio: 16 / 9,
-                      //   child: WebView(
-                      //     initialUrl: 'https://player.twitch.tv/?channel=forsen&enableExtensions=true&muted=true&parent=chatsen.app&player=popout&volume=1.0',
-                      //     javascriptMode: JavascriptMode.unrestricted,
-                      //     allowsInlineMediaPlayback: true,
-                      //     userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
-                      //   ),
-                      // ),
-                      // CookiesManager(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                        child: Material(
-                          // color: Colors.red,
-                          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(48.0),
-                          child: SizedBox(
-                            height: 48.0,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
-                              child: Row(
-                                children: [
-                                  const SizedBox(width: 16.0),
-                                  const Icon(Icons.search),
-                                  const SizedBox(width: 12.0),
-                                  Expanded(
-                                    child: TextField(
-                                      controller: searchTextController,
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintText: AppLocalizations.of(context)!.searchForChannels,
-                                        hintStyle: TextStyle(
-                                          color: Theme.of(context).colorScheme.onBackground,
-                                        ),
-                                      ),
-                                      onChanged: (text) {
-                                        setState(() {
-                                          if (text.isEmpty) {
-                                            search = null;
-                                          } else {
-                                            search?.ignore();
-                                            search = null;
-                                            search = http.get(
-                                              Uri.parse('https://api.twitch.tv/helix/search/channels?query=$text'),
-                                              headers: {
-                                                'Client-ID': '${account?.tokenData.clientId}',
-                                                'Authorization': 'Bearer ${account?.tokenData.accessToken}',
-                                              },
-                                            );
-                                          }
-                                        });
-                                      },
-                                    ),
+          return RefreshIndicator(
+            onRefresh: () {
+              setState(() {
+                refresh();
+              });
+              return Future.wait([recommendedStreams!, topStreams!]);
+            },
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar.large(
+                  surfaceTintColor: Colors.transparent,
+                  title: const Text('Chatsen'),
+                  actions: const [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12.0),
+                      child: AvatarButton(),
+                    ),
+                  ],
+                ),
+                SliverList.list(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Surface(
+                        type: SurfaceType.surfaceVariant,
+                        borderRadius: BorderRadius.circular(48.0),
+                        child: Row(
+                          children: [
+                            const SizedBox(width: 16.0),
+                            const Icon(Icons.search),
+                            const SizedBox(width: 8.0),
+                            Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  filled: false,
+                                  border: InputBorder.none,
+                                  hintText: AppLocalizations.of(context)!.searchForChannels,
+                                  hintStyle: TextStyle(
+                                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                                   ),
-                                  const AvatarButton(),
-                                ],
+                                ),
+                                controller: searchTextController,
+                                onChanged: (text) {
+                                  if (text.isEmpty) {
+                                    setState(() {
+                                      searchResults = null;
+                                    });
+                                    return;
+                                  }
+
+                                  setState(() {
+                                    searchResults = Twitch.channelSearch(account!.tokenData, text);
+                                  });
+                                },
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 16.0),
+                          ],
                         ),
                       ),
-                      if (search != null) ...[
-                        if (searchTextController.text == 'xqc' || searchTextController.text == 'xqcow')
-                          InkWell(
+                    ),
+                    const SizedBox(height: 16.0),
+                  ],
+                ),
+                if (searchResults != null)
+                  FutureBuilder<List<SearchData>>(
+                    future: searchResults,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) return SliverList.list(children: const [Text('Error')]);
+                      if (!snapshot.hasData) {
+                        return SliverList.list(
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            ),
+                          ],
+                        );
+                      }
+                      return SliverList.list(
+                        children: [
+                          Tile(
                             onTap: () {
-                              search?.ignore();
-                              search = null;
-                              search = http.get(
-                                Uri.parse('https://api.twitch.tv/helix/search/channels?query=forsen'),
-                                headers: {
-                                  'Client-ID': '${account?.tokenData.clientId}',
-                                  'Authorization': 'Bearer ${account?.tokenData.accessToken}',
-                                },
-                              );
-                              setState(() => searchTextController.text = 'forsen');
+                              final client = context.read<Client>();
+                              final channelName = '#${searchTextController.text}';
+                              if (!client.channels.state.any((channel) => channel.name == channelName)) {
+                                client.channels.join(channelName);
+                                client.receiver.send('JOIN $channelName');
+                                client.channels.state.firstWhereOrNull((channelSelect) => channelSelect.name == channelName)?.add(ChannelJoin(client.receiver, client.transmitter));
+                              }
+                              WidgetsBinding.instance.scheduleFrameCallback((_) {
+                                WidgetsBinding.instance.scheduleFrameCallback((_) {
+                                  DefaultTabController.of(context).animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
+                                });
+                              });
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
-                              child: Text(
-                                AppLocalizations.of(context)!.spellCheckFailed('forsen'),
-                                style: TextStyle(
-                                  color: Theme.of(context).colorScheme.tertiary,
-                                ),
+                            prefix: ClipRRect(
+                              borderRadius: BorderRadius.circular(48.0),
+                              clipBehavior: Clip.antiAlias,
+                              child: Material(
+                                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+                                child: const Icon(Icons.add_circle_outline),
                               ),
                             ),
+                            title: searchTextController.text,
                           ),
-                        InkWell(
-                          onTap: () {
-                            final client = context.read<Client>();
-                            final channelName = '#${searchTextController.text}';
-                            if (client.channels.state.any((channel) => channel.name == channelName)) {
-                              DefaultTabController.of(context)?.animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
-                              return;
-                            }
-                            client.channels.join(channelName);
-                            client.receiver.send('JOIN $channelName');
-                            client.channels.state.firstWhereOrNull((channelSelect) => channelSelect.name == channelName)?.add(ChannelJoin(client.receiver, client.transmitter));
-                            WidgetsBinding.instance.scheduleFrameCallback((_) {
-                              WidgetsBinding.instance.scheduleFrameCallback((_) {
-                                final defaultTabController = DefaultTabController.of(context);
-                                defaultTabController?.animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
-                              });
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 48.0,
-                                  height: 48.0,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(48.0),
-                                    clipBehavior: Clip.antiAlias,
-                                    child: Material(
-                                      color: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
-                                      // child: Image.network(
-                                      //   '${stream['thumbnail_url']}',
-                                      //   height: 48.0,
-                                      // ),
-                                      child: const Icon(Icons.add_circle_outline),
-                                    ),
-                                  ),
+                          const Separator(),
+                          for (final searchResult in snapshot.data!)
+                            Tile(
+                              onTap: () {
+                                final client = context.read<Client>();
+                                final channelName = '#${searchResult.broadcasterLogin}';
+                                if (!client.channels.state.any((channel) => channel.name == channelName)) {
+                                  client.channels.join(channelName);
+                                  client.receiver.send('JOIN $channelName');
+                                  client.channels.state.firstWhereOrNull((channelSelect) => channelSelect.name == channelName)?.add(ChannelJoin(client.receiver, client.transmitter));
+                                }
+                                WidgetsBinding.instance.scheduleFrameCallback((_) {
+                                  WidgetsBinding.instance.scheduleFrameCallback((_) {
+                                    DefaultTabController.of(context).animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
+                                  });
+                                });
+                              },
+                              prefix: ClipRRect(
+                                borderRadius: BorderRadius.circular(48.0),
+                                clipBehavior: Clip.antiAlias,
+                                child: Material(
+                                  color: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+                                  // child: const Icon(Icons.add_circle_outline),
+                                  child: Ink.image(image: NetworkImage(searchResult.thumbnailUrl)),
                                 ),
-                                const SizedBox(width: 8.0),
-                                Expanded(
-                                  child: Text(
-                                    AppLocalizations.of(context)!.joinChannelName('#${searchTextController.text}'),
-                                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                    overflow: TextOverflow.ellipsis,
+                              ),
+                              title: searchResult.displayName,
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+                if (searchResults == null)
+                  FutureBuilder<List<StreamData>>(
+                    future: recommendedStreams,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError || (snapshot.data?.isEmpty ?? false)) return SliverList.list(children: const []);
+                      if (!snapshot.hasData) {
+                        return SliverList.list(
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            ),
+                          ],
+                        );
+                      }
+                      return SliverList.list(
+                        children: [
+                          ConstrainedBox(
+                            constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.222),
+                            child: CarouselSlider(
+                              options: CarouselOptions(
+                                autoPlay: true,
+                                enlargeCenterPage: true,
+                              ),
+                              items: [
+                                for (final stream in snapshot.data!)
+                                  StreamPreviewLarge(
+                                    stream: stream,
                                   ),
-                                ),
                               ],
                             ),
                           ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                          child: Separator(),
-                        ),
-                        FutureBuilder<http.Response>(
-                          future: search,
-                          builder: (context, snapshotSearch) {
-                            if (snapshotSearch.data == null) {
-                              return const Center(
-                                child: CircularProgressIndicator.adaptive(),
-                              );
-                            }
-
-                            final responseJsonSearch = json.decode(utf8.decode(snapshotSearch.data!.bodyBytes));
-
-                            return Column(
-                              // shrinkWrap: true,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                for (var stream in responseJsonSearch['data'])
-                                  InkWell(
-                                    onTap: () {
-                                      final client = context.read<Client>();
-                                      final channelName = '#${stream['broadcaster_login']}';
-                                      if (client.channels.state.any((channel) => channel.name == channelName)) {
-                                        DefaultTabController.of(context)?.animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
-                                        return;
-                                      }
-                                      client.channels.join(channelName);
-                                      client.receiver.send('JOIN $channelName');
-                                      client.channels.state.firstWhereOrNull((channelSelect) => channelSelect.name == channelName)?.add(ChannelJoin(client.receiver, client.transmitter));
-                                      WidgetsBinding.instance.scheduleFrameCallback((_) {
-                                        WidgetsBinding.instance.scheduleFrameCallback((_) {
-                                          final defaultTabController = DefaultTabController.of(context);
-                                          defaultTabController?.animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
-                                        });
-                                      });
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 48.0,
-                                            height: 48.0,
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(48.0),
-                                              clipBehavior: Clip.antiAlias,
-                                              child: Material(
-                                                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
-                                                child: Image.network(
-                                                  '${stream['thumbnail_url']}',
-                                                  height: 48.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(width: 8.0),
-                                          Expanded(
-                                            child: Text(
-                                              '${stream['display_name']}',
-                                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                              ],
-                            );
-                          },
-                        ),
-                      ],
-                      if (search == null) ...[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                          child: Text(
-                            AppLocalizations.of(context)!.recommendedChannels,
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
-                        ),
-                        for (var stream in responseJson['data']) StreamPreviewSmall(stream: stream),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                          child: Text(
-                            AppLocalizations.of(context)!.popularChannels,
-                            style: Theme.of(context).textTheme.headlineSmall,
-                          ),
-                        ),
-                        for (var stream in responseJsonAll['data']) StreamPreviewSmall(stream: stream),
-                      ],
-                    ],
-                  );
-                },
-              );
-            },
+                          const SizedBox(height: 16.0),
+                        ],
+                      );
+                    },
+                  ),
+                if (searchResults == null)
+                  FutureBuilder<List<StreamData>>(
+                    future: topStreams,
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return SliverList.list(
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            ),
+                          ],
+                        );
+                      }
+                      return SliverList.list(
+                        children: [
+                          for (final stream in snapshot.data!)
+                            //Padding(
+                            //  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                            //  child: StreamPreviewPill(stream: stream),
+                            //),
+                            StreamPreviewSmall(stream: stream),
+                        ],
+                      );
+                    },
+                  ),
+              ],
+            ),
           );
         },
+      );
+}
+
+class StreamPreviewPill extends StatelessWidget {
+  const StreamPreviewPill({
+    super.key,
+    required this.stream,
+  });
+
+  final StreamData stream;
+
+  @override
+  Widget build(BuildContext context) => Surface(
+        type: SurfaceType.surfaceVariant,
+        borderRadius: BorderRadius.circular(12.0),
+        shouldClip: true,
+        onTap: () {},
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Ink.image(
+                image: NetworkImage(stream.thumbnailUrl.replaceAll('{width}', '1920').replaceAll('{height}', '1080')),
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned.fill(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.black.withOpacity(0.66),
+                      Colors.black.withOpacity(0.66),
+                    ],
+                    stops: const [
+                      0.0,
+                      1.0,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(stream.userName, style: Theme.of(context).textTheme.titleLarge),
+                  Text(
+                    stream.title,
+                    style: Theme.of(context).textTheme.titleMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       );
 }
 
@@ -411,25 +416,22 @@ class StreamPreviewSmall extends StatelessWidget {
     required this.stream,
   });
 
-  final dynamic stream;
+  final StreamData stream;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         final client = context.read<Client>();
-        final channelName = '#${stream['user_login']}';
-        if (client.channels.state.any((channel) => channel.name == channelName)) {
-          DefaultTabController.of(context)?.animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
-          return;
+        final channelName = '#${stream.userLogin}';
+        if (!client.channels.state.any((channel) => channel.name == channelName)) {
+          client.channels.join(channelName);
+          client.receiver.send('JOIN $channelName');
+          client.channels.state.firstWhereOrNull((channelSelect) => channelSelect.name == channelName)?.add(ChannelJoin(client.receiver, client.transmitter));
         }
-        client.channels.join(channelName);
-        client.receiver.send('JOIN $channelName');
-        client.channels.state.firstWhereOrNull((channelSelect) => channelSelect.name == channelName)?.add(ChannelJoin(client.receiver, client.transmitter));
         WidgetsBinding.instance.scheduleFrameCallback((_) {
           WidgetsBinding.instance.scheduleFrameCallback((_) {
-            final defaultTabController = DefaultTabController.of(context);
-            defaultTabController?.animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
+            DefaultTabController.of(context).animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
           });
         });
       },
@@ -444,7 +446,7 @@ class StreamPreviewSmall extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
-                    ((stream['thumbnail_url'] as String).replaceAll('{width}', '1920').replaceAll('{height}', '1080')),
+                    (stream.thumbnailUrl.replaceAll('{width}', '1920').replaceAll('{height}', '1080')),
                   ),
                 ),
               ),
@@ -456,19 +458,19 @@ class StreamPreviewSmall extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    stream['user_name'],
+                    stream.userName,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    stream['title'].trim(),
+                    stream.title.trim(),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    '${stream['game_name']}',
+                    stream.gameName,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -485,7 +487,7 @@ class StreamPreviewSmall extends StatelessWidget {
                       ),
                       const SizedBox(width: 4.0),
                       Text(
-                        '${stream['viewer_count']}',
+                        '${stream.viewerCount}',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -497,7 +499,7 @@ class StreamPreviewSmall extends StatelessWidget {
                       const SizedBox(width: 4.0),
                       Expanded(
                         child: Text(
-                          '${DateTime.now().difference(DateTime.parse(stream['started_at']))}'.split('.').first,
+                          '${DateTime.now().difference(stream.startedAt)}'.split('.').first,
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -520,65 +522,112 @@ class StreamPreviewLarge extends StatelessWidget {
     required this.stream,
   });
 
-  final dynamic stream;
+  final StreamData stream;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Material(
-        clipBehavior: Clip.antiAlias,
-        borderRadius: BorderRadius.circular(16.0),
-        child: InkWell(
-          onTap: () {},
-          child: AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Stack(
-              children: [
-                Ink.image(
-                  image: NetworkImage((stream['thumbnail_url'] as String).replaceAll('{width}', '1920').replaceAll('{height}', '1080')),
+    return Material(
+      clipBehavior: Clip.antiAlias,
+      borderRadius: BorderRadius.circular(16.0),
+      child: InkWell(
+        onTap: () {
+          final client = context.read<Client>();
+          final channelName = '#${stream.userLogin}';
+          if (!client.channels.state.any((channel) => channel.name == channelName)) {
+            client.channels.join(channelName);
+            client.receiver.send('JOIN $channelName');
+            client.channels.state.firstWhereOrNull((channelSelect) => channelSelect.name == channelName)?.add(ChannelJoin(client.receiver, client.transmitter));
+          }
+          WidgetsBinding.instance.scheduleFrameCallback((_) {
+            WidgetsBinding.instance.scheduleFrameCallback((_) {
+              DefaultTabController.of(context).animateTo(client.channels.state.indexWhere((channel) => channel.name == channelName) + 1);
+            });
+          });
+        },
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Ink.image(
+                image: NetworkImage(stream.thumbnailUrl.replaceAll('{width}', '1920').replaceAll('{height}', '1080')),
+                fit: BoxFit.cover,
+              ),
+            ),
+            // Gradient overlay
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.0),
+                    Colors.black.withOpacity(1.0),
+                  ],
+                  stops: const [
+                    0.25,
+                    1.0,
+                  ],
                 ),
-                // Gradient overlay
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Colors.black.withOpacity(1.0),
-                      ],
-                      stops: const [
-                        0.5,
-                        1.0,
-                      ],
-                    ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    stream.userName,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Text(
+                    stream.title.trim(),
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    stream.gameName,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Row(
                     children: [
-                      Text(
-                        stream['user_name'],
-                        style: Theme.of(context).textTheme.titleLarge,
+                      // Red dot 8x8
+                      Container(
+                        width: 8.0,
+                        height: 8.0,
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
                       ),
+                      const SizedBox(width: 4.0),
                       Text(
-                        stream['title'],
-                        style: Theme.of(context).textTheme.titleMedium,
+                        '${stream.viewerCount}',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      Text(
-                        'Playing ${stream['game_name']} for ${stream['viewer_count']} viewers',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                      const SizedBox(width: 16.0),
+                      const Icon(
+                        Icons.alarm,
+                        size: 12.0,
+                      ),
+                      const SizedBox(width: 4.0),
+                      Expanded(
+                        child: Text(
+                          '${DateTime.now().difference(stream.startedAt)}'.split('.').first,
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

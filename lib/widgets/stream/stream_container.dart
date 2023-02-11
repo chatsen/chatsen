@@ -104,7 +104,7 @@ class StreamContainer extends StatelessWidget {
               );
             },
           ),
-          FloatingStreamButton(),
+          // FloatingStreamButton(),
         ],
       );
 }

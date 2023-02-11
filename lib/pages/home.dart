@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:chatsen/components/surface.dart';
 import 'package:chatsen/modal/channel.dart';
 import 'package:chatsen/widgets/stream/stream_container.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +59,9 @@ class HomePage extends StatelessWidget {
                 appBar: Platform.isWindows ? const MyAppBar() : null,
                 extendBody: true,
                 extendBodyBehindAppBar: true,
-                bottomNavigationBar: Material(
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                bottomNavigationBar: Surface(
+                  // color: Theme.of(context).colorScheme.surface,
+                  type: SurfaceType.surfaceVariant,
                   child: SafeArea(
                     top: false,
                     child: TabBar(

@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:chatsen/api/twitch/twitch_badge.dart';
 import 'package:http/http.dart' as http;
 
+import '/data/twitch/search_data.dart';
+import '/data/twitch/stream_data.dart';
 import '/data/twitch/token_data.dart';
 import '/data/twitch/user_data.dart';
 
@@ -93,5 +95,38 @@ class Twitch {
             ),
         },
     };
+  }
+
+  static Future<List<StreamData>> streams(
+    TokenData tokenData, {
+    List<String>? userLogins,
+  }) async {
+    final response = await http.get(
+      Uri.parse(
+        'https://api.twitch.tv/helix/streams?first=100${userLogins != null ? '&${userLogins.map((e) => 'user_login=$e').join('&')}' : ''}',
+      ),
+      headers: {
+        'Authorization': 'Bearer ${tokenData.accessToken}',
+        'Client-Id': '${tokenData.clientId}',
+      },
+    );
+    final responseJson = json.decode(utf8.decode(response.bodyBytes));
+    return [
+      for (final data in responseJson['data']) StreamData.fromJson(data),
+    ];
+  }
+
+  static Future<List<SearchData>> channelSearch(TokenData tokenData, String query) async {
+    final response = await http.get(
+      Uri.parse('https://api.twitch.tv/helix/search/channels?query=$query'),
+      headers: {
+        'Authorization': 'Bearer ${tokenData.accessToken}',
+        'Client-Id': '${tokenData.clientId}',
+      },
+    );
+    final responseJson = json.decode(utf8.decode(response.bodyBytes));
+    return [
+      for (final data in responseJson['data']) SearchData.fromJson(data),
+    ];
   }
 }

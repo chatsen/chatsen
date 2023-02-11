@@ -4,9 +4,9 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:chatsen/tmi/channel/channel_chatters.dart';
 
-import '../../api/chatsen/chatsen.dart';
-import '../../data/custom_badge.dart';
-import '../../data/emote.dart';
+import '/api/chatsen/chatsen.dart';
+import '/data/custom_badge.dart';
+import '/data/emote.dart';
 import '../client/client.dart';
 import '../emotes.dart';
 import '/tmi/channel/channel_event.dart';

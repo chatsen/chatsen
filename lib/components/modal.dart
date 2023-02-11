@@ -13,6 +13,29 @@ class Modal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      bottom: false,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Material(
+            color: Color.alphaBlend(Theme.of(context).colorScheme.onSurface.withOpacity(0.075), Theme.of(context).colorScheme.surface),
+            clipBehavior: clipBehavior,
+            borderRadius: const BorderRadius.only(topRight: Radius.circular(8.0), topLeft: Radius.circular(8.0)),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 1024.0,
+                maxHeight: (MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.vertical) * 0.8,
+              ),
+              child: SafeArea(child: child),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget build2(BuildContext context) {
+    return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16.0) + MediaQuery.of(context).viewInsets,
         child: Column(

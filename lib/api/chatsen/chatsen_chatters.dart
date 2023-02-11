@@ -24,4 +24,14 @@ class ChatsenChatters {
 
   factory ChatsenChatters.fromJson(Map<String, dynamic> json) => _$ChatsenChattersFromJson(json);
   Map<String, dynamic> toJson() => _$ChatsenChattersToJson(this);
+
+  List<ChatsenChatter> getAllChatters() {
+    return [
+      ...staff,
+      ...broadcasters,
+      ...moderators,
+      ...vips,
+      ...viewers,
+    ];
+  }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../api/catbox/catbox.dart';
+import '../api/chatsen/chatsen_chatter.dart';
 import '../components/surface.dart';
 import '../components/tile.dart';
 import '../data/custom_command.dart';
@@ -30,6 +31,7 @@ class ChannelView extends StatefulWidget {
 
 enum AutocompletionType {
   emote,
+  user,
   customCommand,
 }
 
@@ -74,7 +76,29 @@ class ChannelViewState extends State<ChannelView> {
   List<AutocompletionItem> getAutocompletionItems() {
     if (textEditingController.text.split(' ').last.length < 2) return [];
     final matchingEmotes = (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).where((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()));
+    final chatters = widget.channel.channelChatters.state?.getAllChatters() ?? [];
+    final matchingChatters = chatters.where((chatter) => chatter.login.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()));
     return [
+      for (final user in matchingChatters)
+        AutocompletionItem(
+          type: AutocompletionType.user,
+          prefix: Image.network(user.profileImageURL, width: 24.0, height: 24.0),
+          shortened: Image.network(user.profileImageURL, width: 24.0, height: 24.0),
+          title: user.displayName,
+          subtitle: user.login,
+          onTap: () {
+            final splits = textEditingController.text.split(' ');
+            splits.removeLast();
+            splits.add('${user.login} ');
+            textEditingController.text = splits.join(' ');
+            textEditingController.selection = TextSelection.fromPosition(
+              TextPosition(
+                offset: textEditingController.text.length,
+              ),
+            );
+            setState(() {});
+          },
+        ),
       for (final customCommand in Hive.box('CustomCommands').values.cast<CustomCommand>())
         AutocompletionItem(
           type: AutocompletionType.customCommand,
@@ -128,8 +152,8 @@ class ChannelViewState extends State<ChannelView> {
             ),
             // child: Container(),
           ),
-          Material(
-            color: Theme.of(context).colorScheme.primaryContainer,
+          Surface(
+            type: SurfaceType.surfaceVariant,
             child: SafeArea(
               top: false,
               child: Column(
@@ -167,6 +191,7 @@ class ChannelViewState extends State<ChannelView> {
                       ),
                     ),
                   Surface(
+                    type: SurfaceType.secondary,
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxHeight: 56.0 * 4.5),
                       child: ListView(
@@ -186,32 +211,32 @@ class ChannelViewState extends State<ChannelView> {
                       ),
                     ),
                   ),
-                  Surface(
-                    type: SurfaceType.tertiary,
-                    child: SizedBox(
-                      height: 56.0,
-                      child: ListView(
-                        padding: EdgeInsets.zero,
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          for (final autocompletionItem in getAutocompletionItems())
-                            InkWell(
-                              onTap: autocompletionItem.onTap,
-                              onLongPress: autocompletionItem.onLongPress,
-                              child: ConstrainedBox(
-                                constraints: BoxConstraints(minWidth: 56.0),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: autocompletionItem.shortened,
-                                ),
-                              ),
-                              // title: autocompletionItem.title,
-                              // subtitle: autocompletionItem.subtitle,
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Surface(
+                  //   type: SurfaceType.tertiary,
+                  //   child: SizedBox(
+                  //     height: 56.0,
+                  //     child: ListView(
+                  //       padding: EdgeInsets.zero,
+                  //       scrollDirection: Axis.horizontal,
+                  //       children: [
+                  //         for (final autocompletionItem in getAutocompletionItems())
+                  //           InkWell(
+                  //             onTap: autocompletionItem.onTap,
+                  //             onLongPress: autocompletionItem.onLongPress,
+                  //             child: ConstrainedBox(
+                  //               constraints: BoxConstraints(minWidth: 56.0),
+                  //               child: Padding(
+                  //                 padding: const EdgeInsets.all(12.0),
+                  //                 child: autocompletionItem.shortened,
+                  //               ),
+                  //             ),
+                  //             // title: autocompletionItem.title,
+                  //             // subtitle: autocompletionItem.subtitle,
+                  //           ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   // if (textEditingController.text.split(' ').last.length >= 2 && (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).any((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase())))
                   //   Ink(
                   //     color: Theme.of(context).colorScheme.secondaryContainer,
