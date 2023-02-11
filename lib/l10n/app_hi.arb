@@ -1,47 +1,47 @@
 {
   "chatsen": "Chatsen",
-  "loggedInVia": "Logget inn som {provider}",
+  "loggedInVia": "Logged in via {provider}",
   "@loggedInVia": {
     "placeholders": {
       "provider": {}
     }
   },
-  "termsOfService": "Vilkår for Bruk",
-  "privacyPolicy": "Personvernerklæring",
-  "settings": "Innstillinger",
-  "expiresNever": "Utgår aldri",
-  "expiresIn": "Utgår om {time}",
+  "termsOfService": "सेवा की शर्तें",
+  "privacyPolicy": "गोपनीयता नीति",
+  "settings": "सेटिंग्स",
+  "expiresNever": "कभी समाप्त नहीं",
+  "expiresIn": "Expires in {time}",
   "@expiresIn": {
     "placeholders": {
       "time": {}
     }
   },
-  "close": "Lukk",
-  "add": "Legg til",
-  "cancel": "Avbryt",
-  "tokenInput": "Tast inn token",
-  "account": "Profil",
-  "refreshAccount": "Last inn profil på nytt",
-  "removeAccount": "Fjern bruker",
-  "addAnotherAccount": "Legg til bruker",
-  "verifiedUserData": "Verifisert bruker data!",
-  "loggedInAs": "Logget inn som {user}",
+  "close": "बंद करें",
+  "add": "जोडें",
+  "cancel": "कैंसिल",
+  "tokenInput": "Token input",
+  "account": "खाता",
+  "refreshAccount": "खाते रिफ्रेश हो रहें हैं",
+  "removeAccount": "खाता हटाएं",
+  "addAnotherAccount": "एक और खाता जोड़ें",
+  "verifiedUserData": "लोग इन डेटा को परखना",
+  "loggedInAs": "Logged in as {user}",
   "@loggedInAs": {
     "placeholders": {
       "user": {}
     }
   },
-  "anErrorHasOccuredWhenVerifyingUserData": "Det oppsto en feil med verifisering av bruker data:",
-  "verifyingUserData": "Verifiserer bruker data...",
-  "verifiedUserToken": "Verifisert bruker token!",
-  "anErrorHasOccuredWhenVerifyingUserToken": "Det oppsto en feil med verifisering av bruker token:",
-  "verifyingUserToken": "Verifiserer bruker token...",
-  "searchForChannels": "Søk for kanaler",
-  "recommendedChannels": "Anbefalte kanaler",
-  "popularChannels": "Populære kanaler",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
-  "joinUser": "Join {user}",
+  "anErrorHasOccuredWhenVerifyingUserData": "An error has occurred when verifying user data:",
+  "verifyingUserData": "लोग इन डेटा को परखना",
+  "verifiedUserToken": "लोग इन डेटा को परखना",
+  "anErrorHasOccuredWhenVerifyingUserToken": "An error has occurred when verifying user token:",
+  "verifyingUserToken": "लोग इन डेटा को परखना",
+  "searchForChannels": "किसी चैनल को खोजें",
+  "recommendedChannels": "अनुशंसित चैनल",
+  "popularChannels": "लोकप्रिय लाइव चैनल",
+  "channel": "चैनल्स",
+  "leaveChannel": "चैनल छोड़ दें?",
+  "joinUser": "{user} चैनल से जुड़े",
   "@joinUser": {
     "placeholders": {
       "user": {}
@@ -53,7 +53,7 @@
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "{channel} चैनल से जुड़े",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
@@ -65,19 +65,19 @@
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
+  "light": "लाइट",
+  "dark": "डार्क",
+  "system": "सिस्टम",
+  "appearance": "स्वरूप",
+  "highContrast": "जादा कॉन्ट्रास्ट",
   "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
+  "stopStream": "स्ट्रीम रोक दें?",
+  "customCommand": "कस्टम कमांड्स",
+  "customCommands": "कस्टम कमांड्स",
   "newCustomCommand": "New custom command",
   "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save",
+  "command": "आदेश:",
+  "save": "सेव करें",
   "browserStreamSettings": "Browser/Stream Settings",
   "addPage": "Add page",
   "channelStream": "{channel}'s stream",

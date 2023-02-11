@@ -65,16 +65,71 @@
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "light": "Φωτεινό",
+  "dark": "Σκοτεινό",
+  "system": "Σύστημα",
+  "appearance": "Εμφάνιση",
+  "highContrast": "Υψηλή αντίθεση",
+  "playStream": "Αναπαραγωγή ροής",
+  "stopStream": "Διακοπή ροής",
+  "customCommand": "Προσαρμοσμένη εντολή",
+  "customCommands": "Προσαρμοσμένες εντολές",
+  "newCustomCommand": "Νέα προσαρμοσμένη εντολή",
+  "commandTrigger": "Έναυσμα",
+  "command": "Εντολή",
+  "save": "Αποθήκευση",
+  "browserStreamSettings": "Ρυθμίσεις Περιηγητή/Ροής",
+  "addPage": "Προσθήκη σελίδας",
+  "channelStream": "Ροή {channel}",
+  "@channelStream": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "openInBrowser": "Άνοιγμα στον περιηγητή",
+  "messageAppearance": "Εμφάνιση μηνύματος",
+  "showTimestamps": "Εμφάνιση χρονικών σημείων",
+  "compactMessages": "Συμπιεσμένα μηνύματα",
+  "messageTrigger": "Έναυσμα μηνύματος",
+  "pattern": "Μοτίβο",
+  "mention": "Επισήμανση",
+  "block": "Αποκλεισμός",
+  "enableRegex": "Ενεργοποίηση regex",
+  "caseSensitive": "Διάκριση πεζών-κεφαλαίων",
+  "messageTriggers": "Εναύσματα μηνύματος",
+  "newMessageTrigger": "Νέο έναυσμα μηνύματος",
+  "reply": "Απάντηση",
+  "copyText": "Αντιγραφή κειμένου",
+  "copyTextSubtitle": "Κρατήστε για αντιγραφή κειμένου μηνύματος με όνομα χρήστη",
+  "deleteMessage": "Διαγραφή μηνύματος",
+  "mentionUser": "Επισήμανση χρήστη",
+  "copyMessageId": "Αντιγραφή ID μηνύματος",
+  "theme": "Θέμα",
+  "userTrigger": "Έναυσμα χρήστη",
+  "userTriggers": "Εναύσματα χρήστη",
+  "chatHistory": "Ιστορικό συνομιλίας",
+  "login": "Σύνδεση",
+  "newUserTrigger": "Νέο έναυσμα χρήστη",
+  "ban": "Αποκλεισμός",
+  "unban": "Άρση αποκλεισμού",
+  "timeoutUserForDuration": "Timeout χρήστη για {duration}",
+  "@timeoutUserForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "chatCleared": "Η συνομιλία εκκαθαρίστηκε",
+  "permabanned": "μόνιμος αποκλεισμός",
+  "bannedForDuration": "αποκλείστηκε για {duration}",
+  "@bannedForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "replyingTo": "Απάντηση σε",
+  "blockedMessage": "Αποκλεισμένο μήνυμα",
+  "showMessage": "Εμφάνιση μηνύματος",
+  "hideMessage": "Απόκρυψη μηνύματος",
+  "scrollToBottom": "Κύλιση προς τα κάτω",
+  "startUsingTheApp": "Για να ξεκινήσετε να χρησιμοποιείτε την εφαρμογή, προσθέστε έναν λογαριασμό παρακάτω."
 }

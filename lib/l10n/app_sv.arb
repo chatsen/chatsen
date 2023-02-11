@@ -39,42 +39,97 @@
   "searchForChannels": "Söker efter kanaler",
   "recommendedChannels": "Rekommenderad kanaler",
   "popularChannels": "Populära kanaler",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
-  "joinUser": "Join {user}",
+  "channel": "Kanal",
+  "leaveChannel": "Lämna Kanal",
+  "joinUser": "Användare {user}",
   "@joinUser": {
     "placeholders": {
       "user": {}
     }
   },
-  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "spellCheckFailed": "Stavningsfel misslyckades! Menade du att söka efter {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "Delta {channel}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Skicka meddelande i {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
+  "light": "Ljus",
+  "dark": "Mörk",
   "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "appearance": "Utseende",
+  "highContrast": "Hög kontrast",
+  "playStream": "Spela ström",
+  "stopStream": "Sluta ström",
+  "customCommand": "Anpassat kommando",
+  "customCommands": "Anpassade kommandon",
+  "newCustomCommand": "Nytt anpassat kommando",
+  "commandTrigger": "Utlösare",
+  "command": "Kommandot",
+  "save": "Spara",
+  "browserStreamSettings": "Webbläsare/ströminställningar",
+  "addPage": "Skapa sida",
+  "channelStream": "{channel}'s ström",
+  "@channelStream": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "openInBrowser": "Öppna i webbläsare",
+  "messageAppearance": "Meddelandets utseende",
+  "showTimestamps": "Visa tidsstämpel",
+  "compactMessages": "Kompakta meddelanden",
+  "messageTrigger": "Meddelande utlösare",
+  "pattern": "Mönster",
+  "mention": "Omnämnande",
+  "block": "Blockera",
+  "enableRegex": "Aktivera regex",
+  "caseSensitive": "Skiftlägeskänslighet",
+  "messageTriggers": "Meddelande utlösare",
+  "newMessageTrigger": "Nytt meddelande utlösare",
+  "reply": "Svara",
+  "copyText": "Kopiera text",
+  "copyTextSubtitle": "Håll för att kopiera meddelandetext med användarnamn",
+  "deleteMessage": "Radera meddelande",
+  "mentionUser": "Nämn användare",
+  "copyMessageId": "Kopiera meddelande-ID",
+  "theme": "Tema",
+  "userTrigger": "Utlösare för användare",
+  "userTriggers": "Utlösare för användare",
+  "chatHistory": "Chatthistorik",
+  "login": "Logga in",
+  "newUserTrigger": "Ny utlösare för användare",
+  "ban": "Bannlys",
+  "unban": "Unbanna",
+  "timeoutUserForDuration": "Timeout-användare för {duration}",
+  "@timeoutUserForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "chatCleared": "Chatten var rensad",
+  "permabanned": "permabannad",
+  "bannedForDuration": "bannlyst för {duration}",
+  "@bannedForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "replyingTo": "Svarar på",
+  "blockedMessage": "Blockerat meddelande",
+  "showMessage": "Visa meddelandet",
+  "hideMessage": "Dölj meddelanden",
+  "scrollToBottom": "Skrolla till botten",
+  "startUsingTheApp": "För att börja använda appen, lägg till ett konto nedan."
 }

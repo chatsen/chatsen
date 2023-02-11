@@ -59,22 +59,77 @@
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Invia messaggio in {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
+  "light": "Chiaro",
+  "dark": "Scuro",
+  "system": "Sistema",
+  "appearance": "Aspetto",
+  "highContrast": "Contrasto elevato",
+  "playStream": "Riproduci lo stream",
+  "stopStream": "Ferma lo stream",
+  "customCommand": "Comando personalizzato",
+  "customCommands": "Comandi Personalizzati",
+  "newCustomCommand": "Nuovo comando personalizzato",
   "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "command": "Comando",
+  "save": "Salva",
+  "browserStreamSettings": "Impostazioni Browser/Stream",
+  "addPage": "Add page",
+  "channelStream": "{channel}'s stream",
+  "@channelStream": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "openInBrowser": "Apri nel browser",
+  "messageAppearance": "Message appearance",
+  "showTimestamps": "Show timestamps",
+  "compactMessages": "Compatta messaggi",
+  "messageTrigger": "Message trigger",
+  "pattern": "Pattern",
+  "mention": "Mention",
+  "block": "Blocca",
+  "enableRegex": "Enable regex",
+  "caseSensitive": "Case sensitive",
+  "messageTriggers": "Message triggers",
+  "newMessageTrigger": "New message trigger",
+  "reply": "Rispondi",
+  "copyText": "Copia testo",
+  "copyTextSubtitle": "Hold to copy message text with username",
+  "deleteMessage": "Cancella messaggio",
+  "mentionUser": "Mention user",
+  "copyMessageId": "Copia ID del messaggio",
+  "theme": "Tema",
+  "userTrigger": "User trigger",
+  "userTriggers": "User triggers",
+  "chatHistory": "Cronologia chat",
+  "login": "Accedi",
+  "newUserTrigger": "New user trigger",
+  "ban": "Banna",
+  "unban": "Unban",
+  "timeoutUserForDuration": "Timeout user for {duration}",
+  "@timeoutUserForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "chatCleared": "Chat was cleared",
+  "permabanned": "permabanned",
+  "bannedForDuration": "bannato per {duration}",
+  "@bannedForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "replyingTo": "Replying to",
+  "blockedMessage": "Messaggio bloccato",
+  "showMessage": "Mostra messaggio",
+  "hideMessage": "Nascondi messaggio",
+  "scrollToBottom": "Scroll to bottom",
+  "startUsingTheApp": "Per iniziare a utilizzare l'app, aggiungi un account qui sotto."
 }

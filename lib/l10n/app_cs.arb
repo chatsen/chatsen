@@ -22,7 +22,7 @@
   "tokenInput": "Vložení tokenu",
   "account": "Účet",
   "refreshAccount": "Načíst účet",
-  "removeAccount": "Zrušit účet",
+  "removeAccount": "Odstranit účet",
   "addAnotherAccount": "Přidat jiný účet",
   "verifiedUserData": "Data úspěšně ověřena!",
   "loggedInAs": "Přihlášen jako {user}",
@@ -33,48 +33,103 @@
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Při ověřování osobních dat se objevil problém:",
   "verifyingUserData": "Ověřuji user data...",
-  "verifiedUserToken": "Token úspěšně ověřen!",
-  "anErrorHasOccuredWhenVerifyingUserToken": "Při ověřování user tokenu se objevil problém:",
-  "verifyingUserToken": "Ověřuji user token...",
-  "searchForChannels": "Procházet kanály",
+  "verifiedUserToken": "Token ověřen!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Při ověřování tokenu uživatele se objevil problém:",
+  "verifyingUserToken": "Ověřování tokenu uživatele...",
+  "searchForChannels": "Hledat kanály",
   "recommendedChannels": "Doporučené kanály",
   "popularChannels": "Populární kanály",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
-  "joinUser": "Join {user}",
+  "channel": "Kanál",
+  "leaveChannel": "Opustit kanál",
+  "joinUser": "Připojit se k {user}",
   "@joinUser": {
     "placeholders": {
       "user": {}
     }
   },
-  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "spellCheckFailed": "Kontrola pravopisu se nezdařila! Měli jste na mysli {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "Připojit se k {channel}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Poslat zprávu v {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "light": "Světlý",
+  "dark": "Tmavý",
+  "system": "Systém",
+  "appearance": "Vzhled",
+  "highContrast": "Vysoký kontrast",
+  "playStream": "Spustit vysílání",
+  "stopStream": "Zastavit vysílání",
+  "customCommand": "Vlastní příkaz",
+  "customCommands": "Vlastní příkazy",
+  "newCustomCommand": "Nový vlastní příkaz",
+  "commandTrigger": "Spouštěč",
+  "command": "Příkaz",
+  "save": "Uložit",
+  "browserStreamSettings": "Prohlížeč/Nastavení Vysílání",
+  "addPage": "Přidat stranu",
+  "channelStream": "vysílání uživatele {channel}",
+  "@channelStream": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "openInBrowser": "Otevřít v prohlížeči",
+  "messageAppearance": "Vzhled zprávy",
+  "showTimestamps": "Zobrazit časové údaje",
+  "compactMessages": "Kompaktní zprávy",
+  "messageTrigger": "Spouštěč zprávy",
+  "pattern": "Vzor",
+  "mention": "Zmínka",
+  "block": "Zablokovat",
+  "enableRegex": "Povolit regex",
+  "caseSensitive": "Rozlišit malá a velká písmena",
+  "messageTriggers": "Spouštěče zpráv",
+  "newMessageTrigger": "Nový spouštěč zprávy",
+  "reply": "Odpovědět",
+  "copyText": "Zkopírovat text",
+  "copyTextSubtitle": "Přidržením zkopírujete zprávu s uživatelským jménem",
+  "deleteMessage": "Smazat zprávu",
+  "mentionUser": "Zmínit uživatele",
+  "copyMessageId": "Zkopírovat ID zprávy",
+  "theme": "Vzhled",
+  "userTrigger": "Spouštěč uživatele",
+  "userTriggers": "Spouštěče uživatele",
+  "chatHistory": "Historie zpráv",
+  "login": "Přihlášení",
+  "newUserTrigger": "Nový spouštěč uživatele",
+  "ban": "Zabanovat",
+  "unban": "Odbanovat",
+  "timeoutUserForDuration": "Dočasně zablokovat uživatele na {duration}",
+  "@timeoutUserForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "chatCleared": "Chat byl vymazán",
+  "permabanned": "trvale zabanován",
+  "bannedForDuration": "zabanován po dobu {duration}",
+  "@bannedForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "replyingTo": "Odpovědět na",
+  "blockedMessage": "Zablokovaná zpráva",
+  "showMessage": "Zobrazit zprávu",
+  "hideMessage": "Skrýt zprávu",
+  "scrollToBottom": "Přejít na konec",
+  "startUsingTheApp": "Chcete-li začít používat aplikaci, přidejte níže svůj účet."
 }

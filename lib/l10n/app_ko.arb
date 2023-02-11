@@ -74,7 +74,62 @@
   "stopStream": "스트림 중지",
   "customCommand": "커스텀 커맨드",
   "customCommands": "커스텀 커맨드",
+  "newCustomCommand": "새로운 커스텀 커맨드",
   "commandTrigger": "트리거",
   "command": "커맨드",
-  "save": "세이브"
+  "save": "세이브",
+  "browserStreamSettings": "브라우저/스트림 설정",
+  "addPage": "페이지 추가",
+  "channelStream": "{channel}의 스트림",
+  "@channelStream": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "openInBrowser": "브라우저에서 열기",
+  "messageAppearance": "메시지 외관",
+  "showTimestamps": "타임 스탬프 표시",
+  "compactMessages": "메시지 컴팩트화",
+  "messageTrigger": "메시지 트리거",
+  "pattern": "패턴",
+  "mention": "멘션",
+  "block": "블락",
+  "enableRegex": "regex 활성화",
+  "caseSensitive": "대소문자 구분",
+  "messageTriggers": "메시지 트리거",
+  "newMessageTrigger": "새로운 메시지 트리거",
+  "reply": "답장",
+  "copyText": "텍스트 복사",
+  "copyTextSubtitle": "텍스트와 사용자 이름을 오래 눌러 복사",
+  "deleteMessage": "메시지 삭제",
+  "mentionUser": "멘션 유저",
+  "copyMessageId": "메시지 ID 복사",
+  "theme": "테마",
+  "userTrigger": "사용자 트리거",
+  "userTriggers": "사용자 트리거",
+  "chatHistory": "채팅 기록",
+  "login": "로그인",
+  "newUserTrigger": "새로운 사용자 트리거",
+  "ban": "밴",
+  "unban": "밴 취소",
+  "timeoutUserForDuration": "사용자를 {duration} 동안 타임아웃",
+  "@timeoutUserForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "chatCleared": "채팅이 청소되었습니다",
+  "permabanned": "영구 밴",
+  "bannedForDuration": "{duration}동안 밴됨",
+  "@bannedForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "replyingTo": "~에 답장",
+  "blockedMessage": "차단된 메시지",
+  "showMessage": "메시지 보기",
+  "hideMessage": "메시지 숨기기",
+  "scrollToBottom": "맨 아래로 스크롤",
+  "startUsingTheApp": "앱을 사용하기 위해서 하단에 계정을 추가하세요."
 }

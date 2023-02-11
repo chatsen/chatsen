@@ -20,9 +20,9 @@
   "add": "Hinzufügen",
   "cancel": "Abbrechen",
   "tokenInput": "Token eingeben",
-  "account": "Benutzerkonto",
-  "refreshAccount": "Benutzerkonto aktualisieren",
-  "removeAccount": "Benutzerkonto entfernen",
+  "account": "Account",
+  "refreshAccount": "Account aktualisieren",
+  "removeAccount": "Account entfernen",
   "addAnotherAccount": "Weiteren Account hinzufügen",
   "verifiedUserData": "Benutzerdaten verifiziert!",
   "loggedInAs": "Eingeloggt als {user}",
@@ -39,42 +39,97 @@
   "searchForChannels": "Suche nach Kanälen",
   "recommendedChannels": "Empfohlene Kanäle",
   "popularChannels": "Beliebte Kanäle",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
-  "joinUser": "Join {user}",
+  "channel": "Kanal",
+  "leaveChannel": "Kanal verlassen",
+  "joinUser": "{user} beitreten",
   "@joinUser": {
     "placeholders": {
       "user": {}
     }
   },
-  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "spellCheckFailed": "Rechtschreibprüfung fehlgeschlagen! Meinen Sie {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "{channel} beitreten",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Nachricht in {channel} senden",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
+  "light": "Hell",
+  "dark": "Dunkel",
   "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save"
+  "appearance": "Darstellung",
+  "highContrast": "Hoher Kontrast",
+  "playStream": "Stream abspielen",
+  "stopStream": "Stream stoppen",
+  "customCommand": "Eigener Befehl",
+  "customCommands": "Eigene Befehle",
+  "newCustomCommand": "Befehl hinzufügen",
+  "commandTrigger": "Auslöser",
+  "command": "Befehl",
+  "save": "Speichern",
+  "browserStreamSettings": "Browser/Stream-Einstellungen",
+  "addPage": "Seite hinzufügen",
+  "channelStream": "{channel}'s Stream",
+  "@channelStream": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "openInBrowser": "Im Browser öffnen",
+  "messageAppearance": "Nachrichten",
+  "showTimestamps": "Uhrzeit anzeigen",
+  "compactMessages": "Kompakte Darstellung",
+  "messageTrigger": "Nachrichtenauslöser",
+  "pattern": "Begriff",
+  "mention": "Erwähnung",
+  "block": "Blockieren",
+  "enableRegex": "Regex verwenden",
+  "caseSensitive": "Groß-/Kleinschreibung beachten",
+  "messageTriggers": "Nachrichtenauslöser",
+  "newMessageTrigger": "Neuer Auslöser",
+  "reply": "Antworten",
+  "copyText": "Kopieren",
+  "copyTextSubtitle": "Halten, um mit Benutzernamen zu kopieren",
+  "deleteMessage": "Nachricht löschen",
+  "mentionUser": "Benutzer erwähnen",
+  "copyMessageId": "Nachrichten-ID kopieren",
+  "theme": "Farben",
+  "userTrigger": "Nutzerauslöser",
+  "userTriggers": "Nutzerauslöser",
+  "chatHistory": "Chatverlauf",
+  "login": "Login",
+  "newUserTrigger": "Neuer Auslöser",
+  "ban": "Sperren",
+  "unban": "Entsperren",
+  "timeoutUserForDuration": "Nutzer für {duration} sperren",
+  "@timeoutUserForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "chatCleared": "Chatverlauf wurde geleert",
+  "permabanned": "permanent gesperrt",
+  "bannedForDuration": "für {duration} gesperrt",
+  "@bannedForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "replyingTo": "Antwort an",
+  "blockedMessage": "Blockierte Nachricht",
+  "showMessage": "Nachricht anzeigen",
+  "hideMessage": "Nachricht ausblenden",
+  "scrollToBottom": "Zum Ende springen",
+  "startUsingTheApp": "Fügen Sie unten ein Konto hinzu, um die App zu verwenden."
 }
