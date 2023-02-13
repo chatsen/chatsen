@@ -49,14 +49,14 @@ class HomeEndDrawer extends StatelessWidget {
                                   SizedBox(height: 8.0),
                                   Text.rich(
                                     TextSpan(
-                                      text: 'Mentions would go here\n...if you had any ',
+                                      text: 'Mentions would go here\n...if you had any :(',
                                       children: [
-                                        WidgetSpan(
+                                        /*WidgetSpan(
                                           child: NetworkImageW(
                                             'https://cdn.frankerfacez.com/emote/425196/2',
                                             scale: 2.0,
                                           ),
-                                        ),
+                                        ),*/
                                       ],
                                     ),
                                     textAlign: TextAlign.center,
