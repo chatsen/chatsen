@@ -174,17 +174,17 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
     client.listeners.add(this);
 
-    updateFuture = UpdateModal.hasUpdate();
+    // updateFuture = UpdateModal.hasUpdate();
 
-    Timer.periodic(Duration(minutes: 5), (timer) {
-      // print('Checking for updates...');
-      setState(() {
-        updateFuture = UpdateModal.hasUpdate();
-      });
-    });
+    // Timer.periodic(Duration(minutes: 5), (timer) {
+    //   // print('Checking for updates...');
+    //   setState(() {
+    //     updateFuture = UpdateModal.hasUpdate();
+    //   });
+    // });
 
     SchedulerBinding.instance!.addPostFrameCallback((_) async {
-      UpdateModal.searchForUpdate(context);
+      // UpdateModal.searchForUpdate(context);
       var settingsState = BlocProvider.of<Settings>(context).state;
       if (settingsState is SettingsLoaded && settingsState.setupScreen) {
         await SetupModal.show(context, client);
@@ -244,7 +244,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                           //   document.getElementsByTagName("video")[0].controls = true;
                           // ''');
                         },
-                        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
                         // userAgent: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0',
                       ),
                       // Positioned.fill(
@@ -438,24 +438,24 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                           ),
                       ],
                     ),
-                  FutureBuilder<bool>(
-                    future: updateFuture,
-                    builder: (context, future) => future.hasData && future.data == true
-                        ? Align(
-                            alignment: Alignment.topRight,
-                            child: SafeArea(
-                              top: state is StreamOverlayClosed || horizontal,
-                              child: IconButton(
-                                icon: Icon(
-                                  Icons.system_update,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                                onPressed: () async => UpdateModal.searchForUpdate(context),
-                              ),
-                            ),
-                          )
-                        : SizedBox(),
-                  ),
+                  // FutureBuilder<bool>(
+                  //   future: updateFuture,
+                  //   builder: (context, future) => future.hasData && future.data == true
+                  //       ? Align(
+                  //           alignment: Alignment.topRight,
+                  //           child: SafeArea(
+                  //             top: state is StreamOverlayClosed || horizontal,
+                  //             child: IconButton(
+                  //               icon: Icon(
+                  //                 Icons.system_update,
+                  //                 color: Theme.of(context).colorScheme.primary,
+                  //               ),
+                  //               onPressed: () async => UpdateModal.searchForUpdate(context),
+                  //             ),
+                  //           ),
+                  //         )
+                  //       : SizedBox(),
+                  // ),
                 ],
               ),
             );

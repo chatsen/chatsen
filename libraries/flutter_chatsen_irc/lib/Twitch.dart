@@ -1099,40 +1099,55 @@ class Client {
     }
 
     try {
-      for (var i = 1; true; ++i) {
-        var data = await GQL.request7('''
-          query {
-            search_emotes(query: "", globalState: "only", limit: 150, pageSize: 150, page: $i) {
-              id
-              name
-              urls
-              provider
-              visibility
-            }
-          }
-        ''');
+      // for (var i = 1; true; ++i) {
+      //   var data = await GQL.request7('''
+      //     query {
+      //       search_emotes(query: "", globalState: "only", limit: 150, pageSize: 150, page: $i) {
+      //         id
+      //         name
+      //         urls
+      //         provider
+      //         visibility
+      //       }
+      //     }
+      //   ''');
 
-        var emotesData = data['data']['search_emotes'];
+      //   var emotesData = data['data']['search_emotes'];
 
-        for (var emoteData in emotesData) {
-          if (emoteData['urls'].isEmpty) {
-            continue;
-          }
+      //   for (var emoteData in emotesData) {
+      //     if (emoteData['urls'].isEmpty) {
+      //       continue;
+      //     }
 
-          var emote = Emote(
-            name: emoteData['name'],
-            id: emoteData['id'],
-            provider: '7TV',
-            mipmap: [
-              for (var url in emoteData['urls']) url.last,
-            ],
-            zeroWidth: (emoteData['visibility'] & (1 << 7)) == (1 << 7),
-          );
+      //     var emote = Emote(
+      //       name: emoteData['name'],
+      //       id: emoteData['id'],
+      //       provider: '7TV',
+      //       mipmap: [
+      //         for (var url in emoteData['urls']) url.last,
+      //       ],
+      //       zeroWidth: (emoteData['visibility'] & (1 << 7)) == (1 << 7),
+      //     );
 
-          emotes.add(emote);
-        }
+      //     emotes.add(emote);
+      //   }
 
-        if (emotesData.length < 150) break;
+      //   if (emotesData.length < 150) break;
+      // }
+
+      // https://api.7tv.app/v3/emote-sets/global
+      final response = await http.get(Uri.parse('https://api.7tv.app/v3/emote-sets/global'));
+      final responseJson = json.decode(utf8.decode(response.bodyBytes));
+      for (final emote in responseJson['emotes']) {
+        emotes.add(Emote(
+          name: emote['name'],
+          id: emote['id'],
+          provider: '7TV',
+          mipmap: [
+            for (final url in emote['data']['host']['files'].where((x) => x['format'] != 'AVIF')) 'https:${emote['data']['host']['url']}/${url['name']}',
+          ],
+          zeroWidth: (emote['data']['flags'] & (1 << 8)) == (1 << 8),
+        ));
       }
     } catch (e) {
       print("Couldn't fetch 7TV emotes: $e");

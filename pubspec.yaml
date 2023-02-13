@@ -27,9 +27,9 @@ dependencies:
   package_info: ^2.0.2
   path_provider: ^2.0.2
   open_file: ^3.2.1
-  dart_downloader:
-    git: https://github.com/williambulin/dart_downloader.git
-    # path: ../dart_downloader
+  # dart_downloader:
+  #   git: https://github.com/williambulin/dart_downloader.git
+  #   # path: ../dart_downloader
   chatsen_resources:
     git: https://github.com/chatsen/resources.git
   file_picker_cross: ^4.4.2

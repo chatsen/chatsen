@@ -11,7 +11,7 @@ import 'package:chatsen/Commands/CommandsCubit.dart';
 import 'package:chatsen/Consts.dart';
 import 'package:chatsen/Mentions/CustomMention.dart';
 import 'package:chatsen/Theme/ThemeBloc.dart';
-import 'package:dart_downloader/DownloadManager.dart';
+// import 'package:dart_downloader/DownloadManager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -75,7 +75,7 @@ Future<void> appRunner() async {
         BlocProvider(create: (BuildContext context) => ChatsenBadges()),
         BlocProvider(create: (BuildContext context) => MentionsCubit()),
         BlocProvider(create: (BuildContext context) => ThemeBloc(themeBox, mode: ThemeMode.dark, colorScheme: 'cyan')),
-        BlocProvider(create: (BuildContext context) => DownloadManager()),
+        // BlocProvider(create: (BuildContext context) => DownloadManager()),
         BlocProvider(create: (BuildContext context) => StreamOverlayBloc()),
         BlocProvider(create: (BuildContext context) => Settings(settingsBox)),
         BlocProvider(create: (BuildContext context) => BlockedUsersCubit(blockedUsersBox)),
