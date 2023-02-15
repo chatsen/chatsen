@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/Commands/CommandsCubit.dart';
+import 'package:chatsen/Consts.dart';
 import 'package:chatsen/Settings/Settings.dart';
 import 'package:chatsen/Settings/SettingsState.dart';
 import 'package:flutter/cupertino.dart';
@@ -138,7 +139,7 @@ class ChatInputBoxState extends State<ChatInputBox> {
 
   @override
   Widget build(BuildContext context) {
-    var autocompletionItems = getAutoCompletionItems();
+    var autocompletionItems = kUnverifiedVersion ? <Widget>[] : getAutoCompletionItems();
     var autocompletionItemsUsers = getAutoCompletionUsers();
     var autocompletionCommands = getAutoCompletionCommands();
 
