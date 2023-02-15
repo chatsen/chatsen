@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/Components/WidgetTooltip.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import '../Consts.dart';
 import '/Components/UI/WidgetBlur.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import 'package:hive/hive.dart';
@@ -42,7 +43,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
 
   @override
   Widget build(BuildContext context) => DefaultTabController(
-        length: 4,
+        length: kUnverifiedVersion ? 1 : 4,
         child: Builder(builder: (context) {
           return WidgetBlur(
             child: Material(
@@ -64,9 +65,9 @@ class _EmoteListModalState extends State<EmoteListModal> {
                           child: TabBar(
                             indicatorPadding: EdgeInsets.zero,
                             tabs: [
-                              Tab(text: 'Channel'),
-                              Tab(text: 'Twitch'),
-                              Tab(text: 'Global'),
+                              if (!kUnverifiedVersion) Tab(text: 'Channel'),
+                              if (!kUnverifiedVersion) Tab(text: 'Twitch'),
+                              if (!kUnverifiedVersion) Tab(text: 'Global'),
                               Tab(text: 'Emojis'),
                             ],
                           ),
@@ -74,48 +75,51 @@ class _EmoteListModalState extends State<EmoteListModal> {
                         Expanded(
                           child: TabBarView(
                             children: [
-                              ListView(
-                                children: [
-                                  for (var group in groupBy(widget.channel!.emotes, (dynamic emote) => emote.provider).entries) ...[
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
-                                      child: Text('${group.key}', style: Theme.of(context).textTheme.headline6),
-                                    ),
-                                    GridView.extent(
-                                      maxCrossAxisExtent: 48.0,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      children: [
-                                        for (var emote in group.value.where((x) => x.name!.toLowerCase().contains(textEditingController!.text.toLowerCase()))) buildEmoteButton(emote),
-                                      ],
-                                    ),
+                              if (!kUnverifiedVersion)
+                                ListView(
+                                  children: [
+                                    for (var group in groupBy(widget.channel!.emotes, (dynamic emote) => emote.provider).entries) ...[
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
+                                        child: Text('${group.key}', style: Theme.of(context).textTheme.headline6),
+                                      ),
+                                      GridView.extent(
+                                        maxCrossAxisExtent: 48.0,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        children: [
+                                          for (var emote in group.value.where((x) => x.name!.toLowerCase().contains(textEditingController!.text.toLowerCase()))) buildEmoteButton(emote),
+                                        ],
+                                      ),
+                                    ],
                                   ],
-                                ],
-                              ),
-                              GridView.extent(
-                                maxCrossAxisExtent: 48.0,
-                                children: [
-                                  for (var emote in widget.channel!.transmitter!.emotes.where((x) => x.name!.toLowerCase().contains(textEditingController!.text.toLowerCase()))) buildEmoteButton(emote),
-                                ],
-                              ),
-                              ListView(
-                                children: [
-                                  for (var group in groupBy(widget.client!.emotes, (dynamic emote) => emote.provider).entries) ...[
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
-                                      child: Text('${group.key}', style: Theme.of(context).textTheme.headline6),
-                                    ),
-                                    GridView.extent(
-                                      maxCrossAxisExtent: 48.0,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      shrinkWrap: true,
-                                      children: [
-                                        for (var emote in group.value.where((x) => x.name!.toLowerCase().contains(textEditingController!.text.toLowerCase()))) buildEmoteButton(emote),
-                                      ],
-                                    ),
+                                ),
+                              if (!kUnverifiedVersion)
+                                GridView.extent(
+                                  maxCrossAxisExtent: 48.0,
+                                  children: [
+                                    for (var emote in widget.channel!.transmitter!.emotes.where((x) => x.name!.toLowerCase().contains(textEditingController!.text.toLowerCase()))) buildEmoteButton(emote),
                                   ],
-                                ],
-                              ),
+                                ),
+                              if (!kUnverifiedVersion)
+                                ListView(
+                                  children: [
+                                    for (var group in groupBy(widget.client!.emotes, (dynamic emote) => emote.provider).entries) ...[
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
+                                        child: Text('${group.key}', style: Theme.of(context).textTheme.headline6),
+                                      ),
+                                      GridView.extent(
+                                        maxCrossAxisExtent: 48.0,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        children: [
+                                          for (var emote in group.value.where((x) => x.name!.toLowerCase().contains(textEditingController!.text.toLowerCase()))) buildEmoteButton(emote),
+                                        ],
+                                      ),
+                                    ],
+                                  ],
+                                ),
                               GridView.extent(
                                 maxCrossAxisExtent: 48.0,
                                 children: [

@@ -16,6 +16,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
 import 'package:flutter_svg/svg.dart';
+import '../Consts.dart';
 import '/Pages/Search.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
@@ -151,42 +152,54 @@ class ChatMessage extends StatelessWidget {
         case twitch.MessageTokenType.Video:
           break;
         case twitch.MessageTokenType.Emote:
-          spans.add(
-            WidgetSpan(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  WidgetTooltip(
-                    message: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 4.0),
-                            child: NetworkImageW(
-                              (token.data as twitch.Emote).mipmap!.last!,
-                              height: 96.0,
+          if (!kUnverifiedVersion) {
+            spans.add(
+              WidgetSpan(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    WidgetTooltip(
+                      message: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 4.0),
+                              child: NetworkImageW(
+                                (token.data as twitch.Emote).mipmap!.last!,
+                                height: 96.0,
+                              ),
                             ),
-                          ),
-                          Text((token.data as twitch.Emote).name!),
-                          Text((token.data as twitch.Emote).provider!),
-                        ],
+                            Text((token.data as twitch.Emote).name!),
+                            Text((token.data as twitch.Emote).provider!),
+                          ],
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 4.0),
+                        child: NetworkImageW(
+                          token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
+                          scale: token.data.provider == 'Twitch' ? 2.0 : (token.data.mipmap.length == 1 ? 1.0 : 4.0),
+                          height: token.data.provider == 'Emoji' ? 24.0 : null,
+                        ),
                       ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 4.0),
-                      child: NetworkImageW(
-                        token.data.provider == 'Twitch' ? token.data.mipmap[1] : token.data.mipmap.last,
-                        scale: token.data.provider == 'Twitch' ? 2.0 : (token.data.mipmap.length == 1 ? 1.0 : 4.0),
-                        height: token.data.provider == 'Emoji' ? 24.0 : null,
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          );
+            );
+          } else {
+            spans.add(
+              TextSpan(
+                text: '${(token.data as twitch.Emote).name!} ',
+                style: TextStyle(
+                  color: (message.user == null || message.action) ? color : null,
+                  shadows: shadows,
+                ),
+              ),
+            );
+          }
           break;
         case twitch.MessageTokenType.EmoteStack:
           spans.add(

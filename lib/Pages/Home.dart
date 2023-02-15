@@ -7,7 +7,12 @@ import 'package:chatsen/Mentions/CustomMentionsCubit.dart';
 import 'package:chatsen/Pages/OAuth.dart';
 import 'package:collection/src/iterable_extensions.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:package_info/package_info.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:version/version.dart';
 
+import '../Consts.dart';
 import '/Accounts/AccountsCubit.dart';
 import '/Components/HomeEndDrawer.dart';
 import '/Components/Modal/SetupModal.dart';
@@ -157,6 +162,43 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
         },
       ),
     );
+
+    http.get(Uri.parse('https://raw.githubusercontent.com/chatsen/resources/master/assets/version.json')).then((response) async {
+      final responseJson = json.decode(utf8.decode(response.bodyBytes));
+      print(responseJson);
+
+      final packageInfo = await PackageInfo.fromPlatform();
+      final currentReleaseVersion = Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
+
+      final latestStoreVersionString = Platform.isIOS ? responseJson['ios'] : responseJson['android'];
+      final latestStoreVersion = Version.parse(latestStoreVersionString);
+
+      if (kPlayStoreRelease && currentReleaseVersion > latestStoreVersion) {
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        //   content: Text('You are using a development version!'),
+        //   behavior: SnackBarBehavior.floating,
+        // ));
+
+        kUnverifiedVersion = true;
+      }
+
+      if (currentReleaseVersion < latestStoreVersion) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('There is a new version available!'),
+          behavior: SnackBarBehavior.floating,
+          action: SnackBarAction(
+            label: 'Update',
+            onPressed: () {
+              if (Platform.isIOS) {
+                launchUrl(Uri.parse('https://apps.apple.com/us/app/chatsen/id1574037007'));
+              } else {
+                launchUrl(Uri.parse('https://play.google.com/store/apps/details?id=com.chatsen.chatsen'));
+              }
+            },
+          ),
+        ));
+      }
+    });
 
     // AccountPresenter.findCurrentAccount().then(
     //   (account) async {
