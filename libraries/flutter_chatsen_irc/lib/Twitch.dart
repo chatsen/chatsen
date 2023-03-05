@@ -481,11 +481,9 @@ class Channel {
             name: emoteData['name'],
             // id: emoteData['id'], // TODO: Fix implementation
             provider: 'FFZ',
-            mipmap: List<String>.from(
-              emoteData['urls'].values.map(
-                    (url) => 'https:$url',
-                  ),
-            ),
+            mipmap: [
+              for (var url in emoteData['urls'].values) url.startsWith('http') ? url : 'https:$url',
+            ],
           );
 
           emotes.add(emote);
@@ -1061,11 +1059,9 @@ class Client {
             name: emoteData['name'],
             // id: emoteData['id'],
             provider: 'FFZ',
-            mipmap: List<String>.from(
-              emoteData['urls'].values.map(
-                    (url) => 'https:$url',
-                  ),
-            ),
+            mipmap: [
+              for (var url in emoteData['urls'].values) url.startsWith('http') ? url : 'https:$url',
+            ],
           );
 
           emotes.add(emote);

@@ -20,7 +20,7 @@ class FFZBadges extends Cubit<Map<String, List<twitch.Badge>>> {
           description: null,
           id: badgeData['id'].toString(),
           mipmap: [
-            for (var url in badgeData['urls'].values) 'https:$url',
+            for (var url in badgeData['urls'].values) url.startsWith('http') ? url : 'https:$url',
           ],
           name: badgeData['name'],
           tag: badgeData['name'],
