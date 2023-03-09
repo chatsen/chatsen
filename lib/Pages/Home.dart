@@ -286,7 +286,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                           //   document.getElementsByTagName("video")[0].controls = true;
                           // ''');
                         },
-                        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+                        userAgent: Platform.isIOS ? 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' : null,
                         // userAgent: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0',
                       ),
                       // Positioned.fill(
