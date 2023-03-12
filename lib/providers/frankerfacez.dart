@@ -23,7 +23,7 @@ class FrankerFaceZProvider extends Provider with EmoteProvider, BadgeProvider {
             id: '${emote.id}',
             name: emote.name,
             mipmap: [
-              for (final url in emote.urls.values) 'https:$url',
+              for (final url in emote.urls.values) url,
             ],
             provider: this,
           ),
@@ -40,7 +40,7 @@ class FrankerFaceZProvider extends Provider with EmoteProvider, BadgeProvider {
             id: '${emote.id}',
             name: emote.name,
             mipmap: [
-              for (final url in emote.urls.values) 'https:$url',
+              for (final url in emote.urls.values) url,
             ],
             provider: this,
           ),
@@ -65,7 +65,9 @@ class FrankerFaceZProvider extends Provider with EmoteProvider, BadgeProvider {
           badge: CustomBadge(
             id: '${badge.id}',
             name: badge.title,
-            mipmap: badge.urls.values.map((e) => 'http:$e').toList(),
+            mipmap: [
+              for (final url in badge.urls.values) url,
+            ],
             provider: this,
           ),
           users: badges.users['${badge.id}']?.map((e) => '$e').toList() ?? [],
