@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:chatsen/api/twitch/twitch_badge.dart';
+import 'package:chatsen/api/twitch/twitch_emote.dart';
 import 'package:http/http.dart' as http;
 
 import '/data/twitch/search_data.dart';
@@ -128,5 +129,26 @@ class Twitch {
     return [
       for (final data in responseJson['data']) SearchData.fromJson(data),
     ];
+  }
+
+  static Future<List<TwitchEmote>> emoteSets(TokenData tokenData, List<String> emoteSetIds) async {
+    const takeCount = 25;
+    final emotes = <TwitchEmote>[];
+    while (emoteSetIds.isNotEmpty) {
+      final emoteSetsPack = emoteSetIds.take(takeCount).toList();
+      final response = await http.get(
+        Uri.parse('https://api.twitch.tv/helix/chat/emotes/set?${emoteSetsPack.map((x) => 'emote_set_id=$x').join('&')}'),
+        headers: {
+          'Authorization': 'Bearer ${tokenData.accessToken}',
+          'Client-Id': '${tokenData.clientId}',
+        },
+      );
+      final responseJson = json.decode(utf8.decode(response.bodyBytes));
+      emotes.addAll([
+        for (final data in responseJson['data']) TwitchEmote.fromJson(data),
+      ]);
+      emoteSetIds.removeRange(0, emoteSetsPack.length);
+    }
+    return emotes;
   }
 }

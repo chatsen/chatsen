@@ -56,6 +56,7 @@ class Client {
 
   List<ClientListener> listeners = [];
 
+  Emotes twitchUserEmotes = Emotes();
   Emotes globalEmotes = Emotes();
   Badges globalBadges = Badges();
   Emotes emojis = Emotes();
@@ -105,7 +106,6 @@ class Client {
         log('Couldn\'t get ${emoteProvider.name} global emotes');
       }
     }
-
     globalEmotes.change(emotes);
   }
 
@@ -159,6 +159,25 @@ class Client {
             stateTwitchAccount,
             blockedUserIds: stateTwitchAccount.tokenData.accessToken == null ? [] : await Twitch.blockedUsers(stateTwitchAccount.tokenData),
           ));
+        }
+        break;
+      case 'GLOBALUSERSTATE':
+        try {
+          if (connection.state is ConnectionStateWithCredentials) {
+            final stateTwitchAccount = (connection.state as ConnectionStateWithCredentials).twitchAccount;
+            final emotes = await Twitch.emoteSets(stateTwitchAccount.tokenData, event.tags['emote-sets']?.split(',') ?? []);
+            twitchUserEmotes.change([
+              for (final emote in emotes)
+                Emote(
+                  id: emote.id,
+                  mipmap: emote.images.values.toList(),
+                  name: emote.name,
+                  provider: providers.firstWhere((element) => element.name == 'Twitch'),
+                ),
+            ]);
+          }
+        } catch (e) {
+          log('Couldn\'t get twitch user emotes');
         }
         break;
       case 'JOIN':

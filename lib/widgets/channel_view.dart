@@ -75,7 +75,7 @@ class ChannelViewState extends State<ChannelView> {
 
   List<AutocompletionItem> getAutocompletionItems() {
     if (textEditingController.text.split(' ').last.length < 2) return [];
-    final matchingEmotes = (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state).where((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()));
+    final matchingEmotes = (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state + widget.channel.client.twitchUserEmotes.state).where((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()));
     final chatters = widget.channel.channelChatters.state?.getAllChatters() ?? [];
     final matchingChatters = chatters.where((chatter) => chatter.login.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()));
     return [
@@ -280,7 +280,7 @@ class ChannelViewState extends State<ChannelView> {
                         padding: MediaQuery.of(context).padding.copyWith(top: 0.0, bottom: 0.0),
                         maxCrossAxisExtent: 32.0 + 24.0,
                         children: [
-                          for (final emote in (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state))
+                          for (final emote in (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state + widget.channel.client.twitchUserEmotes.state))
                             Tooltip(
                               message: emote.name,
                               child: InkWell(
