@@ -74,20 +74,20 @@
   "stopStream": "Detener stream",
   "customCommand": "Comando personalizado",
   "customCommands": "Comandos personalizados",
-  "newCustomCommand": "New custom command",
+  "newCustomCommand": "Nuevo comando personalizado",
   "commandTrigger": "Activador",
   "command": "Comando",
   "save": "Guardar",
-  "browserStreamSettings": "Browser/Stream Settings",
-  "addPage": "Add page",
+  "browserStreamSettings": "Ajustes del Navegador/Stream",
+  "addPage": "Añadir página",
   "channelStream": "{channel}'s stream",
   "@channelStream": {
     "placeholders": {
       "channel": {}
     }
   },
-  "openInBrowser": "Open in browser",
-  "messageAppearance": "Message appearance",
+  "openInBrowser": "Abrir en el navegador",
+  "messageAppearance": "Apariencia del mensaje",
   "showTimestamps": "Show timestamps",
   "compactMessages": "Compact messages",
   "messageTrigger": "Message trigger",
