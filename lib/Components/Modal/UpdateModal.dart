@@ -1,7 +1,7 @@
 // import 'dart:convert';
 // import 'dart:io';
 
-// import 'package:chatsen/Consts.dart';
+// import '/Consts.dart';
 // import 'package:dart_downloader/DownloadManager.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';

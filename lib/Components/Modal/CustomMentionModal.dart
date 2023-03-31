@@ -1,6 +1,6 @@
-import 'package:chatsen/Components/UI/BlurModal.dart';
-import 'package:chatsen/Mentions/CustomMention.dart';
-import 'package:chatsen/Mentions/CustomMentionsCubit.dart';
+import '/Components/UI/BlurModal.dart';
+import '/Mentions/CustomMention.dart';
+import '/Mentions/CustomMentionsCubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

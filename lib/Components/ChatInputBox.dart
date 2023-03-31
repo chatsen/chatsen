@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chatsen/Commands/CommandsCubit.dart';
-import 'package:chatsen/Consts.dart';
-import 'package:chatsen/Settings/Settings.dart';
-import 'package:chatsen/Settings/SettingsState.dart';
+import '/Commands/CommandsCubit.dart';
+import '/Consts.dart';
+import '/Settings/Settings.dart';
+import '/Settings/SettingsState.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

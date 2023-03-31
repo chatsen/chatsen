@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:chatsen/BackgroundAudio/BackgroundAudioWrapper.dart';
-import 'package:chatsen/BackgroundDaemon/BackgroundDaemonCubit.dart';
-import 'package:chatsen/Pages/Settings.dart';
-import 'package:chatsen/Theme/ThemeManager.dart';
+import '/BackgroundAudio/BackgroundAudioWrapper.dart';
+import '/BackgroundDaemon/BackgroundDaemonCubit.dart';
+import '/Pages/Settings.dart';
+import '/Theme/ThemeManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

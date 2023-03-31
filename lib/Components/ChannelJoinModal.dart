@@ -64,6 +64,7 @@ class _ChannelJoinModalState extends State<ChannelJoinModal> {
                     Expanded(
                       child: TextField(
                         controller: textEditingController,
+                        autocorrect: false,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
                           filled: false,

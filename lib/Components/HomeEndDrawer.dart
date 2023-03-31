@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chatsen/Components/ChatMessage.dart';
-import 'package:chatsen/Mentions/MentionsCubit.dart';
+import '/Components/ChatMessage.dart';
+import '/Mentions/MentionsCubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '/Components/UI/WidgetBlur.dart';

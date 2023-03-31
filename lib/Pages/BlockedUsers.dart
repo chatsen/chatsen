@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:chatsen/Components/Modal/BlockedUserModal.dart';
-import 'package:chatsen/Components/Modal/CustomMentionModal.dart';
-import 'package:chatsen/Components/UI/CustomSliverAppBarDelegate.dart';
-import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
-import 'package:chatsen/Components/UI/Tile.dart';
+import '/Components/Modal/BlockedUserModal.dart';
+import '/Components/Modal/CustomMentionModal.dart';
+import '/Components/UI/CustomSliverAppBarDelegate.dart';
+import '/Components/UI/NoAppBarBlur.dart';
+import '/Components/UI/Tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

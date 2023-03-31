@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:chatsen/Commands/Command.dart';
+import '/Commands/Command.dart';
 import 'package:hive/hive.dart';
 
 class CommandsCubit extends Cubit<List<Command>> {

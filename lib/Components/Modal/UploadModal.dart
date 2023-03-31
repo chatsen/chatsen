@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:chatsen/Components/UI/BlurModal.dart';
+import '/Components/UI/BlurModal.dart';
 import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

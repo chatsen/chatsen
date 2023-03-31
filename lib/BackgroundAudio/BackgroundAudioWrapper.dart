@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:chatsen/BackgroundDaemon/BackgroundDaemonCubit.dart';
+import '/BackgroundDaemon/BackgroundDaemonCubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';

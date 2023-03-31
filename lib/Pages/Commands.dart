@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:chatsen/Commands/Command.dart';
-import 'package:chatsen/Commands/CommandsCubit.dart';
-import 'package:chatsen/Components/Modal/CommandModal.dart';
-import 'package:chatsen/Components/UI/CustomSliverAppBarDelegate.dart';
-import 'package:chatsen/Components/UI/NoAppBarBlur.dart';
-import 'package:chatsen/Components/UI/Tile.dart';
+import '/Commands/Command.dart';
+import '/Commands/CommandsCubit.dart';
+import '/Components/Modal/CommandModal.dart';
+import '/Components/UI/CustomSliverAppBarDelegate.dart';
+import '/Components/UI/NoAppBarBlur.dart';
+import '/Components/UI/Tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:chatsen/BlockedTerms/BlockedTermsCubit.dart';
-import 'package:chatsen/Mentions/CustomMentionsCubit.dart';
-import 'package:chatsen/Pages/OAuth.dart';
+import '/BlockedTerms/BlockedTermsCubit.dart';
+import '/Mentions/CustomMentionsCubit.dart';
+import '/Pages/OAuth.dart';
 import 'package:collection/src/iterable_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

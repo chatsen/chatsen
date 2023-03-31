@@ -1,8 +1,8 @@
-import 'package:chatsen/Components/UI/BlurModal.dart';
-import 'package:chatsen/Components/UI/Tile.dart';
-import 'package:chatsen/Settings/Settings.dart';
-import 'package:chatsen/Settings/SettingsEvent.dart';
-import 'package:chatsen/Settings/SettingsState.dart';
+import '/Components/UI/BlurModal.dart';
+import '/Components/UI/Tile.dart';
+import '/Settings/Settings.dart';
+import '/Settings/SettingsEvent.dart';
+import '/Settings/SettingsState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';

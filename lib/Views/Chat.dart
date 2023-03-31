@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:chatsen/BlockedUsers/BlockedUsersCubit.dart';
-import 'package:chatsen/Settings/Settings.dart';
-import 'package:chatsen/Settings/SettingsState.dart';
+import '/BlockedUsers/BlockedUsersCubit.dart';
+import '/Settings/Settings.dart';
+import '/Settings/SettingsState.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

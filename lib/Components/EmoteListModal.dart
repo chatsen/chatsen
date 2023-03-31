@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chatsen/Components/WidgetTooltip.dart';
+import '/Components/WidgetTooltip.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import '../Consts.dart';

@@ -1,16 +1,16 @@
 import 'dart:io';
 
-import 'package:chatsen/Accounts/AccountsCubit.dart';
-import 'package:chatsen/Badges/ChatterinoBadges.dart';
-import 'package:chatsen/Badges/DankChatBadges.dart';
-import 'package:chatsen/Badges/FFZBadges.dart';
-import 'package:chatsen/BlockedTerms/BlockedTermsCubit.dart';
-import 'package:chatsen/BlockedUsers/BlockedUsersCubit.dart';
-import 'package:chatsen/Commands/Command.dart';
-import 'package:chatsen/Commands/CommandsCubit.dart';
-import 'package:chatsen/Consts.dart';
-import 'package:chatsen/Mentions/CustomMention.dart';
-import 'package:chatsen/Theme/ThemeBloc.dart';
+import '/Accounts/AccountsCubit.dart';
+import '/Badges/ChatterinoBadges.dart';
+import '/Badges/DankChatBadges.dart';
+import '/Badges/FFZBadges.dart';
+import '/BlockedTerms/BlockedTermsCubit.dart';
+import '/BlockedUsers/BlockedUsersCubit.dart';
+import '/Commands/Command.dart';
+import '/Commands/CommandsCubit.dart';
+import '/Consts.dart';
+import '/Mentions/CustomMention.dart';
+import '/Theme/ThemeBloc.dart';
 // import 'package:dart_downloader/DownloadManager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:collection/collection.dart';
+import 'package:flutter_chatsen_irc/api/chatsen_static/chatsen_static.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:http/http.dart' as http;
 
@@ -434,11 +435,24 @@ class Channel {
     // );
 
     // return users;
-    var response = await http.get(Uri.parse('http://tmi.twitch.tv/group/user/${name!.substring(1)}/chatters'));
-    var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+    // var response = await http.get(Uri.parse('http://tmi.twitch.tv/group/user/${name!.substring(1)}/chatters'));
+    // var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
 
-    users = Map<String, List<String>>.from(jsonResponse['chatters'].map((k, v) => MapEntry(k, List<String>.from(v))));
+    // users = Map<String, List<String>>.from(jsonResponse['chatters'].map((k, v) => MapEntry(k, List<String>.from(v))));
 
+    // return users;
+
+    users = {};
+
+    try {
+      final response = await http.get(Uri.parse('https://api.chatsen.app/saikin/channel/users/${name!.substring(1)}'));
+      final responseJson = json.decode(utf8.decode(response.bodyBytes));
+      users = {
+        'users': [
+          for (final userData in responseJson.entries) userData.key as String,
+        ],
+      };
+    } catch (e) {}
     return users;
   }
 
@@ -1046,6 +1060,26 @@ class Client {
     } catch (e) {
       // print(e);
       print('Couldn\'t load emojis');
+    }
+
+    try {
+      final staticEmotes = await ChatsenStatic.staticEmotes();
+
+      for (final staticEmote in staticEmotes) {
+        emotes.add(
+          Emote(
+            name: staticEmote.name,
+            id: staticEmote.id,
+            provider: 'Chatsen',
+            mipmap: [
+              staticEmote.url,
+            ],
+            zeroWidth: (staticEmote.modifiers & (1 << 1)) == (1 << 1),
+          ),
+        );
+      }
+    } catch (e) {
+      print("Couldn't fetch Chatsen static emotes");
     }
 
     try {

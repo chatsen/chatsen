@@ -1,4 +1,4 @@
-import 'package:chatsen/Components/UI/BlurModal.dart';
+import '/Components/UI/BlurModal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:chatsen/Commands/Command.dart';
-import 'package:chatsen/Commands/CommandsCubit.dart';
-import 'package:chatsen/Components/UI/BlurModal.dart';
-import 'package:chatsen/Components/UI/Tile.dart';
+import '/Commands/Command.dart';
+import '/Commands/CommandsCubit.dart';
+import '/Components/UI/BlurModal.dart';
+import '/Components/UI/Tile.dart';
 import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:chatsen/Accounts/AccountModel.dart';
-import 'package:chatsen/Accounts/AccountsCubit.dart';
+import '/Accounts/AccountModel.dart';
+import '/Accounts/AccountsCubit.dart';
 import 'package:collection/src/iterable_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
