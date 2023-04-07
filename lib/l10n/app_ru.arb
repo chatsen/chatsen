@@ -16,31 +16,31 @@
       "time": {}
     }
   },
-  "close": "Close",
-  "add": "Add",
+  "close": "Закрыть",
+  "add": "Добавить",
   "cancel": "Cancel",
   "tokenInput": "Token input",
-  "account": "Account",
+  "account": "Учётная запись",
   "refreshAccount": "Refresh account",
   "removeAccount": "Remove account",
-  "addAnotherAccount": "Add another account",
+  "addAnotherAccount": "Добавить другой аккаунт",
   "verifiedUserData": "Verified user data!",
-  "loggedInAs": "Logged in as {user}",
+  "loggedInAs": "Вы вошли как {user}",
   "@loggedInAs": {
     "placeholders": {
       "user": {}
     }
   },
-  "anErrorHasOccuredWhenVerifyingUserData": "An error has occurred when verifying user data:",
-  "verifyingUserData": "Verifying user data...",
+  "anErrorHasOccuredWhenVerifyingUserData": "Произошла ошибка при проверке данных пользователя:",
+  "verifyingUserData": "Проверка данных пользователя...",
   "verifiedUserToken": "Verified user token!",
   "anErrorHasOccuredWhenVerifyingUserToken": "An error has occurred when verifying user token:",
   "verifyingUserToken": "Verifying user token...",
-  "searchForChannels": "Search for channels",
-  "recommendedChannels": "Recommended channels",
-  "popularChannels": "Popular channels",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
+  "searchForChannels": "Поиск каналов",
+  "recommendedChannels": "Рекомендованные каналы",
+  "popularChannels": "Популярные каналы",
+  "channel": "Канал",
+  "leaveChannel": "Покинуть канал",
   "joinUser": "Join {user}",
   "@joinUser": {
     "placeholders": {
@@ -59,26 +59,26 @@
       "channel": {}
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Отправить сообщение в {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "newCustomCommand": "New custom command",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save",
-  "browserStreamSettings": "Browser/Stream Settings",
+  "light": "Светлая",
+  "dark": "Тёмная",
+  "system": "Системная",
+  "appearance": "Внешний вид",
+  "highContrast": "Высокая контрастность",
+  "playStream": "Воспроизвести трансляцию",
+  "stopStream": "Остановить трансляцию",
+  "customCommand": "Собственная команда",
+  "customCommands": "Собственные команды",
+  "newCustomCommand": "Новая собственная команда",
+  "commandTrigger": "Триггер",
+  "command": "Команда",
+  "save": "Сохранить",
+  "browserStreamSettings": "Настройки браузера/трансляции",
   "addPage": "Add page",
   "channelStream": "{channel}'s stream",
   "@channelStream": {
@@ -86,7 +86,7 @@
       "channel": {}
     }
   },
-  "openInBrowser": "Open in browser",
+  "openInBrowser": "Открыть в браузере",
   "messageAppearance": "Message appearance",
   "showTimestamps": "Show timestamps",
   "compactMessages": "Compact messages",
@@ -107,12 +107,12 @@
   "theme": "Theme",
   "userTrigger": "User trigger",
   "userTriggers": "User triggers",
-  "chatHistory": "Chat history",
+  "chatHistory": "История сообщений",
   "login": "Login",
   "newUserTrigger": "New user trigger",
-  "ban": "Ban",
-  "unban": "Unban",
-  "timeoutUserForDuration": "Timeout user for {duration}",
+  "ban": "Забанить",
+  "unban": "Разбанить",
+  "timeoutUserForDuration": "Временно забанить пользователя на {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
       "duration": {}
@@ -130,6 +130,6 @@
   "blockedMessage": "Blocked message",
   "showMessage": "Show message",
   "hideMessage": "Hide message",
-  "scrollToBottom": "Scroll to bottom",
+  "scrollToBottom": "Прокрутить вниз",
   "startUsingTheApp": "To start using the app, add an account below."
 }
