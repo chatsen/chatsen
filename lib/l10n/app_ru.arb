@@ -6,9 +6,9 @@
       "provider": {}
     }
   },
-  "termsOfService": "Terms of Service",
-  "privacyPolicy": "Privacy Policy",
-  "settings": "Settings",
+  "termsOfService": "Условия предоставления услуг",
+  "privacyPolicy": "Политика конфиденциальности",
+  "settings": "Настройки",
   "expiresNever": "Never expires",
   "expiresIn": "Expires in {time}",
   "@expiresIn": {
