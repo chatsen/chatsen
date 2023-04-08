@@ -26,30 +26,34 @@ class FFZAPBadges extends Cubit<Map<String, List<twitch.Badge>>> {
   };
 
   void refresh() async {
-    var response = await http.get(Uri.parse('https://api.ffzap.com/v1/supporters'));
-    var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+    try {
+      var response = await http.get(Uri.parse('https://api.ffzap.com/v1/supporters'));
+      var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
 
-    var users = <String, List<twitch.Badge>>{
-      for (var badgeData in jsonResponse)
-        badgeData['id'].toString(): [
-          twitch.Badge(
-            title: helpers[badgeData['id'].toString()] ?? 'FFZ:AP Supporter',
-            description: null,
-            id: badgeData['id'].toString(),
-            mipmap: [
-              'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/1?date=${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
-              'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/2?date=${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
-              'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/3?date=${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
-            ],
-            name: badgeData['id'].toString(),
-            tag: badgeData['id'].toString(),
-            // color: badgeData['badge_color']?.substring(1),
-            // cache: false,
-          ),
-        ],
-    };
+      var users = <String, List<twitch.Badge>>{
+        for (var badgeData in jsonResponse)
+          badgeData['id'].toString(): [
+            twitch.Badge(
+              title: helpers[badgeData['id'].toString()] ?? 'FFZ:AP Supporter',
+              description: null,
+              id: badgeData['id'].toString(),
+              mipmap: [
+                'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/1?date=${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
+                'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/2?date=${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
+                'https://api.ffzap.com/v1/user/badge/${badgeData['id']}/3?date=${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}',
+              ],
+              name: badgeData['id'].toString(),
+              tag: badgeData['id'].toString(),
+              // color: badgeData['badge_color']?.substring(1),
+              // cache: false,
+            ),
+          ],
+      };
 
-    emit(users);
+      emit(users);
+    } catch (e) {
+      print(e);
+    }
   }
 
   List<twitch.Badge> getBadgesForUser(String id) {

@@ -13,29 +13,33 @@ class ChattyBadges extends Cubit<Map<String, List<twitch.Badge>>> {
   }
 
   void refresh() async {
-    var response = await http.get(Uri.parse('https://tduva.com/res/badges'));
-    var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+    try {
+      var response = await http.get(Uri.parse('https://tduva.com/res/badges'));
+      var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
 
-    var users = <String, List<twitch.Badge>>{};
-    for (var badgeData in jsonResponse.where((element) => element['id'] == 'chatty')) {
-      for (var userId in badgeData['usernames']) {
-        if (users[userId] == null) users[userId] = <twitch.Badge>[];
-        users[userId]!.add(
-          twitch.Badge(
-            title: badgeData['meta_title'],
-            description: null,
-            id: badgeData['version'],
-            mipmap: [
-              'https:${badgeData['image_url']}',
-            ],
-            name: badgeData['version'],
-            tag: badgeData['version'],
-          ),
-        );
+      var users = <String, List<twitch.Badge>>{};
+      for (var badgeData in jsonResponse.where((element) => element['id'] == 'chatty')) {
+        for (var userId in badgeData['usernames']) {
+          if (users[userId] == null) users[userId] = <twitch.Badge>[];
+          users[userId]!.add(
+            twitch.Badge(
+              title: badgeData['meta_title'],
+              description: null,
+              id: badgeData['version'],
+              mipmap: [
+                'https:${badgeData['image_url']}',
+              ],
+              name: badgeData['version'],
+              tag: badgeData['version'],
+            ),
+          );
+        }
       }
-    }
 
-    emit(users);
+      emit(users);
+    } catch (e) {
+      print(e);
+    }
   }
 
   List<twitch.Badge> getBadgesForUser(String id) {

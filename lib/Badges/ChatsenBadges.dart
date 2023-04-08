@@ -37,23 +37,27 @@ class ChatsenBadges extends Cubit<Map<String, List<twitch.Badge>>> {
   }
 
   void refresh() async {
-    var response = await http.get(Uri.parse('https://raw.githubusercontent.com/chatsen/resources/master/assets/data.json')); // https://cdn.jsdelivr.net/gh/chatsen/resources/assets/data.json'));
-    var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
-    var data = resources.Data.fromJson(jsonResponse);
-    emit({
-      for (var userData in data.users)
-        userData.id: [
-          for (var badgeData in userData.badges.map((x) => data.badges.firstWhere((element) => element.name == x.badgeName)).toList())
-            twitch.Badge(
-              title: badgeData.title,
-              description: badgeData.description,
-              id: badgeData.name,
-              mipmap: [badgeData.image],
-              name: badgeData.name,
-              tag: badgeData.name,
-            ),
-        ],
-    });
+    try {
+      var response = await http.get(Uri.parse('https://raw.githubusercontent.com/chatsen/resources/master/assets/data.json')); // https://cdn.jsdelivr.net/gh/chatsen/resources/assets/data.json'));
+      var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+      var data = resources.Data.fromJson(jsonResponse);
+      emit({
+        for (var userData in data.users)
+          userData.id: [
+            for (var badgeData in userData.badges.map((x) => data.badges.firstWhere((element) => element.name == x.badgeName)).toList())
+              twitch.Badge(
+                title: badgeData.title,
+                description: badgeData.description,
+                id: badgeData.name,
+                mipmap: [badgeData.image],
+                name: badgeData.name,
+                tag: badgeData.name,
+              ),
+          ],
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   List<twitch.Badge> getBadgesForUser(String id) {

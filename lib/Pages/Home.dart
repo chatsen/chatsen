@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
       final latestStoreVersionString = Platform.isIOS ? responseJson['ios'] : responseJson['android'];
       final latestStoreVersion = Version.parse(latestStoreVersionString);
 
-      if (kPlayStoreRelease && currentReleaseVersion > latestStoreVersion) {
+      if (kPlayStoreRelease && Platform.isIOS && currentReleaseVersion > latestStoreVersion) {
         // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         //   content: Text('You are using a development version!'),
         //   behavior: SnackBarBehavior.floating,

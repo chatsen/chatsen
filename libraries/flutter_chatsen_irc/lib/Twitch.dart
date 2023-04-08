@@ -387,10 +387,10 @@ class Channel {
         body: message.parameters[1],
         tagBadges: message.tags['badges'],
         tagEmotes: message.tags['emotes'],
-        dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? 0),
+        dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? int.tryParse(message.tags['rm-received-ts']) ?? 0),
       );
 
-      messages.add(chatMessage);
+      if (messages.none((element) => element.id == chatMessage.id)) messages.add(chatMessage);
       if (messages.length > 1000) messages.removeRange(0, messages.length - 1000);
     }
 

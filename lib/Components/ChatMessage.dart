@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import '../Badges/Chatsen2Badges.dart';
 import '/Badges/BTTVBadges.dart';
 import '/Badges/ChatsenBadges.dart';
 import '/Badges/ChatterinoBadges.dart';
@@ -401,6 +402,7 @@ class ChatMessage extends StatelessWidget {
                           ...BlocProvider.of<ChattyBadges>(context).getBadgesForUser('${message.user?.login}'),
                           ...BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}'),
                           ...BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'),
+                          ...BlocProvider.of<Chatsen2Badges>(context).getBadgesForUser('${message.user?.id}'),
                         ])
                           WidgetSpan(
                             child: WidgetTooltip(

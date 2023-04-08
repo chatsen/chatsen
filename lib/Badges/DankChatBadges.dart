@@ -13,29 +13,33 @@ class DankChatBadges extends Cubit<Map<String, List<twitch.Badge>>> {
   }
 
   void refresh() async {
-    var response = await http.get(Uri.parse('https://flxrs.com/api/badges'));
-    var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
+    try {
+      var response = await http.get(Uri.parse('https://flxrs.com/api/badges'));
+      var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
 
-    var users = <String, List<twitch.Badge>>{};
-    for (var badgeData in jsonResponse) {
-      for (var userId in badgeData['users']) {
-        if (users[userId] == null) users[userId] = <twitch.Badge>[];
-        users[userId]!.add(
-          twitch.Badge(
-            title: badgeData['type'],
-            description: null,
-            id: base64Encode(badgeData['type'].codeUnits),
-            mipmap: [
-              badgeData['url'],
-            ],
-            name: base64Encode(badgeData['type'].codeUnits),
-            tag: base64Encode(badgeData['type'].codeUnits),
-          ),
-        );
+      var users = <String, List<twitch.Badge>>{};
+      for (var badgeData in jsonResponse) {
+        for (var userId in badgeData['users']) {
+          if (users[userId] == null) users[userId] = <twitch.Badge>[];
+          users[userId]!.add(
+            twitch.Badge(
+              title: badgeData['type'],
+              description: null,
+              id: base64Encode(badgeData['type'].codeUnits),
+              mipmap: [
+                badgeData['url'],
+              ],
+              name: base64Encode(badgeData['type'].codeUnits),
+              tag: base64Encode(badgeData['type'].codeUnits),
+            ),
+          );
+        }
       }
-    }
 
-    emit(users);
+      emit(users);
+    } catch (e) {
+      print(e);
+    }
   }
 
   List<twitch.Badge> getBadgesForUser(String id) {

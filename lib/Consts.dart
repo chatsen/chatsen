@@ -1,2 +1,2 @@
-bool kPlayStoreRelease = false;
+bool kPlayStoreRelease = true;
 bool kUnverifiedVersion = false;
