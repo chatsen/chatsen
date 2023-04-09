@@ -44,7 +44,7 @@ class _SearchPageState extends State<SearchPage> {
                 child: ListView(
                   reverse: true,
                   children: [
-                    for (var message in widget.channel!.messages.where((message) => (widget.user != null ? message.user?.id == widget.user!.id : true) && message.body!.toLowerCase().contains((textEditingController?.text ?? '').toLowerCase())).toList().reversed)
+                    for (var message in widget.channel!.messages.where((message) => (widget.user != null ? message.user?.id == widget.user!.id : true) && '${message.user?.login}: ${message.body!}'.toLowerCase().contains((textEditingController?.text ?? '').toLowerCase())).toList().reversed)
                       ChatMessage(
                         message: message,
                       ),
