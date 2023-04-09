@@ -91,7 +91,7 @@
   "showTimestamps": "Hiển thị thời gian",
   "compactMessages": "Tin nhắn nhỏ gọn",
   "messageTrigger": "Bộ lọc tin nhắn",
-  "pattern": "Khuôn mẫu",
+  "pattern": "Nội dung",
   "mention": "Nhắc đến",
   "block": "Chặn",
   "enableRegex": "Bật regex",
