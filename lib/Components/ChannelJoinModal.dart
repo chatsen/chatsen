@@ -34,7 +34,7 @@ class _ChannelJoinModalState extends State<ChannelJoinModal> {
   }
 
   void submit() async {
-    var channelNames = textEditingController!.text.replaceAll(' ', ',').split(',').map((value) => '#$value').toList();
+    var channelNames = textEditingController!.text.replaceAll(' ', ',').split(',').map((value) => '#${value.replaceAll('#', '')}').toList();
     channelNames.removeWhere((channelName) => widget.client!.channels.any((channel) => channel.name == channelName));
     await widget.client!.joinChannels(channelNames);
     var channelsBox = await Hive.openBox('Channels');
