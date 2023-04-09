@@ -23,7 +23,7 @@
   "account": "Учётная запись",
   "refreshAccount": "Refresh account",
   "removeAccount": "Remove account",
-  "addAnotherAccount": "Добавить другой аккаунт",
+  "addAnotherAccount": "Добавить другую учётную запись",
   "verifiedUserData": "Verified user data!",
   "loggedInAs": "Вы вошли как {user}",
   "@loggedInAs": {
@@ -131,5 +131,5 @@
   "showMessage": "Показать сообщение",
   "hideMessage": "Скрыть сообщение",
   "scrollToBottom": "Прокрутить вниз",
-  "startUsingTheApp": "To start using the app, add an account below."
+  "startUsingTheApp": "Чтобы начать использовать приложение, добавьте учётную запись ниже."
 }
