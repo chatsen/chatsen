@@ -47,7 +47,7 @@
       "user": {}
     }
   },
-  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "spellCheckFailed": "Ой, кажется очепятка! Вы имели в виду найти {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
@@ -94,8 +94,8 @@
   "pattern": "Шаблон",
   "mention": "Упомянуть",
   "block": "Заблокировать",
-  "enableRegex": "Enable regex",
-  "caseSensitive": "Case sensitive",
+  "enableRegex": "Использовать regex",
+  "caseSensitive": "С учетом регистра",
   "messageTriggers": "Message triggers",
   "newMessageTrigger": "New message trigger",
   "reply": "Ответить",
@@ -120,14 +120,14 @@
   },
   "chatCleared": "Чат был очищен",
   "permabanned": "permabanned",
-  "bannedForDuration": "banned for {duration}",
+  "bannedForDuration": "забанен на {duration}",
   "@bannedForDuration": {
     "placeholders": {
       "duration": {}
     }
   },
-  "replyingTo": "Replying to",
-  "blockedMessage": "Blocked message",
+  "replyingTo": "Ответить на",
+  "blockedMessage": "Заблокированное сообщение",
   "showMessage": "Показать сообщение",
   "hideMessage": "Скрыть сообщение",
   "scrollToBottom": "Прокрутить вниз",
