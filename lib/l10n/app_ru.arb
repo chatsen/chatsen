@@ -9,8 +9,8 @@
   "termsOfService": "Условия предоставления услуг",
   "privacyPolicy": "Политика конфиденциальности",
   "settings": "Настройки",
-  "expiresNever": "Never expires",
-  "expiresIn": "Expires in {time}",
+  "expiresNever": "Никогда не истекает",
+  "expiresIn": "Срок истекает через {time}",
   "@expiresIn": {
     "placeholders": {
       "time": {}
@@ -19,12 +19,12 @@
   "close": "Закрыть",
   "add": "Добавить",
   "cancel": "Отмена",
-  "tokenInput": "Token input",
+  "tokenInput": "Ввод токена",
   "account": "Учётная запись",
-  "refreshAccount": "Refresh account",
-  "removeAccount": "Remove account",
+  "refreshAccount": "Обновить учетную запись",
+  "removeAccount": "Удалить учётную запись",
   "addAnotherAccount": "Добавить другую учётную запись",
-  "verifiedUserData": "Verified user data!",
+  "verifiedUserData": "Данные пользователя подтверждены!",
   "loggedInAs": "Вы вошли как {user}",
   "@loggedInAs": {
     "placeholders": {
@@ -33,27 +33,27 @@
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Произошла ошибка при проверке данных пользователя:",
   "verifyingUserData": "Проверка данных пользователя...",
-  "verifiedUserToken": "Verified user token!",
-  "anErrorHasOccuredWhenVerifyingUserToken": "An error has occurred when verifying user token:",
-  "verifyingUserToken": "Verifying user token...",
+  "verifiedUserToken": "Токен пользователя подтвержден!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Произошла ошибка при проверке токена пользователя:",
+  "verifyingUserToken": "Проверка токена пользователя...",
   "searchForChannels": "Поиск каналов",
   "recommendedChannels": "Рекомендованные каналы",
   "popularChannels": "Популярные каналы",
   "channel": "Канал",
   "leaveChannel": "Покинуть канал",
-  "joinUser": "Join {user}",
+  "joinUser": "Присоединиться к {user}",
   "@joinUser": {
     "placeholders": {
       "user": {}
     }
   },
-  "spellCheckFailed": "Ой, кажется очепятка! Вы имели в виду найти {username}?",
+  "spellCheckFailed": "Ой, кажется очепятка! Вы хотели найти {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "Присоединиться к {channel}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
@@ -79,8 +79,8 @@
   "command": "Команда",
   "save": "Сохранить",
   "browserStreamSettings": "Настройки браузера/трансляции",
-  "addPage": "Add page",
-  "channelStream": "{channel}'s stream",
+  "addPage": "Добавить страницу",
+  "channelStream": "трансляция {channel}",
   "@channelStream": {
     "placeholders": {
       "channel": {}
@@ -88,15 +88,15 @@
   },
   "openInBrowser": "Открыть в браузере",
   "messageAppearance": "Внешний вид сообщения",
-  "showTimestamps": "Show timestamps",
-  "compactMessages": "Compact messages",
-  "messageTrigger": "Message trigger",
+  "showTimestamps": "Показать метки времени",
+  "compactMessages": "Компактный вид сообщений",
+  "messageTrigger": "Действие при сообщении",
   "pattern": "Шаблон",
   "mention": "Упомянуть",
   "block": "Заблокировать",
   "enableRegex": "Использовать regex",
   "caseSensitive": "С учетом регистра",
-  "messageTriggers": "Message triggers",
+  "messageTriggers": "Действия при сообщении",
   "newMessageTrigger": "New message trigger",
   "reply": "Ответить",
   "copyText": "Скопировать текст",
@@ -108,7 +108,7 @@
   "userTrigger": "User trigger",
   "userTriggers": "User triggers",
   "chatHistory": "История сообщений",
-  "login": "Login",
+  "login": "Имя пользователя",
   "newUserTrigger": "New user trigger",
   "ban": "Забанить",
   "unban": "Разбанить",
@@ -119,7 +119,7 @@
     }
   },
   "chatCleared": "Чат был очищен",
-  "permabanned": "permabanned",
+  "permabanned": "забанен",
   "bannedForDuration": "забанен на {duration}",
   "@bannedForDuration": {
     "placeholders": {
