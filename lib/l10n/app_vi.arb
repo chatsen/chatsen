@@ -133,10 +133,10 @@
   "scrollToBottom": "Cuộn xuống cuối",
   "startUsingTheApp": "Để bắt đầu sử dụng, hãy thêm một tài khoản bên dưới.",
   "chatSettings": "Cài đặt Chat",
-  "autocompleteUsersWithAt": "Autocomplete users with @",
-  "autocompleteEmotesWithColon": "Autocomplete emotes with :",
+  "autocompleteUsersWithAt": "Tự động gợi ý người dùng với @",
+  "autocompleteEmotesWithColon": "Tự động gợi ý emotes với :",
   "nothing": "Luôn luôn",
   "both": "Cả hai",
   "language": "Ngôn ngữ",
-  "locale": "Locale"
+  "locale": "Ngôn ngữ"
 }
