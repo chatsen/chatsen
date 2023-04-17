@@ -132,11 +132,11 @@
   "hideMessage": "Απόκρυψη μηνύματος",
   "scrollToBottom": "Κύλιση προς τα κάτω",
   "startUsingTheApp": "Για να ξεκινήσετε να χρησιμοποιείτε την εφαρμογή, προσθέστε έναν λογαριασμό παρακάτω.",
-  "chatSettings": "Chat settings",
-  "autocompleteUsersWith": "Autocomplete users with",
-  "autocompleteEmotesWith": "Autocomplete emotes with",
-  "nothing": "Nothing",
-  "both": "Both",
-  "language": "Language",
+  "chatSettings": "Ρυθμίσεις Συνομιλίας",
+  "autocompleteUsersWith": "Αυτόματη συμπλήρωση χρηστών με",
+  "autocompleteEmotesWith": "Αυτόματη συμπλήρωση emote με",
+  "nothing": "Τίποτα",
+  "both": "Και τα δύο",
+  "language": "Γλώσσα",
   "locale": "Locale"
 }
