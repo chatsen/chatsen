@@ -118,18 +118,18 @@
       "duration": {}
     }
   },
-  "chatCleared": "Chat was cleared",
-  "permabanned": "permabanned",
-  "bannedForDuration": "banned for {duration}",
+  "chatCleared": "El chat ha sido borrado",
+  "permabanned": "baneado permanentemente",
+  "bannedForDuration": "baneado por {duration}",
   "@bannedForDuration": {
     "placeholders": {
       "duration": {}
     }
   },
-  "replyingTo": "Replying to",
-  "blockedMessage": "Blocked message",
-  "showMessage": "Show message",
-  "hideMessage": "Hide message",
+  "replyingTo": "Respondiendo a",
+  "blockedMessage": "Mensaje bloqueado",
+  "showMessage": "Mostrar mensaje",
+  "hideMessage": "Ocultar mensaje",
   "scrollToBottom": "Scroll to bottom",
   "startUsingTheApp": "To start using the app, add an account below."
 }
