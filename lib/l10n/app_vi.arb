@@ -132,9 +132,11 @@
   "hideMessage": "Ẩn tin nhắn",
   "scrollToBottom": "Cuộn xuống cuối",
   "startUsingTheApp": "Để bắt đầu sử dụng, hãy thêm một tài khoản bên dưới.",
-  "chatSettings": "Chat settings",
-  "autocompleteUsersWith": "Autocomplete users with",
-  "autocompleteEmotesWith": "Autocomplete emotes with",
-  "nothing": "Nothing",
-  "both": "Both"
+  "chatSettings": "Cài đặt Chat",
+  "autocompleteUsersWith": "Tự động gợi ý người dùng với",
+  "autocompleteEmotesWith": "Tự động gợi ý emotes với",
+  "nothing": "Luôn luôn",
+  "both": "Cả hai",
+  "language": "Language",
+  "locale": "Locale"
 }
