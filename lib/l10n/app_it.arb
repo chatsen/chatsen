@@ -131,5 +131,10 @@
   "showMessage": "Mostra messaggio",
   "hideMessage": "Nascondi messaggio",
   "scrollToBottom": "Scroll to bottom",
-  "startUsingTheApp": "Per iniziare a utilizzare l'app, aggiungi un account qui sotto."
+  "startUsingTheApp": "Per iniziare a utilizzare l'app, aggiungi un account qui sotto.",
+  "chatSettings": "Chat settings",
+  "autocompleteUsersWith": "Autocomplete users with",
+  "autocompleteEmotesWith": "Autocomplete emotes with",
+  "nothing": "Nothing",
+  "both": "Both"
 }
