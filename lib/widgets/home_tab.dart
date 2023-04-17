@@ -64,6 +64,8 @@ class _HomeTabState extends State<HomeTab> {
         'forsen',
         'btmc',
         'nymn',
+        'vaxei_osu',
+        'mrekkosu',
         'shigetora',
         'enviosity',
         // 'theactingmale',

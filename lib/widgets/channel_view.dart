@@ -70,6 +70,53 @@ class ChannelViewState extends State<ChannelView> {
     });
   }
 
+  Future<void> sendMessage() async {
+    // TODO: Implement reactions here
+
+    var text = textEditingController.text;
+
+    final textSplits = text.trim().split(' ');
+    if (textSplits.isNotEmpty) {
+      final customCommands = Hive.box('CustomCommands').values.cast<CustomCommand>();
+      final customCommand = customCommands.firstWhereOrNull((element) => textSplits.first.toLowerCase() == element.trigger.toLowerCase());
+      if (customCommand != null) {
+        text = customCommand.command;
+        text = text.replaceAllMapped(
+          RegExp(r'{\d*}'),
+          (match) {
+            final matchText = match.group(0) ?? '{}';
+            final matchContent = matchText.substring(1, matchText.length - 1);
+            final index = int.tryParse(matchContent);
+            if (index != null && index < textSplits.length && index > 0) {
+              return textSplits[index];
+            }
+            return '';
+          },
+        );
+        text = text.replaceAllMapped(
+          RegExp(r'{\d*\+}'),
+          (match) {
+            final matchText = match.group(0) ?? '{+}';
+            final matchContent = matchText.substring(1, matchText.length - 2);
+            final index = int.tryParse(matchContent);
+            if (index != null && index < textSplits.length && index > 0) {
+              return textSplits.skip(index).join(' ');
+            }
+            return '';
+          },
+        );
+      }
+    }
+
+    widget.channel.send(text, tags: {
+      if (replyChannelMessageChat != null) 'reply-parent-msg-id': replyChannelMessageChat!.id,
+    });
+
+    setReplyChannelMessageChat(null);
+
+    textEditingController.clear();
+  }
+
   @override
   void dispose() {
     textEditingController.dispose();
@@ -317,13 +364,7 @@ class ChannelViewState extends State<ChannelView> {
                             hintText: AppLocalizations.of(context)!.sendMessageIn(widget.channel.name), //'Send message in ',
                             border: InputBorder.none,
                           ),
-                          onSubmitted: (text) {
-                            widget.channel.send(text, tags: {
-                              if (replyChannelMessageChat != null) 'reply-parent-msg-id': replyChannelMessageChat!.id,
-                            });
-                            setReplyChannelMessageChat(null);
-                            textEditingController.clear();
-                          },
+                          onSubmitted: (text) => sendMessage(),
                           onChanged: (text) {
                             setState(() {});
                           },
@@ -346,15 +387,7 @@ class ChannelViewState extends State<ChannelView> {
                       ),
                       // const Separator(axis: Axis.vertical),
                       InkWell(
-                        onTap: () {
-                          // TODO: Implement replies here
-                          // TODO: Implement reactions here
-                          widget.channel.send(textEditingController.text, tags: {
-                            if (replyChannelMessageChat != null) 'reply-parent-msg-id': replyChannelMessageChat!.id,
-                          });
-                          setReplyChannelMessageChat(null);
-                          textEditingController.clear();
-                        },
+                        onTap: () => sendMessage(),
                         onLongPress: () {
                           setState(() {
                             spamming = !spamming;
