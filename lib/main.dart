@@ -7,6 +7,7 @@ import 'package:chatsen/data/message_trigger.dart';
 import 'package:chatsen/data/settings/application_appearance.dart';
 import 'package:chatsen/data/settings/blocked_message.dart';
 import 'package:chatsen/data/settings/blocked_user.dart';
+import 'package:chatsen/data/settings/chat_settings.dart';
 import 'package:chatsen/data/settings/mention_message.dart';
 import 'package:chatsen/data/settings/mention_user.dart';
 import 'package:chatsen/data/settings/message_appearance.dart';
@@ -50,6 +51,7 @@ Future<void> main() async {
   Hive.registerAdapter(CustomCommandAdapter());
   Hive.registerAdapter(MessageTriggerAdapter());
   Hive.registerAdapter(UserTriggerAdapter());
+  Hive.registerAdapter(ChatSettingsAdapter());
 
   final twitchAccountsBox = await Hive.openBox('TwitchAccounts');
   final accountSettingsBox = await Hive.openBox('AccountSettings');
@@ -59,6 +61,7 @@ Future<void> main() async {
   await Hive.openBox('MessageTriggers');
   await Hive.openBox('UserTriggers');
   await Hive.openBox('CustomCommands');
+  await Hive.openBox('ChatSettings');
 
   // await settingsBox.clear();
 
@@ -69,6 +72,7 @@ Future<void> main() async {
 
   if (!settingsBox.containsKey('messageAppearance')) await settingsBox.put('messageAppearance', MessageAppearance());
   if (!settingsBox.containsKey('applicationAppearance')) await settingsBox.put('applicationAppearance', ApplicationAppearance());
+  if (!settingsBox.containsKey('chatSettings')) await settingsBox.put('chatSettings', ChatSettings());
 
   runApp(
     MultiProvider(

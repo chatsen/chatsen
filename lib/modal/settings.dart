@@ -1,6 +1,7 @@
 import 'package:chatsen/components/boxlistener.dart';
 import 'package:chatsen/modal/application_appearance.dart';
 import 'package:chatsen/modal/application_theme.dart';
+import 'package:chatsen/modal/chat_settings.dart';
 import 'package:chatsen/modal/message_appearance.dart';
 import 'package:chatsen/modal/message_triggers.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,16 @@ class SettingsModal extends StatelessWidget {
                 title: AppLocalizations.of(context)!.theme,
                 prefix: const Icon(Icons.palette_outlined),
                 onTap: () => Modal.show(context: context, child: const ApplicationThemeModal()),
+              ),
+              Tile(
+                title: AppLocalizations.of(context)!.chatSettings,
+                prefix: const Icon(Icons.text_format_outlined),
+                onTap: () => Modal.show(context: context, child: const ChatSettingsModal()),
+              ),
+              Tile(
+                title: AppLocalizations.of(context)!.localeName,
+                prefix: const Icon(Icons.language_outlined),
+                onTap: () => {}, //Modal.show(context: context, child: const ApplicationThemeModal()),
               ),
               Tile(
                 title: AppLocalizations.of(context)!.messageAppearance,
