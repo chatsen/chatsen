@@ -91,7 +91,7 @@
   "showTimestamps": "Hiển thị thời gian",
   "compactMessages": "Tin nhắn nhỏ gọn",
   "messageTrigger": "Bộ lọc tin nhắn",
-  "pattern": "Khuôn mẫu",
+  "pattern": "Nội dung",
   "mention": "Nhắc đến",
   "block": "Chặn",
   "enableRegex": "Bật regex",
@@ -131,5 +131,12 @@
   "showMessage": "Hiển thị tin nhắn",
   "hideMessage": "Ẩn tin nhắn",
   "scrollToBottom": "Cuộn xuống cuối",
-  "startUsingTheApp": "Để bắt đầu sử dụng, hãy thêm một tài khoản bên dưới."
+  "startUsingTheApp": "Để bắt đầu sử dụng, hãy thêm một tài khoản bên dưới.",
+  "chatSettings": "Cài đặt Chat",
+  "autocompleteUsersWithAt": "Tự động gợi ý người dùng với @",
+  "autocompleteEmotesWithColon": "Tự động gợi ý emotes với :",
+  "nothing": "Luôn luôn",
+  "both": "Cả hai",
+  "language": "Ngôn ngữ",
+  "locale": "Ngôn ngữ"
 }

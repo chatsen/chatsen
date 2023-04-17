@@ -131,5 +131,12 @@
   "showMessage": "Nachricht anzeigen",
   "hideMessage": "Nachricht ausblenden",
   "scrollToBottom": "Zum Ende springen",
-  "startUsingTheApp": "Fügen Sie unten ein Konto hinzu, um die App zu verwenden."
+  "startUsingTheApp": "Fügen Sie unten ein Konto hinzu, um die App zu verwenden.",
+  "chatSettings": "Chateinstellungen",
+  "autocompleteUsersWithAt": "Autocomplete users with @",
+  "autocompleteEmotesWithColon": "Autocomplete emotes with :",
+  "nothing": "Keinem",
+  "both": "Beidem",
+  "language": "Sprache",
+  "locale": "Sprache"
 }
