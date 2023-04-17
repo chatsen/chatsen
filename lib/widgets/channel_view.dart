@@ -12,6 +12,7 @@ import '../api/chatsen/chatsen_chatter.dart';
 import '../components/surface.dart';
 import '../components/tile.dart';
 import '../data/custom_command.dart';
+import '../data/settings/chat_settings.dart';
 import '../tmi/channel/channel.dart';
 import '../tmi/channel/messages/channel_message_chat.dart';
 import 'chat_view.dart';
@@ -125,9 +126,19 @@ class ChannelViewState extends State<ChannelView> {
 
   List<AutocompletionItem> getAutocompletionItems() {
     if (textEditingController.text.split(' ').last.length < 2) return [];
-    final matchingEmotes = (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state + widget.channel.client.twitchUserEmotes.state).where((emote) => emote.name.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()));
+    final currentSearch = textEditingController.text.split(' ').last.toLowerCase();
+
+    final chatSettings = Hive.box('Settings').get('chatSettings') as ChatSettings;
+
+    final matchingEmotes = (widget.channel.channelEmotes.state + widget.channel.client.globalEmotes.state + widget.channel.client.twitchUserEmotes.state).where((emote) {
+      return (chatSettings.emoteAutocompletionWithColon ? currentSearch.startsWith(':') : true) && ':${emote.name}:'.toLowerCase().contains(currentSearch);
+    });
+
     final chatters = widget.channel.channelChatters.state?.getAllChatters() ?? [];
-    final matchingChatters = chatters.where((chatter) => chatter.login.toLowerCase().contains(textEditingController.text.split(' ').last.toLowerCase()));
+    final matchingChatters = chatters.where((chatter) {
+      return (chatSettings.userAutocompletionWithAt ? currentSearch.startsWith('@') : true) && '@${chatter.login}'.toLowerCase().contains(currentSearch);
+    });
+
     return [
       for (final user in matchingChatters)
         AutocompletionItem(
