@@ -136,5 +136,7 @@
   "autocompleteUsersWith": "Autocomplete users with",
   "autocompleteEmotesWith": "Autocomplete emotes with",
   "nothing": "Nothing",
-  "both": "Both"
+  "both": "Both",
+  "language": "Language",
+  "locale": "Locale"
 }
