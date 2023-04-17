@@ -1,16 +1,16 @@
 {
   "chatsen": "Chatsen",
-  "loggedInVia": "Entrou via {provider}",
+  "loggedInVia": "Conectado via {provider}",
   "@loggedInVia": {
     "placeholders": {
       "provider": {}
     }
   },
-  "termsOfService": "Termos de serviço",
-  "privacyPolicy": "Política de privacidade",
-  "settings": "Definições",
+  "termsOfService": "Termos de Serviço",
+  "privacyPolicy": "Política de Privacidade",
+  "settings": "Configurações",
   "expiresNever": "Nunca expira",
-  "expiresIn": "Expira em{time}",
+  "expiresIn": "Expira em {time}",
   "@expiresIn": {
     "placeholders": {
       "time": {}
@@ -23,43 +23,43 @@
   "account": "Conta",
   "refreshAccount": "Atualizar conta",
   "removeAccount": "Remover conta",
-  "addAnotherAccount": "Adicionar nova conta",
-  "verifiedUserData": "Dados de utilizador verificados!",
-  "loggedInAs": "Entrou como {user}",
+  "addAnotherAccount": "Adicionar outra conta",
+  "verifiedUserData": "Dados do usuário verificados!",
+  "loggedInAs": "Logado como {user}",
   "@loggedInAs": {
     "placeholders": {
       "user": {}
     }
   },
-  "anErrorHasOccuredWhenVerifyingUserData": "Ocorreu um erro ao verificar dados de utilizador:",
-  "verifyingUserData": "A verificar dados de utilizador...",
-  "verifiedUserToken": "Token de utilizador verificada!",
-  "anErrorHasOccuredWhenVerifyingUserToken": "Ocorreu um erro ao verificar o token do utilizador:",
-  "verifyingUserToken": "A verificar token do utilizador...",
-  "searchForChannels": "Procurar canais",
+  "anErrorHasOccuredWhenVerifyingUserData": "Ocorreu um erro ao verificar os dados do usuário:",
+  "verifyingUserData": "Verificando dados do usuário...",
+  "verifiedUserToken": "Token do usuário verificado!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Ocorreu um erro ao verificar o token do usuário:",
+  "verifyingUserToken": "Verificando token de usuário...",
+  "searchForChannels": "Procurar por canais",
   "recommendedChannels": "Canais recomendados",
   "popularChannels": "Canais populares",
   "channel": "Canal",
   "leaveChannel": "Sair do canal",
-  "joinUser": "Juntar-se{user}",
+  "joinUser": "Entrar {user}",
   "@joinUser": {
     "placeholders": {
       "user": {}
     }
   },
-  "spellCheckFailed": "A verificação ortográfica falhou! Querias pesquisar por {nome do usuário}?",
+  "spellCheckFailed": "A verificação ortográfica falhou! Você queria pesquisar por {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Junte-se ao {canal}",
+  "joinChannelName": "Conectar {channel}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
     }
   },
-  "sendMessageIn": "Envia mensagem no {canal}",
+  "sendMessageIn": "Enviar mensagem em {channel}",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {}
@@ -70,16 +70,16 @@
   "system": "Sistema",
   "appearance": "Aparência",
   "highContrast": "Alto contraste",
-  "playStream": "Reproduzir a transmissão",
+  "playStream": "Reproduzir transmissão",
   "stopStream": "Parar transmissão",
   "customCommand": "Comando personalizado",
   "customCommands": "Comandos personalizados",
   "newCustomCommand": "Novo comando personalizado",
-  "commandTrigger": "Desencadear",
+  "commandTrigger": "Gatilho",
   "command": "Comando",
   "save": "Salvar",
   "browserStreamSettings": "Configurações de Navegador/Transmissão",
-  "addPage": "Adicionar Página",
+  "addPage": "Adicionar página",
   "channelStream": "Transmissão de {channel}",
   "@channelStream": {
     "placeholders": {
@@ -87,51 +87,51 @@
     }
   },
   "openInBrowser": "Abrir no navegador",
-  "messageAppearance": "Mostrar mensagem",
-  "showTimestamps": "Mostrar a data/hora",
+  "messageAppearance": "Aparência das mensagens",
+  "showTimestamps": "Mostrar timestamps",
   "compactMessages": "Mensagens compactas",
-  "messageTrigger": "Ação de mensagem",
+  "messageTrigger": "Gatilho de mensagem",
   "pattern": "Padrão",
   "mention": "Menção",
   "block": "Bloquear",
-  "enableRegex": "Ativa expressão regular",
+  "enableRegex": "Habilitar regex",
   "caseSensitive": "Sensível a maiúsculas e minúsculas",
-  "messageTriggers": "Ações de mensagens",
-  "newMessageTrigger": "Nova ação de mensagem",
+  "messageTriggers": "Gatilhos de mensagem",
+  "newMessageTrigger": "Novo gatilho de mensagem",
   "reply": "Responder",
   "copyText": "Copiar texto",
-  "copyTextSubtitle": "Segura para copiar o texto da mensagem com o nome do utilizador",
-  "deleteMessage": "Apagar mensagem",
-  "mentionUser": "Menciona um utilizador",
-  "copyMessageId": "Copia o ID da mensagem",
+  "copyTextSubtitle": "Segure para copiar o texto da mensagem com o usuário",
+  "deleteMessage": "Excluir mensagem",
+  "mentionUser": "Mencionar usuário",
+  "copyMessageId": "Copiar ID da mensagem",
   "theme": "Tema",
-  "userTrigger": "Ação do utilizador",
-  "userTriggers": "Ação dos utilizadores",
-  "chatHistory": "Histórico do chat",
-  "login": "Inicia sessão",
-  "newUserTrigger": "Nova ação de utilizador",
+  "userTrigger": "Gatilho de usuário",
+  "userTriggers": "Gatilhos de usuário",
+  "chatHistory": "Histórico de chat",
+  "login": "Iniciar sessão",
+  "newUserTrigger": "Novo gatilho de usuário",
   "ban": "Banir",
   "unban": "Desbanir",
-  "timeoutUserForDuration": "Bane temporariamente o utilizador por {duration}",
+  "timeoutUserForDuration": "Suspender usuário por {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
       "duration": {}
     }
   },
   "chatCleared": "O chat foi limpo",
-  "permabanned": "Banido permanentemente",
-  "bannedForDuration": "Banido por {duration}",
+  "permabanned": "banido permanentemente",
+  "bannedForDuration": "banido por {duration}",
   "@bannedForDuration": {
     "placeholders": {
       "duration": {}
     }
   },
-  "replyingTo": "A responder a",
+  "replyingTo": "Respondendo a",
   "blockedMessage": "Mensagem bloqueada",
   "showMessage": "Mostrar mensagem",
-  "hideMessage": "Oculta mensagem",
-  "scrollToBottom": "Rola para baixo",
-  "startUsingTheApp": "Para começar a usar a aplicação, adiciona uma conta abaixo.",
+  "hideMessage": "Ocultar mensagem",
+  "scrollToBottom": "Rolar para o final",
+  "startUsingTheApp": "Para começar a usar o aplicativo, adicione uma conta abaixo.",
   "chatSettings": "Chat settings",
   "autocompleteUsersWithAt": "Autocomplete users with @",
   "autocompleteEmotesWithColon": "Autocomplete emotes with :",
