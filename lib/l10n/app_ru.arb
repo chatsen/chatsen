@@ -135,8 +135,6 @@
   "chatSettings": "Настройки чата",
   "autocompleteUsersWithAt": "Предлагать имена пользователей после ввода @",
   "autocompleteEmotesWithColon": "Предлагать смайлики после ввода :",
-  "nothing": "Nothing",
-  "both": "Both",
   "language": "Language",
   "locale": "Locale"
 }
