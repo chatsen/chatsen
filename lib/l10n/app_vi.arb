@@ -136,5 +136,7 @@
   "autocompleteUsersWithAt": "Tự động gợi ý người dùng sau dấu @",
   "autocompleteEmotesWithColon": "Tự động gợi ý emotes sau dấu :",
   "language": "Ngôn ngữ",
-  "locale": "Ngôn ngữ"
+  "locale": "Ngôn ngữ",
+  "systemDefault": "System default",
+  "justDefault": "Default"
 }
