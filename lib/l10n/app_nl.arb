@@ -136,5 +136,7 @@
   "autocompleteUsersWithAt": "Autocomplete users with @",
   "autocompleteEmotesWithColon": "Autocomplete emotes with :",
   "language": "Language",
-  "locale": "Locale"
+  "locale": "Locale",
+  "systemDefault": "System default",
+  "justDefault": "Default"
 }
