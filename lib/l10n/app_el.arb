@@ -135,8 +135,6 @@
   "chatSettings": "Ρυθμίσεις Συνομιλίας",
   "autocompleteUsersWithAt": "Αυτόματη συμπλήρωση χρηστών με @",
   "autocompleteEmotesWithColon": "Αυτόματη συμπλήρωση emote με :",
-  "nothing": "Τίποτα",
-  "both": "Και τα δύο",
   "language": "Γλώσσα",
   "locale": "Γλώσσα"
 }
