@@ -136,5 +136,7 @@
   "autocompleteUsersWithAt": "@로 시작하여 사용자명을 자동 완성",
   "autocompleteEmotesWithColon": ":로 시작하여 이모티콘을 자동완성",
   "language": "언어",
-  "locale": "지역"
+  "locale": "지역",
+  "systemDefault": "System default",
+  "justDefault": "Default"
 }
