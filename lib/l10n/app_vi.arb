@@ -108,7 +108,7 @@
   "userTrigger": "Bộ lọc người dùng",
   "userTriggers": "Các bộ lọc người dùng",
   "chatHistory": "Lịch sử chat",
-  "login": "Đăng nhập",
+  "login": "Tên người dùng",
   "newUserTrigger": "Tạo bộ lọc người dùng mới",
   "ban": "Cấm",
   "unban": "Gỡ cấm",
@@ -133,10 +133,10 @@
   "scrollToBottom": "Cuộn xuống cuối",
   "startUsingTheApp": "Để bắt đầu sử dụng, hãy thêm một tài khoản bên dưới.",
   "chatSettings": "Cài đặt Chat",
-  "autocompleteUsersWithAt": "Tự động gợi ý người dùng với @",
-  "autocompleteEmotesWithColon": "Tự động gợi ý emotes với :",
-  "nothing": "Luôn luôn",
-  "both": "Cả hai",
+  "autocompleteUsersWithAt": "Tự động gợi ý người dùng sau dấu @",
+  "autocompleteEmotesWithColon": "Tự động gợi ý emotes sau dấu :",
   "language": "Ngôn ngữ",
-  "locale": "Ngôn ngữ"
+  "locale": "Ngôn ngữ",
+  "systemDefault": "System default",
+  "justDefault": "Default"
 }

@@ -135,8 +135,8 @@
   "chatSettings": "Chateinstellungen",
   "autocompleteUsersWithAt": "Autocomplete users with @",
   "autocompleteEmotesWithColon": "Autocomplete emotes with :",
-  "nothing": "Keinem",
-  "both": "Beidem",
   "language": "Sprache",
-  "locale": "Sprache"
+  "locale": "Sprache",
+  "systemDefault": "System default",
+  "justDefault": "Default"
 }

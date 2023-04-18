@@ -132,11 +132,11 @@
   "hideMessage": "메시지 숨기기",
   "scrollToBottom": "맨 아래로 스크롤",
   "startUsingTheApp": "앱을 사용하기 위해서 하단에 계정을 추가하세요.",
-  "chatSettings": "Chat settings",
-  "autocompleteUsersWithAt": "Autocomplete users with @",
-  "autocompleteEmotesWithColon": "Autocomplete emotes with :",
-  "nothing": "Nothing",
-  "both": "Both",
-  "language": "Language",
-  "locale": "Locale"
+  "chatSettings": "채팅 설정",
+  "autocompleteUsersWithAt": "@로 시작하여 사용자명을 자동 완성",
+  "autocompleteEmotesWithColon": ":로 시작하여 이모티콘을 자동완성",
+  "language": "언어",
+  "locale": "지역",
+  "systemDefault": "System default",
+  "justDefault": "Default"
 }

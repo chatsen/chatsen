@@ -88,7 +88,7 @@
   },
   "openInBrowser": "Открыть в браузере",
   "messageAppearance": "Внешний вид сообщения",
-  "showTimestamps": "Показать метки времени",
+  "showTimestamps": "Показывать временные отметки",
   "compactMessages": "Компактный вид сообщений",
   "messageTrigger": "Триггер при сообщении",
   "pattern": "Шаблон",
@@ -132,11 +132,11 @@
   "hideMessage": "Скрыть сообщение",
   "scrollToBottom": "Прокрутить вниз",
   "startUsingTheApp": "Чтобы начать использовать приложение, добавьте учётную запись ниже.",
-  "chatSettings": "Chat settings",
-  "autocompleteUsersWithAt": "Autocomplete users with @",
-  "autocompleteEmotesWithColon": "Autocomplete emotes with :",
-  "nothing": "Nothing",
-  "both": "Both",
+  "chatSettings": "Настройки чата",
+  "autocompleteUsersWithAt": "Предлагать имена пользователей после ввода @",
+  "autocompleteEmotesWithColon": "Предлагать смайлики после ввода :",
   "language": "Language",
-  "locale": "Locale"
+  "locale": "Locale",
+  "systemDefault": "System default",
+  "justDefault": "Default"
 }
