@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:chatsen/tmi/channel/channel_message.dart';
 import 'package:chatsen/tmi/client/client.dart';
 import 'package:chatsen/tmi/client/client_listener.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -70,10 +72,14 @@ class _AppState extends State<App> implements ClientListener {
         box: Hive.box('Settings'),
         builder: (context, box) {
           final ApplicationAppearance applicationAppearance = box.get('applicationAppearance') as ApplicationAppearance;
+          final matchingCustomLocale = AppLocalizations.supportedLocales.firstWhereOrNull((element) => element.toLanguageTag() == box.get('locale'));
           return MaterialApp(
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            localizationsDelegates: const [
+              ...AppLocalizations.localizationsDelegates,
+              LocaleNamesLocalizationsDelegate(),
+            ],
             supportedLocales: AppLocalizations.supportedLocales,
-            locale: null,
+            locale: matchingCustomLocale,
             debugShowCheckedModeBanner: false,
             home: Builder(builder: (context) {
               if (Platform.isWindows) {

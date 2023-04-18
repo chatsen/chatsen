@@ -10,26 +10,30 @@ import '/data/twitch/user_data.dart';
 
 class Twitch {
   static Future<List<String>> blockedUsers(TokenData tokenData) async {
-    final result = <String>[];
-    const pageSize = 100;
-    String? cursor;
+    try {
+      final result = <String>[];
+      const pageSize = 100;
+      String? cursor;
 
-    do {
-      final response = await http.get(
-        Uri.parse('https://api.twitch.tv/helix/users/blocks?broadcaster_id=${tokenData.userId}&first=$pageSize${cursor != null ? '&after=$cursor' : ''}'),
-        headers: {
-          'Authorization': 'Bearer ${tokenData.accessToken}',
-          'Client-Id': '${tokenData.clientId}',
-        },
-      );
-      final responseJson = json.decode(utf8.decode(response.bodyBytes));
-      final data = List<dynamic>.from(responseJson['data']);
-      result.addAll(data.map((e) => e['user_id']));
-      cursor = responseJson['pagination']?['cursor'];
-      // if (data.length < pageSize) break;
-    } while (cursor != null);
+      do {
+        final response = await http.get(
+          Uri.parse('https://api.twitch.tv/helix/users/blocks?broadcaster_id=${tokenData.userId}&first=$pageSize${cursor != null ? '&after=$cursor' : ''}'),
+          headers: {
+            'Authorization': 'Bearer ${tokenData.accessToken}',
+            'Client-Id': '${tokenData.clientId}',
+          },
+        );
+        final responseJson = json.decode(utf8.decode(response.bodyBytes));
+        final data = List<dynamic>.from(responseJson['data']);
+        result.addAll(data.map((e) => e['user_id']));
+        cursor = responseJson['pagination']?['cursor'];
+        // if (data.length < pageSize) break;
+      } while (cursor != null);
 
-    return result;
+      return result;
+    } catch (e) {
+      return [];
+    }
   }
 
   static Future<TokenData> validateToken(String token) async {

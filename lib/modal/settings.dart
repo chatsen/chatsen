@@ -2,9 +2,12 @@ import 'package:chatsen/components/boxlistener.dart';
 import 'package:chatsen/modal/application_appearance.dart';
 import 'package:chatsen/modal/application_theme.dart';
 import 'package:chatsen/modal/chat_settings.dart';
+import 'package:chatsen/modal/language_selection.dart';
 import 'package:chatsen/modal/message_appearance.dart';
 import 'package:chatsen/modal/message_triggers.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -43,9 +46,10 @@ class SettingsModal extends StatelessWidget {
                 onTap: () => Modal.show(context: context, child: const ChatSettingsModal()),
               ),
               Tile(
-                title: AppLocalizations.of(context)!.localeName,
+                title: AppLocalizations.of(context)!.language,
+                subtitle: LocaleNamesLocalizationsDelegate.nativeLocaleNames[AppLocalizations.supportedLocales.firstWhereOrNull((element) => element.toLanguageTag() == box.get('locale')).toString()] ?? AppLocalizations.of(context)!.systemDefault,
                 prefix: const Icon(Icons.language_outlined),
-                onTap: () => {}, //Modal.show(context: context, child: const ApplicationThemeModal()),
+                onTap: () => Modal.show(context: context, child: const LanguageSelectionModal()),
               ),
               Tile(
                 title: AppLocalizations.of(context)!.messageAppearance,
