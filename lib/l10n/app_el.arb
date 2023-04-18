@@ -136,5 +136,7 @@
   "autocompleteUsersWithAt": "Αυτόματη συμπλήρωση χρηστών με @",
   "autocompleteEmotesWithColon": "Αυτόματη συμπλήρωση emote με :",
   "language": "Γλώσσα",
-  "locale": "Γλώσσα"
+  "locale": "Γλώσσα",
+  "systemDefault": "System default",
+  "justDefault": "Default"
 }
