@@ -79,30 +79,30 @@
   "command": "Comando",
   "save": "Salva",
   "browserStreamSettings": "Impostazioni Browser/Stream",
-  "addPage": "Add page",
-  "channelStream": "{channel}'s stream",
+  "addPage": "Aggiungi pagina",
+  "channelStream": "Stream di {channel}",
   "@channelStream": {
     "placeholders": {
       "channel": {}
     }
   },
   "openInBrowser": "Apri nel browser",
-  "messageAppearance": "Message appearance",
-  "showTimestamps": "Show timestamps",
+  "messageAppearance": "Aspetto messaggio",
+  "showTimestamps": "Mostra timestamp",
   "compactMessages": "Compatta messaggi",
   "messageTrigger": "Message trigger",
-  "pattern": "Pattern",
-  "mention": "Mention",
+  "pattern": "Modello",
+  "mention": "Menzione",
   "block": "Blocca",
-  "enableRegex": "Enable regex",
-  "caseSensitive": "Case sensitive",
+  "enableRegex": "Abilita regex",
+  "caseSensitive": "Sensibile alle maiuscole",
   "messageTriggers": "Message triggers",
   "newMessageTrigger": "New message trigger",
   "reply": "Rispondi",
   "copyText": "Copia testo",
-  "copyTextSubtitle": "Hold to copy message text with username",
+  "copyTextSubtitle": "Tieni premuto per copiare il testo del messaggio con il nome utente",
   "deleteMessage": "Cancella messaggio",
-  "mentionUser": "Mention user",
+  "mentionUser": "Menziona utente",
   "copyMessageId": "Copia ID del messaggio",
   "theme": "Tema",
   "userTrigger": "User trigger",
@@ -111,32 +111,30 @@
   "login": "Accedi",
   "newUserTrigger": "New user trigger",
   "ban": "Banna",
-  "unban": "Unban",
-  "timeoutUserForDuration": "Timeout user for {duration}",
+  "unban": "Sbanna",
+  "timeoutUserForDuration": "Banna temporaneamente l'utente per {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
       "duration": {}
     }
   },
-  "chatCleared": "Chat was cleared",
-  "permabanned": "permabanned",
+  "chatCleared": "La chat è stata cancellata",
+  "permabanned": "bannato permanentemente",
   "bannedForDuration": "bannato per {duration}",
   "@bannedForDuration": {
     "placeholders": {
       "duration": {}
     }
   },
-  "replyingTo": "Replying to",
+  "replyingTo": "In risposta a",
   "blockedMessage": "Messaggio bloccato",
   "showMessage": "Mostra messaggio",
   "hideMessage": "Nascondi messaggio",
-  "scrollToBottom": "Scroll to bottom",
+  "scrollToBottom": "Scorri in fondo",
   "startUsingTheApp": "Per iniziare a utilizzare l'app, aggiungi un account qui sotto.",
-  "chatSettings": "Chat settings",
-  "autocompleteUsersWithAt": "Autocomplete users with @",
-  "autocompleteEmotesWithColon": "Autocomplete emotes with :",
-  "nothing": "Nothing",
-  "both": "Both",
-  "language": "Language",
-  "locale": "Locale"
+  "chatSettings": "Impostazioni della Chat",
+  "autocompleteUsersWithAt": "Autocompleta nomi utente con @",
+  "autocompleteEmotesWithColon": "Autocompleta emote con :",
+  "language": "Lingua",
+  "locale": "Localizzazione"
 }
