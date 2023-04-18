@@ -136,5 +136,7 @@
   "autocompleteUsersWithAt": "Предлагать имена пользователей после ввода @",
   "autocompleteEmotesWithColon": "Предлагать смайлики после ввода :",
   "language": "Language",
-  "locale": "Locale"
+  "locale": "Locale",
+  "systemDefault": "System default",
+  "justDefault": "Default"
 }
