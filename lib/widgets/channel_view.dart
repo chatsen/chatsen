@@ -208,9 +208,18 @@ class ChannelViewState extends State<ChannelView> {
     return Column(
       children: [
         Expanded(
-          child: ChatView(
-            padding: MediaQuery.of(context).viewPadding,
-            channel: widget.channel,
+          child: Listener(
+            behavior: HitTestBehavior.opaque,
+            onPointerDown: (e) {
+              final currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus && currentFocus.hasFocus) {
+                FocusManager.instance.primaryFocus?.unfocus();
+              }
+            },
+            child: ChatView(
+              padding: MediaQuery.of(context).viewPadding,
+              channel: widget.channel,
+            ),
           ),
           // child: Container(),
         ),
