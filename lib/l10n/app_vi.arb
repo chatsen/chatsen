@@ -137,6 +137,6 @@
   "autocompleteEmotesWithColon": "Tự động gợi ý emotes sau dấu :",
   "language": "Ngôn ngữ",
   "locale": "Ngôn ngữ",
-  "systemDefault": "System default",
-  "justDefault": "Default"
+  "systemDefault": "Mặc định theo hệ thống",
+  "justDefault": "Mặc định"
 }
