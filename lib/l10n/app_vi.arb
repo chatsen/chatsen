@@ -1,5 +1,6 @@
 {
   "chatsen": "Chatsen",
+  "catsen": "Catsen",
   "loggedInVia": "Đã đăng nhập qua {provider}",
   "@loggedInVia": {
     "placeholders": {
@@ -138,5 +139,13 @@
   "language": "Ngôn ngữ",
   "locale": "Ngôn ngữ",
   "systemDefault": "Mặc định theo hệ thống",
-  "justDefault": "Mặc định"
+  "justDefault": "Mặc định",
+  "notifications": "Thông báo",
+  "noNotifications": "Một ai đó, ở đâu đó, sẽ nhắc đến bạn vào một ngày nào đó.",
+  "backgroundNotifications": "Background notifications",
+  "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
+  "optionNotAvailablePaywalled": "This option is for Chatsen supporters only.",
+  "clearAll": "Clear all",
+  "cache": "Cache",
+  "clearCache": "Clear cache"
 }
