@@ -65,8 +65,8 @@
       "channel": {}
     }
   },
-  "light": "Φωτεινό",
-  "dark": "Σκοτεινό",
+  "light": "Φωτεινή",
+  "dark": "Σκοτεινή",
   "system": "Σύστημα",
   "appearance": "Εμφάνιση",
   "highContrast": "Υψηλή αντίθεση",
@@ -93,7 +93,7 @@
   "messageTrigger": "Συντόμευση μηνύματος",
   "pattern": "Μοτίβο",
   "mention": "Επισήμανση",
-  "block": "Αποκλεισμός",
+  "block": "Μπλοκ",
   "enableRegex": "Ενεργοποίηση regex",
   "caseSensitive": "Διάκριση πεζών-κεφαλαίων",
   "messageTriggers": "Συντομεύσεις μηνύματος",
@@ -119,7 +119,7 @@
     }
   },
   "chatCleared": "Η συνομιλία εκκαθαρίστηκε",
-  "permabanned": "μόνιμος αποκλεισμός",
+  "permabanned": "μόνιμα αποκλεισμένος",
   "bannedForDuration": "αποκλείστηκε για {duration}",
   "@bannedForDuration": {
     "placeholders": {
@@ -127,7 +127,7 @@
     }
   },
   "replyingTo": "Απάντηση σε",
-  "blockedMessage": "Αποκλεισμένο μήνυμα",
+  "blockedMessage": "Μπλοκαρισμένο μήνυμα",
   "showMessage": "Εμφάνιση μηνύματος",
   "hideMessage": "Απόκρυψη μηνύματος",
   "scrollToBottom": "Κύλιση προς τα κάτω",
@@ -136,7 +136,7 @@
   "autocompleteUsersWithAt": "Αυτόματη συμπλήρωση χρηστών με @",
   "autocompleteEmotesWithColon": "Αυτόματη συμπλήρωση emote με :",
   "language": "Γλώσσα",
-  "locale": "Γλώσσα",
+  "locale": "Γλωσσικές Ρυθμίσεις",
   "systemDefault": "Προεπιλογή συστήματος",
   "justDefault": "Προεπιλεγμένη"
 }
