@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chatsen/api/twitch/twitch.dart';
 import 'package:chatsen/components/boxlistener.dart';
@@ -152,6 +154,9 @@ class _HomeTabState extends State<HomeTab> {
               slivers: [
                 SliverAppBar.large(
                   surfaceTintColor: Colors.transparent,
+                  backgroundColor: Platform.isWindows ? Colors.transparent : null,
+                  // foregroundColor: Colors.transparent,
+                  shadowColor: Platform.isWindows ? Colors.transparent : null,
                   title: const Text('Chatsen'),
                   actions: const [
                     Padding(
