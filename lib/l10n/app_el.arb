@@ -137,6 +137,6 @@
   "autocompleteEmotesWithColon": "Αυτόματη συμπλήρωση emote με :",
   "language": "Γλώσσα",
   "locale": "Γλώσσα",
-  "systemDefault": "System default",
-  "justDefault": "Default"
+  "systemDefault": "Προεπιλογή συστήματος",
+  "justDefault": "Προκαθορισμένο"
 }
