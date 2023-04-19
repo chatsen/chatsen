@@ -137,6 +137,6 @@
   "autocompleteEmotesWithColon": "Autocompleta emote con :",
   "language": "Lingua",
   "locale": "Localizzazione",
-  "systemDefault": "System default",
-  "justDefault": "Default"
+  "systemDefault": "Predefinita di Sistema",
+  "justDefault": "Predefinita"
 }
