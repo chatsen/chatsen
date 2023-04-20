@@ -95,8 +95,8 @@
   "pattern": "Шаблон",
   "mention": "Выделить в чате",
   "block": "Заблокировать",
-  "enableRegex": "Использовать regex",
-  "caseSensitive": "С учетом регистра",
+  "enableRegex": "Включить regex",
+  "caseSensitive": "Учитывать регистр",
   "messageTriggers": "Ключевые слова в сообщениях",
   "newMessageTrigger": "Добавить новое ключевое слово",
   "reply": "Ответить",
@@ -113,7 +113,7 @@
   "newUserTrigger": "Добавить новое действие при пользователе",
   "ban": "Забанить",
   "unban": "Разбанить",
-  "timeoutUserForDuration": "Временно забанить пользователя на {duration}",
+  "timeoutUserForDuration": "Временно отстранить пользователя на {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
       "duration": {}
@@ -141,11 +141,11 @@
   "systemDefault": "Системные настройки",
   "justDefault": "По умолчанию",
   "notifications": "Уведомления",
-  "noNotifications": "Someone, somewhere, will mention you someday.",
-  "backgroundNotifications": "Background notifications",
-  "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
-  "optionNotAvailablePaywalled": "This option is for Chatsen supporters only.",
-  "clearAll": "Clear all",
-  "cache": "Cache",
-  "clearCache": "Clear cache"
+  "noNotifications": "Кто-то, где-то, обязательно упомянет вас когда-нибудь.",
+  "backgroundNotifications": "Фоновые уведомления",
+  "optionNotAvailableOnYourPlatform": "Эта опция недоступна на вашей операционной системе.",
+  "optionNotAvailablePaywalled": "Эта опция предназначена только для спонсоров Chatsen.",
+  "clearAll": "Очистить всё",
+  "cache": "Кэш",
+  "clearCache": "Очистить кэш"
 }
