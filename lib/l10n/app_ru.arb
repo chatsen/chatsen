@@ -140,7 +140,7 @@
   "locale": "Настройки языка",
   "systemDefault": "Системные настройки",
   "justDefault": "По умолчанию",
-  "notifications": "Notifications",
+  "notifications": "Уведомления",
   "noNotifications": "Someone, somewhere, will mention you someday.",
   "backgroundNotifications": "Background notifications",
   "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
