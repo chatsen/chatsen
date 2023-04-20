@@ -143,9 +143,9 @@
   "notifications": "Ειδοποιήσεις",
   "noNotifications": "Κάποιος, κάπου, θα σας αναφέρει κάποια μέρα.",
   "backgroundNotifications": "Ειδοποιήσεις παρασκηνίου",
-  "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
-  "optionNotAvailablePaywalled": "This option is for Chatsen supporters only.",
-  "clearAll": "Clear all",
-  "cache": "Cache",
-  "clearCache": "Clear cache"
+  "optionNotAvailableOnYourPlatform": "Αυτή η επιλογή δεν είναι διαθέσιμη στην πλατφόρμα σας.",
+  "optionNotAvailablePaywalled": "Αυτή η επιλογή είναι μόνο για υποστηρικτές του Chatsen.",
+  "clearAll": "Εκκαθάριση όλων",
+  "cache": "Προσωρινή μνήμη",
+  "clearCache": "Εκκαθάριση προσωρινής μνήμης"
 }
