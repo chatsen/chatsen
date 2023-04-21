@@ -1,5 +1,6 @@
 {
   "chatsen": "Chatsen",
+  "catsen": "Catsen",
   "loggedInVia": "Вы вошли через {provider}",
   "@loggedInVia": {
     "placeholders": {
@@ -75,7 +76,7 @@
   "customCommand": "Собственная команда",
   "customCommands": "Собственные команды",
   "newCustomCommand": "Новая собственная команда",
-  "commandTrigger": "Триггер",
+  "commandTrigger": "Замена текста",
   "command": "Команда",
   "save": "Сохранить",
   "browserStreamSettings": "Настройки браузера/трансляции",
@@ -90,14 +91,14 @@
   "messageAppearance": "Внешний вид сообщения",
   "showTimestamps": "Показывать временные отметки",
   "compactMessages": "Компактный вид сообщений",
-  "messageTrigger": "Триггер при сообщении",
+  "messageTrigger": "Ключевое слово",
   "pattern": "Шаблон",
-  "mention": "Упомянуть",
+  "mention": "Выделить в чате",
   "block": "Заблокировать",
-  "enableRegex": "Использовать regex",
-  "caseSensitive": "С учетом регистра",
-  "messageTriggers": "Триггеры при сообщении",
-  "newMessageTrigger": "Триггер при новом сообщении",
+  "enableRegex": "Включить regex",
+  "caseSensitive": "Учитывать регистр",
+  "messageTriggers": "Ключевые слова в сообщениях",
+  "newMessageTrigger": "Добавить новое ключевое слово",
   "reply": "Ответить",
   "copyText": "Скопировать текст",
   "copyTextSubtitle": "Удерживайте, чтобы скопировать текст сообщения с именем пользователя",
@@ -105,14 +106,14 @@
   "mentionUser": "Упомянуть пользователя",
   "copyMessageId": "Скопировать ID сообщения",
   "theme": "Тема",
-  "userTrigger": "Триггер при пользователе",
-  "userTriggers": "Триггеры при пользователе",
+  "userTrigger": "Действия при определённом пользователе",
+  "userTriggers": "Действия при пользователях",
   "chatHistory": "История сообщений",
   "login": "Имя пользователя",
-  "newUserTrigger": "Триггер при новом пользователе",
+  "newUserTrigger": "Добавить новое действие при пользователе",
   "ban": "Забанить",
   "unban": "Разбанить",
-  "timeoutUserForDuration": "Временно забанить пользователя на {duration}",
+  "timeoutUserForDuration": "Временно отстранить пользователя на {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
       "duration": {}
@@ -120,14 +121,14 @@
   },
   "chatCleared": "Чат был очищен",
   "permabanned": "забанен",
-  "bannedForDuration": "забанен на {duration}",
+  "bannedForDuration": "отстранён на {duration}",
   "@bannedForDuration": {
     "placeholders": {
       "duration": {}
     }
   },
   "replyingTo": "Ответить на",
-  "blockedMessage": "Заблокированное сообщение",
+  "blockedMessage": "Скрытое сообщение",
   "showMessage": "Показать сообщение",
   "hideMessage": "Скрыть сообщение",
   "scrollToBottom": "Прокрутить вниз",
@@ -135,8 +136,16 @@
   "chatSettings": "Настройки чата",
   "autocompleteUsersWithAt": "Предлагать имена пользователей после ввода @",
   "autocompleteEmotesWithColon": "Предлагать смайлики после ввода :",
-  "language": "Language",
-  "locale": "Locale",
-  "systemDefault": "System default",
-  "justDefault": "Default"
+  "language": "Язык",
+  "locale": "Настройки языка",
+  "systemDefault": "Системные настройки",
+  "justDefault": "По умолчанию",
+  "notifications": "Уведомления",
+  "noNotifications": "Кто-то, где-то, обязательно упомянет вас когда-нибудь.",
+  "backgroundNotifications": "Фоновые уведомления",
+  "optionNotAvailableOnYourPlatform": "Эта опция недоступна на вашей операционной системе.",
+  "optionNotAvailablePaywalled": "Эта опция предназначена только для спонсоров Chatsen.",
+  "clearAll": "Очистить всё",
+  "cache": "Кэш",
+  "clearCache": "Очистить кэш"
 }

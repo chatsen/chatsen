@@ -1,5 +1,6 @@
 {
   "chatsen": "Chatsen",
+  "catsen": "Catsen",
   "loggedInVia": "Đã đăng nhập qua {provider}",
   "@loggedInVia": {
     "placeholders": {
@@ -73,7 +74,7 @@
   "playStream": "Phát",
   "stopStream": "Ngừng phát",
   "customCommand": "Lệnh tùy chỉnh",
-  "customCommands": "Các lệnh tùy chỉnh",
+  "customCommands": "Lệnh tùy chỉnh",
   "newCustomCommand": "Tạo lệnh tùy chỉnh mới",
   "commandTrigger": "Từ khóa Kích hoạt",
   "command": "Lệnh",
@@ -96,7 +97,7 @@
   "block": "Chặn",
   "enableRegex": "Bật regex",
   "caseSensitive": "Phân biệt in hoa",
-  "messageTriggers": "Các bộ lọc tin nhắn",
+  "messageTriggers": "Bộ lọc tin nhắn",
   "newMessageTrigger": "Tạo bộ lọc tin nhắn mới",
   "reply": "Trả lời",
   "copyText": "Sao chép văn bản",
@@ -104,9 +105,9 @@
   "deleteMessage": "Xóa tin nhắn",
   "mentionUser": "Nhắc tên người dùng",
   "copyMessageId": "Sao chép ID tin nhắn",
-  "theme": "Chủ đề",
+  "theme": "Màu chủ đề",
   "userTrigger": "Bộ lọc người dùng",
-  "userTriggers": "Các bộ lọc người dùng",
+  "userTriggers": "Bộ lọc người dùng",
   "chatHistory": "Lịch sử chat",
   "login": "Tên người dùng",
   "newUserTrigger": "Tạo bộ lọc người dùng mới",
@@ -137,6 +138,14 @@
   "autocompleteEmotesWithColon": "Tự động gợi ý emotes sau dấu :",
   "language": "Ngôn ngữ",
   "locale": "Ngôn ngữ",
-  "systemDefault": "System default",
-  "justDefault": "Default"
+  "systemDefault": "Mặc định theo hệ thống",
+  "justDefault": "Mặc định",
+  "notifications": "Thông báo",
+  "noNotifications": "Một ai đó, ở đâu đó, sẽ nhắc đến bạn vào một ngày nào đó.",
+  "backgroundNotifications": "Thông báo trong nền",
+  "optionNotAvailableOnYourPlatform": "Tùy chọn này không có sẵn trên nền tảng của bạn.",
+  "optionNotAvailablePaywalled": "Tùy chọn này chỉ dành cho người dùng ủng hộ Chatsen.",
+  "clearAll": "Xoá tất cả",
+  "cache": "Bộ nhớ đệm",
+  "clearCache": "Xóa bộ nhớ đệm"
 }

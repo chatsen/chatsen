@@ -1,5 +1,6 @@
 {
   "chatsen": "Chatsen",
+  "catsen": "Catsen",
   "loggedInVia": "Connesso tramite {provider}",
   "@loggedInVia": {
     "placeholders": {
@@ -137,6 +138,14 @@
   "autocompleteEmotesWithColon": "Autocompleta emote con :",
   "language": "Lingua",
   "locale": "Localizzazione",
-  "systemDefault": "System default",
-  "justDefault": "Default"
+  "systemDefault": "Predefinita di Sistema",
+  "justDefault": "Predefinita",
+  "notifications": "Notifications",
+  "noNotifications": "Someone, somewhere, will mention you someday.",
+  "backgroundNotifications": "Background notifications",
+  "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
+  "optionNotAvailablePaywalled": "This option is for Chatsen supporters only.",
+  "clearAll": "Clear all",
+  "cache": "Cache",
+  "clearCache": "Clear cache"
 }

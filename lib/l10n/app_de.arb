@@ -1,5 +1,6 @@
 {
   "chatsen": "Chatsen",
+  "catsen": "Catsen",
   "loggedInVia": "Eingeloggt über {provider}",
   "@loggedInVia": {
     "placeholders": {
@@ -133,10 +134,18 @@
   "scrollToBottom": "Zum Ende springen",
   "startUsingTheApp": "Fügen Sie unten ein Konto hinzu, um die App zu verwenden.",
   "chatSettings": "Chateinstellungen",
-  "autocompleteUsersWithAt": "Autocomplete users with @",
-  "autocompleteEmotesWithColon": "Autocomplete emotes with :",
+  "autocompleteUsersWithAt": "Benutzernamen mit @ vervollständigen",
+  "autocompleteEmotesWithColon": "Emotes mit : vervollständigen",
   "language": "Sprache",
   "locale": "Sprache",
-  "systemDefault": "System default",
-  "justDefault": "Default"
+  "systemDefault": "Standard",
+  "justDefault": "Default",
+  "notifications": "Notifications",
+  "noNotifications": "Someone, somewhere, will mention you someday.",
+  "backgroundNotifications": "Background notifications",
+  "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
+  "optionNotAvailablePaywalled": "This option is for Chatsen supporters only.",
+  "clearAll": "Clear all",
+  "cache": "Cache",
+  "clearCache": "Clear cache"
 }
