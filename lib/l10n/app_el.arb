@@ -32,10 +32,10 @@
       "user": {}
     }
   },
-  "anErrorHasOccuredWhenVerifyingUserData": "Ένα σφάλμα συνέβη κατά την επαλήθευση δεδομένων χρήστη:",
+  "anErrorHasOccuredWhenVerifyingUserData": "Παρουσιάστηκε ένα σφάλμα κατά την επαλήθευση δεδομένων χρήστη:",
   "verifyingUserData": "Επαλήθευση δεδομένων χρήστη...",
   "verifiedUserToken": "Επαληθεύτηκε το token χρήστη!",
-  "anErrorHasOccuredWhenVerifyingUserToken": "Ένα σφάλμα συνέβη κατά την επαλήθευση του token χρήστη:",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Παρουσιάστηκε ένα σφάλμα κατά την επαλήθευση του token χρήστη:",
   "verifyingUserToken": "Επαλήθευση token χρήστη...",
   "searchForChannels": "Αναζήτηση για κανάλια",
   "recommendedChannels": "Προτεινόμενα κανάλια",
@@ -138,7 +138,7 @@
   "autocompleteEmotesWithColon": "Αυτόματη συμπλήρωση emote με :",
   "language": "Γλώσσα",
   "locale": "Γλωσσικές Ρυθμίσεις",
-  "systemDefault": "Προεπιλογή Συστήματος",
+  "systemDefault": "Προεπιλογή συστήματος",
   "justDefault": "Προεπιλεγμένη",
   "notifications": "Ειδοποιήσεις",
   "noNotifications": "Κάποιος, κάπου, θα σας αναφέρει κάποια μέρα.",
