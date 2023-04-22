@@ -48,13 +48,13 @@
       "user": {}
     }
   },
-  "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
+  "spellCheckFailed": "La revisió ha fallat! Potser has volgut cercar {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "Uneix-te a {channel}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
