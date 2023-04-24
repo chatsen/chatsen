@@ -1,7 +1,9 @@
 import 'package:chatsen/data/inline_url.dart';
 import 'package:chatsen/modal/emote.dart';
 import 'package:chatsen/modal/user.dart';
+import 'package:chatsen/tmi/channel/channel_state.dart';
 import 'package:chatsen/tmi/channel/messages/channel_message_embeds.dart';
+import 'package:chatsen/tmi/channel/messages/channel_message_state_change.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +12,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../tmi/channel/messages/channel_message_event.dart';
 import '/components/modal.dart';
 import '/components/surface.dart';
 import '/data/emote.dart';
@@ -86,10 +89,12 @@ class _BlockedChatMessageState extends State<BlockedChatMessage> {
 class ChatMessage extends StatelessWidget {
   final ChannelMessage message;
   late MessageAppearance messageAppearance;
+  final bool renderMentions;
 
   ChatMessage({
     super.key,
     required this.message,
+    this.renderMentions = true,
   }) {
     messageAppearance = Hive.box('Settings').get('messageAppearance');
   }
@@ -144,7 +149,7 @@ class ChatMessage extends StatelessWidget {
             final widget = Surface(
               type: chatMessage.blocked
                   ? SurfaceType.error
-                  : chatMessage.mentionned
+                  : chatMessage.mentionned && renderMentions
                       ? SurfaceType.primary
                       : SurfaceType.transparent,
               onTap: () async {},
@@ -172,6 +177,10 @@ class ChatMessage extends StatelessWidget {
             return ChatBanChip(messageAppearance: messageAppearance, message: message as ChannelMessageBan);
           } else if (message is ChannelMessageNotice) {
             return ChatNoticeChip(messageAppearance: messageAppearance, message: message as ChannelMessageNotice);
+          } else if (message is ChannelMessageEvent) {
+            return Container();
+          } else if (message is ChannelMessageStateChange) {
+            return Text((message as ChannelMessageStateChange).change.nextState.toString());
           }
           return Text('Unhandled message type: ${message.runtimeType}');
         },

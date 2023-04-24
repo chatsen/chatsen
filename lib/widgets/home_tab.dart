@@ -72,6 +72,8 @@ class _HomeTabState extends State<HomeTab> {
         'enviosity',
         // 'theactingmale',
         'kitboga',
+        'cdawgva',
+        'gigguk',
       ],
     );
     topStreams = Twitch.streams(account!.tokenData);
@@ -583,17 +585,18 @@ class StreamPreviewLarge extends StatelessWidget {
                     stream.userName,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
+                          color: Colors.white.withOpacity(0.9),
                         ),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     stream.title.trim(),
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white.withOpacity(0.9)),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     stream.gameName,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.white.withOpacity(0.9)),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Row(
@@ -610,19 +613,20 @@ class StreamPreviewLarge extends StatelessWidget {
                       const SizedBox(width: 4.0),
                       Text(
                         '${stream.viewerCount}',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white.withOpacity(0.9)),
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(width: 16.0),
-                      const Icon(
+                      Icon(
                         Icons.alarm,
                         size: 12.0,
+                        color: Colors.white.withOpacity(0.9),
                       ),
                       const SizedBox(width: 4.0),
                       Expanded(
                         child: Text(
                           '${DateTime.now().difference(stream.startedAt)}'.split('.').first,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground.withOpacity(0.9)),
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white.withOpacity(0.9)),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),

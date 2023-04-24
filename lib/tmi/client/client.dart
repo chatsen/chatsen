@@ -150,7 +150,6 @@ class Client {
   }
 
   Future<void> receive(Connection connection, irc.Message event) async {
-    // print('$connection: ${event.raw}');
     switch (event.command) {
       case '001':
         if (connection.state is ConnectionConnecting) {
@@ -254,6 +253,10 @@ class Client {
         final channel = channels.state.firstWhereOrNull((channel) => channel.name == channelName);
         if (channel == null) {
           break;
+        }
+
+        if (event.tags['msg-id'] == 'msg_channel_suspended') {
+          channel.add(ChannelSuspend());
         }
 
         channel.channelMessages.add(

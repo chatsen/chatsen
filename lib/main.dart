@@ -1,5 +1,6 @@
 import 'dart:ffi' as dffi;
 import 'dart:io';
+import 'package:chatsen/data/notifications_cubit.dart';
 import 'package:ffi/ffi.dart' as ffi;
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -88,6 +89,7 @@ Future<void> main() async {
           ),
         ),
         Provider<BrowserState>(create: (context) => BrowserState()),
+        Provider<NotificationsCubit>(create: (context) => NotificationsCubit()),
       ],
       child: const App(),
     ),

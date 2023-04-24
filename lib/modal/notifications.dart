@@ -1,12 +1,19 @@
+import 'package:chatsen/data/notifications_cubit.dart';
 import 'package:chatsen/modal/components/modal_header.dart';
+import 'package:chatsen/widgets/chat_message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationsModal extends StatelessWidget {
   const NotificationsModal({super.key});
 
   @override
-  Widget build(BuildContext context) => ListView(
+  Widget build(BuildContext context) {
+    BlocProvider.of<NotificationsCubit>(context).clearUnreads();
+    return BlocBuilder<NotificationsCubit, NotificationsCubitState>(
+      bloc: BlocProvider.of<NotificationsCubit>(context),
+      builder: (BuildContext context, state) => ListView(
         shrinkWrap: true,
         children: [
           ModalHeader(
@@ -24,7 +31,7 @@ class NotificationsModal extends StatelessWidget {
               ),
             ),
           ),
-          if (true) ...[
+          if (state.messages.isEmpty) ...[
             const SizedBox(height: 16.0),
             const Center(child: Icon(Icons.info_outline)),
             const SizedBox(height: 6.0),
@@ -33,6 +40,12 @@ class NotificationsModal extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
           ],
+          ...state.messages.map((e) => ChatMessage(
+                message: e,
+                renderMentions: false,
+              )),
         ],
-      );
+      ),
+    );
+  }
 }

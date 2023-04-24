@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:chatsen/components/surface.dart';
 import 'package:chatsen/modal/channel.dart';
+import 'package:chatsen/modal/notifications.dart';
 import 'package:chatsen/widgets/stream/stream_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,6 +55,7 @@ class HomePage extends StatelessWidget {
             return DefaultTabController(
               length: 1 + state.length,
               child: Scaffold(
+                // endDrawer: const NotificationsModal(),
                 // backgroundColor: Theme.of(context).colorScheme.background.withOpacity(0.80),
                 backgroundColor: Platform.isWindows ? Colors.transparent : null,
                 appBar: Platform.isWindows ? const MyAppBar() : null,
