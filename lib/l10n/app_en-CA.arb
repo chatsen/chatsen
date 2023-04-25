@@ -1,5 +1,5 @@
 {
-  "chatsen": "Chatsen",
+  "chatsen": "Chastsen",
   "catsen": "Catsen",
   "loggedInVia": "Logged in via {provider}",
   "@loggedInVia": {
@@ -96,7 +96,7 @@
   "mention": "Mention",
   "block": "Block",
   "enableRegex": "Enable regex",
-  "caseSensitive": "Case sensitive",
+  "caseSensitive": "Case senstitive",
   "messageTriggers": "Message triggers",
   "newMessageTrigger": "New message trigger",
   "reply": "Reply",
