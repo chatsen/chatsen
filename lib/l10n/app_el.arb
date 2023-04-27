@@ -147,5 +147,12 @@
   "optionNotAvailablePaywalled": "Αυτή η επιλογή είναι μόνο για υποστηρικτές του Chatsen.",
   "clearAll": "Εκκαθάριση όλων",
   "cache": "Προσωρινή μνήμη",
-  "clearCache": "Εκκαθάριση προσωρινής μνήμης"
+  "clearCache": "Εκκαθάριση προσωρινής μνήμης",
+  "chatters": "Chatters",
+  "lastSeenAgo": "Last seen {time} ago",
+  "@lastSeenAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  }
 }
