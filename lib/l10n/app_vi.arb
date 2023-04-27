@@ -147,5 +147,12 @@
   "optionNotAvailablePaywalled": "Tùy chọn này chỉ dành cho người dùng ủng hộ Chatsen.",
   "clearAll": "Xoá tất cả",
   "cache": "Bộ nhớ đệm",
-  "clearCache": "Xóa bộ nhớ đệm"
+  "clearCache": "Xóa bộ nhớ đệm",
+  "chatters": "Chatters",
+  "lastSeenAgo": "Last seen {time} ago",
+  "@lastSeenAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  }
 }
