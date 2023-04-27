@@ -147,5 +147,12 @@
   "optionNotAvailablePaywalled": "Esta opción es sólo para simpatizantes de Chatsen.",
   "clearAll": "Borrar todo",
   "cache": "Caché",
-  "clearCache": "Borrar caché"
+  "clearCache": "Borrar caché",
+  "chatters": "Chatters",
+  "lastSeenAgo": "Last seen {time} ago",
+  "@lastSeenAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  }
 }
