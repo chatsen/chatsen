@@ -7,6 +7,7 @@ import '/data/twitch/search_data.dart';
 import '/data/twitch/stream_data.dart';
 import '/data/twitch/token_data.dart';
 import '/data/twitch/user_data.dart';
+import 'twitch_ban_response_data.dart';
 
 class Twitch {
   static Future<List<String>> blockedUsers(TokenData tokenData) async {
@@ -154,5 +155,58 @@ class Twitch {
       emoteSetIds.removeRange(0, emoteSetsPack.length);
     }
     return emotes;
+  }
+
+  Future<TwitchBanResponseData> ban(
+    TokenData tokenData, {
+    required String broadcasterId,
+    required String moderatorId,
+    required String userId,
+    int? duration,
+    String? reason,
+  }) async {
+    final response = await http.post(
+      Uri.parse('https://api.twitch.tv/helix/moderation/bans?broadcaster_id=$broadcasterId&moderator_id=$moderatorId'),
+      headers: {
+        'Authorization': 'Bearer ${tokenData.accessToken}',
+        'Client-Id': '${tokenData.clientId}',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'data': {
+          'user_id': userId,
+          if (duration != null) 'duration': duration,
+          if (reason != null) 'reason': reason,
+        },
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final responseJson = json.decode(utf8.decode(response.bodyBytes));
+      return TwitchBanResponseData.fromJson(responseJson['data'][0]);
+    } else {
+      final errorJson = json.decode(utf8.decode(response.bodyBytes));
+      throw Exception('${errorJson['error']}: ${errorJson['message']}');
+    }
+  }
+
+  Future<void> unban(
+    TokenData tokenData, {
+    required String broadcasterId,
+    required String moderatorId,
+    required String userId,
+  }) async {
+    final response = await http.delete(
+      Uri.parse('https://api.twitch.tv/helix/moderation/bans?broadcaster_id=$broadcasterId&moderator_id=$moderatorId&user_id=$userId'),
+      headers: {
+        'Authorization': 'Bearer ${tokenData.accessToken}',
+        'Client-Id': '${tokenData.clientId}',
+      },
+    );
+
+    if (response.statusCode != 204) {
+      final errorJson = json.decode(utf8.decode(response.bodyBytes));
+      throw Exception('${errorJson['error']}: ${errorJson['message']}');
+    }
   }
 }
