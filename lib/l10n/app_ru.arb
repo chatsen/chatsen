@@ -149,7 +149,7 @@
   "cache": "Кэш",
   "clearCache": "Очистить кэш",
   "chatters": "Участники чата",
-  "lastSeenAgo": "Last seen {time} ago",
+  "lastSeenAgo": "Последний раз видели {time} назад",
   "@lastSeenAgo": {
     "placeholders": {
       "time": {}
