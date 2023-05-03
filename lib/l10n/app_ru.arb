@@ -148,7 +148,7 @@
   "clearAll": "Очистить всё",
   "cache": "Кэш",
   "clearCache": "Очистить кэш",
-  "chatters": "Chatters",
+  "chatters": "Участники чата",
   "lastSeenAgo": "Last seen {time} ago",
   "@lastSeenAgo": {
     "placeholders": {
