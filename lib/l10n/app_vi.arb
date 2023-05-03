@@ -148,8 +148,8 @@
   "clearAll": "Xoá tất cả",
   "cache": "Bộ nhớ đệm",
   "clearCache": "Xóa bộ nhớ đệm",
-  "chatters": "Chatters",
-  "lastSeenAgo": "Last seen {time} ago",
+  "chatters": "Người trò chuyện",
+  "lastSeenAgo": "Nhìn thấy lần cuối {time} trước",
   "@lastSeenAgo": {
     "placeholders": {
       "time": {}
