@@ -149,7 +149,7 @@
   "cache": "Cache",
   "clearCache": "Clear cache",
   "chatters": "Chatters",
-  "lastSeenAgo": "Last seen {time} ago",
+  "lastSeenAgo": "Zuletzt gesehen vor {time}",
   "@lastSeenAgo": {
     "placeholders": {
       "time": {}
