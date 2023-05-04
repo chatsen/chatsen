@@ -1,4 +1,6 @@
+import 'package:chatsen/components/modal.dart';
 import 'package:chatsen/data/browser/browser_tab.dart';
+import 'package:chatsen/modal/chatters.dart';
 import 'package:chatsen/tmi/channel/channel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,6 +41,16 @@ class ChannelModal extends StatelessWidget {
                     url: 'https://player.twitch.tv/?channel=${channel.name.substring(1)}&enableExtensions=true&muted=true&parent=chatsen.app&player=popout&volume=1.0',
                   ),
                 ]);
+              },
+            ),
+            Tile(
+              title: AppLocalizations.of(context)!.chatters,
+              prefix: const Icon(Icons.people_outline_outlined),
+              onTap: () async {
+                Modal.show(
+                  context: context,
+                  child: ChattersModal(channel: channel),
+                );
               },
             ),
             Tile(
