@@ -250,8 +250,8 @@ class ChatMessage extends StatelessWidget {
                               badge.mipmap.last,
                               height: 20.0 * messageAppearance.scale,
                             )
-                          : CachedNetworkImage(
-                              imageUrl: badge.mipmap.last,
+                          : Image(
+                              image: CachedNetworkImageProvider(badge.mipmap.last),
                               height: 20.0 * messageAppearance.scale,
                               // scale: (1.0 / messageAppearance.scale) * 4.0,
                             ),
@@ -292,12 +292,10 @@ class ChatMessage extends StatelessWidget {
                         message: split.name,
                         child: Padding(
                           padding: const EdgeInsets.only(right: 4.0) * messageAppearance.scale,
-                          child: Transform.scale(
-                            scale: (1.0 / messageAppearance.scale) * 4.0,
-                            child: CachedNetworkImage(
-                              imageUrl: split.mipmap.last,
-                              height: split.provider.name == 'Emoji' ? 24.0 : null,
-                            ),
+                          child: Image(
+                            image: CachedNetworkImageProvider(split.mipmap.last),
+                            height: (split.provider.name == 'Emoji' ? 24.0 : 32.0) * (1.0 / messageAppearance.scale),
+                            filterQuality: FilterQuality.high,
                           ),
                         ),
                       ),
