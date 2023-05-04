@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/modal/components/modal_header.dart';
 import 'package:chatsen/modal/settings.dart';
 import 'package:flutter/material.dart';
@@ -193,7 +194,7 @@ class TwitchAccountButton extends StatelessWidget {
                 height: active ? 40.0 : 36.0,
                 child: twitchAccount.userData != null
                     ? Ink.image(
-                        image: NetworkImage(twitchAccount.userData!.avatarUrl),
+                        image: CachedNetworkImageProvider(twitchAccount.userData!.avatarUrl),
                         fit: BoxFit.cover,
                       )
                     : const Icon(Icons.question_mark_outlined),

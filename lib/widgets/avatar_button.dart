@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/components/surface.dart';
 import 'package:chatsen/modal/notifications.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +111,7 @@ class _AvatarButtonState extends State<AvatarButton> {
                                         width: 32.0,
                                         height: 32.0,
                                         child: Ink.image(
-                                          image: NetworkImage(twitchAccount.userData.avatarUrl),
+                                          image: CachedNetworkImageProvider(twitchAccount.userData.avatarUrl),
                                           fit: BoxFit.cover,
                                         ),
                                       ),

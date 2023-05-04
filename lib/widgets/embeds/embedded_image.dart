@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,8 +21,8 @@ class EmbeddedImage extends StatelessWidget {
           children: [
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 128.0 * 2.5) * scale,
-              child: Image.network(
-                embed.url,
+              child: CachedNetworkImage(
+                imageUrl: embed.url,
                 filterQuality: FilterQuality.high,
               ),
             ),

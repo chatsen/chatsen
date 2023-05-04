@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -22,8 +23,8 @@ class EmoteModal extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            Image.network(
-              emote.mipmap.last,
+            CachedNetworkImage(
+              imageUrl: emote.mipmap.last,
               height: 64.0,
             ),
             const SizedBox(width: 16.0),

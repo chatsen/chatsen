@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/modal/components/modal_header.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class UserModalHeader extends StatelessWidget {
             children: [
               Positioned.fill(
                 child: Ink.image(
-                  image: NetworkImage(user.bannerImageURL ?? user.offlineImageURL ?? user.profileImageURL),
+                  image: CachedNetworkImageProvider(user.bannerImageURL ?? user.offlineImageURL ?? user.profileImageURL),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -43,7 +44,7 @@ class UserModalHeader extends StatelessWidget {
                           clipBehavior: Clip.antiAlias,
                           elevation: 8.0,
                           child: Ink.image(
-                            image: NetworkImage(user.profileImageURL),
+                            image: CachedNetworkImageProvider(user.profileImageURL),
                             width: 64.0,
                             height: 64.0,
                             child: InkWell(
@@ -98,7 +99,7 @@ class UserModalHeader extends StatelessWidget {
               children: [
                 Positioned.fill(
                   child: Ink.image(
-                    image: NetworkImage(user.stream!.previewImageURL.replaceAll('{width}', '1920').replaceAll('{height}', '1080')),
+                    image: CachedNetworkImageProvider(user.stream!.previewImageURL.replaceAll('{width}', '1920').replaceAll('{height}', '1080')),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -117,7 +118,7 @@ class UserModalHeader extends StatelessWidget {
                             clipBehavior: Clip.antiAlias,
                             elevation: 8.0,
                             child: Ink.image(
-                              image: NetworkImage(user.stream!.game.avatarURL),
+                              image: CachedNetworkImageProvider(user.stream!.game.avatarURL),
                               fit: BoxFit.cover,
                               width: 64.0,
                               height: 64.0,

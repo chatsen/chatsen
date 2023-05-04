@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -91,8 +92,8 @@ class EmotePicker extends StatelessWidget {
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: Image.network(
-                            emote.mipmap.last,
+                          child: CachedNetworkImage(
+                            imageUrl: emote.mipmap.last,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -141,8 +142,8 @@ SliverList.list(
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: Image.network(
-                            emote.mipmap.last,
+                          child: CachedNetworkImage(
+                            emoteUrl: emote.mipmap.last,
                             fit: BoxFit.cover,
                           ),
                         ),

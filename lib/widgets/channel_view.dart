@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/widgets/chat/emote_picker.dart';
 import 'package:chatsen/widgets/chat_message.dart';
 import 'package:file_picker/file_picker.dart';
@@ -143,8 +144,8 @@ class ChannelViewState extends State<ChannelView> {
       for (final user in matchingChatters)
         AutocompletionItem(
           type: AutocompletionType.user,
-          prefix: Image.network(user.profileImageURL, width: 24.0, height: 24.0),
-          shortened: Image.network(user.profileImageURL, width: 24.0, height: 24.0),
+          prefix: CachedNetworkImage(imageUrl: user.profileImageURL, width: 24.0, height: 24.0),
+          shortened: CachedNetworkImage(imageUrl: user.profileImageURL, width: 24.0, height: 24.0),
           title: user.displayName,
           subtitle: user.login,
           onTap: () {
@@ -183,8 +184,8 @@ class ChannelViewState extends State<ChannelView> {
       for (final emote in matchingEmotes)
         AutocompletionItem(
           type: AutocompletionType.emote,
-          prefix: Image.network(emote.mipmap.last, width: 24.0, height: 24.0),
-          shortened: Image.network(emote.mipmap.last, width: 24.0, height: 24.0),
+          prefix: CachedNetworkImage(imageUrl: emote.mipmap.last, width: 24.0, height: 24.0),
+          shortened: CachedNetworkImage(imageUrl: emote.mipmap.last, width: 24.0, height: 24.0),
           title: emote.name,
           subtitle: emote.provider.name,
           onTap: () {

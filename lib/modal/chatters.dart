@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/components/tile.dart';
 import 'package:chatsen/modal/components/modal_header.dart';
 import 'package:chatsen/modal/user.dart';
@@ -64,7 +65,7 @@ class _ChattersModalState extends State<ChattersModal> {
             for (final chatter in widget.channel.channelChatters.state!.getAllChatters().where((element) => element.login.toLowerCase().contains(searchController.text.toLowerCase()) || element.displayName.toLowerCase().contains(searchController.text.toLowerCase())))
               Tile(
                 prefix: CircleAvatar(
-                  backgroundImage: NetworkImage(chatter.profileImageURL),
+                  backgroundImage: CachedNetworkImageProvider(chatter.profileImageURL),
                 ),
                 title: chatter.displayName,
                 // subtitle: chatter.login,

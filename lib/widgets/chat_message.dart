@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/data/inline_url.dart';
 import 'package:chatsen/modal/emote.dart';
 import 'package:chatsen/modal/user.dart';
@@ -249,8 +250,8 @@ class ChatMessage extends StatelessWidget {
                               badge.mipmap.last,
                               height: 20.0 * messageAppearance.scale,
                             )
-                          : Image.network(
-                              badge.mipmap.last,
+                          : CachedNetworkImage(
+                              imageUrl: badge.mipmap.last,
                               height: 20.0 * messageAppearance.scale,
                               // scale: (1.0 / messageAppearance.scale) * 4.0,
                             ),
@@ -291,10 +292,12 @@ class ChatMessage extends StatelessWidget {
                         message: split.name,
                         child: Padding(
                           padding: const EdgeInsets.only(right: 4.0) * messageAppearance.scale,
-                          child: Image.network(
-                            split.mipmap.last,
+                          child: Transform.scale(
                             scale: (1.0 / messageAppearance.scale) * 4.0,
-                            height: split.provider.name == 'Emoji' ? 24.0 : null,
+                            child: CachedNetworkImage(
+                              imageUrl: split.mipmap.last,
+                              height: split.provider.name == 'Emoji' ? 24.0 : null,
+                            ),
                           ),
                         ),
                       ),
