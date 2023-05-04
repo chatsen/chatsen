@@ -157,7 +157,7 @@ class Twitch {
     return emotes;
   }
 
-  Future<TwitchBanResponseData> ban(
+  static Future<TwitchBanResponseData> ban(
     TokenData tokenData, {
     required String broadcasterId,
     required String moderatorId,
@@ -190,7 +190,7 @@ class Twitch {
     }
   }
 
-  Future<void> unban(
+  static Future<void> unban(
     TokenData tokenData, {
     required String broadcasterId,
     required String moderatorId,
@@ -205,6 +205,154 @@ class Twitch {
     );
 
     if (response.statusCode != 204) {
+      final errorJson = json.decode(utf8.decode(response.bodyBytes));
+      throw Exception('${errorJson['error']}: ${errorJson['message']}');
+    }
+  }
+
+  static Future<void> deleteChatMessage(
+    TokenData tokenData, {
+    required String broadcasterId,
+    required String moderatorId,
+    String? messageId,
+  }) async {
+    final response = await http.delete(
+      Uri.parse('https://api.twitch.tv/helix/moderation/chat?broadcaster_id=$broadcasterId&moderator_id=$moderatorId${messageId != null ? '&message_id=$messageId' : ''}'),
+      headers: {
+        'Authorization': 'Bearer ${tokenData.accessToken}',
+        'Client-Id': '${tokenData.clientId}',
+      },
+    );
+
+    if (response.statusCode != 204) {
+      final errorJson = json.decode(utf8.decode(response.bodyBytes));
+      throw Exception('${errorJson['error']}: ${errorJson['message']}');
+    }
+  }
+
+  static Future<void> addModerator(
+    TokenData tokenData, {
+    required String broadcasterId,
+    required String userId,
+  }) async {
+    final response = await http.post(
+      Uri.parse('https://api.twitch.tv/helix/moderation/moderators?broadcaster_id=$broadcasterId&user_id=$userId'),
+      headers: {
+        'Authorization': 'Bearer ${tokenData.accessToken}',
+        'Client-Id': '${tokenData.clientId}',
+      },
+    );
+
+    if (response.statusCode != 204) {
+      final errorJson = json.decode(utf8.decode(response.bodyBytes));
+      throw Exception('${errorJson['error']}: ${errorJson['message']}');
+    }
+  }
+
+  static Future<void> removeModerator(
+    TokenData tokenData, {
+    required String broadcasterId,
+    required String userId,
+  }) async {
+    final response = await http.delete(
+      Uri.parse('https://api.twitch.tv/helix/moderation/moderators?broadcaster_id=$broadcasterId&user_id=$userId'),
+      headers: {
+        'Authorization': 'Bearer ${tokenData.accessToken}',
+        'Client-Id': '${tokenData.clientId}',
+      },
+    );
+
+    if (response.statusCode != 204) {
+      final errorJson = json.decode(utf8.decode(response.bodyBytes));
+      throw Exception('${errorJson['error']}: ${errorJson['message']}');
+    }
+  }
+
+  static Future<void> changeChatColor(
+    TokenData tokenData, {
+    required String userId,
+    required String color,
+  }) async {
+    final response = await http.put(
+      Uri.parse('https://api.twitch.tv/helix/chat/color?user_id=$userId&color=${Uri.encodeComponent(color)}'),
+      headers: {
+        'Authorization': 'Bearer ${tokenData.accessToken}',
+        'Client-Id': '${tokenData.clientId}',
+      },
+    );
+
+    if (response.statusCode != 204) {
+      final errorJson = json.decode(utf8.decode(response.bodyBytes));
+      throw Exception('${errorJson['error']}: ${errorJson['message']}');
+    }
+  }
+
+  static Future<void> sendAnnouncement(
+    TokenData tokenData, {
+    required String broadcasterId,
+    required String moderatorId,
+    required String message,
+    required String color,
+  }) async {
+    final response = await http.post(
+      Uri.parse('https://api.twitch.tv/helix/chat/announcements?broadcaster_id=$broadcasterId&moderator_id=$moderatorId'),
+      headers: {
+        'Authorization': 'Bearer ${tokenData.accessToken}',
+        'Client-Id': '${tokenData.clientId}',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'message': message,
+        'color': color,
+      }),
+    );
+
+    if (response.statusCode != 204) {
+      final errorJson = json.decode(utf8.decode(response.bodyBytes));
+      throw Exception('${errorJson['error']}: ${errorJson['message']}');
+    }
+  }
+
+  static Future<Map<String, dynamic>> updateChatSettings(
+    TokenData tokenData, {
+    required String broadcasterId,
+    required String moderatorId,
+    bool? emoteMode,
+    bool? followerMode,
+    int? followerModeDuration,
+    bool? nonModeratorChatDelay,
+    int? nonModeratorChatDelayDuration,
+    bool? slowMode,
+    int? slowModeWaitTime,
+    bool? subscriberMode,
+    bool? uniqueChatMode,
+  }) async {
+    final settings = {
+      if (emoteMode != null) 'emote_mode': emoteMode,
+      if (followerMode != null) 'follower_mode': followerMode,
+      if (followerModeDuration != null) 'follower_mode_duration': followerModeDuration,
+      if (nonModeratorChatDelay != null) 'non_moderator_chat_delay': nonModeratorChatDelay,
+      if (nonModeratorChatDelayDuration != null) 'non_moderator_chat_delay_duration': nonModeratorChatDelayDuration,
+      if (slowMode != null) 'slow_mode': slowMode,
+      if (slowModeWaitTime != null) 'slow_mode_wait_time': slowModeWaitTime,
+      if (subscriberMode != null) 'subscriber_mode': subscriberMode,
+      if (uniqueChatMode != null) 'unique_chat_mode': uniqueChatMode,
+    };
+
+    final response = await http.patch(
+      Uri.parse('https://api.twitch.tv/helix/chat/settings?broadcaster_id=$broadcasterId&moderator_id=$moderatorId'),
+      headers: {
+        'Authorization': 'Bearer ${tokenData.accessToken}',
+        'Client-Id': '${tokenData.clientId}',
+        'Content-Type': 'application/json',
+      },
+      body: json.encode(settings),
+    );
+
+    if (response.statusCode == 200) {
+      final responseJson = json.decode(utf8.decode(response.bodyBytes));
+      return responseJson['data'][0];
+    } else {
       final errorJson = json.decode(utf8.decode(response.bodyBytes));
       throw Exception('${errorJson['error']}: ${errorJson['message']}');
     }
