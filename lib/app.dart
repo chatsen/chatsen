@@ -5,6 +5,7 @@ import 'package:chatsen/tmi/channel/channel_message.dart';
 import 'package:chatsen/tmi/client/client.dart';
 import 'package:chatsen/tmi/client/client_listener.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -131,7 +132,16 @@ class _AppState extends State<App> implements ClientListener {
                 : applicationAppearance.themeMode == 'light'
                     ? ThemeMode.light
                     : ThemeMode.system,
+            scrollBehavior: CustomScrollBehavior(),
           );
         },
       );
+}
+
+class CustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
