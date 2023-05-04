@@ -40,7 +40,7 @@ class ChatBanChip extends StatelessWidget {
                             ? TextSpan(text: AppLocalizations.of(context)!.chatCleared)
                             : TextSpan(
                                 children: [
-                                  TextSpan(text: '${message.user?.displayName}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                                  TextSpan(text: '${message.user?.displayName} ', style: const TextStyle(fontWeight: FontWeight.bold)),
                                   if (message.duration == null) TextSpan(text: AppLocalizations.of(context)!.permabanned),
                                   if (message.duration != null) TextSpan(text: AppLocalizations.of(context)!.bannedForDuration(message.duration.toString().split('.').first)),
                                 ],
