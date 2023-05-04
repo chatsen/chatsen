@@ -1,3 +1,4 @@
+import 'package:chatsen/api/twitch/twitch.dart';
 import 'package:chatsen/widgets/channel_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +52,8 @@ class MessageModal extends StatelessWidget {
             prefix: const Icon(Icons.delete_outline_outlined),
             onTap: () async {
               Navigator.of(context).pop();
-              await message.channel?.send('/delete ${message.id}');
+              await Twitch.deleteChatMessage(message.channel!.client.transmitter.twitchAccount!.tokenData, broadcasterId: message.channel!.id!, moderatorId: message.channel!.client.transmitter.twitchAccount!.tokenData.userId!);
+              // await message.channel?.send('/delete ${message.id}');
             },
           ),
           Tile(
