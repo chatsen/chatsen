@@ -1,3 +1,5 @@
+import 'package:chatsen/api/twitch/twitch.dart';
+import 'package:chatsen/tmi/channel/messages/channel_message_notice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -42,7 +44,20 @@ class UserModal extends StatelessWidget {
                             Icons.block_rounded,
                             color: Colors.red,
                           ),
-                          onPressed: () => channel?.send('/ban ${snapshot.data!.login}'),
+                          onPressed: () async {
+                            try {
+                              await Twitch.ban(
+                                channel!.client.transmitter.twitchAccount!.tokenData,
+                                broadcasterId: channel!.id!,
+                                moderatorId: channel!.client.transmitter.twitchAccount!.tokenData.userId!,
+                                userId: snapshot.data!.id,
+                              );
+                            } catch (e) {
+                              print(e);
+                              // channel.channelMessages.add(ChannelMessageNotice(message: message, dateTime: dateTime))
+                            }
+                            // channel?.send('/ban ${snapshot.data!.login}'),
+                          },
                         ),
                       ),
                       Expanded(
@@ -67,7 +82,21 @@ class UserModal extends StatelessWidget {
                                     message: AppLocalizations.of(context)!.timeoutUserForDuration(time.value.toString().split('.').first),
                                     child: TextButton(
                                       child: Text(time.key),
-                                      onPressed: () => channel?.send('/timeout ${snapshot.data!.login} ${time.value.inSeconds}'),
+                                      onPressed: () async {
+                                        try {
+                                          await Twitch.ban(
+                                            channel!.client.transmitter.twitchAccount!.tokenData,
+                                            broadcasterId: channel!.id!,
+                                            moderatorId: channel!.client.transmitter.twitchAccount!.tokenData.userId!,
+                                            userId: snapshot.data!.id,
+                                            duration: time.value.inSeconds,
+                                          );
+                                        } catch (e) {
+                                          print(e);
+                                          // channel.channelMessages.add(ChannelMessageNotice(message: message, dateTime: dateTime))
+                                        }
+                                        // channel?.send('/timeout ${snapshot.data!.login} ${time.value.inSeconds}'),
+                                      },
                                     ),
                                   ),
                               ],
@@ -82,7 +111,20 @@ class UserModal extends StatelessWidget {
                             Icons.block_rounded,
                             color: Colors.green,
                           ),
-                          onPressed: () => channel?.send('/unban ${snapshot.data!.login}'),
+                          onPressed: () async {
+                            try {
+                              await Twitch.unban(
+                                channel!.client.transmitter.twitchAccount!.tokenData,
+                                broadcasterId: channel!.id!,
+                                moderatorId: channel!.client.transmitter.twitchAccount!.tokenData.userId!,
+                                userId: snapshot.data!.id,
+                              );
+                            } catch (e) {
+                              print(e);
+                              // channel.channelMessages.add(ChannelMessageNotice(message: message, dateTime: dateTime))
+                            }
+                            // channel?.send('/unban ${snapshot.data!.login}');
+                          },
                         ),
                       ),
                     ],

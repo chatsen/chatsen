@@ -75,6 +75,12 @@ class Surface extends StatelessWidget {
         iconTheme: Theme.of(context).iconTheme.copyWith(
               color: foregroundColor,
             ),
+        inputDecorationTheme: InputDecorationTheme(
+          iconColor: foregroundColor,
+          hintStyle: TextStyle(
+            color: foregroundColor,
+          ),
+        ),
       ),
       child: type == SurfaceType.transparent
           ? InkWell(
