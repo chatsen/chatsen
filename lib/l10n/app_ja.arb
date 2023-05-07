@@ -1,0 +1,158 @@
+{
+  "chatsen": "チャットセン",
+  "catsen": "キャットセン",
+  "loggedInVia": "{provider}経由でログイン",
+  "@loggedInVia": {
+    "placeholders": {
+      "provider": {}
+    }
+  },
+  "termsOfService": "利用規約",
+  "privacyPolicy": "プライバシーポリシー",
+  "settings": "設定",
+  "expiresNever": "期限なし",
+  "expiresIn": "{time}で期限切れ",
+  "@expiresIn": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "close": "閉じる",
+  "add": "追加",
+  "cancel": "キャンセル",
+  "tokenInput": "トークン入力",
+  "account": "アカウント",
+  "refreshAccount": "アカウントを更新",
+  "removeAccount": "アカウントを削除",
+  "addAnotherAccount": "別のアカウントを追加",
+  "verifiedUserData": "認証済みユーザーデータ！",
+  "loggedInAs": "{user}としてログイン",
+  "@loggedInAs": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "anErrorHasOccuredWhenVerifyingUserData": "ユーザーデータの確認中にエラーが発生しました：",
+  "verifyingUserData": "ユーザーデータを確認中...",
+  "verifiedUserToken": "認証済みユーザートークン！",
+  "anErrorHasOccuredWhenVerifyingUserToken": "ユーザートークンの確認中にエラーが発生しました：",
+  "verifyingUserToken": "ユーザートークンを確認中...",
+  "searchForChannels": "チャンネルを検索",
+  "recommendedChannels": "おすすめチャンネル",
+  "popularChannels": "人気チャンネル",
+  "channel": "チャンネル",
+  "leaveChannel": "チャンネルを退出",
+  "joinUser": "{user}に参加",
+  "@joinUser": {
+    "placeholders": {
+      "user": {}
+    }
+  },
+  "spellCheckFailed": "スペルチェックに失敗しました！{username}を検索しようとしましたか？",
+  "@spellCheckFailed": {
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "joinChannelName": "{channel}に参加",
+  "@joinChannelName": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "sendMessageIn": "{channel}でメッセージを送信",
+  "@sendMessageIn": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "light": "ライト",
+  "dark": "ダーク",
+  "system": "システム",
+  "appearance": "外観",
+  "highContrast": "ハイコントラスト",
+  "playStream": "ストリームを再生",
+  "stopStream": "ストリームを停止",
+  "customCommand": "カスタムコマンド",
+  "customCommands": "カスタムコマンド",
+  "newCustomCommand": "新しいカスタムコマンド",
+  "commandTrigger": "トリガー",
+  "command": "コマンド",
+  "save": "保存",
+  "browserStreamSettings": "ブラウザ/ストリーム設定",
+  "addPage": "ページを追加",
+  "channelStream": "{channel}のストリーム",
+  "@channelStream": {
+    "placeholders": {
+      "channel": {}
+    }
+  },
+  "openInBrowser": "ブラウザで開く",
+  "messageAppearance": "メッセージの外観",
+  "showTimestamps": "タイムスタンプを表示",
+  "compactMessages": "コンパクトメッセージ",
+  "messageTrigger": "メッセージトリガー",
+  "pattern": "パターン",
+  "mention": "メンション",
+  "block": "ブロック",
+  "enableRegex": "正規表現を有効にする",
+  "caseSensitive": "大文字小文字を区別する",
+  "messageTriggers": "メッセージトリガー",
+  "newMessageTrigger": "新しいメッセージトリガー",
+  "reply": "返信",
+  "copyText": "テキストをコピー",
+  "copyTextSubtitle": "ユーザー名とメッセージテキストをコピーするには長押し",
+  "deleteMessage": "メッセージを削除",
+  "mentionUser": "ユーザーにメンション",
+  "copyMessageId": "メッセージIDをコピー",
+  "theme": "テーマ",
+  "userTrigger": "ユーザートリガー",
+  "userTriggers": "ユーザートリガー",
+  "chatHistory": "チャット履歴",
+  "login": "ログイン",
+  "newUserTrigger": "新しいユーザートリガー",
+  "ban": "BAN",
+  "unban": "BAN解除",
+  "timeoutUserForDuration": "{duration}の間ユーザーをタイムアウト",
+  "@timeoutUserForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "chatCleared": "チャットがクリアされました",
+  "permabanned": "永久BAN",
+  "bannedForDuration": "{duration}の間BAN",
+  "@bannedForDuration": {
+    "placeholders": {
+      "duration": {}
+    }
+  },
+  "replyingTo": "返信先",
+  "blockedMessage": "ブロックされたメッセージ",
+  "showMessage": "メッセージを表示",
+  "hideMessage": "メッセージを非表示",
+  "scrollToBottom": "下にスクロール",
+  "startUsingTheApp": "アプリを使用するには、以下からアカウントを追加してください。",
+  "chatSettings": "チャット設定",
+  "autocompleteUsersWithAt": "@でユーザー名を自動補完",
+  "autocompleteEmotesWithColon": ":でエモートを自動補完",
+  "language": "言語",
+  "locale": "ロケール",
+  "systemDefault": "システムデフォルト",
+  "justDefault": "デフォルト",
+  "notifications": "通知",
+  "noNotifications": "いつか、どこかで誰かがあなたにメンションしてくれるでしょう。",
+  "backgroundNotifications": "バックグラウンド通知",
+  "optionNotAvailableOnYourPlatform": "このオプションはお使いのプラットフォームでは利用できません。",
+  "optionNotAvailablePaywalled": "このオプションはChatsenサポーター専用です。",
+  "clearAll": "すべてクリア",
+  "cache": "キャッシュ",
+  "clearCache": "キャッシュをクリア",
+  "chatters": "チャッター",
+  "lastSeenAgo": "{time}前に最後に見た",
+  "@lastSeenAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  }
+}
