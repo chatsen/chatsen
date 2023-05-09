@@ -2,6 +2,7 @@ import 'package:chatsen/components/boxlistener.dart';
 import 'package:chatsen/modal/application_appearance.dart';
 import 'package:chatsen/modal/application_theme.dart';
 import 'package:chatsen/modal/chat_settings.dart';
+import 'package:chatsen/modal/credits.dart';
 import 'package:chatsen/modal/language_selection.dart';
 import 'package:chatsen/modal/message_appearance.dart';
 import 'package:chatsen/modal/message_triggers.dart';
@@ -70,6 +71,11 @@ class SettingsModal extends StatelessWidget {
                 title: AppLocalizations.of(context)!.userTriggers,
                 prefix: const Icon(Icons.person_outline_rounded),
                 onTap: () => Modal.show(context: context, child: const UserTriggersModal()),
+              ),
+              Tile(
+                title: 'AppLocalizations.of(context)!.credits',
+                prefix: const Icon(Icons.work_outline_outlined),
+                onTap: () => Modal.show(context: context, child: const CreditsModal()),
               ),
               BoxSwitchTile(
                 title: AppLocalizations.of(context)!.chatHistory,
