@@ -73,7 +73,7 @@ class SettingsModal extends StatelessWidget {
                 onTap: () => Modal.show(context: context, child: const UserTriggersModal()),
               ),
               Tile(
-                title: 'AppLocalizations.of(context)!.credits',
+                title: AppLocalizations.of(context)!.credits,
                 prefix: const Icon(Icons.work_outline_outlined),
                 onTap: () => Modal.show(context: context, child: const CreditsModal()),
               ),

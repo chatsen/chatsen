@@ -1,6 +1,7 @@
 import 'package:chatsen/modal/components/modal_header.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/tile.dart';
 
@@ -88,7 +89,7 @@ class CreditsModal extends StatelessWidget {
   Widget build(BuildContext context) => ListView(
         shrinkWrap: true,
         children: [
-          ModalHeader(title: 'AppLocalizations.of(context)!.credits'),
+          ModalHeader(title: AppLocalizations.of(context)!.credits),
           // Tile(
           //   title: 'Midori',
           //   subtitle: 'French translation',
