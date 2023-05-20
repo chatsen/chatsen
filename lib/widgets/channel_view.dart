@@ -61,6 +61,7 @@ class AutocompletionItem {
 }
 
 class ChannelViewState extends State<ChannelView> {
+  final FocusNode textFocusNode = FocusNode();
   final TextEditingController textEditingController = TextEditingController();
   bool spamming = false;
   bool emoteKeyboard = false;
@@ -122,6 +123,7 @@ class ChannelViewState extends State<ChannelView> {
   @override
   void dispose() {
     textEditingController.dispose();
+    textFocusNode.dispose();
     super.dispose();
   }
 
@@ -347,7 +349,7 @@ class ChannelViewState extends State<ChannelView> {
                 //   ),
                 if (emoteKeyboard)
                   SizedBox(
-                    height: 200.0,
+                    height: 350.0,
                     child: EmotePicker(
                       channel: widget.channel,
                     ),
@@ -380,12 +382,16 @@ class ChannelViewState extends State<ChannelView> {
                       Expanded(
                         child: TextField(
                           controller: textEditingController,
+                          focusNode: textFocusNode,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                             hintText: AppLocalizations.of(context)!.sendMessageIn(widget.channel.name), //'Send message in ',
                             border: InputBorder.none,
                           ),
-                          onSubmitted: (text) => sendMessage(),
+                          onSubmitted: (text) {
+                            sendMessage();
+                            textFocusNode.requestFocus();
+                          },
                           onChanged: (text) {
                             setState(() {});
                           },
