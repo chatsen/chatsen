@@ -147,5 +147,12 @@
   "optionNotAvailablePaywalled": "Эта опция предназначена только для спонсоров Chatsen.",
   "clearAll": "Очистить всё",
   "cache": "Кэш",
-  "clearCache": "Очистить кэш"
+  "clearCache": "Очистить кэш",
+  "chatters": "Участники чата",
+  "lastSeenAgo": "Последний раз видели {time} назад",
+  "@lastSeenAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  }
 }

@@ -147,5 +147,12 @@
   "optionNotAvailablePaywalled": "해당 옵션은 Chatsen 후원자 전용 옵션입니다.",
   "clearAll": "모두 지우기",
   "cache": "캐시",
-  "clearCache": "캐시 지우기"
+  "clearCache": "캐시 지우기",
+  "chatters": "Chatters",
+  "lastSeenAgo": "Last seen {time} ago",
+  "@lastSeenAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  }
 }

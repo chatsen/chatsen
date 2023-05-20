@@ -139,13 +139,20 @@
   "language": "Sprache",
   "locale": "Sprache",
   "systemDefault": "Standard",
-  "justDefault": "Default",
-  "notifications": "Notifications",
+  "justDefault": "Standard",
+  "notifications": "Benachrichtigungen",
   "noNotifications": "Someone, somewhere, will mention you someday.",
-  "backgroundNotifications": "Background notifications",
-  "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
-  "optionNotAvailablePaywalled": "This option is for Chatsen supporters only.",
-  "clearAll": "Clear all",
+  "backgroundNotifications": "Hintergrundbenachrichtigungen",
+  "optionNotAvailableOnYourPlatform": "Diese Option ist nicht für Ihre Plattform verfügbar.",
+  "optionNotAvailablePaywalled": "Diese Option ist nur für Chatsen Unterstützer.",
+  "clearAll": "Alles löschen",
   "cache": "Cache",
-  "clearCache": "Clear cache"
+  "clearCache": "Chache löschen",
+  "chatters": "Chatter",
+  "lastSeenAgo": "Zuletzt gesehen vor {time}",
+  "@lastSeenAgo": {
+    "placeholders": {
+      "time": {}
+    }
+  }
 }
