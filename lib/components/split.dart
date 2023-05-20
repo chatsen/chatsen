@@ -24,11 +24,17 @@ double degToRad(num deg) => deg * (math.pi / 180.0);
 /// this widget.
 class Split extends StatefulWidget {
   /// Builds a split oriented along [axis].
+
+  final List<Widget> prefixes;
+  final List<Widget> suffixes;
+
   Split({
     Key? key,
     required this.axis,
     required this.children,
     required this.initialFractions,
+    this.prefixes = const [],
+    this.suffixes = const [],
     this.minSizes,
     this.splitters,
   })  : assert(children.length >= 2),
@@ -262,7 +268,20 @@ class _SplitState extends State<Split> {
                 // the drag bar. There still appears to be a few frame lag before the
                 // drag action triggers which is't ideal but isn't a launch blocker.
                 dragStartBehavior: DragStartBehavior.down,
-                child: widget.splitters != null ? widget.splitters![i] : DefaultSplitter(isHorizontal: isHorizontal),
+                child: SizedBox(
+                  width: isHorizontal ? DefaultSplitter.splitterWidth : width,
+                  height: isHorizontal ? height : DefaultSplitter.splitterWidth,
+                  child: Flex(
+                    direction: isHorizontal ? Axis.vertical : Axis.horizontal,
+                    children: [
+                      ...widget.prefixes,
+                      Expanded(
+                        child: widget.splitters != null ? widget.splitters![i] : DefaultSplitter(isHorizontal: isHorizontal),
+                      ),
+                      ...widget.suffixes,
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -293,7 +312,7 @@ class DefaultSplitter extends StatelessWidget {
   const DefaultSplitter({required this.isHorizontal});
 
   static const double iconSize = 24.0;
-  static const double splitterWidth = 12.0;
+  static const double splitterWidth = 24.0; //12.0;
 
   final bool isHorizontal;
 

@@ -1,3 +1,4 @@
+import 'package:chatsen/components/surface.dart';
 import 'package:chatsen/modal/browser_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -10,8 +11,9 @@ import '../../components/split.dart';
 import '../../data/browser/browser_state.dart';
 import '../../data/browser/browser_tab.dart';
 import 'browser.dart';
+import 'browser_view.dart';
 
-class StreamContainer extends StatelessWidget {
+class StreamContainer extends StatefulWidget {
   final Widget child;
   final bool theater;
 
@@ -20,6 +22,13 @@ class StreamContainer extends StatelessWidget {
     required this.child,
     this.theater = false,
   });
+
+  @override
+  State<StreamContainer> createState() => _StreamContainerState();
+}
+
+class _StreamContainerState extends State<StreamContainer> {
+  bool displayTabs = false;
 
   double verticalAspectRatioCalculation(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -41,21 +50,46 @@ class StreamContainer extends StatelessWidget {
             builder: (context, state) {
               if (state.isEmpty) {
                 SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-                return child;
+                return widget.child;
               }
 
               final mediaQuery = MediaQuery.of(context);
               bool horizontal = mediaQuery.size.width > mediaQuery.size.height;
+
+              final actions = [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: horizontal ? mediaQuery.padding.top : 0.0,
+                  ),
+                  child: Surface(
+                    borderRadius: BorderRadius.circular(32.0),
+                    type: SurfaceType.transparent,
+                    child: const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Icon(
+                        Icons.tab_outlined,
+                        size: 16.0,
+                      ),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        displayTabs = !displayTabs;
+                      });
+                    },
+                  ),
+                ),
+              ];
+
               final browser = Browser(
-                key: const ValueKey('stream-player'),
-                tabs: state,
+                showTabs: displayTabs,
               );
-              if (theater && horizontal) {
+              if (widget.theater && horizontal) {
                 SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
                 return Stack(
                   children: [
                     browser,
                     Split(
+                      prefixes: actions,
                       axis: Axis.horizontal,
                       initialFractions: const [0.75, 0.25],
                       children: [
@@ -64,7 +98,7 @@ class StreamContainer extends StatelessWidget {
                           context: context,
                           removeLeft: horizontal,
                           removeTop: !horizontal,
-                          child: child,
+                          child: widget.child,
                         ),
                       ],
                     ),
@@ -75,6 +109,7 @@ class StreamContainer extends StatelessWidget {
               }
 
               return Split(
+                prefixes: actions,
                 minSizes: const [100, 100],
                 axis: horizontal ? Axis.horizontal : Axis.vertical,
                 initialFractions: horizontal
@@ -96,7 +131,7 @@ class StreamContainer extends StatelessWidget {
                     context: context,
                     removeLeft: horizontal,
                     removeTop: !horizontal,
-                    child: child,
+                    child: widget.child,
                   ),
                 ],
               );

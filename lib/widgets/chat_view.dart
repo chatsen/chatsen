@@ -61,7 +61,7 @@ class _ChatViewState extends State<ChatView> {
             if (widget.filter != null) messages = messages.where((element) => widget.filter!(element)).toList();
             return Stack(
               children: [
-                Expanded(
+                Positioned.fill(
                   child: NotificationListener<ScrollNotification>(
                     onNotification: (scrollNotification) {
                       if (scrollNotification is ScrollUpdateNotification && scrollMessages == null && scrollController.position.pixels > scrollController.position.minScrollExtent) {

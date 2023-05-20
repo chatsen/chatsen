@@ -69,11 +69,10 @@ class _HomeTabState extends State<HomeTab> {
         'vaxei_osu',
         'mrekkosu',
         'shigetora',
-        'enviosity',
-        // 'theactingmale',
         'kitboga',
         'cdawgva',
         'gigguk',
+        'vedal987',
       ],
     );
     topStreams = Twitch.streams(account!.tokenData);

@@ -8,6 +8,7 @@ class Emote {
   List<String> mipmap;
   int flags;
   Provider provider;
+  String? category;
 
   Emote({
     required this.id,
@@ -17,5 +18,6 @@ class Emote {
     required this.mipmap,
     this.flags = 0,
     required this.provider,
+    this.category,
   });
 }

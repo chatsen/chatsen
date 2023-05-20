@@ -27,6 +27,7 @@ class EmojiProvider extends Provider with EmoteProvider {
             'https://raw.githubusercontent.com/iamcal/emoji-data/master/img-twitter-72/${emojiData['image']}',
           ],
           provider: this,
+          category: emojiData['category'],
         ),
     ];
   }
