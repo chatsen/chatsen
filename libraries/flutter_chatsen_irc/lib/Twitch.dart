@@ -780,7 +780,10 @@ class Connection {
         // await updateUserEmotes();
         break;
       case 'GLOBALUSERSTATE':
-        if (transmission) await updateUserEmotes(emoteSets: message!.tags['emote-sets'].split(','));
+        if (transmission) {
+          await updateUserEmotes(emoteSets: message!.tags['emote-sets'].split(','));
+          await client!.updateBadges();
+        }
         break;
       case 'PING':
         send('PONG :${message!.parameters[1]}'); //  ?? 'tmi.twitch.tv'
@@ -1011,16 +1014,22 @@ class Client {
     badges.clear();
 
     try {
-      var request = await http.get(Uri.parse('https://badges.twitch.tv/v1/badges/global/display'));
+      var request = await http.get(
+        Uri.parse('https://api.twitch.tv/helix/chat/badges/global'), // https://badges.twitch.tv/v1/badges/global/display
+        headers: {
+          'Client-ID': credentials.clientId!,
+          'Authorization': 'Bearer ${credentials.token}',
+        },
+      );
       var jsonRequest = jsonDecode(request.body);
 
-      for (var categories in jsonRequest['badge_sets'].entries) {
-        for (var badgeData in categories.value['versions'].entries) {
+      for (var categories in jsonRequest['data']) {
+        for (var badgeData in categories['versions']) {
           badges.add(
             Badge.fromJson(
-              categories.key,
-              badgeData.key,
-              badgeData.value,
+              categories['set_id'],
+              badgeData['id'],
+              badgeData,
             ),
           );
         }
@@ -1189,7 +1198,6 @@ class Client {
     this.useRecentMessages = true,
   }) {
     updateEmotes();
-    updateBadges();
     timer = Timer.periodic(
       Duration(seconds: 2),
       (timer) async => consumeChannelBucket(),
