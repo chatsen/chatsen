@@ -461,16 +461,22 @@ class Channel {
     badges.clear();
 
     try {
-      var request = await http.get(Uri.parse('https://badges.twitch.tv/v1/badges/channels/$id/display?language=en'));
+      var request = await http.get(
+        Uri.parse('https://api.twitch.tv/helix/chat/badges?broadcaster_id=$id'), // https://badges.twitch.tv/v1/badges/channels/$id/display?language=en
+        headers: {
+          'Client-ID': client!.credentials.clientId!,
+          'Authorization': 'Bearer ${client!.credentials.token}',
+        },
+      );
       var jsonRequest = jsonDecode(request.body);
 
-      for (var categories in jsonRequest['badge_sets'].entries) {
-        for (var badgeData in categories.value['versions'].entries) {
+      for (var categories in jsonRequest['data']) {
+        for (var badgeData in categories['versions']) {
           badges.add(
             Badge.fromJson(
-              categories.key,
-              badgeData.key,
-              badgeData.value,
+              categories['set_id'],
+              badgeData['id'],
+              badgeData,
             ),
           );
         }
