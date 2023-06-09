@@ -30,6 +30,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2.7.1
         with:
+          flutter-version: "3.7.12"
           channel: "stable"
 
       - name: Check for flutter updates
@@ -151,6 +152,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2.7.1
         with:
+          flutter-version: "3.7.12"
           channel: "stable"
 
       - name: Check for flutter updates
