@@ -48,13 +48,13 @@
       "user": {}
     }
   },
-  "spellCheckFailed": "Sprawdzanie pisowni nie powiodło się. Czy chciałeś wyszukać {username}?",
+  "spellCheckFailed": "Sprawdzanie pisowni nie powiodło się! Czy chciałeś wyszukać {username}?",
   "@spellCheckFailed": {
     "placeholders": {
       "username": {}
     }
   },
-  "joinChannelName": "Dołącz {channel}",
+  "joinChannelName": "Dołącz do {channel}",
   "@joinChannelName": {
     "placeholders": {
       "channel": {}
