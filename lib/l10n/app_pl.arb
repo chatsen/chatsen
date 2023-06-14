@@ -76,12 +76,12 @@
   "customCommand": "Niestandardowe polecenie",
   "customCommands": "Niestandardowe polecenia",
   "newCustomCommand": "Nowe niestandardowe polecenie",
-  "commandTrigger": "Trigger",
+  "commandTrigger": "Wyzwalacz",
   "command": "Polecenie",
   "save": "Zapisz",
-  "browserStreamSettings": "Browser/Stream Settings",
+  "browserStreamSettings": "Ustawienia Wyszukiwarki/Strumienia",
   "addPage": "Dodaj stronę",
-  "channelStream": "{channel}'s stream",
+  "channelStream": "Strumień {channel}",
   "@channelStream": {
     "placeholders": {
       "channel": {}
@@ -98,7 +98,7 @@
   "enableRegex": "Włącz regex",
   "caseSensitive": "Rozróżniaj wielkość liter",
   "messageTriggers": "Message triggers",
-  "newMessageTrigger": "New message trigger",
+  "newMessageTrigger": "Nowy wyzwalacz wiadomości",
   "reply": "Odpowiedz",
   "copyText": "Kopiuj tekst",
   "copyTextSubtitle": "Przytrzymaj, aby skopiować tekst z nazwą użytkownika",
@@ -106,7 +106,7 @@
   "mentionUser": "Wspomnij użytkownika",
   "copyMessageId": "Kopiuj ID wiadomości",
   "theme": "Motyw",
-  "userTrigger": "User trigger",
+  "userTrigger": "Wyzwalacz użytkownika",
   "userTriggers": "User triggers",
   "chatHistory": "Historia czatu",
   "login": "Zaloguj się",
