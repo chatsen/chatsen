@@ -15,12 +15,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ["Android", "Windows", "iOS"] # ["Android", "Windows", "Linux", "macOS", "iOS"]
+        target: ["Android", "iOS"] # ["Android", "Windows", "Linux", "macOS", "iOS"]
         include:
           - target: Android
             os: ubuntu-latest
-          - target: Windows
-            os: windows-latest
+          # - target: Windows
+          #   os: windows-latest
           # - target: Linux
           #   os: ubuntu-latest
           # - target: macOS
