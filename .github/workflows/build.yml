@@ -97,3 +97,27 @@ jobs:
         if: matrix.target == 'Windows'
         working-directory: ${{env.APP_PATH}}
         run: flutter build windows -v
+
+      - name: Uploading Android artifact
+        uses: actions/upload-artifact@v2
+        if: matrix.target == 'Android'
+        working-directory: ${{env.APP_PATH}}
+        with:
+          name: ${{env.APP_NAME}}-android.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Packing iOS ipa
+        if: matrix.target == 'iOS'
+        working-directory: ${{env.APP_PATH}}
+        run: |
+          mkdir -p build/ios/iphoneos/Payload
+          cp -rf build/ios/iphoneos/Runner.app build/ios/iphoneos/Payload/Runner.app
+          ditto -c -k --sequesterRsrc --keepParent build/ios/iphoneos/Payload build/ios/iphoneos/iOS.ipa
+
+      - name: Uploading iOS artifact
+        uses: actions/upload-artifact@v2
+        if: matrix.target == 'iOS'
+        working-directory: ${{env.APP_PATH}}
+        with:
+          name: ${{env.APP_NAME}}-ios.ipa
+          path: build/ios/iphoneos/iOS.ipa
