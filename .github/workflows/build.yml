@@ -55,7 +55,7 @@ jobs:
       - name: Checking out flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'master'
+          channel: 'stable'
           architecture: x64
 
       - name: Check for flutter updates
