@@ -73,6 +73,17 @@ jobs:
         working-directory: ${{env.APP_PATH}}
         run: flutter pub run build_runner build --delete-conflicting-outputs
 
-      - name: Building ${{env.APP_TITLE}} for ${{matrix.target}}
+      - name: Building ${{env.APP_TITLE}} for Android
+        if: matrix.target == 'Android'
         working-directory: ${{env.APP_PATH}}
-        run: flutter build ${{matrix.target}} --no-codesign
+        run: flutter build apk
+
+      - name: Building ${{env.APP_TITLE}} for iOS
+        if: matrix.target == 'iOS'
+        working-directory: ${{env.APP_PATH}}
+        run: flutter build ios --no-codesign
+
+      - name: Building ${{env.APP_TITLE}} for Windows
+        if: matrix.target == 'Windows'
+        working-directory: ${{env.APP_PATH}}
+        run: flutter build windows
