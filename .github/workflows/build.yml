@@ -101,10 +101,9 @@ jobs:
       - name: Uploading Android artifact
         uses: actions/upload-artifact@v2
         if: matrix.target == 'Android'
-        working-directory: ${{env.APP_PATH}}
         with:
           name: ${{env.APP_NAME}}-android.apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: ${{env.APP_PATH}}/build/app/outputs/flutter-apk/app-release.apk
 
       - name: Packing iOS ipa
         if: matrix.target == 'iOS'
@@ -117,7 +116,6 @@ jobs:
       - name: Uploading iOS artifact
         uses: actions/upload-artifact@v2
         if: matrix.target == 'iOS'
-        working-directory: ${{env.APP_PATH}}
         with:
           name: ${{env.APP_NAME}}-ios.ipa
-          path: build/ios/iphoneos/iOS.ipa
+          path: ${{env.APP_PATH}}/build/ios/iphoneos/iOS.ipa
