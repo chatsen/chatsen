@@ -96,4 +96,4 @@ jobs:
       - name: Building ${{env.APP_TITLE}} for Windows
         if: matrix.target == 'Windows'
         working-directory: ${{env.APP_PATH}}
-        run: flutter build windows
+        run: flutter build windows -v
