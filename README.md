@@ -22,8 +22,8 @@ rm -rf test
 flutter pub run build_runner build --delete-conflicting-outputs
 
 # Build the application on your desired platform
-flutter build ios --release --no-codesign # for iOS
-flutter build android --release # for Android
+flutter build ios --no-codesign # for iOS
+flutter build android # for Android
 ```
 
 # 📜 Licensing

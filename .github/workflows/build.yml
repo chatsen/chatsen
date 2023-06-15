@@ -75,4 +75,4 @@ jobs:
 
       - name: Building ${{env.APP_TITLE}} for ${{matrix.target}}
         working-directory: ${{env.APP_PATH}}
-        run: flutter build ${{matrix.target}} --release --no-codesign
+        run: flutter build ${{matrix.target}} --no-codesign
