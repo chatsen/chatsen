@@ -12,5 +12,19 @@
   <a href="https://play.google.com/store/apps/details?id=com.chatsen.chatsen"><img height="75" src="assets/play_store_badge.png"></a>
 </div>
 
-# Licensing
+# 🛠️ Building the application
+```sh
+# Initialize the project
+flutter create .
+rm -rf test
+
+# Build auto-generated source files
+flutter pub run build_runner build --delete-conflicting-outputs
+
+# Build the application on your desired platform
+flutter build ios --release --no-codesign # for iOS
+flutter build android --release # for Android
+```
+
+# 📜 Licensing
 Chatsen is distributed under the AGPLv3 licence. A copy may be found in the LICENCE file in that repository. All the dependencies remain under their original licenses.
