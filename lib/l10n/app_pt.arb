@@ -141,15 +141,15 @@
   "systemDefault": "Padrão do sistema",
   "justDefault": "Padrão",
   "notifications": "Notificações",
-  "noNotifications": "Someone, somewhere, will mention you someday.",
-  "backgroundNotifications": "Background notifications",
-  "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
-  "optionNotAvailablePaywalled": "This option is for Chatsen supporters only.",
-  "clearAll": "Clear all",
+  "noNotifications": "Alguém, em algum lugar, vai te mencionar um dia.",
+  "backgroundNotifications": "Notificações em segundo plano",
+  "optionNotAvailableOnYourPlatform": "Essa opção não está disponível na sua plataforma.",
+  "optionNotAvailablePaywalled": "Esta opção é apenas para apoiadores do Chatsen.",
+  "clearAll": "Limpar tudo",
   "cache": "Cache",
-  "clearCache": "Clear cache",
+  "clearCache": "Limpar cache",
   "chatters": "Chatters",
-  "lastSeenAgo": "Last seen {time} ago",
+  "lastSeenAgo": "Visto pela última vez {time} atrás",
   "@lastSeenAgo": {
     "placeholders": {
       "time": {}
