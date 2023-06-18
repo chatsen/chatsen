@@ -77,20 +77,20 @@ jobs:
         if: matrix.target == 'Android'
         working-directory: ${{env.APP_PATH}}
         run: |
-          sed -i 's/android:label=".*"/android:label="${{env.APP_TITLE}}"/' ./android/app/src/main/AndroidManifest.xml
-          sed -i 's/minSdkVersion .*/minSdkVersion 19/' ./android/app/build.gradle
-          sed -i '/.*package=".*".*/a \ \ \ <uses-permission android:name="android.permission.INTERNET"/>' ./android/app/src/main/AndroidManifest.xml
-          sed -i "/io.flutter.embedding.android.FlutterActivity/a import android.os.Bundle\nimport android.os.Build\nimport androidx.annotation.NonNull\nimport io.flutter.embedding.android.FlutterActivityLaunchConfigs.BackgroundMode.transparent\nimport io.flutter.embedding.engine.FlutterEngine\nimport io.flutter.plugins.GeneratedPluginRegistrant" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
-          sed -i "/FlutterActivity()/a \ \ \ \ override fun onCreate(savedInstanceState: Bundle?) {\n\ \ \ \ \ \ \ \ super.onCreate(savedInstanceState)\n\ \ \ \ \ \ \ \ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {\n\ \ \ \ \ \ \ \ \ \ \ \ window.setDecorFitsSystemWindows(false)\n\ \ \ \ \ \ \ \ }\n\ \ \ \ }" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
+          $sed -i 's/android:label=".*"/android:label="${{env.APP_TITLE}}"/' ./android/app/src/main/AndroidManifest.xml
+          $sed -i 's/minSdkVersion .*/minSdkVersion 19/' ./android/app/build.gradle
+          $sed -i '/.*package=".*".*/a \ \ \ <uses-permission android:name="android.permission.INTERNET"/>' ./android/app/src/main/AndroidManifest.xml
+          $sed -i "/io.flutter.embedding.android.FlutterActivity/a import android.os.Bundle\nimport android.os.Build\nimport androidx.annotation.NonNull\nimport io.flutter.embedding.android.FlutterActivityLaunchConfigs.BackgroundMode.transparent\nimport io.flutter.embedding.engine.FlutterEngine\nimport io.flutter.plugins.GeneratedPluginRegistrant" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
+          $sed -i "/FlutterActivity()/a \ \ \ \ override fun onCreate(savedInstanceState: Bundle?) {\n\ \ \ \ \ \ \ \ super.onCreate(savedInstanceState)\n\ \ \ \ \ \ \ \ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {\n\ \ \ \ \ \ \ \ \ \ \ \ window.setDecorFitsSystemWindows(false)\n\ \ \ \ \ \ \ \ }\n\ \ \ \ }" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
 
       - name: Applying iOS project patches
         if: matrix.target == 'iOS'
         working-directory: ${{env.APP_PATH}}
         run: |
-          sed -i 's/<string>${{env.APP_NAME}}<\/string>/<string>${{env.APP_TITLE}}<\/string>/' ./ios/Runner/Info.plist
-          sed -i '/<dict>/a \ \ <key>NSPhotoLibraryUsageDescription</key>\n\ \ <string>${{env.APP_TITLE}} requests to access your files to allow file selection.</string>' ios/Runner/Info.plist
-          sed -i '/<dict>/a \ \ <key>CADisableMinimumFrameDurationOnPhone</key><true/>' ios/Runner/Info.plist
-          sed -i '/<dict>/a \ \ <key>ITSAppUsesNonExemptEncryption</key><false/>' ios/Runner/Info.plist
+          $sed -i 's/<string>${{env.APP_NAME}}<\/string>/<string>${{env.APP_TITLE}}<\/string>/' ./ios/Runner/Info.plist
+          $sed -i '/<dict>/a \ \ <key>NSPhotoLibraryUsageDescription</key>\n\ \ <string>${{env.APP_TITLE}} requests to access your files to allow file selection.</string>' ios/Runner/Info.plist
+          $sed -i '/<dict>/a \ \ <key>CADisableMinimumFrameDurationOnPhone</key><true/>' ios/Runner/Info.plist
+          $sed -i '/<dict>/a \ \ <key>ITSAppUsesNonExemptEncryption</key><false/>' ios/Runner/Info.plist
 
       - name: Building ${{env.APP_TITLE}} for Android
         if: matrix.target == 'Android'
