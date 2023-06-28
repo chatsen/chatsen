@@ -1,7 +1,5 @@
-import 'dart:ffi' as dffi;
 import 'dart:io';
 import 'package:chatsen/data/notifications_cubit.dart';
-import 'package:ffi/ffi.dart' as ffi;
 
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:chatsen/data/browser/browser_state.dart';
@@ -20,7 +18,6 @@ import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:wakelock/wakelock.dart';
-import 'package:win32/win32.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '/data/twitch/token_data.dart';
@@ -168,3 +165,6 @@ Future<void> main() async {
       // // setWindowLong(hwnd, -16, 0x00000080 | WS_VISIBLE | 0x00000100); // WS_THICKFRAME 0x00040000
 
       // setWindowPos(hwnd, 0, 0, 0, 240 + 128, 768, SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_NOMOVE | SWP_NOSIZE | SWP_FRAMECHANGED);
+// import 'package:ffi/ffi.dart' as ffi;
+// import 'package:win32/win32.dart';
+// import 'dart:ffi' as dffi;
