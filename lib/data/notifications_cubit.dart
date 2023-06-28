@@ -34,4 +34,8 @@ class NotificationsCubit extends Cubit<NotificationsCubitState> {
   void clearUnreads() {
     emit(state.copyWith(unread: 0));
   }
+
+  void clear() {
+    emit(state.copyWith(messages: [], unread: 0));
+  }
 }

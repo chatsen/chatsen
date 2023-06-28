@@ -21,7 +21,10 @@ class NotificationsModal extends StatelessWidget {
             trailing: Tooltip(
               message: AppLocalizations.of(context)!.clearAll,
               child: InkWell(
-                onTap: () async => Navigator.of(context).pop(),
+                onTap: () async {
+                  Navigator.of(context).pop();
+                  BlocProvider.of<NotificationsCubit>(context).clear();
+                },
                 borderRadius: BorderRadius.circular(24.0),
                 child: const SizedBox(
                   width: 40.0,
