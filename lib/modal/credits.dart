@@ -22,6 +22,12 @@ class CreditedPerson {
 List<CreditedPerson> credits = const [
   CreditedPerson(
     avatarUrl: 'https://cdn.discordapp.com/attachments/1097848618091806730/1097853110543716422/Wk0hfra.jpg',
+    description: 'Logo designer',
+    name: 'ayyybubu',
+    url: 'https://twitch.tv/ayyybubu',
+  ),
+  CreditedPerson(
+    avatarUrl: 'https://cdn.discordapp.com/attachments/1097848618091806730/1097853110543716422/Wk0hfra.jpg',
     description: 'Vietnamese translation',
     name: '21mtd',
     url: 'https://twitch.tv/21mtd',
