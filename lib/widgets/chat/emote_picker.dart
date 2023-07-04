@@ -57,6 +57,7 @@ class _EmotePickerState extends State<EmotePicker> {
   PickerMode mode = PickerMode.emote;
   Future<http.Response>? gifSearch;
   TextEditingController searchController = TextEditingController();
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -67,6 +68,7 @@ class _EmotePickerState extends State<EmotePicker> {
   @override
   void dispose() {
     searchController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
@@ -77,10 +79,12 @@ class _EmotePickerState extends State<EmotePicker> {
     final allEmotes = channelEmotes + globalEmotes;
 
     final groups = <String, List<Emote>>{};
+    final groupKeys = <String, GlobalKey>{};
     for (final providerGroup in groupBy(allEmotes, (emote) => emote.provider).entries) {
       for (final category in groupBy(providerGroup.value, (emote) => emote.category).entries) {
         groups.putIfAbsent(category.key ?? providerGroup.key.name, () => []);
         groups[category.key ?? providerGroup.key.name]!.addAll(category.value);
+        groupKeys.putIfAbsent(category.key ?? providerGroup.key.name, () => GlobalKey());
       }
     }
 
@@ -224,6 +228,16 @@ class _EmotePickerState extends State<EmotePicker> {
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Surface(
+                            onTap: () async {
+                              var context = groupKeys[category]!.currentContext!;
+                              Scrollable.maybeOf(context)!.position.jumpTo(Scrollable.maybeOf(context)!.position.maxScrollExtent);
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                Scrollable.maybeOf(context)!.position.ensureVisible(
+                                      context.findRenderObject()!,
+                                      duration: const Duration(milliseconds: 500),
+                                    );
+                              });
+                            },
                             borderRadius: BorderRadius.circular(64.0),
                             child: AspectRatio(
                               aspectRatio: 1 / 1,
@@ -239,26 +253,15 @@ class _EmotePickerState extends State<EmotePicker> {
                 ),
                 Expanded(
                   child: CustomScrollView(
+                    controller: scrollController,
                     // padding: EdgeInsets.zero,
                     slivers: [
                       for (final category in groups.entries)
                         MultiSliver(
                           pushPinnedChildren: true,
                           children: [
-                            // SliverPersistentHeader(
-                            //   delegate: SectionHeaderDelegate(providerGroup.key.name),
-                            //   pinned: true,
-                            // ),
-                            // SliverPinnedHeader(
-                            //   child: ColoredBox(
-                            //     color: Colors.red,
-                            //     child: ListTile(
-                            //       //  textColor: titleColor,
-                            //       title: Text(providerGroup.key.name),
-                            //     ),
-                            //   ),
-                            // ),
                             SliverPinnedHeader(
+                              key: groupKeys[category.key],
                               child: ColoredBox(
                                 color: Theme.of(context).colorScheme.surfaceVariant,
                                 child: Padding(
@@ -267,9 +270,8 @@ class _EmotePickerState extends State<EmotePicker> {
                                 ),
                               ),
                             ),
-
                             SliverGrid.extent(
-                              maxCrossAxisExtent: 32.0 + 24.0,
+                              maxCrossAxisExtent: 32.0 + 16.0,
                               children: [
                                 for (final emote in category.value)
                                   Tooltip(
@@ -285,7 +287,7 @@ class _EmotePickerState extends State<EmotePicker> {
                                         // setState(() {});
                                       },
                                       child: Padding(
-                                        padding: const EdgeInsets.all(12.0),
+                                        padding: const EdgeInsets.all(8.0),
                                         child: CachedNetworkImage(
                                           imageUrl: emote.mipmap.last,
                                           fit: BoxFit.cover,
