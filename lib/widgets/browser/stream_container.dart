@@ -11,7 +11,6 @@ import '../../components/split.dart';
 import '../../data/browser/browser_state.dart';
 import '../../data/browser/browser_tab.dart';
 import 'browser.dart';
-import 'browser_view.dart';
 
 class StreamContainer extends StatefulWidget {
   final Widget child;

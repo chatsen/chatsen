@@ -10,7 +10,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../api/catbox/catbox.dart';
-import '../api/chatsen/chatsen_chatter.dart';
 import '../components/surface.dart';
 import '../components/tile.dart';
 import '../data/custom_command.dart';
@@ -244,7 +243,7 @@ class ChannelViewState extends State<ChannelView> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (true ? 1.0 : 2.0)),
+                                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0 * (true ? 1.0 : 2.0)),
                                 child: Text(AppLocalizations.of(context)!.replyingTo),
                               ),
                               ChatMessage(message: replyChannelMessageChat!),
@@ -362,7 +361,7 @@ class ChannelViewState extends State<ChannelView> {
                             splits.add(uploadedFile.url);
                           }
                           splits.removeWhere((element) => element.isEmpty);
-                          if (splits.isNotEmpty) textEditingController.text = splits.join(' ') + ' ';
+                          if (splits.isNotEmpty) textEditingController.text = '${splits.join(' ')} ';
                         },
                         child: SizedBox(
                           width: 48.0,

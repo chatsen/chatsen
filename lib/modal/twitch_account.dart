@@ -43,12 +43,12 @@ class TwitchAccountModal extends StatelessWidget {
           ),
           SelectableText(
             twitchAccount.userData?.displayName ?? twitchAccount.tokenData.login,
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
           SelectableText(
             '${twitchAccount.tokenData.login}#${twitchAccount.tokenData.userId}',
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16.0),

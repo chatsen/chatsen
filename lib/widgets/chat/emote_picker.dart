@@ -135,9 +135,9 @@ class _EmotePickerState extends State<EmotePicker> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildGifColumn(gifs.take((gifs.length / 2).toInt()).toList()),
+                          buildGifColumn(gifs.take(gifs.length ~/ 2).toList()),
                           const SizedBox(width: 8.0),
-                          buildGifColumn(gifs.sublist((gifs.length / 2).toInt()).toList()),
+                          buildGifColumn(gifs.sublist(gifs.length ~/ 2).toList()),
                         ],
                       ),
                     ),

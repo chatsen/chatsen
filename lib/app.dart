@@ -10,7 +10,6 @@ import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
 
 import '/tools/m3parser.dart';
 import 'package:flutter/material.dart';

@@ -3,7 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/boxlistener.dart';
-import '../components/modal.dart';
 import '../components/tile.dart';
 import '../components/toggle.dart';
 import '/data/settings/chat_settings.dart';

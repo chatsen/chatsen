@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class M3Parser {
   static Color parseColor(String? color) {
-    return Color(int.tryParse('ff' + color!.substring(1), radix: 16) ?? 0);
+    return Color(int.tryParse('ff${color!.substring(1)}', radix: 16) ?? 0);
   }
 
   static ThemeData parse(

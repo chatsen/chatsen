@@ -79,7 +79,9 @@ class Client {
           final channelsToJoin = channels.state.where((channel) => channel.state is ChannelDisconnected).take((tmiJoinPerSecond * 2).floor());
           if (channelsToJoin.isEmpty) return;
           print(channelsToJoin.map((e) => e.name).join(','));
-          for (final channel in channelsToJoin) channel.add(ChannelJoin(receiver, transmitter));
+          for (final channel in channelsToJoin) {
+            channel.add(ChannelJoin(receiver, transmitter));
+          }
           receiver.send('JOIN ${channelsToJoin.map((e) => e.name).join(',')}');
         }
       },

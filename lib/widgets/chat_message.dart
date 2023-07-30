@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/data/inline_url.dart';
 import 'package:chatsen/modal/emote.dart';
 import 'package:chatsen/modal/user.dart';
-import 'package:chatsen/tmi/channel/channel_state.dart';
 import 'package:chatsen/tmi/channel/messages/channel_message_embeds.dart';
 import 'package:chatsen/tmi/channel/messages/channel_message_state_change.dart';
 import 'package:flutter/gestures.dart';
