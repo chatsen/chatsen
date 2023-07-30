@@ -30,6 +30,7 @@ class ChatsenModal extends StatelessWidget {
         return BoxListener(
           box: Hive.box('TwitchAccounts'),
           builder: (BuildContext context, Box twitchAccountsBox) {
+            final activeTwitchAccount = twitchAccountsBox.values.firstWhere((element) => accountSettingsBox.get('activeTwitchAccount') == element.tokenData.hash, orElse: () => null);
             return ListView(
               shrinkWrap: true,
               children: [
@@ -54,11 +55,11 @@ class ChatsenModal extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (accountSettingsBox.get('activeTwitchAccount') != null) ...[
+                if (activeTwitchAccount != null) ...[
                   TwitchAccountButton(
                     active: true,
                     // key: ObjectKey(twitchAccount),
-                    twitchAccount: twitchAccountsBox.values.firstWhere((element) => accountSettingsBox.get('activeTwitchAccount') == element.tokenData.hash, orElse: () => null),
+                    twitchAccount: activeTwitchAccount,
                   ),
                   const Separator(),
                 ],
