@@ -88,25 +88,29 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
     // TODO: Ensure there is always an id at this stage?
     id = message.tags['id']!;
 
-    try {
-      replyInfo = ChannelMessageChatReplyInfo(
-        replyParentDisplayName: message.tags['reply-parent-display-name']!,
-        replyParentMsgBody: message.tags['reply-parent-msg-body']!, //.split('\\s').skip(0).join('\\s'),
-        replyParentMsgId: message.tags['reply-parent-msg-id']!,
-        replyParentUserId: message.tags['reply-parent-user-id']!,
-        replyParentUserLogin: message.tags['reply-parent-user-login']!,
-      );
-    } catch (e) {
-      // ignore
+    if (message.tags['reply-parent-display-name'] != null) {
+      try {
+        replyInfo = ChannelMessageChatReplyInfo(
+          replyParentDisplayName: message.tags['reply-parent-display-name']!,
+          replyParentMsgBody: message.tags['reply-parent-msg-body']!, //.split('\\s').skip(0).join('\\s'),
+          replyParentMsgId: message.tags['reply-parent-msg-id']!,
+          replyParentUserId: message.tags['reply-parent-user-id']!,
+          replyParentUserLogin: message.tags['reply-parent-user-login']!,
+        );
+      } catch (e) {
+        // ignore
+      }
     }
 
-    try {
-      subInfo = ChannelMessageChatSubInfo(
-        systemMsg: message.tags['system-msg']!,
-        msgParamWasGifted: message.tags['msg-param-was-gifted']! != 'false',
-      );
-    } catch (e) {
-      // ignore
+    if (message.tags['system-msg'] != null && message.tags['msg-param-was-gifted'] != null) {
+      try {
+        subInfo = ChannelMessageChatSubInfo(
+          systemMsg: message.tags['system-msg']!,
+          msgParamWasGifted: message.tags['msg-param-was-gifted']! != 'false',
+        );
+      } catch (e) {
+        // ignore
+      }
     }
 
     user = User(
@@ -190,7 +194,7 @@ class ChannelMessageChat extends ChannelMessage with ChannelMessageUser, Channel
         );
       }
 
-      final uri = Uri.tryParse(textSplit);
+      final uri = textSplit.startsWith('http') ? Uri.tryParse(textSplit) : null;
       final imageRegex = RegExp(r'\.(png|apng|gif|webp|jpg|jpeg)$');
       final videoRegex = RegExp(r'\.(webm|mp4)$');
 
