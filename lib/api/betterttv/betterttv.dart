@@ -15,9 +15,10 @@ class BetterTTV {
     ];
   }
 
-  static Future<BetterTTVUser> user(String uid) async {
+  static Future<BetterTTVUser?> user(String uid) async {
     final response = await http.get(Uri.parse('https://api.betterttv.net/3/cached/users/twitch/$uid'));
     final responseJson = json.decode(utf8.decode(response.bodyBytes));
+    if (responseJson['id'] == null) return null;
     return BetterTTVUser.fromJson(responseJson);
   }
 

@@ -47,6 +47,7 @@ class BetterTTVProvider extends Provider with EmoteProvider, BadgeProvider {
   @override
   Future<List<Emote>> channelEmotes(String uid) async {
     final user = await BetterTTV.user(uid);
+    if (user == null) return [];
     return [
       for (final emote in [...user.channelEmotes, ...user.sharedEmotes])
         Emote(
