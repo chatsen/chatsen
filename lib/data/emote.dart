@@ -1,5 +1,9 @@
 import '../providers/provider.dart';
 
+class EmoteFlags {
+  static int overlay = (1 << 0);
+}
+
 class Emote {
   String id;
   String name;

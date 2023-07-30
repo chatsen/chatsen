@@ -17,14 +17,15 @@ class SevenTVProvider extends Provider with EmoteProvider, BadgeProvider {
   Future<List<Emote>> globalEmotes() async {
     final globalEmotes = await SevenTV.globalEmotes();
     return [
-      for (final emote in globalEmotes)
+      for (final emote in globalEmotes.where((emote) => emote.data.host.files.isNotEmpty))
         Emote(
           id: emote.id,
           name: emote.name,
           mipmap: [
-            for (final urlArray in emote.urls) urlArray.last,
+            for (final urlArray in emote.data.host.files.where((element) => element.format != 'AVIF')) 'https:${emote.data.host.url}/${urlArray.name}',
           ],
           provider: this,
+          flags: ((emote.data.flags & (1 << 8)) == (1 << 8)) ? EmoteFlags.overlay : 0,
         ),
     ];
   }
@@ -33,14 +34,15 @@ class SevenTVProvider extends Provider with EmoteProvider, BadgeProvider {
   Future<List<Emote>> channelEmotes(String uid) async {
     final channelEmotes = await SevenTV.channelEmotes(uid);
     return [
-      for (final emote in channelEmotes)
+      for (final emote in channelEmotes.where((emote) => emote.data.host.files.isNotEmpty))
         Emote(
           id: emote.id,
           name: emote.name,
           mipmap: [
-            for (final urlArray in emote.urls) urlArray.last,
+            for (final urlArray in emote.data.host.files.where((element) => element.format != 'AVIF')) 'https:${emote.data.host.url}/${urlArray.name}',
           ],
           provider: this,
+          flags: ((emote.data.flags & (1 << 8)) == (1 << 8)) ? EmoteFlags.overlay : 0,
         ),
     ];
   }

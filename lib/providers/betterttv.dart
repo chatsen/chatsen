@@ -8,6 +8,17 @@ import 'emote_provider.dart';
 import 'provider.dart';
 
 class BetterTTVProvider extends Provider with EmoteProvider, BadgeProvider {
+  static const zeroWidthEmotes = <String>[
+    'SoSnowy',
+    'IceCold',
+    'SantaHat',
+    'TopHat',
+    'ReinDeer',
+    'CandyCane',
+    'cvMask',
+    'cvHazmat',
+  ];
+
   @override
   String get name => 'BetterTTV';
 
@@ -28,6 +39,7 @@ class BetterTTVProvider extends Provider with EmoteProvider, BadgeProvider {
             'https://cdn.betterttv.net/emote/${emote.id}/3x',
           ],
           provider: this,
+          flags: zeroWidthEmotes.contains(emote.code) ? EmoteFlags.overlay : 0,
         ),
     ];
   }
