@@ -17,8 +17,9 @@ class SevenTV {
   static Future<List<SevenTVEmote>> channelEmotes(String uid) async {
     final response = await http.get(Uri.parse('https://api.7tv.app/v3/users/twitch/$uid'));
     final responseJson = json.decode(utf8.decode(response.bodyBytes));
+    if (responseJson['status_code'] == 404) return [];
     return [
-      for (final emote in responseJson['emote_set']['emotes']) SevenTVEmote.fromJson(emote),
+      for (final emote in responseJson['emote_set']['emotes'] ?? []) SevenTVEmote.fromJson(emote),
     ];
   }
 
