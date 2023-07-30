@@ -38,7 +38,7 @@ class FrankerFaceZEmote {
   DateTime createdAt;
 
   @JsonKey(name: 'last_updated')
-  DateTime lastUpdated;
+  DateTime? lastUpdated;
 
   FrankerFaceZEmote({
     required this.id,
