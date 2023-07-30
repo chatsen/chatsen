@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chatsen/widgets/chat/emote_picker.dart';
@@ -347,13 +348,7 @@ class ChannelViewState extends State<ChannelView> {
                 //       ),
                 //     ),
                 //   ),
-                if (emoteKeyboard)
-                  SizedBox(
-                    height: 350.0,
-                    child: EmotePicker(
-                      channel: widget.channel,
-                    ),
-                  ),
+
                 SizedBox(
                   height: 48.0,
                   child: Row(
@@ -432,6 +427,29 @@ class ChannelViewState extends State<ChannelView> {
                     ],
                   ),
                 ),
+                if (emoteKeyboard)
+                  SizedBox(
+                    height: 350.0,
+                    child: EmotePicker(
+                      channel: widget.channel,
+                      getFieldInput: () => textEditingController.text,
+                      setFieldInput: (text) async {
+                        setState(() {
+                          textEditingController.text = text;
+                          textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: textEditingController.text.length));
+                        });
+                      },
+                      insertFieldInput: (text) async {
+                        setState(() {
+                          final cursorPosition = max(0, textEditingController.selection.baseOffset);
+                          if (textEditingController.text.isEmpty || cursorPosition >= textEditingController.text.length || textEditingController.text[cursorPosition] != ' ') text = '$text ';
+                          if (cursorPosition > 0 && textEditingController.text[cursorPosition - 1] != ' ') text = ' $text';
+                          textEditingController.text = textEditingController.text.substring(0, cursorPosition) + text + textEditingController.text.substring(cursorPosition);
+                          textEditingController.selection = TextSelection.fromPosition(TextPosition(offset: cursorPosition + text.length));
+                        });
+                      },
+                    ),
+                  ),
               ],
             ),
           ),

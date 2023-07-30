@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -43,10 +44,16 @@ enum PickerMode {
 
 class EmotePicker extends StatefulWidget {
   final Channel channel;
+  final String Function() getFieldInput;
+  final void Function(String) setFieldInput;
+  final void Function(String) insertFieldInput;
 
   const EmotePicker({
     super.key,
     required this.channel,
+    required this.getFieldInput,
+    required this.setFieldInput,
+    required this.insertFieldInput,
   });
 
   @override
@@ -88,224 +95,176 @@ class _EmotePickerState extends State<EmotePicker> {
       }
     }
 
-    return Column(
-      children: [
-        const SizedBox(height: 4.0),
-        Surface(
-          type: SurfaceType.transparent,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              //   child: Row(
-              //     children: [
-              //       Surface(
-              //         borderRadius: BorderRadius.circular(8.0),
-              //         type: SurfaceType.background,
-              //         child: const Padding(
-              //           padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-              //           child: Text('GIFs'),
-              //         ),
-              //         onTap: () {},
-              //       ),
-              //       const SizedBox(width: 4.0),
-              //       Surface(
-              //         borderRadius: BorderRadius.circular(8.0),
-              //         type: SurfaceType.background,
-              //         child: const Padding(
-              //           padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
-              //           child: Text('Emotes'),
-              //         ),
-              //         onTap: () {},
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              SegmentedButton<PickerMode>(
-                segments: const [
-                  ButtonSegment<PickerMode>(
-                    value: PickerMode.gif,
-                    label: Text('GIFs'),
-                    icon: Icon(Icons.image_search_outlined),
-                  ),
-                  ButtonSegment<PickerMode>(
-                    value: PickerMode.emote,
-                    label: Text('Emote'),
-                    icon: Icon(Icons.emoji_emotions_outlined),
-                  ),
-                ],
-                selected: <PickerMode>{mode},
-                onSelectionChanged: (selection) {
-                  setState(() {
-                    mode = selection.first;
-                  });
+    const icons = {
+      "Symbols": Icon(Icons.star_border_outlined),
+      "Activities": Icon(Icons.local_activity_outlined),
+      "Flags": Icon(Icons.flag_outlined),
+      "Travel & Places": Icon(Icons.card_travel_outlined),
+      "Food & Drink": Icon(Icons.fastfood_outlined),
+      "Animals & Nature": Icon(Icons.pest_control_outlined),
+      "People & Body": Icon(Icons.people_outline_outlined),
+      "Objects": Icon(Icons.emoji_objects_outlined),
+      "Component": Icon(Icons.settings_input_component_outlined),
+      "Smileys & Emotion": Icon(Icons.emoji_emotions_outlined),
+    };
+
+    return Surface(
+      type: SurfaceType.background,
+      child: Column(
+        children: [
+          if (mode == PickerMode.gif)
+            Expanded(
+              child: FutureBuilder<http.Response>(
+                future: gifSearch,
+                builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
+                  if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
+                  final gifs = <GifInfo>[];
+                  final responseJson = json.decode(utf8.decode(snapshot.data!.bodyBytes)) as Map<String, dynamic>;
+                  for (final gif in responseJson['results']) {
+                    gifs.add(GifInfo(
+                      url: gif['media'][0]['tinygif']['url'] as String,
+                      width: (gif['media'][0]['tinygif']['dims'][0] as int).toDouble(),
+                      height: (gif['media'][0]['tinygif']['dims'][1] as int).toDouble(),
+                      preview: gif['media'][0]['tinygif']['url'] as String,
+                    ));
+                  }
+
+                  return SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildGifColumn(gifs.take((gifs.length / 2).toInt()).toList()),
+                          const SizedBox(width: 8.0),
+                          buildGifColumn(gifs.sublist((gifs.length / 2).toInt()).toList()),
+                        ],
+                      ),
+                    ),
+                  );
                 },
               ),
-              const SizedBox(height: 4.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Surface(
-                  borderRadius: BorderRadius.circular(8.0),
-                  // color: Colors.blue,
-                  type: SurfaceType.background,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: TextField(
-                            controller: searchController,
-                            decoration: const InputDecoration(
-                              isDense: true,
-                              border: InputBorder.none,
-                              hintText: 'Search',
-                            ),
-                            onChanged: (value) {
-                              if (mode == PickerMode.gif) {
-                                gifSearch = http.get(Uri.parse('https://g.tenor.com/v1/search?q=$value&key=LIVDSRZULELA&limit=50'));
-                                setState(() {});
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 2.0),
-                      const Icon(Icons.search_outlined),
-                      const SizedBox(width: 6.0),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 4.0),
-        if (mode == PickerMode.gif)
-          Expanded(
-            child: FutureBuilder<http.Response>(
-              future: gifSearch,
-              builder: (BuildContext context, AsyncSnapshot<http.Response> snapshot) {
-                if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
-                final gifs = <GifInfo>[];
-                final responseJson = json.decode(utf8.decode(snapshot.data!.bodyBytes)) as Map<String, dynamic>;
-                for (final gif in responseJson['results']) {
-                  gifs.add(GifInfo(
-                    url: gif['media'][0]['tinygif']['url'] as String,
-                    width: (gif['media'][0]['tinygif']['dims'][0] as int).toDouble(),
-                    height: (gif['media'][0]['tinygif']['dims'][1] as int).toDouble(),
-                    preview: gif['media'][0]['tinygif']['url'] as String,
-                  ));
-                }
-
-                return SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        buildGifColumn(gifs.take((gifs.length / 2).toInt()).toList()),
-                        const SizedBox(width: 8.0),
-                        buildGifColumn(gifs.sublist((gifs.length / 2).toInt()).toList()),
-                      ],
-                    ),
-                  ),
-                );
-              },
             ),
-          ),
-        if (mode == PickerMode.emote)
-          Expanded(
-            child: Row(
-              children: [
-                Container(
-                  // color: Colors.red,
-                  width: 48.0,
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    children: [
-                      for (final category in groups.keys)
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Surface(
-                            onTap: () async {
-                              var context = groupKeys[category]!.currentContext!;
-                              Scrollable.maybeOf(context)!.position.jumpTo(Scrollable.maybeOf(context)!.position.maxScrollExtent);
-                              WidgetsBinding.instance.addPostFrameCallback((_) {
-                                Scrollable.maybeOf(context)!.position.ensureVisible(
-                                      context.findRenderObject()!,
-                                      duration: const Duration(milliseconds: 500),
-                                    );
-                              });
-                            },
-                            borderRadius: BorderRadius.circular(64.0),
-                            child: AspectRatio(
-                              aspectRatio: 1 / 1,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(category),
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: CustomScrollView(
-                    controller: scrollController,
-                    // padding: EdgeInsets.zero,
-                    slivers: [
-                      for (final category in groups.entries)
-                        MultiSliver(
-                          pushPinnedChildren: true,
+          if (mode == PickerMode.emote)
+            Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: CustomScrollView(
+                      controller: scrollController,
+                      // padding: EdgeInsets.zero,
+                      slivers: [
+                        SliverList.list(
                           children: [
-                            SliverPinnedHeader(
-                              key: groupKeys[category.key],
-                              child: ColoredBox(
-                                color: Theme.of(context).colorScheme.surfaceVariant,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+                              child: Surface(
+                                borderRadius: BorderRadius.circular(128.0),
+                                // color: Colors.white,
+                                type: SurfaceType.surfaceVariant,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Text(category.key),
+                                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: TextField(
+                                    controller: searchController,
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: AppLocalizations.of(context)!.search,
+                                      isDense: true,
+                                    ),
+                                    onChanged: (text) => setState(() {}),
+                                  ),
                                 ),
                               ),
                             ),
-                            SliverGrid.extent(
-                              maxCrossAxisExtent: 32.0 + 16.0,
-                              children: [
-                                for (final emote in category.value)
-                                  Tooltip(
-                                    message: emote.name,
-                                    child: InkWell(
-                                      onTap: () {
-                                        // textEditingController.text = (textEditingController.text.split(' ') + [emote.code ?? emote.name]).where((element) => element.isNotEmpty).join(' ') + ' ';
-                                        // textEditingController.selection = TextSelection.fromPosition(
-                                        //   TextPosition(
-                                        //     offset: textEditingController.text.length,
-                                        //   ),
-                                        // );
-                                        // setState(() {});
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: CachedNetworkImage(
-                                          imageUrl: emote.mipmap.last,
-                                          fit: BoxFit.cover,
+                          ],
+                        ),
+                        for (final category in groups.entries.where((group) => group.value.any((emote) => emote.name.toLowerCase().contains(searchController.text.toLowerCase()))))
+                          MultiSliver(
+                            pushPinnedChildren: true,
+                            children: [
+                              SliverPinnedHeader(
+                                key: groupKeys[category.key],
+                                child: ColoredBox(
+                                  color: Theme.of(context).colorScheme.background,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 8.0, bottom: 4.0, left: 4.0, right: 4.0),
+                                    child: Text(category.key),
+                                  ),
+                                ),
+                              ),
+                              SliverGrid.extent(
+                                maxCrossAxisExtent: 32.0 + 16.0,
+                                children: [
+                                  for (final emote in category.value.where((emote) => emote.name.toLowerCase().contains(searchController.text.toLowerCase())))
+                                    Tooltip(
+                                      message: emote.name,
+                                      child: InkWell(
+                                        onTap: () async => widget.insertFieldInput(emote.code ?? emote.name),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CachedNetworkImage(
+                                            imageUrl: emote.mipmap.last,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                              ],
-                            ),
-                          ],
-                        ),
-                    ],
+                                ],
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Surface(
+                    type: SurfaceType.surfaceVariant,
+                    child: SizedBox(
+                      height: 48.0,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.zero,
+                        children: [
+                          for (final category in groups.keys)
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Surface(
+                                type: SurfaceType.surface,
+                                onTap: () async {
+                                  final context = groupKeys[category]!.currentContext!;
+                                  Scrollable.maybeOf(context)!.position.jumpTo(Scrollable.maybeOf(context)!.position.maxScrollExtent);
+                                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                                    Scrollable.maybeOf(context)!.position.ensureVisible(
+                                          context.findRenderObject()!,
+                                          duration: const Duration(milliseconds: 500),
+                                        );
+                                  });
+                                },
+                                borderRadius: BorderRadius.circular(64.0),
+                                child: AspectRatio(
+                                  aspectRatio: 1 / 1,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: icons.containsKey(category)
+                                          ? icons[category]
+                                          : Text(
+                                              category,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -344,6 +303,98 @@ class GifInfo {
     required this.height,
   });
 }
+
+          // const SizedBox(height: 4.0),
+          // Surface(
+          //   type: SurfaceType.transparent,
+          //   child: Column(
+          //     mainAxisSize: MainAxisSize.min,
+          //     children: [
+          //       // Padding(
+          //       //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          //       //   child: Row(
+          //       //     children: [
+          //       //       Surface(
+          //       //         borderRadius: BorderRadius.circular(8.0),
+          //       //         type: SurfaceType.background,
+          //       //         child: const Padding(
+          //       //           padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+          //       //           child: Text('GIFs'),
+          //       //         ),
+          //       //         onTap: () {},
+          //       //       ),
+          //       //       const SizedBox(width: 4.0),
+          //       //       Surface(
+          //       //         borderRadius: BorderRadius.circular(8.0),
+          //       //         type: SurfaceType.background,
+          //       //         child: const Padding(
+          //       //           padding: EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+          //       //           child: Text('Emotes'),
+          //       //         ),
+          //       //         onTap: () {},
+          //       //       ),
+          //       //     ],
+          //       //   ),
+          //       // ),
+          //       SegmentedButton<PickerMode>(
+          //         segments: const [
+          //           ButtonSegment<PickerMode>(
+          //             value: PickerMode.gif,
+          //             label: Text('GIFs'),
+          //             icon: Icon(Icons.image_search_outlined),
+          //           ),
+          //           ButtonSegment<PickerMode>(
+          //             value: PickerMode.emote,
+          //             label: Text('Emote'),
+          //             icon: Icon(Icons.emoji_emotions_outlined),
+          //           ),
+          //         ],
+          //         selected: <PickerMode>{mode},
+          //         onSelectionChanged: (selection) {
+          //           setState(() {
+          //             mode = selection.first;
+          //           });
+          //         },
+          //       ),
+          //       const SizedBox(height: 4.0),
+          //       Padding(
+          //         padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          //         child: Surface(
+          //           borderRadius: BorderRadius.circular(8.0),
+          //           // color: Colors.blue,
+          //           type: SurfaceType.background,
+          //           child: Row(
+          //             children: [
+          //               Expanded(
+          //                 child: Padding(
+          //                   padding: const EdgeInsets.only(left: 8.0),
+          //                   child: TextField(
+          //                     controller: searchController,
+          //                     decoration: const InputDecoration(
+          //                       isDense: true,
+          //                       border: InputBorder.none,
+          //                       hintText: 'Search',
+          //                     ),
+          //                     onChanged: (value) {
+          //                       if (mode == PickerMode.gif) {
+          //                         gifSearch = http.get(Uri.parse('https://g.tenor.com/v1/search?q=$value&key=LIVDSRZULELA&limit=50'));
+          //                         setState(() {});
+          //                       }
+          //                     },
+          //                   ),
+          //                 ),
+          //               ),
+          //               const SizedBox(width: 2.0),
+          //               const Icon(Icons.search_outlined),
+          //               const SizedBox(width: 6.0),
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // const SizedBox(height: 4.0),
 
 /*
 

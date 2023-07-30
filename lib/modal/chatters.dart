@@ -4,7 +4,6 @@ import 'package:chatsen/modal/components/modal_header.dart';
 import 'package:chatsen/modal/user.dart';
 import 'package:chatsen/tmi/channel/channel.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/modal.dart';
@@ -52,9 +51,9 @@ class _ChattersModalState extends State<ChattersModal> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: TextField(
                     controller: searchController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Search',
+                      hintText: AppLocalizations.of(context)!.search,
                       isDense: true,
                     ),
                     onChanged: (text) => setState(() {}),

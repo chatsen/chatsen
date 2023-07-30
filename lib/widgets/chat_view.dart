@@ -144,9 +144,9 @@ class _ChatViewState extends State<ChatView> {
                                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                 child: TextField(
                                   controller: searchController,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: 'Search',
+                                    hintText: AppLocalizations.of(context)!.search,
                                     isDense: true,
                                   ),
                                   onChanged: (text) => setState(() {}),
