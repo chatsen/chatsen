@@ -154,5 +154,7 @@
     "placeholders": {
       "time": {}
     }
-  }
+  },
+  "credits": "Συντελεστές",
+  "search": "Αναζήτηση"
 }

@@ -154,5 +154,7 @@
     "placeholders": {
       "time": {}
     }
-  }
+  },
+  "credits": "Благодарности",
+  "search": "Поиск"
 }

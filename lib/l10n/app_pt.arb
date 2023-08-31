@@ -154,5 +154,7 @@
     "placeholders": {
       "time": {}
     }
-  }
+  },
+  "credits": "Créditos",
+  "search": "Pesquisar"
 }
