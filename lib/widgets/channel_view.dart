@@ -354,7 +354,9 @@ class ChannelViewState extends State<ChannelView> {
                     children: [
                       InkWell(
                         onTap: () async {
-                          final picker = await FilePicker.platform.pickFiles();
+                          final picker = await FilePicker.platform.pickFiles(
+                            type: Platform.isIOS ? FileType.image : FileType.any,
+                          );
                           final splits = textEditingController.text.split(' ');
                           for (PlatformFile file in picker?.files ?? []) {
                             final uploadedFile = await Catbox.uploadFile(file.name, File(file.path!).readAsBytesSync());
