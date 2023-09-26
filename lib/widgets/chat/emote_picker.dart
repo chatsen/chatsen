@@ -230,6 +230,7 @@ class _EmotePickerState extends State<EmotePicker> {
                               child: Surface(
                                 type: SurfaceType.surface,
                                 onTap: () async {
+                                  if (groupKeys[category] == null) return;
                                   final context = groupKeys[category]!.currentContext!;
                                   Scrollable.maybeOf(context)!.position.jumpTo(Scrollable.maybeOf(context)!.position.maxScrollExtent);
                                   WidgetsBinding.instance.addPostFrameCallback((_) {
