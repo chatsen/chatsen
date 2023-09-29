@@ -71,14 +71,14 @@ jobs:
 
       - name: Building required generated source files
         working-directory: ${{env.APP_PATH}}
-        run: flutter pub run build_runner build --delete-conflicting-outputs
+        run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Applying Android project patches
         if: matrix.target == 'Android'
         working-directory: ${{env.APP_PATH}}
         run: |
           $sed -i 's/android:label=".*"/android:label="${{env.APP_TITLE}}"/' ./android/app/src/main/AndroidManifest.xml
-          $sed -i 's/minSdkVersion .*/minSdkVersion 19/' ./android/app/build.gradle
+          $sed -i 's/minSdkVersion .*/minSdkVersion 21/' ./android/app/build.gradle
           $sed -i '/.*\/manifest.*/i \ \ \ \ <uses-permission android:name="android.permission.INTERNET"/>' ./android/app/src/main/AndroidManifest.xml
           $sed -i "/io.flutter.embedding.android.FlutterActivity/a import android.os.Bundle\nimport android.os.Build\nimport androidx.annotation.NonNull\nimport io.flutter.embedding.android.FlutterActivityLaunchConfigs.BackgroundMode.transparent\nimport io.flutter.embedding.engine.FlutterEngine\nimport io.flutter.plugins.GeneratedPluginRegistrant" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
           $sed -i "/FlutterActivity()/a \ \ \ \ override fun onCreate(savedInstanceState: Bundle?) {\n\ \ \ \ \ \ \ \ super.onCreate(savedInstanceState)\n\ \ \ \ \ \ \ \ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {\n\ \ \ \ \ \ \ \ \ \ \ \ window.setDecorFitsSystemWindows(false)\n\ \ \ \ \ \ \ \ }\n\ \ \ \ }" android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt
