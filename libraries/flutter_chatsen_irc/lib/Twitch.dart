@@ -551,7 +551,7 @@ class Channel {
       //   }
       // ''');
 
-      final response = await http.get(Uri.parse('https://api.7tv.app/v3/users/twitch/$id'));
+      final response = await http.get(Uri.parse('https://7tv.io/v3/users/twitch/$id'));
       final responseJson = json.decode(utf8.decode(response.bodyBytes));
 
       for (var emoteData in responseJson['emote_set']['emotes'] ?? responseJson['emote_set']['emote']) {
@@ -1180,8 +1180,8 @@ class Client {
       //   if (emotesData.length < 150) break;
       // }
 
-      // https://api.7tv.app/v3/emote-sets/global
-      final response = await http.get(Uri.parse('https://api.7tv.app/v3/emote-sets/global'));
+      // https://api.7tv.app/v3/emote-sets/global 
+      final response = await http.get(Uri.parse('https://7tv.io/v3/emote-sets/global'));
       final responseJson = json.decode(utf8.decode(response.bodyBytes));
       for (final emote in responseJson['emotes']) {
         emotes.add(Emote(

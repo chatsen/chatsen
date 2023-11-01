@@ -14,7 +14,7 @@ class SevenTVBadges extends Cubit<Map<String, List<twitch.Badge>>> {
 
   void refresh() async {
     try {
-      var response = await http.get(Uri.parse('https://api.7tv.app/v2/cosmetics?user_identifier=twitch_id'));
+      var response = await http.get(Uri.parse('https://7tv.io/v2/cosmetics?user_identifier=twitch_id'));
       var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
 
       var users = <String, List<twitch.Badge>>{};
