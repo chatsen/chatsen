@@ -7,7 +7,7 @@ import 'seventv_emote.dart';
 
 class SevenTV {
   static Future<List<SevenTVEmote>> globalEmotes() async {
-    final response = await http.get(Uri.parse('https://api.7tv.app/v3/emote-sets/global'));
+    final response = await http.get(Uri.parse('https://7tv.io/v3/emote-sets/global'));
     final responseJson = json.decode(utf8.decode(response.bodyBytes));
     return [
       for (final emote in responseJson['emotes']) SevenTVEmote.fromJson(emote),
@@ -15,7 +15,7 @@ class SevenTV {
   }
 
   static Future<List<SevenTVEmote>> channelEmotes(String uid) async {
-    final response = await http.get(Uri.parse('https://api.7tv.app/v3/users/twitch/$uid'));
+    final response = await http.get(Uri.parse('https://7tv.io/v3/users/twitch/$uid'));
     final responseJson = json.decode(utf8.decode(response.bodyBytes));
     if (responseJson['status_code'] == 404) return [];
     return [
@@ -24,7 +24,7 @@ class SevenTV {
   }
 
   static Future<SevenTVCosmetics> cosmetics() async {
-    final response = await http.get(Uri.parse('https://api.7tv.app/v2/cosmetics?user_identifier=twitch_id'));
+    final response = await http.get(Uri.parse('https://7tv.io/v2/cosmetics?user_identifier=twitch_id'));
     final responseJson = json.decode(utf8.decode(response.bodyBytes));
     return SevenTVCosmetics.fromJson(responseJson);
   }
