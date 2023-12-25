@@ -149,12 +149,12 @@
   "cache": "Caché",
   "clearCache": "Borrar caché",
   "chatters": "Chatters",
-  "lastSeenAgo": "Last seen {time} ago",
+  "lastSeenAgo": "Última vez visto hace {time}",
   "@lastSeenAgo": {
     "placeholders": {
       "time": {}
     }
   },
-  "credits": "Credits",
-  "search": "Search"
+  "credits": "Créditos",
+  "search": "Buscar"
 }
