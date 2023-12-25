@@ -142,19 +142,19 @@
   "justDefault": "Predeterminat",
   "notifications": "Notificacions",
   "noNotifications": "Algú, en algun lloc, t'esmentarà algun dia.",
-  "backgroundNotifications": "Background notifications",
-  "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
-  "optionNotAvailablePaywalled": "This option is for Chatsen supporters only.",
-  "clearAll": "Clear all",
-  "cache": "Cache",
-  "clearCache": "Clear cache",
+  "backgroundNotifications": "Notificacions en segon pla",
+  "optionNotAvailableOnYourPlatform": "Aquesta opció no està disponible a la teva plataforma.",
+  "optionNotAvailablePaywalled": "Aquesta opció és només per als mecenes de Chatsen.",
+  "clearAll": "Esborra-ho tot",
+  "cache": "Caché",
+  "clearCache": "Netejar el caché",
   "chatters": "Chatters",
-  "lastSeenAgo": "Last seen {time} ago",
+  "lastSeenAgo": "Vist per última vegada fa {time}",
   "@lastSeenAgo": {
     "placeholders": {
       "time": {}
     }
   },
-  "credits": "Credits",
-  "search": "Search"
+  "credits": "Crèdits",
+  "search": "Cerca"
 }
