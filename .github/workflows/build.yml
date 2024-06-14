@@ -128,3 +128,5 @@ jobs:
         with:
           name: ${{env.APP_NAME}}-ios.ipa
           path: ${{env.APP_PATH}}/build/ios/iphoneos/iOS.ipa
+
+          
