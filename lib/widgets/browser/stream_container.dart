@@ -87,7 +87,7 @@ class _StreamContainerState extends State<StreamContainer> {
                 return Stack(
                   children: [
                     browser,
-                    Split(
+                    CustomSplit(
                       prefixes: actions,
                       axis: Axis.horizontal,
                       initialFractions: const [0.75, 0.25],
@@ -107,7 +107,7 @@ class _StreamContainerState extends State<StreamContainer> {
                 SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
               }
 
-              return Split(
+              return CustomSplit(
                 prefixes: actions,
                 minSizes: const [100, 100],
                 axis: horizontal ? Axis.horizontal : Axis.vertical,

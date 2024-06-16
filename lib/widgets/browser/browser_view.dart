@@ -34,6 +34,7 @@ class MobileBrowserView extends StatelessWidget {
   Widget build(BuildContext context) => WebView(
         javascriptMode: JavascriptMode.unrestricted,
         initialUrl: url,
+        allowsInlineMediaPlayback: true,
       );
 }
 
