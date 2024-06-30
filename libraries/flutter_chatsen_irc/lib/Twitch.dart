@@ -390,6 +390,12 @@ class Channel {
         dateTime: DateTime.fromMillisecondsSinceEpoch(int.tryParse(message.tags['tmi-sent-ts']) ?? int.tryParse(message.tags['rm-received-ts']) ?? 0),
       );
 
+      users.putIfAbsent('users', () => []);
+      if (chatMessage.user != null && chatMessage.user!.login != null) {
+        if (!users['users']!.contains(chatMessage.user!.login!)) //.add();
+          users['users']!.add(chatMessage.user!.login!);
+      }
+
       if (messages.none((element) => element.id == chatMessage.id)) messages.add(chatMessage);
       if (messages.length > 1000) messages.removeRange(0, messages.length - 1000);
     }
@@ -442,17 +448,17 @@ class Channel {
 
     // return users;
 
-    users = {};
+    // users = {};
 
-    try {
-      final response = await http.get(Uri.parse('https://api.chatsen.app/saikin/channel/users/${name!.substring(1)}'));
-      final responseJson = json.decode(utf8.decode(response.bodyBytes));
-      users = {
-        'users': [
-          for (final userData in responseJson.entries) userData.key as String,
-        ],
-      };
-    } catch (e) {}
+    // try {
+    //   final response = await http.get(Uri.parse('https://api.chatsen.app/saikin/channel/users/${name!.substring(1)}'));
+    //   final responseJson = json.decode(utf8.decode(response.bodyBytes));
+    //   users = {
+    //     'users': [
+    //       for (final userData in responseJson.entries) userData.key as String,
+    //     ],
+    //   };
+    // } catch (e) {}
     return users;
   }
 
@@ -844,6 +850,12 @@ class Connection {
           tagEmotes: message.tags['emotes'],
         );
 
+        channel?.users.putIfAbsent('users', () => []);
+        if (channel != null && chatMessage.user != null && chatMessage.user!.login != null) {
+          if (!channel.users['users']!.contains(chatMessage.user!.login!)) //.add();
+            channel.users['users']!.add(chatMessage.user!.login!);
+        }
+
         client!.listeners.forEach((listener) => listener.onMessage(channel, chatMessage));
 
         channel?.messages.add(chatMessage);
@@ -1180,7 +1192,7 @@ class Client {
       //   if (emotesData.length < 150) break;
       // }
 
-      // https://api.7tv.app/v3/emote-sets/global 
+      // https://api.7tv.app/v3/emote-sets/global
       final response = await http.get(Uri.parse('https://7tv.io/v3/emote-sets/global'));
       final responseJson = json.decode(utf8.decode(response.bodyBytes));
       for (final emote in responseJson['emotes']) {
