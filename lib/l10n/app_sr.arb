@@ -1,6 +1,6 @@
 {
   "chatsen": "Chatsen",
-  "catsen": "Catsen",
+  "catsen": "Mačkasen",
   "loggedInVia": "Prijavljen preko {provider}",
   "@loggedInVia": {
     "placeholders": {
@@ -66,16 +66,16 @@
       "channel": {}
     }
   },
-  "light": "Light",
-  "dark": "Dark",
-  "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "newCustomCommand": "New custom command",
+  "light": "Svetlo",
+  "dark": "Tamno",
+  "system": "Sistem",
+  "appearance": "Izgled",
+  "highContrast": "Visoki kontrast",
+  "playStream": "Pusti strim",
+  "stopStream": "Zaustavi strim",
+  "customCommand": "Prilagođena komanda",
+  "customCommands": "Prilagođene komande",
+  "newCustomCommand": "Nova prilagođena komanda",
   "commandTrigger": "Okidač",
   "command": "Komanda",
   "save": "Sačuvaj",
