@@ -4,6 +4,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:chatsen/components/surface.dart';
 import 'package:chatsen/modal/channel.dart';
 import 'package:chatsen/widgets/browser/stream_container.dart';
+import 'package:chatsen/widgets/cookies_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

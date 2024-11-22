@@ -15,7 +15,7 @@ class TwitchAccount extends HiveObject {
   UserData? userData;
 
   @HiveField(2)
-  List<CookieData>? cookies;
+  String? cookies;
 
   TwitchAccount({
     required this.tokenData,

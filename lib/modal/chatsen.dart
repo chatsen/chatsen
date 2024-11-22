@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:webview_cookie_manager/webview_cookie_manager.dart';
 
 import '../components/tile.dart';
 import '/tmi/client/client.dart';
@@ -167,12 +166,6 @@ class TwitchAccountButton extends StatelessWidget {
 
         var accountSettingsBox = Hive.box('AccountSettings');
         await accountSettingsBox.put('activeTwitchAccount', twitchAccount.tokenData.hash);
-
-        await WebviewCookieManager().clearCookies();
-
-        await WebviewCookieManager().setCookies([
-          for (var cookie in twitchAccount.cookies ?? []) cookie.toCookie(),
-        ]);
       },
       onLongPress: () {
         Modal.show(

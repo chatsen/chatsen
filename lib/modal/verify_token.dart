@@ -9,7 +9,7 @@ import '/data/webview/cookie_data.dart';
 
 class VerifyTokenModal extends StatefulWidget {
   final String token;
-  final List<CookieData>? cookies;
+  final String? cookies;
 
   const VerifyTokenModal({
     super.key,

@@ -11,7 +11,7 @@ import '/api/twitch/twitch.dart';
 
 class VerifyUserModal extends StatefulWidget {
   final TokenData tokenData;
-  final List<CookieData>? cookies;
+  final String? cookies;
 
   const VerifyUserModal({
     super.key,
