@@ -47,6 +47,10 @@ jobs:
           brew install gnu-sed
           echo "sed=gsed" >> $GITHUB_ENV
 
+      - name: Setup upterm session
+        if: matrix.os == 'ubuntu-latest'
+        uses: lhotari/action-upterm@v1
+
       - name: Set up Adoptium JDK for Ubuntu
         if: matrix.os == 'ubuntu-latest'
         run: |
