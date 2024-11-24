@@ -51,14 +51,14 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         uses: lhotari/action-upterm@v1
 
-      - name: Set up Adoptium JDK for Ubuntu
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt install -y wget apt-transport-https gpg
-          sudo wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/adoptium.gpg > /dev/null
-          echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
-          sudo apt update
-          sudo apt install temurin-17-jdk
+      # - name: Set up Adoptium JDK for Ubuntu
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: |
+      #     sudo apt install -y wget apt-transport-https gpg
+      #     sudo wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/adoptium.gpg > /dev/null
+      #     echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
+      #     sudo apt update
+      #     sudo apt install temurin-17-jdk
 
       - name: Checking out the ${{env.APP_TITLE}} source code
         uses: actions/checkout@v3
@@ -108,6 +108,8 @@ jobs:
       - name: Building ${{env.APP_TITLE}} for Android
         if: matrix.target == 'Android'
         working-directory: ${{env.APP_PATH}}
+        env:
+          JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
         run: flutter build apk
 
       - name: Building ${{env.APP_TITLE}} for iOS
