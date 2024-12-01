@@ -75,12 +75,12 @@
   "stopStream": "Arrêter le stream",
   "customCommand": "Commande personnalisée",
   "customCommands": "Commandes personnalisées",
-  "newCustomCommand": "New custom command",
+  "newCustomCommand": "Nouvelle commande personnalisée",
   "commandTrigger": "Déclencheur",
   "command": "Commande",
   "save": "Sauvegarder",
-  "browserStreamSettings": "Browser/Stream Settings",
-  "addPage": "Add page",
+  "browserStreamSettings": "Paramètres du navigateur/stream",
+  "addPage": "Ajouter une page",
   "channelStream": "Stream de {channel}",
   "@channelStream": {
     "placeholders": {
@@ -95,8 +95,8 @@
   "pattern": "Pattern",
   "mention": "Mention",
   "block": "Bloquer",
-  "enableRegex": "Enable regex",
-  "caseSensitive": "Case sensitive",
+  "enableRegex": "Activer regex",
+  "caseSensitive": "Sensible à la casse",
   "messageTriggers": "Message triggers",
   "newMessageTrigger": "New message trigger",
   "reply": "Répondre",
@@ -143,7 +143,7 @@
   "notifications": "Notifications",
   "noNotifications": "Quelqu'un vous mentionnera un jour.",
   "backgroundNotifications": "Notifications en arrière-plan",
-  "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
+  "optionNotAvailableOnYourPlatform": "Cette option n'est pas disponible sur votre plateforme.",
   "optionNotAvailablePaywalled": "Cette option est réservée aux supporters de Chatsen.",
   "clearAll": "Tout effacer",
   "cache": "Cache",
@@ -156,5 +156,5 @@
     }
   },
   "credits": "Credits",
-  "search": "Search"
+  "search": "Recherche"
 }
