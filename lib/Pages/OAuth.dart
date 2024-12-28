@@ -6,7 +6,7 @@ import '/Accounts/AccountsCubit.dart';
 import 'package:collection/src/iterable_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+// import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
@@ -112,10 +112,10 @@ class _OAuthPageState extends State<OAuthPage> {
                 await cookieManager.clearCookies();
               } catch (e, stackTrace) {
                 print(e);
-                await Sentry.captureException(
-                  e,
-                  stackTrace: stackTrace,
-                );
+                // await Sentry.captureException(
+                //   e,
+                //   stackTrace: stackTrace,
+                // );
               }
 
               Navigator.of(context).pop();

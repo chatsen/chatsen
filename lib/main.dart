@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
+// import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'Accounts/AccountModel.dart';
 import 'App.dart';
@@ -92,12 +92,14 @@ Future<void> appRunner() async {
 /// The main function is the entry point of our application.
 void main() async {
   if (kReleaseMode) {
-    await SentryFlutter.init(
-      (options) {
-        options.dsn = 'https://27538e5be8ea45bd97bf0875ba6e756c@sentry.chatsen.app/4';
-      },
-      appRunner: appRunner,
-    );
+    // await SentryFlutter.init(
+    //   (options) {
+    //     options.dsn = 'https://27538e5be8ea45bd97bf0875ba6e756c@sentry.chatsen.app/4';
+    //   },
+    //   appRunner: appRunner,
+    // );
+    await appRunner();
+
   } else {
     await appRunner();
   }
