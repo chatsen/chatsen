@@ -1,10 +1,16 @@
 {
   "chatsen": "Chatsen",
   "catsen": "Catsen",
+  "translationAuthorNames": "",
+  "@translationAuthorNames": {
+    "description": "Translators should put their desired names to be displayed in the application credits, separated by semicolons here. Example: forsen;nymn;randomuser123 (one per contributor)"
+  },
   "loggedInVia": "{provider} aracılığıyla giriş yapıldı",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {
+        "type": "String"
+      }
     }
   },
   "termsOfService": "Kullanım Şartları",
@@ -14,7 +20,9 @@
   "expiresIn": "{time} sonra sona erecek",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "close": "Kapat",
@@ -29,7 +37,9 @@
   "loggedInAs": "{user} olarak giriş yapıldı",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {
+        "type": "String"
+      }
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Kullanıcı verisi onaylanırken bir sorun yaşandı:",
@@ -45,25 +55,33 @@
   "joinUser": "{user} katıl",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {
+        "type": "String"
+      }
     }
   },
   "spellCheckFailed": "Yazım denetimi başarısız oldu! {username} için mi arama yapmak istemiştiniz?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {
+        "type": "String"
+      }
     }
   },
   "joinChannelName": "{channel} katıl",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "sendMessageIn": "{channel} kanalına mesaj gönder",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "light": "Light",
@@ -84,7 +102,9 @@
   "channelStream": "{channel}'s stream",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "openInBrowser": "Open in browser",
@@ -116,7 +136,9 @@
   "timeoutUserForDuration": "Timeout user for {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "chatCleared": "Chat was cleared",
@@ -124,7 +146,9 @@
   "bannedForDuration": "banned for {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "replyingTo": "Replying to",
@@ -152,7 +176,9 @@
   "lastSeenAgo": "Last seen {time} ago",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "credits": "Credits",
