@@ -1,10 +1,16 @@
 {
   "chatsen": "Chatsen",
   "catsen": "Catsen",
+  "translationAuthorNames": "",
+  "@translationAuthorNames": {
+    "description": "Translators should put their desired names to be displayed in the application credits, separated by semicolons here. Example: forsen;nymn;randomuser123 (one per contributor)"
+  },
   "loggedInVia": "Inloggad via {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {
+        "type": "String"
+      }
     }
   },
   "termsOfService": "Användarvillkor",
@@ -14,7 +20,9 @@
   "expiresIn": "Upphör att gälla om {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "close": "Stäng",
@@ -29,7 +37,9 @@
   "loggedInAs": "Inloggad som {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {
+        "type": "String"
+      }
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Ett fel har uppstått vid verifiering av användardata:",
@@ -45,25 +55,33 @@
   "joinUser": "Användare {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {
+        "type": "String"
+      }
     }
   },
   "spellCheckFailed": "Stavningsfel misslyckades! Menade du att söka efter {username}?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {
+        "type": "String"
+      }
     }
   },
   "joinChannelName": "Delta {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "sendMessageIn": "Skicka meddelande i {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "light": "Ljus",
@@ -84,7 +102,9 @@
   "channelStream": "{channel}'s ström",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "openInBrowser": "Öppna i webbläsare",
@@ -116,7 +136,9 @@
   "timeoutUserForDuration": "Timeout-användare för {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "chatCleared": "Chatten var rensad",
@@ -124,7 +146,9 @@
   "bannedForDuration": "bannlyst för {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "replyingTo": "Svarar på",
@@ -152,7 +176,9 @@
   "lastSeenAgo": "Last seen {time} ago",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "credits": "Credits",
