@@ -1,10 +1,16 @@
 {
   "chatsen": "Chatsen",
   "catsen": "Catsen",
+  "translationAuthorNames": "",
+  "@translationAuthorNames": {
+    "description": "Translators should put their desired names to be displayed in the application credits, separated by semicolons here. Example: forsen;nymn;randomuser123 (one per contributor)"
+  },
   "loggedInVia": "S'ha iniciat la sessió mitjançant {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {
+        "type": "String"
+      }
     }
   },
   "termsOfService": "Condicions del Servei",
@@ -14,7 +20,9 @@
   "expiresIn": "Caduca en {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "close": "Tanca",
@@ -29,7 +37,9 @@
   "loggedInAs": "S'ha iniciat la sessió com {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {
+        "type": "String"
+      }
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "S'ha produït un error en verificar les dades de l'usuari:",
@@ -45,25 +55,33 @@
   "joinUser": "Uneix-te a {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {
+        "type": "String"
+      }
     }
   },
   "spellCheckFailed": "La revisió ha fallat! Potser has volgut cercar {username}?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {
+        "type": "String"
+      }
     }
   },
   "joinChannelName": "Uneix-te a {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "sendMessageIn": "Envia missatge en {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "light": "Clar",
@@ -84,7 +102,9 @@
   "channelStream": "Retransmissió de {channel}",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "openInBrowser": "Obre al navegador",
@@ -116,7 +136,9 @@
   "timeoutUserForDuration": "Expulsar temporalment per {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "chatCleared": "El xat s'ha esborrat",
@@ -124,7 +146,9 @@
   "bannedForDuration": "expulsat per {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "replyingTo": "Responent a",
@@ -152,7 +176,9 @@
   "lastSeenAgo": "Vist per última vegada fa {time}",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "credits": "Crèdits",
