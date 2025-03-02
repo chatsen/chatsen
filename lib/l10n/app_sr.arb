@@ -4,7 +4,7 @@
   "loggedInVia": "Prijavljen preko {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {"type": "String"}
     }
   },
   "termsOfService": "Uslovi Korišćenja",
@@ -14,7 +14,7 @@
   "expiresIn": "Ističe za {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "close": "Zatvori",
@@ -29,7 +29,7 @@
   "loggedInAs": "Prijavljen/a kao {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Greška se pojavila tokom verifikacije korisničkih podataka:",
@@ -45,25 +45,25 @@
   "joinUser": "Pridruži se {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "spellCheckFailed": "Pravopis neispravan! Da li ste misli da potražite {username}?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {"type": "String"}
     }
   },
   "joinChannelName": "Pridruži se {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "sendMessageIn": "Pošalji poruku u {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "light": "Light",
@@ -84,7 +84,7 @@
   "channelStream": "{channel}'s stream",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "openInBrowser": "Open in browser",
@@ -116,7 +116,7 @@
   "timeoutUserForDuration": "Timeout user for {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "chatCleared": "Chat was cleared",
@@ -124,7 +124,7 @@
   "bannedForDuration": "banned for {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "replyingTo": "Replying to",
@@ -152,7 +152,7 @@
   "lastSeenAgo": "Last seen {time} ago",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "credits": "Credits",

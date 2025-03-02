@@ -4,7 +4,7 @@
   "loggedInVia": "Přihlášen jako {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {"type": "String"}
     }
   },
   "termsOfService": "Podmínky služby",
@@ -14,7 +14,7 @@
   "expiresIn": "Vyprší v {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "close": "Zavřít",
@@ -29,7 +29,7 @@
   "loggedInAs": "Přihlášen jako {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Při ověřování osobních dat se objevil problém:",
@@ -45,25 +45,25 @@
   "joinUser": "Připojit se k {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "spellCheckFailed": "Kontrola pravopisu se nezdařila! Měli jste na mysli {username}?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {"type": "String"}
     }
   },
   "joinChannelName": "Připojit se k {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "sendMessageIn": "Poslat zprávu v {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "light": "Světlý",
@@ -84,7 +84,7 @@
   "channelStream": "vysílání uživatele {channel}",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "openInBrowser": "Otevřít v prohlížeči",
@@ -116,7 +116,7 @@
   "timeoutUserForDuration": "Dočasně zablokovat uživatele na {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "chatCleared": "Chat byl vymazán",
@@ -124,7 +124,7 @@
   "bannedForDuration": "zabanován po dobu {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "replyingTo": "Odpovědět na",
@@ -152,7 +152,7 @@
   "lastSeenAgo": "Last seen {time} ago",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "credits": "Credits",

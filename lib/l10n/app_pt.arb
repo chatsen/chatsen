@@ -4,7 +4,7 @@
   "loggedInVia": "Conectado via {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {"type": "String"}
     }
   },
   "termsOfService": "Termos de Serviço",
@@ -14,7 +14,7 @@
   "expiresIn": "Expira em {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "close": "Fechar",
@@ -29,7 +29,7 @@
   "loggedInAs": "Logado como {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Ocorreu um erro ao verificar os dados do usuário:",
@@ -45,25 +45,25 @@
   "joinUser": "Entrar {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "spellCheckFailed": "A verificação ortográfica falhou! Você queria pesquisar por {username}?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {"type": "String"}
     }
   },
   "joinChannelName": "Conectar {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "sendMessageIn": "Enviar mensagem em {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "light": "Claro",
@@ -84,7 +84,7 @@
   "channelStream": "Transmissão de {channel}",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "openInBrowser": "Abrir no navegador",
@@ -116,7 +116,7 @@
   "timeoutUserForDuration": "Suspender usuário por {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "chatCleared": "O chat foi limpo",
@@ -124,7 +124,7 @@
   "bannedForDuration": "banido por {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "replyingTo": "Respondendo a",
@@ -152,7 +152,7 @@
   "lastSeenAgo": "Visto pela última vez {time} atrás",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "credits": "Créditos",

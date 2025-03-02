@@ -4,7 +4,7 @@
   "loggedInVia": "Вы вошли через {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {"type": "String"}
     }
   },
   "termsOfService": "Условия предоставления услуг",
@@ -14,7 +14,7 @@
   "expiresIn": "Срок истекает через {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "close": "Закрыть",
@@ -29,7 +29,7 @@
   "loggedInAs": "Вы вошли как {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Произошла ошибка при проверке данных пользователя:",
@@ -45,25 +45,25 @@
   "joinUser": "Присоединиться к {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "spellCheckFailed": "Ой, кажется очепятка! Вы хотели найти {username}?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {"type": "String"}
     }
   },
   "joinChannelName": "Присоединиться к {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "sendMessageIn": "Отправить сообщение в {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "light": "Светлая",
@@ -84,7 +84,7 @@
   "channelStream": "трансляция {channel}",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "openInBrowser": "Открыть в браузере",
@@ -116,7 +116,7 @@
   "timeoutUserForDuration": "Временно отстранить пользователя на {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "chatCleared": "Чат был очищен",
@@ -124,7 +124,7 @@
   "bannedForDuration": "отстранён на {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "replyingTo": "Ответить на",
@@ -152,7 +152,7 @@
   "lastSeenAgo": "Последний раз видели {time} назад",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "credits": "Благодарности",

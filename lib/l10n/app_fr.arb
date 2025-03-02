@@ -4,7 +4,7 @@
   "loggedInVia": "Connecté via {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {"type": "String"}
     }
   },
   "termsOfService": "Conditions d'utilisation",
@@ -14,7 +14,7 @@
   "expiresIn": "Expire dans {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "close": "Fermer",
@@ -29,7 +29,7 @@
   "loggedInAs": "Connecté en tant que {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Une erreur est survenue lors de la vérification des données utilisateur:",
@@ -45,25 +45,25 @@
   "joinUser": "Joindre {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "spellCheckFailed": "Saisie potentiellement incorrecte ! Essayez-vous de rechercher {username} ?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {"type": "String"}
     }
   },
   "joinChannelName": "Joindre {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "sendMessageIn": "Envoyer un message dans {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "light": "Clair",
@@ -84,7 +84,7 @@
   "channelStream": "Stream de {channel}",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "openInBrowser": "Ouvrir dans le navigateur",
@@ -116,7 +116,7 @@
   "timeoutUserForDuration": "Bannir temporairement l'utilisateur pendant {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "chatCleared": "Le chat a été effacé",
@@ -124,7 +124,7 @@
   "bannedForDuration": "banni pour {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "replyingTo": "Répondre à",
@@ -152,7 +152,7 @@
   "lastSeenAgo": "Vu il y a {time}",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "credits": "Credits",

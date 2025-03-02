@@ -4,7 +4,7 @@
   "loggedInVia": "Đã đăng nhập qua {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {"type": "String"}
     }
   },
   "termsOfService": "Điều khoản dịch vụ",
@@ -14,7 +14,7 @@
   "expiresIn": "Hết hạn trong {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "close": "Đóng",
@@ -29,7 +29,7 @@
   "loggedInAs": "Đã đăng nhập với tư cách là {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Đã có lỗi xảy ra khi xác thực dữ liệu người dùng:",
@@ -45,25 +45,25 @@
   "joinUser": "Tham gia vào {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "spellCheckFailed": "Kiểm tra chính tả thất bại! Có phải bạn muốn tìm {username}?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {"type": "String"}
     }
   },
   "joinChannelName": "Tham gia vào {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "sendMessageIn": "Gửi tin nhắn vào {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "light": "Sáng",
@@ -84,7 +84,7 @@
   "channelStream": "Kênh stream {channel}",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "openInBrowser": "Mở trong trình duyệt",
@@ -116,7 +116,7 @@
   "timeoutUserForDuration": "Cấm chat người dùng trong {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "chatCleared": "Chat đã được xóa",
@@ -124,7 +124,7 @@
   "bannedForDuration": "bị cấm trong {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "replyingTo": "Trả lời cho",
@@ -152,7 +152,7 @@
   "lastSeenAgo": "Nhìn thấy lần cuối {time} trước",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "credits": "Credits",

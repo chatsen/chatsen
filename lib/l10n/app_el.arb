@@ -4,7 +4,7 @@
   "loggedInVia": "Συνδέθηκε μέσω {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {"type": "String"}
     }
   },
   "termsOfService": "Όροι Χρήσης",
@@ -14,7 +14,7 @@
   "expiresIn": "Λήγει σε {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "close": "Κλείσιμο",
@@ -29,7 +29,7 @@
   "loggedInAs": "Συνδεθήκατε ως {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Παρουσιάστηκε ένα σφάλμα κατά την επαλήθευση δεδομένων χρήστη:",
@@ -45,25 +45,25 @@
   "joinUser": "Συμμετοχή στο {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "spellCheckFailed": "Ο ορθογραφικός έλεγχος απέτυχε! Μήπως εννοούσατε να αναζητήσετε για {username};",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {"type": "String"}
     }
   },
   "joinChannelName": "Συμμετοχή στο {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "sendMessageIn": "Στείλτε μήνυμα στο {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "light": "Φωτεινή",
@@ -84,7 +84,7 @@
   "channelStream": "Ροή {channel}",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "openInBrowser": "Άνοιγμα στον περιηγητή",
@@ -116,7 +116,7 @@
   "timeoutUserForDuration": "Timeout χρήστη για {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "chatCleared": "Η συνομιλία εκκαθαρίστηκε",
@@ -124,7 +124,7 @@
   "bannedForDuration": "αποκλείστηκε για {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "replyingTo": "Απάντηση σε",
@@ -152,7 +152,7 @@
   "lastSeenAgo": "Τελευταία εμφάνιση {time} πριν",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "credits": "Συντελεστές",

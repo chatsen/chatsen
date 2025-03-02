@@ -4,7 +4,7 @@
   "loggedInVia": "다음 방식으로 로그인 됨: {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {"type": "String"}
     }
   },
   "termsOfService": "이용 약관",
@@ -14,7 +14,7 @@
   "expiresIn": "{time} 후 만료",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "close": "닫기",
@@ -29,7 +29,7 @@
   "loggedInAs": "{user} 으로 로그인 됨",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "유저 데이터를 확인하는데 오류가 발생하였습니다:",
@@ -45,25 +45,25 @@
   "joinUser": "{user} 로 접속",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "spellCheckFailed": "스펠링 체크에 실패했습니다! 혹시 {username} 을 찾으셨나요?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {"type": "String"}
     }
   },
   "joinChannelName": "{channel} 참가하기",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "sendMessageIn": "{channel} 에 메세지를 보내기",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "light": "밝게",
@@ -84,7 +84,7 @@
   "channelStream": "{channel}의 스트림",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "openInBrowser": "브라우저에서 열기",
@@ -116,7 +116,7 @@
   "timeoutUserForDuration": "사용자를 {duration} 동안 타임아웃",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "chatCleared": "채팅이 청소되었습니다",
@@ -124,7 +124,7 @@
   "bannedForDuration": "{duration}동안 밴됨",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "replyingTo": "~에 답장",
@@ -152,7 +152,7 @@
   "lastSeenAgo": "Last seen {time} ago",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "credits": "Credits",

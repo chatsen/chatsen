@@ -4,7 +4,7 @@
   "loggedInVia": "{provider}経由でログイン",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {"type": "String"}
     }
   },
   "termsOfService": "利用規約",
@@ -14,7 +14,7 @@
   "expiresIn": "{time}で期限切れ",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   },
   "close": "閉じる",
@@ -29,7 +29,7 @@
   "loggedInAs": "{user}としてログイン",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "ユーザーデータの確認中にエラーが発生しました：",
@@ -45,25 +45,25 @@
   "joinUser": "{user}に参加",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {"type": "String"}
     }
   },
   "spellCheckFailed": "スペルチェックに失敗しました！{username}を検索しようとしましたか？",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {"type": "String"}
     }
   },
   "joinChannelName": "{channel}に参加",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "sendMessageIn": "{channel}でメッセージを送信",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "light": "ライト",
@@ -84,7 +84,7 @@
   "channelStream": "{channel}のストリーム",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {"type": "String"}
     }
   },
   "openInBrowser": "ブラウザで開く",
@@ -116,7 +116,7 @@
   "timeoutUserForDuration": "{duration}の間ユーザーをタイムアウト",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "chatCleared": "チャットがクリアされました",
@@ -124,7 +124,7 @@
   "bannedForDuration": "{duration}の間BAN",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {"type": "String"}
     }
   },
   "replyingTo": "返信先",
@@ -152,7 +152,7 @@
   "lastSeenAgo": "{time}前に最後に見た",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {"type": "String"}
     }
   }
 }
