@@ -1,10 +1,16 @@
 {
   "chatsen": "Chatsen",
   "catsen": "Catsen",
+  "translationAuthorNames": "",
+  "@translationAuthorNames": {
+    "description": "Translators should put their desired names to be displayed in the application credits, separated by semicolons here. Example: forsen;nymn;randomuser123 (one per contributor)"
+  },
   "loggedInVia": "Logged in via {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {"type": "String"}
+      "provider": {
+        "type": "String"
+      }
     }
   },
   "termsOfService": "Terms of Service",
@@ -14,7 +20,9 @@
   "expiresIn": "Expires in {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "close": "Close",
@@ -29,7 +37,9 @@
   "loggedInAs": "Logged in as {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {"type": "String"}
+      "user": {
+        "type": "String"
+      }
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "An error has occurred when verifying user data:",
@@ -45,25 +55,33 @@
   "joinUser": "Join {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {"type": "String"}
+      "user": {
+        "type": "String"
+      }
     }
   },
   "spellCheckFailed": "Spell check failed! Did you mean to search for {username}?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {"type": "String"}
+      "username": {
+        "type": "String"
+      }
     }
   },
   "joinChannelName": "Join {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {"type": "String"}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "sendMessageIn": "Send message in {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {"type": "String"}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "light": "Light",
@@ -84,7 +102,9 @@
   "channelStream": "{channel}'s stream",
   "@channelStream": {
     "placeholders": {
-      "channel": {"type": "String"}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "openInBrowser": "Open in browser",
@@ -116,7 +136,9 @@
   "timeoutUserForDuration": "Timeout user for {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {"type": "String"}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "chatCleared": "Chat was cleared",
@@ -124,7 +146,9 @@
   "bannedForDuration": "banned for {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {"type": "String"}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "replyingTo": "Replying to",
@@ -152,7 +176,9 @@
   "lastSeenAgo": "Last seen {time} ago",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {"type": "String"}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "credits": "Credits",
