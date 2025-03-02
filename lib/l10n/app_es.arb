@@ -1,10 +1,16 @@
 {
   "chatsen": "Chatsen",
   "catsen": "Catsen",
+  "translationAuthorNames": "",
+  "@translationAuthorNames": {
+    "description": "Translators should put their desired names to be displayed in the application credits, separated by semicolons here. Example: forsen;nymn;randomuser123 (one per contributor)"
+  },
   "loggedInVia": "Sesión iniciada a través de {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {
+        "type": "String"
+      }
     }
   },
   "termsOfService": "Términos del Servicio",
@@ -14,7 +20,9 @@
   "expiresIn": "Expira en {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "close": "Cerrar",
@@ -29,7 +37,9 @@
   "loggedInAs": "Sesión iniciada como {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {
+        "type": "String"
+      }
     }
   },
   "anErrorHasOccuredWhenVerifyingUserData": "Se ha producido un error al verificar los datos de usuario:",
@@ -45,25 +55,33 @@
   "joinUser": "Unirse a {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {
+        "type": "String"
+      }
     }
   },
   "spellCheckFailed": "La revisión ortográfica falló! Quizás quisiste buscar {username}?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {
+        "type": "String"
+      }
     }
   },
   "joinChannelName": "Unirse a {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "sendMessageIn": "Enviar mensaje en {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "light": "Claro",
@@ -84,7 +102,9 @@
   "channelStream": "Stream de {channel}",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
   "openInBrowser": "Abrir en el navegador",
@@ -116,7 +136,9 @@
   "timeoutUserForDuration": "Banear usuario temporalmente por {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "chatCleared": "El chat ha sido borrado",
@@ -124,7 +146,9 @@
   "bannedForDuration": "baneado por {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {
+        "type": "String"
+      }
     }
   },
   "replyingTo": "Respondiendo a",
@@ -152,7 +176,9 @@
   "lastSeenAgo": "Última vez visto hace {time}",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {
+        "type": "String"
+      }
     }
   },
   "credits": "Créditos",
