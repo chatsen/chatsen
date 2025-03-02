@@ -1,160 +1,186 @@
 {
   "chatsen": "Chatsen",
-  "catsen": "Mačkasen",
-  "loggedInVia": "Prijavljen preko {provider}",
+  "catsen": "Catsen",
+  "translationAuthorNames": "",
+  "@translationAuthorNames": {
+    "description": "Translators should put their desired names to be displayed in the application credits, separated by semicolons here. Example: forsen;nymn;randomuser123 (one per contributor)"
+  },
+  "loggedInVia": "Пријављен преко {provider}",
   "@loggedInVia": {
     "placeholders": {
-      "provider": {}
+      "provider": {
+        "type": "String"
+      }
     }
   },
-  "termsOfService": "Uslovi Korišćenja",
-  "privacyPolicy": "Pravila Privatnosti",
-  "settings": "Podešavanja",
-  "expiresNever": "Nikad ne ističe",
-  "expiresIn": "Ističe za {time}",
+  "termsOfService": "Услови Коришћена",
+  "privacyPolicy": "Правила о Приватности",
+  "settings": "Подешавања",
+  "expiresNever": "Никад не истиче",
+  "expiresIn": "Истиче за {time}",
   "@expiresIn": {
     "placeholders": {
-      "time": {}
+      "time": {
+        "type": "String"
+      }
     }
   },
-  "close": "Zatvori",
-  "add": "Dodaj",
-  "cancel": "Otkaži",
-  "tokenInput": "Unos tokena",
-  "account": "Nalog",
-  "refreshAccount": "Osveži nalog",
-  "removeAccount": "Ukloni nalog",
-  "addAnotherAccount": "Dodaj novi nalog",
-  "verifiedUserData": "Verifikovani korisnički podaci!",
-  "loggedInAs": "Prijavljen/a kao {user}",
+  "close": "Затвори",
+  "add": "Додај",
+  "cancel": "Откажи",
+  "tokenInput": "Унос токена",
+  "account": "Налог",
+  "refreshAccount": "Освежи налог",
+  "removeAccount": "Уклони налог",
+  "addAnotherAccount": "Додај нови налог",
+  "verifiedUserData": "Верификовани кориснички подаци!",
+  "loggedInAs": "Улогован/а као {user}",
   "@loggedInAs": {
     "placeholders": {
-      "user": {}
+      "user": {
+        "type": "String"
+      }
     }
   },
-  "anErrorHasOccuredWhenVerifyingUserData": "Greška se pojavila tokom verifikacije korisničkih podataka:",
-  "verifyingUserData": "Verifikovanje korisničkih podataka...",
-  "verifiedUserToken": "Verifikovan korisnički token!",
-  "anErrorHasOccuredWhenVerifyingUserToken": "Greška se pojavila tokom verifikovanja korisničkog tokena:",
-  "verifyingUserToken": "Verifikovanje korisničkog tokena...",
-  "searchForChannels": "Potraži kanale",
-  "recommendedChannels": "Preporučeni kanali",
-  "popularChannels": "Popularni kanali",
-  "channel": "Kanal",
-  "leaveChannel": "Napusti kanal",
-  "joinUser": "Pridruži se {user}",
+  "anErrorHasOccuredWhenVerifyingUserData": "Грешка се појавила током верификације корисничких података:",
+  "verifyingUserData": "Верификовање корисничких података...",
+  "verifiedUserToken": "Верификован кориснички токен!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Грешка се појавила током верификовања корисничког токена:",
+  "verifyingUserToken": "Верификовање корисничког токена...",
+  "searchForChannels": "Потражи канале",
+  "recommendedChannels": "Препоручени канали",
+  "popularChannels": "Популарни канали",
+  "channel": "Канал",
+  "leaveChannel": "Напусти канал",
+  "joinUser": "Придружи {user}",
   "@joinUser": {
     "placeholders": {
-      "user": {}
+      "user": {
+        "type": "String"
+      }
     }
   },
-  "spellCheckFailed": "Pravopis neispravan! Da li ste misli da potražite {username}?",
+  "spellCheckFailed": "Правописна грешка! Да ли сте мислили да потражите {username}?",
   "@spellCheckFailed": {
     "placeholders": {
-      "username": {}
+      "username": {
+        "type": "String"
+      }
     }
   },
-  "joinChannelName": "Pridruži se {channel}",
+  "joinChannelName": "Придружи се {channel}",
   "@joinChannelName": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
-  "sendMessageIn": "Pošalji poruku u {channel}",
+  "sendMessageIn": "Пошаљи поруку у {channel}",
   "@sendMessageIn": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
-  "light": "Svetlo",
-  "dark": "Tamno",
-  "system": "Sistem",
-  "appearance": "Izgled",
-  "highContrast": "Visoki kontrast",
-  "playStream": "Pusti strim",
-  "stopStream": "Zaustavi strim",
-  "customCommand": "Prilagođena komanda",
-  "customCommands": "Prilagođene komande",
-  "newCustomCommand": "Nova prilagođena komanda",
-  "commandTrigger": "Okidač",
-  "command": "Komanda",
-  "save": "Sačuvaj",
-  "browserStreamSettings": "Podešavanja Pretraživača/Strima",
-  "addPage": "Dodaj stranicu",
-  "channelStream": "{channel} strim",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "appearance": "Appearance",
+  "highContrast": "High contrast",
+  "playStream": "Play stream",
+  "stopStream": "Stop stream",
+  "customCommand": "Custom command",
+  "customCommands": "Custom commands",
+  "newCustomCommand": "New custom command",
+  "commandTrigger": "Trigger",
+  "command": "Command",
+  "save": "Save",
+  "browserStreamSettings": "Browser/Stream Settings",
+  "addPage": "Add page",
+  "channelStream": "{channel}'s stream",
   "@channelStream": {
     "placeholders": {
-      "channel": {}
+      "channel": {
+        "type": "String"
+      }
     }
   },
-  "openInBrowser": "Otvori u pretraživaču",
-  "messageAppearance": "Izgled poruke",
-  "showTimestamps": "Prikaži vremena",
-  "compactMessages": "Kompaktne poruke",
-  "messageTrigger": "Okidač poruke",
-  "pattern": "Obrazac",
-  "mention": "Spomeni",
-  "block": "Blokiraj",
-  "enableRegex": "Omogući regex",
-  "caseSensitive": "Osetljivo na velika i mala slova",
-  "messageTriggers": "Okidači poruka",
-  "newMessageTrigger": "Okidač nove poruke",
-  "reply": "Odgovori",
-  "copyText": "Kopiraj tekst",
-  "copyTextSubtitle": "Zadrži da bi kopirao poruku sa imenom korisnika",
-  "deleteMessage": "Obriši poruku",
-  "mentionUser": "Spomeni",
-  "copyMessageId": "Kopiraj ID poruke",
-  "theme": "Tema",
-  "userTrigger": "Okidač korisnika",
-  "userTriggers": "Okidači korisnika",
-  "chatHistory": "Istorija razgovora",
-  "login": "Prijavite se",
-  "newUserTrigger": "Okidač novog korisnika",
-  "ban": "Banuj",
-  "unban": "Ukini Zabranu",
-  "timeoutUserForDuration": "Ograniči korisnika {duration}",
+  "openInBrowser": "Open in browser",
+  "messageAppearance": "Message appearance",
+  "showTimestamps": "Show timestamps",
+  "compactMessages": "Compact messages",
+  "messageTrigger": "Message trigger",
+  "pattern": "Pattern",
+  "mention": "Mention",
+  "block": "Block",
+  "enableRegex": "Enable regex",
+  "caseSensitive": "Case sensitive",
+  "messageTriggers": "Message triggers",
+  "newMessageTrigger": "New message trigger",
+  "reply": "Reply",
+  "copyText": "Copy text",
+  "copyTextSubtitle": "Hold to copy message text with username",
+  "deleteMessage": "Delete message",
+  "mentionUser": "Mention user",
+  "copyMessageId": "Copy message ID",
+  "theme": "Theme",
+  "userTrigger": "User trigger",
+  "userTriggers": "User triggers",
+  "chatHistory": "Chat history",
+  "login": "Login",
+  "newUserTrigger": "New user trigger",
+  "ban": "Ban",
+  "unban": "Unban",
+  "timeoutUserForDuration": "Timeout user for {duration}",
   "@timeoutUserForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {
+        "type": "String"
+      }
     }
   },
-  "chatCleared": "Razgovor izbrisan",
-  "permabanned": "zauvek banovan",
-  "bannedForDuration": "banovan još {duration}",
+  "chatCleared": "Chat was cleared",
+  "permabanned": "permabanned",
+  "bannedForDuration": "banned for {duration}",
   "@bannedForDuration": {
     "placeholders": {
-      "duration": {}
+      "duration": {
+        "type": "String"
+      }
     }
   },
-  "replyingTo": "Odgovarate",
-  "blockedMessage": "Blokirana poruka",
-  "showMessage": "Prikaži poruku",
-  "hideMessage": "Sakrij poruku",
-  "scrollToBottom": "Skrolujte do dna",
-  "startUsingTheApp": "Dodajte nalog da bi ste koristili aplikaciju.",
-  "chatSettings": "Podešavanja razgovora",
-  "autocompleteUsersWithAt": "Automatski dovrši korisnike sa @",
-  "autocompleteEmotesWithColon": "Automatski dovrši emotikone sa :",
-  "language": "Jezik",
-  "locale": "Lokalno",
-  "systemDefault": "Sistemski podrazumevano",
-  "justDefault": "Podrazumevano",
-  "notifications": "Obaveštenja",
-  "noNotifications": "Neko, negde, će vas spomenuti nekog dana.",
-  "backgroundNotifications": "Pozadinska obaveštenja",
-  "optionNotAvailableOnYourPlatform": "Ova opcija nije dostupna na vašoj platformi.",
-  "optionNotAvailablePaywalled": "Ova opcija je dostupna samo Chatsen podrživačima.",
-  "clearAll": "Izbriši sve",
-  "cache": "Keš memorija",
-  "clearCache": "Izbriši keš memoriju",
-  "chatters": "Četeri",
-  "lastSeenAgo": "Zadnji put viđeni pre {time}",
+  "replyingTo": "Replying to",
+  "blockedMessage": "Blocked message",
+  "showMessage": "Show message",
+  "hideMessage": "Hide message",
+  "scrollToBottom": "Scroll to bottom",
+  "startUsingTheApp": "To start using the app, add an account below.",
+  "chatSettings": "Chat settings",
+  "autocompleteUsersWithAt": "Autocomplete users with @",
+  "autocompleteEmotesWithColon": "Autocomplete emotes with :",
+  "language": "Language",
+  "locale": "Locale",
+  "systemDefault": "System default",
+  "justDefault": "Default",
+  "notifications": "Notifications",
+  "noNotifications": "Someone, somewhere, will mention you someday.",
+  "backgroundNotifications": "Background notifications",
+  "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
+  "optionNotAvailablePaywalled": "This option is for Chatsen supporters only.",
+  "clearAll": "Clear all",
+  "cache": "Cache",
+  "clearCache": "Clear cache",
+  "chatters": "Chatters",
+  "lastSeenAgo": "Last seen {time} ago",
   "@lastSeenAgo": {
     "placeholders": {
-      "time": {}
+      "time": {
+        "type": "String"
+      }
     }
   },
-  "credits": "Zasluge",
-  "search": "Pretraži"
+  "credits": "Credits",
+  "search": "Search"
 }
