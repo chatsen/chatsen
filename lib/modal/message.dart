@@ -2,7 +2,7 @@ import 'package:chatsen/api/twitch/twitch.dart';
 import 'package:chatsen/widgets/channel_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:chatsen/l10n/app_localizations.dart';
 
 import '../components/tile.dart';
 import '../tmi/channel/messages/channel_message_chat.dart';

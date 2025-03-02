@@ -4,7 +4,7 @@ import 'package:chatsen/modal/components/modal_header.dart';
 import 'package:chatsen/modal/user.dart';
 import 'package:chatsen/tmi/channel/channel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:chatsen/l10n/app_localizations.dart';
 
 import '../components/modal.dart';
 

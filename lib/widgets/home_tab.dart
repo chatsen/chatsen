@@ -9,7 +9,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:chatsen/l10n/app_localizations.dart';
 
 import '/components/modal.dart';
 import '/components/separator.dart';

@@ -2,7 +2,7 @@ import 'package:chatsen/components/tile.dart';
 import 'package:chatsen/data/browser/browser_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:chatsen/l10n/app_localizations.dart';
 
 import '../data/browser/browser_state.dart';
 import 'components/modal_header.dart';

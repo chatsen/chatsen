@@ -14,7 +14,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '/tools/m3parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:chatsen/l10n/app_localizations.dart';
 
 import 'components/boxlistener.dart';
 import 'data/settings/application_appearance.dart';

@@ -4,7 +4,7 @@ import 'package:chatsen/modal/chatters.dart';
 import 'package:chatsen/tmi/channel/channel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:chatsen/l10n/app_localizations.dart';
 
 import '../api/chatsen/chatsen_user.dart';
 import '../components/tile.dart';

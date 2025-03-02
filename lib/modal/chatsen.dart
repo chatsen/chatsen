@@ -5,7 +5,7 @@ import 'package:chatsen/modal/components/modal_header.dart';
 import 'package:chatsen/modal/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:chatsen/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../components/tile.dart';

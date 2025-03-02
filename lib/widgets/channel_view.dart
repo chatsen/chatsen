@@ -6,7 +6,7 @@ import 'package:chatsen/widgets/chat/emote_picker.dart';
 import 'package:chatsen/widgets/chat_message.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:chatsen/l10n/app_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../api/catbox/catbox.dart';

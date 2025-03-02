@@ -2,7 +2,7 @@ import 'package:chatsen/components/tile.dart';
 import 'package:chatsen/components/toggle.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:chatsen/l10n/app_localizations.dart';
 
 import '../components/boxlistener.dart';
 import '../data/settings/message_appearance.dart';

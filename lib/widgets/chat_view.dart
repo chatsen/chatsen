@@ -5,7 +5,7 @@ import 'package:chatsen/widgets/avatar_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:chatsen/l10n/app_localizations.dart';
 
 import '../components/boxlistener.dart';
 import '../components/surface.dart';
