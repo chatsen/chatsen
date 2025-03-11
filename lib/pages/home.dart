@@ -68,6 +68,7 @@ class HomePage extends StatelessWidget {
                     top: false,
                     child: TabBar(
                       isScrollable: true,
+                      tabAlignment: TabAlignment.start,
                       tabs: [
                         GestureDetector(
                           onLongPress: () {
