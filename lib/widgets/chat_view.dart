@@ -171,25 +171,28 @@ class _ChatViewState extends State<ChatView> {
                 Positioned(
                   bottom: 24.0,
                   right: 24.0,
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 200),
-                    opacity: scrollMessages != null ? 1.0 : 0.0,
-                    child: Surface(
-                      onTap: () {
-                        scrollMessages = null;
-                        setState(() {});
-                        WidgetsBinding.instance.scheduleFrameCallback((_) {
-                          scrollController.jumpTo(scrollController.position.minScrollExtent);
-                        });
-                        searchController.text = '';
-                      },
-                      borderRadius: BorderRadius.circular(128.0),
-                      type: SurfaceType.tertiary,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Transform.rotate(
-                          angle: 90 * pi / 180,
-                          child: const Icon(Icons.chevron_right_outlined),
+                  child: SafeArea(
+                    bottom: false,
+                    child: AnimatedOpacity(
+                      duration: const Duration(milliseconds: 200),
+                      opacity: scrollMessages != null ? 1.0 : 0.0,
+                      child: Surface(
+                        onTap: () {
+                          scrollMessages = null;
+                          setState(() {});
+                          WidgetsBinding.instance.scheduleFrameCallback((_) {
+                            scrollController.jumpTo(scrollController.position.minScrollExtent);
+                          });
+                          searchController.text = '';
+                        },
+                        borderRadius: BorderRadius.circular(128.0),
+                        type: SurfaceType.tertiary,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Transform.rotate(
+                            angle: 90 * pi / 180,
+                            child: const Icon(Icons.chevron_right_outlined),
+                          ),
                         ),
                       ),
                     ),
