@@ -85,7 +85,7 @@ class SevenTVEmoteData {
   int lifecycle;
   bool listed;
   String name;
-  SevenTVEmoteDataOwner owner;
+  SevenTVEmoteDataOwner? owner;
   List<String> state;
 
   SevenTVEmoteData({
