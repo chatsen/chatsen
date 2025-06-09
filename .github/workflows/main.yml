@@ -102,7 +102,7 @@ jobs:
           echo "Sync with Github repository." > whatsnew-en-US
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         if: startsWith(github.ref, 'refs/tags/')
         with:
           name: PlayStore.aab
@@ -184,7 +184,7 @@ jobs:
           ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS.ipa
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: iOS.ipa
           path: ./release/iOS.ipa
