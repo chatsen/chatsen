@@ -785,7 +785,7 @@ class Tutorial extends StatelessWidget {
             Text('Quick actions', style: Theme.of(context).textTheme.headline5),
             SizedBox(height: 16.0),
             Container(
-              constraints: BoxConstraints(maxWidth: 128.0 * 1.5),
+              constraints: BoxConstraints(maxWidth: 128.0 * 1.6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
@@ -806,13 +806,13 @@ class Tutorial extends StatelessWidget {
                   SizedBox(height: 8.0),
                   ElevatedButton.icon(
                     onPressed: () async {
-                      await client.joinChannels(['#chatsen']);
+                      await client.joinChannels(['#chatsenapp']);
                       var channelsBox = await Hive.openBox('Channels');
                       await channelsBox.clear();
                       await channelsBox.addAll(client.channels.map((channel) => channel.name));
                     },
                     icon: Icon(Icons.chat),
-                    label: Text('Join #chatsen'),
+                    label: Text('Join #chatsenapp'),
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
                       padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
