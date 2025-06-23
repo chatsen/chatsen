@@ -72,7 +72,8 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Wystąpił problem podczas weryfikacji danych użytkownika:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Wystąpił problem podczas weryfikacji danych użytkownika:';
 
   @override
   String get verifyingUserData => 'Weryfikowanie danych użytkownika...';
@@ -81,7 +82,8 @@ class AppLocalizationsPl extends AppLocalizations {
   String get verifiedUserToken => 'Zwerifikowano token użytkownika!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Wystąpił problem podczas weryfikacji tokenu użytkownika:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Wystąpił problem podczas weryfikacji tokenu użytkownika:';
 
   @override
   String get verifyingUserToken => 'Weryfikowanie tokenu użytkownika...';
@@ -214,7 +216,8 @@ class AppLocalizationsPl extends AppLocalizations {
   String get copyText => 'Kopiuj tekst';
 
   @override
-  String get copyTextSubtitle => 'Przytrzymaj, aby skopiować tekst z nazwą użytkownika';
+  String get copyTextSubtitle =>
+      'Przytrzymaj, aby skopiować tekst z nazwą użytkownika';
 
   @override
   String get deleteMessage => 'Usuń wiadomość';
@@ -281,16 +284,19 @@ class AppLocalizationsPl extends AppLocalizations {
   String get scrollToBottom => 'Przewiń na dół';
 
   @override
-  String get startUsingTheApp => 'Dodaj konto poniżej, aby zacząć korzystać z aplikacji.';
+  String get startUsingTheApp =>
+      'Dodaj konto poniżej, aby zacząć korzystać z aplikacji.';
 
   @override
   String get chatSettings => 'Ustawienia czatu';
 
   @override
-  String get autocompleteUsersWithAt => 'Autouzupełnianie użytkowników używając @';
+  String get autocompleteUsersWithAt =>
+      'Autouzupełnianie użytkowników używając @';
 
   @override
-  String get autocompleteEmotesWithColon => 'Autouzupełnianie emotek używając :';
+  String get autocompleteEmotesWithColon =>
+      'Autouzupełnianie emotek używając :';
 
   @override
   String get language => 'Język';
@@ -314,10 +320,12 @@ class AppLocalizationsPl extends AppLocalizations {
   String get backgroundNotifications => 'Powiadomienia w tle';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'Ta opcja nie jest dostępna na twojej platformie.';
+  String get optionNotAvailableOnYourPlatform =>
+      'Ta opcja nie jest dostępna na twojej platformie.';
 
   @override
-  String get optionNotAvailablePaywalled => 'Ta opcja jest tylko dla wspierających Chatsen.';
+  String get optionNotAvailablePaywalled =>
+      'Ta opcja jest tylko dla wspierających Chatsen.';
 
   @override
   String get clearAll => 'Wyczyść wszystko';

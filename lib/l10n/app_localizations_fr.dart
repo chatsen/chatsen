@@ -72,7 +72,8 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Une erreur est survenue lors de la vérification des données utilisateur:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Une erreur est survenue lors de la vérification des données utilisateur:';
 
   @override
   String get verifyingUserData => 'Vérification des données utilisateur...';
@@ -81,7 +82,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get verifiedUserToken => 'Token utilisateur vérifié!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Une erreur est survenue lors de la vérification du token utilisateur:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Une erreur est survenue lors de la vérification du token utilisateur:';
 
   @override
   String get verifyingUserToken => 'Vérification du token utilisateur...';
@@ -214,7 +216,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get copyText => 'Copier le texte';
 
   @override
-  String get copyTextSubtitle => 'Maintenez pour copier le texte du message avec le nom d\'utilisateur';
+  String get copyTextSubtitle =>
+      'Maintenez pour copier le texte du message avec le nom d\'utilisateur';
 
   @override
   String get deleteMessage => 'Supprimer le message';
@@ -281,13 +284,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get scrollToBottom => 'Défiler vers le bas';
 
   @override
-  String get startUsingTheApp => 'Pour commencer à utiliser l\'appli, ajoutez un compte ci-dessous.';
+  String get startUsingTheApp =>
+      'Pour commencer à utiliser l\'appli, ajoutez un compte ci-dessous.';
 
   @override
   String get chatSettings => 'Paramètres du chat';
 
   @override
-  String get autocompleteUsersWithAt => 'Auto-complétion des noms d\'utilisateurs avec @';
+  String get autocompleteUsersWithAt =>
+      'Auto-complétion des noms d\'utilisateurs avec @';
 
   @override
   String get autocompleteEmotesWithColon => 'Auto-complétion des emotes avec :';
@@ -314,10 +319,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get backgroundNotifications => 'Notifications en arrière-plan';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'Cette option est réservée aux supporters de Chatsen.';
+  String get optionNotAvailablePaywalled =>
+      'Cette option est réservée aux supporters de Chatsen.';
 
   @override
   String get clearAll => 'Tout effacer';

@@ -72,7 +72,8 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => '유저 데이터를 확인하는데 오류가 발생하였습니다:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      '유저 데이터를 확인하는데 오류가 발생하였습니다:';
 
   @override
   String get verifyingUserData => '유저 데이터 확인중...';
@@ -81,7 +82,8 @@ class AppLocalizationsKo extends AppLocalizations {
   String get verifiedUserToken => '유저 토큰 확인됨!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => '유저 토큰을 확인하는데 오류가 발생하였습니다:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      '유저 토큰을 확인하는데 오류가 발생하였습니다:';
 
   @override
   String get verifyingUserToken => '유저 토큰 확인중...';
@@ -314,7 +316,8 @@ class AppLocalizationsKo extends AppLocalizations {
   String get backgroundNotifications => '백그라운드 알림';
 
   @override
-  String get optionNotAvailableOnYourPlatform => '해당 옵션은 사용자의 플랫폼에서 사용할 수 없습니다.';
+  String get optionNotAvailableOnYourPlatform =>
+      '해당 옵션은 사용자의 플랫폼에서 사용할 수 없습니다.';
 
   @override
   String get optionNotAvailablePaywalled => '해당 옵션은 Chatsen 후원자 전용 옵션입니다.';

@@ -72,7 +72,8 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'שגיאה בעת אימות נתוני משתמש:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'שגיאה בעת אימות נתוני משתמש:';
 
   @override
   String get verifyingUserData => 'מאמת את נתוני המשתמש...';
@@ -81,7 +82,8 @@ class AppLocalizationsHe extends AppLocalizations {
   String get verifiedUserToken => 'טוקן משתמש מאומת!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'שגיאה בעת אימות טוקן משתמש:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'שגיאה בעת אימות טוקן משתמש:';
 
   @override
   String get verifyingUserToken => 'מאמת טוקן משתמש...';
@@ -281,7 +283,8 @@ class AppLocalizationsHe extends AppLocalizations {
   String get scrollToBottom => 'Scroll to bottom';
 
   @override
-  String get startUsingTheApp => 'To start using the app, add an account below.';
+  String get startUsingTheApp =>
+      'To start using the app, add an account below.';
 
   @override
   String get chatSettings => 'Chat settings';
@@ -314,10 +317,12 @@ class AppLocalizationsHe extends AppLocalizations {
   String get backgroundNotifications => 'Background notifications';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'This option is for Chatsen supporters only.';
+  String get optionNotAvailablePaywalled =>
+      'This option is for Chatsen supporters only.';
 
   @override
   String get clearAll => 'Clear all';

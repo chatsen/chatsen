@@ -72,7 +72,8 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Er is een fout opgetreden bij het verifiëren van gebruikersgegevens:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Er is een fout opgetreden bij het verifiëren van gebruikersgegevens:';
 
   @override
   String get verifyingUserData => 'Gebruikersgegevens verifiëren...';
@@ -81,7 +82,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get verifiedUserToken => 'Geverifieerde gebruikerstoken!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Er is een fout opgetreden bij het verifiëren van de gebruikerstoken:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Er is een fout opgetreden bij het verifiëren van de gebruikerstoken:';
 
   @override
   String get verifyingUserToken => 'Gebruikerstoken verifiëren...';
@@ -281,7 +283,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get scrollToBottom => 'Scroll to bottom';
 
   @override
-  String get startUsingTheApp => 'To start using the app, add an account below.';
+  String get startUsingTheApp =>
+      'To start using the app, add an account below.';
 
   @override
   String get chatSettings => 'Chat settings';
@@ -314,10 +317,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get backgroundNotifications => 'Background notifications';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'This option is for Chatsen supporters only.';
+  String get optionNotAvailablePaywalled =>
+      'This option is for Chatsen supporters only.';
 
   @override
   String get clearAll => 'Clear all';

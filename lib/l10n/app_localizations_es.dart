@@ -72,7 +72,8 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Se ha producido un error al verificar los datos de usuario:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Se ha producido un error al verificar los datos de usuario:';
 
   @override
   String get verifyingUserData => 'Verificando datos de usuario...';
@@ -81,7 +82,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get verifiedUserToken => '¡Token de usuario verificado!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Se ha producido un error al verificar el token de usuario:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Se ha producido un error al verificar el token de usuario:';
 
   @override
   String get verifyingUserToken => 'Verificando token de usuario...';
@@ -214,7 +216,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get copyText => 'Copiar texto';
 
   @override
-  String get copyTextSubtitle => 'Mantén pulsado para copiar el texto del mensaje con el nombre de usuario';
+  String get copyTextSubtitle =>
+      'Mantén pulsado para copiar el texto del mensaje con el nombre de usuario';
 
   @override
   String get deleteMessage => 'Eliminar mensaje';
@@ -281,7 +284,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get scrollToBottom => 'Ir hasta abajo';
 
   @override
-  String get startUsingTheApp => 'Para empezar a utilizar la aplicación, añade una cuenta a continuación.';
+  String get startUsingTheApp =>
+      'Para empezar a utilizar la aplicación, añade una cuenta a continuación.';
 
   @override
   String get chatSettings => 'Ajustes del Chat';
@@ -308,16 +312,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get notifications => 'Notificaciones';
 
   @override
-  String get noNotifications => 'Alguien, en algún lugar, te mencionará algún día.';
+  String get noNotifications =>
+      'Alguien, en algún lugar, te mencionará algún día.';
 
   @override
   String get backgroundNotifications => 'Notificaciones en segundo plano';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'Esta opción no está disponible en tu plataforma.';
+  String get optionNotAvailableOnYourPlatform =>
+      'Esta opción no está disponible en tu plataforma.';
 
   @override
-  String get optionNotAvailablePaywalled => 'Esta opción es sólo para simpatizantes de Chatsen.';
+  String get optionNotAvailablePaywalled =>
+      'Esta opción es sólo para simpatizantes de Chatsen.';
 
   @override
   String get clearAll => 'Borrar todo';

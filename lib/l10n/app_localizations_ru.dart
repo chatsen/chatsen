@@ -72,7 +72,8 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Произошла ошибка при проверке данных пользователя:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Произошла ошибка при проверке данных пользователя:';
 
   @override
   String get verifyingUserData => 'Проверка данных пользователя...';
@@ -81,7 +82,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get verifiedUserToken => 'Токен пользователя подтвержден!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Произошла ошибка при проверке токена пользователя:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Произошла ошибка при проверке токена пользователя:';
 
   @override
   String get verifyingUserToken => 'Проверка токена пользователя...';
@@ -214,7 +216,8 @@ class AppLocalizationsRu extends AppLocalizations {
   String get copyText => 'Скопировать текст';
 
   @override
-  String get copyTextSubtitle => 'Удерживайте, чтобы скопировать текст сообщения с именем пользователя';
+  String get copyTextSubtitle =>
+      'Удерживайте, чтобы скопировать текст сообщения с именем пользователя';
 
   @override
   String get deleteMessage => 'Удалить сообщение';
@@ -281,13 +284,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get scrollToBottom => 'Прокрутить вниз';
 
   @override
-  String get startUsingTheApp => 'Чтобы начать использовать приложение, добавьте учётную запись ниже.';
+  String get startUsingTheApp =>
+      'Чтобы начать использовать приложение, добавьте учётную запись ниже.';
 
   @override
   String get chatSettings => 'Настройки чата';
 
   @override
-  String get autocompleteUsersWithAt => 'Предлагать имена пользователей после ввода @';
+  String get autocompleteUsersWithAt =>
+      'Предлагать имена пользователей после ввода @';
 
   @override
   String get autocompleteEmotesWithColon => 'Предлагать смайлики после ввода :';
@@ -308,16 +313,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get notifications => 'Уведомления';
 
   @override
-  String get noNotifications => 'Кто-то, где-то, обязательно упомянет вас когда-нибудь.';
+  String get noNotifications =>
+      'Кто-то, где-то, обязательно упомянет вас когда-нибудь.';
 
   @override
   String get backgroundNotifications => 'Фоновые уведомления';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'Эта опция недоступна на вашей операционной системе.';
+  String get optionNotAvailableOnYourPlatform =>
+      'Эта опция недоступна на вашей операционной системе.';
 
   @override
-  String get optionNotAvailablePaywalled => 'Эта опция предназначена только для спонсоров Chatsen.';
+  String get optionNotAvailablePaywalled =>
+      'Эта опция предназначена только для спонсоров Chatsen.';
 
   @override
   String get clearAll => 'Очистить всё';

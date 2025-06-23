@@ -72,7 +72,8 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Kullanıcı verisi onaylanırken bir sorun yaşandı:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Kullanıcı verisi onaylanırken bir sorun yaşandı:';
 
   @override
   String get verifyingUserData => 'Kullanıcı verisi onaylanıyor...';
@@ -81,7 +82,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get verifiedUserToken => 'Kullanıcı belirteci onaylandı!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Kullanıcı belirteci onaylanırken bir sorun yaşandı:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Kullanıcı belirteci onaylanırken bir sorun yaşandı:';
 
   @override
   String get verifyingUserToken => 'Kullanıcı belirteci onaylanıyor...';
@@ -281,7 +283,8 @@ class AppLocalizationsTr extends AppLocalizations {
   String get scrollToBottom => 'Scroll to bottom';
 
   @override
-  String get startUsingTheApp => 'To start using the app, add an account below.';
+  String get startUsingTheApp =>
+      'To start using the app, add an account below.';
 
   @override
   String get chatSettings => 'Chat settings';
@@ -314,10 +317,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get backgroundNotifications => 'Background notifications';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'This option is for Chatsen supporters only.';
+  String get optionNotAvailablePaywalled =>
+      'This option is for Chatsen supporters only.';
 
   @override
   String get clearAll => 'Clear all';

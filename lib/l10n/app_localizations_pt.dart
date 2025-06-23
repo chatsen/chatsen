@@ -72,7 +72,8 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Ocorreu um erro ao verificar os dados do usuário:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Ocorreu um erro ao verificar os dados do usuário:';
 
   @override
   String get verifyingUserData => 'Verificando dados do usuário...';
@@ -81,7 +82,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get verifiedUserToken => 'Token do usuário verificado!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Ocorreu um erro ao verificar o token do usuário:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Ocorreu um erro ao verificar o token do usuário:';
 
   @override
   String get verifyingUserToken => 'Verificando token de usuário...';
@@ -214,7 +216,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get copyText => 'Copiar texto';
 
   @override
-  String get copyTextSubtitle => 'Segure para copiar o texto da mensagem com o usuário';
+  String get copyTextSubtitle =>
+      'Segure para copiar o texto da mensagem com o usuário';
 
   @override
   String get deleteMessage => 'Excluir mensagem';
@@ -281,7 +284,8 @@ class AppLocalizationsPt extends AppLocalizations {
   String get scrollToBottom => 'Rolar para o final';
 
   @override
-  String get startUsingTheApp => 'Para começar a usar o aplicativo, adicione uma conta abaixo.';
+  String get startUsingTheApp =>
+      'Para começar a usar o aplicativo, adicione uma conta abaixo.';
 
   @override
   String get chatSettings => 'Configurações do chat';
@@ -308,16 +312,19 @@ class AppLocalizationsPt extends AppLocalizations {
   String get notifications => 'Notificações';
 
   @override
-  String get noNotifications => 'Alguém, em algum lugar, vai te mencionar um dia.';
+  String get noNotifications =>
+      'Alguém, em algum lugar, vai te mencionar um dia.';
 
   @override
   String get backgroundNotifications => 'Notificações em segundo plano';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'Essa opção não está disponível na sua plataforma.';
+  String get optionNotAvailableOnYourPlatform =>
+      'Essa opção não está disponível na sua plataforma.';
 
   @override
-  String get optionNotAvailablePaywalled => 'Esta opção é apenas para apoiadores do Chatsen.';
+  String get optionNotAvailablePaywalled =>
+      'Esta opção é apenas para apoiadores do Chatsen.';
 
   @override
   String get clearAll => 'Limpar tudo';

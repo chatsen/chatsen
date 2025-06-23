@@ -72,7 +72,8 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Đã có lỗi xảy ra khi xác thực dữ liệu người dùng:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Đã có lỗi xảy ra khi xác thực dữ liệu người dùng:';
 
   @override
   String get verifyingUserData => 'Đang xác thực dữ liệu người dùng...';
@@ -81,7 +82,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get verifiedUserToken => 'Đã xác nhận Token người dùng!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Đã có lỗi xảy ra khi xác thực mã Token người dùng:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Đã có lỗi xảy ra khi xác thực mã Token người dùng:';
 
   @override
   String get verifyingUserToken => 'Đang xác thực mã Token người dùng...';
@@ -281,7 +283,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get scrollToBottom => 'Cuộn xuống cuối';
 
   @override
-  String get startUsingTheApp => 'Để bắt đầu sử dụng, hãy thêm một tài khoản bên dưới.';
+  String get startUsingTheApp =>
+      'Để bắt đầu sử dụng, hãy thêm một tài khoản bên dưới.';
 
   @override
   String get chatSettings => 'Cài đặt Chat';
@@ -308,16 +311,19 @@ class AppLocalizationsVi extends AppLocalizations {
   String get notifications => 'Thông báo';
 
   @override
-  String get noNotifications => 'Một ai đó, ở đâu đó, sẽ nhắc đến bạn vào một ngày nào đó.';
+  String get noNotifications =>
+      'Một ai đó, ở đâu đó, sẽ nhắc đến bạn vào một ngày nào đó.';
 
   @override
   String get backgroundNotifications => 'Thông báo trong nền';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'Tùy chọn này không có sẵn trên nền tảng của bạn.';
+  String get optionNotAvailableOnYourPlatform =>
+      'Tùy chọn này không có sẵn trên nền tảng của bạn.';
 
   @override
-  String get optionNotAvailablePaywalled => 'Tùy chọn này chỉ dành cho người dùng ủng hộ Chatsen.';
+  String get optionNotAvailablePaywalled =>
+      'Tùy chọn này chỉ dành cho người dùng ủng hộ Chatsen.';
 
   @override
   String get clearAll => 'Xoá tất cả';

@@ -72,7 +72,8 @@ class AppLocalizationsCa extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'S\'ha produït un error en verificar les dades de l\'usuari:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'S\'ha produït un error en verificar les dades de l\'usuari:';
 
   @override
   String get verifyingUserData => 'Verificant les dades de l\'usuari...';
@@ -81,7 +82,8 @@ class AppLocalizationsCa extends AppLocalizations {
   String get verifiedUserToken => 'Token de l\'usuari verificat!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'S\'ha produït un error en verificar el token de l\'usuari:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'S\'ha produït un error en verificar el token de l\'usuari:';
 
   @override
   String get verifyingUserToken => 'Verificant el token de l\'usuari...';
@@ -161,7 +163,8 @@ class AppLocalizationsCa extends AppLocalizations {
   String get save => 'Desa';
 
   @override
-  String get browserStreamSettings => 'Configuració del navegador/Retransmissió';
+  String get browserStreamSettings =>
+      'Configuració del navegador/Retransmissió';
 
   @override
   String get addPage => 'Afegir una pàgina';
@@ -214,7 +217,8 @@ class AppLocalizationsCa extends AppLocalizations {
   String get copyText => 'Copiar text';
 
   @override
-  String get copyTextSubtitle => 'Mantingueu premut per copiar el text del missatge amb el nom d\'usuari';
+  String get copyTextSubtitle =>
+      'Mantingueu premut per copiar el text del missatge amb el nom d\'usuari';
 
   @override
   String get deleteMessage => 'Eliminar missatge';
@@ -281,16 +285,19 @@ class AppLocalizationsCa extends AppLocalizations {
   String get scrollToBottom => 'Desplaça al final';
 
   @override
-  String get startUsingTheApp => 'Per començar a utilitzar l\'aplicació, afegiu un compte a continuació.';
+  String get startUsingTheApp =>
+      'Per començar a utilitzar l\'aplicació, afegiu un compte a continuació.';
 
   @override
   String get chatSettings => 'Configuració del xat';
 
   @override
-  String get autocompleteUsersWithAt => 'Completa els usuaris automàticament amb @';
+  String get autocompleteUsersWithAt =>
+      'Completa els usuaris automàticament amb @';
 
   @override
-  String get autocompleteEmotesWithColon => 'Completa els emotes automàticament amb :';
+  String get autocompleteEmotesWithColon =>
+      'Completa els emotes automàticament amb :';
 
   @override
   String get language => 'Llenguatge';
@@ -314,10 +321,12 @@ class AppLocalizationsCa extends AppLocalizations {
   String get backgroundNotifications => 'Background notifications';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'This option is for Chatsen supporters only.';
+  String get optionNotAvailablePaywalled =>
+      'This option is for Chatsen supporters only.';
 
   @override
   String get clearAll => 'Clear all';

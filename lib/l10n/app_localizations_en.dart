@@ -72,7 +72,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'An error has occurred when verifying user data:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'An error has occurred when verifying user data:';
 
   @override
   String get verifyingUserData => 'Verifying user data...';
@@ -81,7 +82,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verifiedUserToken => 'Verified user token!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'An error has occurred when verifying user token:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'An error has occurred when verifying user token:';
 
   @override
   String get verifyingUserToken => 'Verifying user token...';
@@ -281,7 +283,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scrollToBottom => 'Scroll to bottom';
 
   @override
-  String get startUsingTheApp => 'To start using the app, add an account below.';
+  String get startUsingTheApp =>
+      'To start using the app, add an account below.';
 
   @override
   String get chatSettings => 'Chat settings';
@@ -314,10 +317,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get backgroundNotifications => 'Background notifications';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'This option is for Chatsen supporters only.';
+  String get optionNotAvailablePaywalled =>
+      'This option is for Chatsen supporters only.';
 
   @override
   String get clearAll => 'Clear all';
@@ -345,7 +350,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
 /// The translations for English, as used in Canada (`en_CA`).
 class AppLocalizationsEnCa extends AppLocalizationsEn {
-  AppLocalizationsEnCa(): super('en_CA');
+  AppLocalizationsEnCa() : super('en_CA');
 
   @override
   String get chatsen => 'Chatsen';
@@ -408,7 +413,8 @@ class AppLocalizationsEnCa extends AppLocalizationsEn {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'An error has occurred when verifying user data:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'An error has occurred when verifying user data:';
 
   @override
   String get verifyingUserData => 'Verifying user data...';
@@ -417,7 +423,8 @@ class AppLocalizationsEnCa extends AppLocalizationsEn {
   String get verifiedUserToken => 'Verified user token!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'An error has occurred when verifying user token:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'An error has occurred when verifying user token:';
 
   @override
   String get verifyingUserToken => 'Verifying user token...';
@@ -617,7 +624,8 @@ class AppLocalizationsEnCa extends AppLocalizationsEn {
   String get scrollToBottom => 'Scroll to bottom';
 
   @override
-  String get startUsingTheApp => 'To start using the app, add an account below.';
+  String get startUsingTheApp =>
+      'To start using the app, add an account below.';
 
   @override
   String get chatSettings => 'Chat settings';
@@ -650,10 +658,12 @@ class AppLocalizationsEnCa extends AppLocalizationsEn {
   String get backgroundNotifications => 'Background notifications';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'This option is for Chatsen supporters only.';
+  String get optionNotAvailablePaywalled =>
+      'This option is for Chatsen supporters only.';
 
   @override
   String get clearAll => 'Clear all';
@@ -681,7 +691,7 @@ class AppLocalizationsEnCa extends AppLocalizationsEn {
 
 /// The translations for English, as used in Portugal (`en_PT`).
 class AppLocalizationsEnPt extends AppLocalizationsEn {
-  AppLocalizationsEnPt(): super('en_PT');
+  AppLocalizationsEnPt() : super('en_PT');
 
   @override
   String get chatsen => 'Chatsen';
@@ -744,7 +754,8 @@ class AppLocalizationsEnPt extends AppLocalizationsEn {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'An error has occurred when verifying user data:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'An error has occurred when verifying user data:';
 
   @override
   String get verifyingUserData => 'Verifying user data...';
@@ -753,7 +764,8 @@ class AppLocalizationsEnPt extends AppLocalizationsEn {
   String get verifiedUserToken => 'Verified user token!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'An error has occurred when verifying user token:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'An error has occurred when verifying user token:';
 
   @override
   String get verifyingUserToken => 'Verifying user token...';
@@ -953,7 +965,8 @@ class AppLocalizationsEnPt extends AppLocalizationsEn {
   String get scrollToBottom => 'Scroll to bottom';
 
   @override
-  String get startUsingTheApp => 'To start using the app, add an account below.';
+  String get startUsingTheApp =>
+      'To start using the app, add an account below.';
 
   @override
   String get chatSettings => 'Chat settings';
@@ -986,10 +999,12 @@ class AppLocalizationsEnPt extends AppLocalizationsEn {
   String get backgroundNotifications => 'Background notifications';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'This option is for Chatsen supporters only.';
+  String get optionNotAvailablePaywalled =>
+      'This option is for Chatsen supporters only.';
 
   @override
   String get clearAll => 'Clear all';

@@ -72,7 +72,8 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'ユーザーデータの確認中にエラーが発生しました：';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'ユーザーデータの確認中にエラーが発生しました：';
 
   @override
   String get verifyingUserData => 'ユーザーデータを確認中...';
@@ -81,7 +82,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get verifiedUserToken => '認証済みユーザートークン！';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'ユーザートークンの確認中にエラーが発生しました：';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'ユーザートークンの確認中にエラーが発生しました：';
 
   @override
   String get verifyingUserToken => 'ユーザートークンを確認中...';
@@ -314,7 +316,8 @@ class AppLocalizationsJa extends AppLocalizations {
   String get backgroundNotifications => 'バックグラウンド通知';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'このオプションはお使いのプラットフォームでは利用できません。';
+  String get optionNotAvailableOnYourPlatform =>
+      'このオプションはお使いのプラットフォームでは利用できません。';
 
   @override
   String get optionNotAvailablePaywalled => 'このオプションはChatsenサポーター専用です。';

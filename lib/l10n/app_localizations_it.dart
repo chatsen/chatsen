@@ -72,7 +72,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Si è verificato un errore durante la verifica dei dati utente:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Si è verificato un errore durante la verifica dei dati utente:';
 
   @override
   String get verifyingUserData => 'Verificando dati utente...';
@@ -81,7 +82,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get verifiedUserToken => 'Token utente verificato!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Si è verificato un errore durante la verifica del token utente:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Si è verificato un errore durante la verifica del token utente:';
 
   @override
   String get verifyingUserToken => 'Verificando token utente...';
@@ -214,7 +216,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get copyText => 'Copia testo';
 
   @override
-  String get copyTextSubtitle => 'Tieni premuto per copiare il testo del messaggio con il nome utente';
+  String get copyTextSubtitle =>
+      'Tieni premuto per copiare il testo del messaggio con il nome utente';
 
   @override
   String get deleteMessage => 'Cancella messaggio';
@@ -281,7 +284,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get scrollToBottom => 'Scorri in fondo';
 
   @override
-  String get startUsingTheApp => 'Per iniziare a utilizzare l\'app, aggiungi un account qui sotto.';
+  String get startUsingTheApp =>
+      'Per iniziare a utilizzare l\'app, aggiungi un account qui sotto.';
 
   @override
   String get chatSettings => 'Impostazioni della Chat';
@@ -314,10 +318,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get backgroundNotifications => 'Background notifications';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'This option is for Chatsen supporters only.';
+  String get optionNotAvailablePaywalled =>
+      'This option is for Chatsen supporters only.';
 
   @override
   String get clearAll => 'Clear all';

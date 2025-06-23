@@ -72,7 +72,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Bei der Verifizierung der Benutzerdaten ist ein Fehler aufgetreten:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Bei der Verifizierung der Benutzerdaten ist ein Fehler aufgetreten:';
 
   @override
   String get verifyingUserData => 'Benutzerdaten werden verifiziert...';
@@ -81,7 +82,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get verifiedUserToken => 'Benutzertoken verifiziert!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Bei der Verifizierung des Benutzertokens ist ein Fehler aufgetreten:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Bei der Verifizierung des Benutzertokens ist ein Fehler aufgetreten:';
 
   @override
   String get verifyingUserToken => 'Benutzertoken wird verifiziert...';
@@ -281,7 +283,8 @@ class AppLocalizationsDe extends AppLocalizations {
   String get scrollToBottom => 'Zum Ende springen';
 
   @override
-  String get startUsingTheApp => 'Fügen Sie unten ein Konto hinzu, um die App zu verwenden.';
+  String get startUsingTheApp =>
+      'Fügen Sie unten ein Konto hinzu, um die App zu verwenden.';
 
   @override
   String get chatSettings => 'Chateinstellungen';
@@ -314,10 +317,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get backgroundNotifications => 'Hintergrundbenachrichtigungen';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'Diese Option ist nicht für Ihre Plattform verfügbar.';
+  String get optionNotAvailableOnYourPlatform =>
+      'Diese Option ist nicht für Ihre Plattform verfügbar.';
 
   @override
-  String get optionNotAvailablePaywalled => 'Diese Option ist nur für Chatsen Unterstützer.';
+  String get optionNotAvailablePaywalled =>
+      'Diese Option ist nur für Chatsen Unterstützer.';
 
   @override
   String get clearAll => 'Alles löschen';

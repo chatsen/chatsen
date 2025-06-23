@@ -72,7 +72,8 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Došlo je do pogreške prilikom provjere korisničkih podataka:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Došlo je do pogreške prilikom provjere korisničkih podataka:';
 
   @override
   String get verifyingUserData => 'Provjera korisničkih podataka...';
@@ -81,7 +82,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get verifiedUserToken => 'Potvrđen korisnički token!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Dogodila se greška prilikom provjere korisničkog tokena:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Dogodila se greška prilikom provjere korisničkog tokena:';
 
   @override
   String get verifyingUserToken => 'Provjera korisničkog tokena...';
@@ -281,7 +283,8 @@ class AppLocalizationsHr extends AppLocalizations {
   String get scrollToBottom => 'Scroll to bottom';
 
   @override
-  String get startUsingTheApp => 'To start using the app, add an account below.';
+  String get startUsingTheApp =>
+      'To start using the app, add an account below.';
 
   @override
   String get chatSettings => 'Chat settings';
@@ -314,10 +317,12 @@ class AppLocalizationsHr extends AppLocalizations {
   String get backgroundNotifications => 'Background notifications';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'This option is for Chatsen supporters only.';
+  String get optionNotAvailablePaywalled =>
+      'This option is for Chatsen supporters only.';
 
   @override
   String get clearAll => 'Clear all';

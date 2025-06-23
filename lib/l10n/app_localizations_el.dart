@@ -72,7 +72,8 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Παρουσιάστηκε ένα σφάλμα κατά την επαλήθευση δεδομένων χρήστη:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Παρουσιάστηκε ένα σφάλμα κατά την επαλήθευση δεδομένων χρήστη:';
 
   @override
   String get verifyingUserData => 'Επαλήθευση δεδομένων χρήστη...';
@@ -81,7 +82,8 @@ class AppLocalizationsEl extends AppLocalizations {
   String get verifiedUserToken => 'Επαληθεύτηκε το token χρήστη!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Παρουσιάστηκε ένα σφάλμα κατά την επαλήθευση του token χρήστη:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Παρουσιάστηκε ένα σφάλμα κατά την επαλήθευση του token χρήστη:';
 
   @override
   String get verifyingUserToken => 'Επαλήθευση token χρήστη...';
@@ -214,7 +216,8 @@ class AppLocalizationsEl extends AppLocalizations {
   String get copyText => 'Αντιγραφή κειμένου';
 
   @override
-  String get copyTextSubtitle => 'Κρατήστε για αντιγραφή κειμένου μηνύματος με όνομα χρήστη';
+  String get copyTextSubtitle =>
+      'Κρατήστε για αντιγραφή κειμένου μηνύματος με όνομα χρήστη';
 
   @override
   String get deleteMessage => 'Διαγραφή μηνύματος';
@@ -281,7 +284,8 @@ class AppLocalizationsEl extends AppLocalizations {
   String get scrollToBottom => 'Κύλιση προς τα κάτω';
 
   @override
-  String get startUsingTheApp => 'Για να ξεκινήσετε να χρησιμοποιείτε την εφαρμογή, προσθέστε έναν λογαριασμό παρακάτω.';
+  String get startUsingTheApp =>
+      'Για να ξεκινήσετε να χρησιμοποιείτε την εφαρμογή, προσθέστε έναν λογαριασμό παρακάτω.';
 
   @override
   String get chatSettings => 'Ρυθμίσεις συνομιλίας';
@@ -314,10 +318,12 @@ class AppLocalizationsEl extends AppLocalizations {
   String get backgroundNotifications => 'Ειδοποιήσεις παρασκηνίου';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'Αυτή η επιλογή δεν είναι διαθέσιμη στην πλατφόρμα σας.';
+  String get optionNotAvailableOnYourPlatform =>
+      'Αυτή η επιλογή δεν είναι διαθέσιμη στην πλατφόρμα σας.';
 
   @override
-  String get optionNotAvailablePaywalled => 'Αυτή η επιλογή είναι μόνο για υποστηρικτές του Chatsen.';
+  String get optionNotAvailablePaywalled =>
+      'Αυτή η επιλογή είναι μόνο για υποστηρικτές του Chatsen.';
 
   @override
   String get clearAll => 'Εκκαθάριση όλων';

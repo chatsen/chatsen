@@ -72,7 +72,8 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserData => 'Při ověřování osobních dat se objevil problém:';
+  String get anErrorHasOccuredWhenVerifyingUserData =>
+      'Při ověřování osobních dat se objevil problém:';
 
   @override
   String get verifyingUserData => 'Ověřuji user data...';
@@ -81,7 +82,8 @@ class AppLocalizationsCs extends AppLocalizations {
   String get verifiedUserToken => 'Token ověřen!';
 
   @override
-  String get anErrorHasOccuredWhenVerifyingUserToken => 'Při ověřování tokenu uživatele se objevil problém:';
+  String get anErrorHasOccuredWhenVerifyingUserToken =>
+      'Při ověřování tokenu uživatele se objevil problém:';
 
   @override
   String get verifyingUserToken => 'Ověřování tokenu uživatele...';
@@ -214,7 +216,8 @@ class AppLocalizationsCs extends AppLocalizations {
   String get copyText => 'Zkopírovat text';
 
   @override
-  String get copyTextSubtitle => 'Přidržením zkopírujete zprávu s uživatelským jménem';
+  String get copyTextSubtitle =>
+      'Přidržením zkopírujete zprávu s uživatelským jménem';
 
   @override
   String get deleteMessage => 'Smazat zprávu';
@@ -281,7 +284,8 @@ class AppLocalizationsCs extends AppLocalizations {
   String get scrollToBottom => 'Přejít na konec';
 
   @override
-  String get startUsingTheApp => 'Chcete-li začít používat aplikaci, přidejte níže svůj účet.';
+  String get startUsingTheApp =>
+      'Chcete-li začít používat aplikaci, přidejte níže svůj účet.';
 
   @override
   String get chatSettings => 'Chat settings';
@@ -314,10 +318,12 @@ class AppLocalizationsCs extends AppLocalizations {
   String get backgroundNotifications => 'Background notifications';
 
   @override
-  String get optionNotAvailableOnYourPlatform => 'This option is not available on your platform.';
+  String get optionNotAvailableOnYourPlatform =>
+      'This option is not available on your platform.';
 
   @override
-  String get optionNotAvailablePaywalled => 'This option is for Chatsen supporters only.';
+  String get optionNotAvailablePaywalled =>
+      'This option is for Chatsen supporters only.';
 
   @override
   String get clearAll => 'Clear all';
