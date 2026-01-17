@@ -77,8 +77,8 @@ class SevenTvCosmeticsState {
       );
 }
 
-class SevenTvCosmeticsCubit extends Cubit<SevenTvCosmeticsState> {
-  SevenTvCosmeticsCubit() : super(SevenTvCosmeticsState.initial()) {}
+class SevenTvCosmetics extends Cubit<SevenTvCosmeticsState> {
+  SevenTvCosmetics() : super(SevenTvCosmeticsState.initial()) {}
 
   static const _wsUrl = 'wss://events.7tv.io/v3';
 

@@ -22,7 +22,7 @@ import '/Mentions/MentionsCubit.dart';
 import '/Settings/Settings.dart';
 import '/Settings/SettingsEvent.dart';
 import '/Settings/SettingsState.dart';
-import '/Cosmetics/SevenTvCosmeticsCubit.dart';
+import '../Cosmetics/SevenTvCosmetics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -752,14 +752,14 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
       Future.delayed(const Duration(milliseconds: 100), () {
         if (!mounted) return;
         if (channel.id != null) {
-          BlocProvider.of<SevenTvCosmeticsCubit>(context)
+          BlocProvider.of<SevenTvCosmetics>(context)
               .subscribeToChannelId(channel.id!);
         }
       });
       return;
     }
 
-    BlocProvider.of<SevenTvCosmeticsCubit>(context)
+    BlocProvider.of<SevenTvCosmetics>(context)
         .subscribeToChannelId(channel.id!);
   }
 
