@@ -22,6 +22,7 @@ import '/Mentions/MentionsCubit.dart';
 import '/Settings/Settings.dart';
 import '/Settings/SettingsEvent.dart';
 import '/Settings/SettingsState.dart';
+import '../Cosmetics/SevenTvCosmetics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -99,7 +100,8 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
       // Should observe events instead, serves as a quick fix.
       (t) {
         try {
-          var settings = BlocProvider.of<Settings>(context).state as SettingsLoaded;
+          var settings =
+              BlocProvider.of<Settings>(context).state as SettingsLoaded;
           client.useRecentMessages = settings.historyUseRecentMessages;
         } catch (e) {}
         loadChannelHistory();
@@ -120,30 +122,39 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
           var jsonResponse = jsonDecode(utf8.decode(response.bodyBytes));
           print(jsonResponse);
 
-          if (jsonResponse['expires_in'] != null && Duration(seconds: (jsonResponse['expires_in'] ?? -1)) <= Duration(days: 7)) {
+          if (jsonResponse['expires_in'] != null &&
+              Duration(seconds: (jsonResponse['expires_in'] ?? -1)) <=
+                  Duration(days: 7)) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('Your login will expire soon! Please login again to refresh it.'),
+              content: Text(
+                  'Your login will expire soon! Please login again to refresh it.'),
               behavior: SnackBarBehavior.floating,
               action: SnackBarAction(
                 label: 'Re-login',
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (BuildContext context) => OAuthPage(client: client)),
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            OAuthPage(client: client)),
                   );
                 },
               ),
             ));
           }
 
-          if (jsonResponse['expires_in'] == null || (jsonResponse['expires_in'] ?? -1) < 0) {
+          if (jsonResponse['expires_in'] == null ||
+              (jsonResponse['expires_in'] ?? -1) < 0) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('Your login has expired! Please login again to refresh it.'),
+              content: Text(
+                  'Your login has expired! Please login again to refresh it.'),
               behavior: SnackBarBehavior.floating,
               action: SnackBarAction(
                 label: 'Re-login',
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (BuildContext context) => OAuthPage(client: client)),
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            OAuthPage(client: client)),
                   );
                 },
               ),
@@ -163,17 +174,24 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
       ),
     );
 
-    http.get(Uri.parse('https://raw.githubusercontent.com/chatsen/resources/master/assets/version.json')).then((response) async {
+    http
+        .get(Uri.parse(
+            'https://raw.githubusercontent.com/chatsen/resources/master/assets/version.json'))
+        .then((response) async {
       final responseJson = json.decode(utf8.decode(response.bodyBytes));
       print(responseJson);
 
       final packageInfo = await PackageInfo.fromPlatform();
-      final currentReleaseVersion = Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
+      final currentReleaseVersion =
+          Version.parse('${packageInfo.version}+${packageInfo.buildNumber}');
 
-      final latestStoreVersionString = Platform.isIOS ? responseJson['ios'] : responseJson['android'];
+      final latestStoreVersionString =
+          Platform.isIOS ? responseJson['ios'] : responseJson['android'];
       final latestStoreVersion = Version.parse(latestStoreVersionString);
 
-      if (kPlayStoreRelease && Platform.isIOS && currentReleaseVersion > latestStoreVersion) {
+      if (kPlayStoreRelease &&
+          Platform.isIOS &&
+          currentReleaseVersion > latestStoreVersion) {
         // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         //   content: Text('You are using a development version!'),
         //   behavior: SnackBarBehavior.floating,
@@ -190,9 +208,11 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
             label: 'Update',
             onPressed: () {
               if (Platform.isIOS) {
-                launchUrl(Uri.parse('https://apps.apple.com/us/app/chatsen/id1574037007'));
+                launchUrl(Uri.parse(
+                    'https://apps.apple.com/us/app/chatsen/id1574037007'));
               } else {
-                launchUrl(Uri.parse('https://play.google.com/store/apps/details?id=com.chatsen.chatsen'));
+                launchUrl(Uri.parse(
+                    'https://play.google.com/store/apps/details?id=com.chatsen.chatsen'));
               }
             },
           ),
@@ -230,7 +250,8 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
       var settingsState = BlocProvider.of<Settings>(context).state;
       if (settingsState is SettingsLoaded && settingsState.setupScreen) {
         await SetupModal.show(context, client);
-        BlocProvider.of<Settings>(context).add(SettingsChange(state: settingsState.copyWith(setupScreen: false)));
+        BlocProvider.of<Settings>(context).add(
+            SettingsChange(state: settingsState.copyWith(setupScreen: false)));
       }
     });
 
@@ -267,10 +288,12 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                     children: [
                       WebView(
                         key: keyTest,
-                        initialUrl: 'https://player.twitch.tv/?channel=${state.channelName}&enableExtensions=true&muted=false&parent=chatsen.app',
+                        initialUrl:
+                            'https://player.twitch.tv/?channel=${state.channelName}&enableExtensions=true&muted=false&parent=chatsen.app',
                         javascriptMode: JavascriptMode.unrestricted,
                         allowsInlineMediaPlayback: true,
-                        onWebViewCreated: (controller) => webViewController = controller,
+                        onWebViewCreated: (controller) =>
+                            webViewController = controller,
                         onPageStarted: (url) {
                           // webViewController!.evaluateJavascript(ffz);
 
@@ -286,7 +309,9 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                           //   document.getElementsByTagName("video")[0].controls = true;
                           // ''');
                         },
-                        userAgent: Platform.isIOS ? 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' : null,
+                        userAgent: Platform.isIOS
+                            ? 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
+                            : null,
                         // userAgent: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0',
                       ),
                       // Positioned.fill(
@@ -309,7 +334,9 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
               extendBodyBehindAppBar: true,
               drawer: Builder(
                 builder: (context) {
-                  var currentChannel = client.channels.isNotEmpty ? client.channels[DefaultTabController.of(context)!.index] : null;
+                  var currentChannel = client.channels.isNotEmpty
+                      ? client.channels[DefaultTabController.of(context)!.index]
+                      : null;
                   return HomeDrawer(
                     client: client,
                     channel: currentChannel,
@@ -317,29 +344,41 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                 },
               ),
               endDrawer: HomeEndDrawer(),
-              backgroundColor: (state is StreamOverlayOpened && horizontal && immersive) ? Colors.transparent : null,
+              backgroundColor:
+                  (state is StreamOverlayOpened && horizontal && immersive)
+                      ? Colors.transparent
+                      : null,
               bottomNavigationBar: Builder(
                 builder: (context) {
                   var widget = Material(
-                    color: client.channels.isEmpty ? Theme.of(context).colorScheme.surface.withAlpha(196) : Colors.transparent,
+                    color: client.channels.isEmpty
+                        ? Theme.of(context).colorScheme.surface.withAlpha(196)
+                        : Colors.transparent,
                     child: SafeArea(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          if (client.channels.isEmpty) Ink(height: 1.0, color: Theme.of(context).dividerColor),
+                          if (client.channels.isEmpty)
+                            Ink(
+                                height: 1.0,
+                                color: Theme.of(context).dividerColor),
                           SizedBox(
                             height: 40.0,
                             child: Row(
                               children: [
                                 Builder(
                                   builder: (context) => InkWell(
-                                    onTap: () async => Scaffold.of(context).openDrawer(),
+                                    onTap: () async =>
+                                        Scaffold.of(context).openDrawer(),
                                     child: Container(
                                       height: 40.0,
                                       width: 40.0,
                                       child: Icon(
                                         Icons.menu,
-                                        color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface
+                                            .withAlpha(64 * 3),
                                       ),
                                     ),
                                   ),
@@ -414,7 +453,10 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                         backgroundColor: Colors.transparent,
                                         builder: (context) => SafeArea(
                                           child: Padding(
-                                            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                                            padding: EdgeInsets.only(
+                                                bottom: MediaQuery.of(context)
+                                                    .viewInsets
+                                                    .bottom),
                                             child: ChannelJoinModal(
                                               client: client,
                                               refresh: () => setState(() {}),
@@ -427,21 +469,32 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                       height: 40.0,
                                       width: 40.0,
                                       child: Icon(
-                                        (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.plus : Icons.add,
-                                        color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                                        (Platform.isMacOS || Platform.isIOS)
+                                            ? CupertinoIcons.plus
+                                            : Icons.add,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface
+                                            .withAlpha(64 * 3),
                                       ),
                                     ),
                                   ),
                                 ),
                                 InkWell(
-                                  onTap: () async => Scaffold.of(context).openEndDrawer(),
+                                  onTap: () async =>
+                                      Scaffold.of(context).openEndDrawer(),
                                   child: Container(
                                     height: 40.0,
                                     width: 40.0,
                                     child: Icon(
-                                      (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.bell : Icons.alternate_email,
+                                      (Platform.isMacOS || Platform.isIOS)
+                                          ? CupertinoIcons.bell
+                                          : Icons.alternate_email,
                                       size: 20.0,
-                                      color: Theme.of(context).colorScheme.onSurface.withAlpha(64 * 3),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface
+                                          .withAlpha(64 * 3),
                                     ),
                                   ),
                                 ),
@@ -452,7 +505,9 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                       ),
                     ),
                   );
-                  return client.channels.isEmpty ? WidgetBlur(child: widget) : widget;
+                  return client.channels.isEmpty
+                      ? WidgetBlur(child: widget)
+                      : widget;
                 },
               ),
               body: Stack(
@@ -460,10 +515,12 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                   if (client.channels.isEmpty)
                     SingleChildScrollView(
                       child: Container(
-                        constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+                        constraints: BoxConstraints(
+                            minHeight: MediaQuery.of(context).size.height),
                         child: Center(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8.0),
                             child: Tutorial(client: client),
                           ),
                         ),
@@ -476,7 +533,9 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                           ChatView(
                             client: client,
                             channel: channel,
-                            shadow: (state is StreamOverlayOpened && horizontal && immersive),
+                            shadow: (state is StreamOverlayOpened &&
+                                horizontal &&
+                                immersive),
                           ),
                       ],
                     ),
@@ -575,12 +634,14 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                       alignment: Alignment.bottomCenter,
                                       child: SafeArea(
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             IconButton(
                                               icon: Icon(
                                                 Icons.fullscreen_exit,
-                                                color: Colors.white.withAlpha(192),
+                                                color:
+                                                    Colors.white.withAlpha(192),
                                               ),
                                               onPressed: () => setState(() {
                                                 immersive = false;
@@ -588,10 +649,17 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                             ),
                                             IconButton(
                                               icon: Icon(
-                                                (Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.line_horizontal_3 : Icons.menu,
-                                                color: Colors.white.withAlpha(192),
+                                                (Platform.isMacOS ||
+                                                        Platform.isIOS)
+                                                    ? CupertinoIcons
+                                                        .line_horizontal_3
+                                                    : Icons.menu,
+                                                color:
+                                                    Colors.white.withAlpha(192),
                                               ),
-                                              onPressed: () => Scaffold.of(context).openEndDrawer(),
+                                              onPressed: () =>
+                                                  Scaffold.of(context)
+                                                      .openEndDrawer(),
                                             ),
                                           ],
                                         ),
@@ -608,7 +676,14 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                 child: Material(
                                   color: Colors.transparent,
                                   child: Padding(
-                                    padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top, bottom: MediaQuery.of(context).padding.bottom, left: MediaQuery.of(context).padding.left),
+                                    padding: EdgeInsets.only(
+                                        top: MediaQuery.of(context).padding.top,
+                                        bottom: MediaQuery.of(context)
+                                            .padding
+                                            .bottom,
+                                        left: MediaQuery.of(context)
+                                            .padding
+                                            .left),
                                     child: Stack(
                                       children: [
                                         videoPlayer!,
@@ -616,12 +691,14 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                           alignment: Alignment.bottomCenter,
                                           child: SafeArea(
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               children: [
                                                 IconButton(
                                                   icon: Icon(
                                                     Icons.fullscreen,
-                                                    color: Colors.white.withAlpha(192),
+                                                    color: Colors.white
+                                                        .withAlpha(192),
                                                   ),
                                                   onPressed: () => setState(() {
                                                     immersive = true;
@@ -669,11 +746,26 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void onChannelStateChange(twitch.Channel channel, twitch.ChannelState state) {
-    setState(() {});
+    if (state != twitch.ChannelState.Connected) return;
+
+    if (channel.id == null) {
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (!mounted) return;
+        if (channel.id != null) {
+          BlocProvider.of<SevenTvCosmetics>(context)
+              .subscribeToChannelId(channel.id!);
+        }
+      });
+      return;
+    }
+
+    BlocProvider.of<SevenTvCosmetics>(context)
+        .subscribeToChannelId(channel.id!);
   }
 
   @override
-  void onConnectionStateChange(twitch.Connection connection, twitch.ConnectionState state) {
+  void onConnectionStateChange(
+      twitch.Connection connection, twitch.ConnectionState state) {
     setState(() {});
   }
 
@@ -681,15 +773,20 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
   void onMessage(twitch.Channel? channel, twitch.Message message) {
     var splits = message.body!.split(' ').where((split) => split.isNotEmpty);
 
-    message.blocked = BlocProvider.of<BlockedTermsCubit>(context).state.firstWhereOrNull((customTerm) {
-          if (customTerm.regex) return RegExp(customTerm.pattern).hasMatch(message.body!);
+    message.blocked = BlocProvider.of<BlockedTermsCubit>(context)
+            .state
+            .firstWhereOrNull((customTerm) {
+          if (customTerm.regex)
+            return RegExp(customTerm.pattern).hasMatch(message.body!);
           if (customTerm.caseSensitive) {
             return message.body!.contains(customTerm.pattern);
             // return splits.any(
             //   (split) => (split == customTerm.pattern),
             // );
           }
-          return message.body!.toLowerCase().contains(customTerm.pattern.toLowerCase());
+          return message.body!
+              .toLowerCase()
+              .contains(customTerm.pattern.toLowerCase());
           // return splits.any(
           // (split) => (split.toLowerCase() == customTerm.pattern.toLowerCase()),
           // );
@@ -699,24 +796,36 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
     if (message.blocked) return;
 
     // message.mention = true;
-    var contains = BlocProvider.of<CustomMentionsCubit>(context).state.firstWhereOrNull((customMention) {
+    var contains = BlocProvider.of<CustomMentionsCubit>(context)
+        .state
+        .firstWhereOrNull((customMention) {
       try {
-        if (customMention.enableRegex) return RegExp(customMention.pattern).hasMatch(message.body!);
+        if (customMention.enableRegex)
+          return RegExp(customMention.pattern).hasMatch(message.body!);
         // ignore: empty_catches
       } catch (e) {}
       if (customMention.caseSensitive) {
         return splits.any(
-          (split) => (split == customMention.pattern || split == '@${customMention.pattern}' || split == '${customMention.pattern},' || split == '@${customMention.pattern},'),
+          (split) => (split == customMention.pattern ||
+              split == '@${customMention.pattern}' ||
+              split == '${customMention.pattern},' ||
+              split == '@${customMention.pattern},'),
         );
       }
       return splits.any(
-        (split) => (split.toLowerCase() == customMention.pattern.toLowerCase() || split.toLowerCase() == '@${customMention.pattern.toLowerCase()}' || split.toLowerCase() == '${customMention.pattern.toLowerCase()},' || split.toLowerCase() == '@${customMention.pattern.toLowerCase()},'),
+        (split) => (split.toLowerCase() ==
+                customMention.pattern.toLowerCase() ||
+            split.toLowerCase() == '@${customMention.pattern.toLowerCase()}' ||
+            split.toLowerCase() == '${customMention.pattern.toLowerCase()},' ||
+            split.toLowerCase() == '@${customMention.pattern.toLowerCase()},'),
       );
     });
     message.mention = message.mention || contains != null;
 
     if (message.mention) BlocProvider.of<MentionsCubit>(context).add(message);
-    if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).notificationOnMention && message.mention) {
+    if ((BlocProvider.of<Settings>(context).state as SettingsLoaded)
+            .notificationOnMention &&
+        message.mention) {
       NotificationWrapper.of(context)!.sendNotification(
         payload: message.body,
         title: '${message.user!.login} in ${channel!.name}',
@@ -730,7 +839,9 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
 
   @override
   void onWhisper(twitch.Channel channel, twitch.Message message) {
-    if ((BlocProvider.of<Settings>(context).state as SettingsLoaded).notificationOnWhisper && message.user!.id != channel.receiver!.credentials!.id) {
+    if ((BlocProvider.of<Settings>(context).state as SettingsLoaded)
+            .notificationOnWhisper &&
+        message.user!.id != channel.receiver!.credentials!.id) {
       NotificationWrapper.of(context)!.sendNotification(
         payload: message.body,
         title: message.user!.login,
@@ -752,8 +863,10 @@ class Tutorial extends StatelessWidget {
   Widget build(BuildContext context) => SafeArea(
         child: Column(
           children: [
-            Icon(Icons.not_started, size: 48.0, color: Theme.of(context).colorScheme.primary),
-            Text('Getting started', style: Theme.of(context).textTheme.headline5),
+            Icon(Icons.not_started,
+                size: 48.0, color: Theme.of(context).colorScheme.primary),
+            Text('Getting started',
+                style: Theme.of(context).textTheme.headline5),
             // Text('To get started, you can join a channel by pressing the + button below.', textAlign: TextAlign.center),
             // SizedBox(height: 32.0),
             // Text('Help', style: Theme.of(context).textTheme.headline5),
@@ -762,7 +875,9 @@ class Tutorial extends StatelessWidget {
               children: [
                 Icon(Icons.add),
                 SizedBox(width: 16.0),
-                Expanded(child: Text('The add icon allows you to join channels by typing in their names. You can join multiple channels by separating the names with spaces: "chatsen btmc twitch"')),
+                Expanded(
+                    child: Text(
+                        'The add icon allows you to join channels by typing in their names. You can join multiple channels by separating the names with spaces: "chatsen btmc twitch"')),
               ],
             ),
             SizedBox(height: 16.0),
@@ -770,7 +885,9 @@ class Tutorial extends StatelessWidget {
               children: [
                 Icon(Icons.menu),
                 SizedBox(width: 16.0),
-                Expanded(child: Text('The menu icon will open the primary menu of the application. You can also hold-and-slide from the left edge to the right to open it!')),
+                Expanded(
+                    child: Text(
+                        'The menu icon will open the primary menu of the application. You can also hold-and-slide from the left edge to the right to open it!')),
               ],
             ),
             SizedBox(height: 16.0),
@@ -778,7 +895,9 @@ class Tutorial extends StatelessWidget {
               children: [
                 Icon(Icons.alternate_email),
                 SizedBox(width: 16.0),
-                Expanded(child: Text('The email icon will open the mentions menu of the application. You can also hold-and-slide from the right edge to the left to open it!')),
+                Expanded(
+                    child: Text(
+                        'The email icon will open the mentions menu of the application. You can also hold-and-slide from the right edge to the left to open it!')),
               ],
             ),
             SizedBox(height: 32.0),
@@ -791,7 +910,8 @@ class Tutorial extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ElevatedButton.icon(
-                    onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    onPressed: () =>
+                        Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => AccountPage(
                         client: client,
                       ),
@@ -799,8 +919,10 @@ class Tutorial extends StatelessWidget {
                     icon: Icon(Icons.account_circle),
                     label: Text('Add an account'),
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32.0))),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 24.0 / 2.0)),
                     ),
                   ),
                   SizedBox(height: 8.0),
@@ -809,13 +931,16 @@ class Tutorial extends StatelessWidget {
                       await client.joinChannels(['#chatsenapp']);
                       var channelsBox = await Hive.openBox('Channels');
                       await channelsBox.clear();
-                      await channelsBox.addAll(client.channels.map((channel) => channel.name));
+                      await channelsBox.addAll(
+                          client.channels.map((channel) => channel.name));
                     },
                     icon: Icon(Icons.chat),
                     label: Text('Join #chatsenapp'),
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32.0))),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 24.0 / 2.0)),
                     ),
                   ),
                   SizedBox(height: 8.0),
@@ -824,8 +949,10 @@ class Tutorial extends StatelessWidget {
                     icon: Icon(Icons.alternate_email),
                     label: Text('Open mentions'),
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32.0))),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(
+                          horizontal: 24.0, vertical: 24.0 / 2.0)),
                     ),
                   ),
                 ],

@@ -28,6 +28,7 @@ import 'Badges/ChatsenBadges.dart';
 import 'Badges/ChattyBadges.dart';
 import 'Badges/FFZAPBadges.dart';
 import 'Badges/SevenTVBadges.dart';
+import 'Cosmetics/SevenTvCosmetics.dart';
 import 'Mentions/CustomMentionsCubit.dart';
 import 'Mentions/MentionsCubit.dart';
 import 'Settings/Settings.dart';
@@ -62,10 +63,16 @@ Future<void> appRunner() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        if (!kPlayStoreRelease) BlocProvider(create: (BuildContext context) => BackgroundDaemonCubit()),
-        BlocProvider(create: (BuildContext context) => CommandsCubit(commandsBox)),
-        BlocProvider(create: (BuildContext context) => CustomMentionsCubit(customMentionsBox)),
-        BlocProvider(create: (BuildContext context) => AccountsCubit(accountsBox)),
+        if (!kPlayStoreRelease)
+          BlocProvider(
+              create: (BuildContext context) => BackgroundDaemonCubit()),
+        BlocProvider(
+            create: (BuildContext context) => CommandsCubit(commandsBox)),
+        BlocProvider(
+            create: (BuildContext context) =>
+                CustomMentionsCubit(customMentionsBox)),
+        BlocProvider(
+            create: (BuildContext context) => AccountsCubit(accountsBox)),
         BlocProvider(create: (BuildContext context) => FFZAPBadges()),
         BlocProvider(create: (BuildContext context) => FFZBadges()),
         BlocProvider(create: (BuildContext context) => BTTVBadges()),
@@ -73,15 +80,22 @@ Future<void> appRunner() async {
         BlocProvider(create: (BuildContext context) => ChatterinoBadges()),
         BlocProvider(create: (BuildContext context) => DankChatBadges()),
         BlocProvider(create: (BuildContext context) => SevenTVBadges()),
+        BlocProvider(create: (BuildContext context) => SevenTvCosmetics()),
         BlocProvider(create: (BuildContext context) => ChatsenBadges()),
         BlocProvider(create: (BuildContext context) => Chatsen2Badges()),
         BlocProvider(create: (BuildContext context) => MentionsCubit()),
-        BlocProvider(create: (BuildContext context) => ThemeBloc(themeBox, mode: ThemeMode.dark, colorScheme: 'cyan')),
+        BlocProvider(
+            create: (BuildContext context) =>
+                ThemeBloc(themeBox, mode: ThemeMode.dark, colorScheme: 'cyan')),
         // BlocProvider(create: (BuildContext context) => DownloadManager()),
         BlocProvider(create: (BuildContext context) => StreamOverlayBloc()),
         BlocProvider(create: (BuildContext context) => Settings(settingsBox)),
-        BlocProvider(create: (BuildContext context) => BlockedUsersCubit(blockedUsersBox)),
-        BlocProvider(create: (BuildContext context) => BlockedTermsCubit(blockedTermsBox)),
+        BlocProvider(
+            create: (BuildContext context) =>
+                BlockedUsersCubit(blockedUsersBox)),
+        BlocProvider(
+            create: (BuildContext context) =>
+                BlockedTermsCubit(blockedTermsBox)),
       ],
       child: App(),
     ),
@@ -99,7 +113,6 @@ void main() async {
     //   appRunner: appRunner,
     // );
     await appRunner();
-
   } else {
     await appRunner();
   }

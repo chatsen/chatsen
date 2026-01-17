@@ -13,21 +13,37 @@ class Chatsen2Badges extends Cubit<Map<String, List<twitch.Badge>>> {
     try {
       final response = await http.get(Uri.parse('https://api.chatsen.app/account/badges'));
       final responseJson = json.decode(utf8.decode(response.bodyBytes));
+      if (responseJson is! List) return;
 
-      emit({
-        for (final emoteData in responseJson)
-          for (final user in emoteData['users'])
-            user: [
-              twitch.Badge(
-                title: emoteData['name'],
-                id: emoteData['id'],
-                description: emoteData['description'],
-                name: emoteData['name'],
-                tag: emoteData['name'],
-                mipmap: List<String>.from(emoteData['mipmap']),
-              ),
-            ],
-      });
+      final users = <String, List<twitch.Badge>>{};
+      for (final raw in responseJson) {
+        if (raw is! Map) continue;
+
+        final rawUsers = raw['users'];
+        final rawMipmap = raw['mipmap'];
+        if (rawUsers is! List || rawMipmap is! List) continue;
+
+        final mipmap = rawMipmap.map((x) => x?.toString()).whereType<String>().where((x) => x.isNotEmpty).toList();
+        if (mipmap.isEmpty) continue;
+
+        final badge = twitch.Badge(
+          title: raw['name']?.toString(),
+          id: raw['id']?.toString(),
+          description: raw['description']?.toString(),
+          name: raw['name']?.toString(),
+          tag: raw['name']?.toString(),
+          mipmap: mipmap,
+        );
+
+        for (final userIdRaw in rawUsers) {
+          final userId = userIdRaw?.toString();
+          if (userId == null || userId.isEmpty) continue;
+          users.putIfAbsent(userId, () => <twitch.Badge>[]);
+          users[userId]!.add(badge);
+        }
+      }
+
+      emit(users);
     } catch (e) {
       print(e);
     }
