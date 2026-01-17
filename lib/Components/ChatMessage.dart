@@ -9,6 +9,7 @@ import '/Badges/FFZAPBadges.dart';
 import '/Badges/FFZBadges.dart';
 import '/Badges/SevenTVBadges.dart';
 import '/Components/WidgetTooltip.dart';
+import '/Cosmetics/SevenTvCosmeticsCubit.dart';
 import '/Settings/Settings.dart';
 import '/Settings/SettingsState.dart';
 import 'package:flutter/gestures.dart';
@@ -24,6 +25,7 @@ import 'dart:ui' as ui;
 import 'dart:async';
 
 import 'ChatInputBox.dart';
+import 'SevenTvPaintedText.dart';
 import 'UI/NetworkImageWrapper.dart';
 
 /// [ChatMessage] is a Widget that takes a [twitch.Message] and renders into something readable and interactable.
@@ -401,6 +403,7 @@ class ChatMessage extends StatelessWidget {
                           ...BlocProvider.of<DankChatBadges>(context).getBadgesForUser('${message.user?.id}'),
                           ...BlocProvider.of<ChattyBadges>(context).getBadgesForUser('${message.user?.login}'),
                           ...BlocProvider.of<SevenTVBadges>(context).getBadgesForUser('${message.user?.id}'),
+                          ...BlocProvider.of<SevenTvCosmeticsCubit>(context).getBadgesForTwitchUserId(message.user?.id),
                           ...BlocProvider.of<ChatsenBadges>(context).getBadgesForUser('${message.user?.id}'),
                           ...BlocProvider.of<Chatsen2Badges>(context).getBadgesForUser('${message.user?.id}'),
                         ])
@@ -460,20 +463,48 @@ class ChatMessage extends StatelessWidget {
                             ),
                           ),
                       if (message.user != null)
-                        TextSpan(
-                          text: '${message.user!.displayName}' + (message.user!.displayName!.toLowerCase() != message.user!.login!.toLowerCase() ? ' (${message.user!.login})' : '') + (message.action ? ' ' : ': '),
-                          style: TextStyle(
+                        () {
+                          final usernameText = '${message.user!.displayName}' +
+                              (message.user!.displayName!.toLowerCase() != message.user!.login!.toLowerCase() ? ' (${message.user!.login})' : '') +
+                              (message.action ? ' ' : ': ');
+                          final usernameStyle = TextStyle(
                             color: color,
                             fontWeight: FontWeight.bold,
                             shadows: shadows,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async => Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (BuildContext context) => SearchPage(channel: message.channel, user: message.user),
-                                  ),
+                          );
+
+                          final paint = BlocProvider.of<SevenTvCosmeticsCubit>(context).getPaintForTwitchUserId(message.user?.id);
+                          if (paint == null) {
+                            return TextSpan(
+                              text: usernameText,
+                              style: usernameStyle,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (BuildContext context) => SearchPage(channel: message.channel, user: message.user),
+                                      ),
+                                    ),
+                            );
+                          }
+
+                          return WidgetSpan(
+                            alignment: ui.PlaceholderAlignment.baseline,
+                            baseline: TextBaseline.alphabetic,
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () async => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) => SearchPage(channel: message.channel, user: message.user),
                                 ),
-                        ),
+                              ),
+                              child: SevenTvPaintedText(
+                                text: usernameText,
+                                style: usernameStyle,
+                                paint: paint,
+                              ),
+                            ),
+                          );
+                        }(),
                     ] +
                     spans,
               ),

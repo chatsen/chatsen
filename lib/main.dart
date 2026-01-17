@@ -28,6 +28,7 @@ import 'Badges/ChatsenBadges.dart';
 import 'Badges/ChattyBadges.dart';
 import 'Badges/FFZAPBadges.dart';
 import 'Badges/SevenTVBadges.dart';
+import 'Cosmetics/SevenTvCosmeticsCubit.dart';
 import 'Mentions/CustomMentionsCubit.dart';
 import 'Mentions/MentionsCubit.dart';
 import 'Settings/Settings.dart';
@@ -73,6 +74,7 @@ Future<void> appRunner() async {
         BlocProvider(create: (BuildContext context) => ChatterinoBadges()),
         BlocProvider(create: (BuildContext context) => DankChatBadges()),
         BlocProvider(create: (BuildContext context) => SevenTVBadges()),
+        BlocProvider(create: (BuildContext context) => SevenTvCosmeticsCubit()),
         BlocProvider(create: (BuildContext context) => ChatsenBadges()),
         BlocProvider(create: (BuildContext context) => Chatsen2Badges()),
         BlocProvider(create: (BuildContext context) => MentionsCubit()),
