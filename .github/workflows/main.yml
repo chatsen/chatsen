@@ -258,9 +258,91 @@ jobs:
           # gsed -i '/<dict>/a \ \ <key>UIBackgroundModes</key>\n\ \ <array>\n\ \ \ \ <string>audio</string>\n\ \ </array>' ./ios/Runner/Info.plist
 
           dart run flutter_launcher_icons
-          flutter build ios --no-codesign
 
-      - name: Prepare release files and converting .app to .ipa
+      - name: Import signing certificate and provisioning profile
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          # Create temporary keychain
+          KEYCHAIN_PASSWORD=$(cat signingkeys/apple/keychainpassword)
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+          # Import distribution certificate
+          security import signingkeys/apple/ios_distribution.p12 \
+            -P "$KEYCHAIN_PASSWORD" \
+            -A -t cert -f pkcs12 \
+            -k "$KEYCHAIN_PATH"
+
+          # Allow codesign to access the keychain without prompting
+          security set-key-partition-list \
+            -S apple-tool:,apple:,codesign: \
+            -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+          # Add temporary keychain to the search list (preserving existing keychains)
+          security list-keychain -d user -s "$KEYCHAIN_PATH" $(security list-keychain -d user | tr -d '"')
+
+          # Install provisioning profile
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp signingkeys/apple/Chatsen.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+
+          # List identities for debugging
+          security find-identity -v
+
+      - name: Build iOS
+        working-directory: ./chatsen
+        run: flutter build ios --no-codesign
+
+      - name: Sign iOS application
+        if: startsWith(github.ref, 'refs/tags/')
+        working-directory: ./chatsen
+        run: |
+          SIGNING_IDENTITY="$(cat ../signingkeys/apple/signingcertname)"
+          APP_PATH="build/ios/iphoneos/Runner.app"
+
+          # Extract entitlements from provisioning profile
+          security cms -D -i ../signingkeys/apple/Chatsen.mobileprovision > /tmp/profile.plist
+          /usr/libexec/PlistBuddy -x -c 'Print:Entitlements' /tmp/profile.plist > /tmp/entitlements.plist
+
+          # Embed provisioning profile in the app bundle
+          cp ../signingkeys/apple/Chatsen.mobileprovision "$APP_PATH/embedded.mobileprovision"
+
+          # Sign all embedded frameworks and dylibs
+          if [ -d "$APP_PATH/Frameworks" ]; then
+            find "$APP_PATH/Frameworks" -maxdepth 1 \( -type d -name '*.framework' -o -name '*.dylib' \) | while read -r item; do
+              codesign --force --verbose --sign "$SIGNING_IDENTITY" "$item"
+            done
+          fi
+
+          # Sign app extensions if any exist
+          if [ -d "$APP_PATH/PlugIns" ]; then
+            find "$APP_PATH/PlugIns" -maxdepth 1 -type d -name '*.appex' | while read -r appex; do
+              codesign --force --verbose \
+                --entitlements /tmp/entitlements.plist \
+                --sign "$SIGNING_IDENTITY" "$appex"
+            done
+          fi
+
+          # Sign the main app bundle
+          codesign --force --verbose \
+            --entitlements /tmp/entitlements.plist \
+            --sign "$SIGNING_IDENTITY" \
+            "$APP_PATH"
+
+          # Verify signature
+          codesign --verify --verbose "$APP_PATH"
+
+      - name: Prepare unsigned IPA
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        run: |
+          mkdir -p release/Payload
+          cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
+          ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS.ipa
+
+      - name: Prepare signed IPA
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
           mkdir -p release/Payload
           cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
@@ -276,3 +358,17 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: ./release/iOS.ipa
+
+      - name: Upload to App Store Connect
+        if: startsWith(github.ref, 'refs/tags/')
+        continue-on-error: true
+        run: |
+          xcrun altool --upload-app \
+            --type ios \
+            --file release/iOS.ipa \
+            --username "$(cat signingkeys/apple/account/email)" \
+            --password "$(cat signingkeys/apple/account/password)"
+
+      - name: Cleanup keychain
+        if: always()
+        run: security delete-keychain "$RUNNER_TEMP/app-signing.keychain-db" 2>/dev/null || true
