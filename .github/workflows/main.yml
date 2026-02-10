@@ -269,7 +269,16 @@ jobs:
           security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
 
-          # Import distribution certificate
+          # Install Apple WWDR intermediate certificates (required for trust chain validation)
+          curl -sL https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer -o /tmp/AppleWWDRCAG3.cer
+          curl -sL https://www.apple.com/certificateauthority/AppleWWDRCAG6.cer -o /tmp/AppleWWDRCAG6.cer
+          security import /tmp/AppleWWDRCAG3.cer -k "$KEYCHAIN_PATH" -T /usr/bin/codesign
+          security import /tmp/AppleWWDRCAG6.cer -k "$KEYCHAIN_PATH" -T /usr/bin/codesign
+
+          # Import distribution certificate (.cer + .p12)
+          security import signingkeys/apple/ios_distribution.cer \
+            -k "$KEYCHAIN_PATH" \
+            -T /usr/bin/codesign
           security import signingkeys/apple/ios_distribution.p12 \
             -P "$KEYCHAIN_PASSWORD" \
             -A -t cert -f pkcs12 \
@@ -287,8 +296,13 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp signingkeys/apple/Chatsen.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 
-          # List identities for debugging
-          security find-identity -v
+          # Debug: list all identities (including invalid)
+          echo "=== All identities ==="
+          security find-identity "$KEYCHAIN_PATH"
+          echo "=== Valid identities ==="
+          security find-identity -v "$KEYCHAIN_PATH"
+          echo "=== Certificates in keychain ==="
+          security find-certificate -a -p "$KEYCHAIN_PATH" | openssl x509 -noout -subject -dates 2>/dev/null || true
 
       - name: Build iOS
         working-directory: ./chatsen
