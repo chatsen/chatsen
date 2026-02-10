@@ -70,7 +70,7 @@ jobs:
           }
 
           android {
-              namespace = "com.chatsen.chatsen1"
+              namespace = "com.chatsen.chatsen"
               compileSdk = flutter.compileSdkVersion
               ndkVersion = flutter.ndkVersion
 
@@ -85,7 +85,7 @@ jobs:
               }
 
               defaultConfig {
-                  applicationId = "com.chatsen.chatsen1"
+                  applicationId = "com.chatsen.chatsen"
                   minSdk = flutter.minSdkVersion
                   targetSdk = flutter.targetSdkVersion
                   versionCode = flutter.versionCode
@@ -124,8 +124,8 @@ jobs:
           GRADLE
 
           # Write customized MainActivity.kt with edge-to-edge support
-          cat > ./android/app/src/main/kotlin/com/chatsen/chatsen1/MainActivity.kt << 'KOTLIN'
-          package com.chatsen.chatsen1
+          cat > ./android/app/src/main/kotlin/com/chatsen/chatsen/MainActivity.kt << 'KOTLIN'
+          package com.chatsen.chatsen
 
           import android.os.Build
           import android.os.Bundle
@@ -183,7 +183,7 @@ jobs:
       - uses: r0adkll/upload-google-play@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          packageName: com.chatsen.chatsen1
+          packageName: com.chatsen.chatsen
           serviceAccountJson: ./signingkeys/pc-api-7512701657656671844-671-a7a04005a195.json
           track: production
           releaseFiles: ./release/PlayStore.aab
@@ -251,7 +251,7 @@ jobs:
           SWIFT
 
           # Patch Info.plist
-          gsed -i 's/<string>chatsen1<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info.plist
+          gsed -i 's/<string>chatsen<\/string>/<string>Chatsen<\/string>/' ./ios/Runner/Info.plist
           gsed -i '/<dict>/a \ \ <key>ITSAppUsesNonExemptEncryption</key><false/>' ./ios/Runner/Info.plist
           gsed -i '/<dict>/a \ \ <key>CADisableMinimumFrameDurationOnPhone</key><true/>' ./ios/Runner/Info.plist
           gsed -i '/<dict>/a \ \ <key>NSPhotoLibraryUsageDescription</key>\n\ \ <string>Chatsen requests to access your files to allow file selection.</string>' ./ios/Runner/Info.plist
