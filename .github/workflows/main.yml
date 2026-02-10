@@ -260,7 +260,6 @@ jobs:
           dart run flutter_launcher_icons
 
       - name: Import signing certificate and provisioning profile
-        if: startsWith(github.ref, 'refs/tags/')
         run: |
           # Create temporary keychain
           KEYCHAIN_PASSWORD=$(cat signingkeys/apple/keychainpassword)
@@ -296,7 +295,6 @@ jobs:
         run: flutter build ios --no-codesign
 
       - name: Sign iOS application
-        if: startsWith(github.ref, 'refs/tags/')
         working-directory: ./chatsen
         run: |
           SIGNING_IDENTITY="$(cat ../signingkeys/apple/signingcertname)"
@@ -334,15 +332,7 @@ jobs:
           # Verify signature
           codesign --verify --verbose "$APP_PATH"
 
-      - name: Prepare unsigned IPA
-        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
-        run: |
-          mkdir -p release/Payload
-          cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
-          ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS.ipa
-
-      - name: Prepare signed IPA
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Prepare IPA
         run: |
           mkdir -p release/Payload
           cp -rf ./chatsen/build/ios/iphoneos/Runner.app ./release/Payload/Runner.app
