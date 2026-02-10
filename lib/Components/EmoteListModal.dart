@@ -81,7 +81,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
                                     for (var group in groupBy(widget.channel!.emotes, (dynamic emote) => emote.provider).entries) ...[
                                       Padding(
                                         padding: const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
-                                        child: Text('${group.key}', style: Theme.of(context).textTheme.headline6),
+                                        child: Text('${group.key}', style: Theme.of(context).textTheme.titleLarge),
                                       ),
                                       GridView.extent(
                                         maxCrossAxisExtent: 48.0,
@@ -107,7 +107,7 @@ class _EmoteListModalState extends State<EmoteListModal> {
                                     for (var group in groupBy(widget.client!.emotes, (dynamic emote) => emote.provider).entries) ...[
                                       Padding(
                                         padding: const EdgeInsets.only(top: 16.0, right: 8.0, left: 8.0),
-                                        child: Text('${group.key}', style: Theme.of(context).textTheme.headline6),
+                                        child: Text('${group.key}', style: Theme.of(context).textTheme.titleLarge),
                                       ),
                                       GridView.extent(
                                         maxCrossAxisExtent: 48.0,

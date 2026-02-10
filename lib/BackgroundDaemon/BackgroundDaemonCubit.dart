@@ -6,10 +6,10 @@ class BackgroundDaemonCubit extends Cubit<WebViewController?> {
 
   void receive(WebViewController wvController) => emit(wvController);
 
-  void enable() => state?.loadUrl('https://chatsen.app/assets/bgm.mp3');
-  void disable() => state?.loadUrl('https://chatsen.app/');
+  void enable() => state?.loadRequest(Uri.parse('https://chatsen.app/assets/bgm.mp3'));
+  void disable() => state?.loadRequest(Uri.parse('https://chatsen.app/'));
 
-  Future<String?> evaluate(String js) async => await state?.evaluateJavascript(js);
+  Future<Object?> evaluate(String js) async => await state?.runJavaScriptReturningResult(js);
 
   Future<void> play() async => evaluate('''
     [...document.querySelectorAll('audio, video')].forEach(el => el.play());

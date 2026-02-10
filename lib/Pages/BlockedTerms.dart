@@ -82,7 +82,7 @@ class _BlockedTermsPageState extends State<BlockedTermsPage> {
                           Spacer(),
                           Text(
                             'Blocked terms',
-                            style: Theme.of(context).textTheme.headline4!.copyWith(
+                            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                   color: Theme.of(context).colorScheme.onSurface,
                                 ),
                           ),

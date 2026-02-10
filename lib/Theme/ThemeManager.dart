@@ -25,7 +25,6 @@ class ThemeManager {
     var baseColorScheme = brightness == Brightness.light ? ColorScheme.light() : ColorScheme.dark();
     var colorScheme = ColorScheme.fromSwatch(
       primarySwatch: colors[color]!.first,
-      accentColor: colors[color]!.last,
       brightness: brightness,
       backgroundColor: brightness == Brightness.dark ? (highContrast ? Colors.black : Colors.grey[900]) : Colors.grey[100],
     ).copyWith(
@@ -33,7 +32,6 @@ class ThemeManager {
     );
     var themeData = ThemeData.from(colorScheme: colorScheme);
     return themeData.copyWith(
-      toggleableActiveColor: colorScheme.primary,
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.primary,
@@ -43,17 +41,14 @@ class ThemeManager {
           color: themeData.hintColor,
         ),
         shadowColor: Colors.black45,
-        color: colorScheme.surface,
-        textTheme: TextTheme(
-          headline6: TextStyle().copyWith(
-            fontSize: 20.0,
-            fontWeight: FontWeight.w500,
-            color: themeData.hintColor,
-          ),
+        backgroundColor: colorScheme.surface,
+        titleTextStyle: TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.w500,
+          color: themeData.hintColor,
         ),
-        brightness: ThemeData.estimateBrightnessForColor(colorScheme.surface),
       ),
-      tabBarTheme: TabBarTheme(
+      tabBarTheme: TabBarThemeData(
         indicator: UnderlineTabIndicator(
           borderSide: BorderSide(width: 0.0, color: Colors.transparent),
         ),
@@ -92,38 +87,3 @@ class ThemeManager {
     );
   }
 }
-
-// darkTheme: ThemeData.dark().copyWith(
-//   accentColor: Colors.deepPurpleAccent,
-//   primaryColor: Colors.deepPurple,
-// ),
-// darkTheme: ThemeData.from(
-//   colorScheme: ColorScheme.dark().copyWith(
-//     primary: Colors.pink[200]!,
-//     primaryVariant: Colors.pink[200]!,
-//     secondary: Colors.pink[200]!,
-//     secondaryVariant: Colors.pink[200]!,
-//   ),
-// ).copyWith(
-//   platform: TargetPlatform.fuchsia,
-//   toggleableActiveColor: Colors.pink[200]!,
-//   floatingActionButtonTheme: FloatingActionButtonThemeData(
-//     backgroundColor: ColorScheme.dark().surface,
-//     foregroundColor: Colors.pink[200]!,
-//   ),
-// ),
-// theme: ThemeData.from(
-//   colorScheme: ColorScheme.light().copyWith(
-//     primary: Colors.pink[300]!,
-//     primaryVariant: Colors.pink[300]!,
-//     secondary: Colors.pink[300]!,
-//     secondaryVariant: Colors.pink[300]!,
-//   ),
-// ).copyWith(
-//   platform: TargetPlatform.fuchsia,
-//   toggleableActiveColor: Colors.pink[300]!,
-//   floatingActionButtonTheme: FloatingActionButtonThemeData(
-//     backgroundColor: ColorScheme.light().surface,
-//     foregroundColor: Colors.pink[300]!,
-//   ),
-// ),

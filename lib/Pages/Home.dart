@@ -8,7 +8,7 @@ import '/Pages/OAuth.dart';
 import 'package:collection/src/iterable_extensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
@@ -66,13 +66,13 @@ class TitleBarHide extends StatefulWidget {
 class _TitleBarHideState extends State<TitleBarHide> {
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     super.initState();
   }
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     // SystemChrome.restoreSystemUIOverlays();
     super.dispose();
   }
@@ -225,7 +225,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
     //   });
     // });
 
-    SchedulerBinding.instance!.addPostFrameCallback((_) async {
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
       // UpdateModal.searchForUpdate(context);
       var settingsState = BlocProvider.of<Settings>(context).state;
       if (settingsState is SettingsLoaded && settingsState.setupScreen) {
@@ -237,7 +237,6 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
     // http.get(Uri.parse('https://cdn.frankerfacez.com/static/player.b1d9260ef2ad14f4e3e4.js')).then((rep) => ffz = utf8.decode(rep.bodyBytes));
 
     super.initState();
-    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
   }
 
   @override
@@ -246,61 +245,22 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
     super.dispose();
   }
 
-  var keyTest = GlobalKey();
-  WebViewController? webViewController;
-
   @override
   Widget build(BuildContext context) => DefaultTabController(
         length: client.channels.length,
         child: BlocBuilder<StreamOverlayBloc, StreamOverlayState>(
           builder: (context, state) {
             // ignore: invalid_use_of_protected_member
-            if (!DefaultTabController.of(context)!.hasListeners) {
-              DefaultTabController.of(context)!.addListener(() {
+            if (!DefaultTabController.of(context).hasListeners) {
+              DefaultTabController.of(context).addListener(() {
                 setState(() {});
               });
             }
             var horizontal = MediaQuery.of(context).size.aspectRatio > 1.0;
             // // var videoPlayer = Container(color: Theme.of(context).primaryColor);
             var videoPlayer = state is StreamOverlayOpened
-                ? Stack(
-                    children: [
-                      WebView(
-                        key: keyTest,
-                        initialUrl: 'https://player.twitch.tv/?channel=${state.channelName}&enableExtensions=true&muted=false&parent=chatsen.app',
-                        javascriptMode: JavascriptMode.unrestricted,
-                        allowsInlineMediaPlayback: true,
-                        onWebViewCreated: (controller) => webViewController = controller,
-                        onPageStarted: (url) {
-                          // webViewController!.evaluateJavascript(ffz);
-
-                          // var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
-                          // await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes));
-                        },
-                        onPageFinished: (url) async {
-                          // webViewController!.evaluateJavascript(ffz);
-                          // var ffzResponse = await http.get(Uri.parse('https://cdn.frankerfacez.com/static/ffz_injector.user.js'));
-                          // print(await webViewController!.evaluateJavascript(utf8.decode(ffzResponse.bodyBytes)));
-                          // await webViewController!.evaluateJavascript('''
-                          //   document.getElementsByClassName("video-player__overlay")[0].hidden = true;
-                          //   document.getElementsByTagName("video")[0].controls = true;
-                          // ''');
-                        },
-                        userAgent: Platform.isIOS ? 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' : null,
-                        // userAgent: 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/4.0',
-                      ),
-                      // Positioned.fill(
-                      //   child: Listener(
-                      //     behavior: HitTestBehavior.translucent,
-                      //     onPointerDown: (e) {
-                      //       webViewController!.evaluateJavascript('''
-                      //           document.getElementsByClassName("video-player__overlay")[0].hidden = true;
-                      //           document.getElementsByTagName("video")[0].controls = true;
-                      //         ''');
-                      //     },
-                      //   ),
-                      // ),
-                    ],
+                ? _StreamOverlayWebView(
+                    channelName: state.channelName,
                   )
                 : null;
 
@@ -309,7 +269,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
               extendBodyBehindAppBar: true,
               drawer: Builder(
                 builder: (context) {
-                  var currentChannel = client.channels.isNotEmpty ? client.channels[DefaultTabController.of(context)!.index] : null;
+                  var currentChannel = client.channels.isNotEmpty ? client.channels[DefaultTabController.of(context).index] : null;
                   return HomeDrawer(
                     client: client,
                     channel: currentChannel,
@@ -379,7 +339,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                     //       InkWell(
                                     //         key: ValueKey(channel),
                                     //         onTap: () {
-                                    //           DefaultTabController.of(context)!.animateTo(client.channels.indexOf(channel));
+                                    //           DefaultTabController.of(context).animateTo(client.channels.indexOf(channel));
                                     //           // setState(() {});
                                     //         },
                                     //         child: Padding(
@@ -387,7 +347,7 @@ class _HomePageState extends State<HomePage> implements twitch.Listener {
                                     //           child: Text(
                                     //             '${channel.name!.replaceFirst('#', '')}',
                                     //             style: TextStyle(
-                                    //               color: DefaultTabController.of(context)!.index == client.channels.indexOf(channel) ? Colors.red : null,
+                                    //               color: DefaultTabController.of(context).index == client.channels.indexOf(channel) ? Colors.red : null,
                                     //             ),
                                     //           ),
                                     //         ),
@@ -753,10 +713,10 @@ class Tutorial extends StatelessWidget {
         child: Column(
           children: [
             Icon(Icons.not_started, size: 48.0, color: Theme.of(context).colorScheme.primary),
-            Text('Getting started', style: Theme.of(context).textTheme.headline5),
+            Text('Getting started', style: Theme.of(context).textTheme.headlineSmall),
             // Text('To get started, you can join a channel by pressing the + button below.', textAlign: TextAlign.center),
             // SizedBox(height: 32.0),
-            // Text('Help', style: Theme.of(context).textTheme.headline5),
+            // Text('Help', style: Theme.of(context).textTheme.headlineSmall),
             SizedBox(height: 16.0),
             Row(
               children: [
@@ -782,7 +742,7 @@ class Tutorial extends StatelessWidget {
               ],
             ),
             SizedBox(height: 32.0),
-            Text('Quick actions', style: Theme.of(context).textTheme.headline5),
+            Text('Quick actions', style: Theme.of(context).textTheme.headlineSmall),
             SizedBox(height: 16.0),
             Container(
               constraints: BoxConstraints(maxWidth: 128.0 * 1.6),
@@ -799,8 +759,8 @@ class Tutorial extends StatelessWidget {
                     icon: Icon(Icons.account_circle),
                     label: Text('Add an account'),
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
+                      shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                      padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
                     ),
                   ),
                   SizedBox(height: 8.0),
@@ -814,8 +774,8 @@ class Tutorial extends StatelessWidget {
                     icon: Icon(Icons.chat),
                     label: Text('Join #chatsenapp'),
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
+                      shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                      padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
                     ),
                   ),
                   SizedBox(height: 8.0),
@@ -824,8 +784,8 @@ class Tutorial extends StatelessWidget {
                     icon: Icon(Icons.alternate_email),
                     label: Text('Open mentions'),
                     style: ButtonStyle(
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
+                      shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                      padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0 / 2.0)),
                     ),
                   ),
                 ],
@@ -834,4 +794,32 @@ class Tutorial extends StatelessWidget {
           ],
         ),
       );
+}
+
+class _StreamOverlayWebView extends StatefulWidget {
+  final String? channelName;
+
+  const _StreamOverlayWebView({
+    Key? key,
+    required this.channelName,
+  }) : super(key: key);
+
+  @override
+  State<_StreamOverlayWebView> createState() => _StreamOverlayWebViewState();
+}
+
+class _StreamOverlayWebViewState extends State<_StreamOverlayWebView> {
+  late WebViewController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setUserAgent(Platform.isIOS ? 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36' : null)
+      ..loadRequest(Uri.parse('https://player.twitch.tv/?channel=${widget.channelName}&enableExtensions=true&muted=false&parent=chatsen.app'));
+  }
+
+  @override
+  Widget build(BuildContext context) => WebViewWidget(controller: _controller);
 }

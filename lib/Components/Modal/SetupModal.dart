@@ -30,7 +30,7 @@ class SetupModal extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Welcome to Chatsen!', style: Theme.of(context).textTheme.headline5),
+                        Text('Welcome to Chatsen!', style: Theme.of(context).textTheme.headlineSmall),
                         Text('Before getting started, please review the following settings.'),
                       ],
                     ),
@@ -38,7 +38,7 @@ class SetupModal extends StatelessWidget {
                   Tile(
                     leading: InkWell(
                       borderRadius: BorderRadius.circular(32.0),
-                      onTap: () => launch('https://recent-messages.robotty.de/'),
+                      onTap: () => launchUrl(Uri.parse('https://recent-messages.robotty.de/')),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(Icons.info),

@@ -4,7 +4,6 @@ import '/Commands/Command.dart';
 import '/Commands/CommandsCubit.dart';
 import '/Components/UI/BlurModal.dart';
 import '/Components/UI/Tile.dart';
-import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -50,7 +49,7 @@ class _ChannelCloseModalState extends State<ChannelCloseModal> {
             children: [
               Text(
                 'Are you sure that you want to close channel ${widget.name}?',
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 8.0),
               ElevatedButton.icon(
@@ -61,9 +60,9 @@ class _ChannelCloseModalState extends State<ChannelCloseModal> {
                 icon: Icon(Icons.close),
                 label: Text('Leave channel'),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.redAccent),
-                  padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                  backgroundColor: WidgetStateProperty.all(Colors.redAccent),
+                  padding: WidgetStateProperty.all(EdgeInsets.all(16.0)),
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
                 ),
               ),
               SizedBox(height: 8.0),
@@ -73,8 +72,8 @@ class _ChannelCloseModalState extends State<ChannelCloseModal> {
                 },
                 // // icon: Icon(Icons.close),
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                  padding: WidgetStateProperty.all(EdgeInsets.all(16.0)),
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
                 ),
                 child: Text('Abort'),
               ),

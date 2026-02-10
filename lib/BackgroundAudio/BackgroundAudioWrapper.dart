@@ -20,6 +20,8 @@ class BackgroundAudioWrapper extends StatefulWidget {
 }
 
 class _BackgroundAudioWrapperState extends State<BackgroundAudioWrapper> {
+  late WebViewController _controller;
+
   void setupLoop() async {
     await BlocProvider.of<BackgroundDaemonCubit>(context).loop(true);
     await Future.delayed(Duration(seconds: 2));
@@ -30,8 +32,15 @@ class _BackgroundAudioWrapperState extends State<BackgroundAudioWrapper> {
 
   @override
   void initState() {
-    setupLoop();
     super.initState();
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setNavigationDelegate(NavigationDelegate(
+        onPageFinished: (url) => setupLoop(),
+      ))
+      ..loadRequest(Uri.parse('https://chatsen.app/assets/bgm.mp3'));
+    BlocProvider.of<BackgroundDaemonCubit>(context).receive(_controller);
+    setupLoop();
   }
 
   @override
@@ -40,14 +49,7 @@ class _BackgroundAudioWrapperState extends State<BackgroundAudioWrapper> {
           children: [
             SizedBox(
               height: 0.0,
-              child: WebView(
-                onWebViewCreated: (controller) {
-                  BlocProvider.of<BackgroundDaemonCubit>(context).emit(controller);
-                },
-                initialUrl: 'https://chatsen.app/assets/bgm.mp3',
-                javascriptMode: JavascriptMode.unrestricted,
-                onPageFinished: (url) => setupLoop(),
-              ),
+              child: WebViewWidget(controller: _controller),
             ),
             Positioned.fill(child: widget.child),
           ],

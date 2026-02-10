@@ -67,7 +67,7 @@ class ChatMessage extends StatelessWidget {
     var color = getUserColor(context, Color(int.tryParse(message.user?.color ?? '777777', radix: 16) ?? 0x777777).withAlpha(255));
     var spans = <InlineSpan>[];
     var shadowSpread = 1.0;
-    var shadowColor = Theme.of(context).colorScheme.background;
+    var shadowColor = Theme.of(context).colorScheme.surface;
     var shadows = shadow
         ? [
             Shadow(offset: Offset(-shadowSpread, -shadowSpread), color: shadowColor),
@@ -103,7 +103,7 @@ class ChatMessage extends StatelessWidget {
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () async {
-                      await launch(Uri.parse(token.data).toString());
+                      await launchUrl(Uri.parse(token.data));
                     },
                 ),
                 TextSpan(text: ' '),
@@ -123,7 +123,7 @@ class ChatMessage extends StatelessWidget {
                       decoration: TextDecoration.underline,
                       shadows: shadows,
                     ),
-                    recognizer: TapGestureRecognizer()..onTap = () async => launch(Uri.parse(token.data).toString()),
+                    recognizer: TapGestureRecognizer()..onTap = () async => launchUrl(Uri.parse(token.data)),
                   ),
                   TextSpan(text: ' '),
                 ],
@@ -140,7 +140,7 @@ class ChatMessage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: InkWell(
-                      onTap: () async => launch(Uri.parse(token.data).toString()), //'https://cdn.imgproxify.com/image?url=${Uri.encodeComponent(token.data)}'),
+                      onTap: () async => launchUrl(Uri.parse(token.data)), //'https://cdn.imgproxify.com/image?url=${Uri.encodeComponent(token.data)}'),
                       child: NetworkImageW(Uri.parse(token.data).toString()), //'https://cdn.imgproxify.com/image?url=${Uri.encodeComponent(token.data)}'),
                     ),
                   ),
@@ -311,7 +311,7 @@ class ChatMessage extends StatelessWidget {
       //       gkey?.currentState?.appendText('@${message.user?.login ?? 'twitch'} ');
       //     } else if (d == DismissDirection.endToStart) {
       //       gkey?.currentState?.appendText(message.body!);
-      //       await Clipboard.setData(ClipboardData(text: message.body));
+      //       await Clipboard.setData(ClipboardData(text: message.body ?? ''));
       //       // ScaffoldMessenger.of(context).showSnackBar(
       //       //   SnackBar(
       //       //     behavior: SnackBarBehavior.floating,
@@ -327,7 +327,7 @@ class ChatMessage extends StatelessWidget {
         color: message.mention ? Theme.of(context).colorScheme.primary.withAlpha(48) : backgroundColor,
         child: InkWell(
           onDoubleTap: () async {
-            await Clipboard.setData(ClipboardData(text: message.body));
+            await Clipboard.setData(ClipboardData(text: message.body ?? ''));
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 behavior: SnackBarBehavior.floating,
@@ -342,7 +342,7 @@ class ChatMessage extends StatelessWidget {
             );
           },
           onLongPress: () async {
-            await Clipboard.setData(ClipboardData(text: message.body));
+            await Clipboard.setData(ClipboardData(text: message.body ?? ''));
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 behavior: SnackBarBehavior.floating,
@@ -356,7 +356,7 @@ class ChatMessage extends StatelessWidget {
               ),
             );
           },
-          // onLongPress: () async => await Clipboard.setData(ClipboardData(text: message.body)),
+          // onLongPress: () async => await Clipboard.setData(ClipboardData(text: message.body ?? '')),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
             child: Text.rich(

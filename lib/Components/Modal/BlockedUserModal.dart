@@ -71,8 +71,8 @@ class _BlockedUserModalState extends State<BlockedUserModal> {
                 icon: Icon(Icons.save),
                 label: Text('Save'),
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                  padding: WidgetStateProperty.all(EdgeInsets.all(16.0)),
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
                 ),
               ),
             ],

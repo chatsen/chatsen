@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import '/Components/UI/BlurModal.dart';
-import 'package:file_picker_cross/file_picker_cross.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' as http;
@@ -50,7 +50,7 @@ class UploadModal extends StatelessWidget {
     // x-ms-wmv
   ];
 
-  final FilePickerCross file;
+  final PlatformFile file;
   final twitch.Channel channel;
 
   const UploadModal({
@@ -61,7 +61,7 @@ class UploadModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var lowName = file.fileName!.toLowerCase();
+    var lowName = file.name.toLowerCase();
     var extension = lowName.contains('.') ? lowName.split('.').last : '';
 
     return Padding(
@@ -73,14 +73,14 @@ class UploadModal extends StatelessWidget {
         // shrinkWrap: true,
         children: [
           Text(
-            'You are about to upload ${file.fileName} and share the link in ${channel.name}',
-            style: Theme.of(context).textTheme.headline6,
+            'You are about to upload ${file.name} and share the link in ${channel.name}',
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           SizedBox(height: 16.0),
           if (imageExtensions.contains(extension)) ...[
             Container(
               constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.5),
-              child: Image.memory(file.toUint8List()),
+              child: Image.memory(file.bytes!),
             ),
             SizedBox(height: 16.0),
           ],
@@ -97,8 +97,8 @@ class UploadModal extends StatelessWidget {
                       request.files.add(
                         http.MultipartFile.fromBytes(
                           'image',
-                          file.toUint8List(),
-                          filename: '${file.fileName}',
+                          file.bytes!,
+                          filename: '${file.name}',
                         ),
                       );
                       var response = await request.send();
@@ -110,8 +110,8 @@ class UploadModal extends StatelessWidget {
                     label: Text('imgur'),
                     icon: Icon(Icons.upload),
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
-                      shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                      padding: WidgetStateProperty.all(EdgeInsets.all(16.0)),
+                      shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
                     ),
                   ),
                   SizedBox(width: 12.0),
@@ -126,8 +126,8 @@ class UploadModal extends StatelessWidget {
                         request.files.add(
                           http.MultipartFile.fromBytes(
                             'fileToUpload',
-                            file.toUint8List(),
-                            filename: '${file.fileName}',
+                            file.bytes!,
+                            filename: '${file.name}',
                           ),
                           // file.toMultipartFile(filename: 'file.png'),
                         );
@@ -140,8 +140,8 @@ class UploadModal extends StatelessWidget {
                       label: Text('catbox.moe'),
                       icon: Icon(Icons.upload),
                       style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                        padding: WidgetStateProperty.all(EdgeInsets.all(16.0)),
+                        shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
                       ),
                     ),
                   ),
@@ -152,8 +152,8 @@ class UploadModal extends StatelessWidget {
                   // label: Text('Cancel'),
                   icon: Icon(Icons.cancel),
                   // style: ButtonStyle(
-                  //   padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
-                  //   shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                  //   padding: WidgetStateProperty.all(EdgeInsets.all(16.0)),
+                  //   shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
                   // ),
                 ),
                 SizedBox(width: 12.0),
@@ -170,7 +170,11 @@ class UploadModal extends StatelessWidget {
     required twitch.Channel channel,
   }) async {
     try {
-      var selectedFile = await FilePickerCross.importFromStorage(type: Platform.isIOS ? FileTypeCross.image : FileTypeCross.any);
+      var result = await FilePicker.platform.pickFiles(
+        type: Platform.isIOS ? FileType.image : FileType.any,
+        withData: true,
+      );
+      var selectedFile = result!.files.first;
       await BlurModal.show(
         context: context,
         child: UploadModal(

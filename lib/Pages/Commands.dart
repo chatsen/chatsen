@@ -84,7 +84,7 @@ class _CommandsPageState extends State<CommandsPage> {
                           Spacer(),
                           Text(
                             'Commands',
-                            style: Theme.of(context).textTheme.headline4!.copyWith(
+                            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                   color: Theme.of(context).colorScheme.onSurface,
                                 ),
                           ),

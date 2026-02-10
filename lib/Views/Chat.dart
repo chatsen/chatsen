@@ -41,7 +41,7 @@ class _ChatViewState extends State<ChatView> implements twitch.Listener {
 
   void scrollToEnd() {
     scrollController!.jumpTo(0);
-    SchedulerBinding.instance!.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       scrollController!.jumpTo(0);
     });
   }

@@ -4,7 +4,6 @@ import '/Commands/Command.dart';
 import '/Commands/CommandsCubit.dart';
 import '/Components/UI/BlurModal.dart';
 import '/Components/UI/Tile.dart';
-import 'package:file_picker_cross/file_picker_cross.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -122,8 +121,8 @@ class _TokenModalState extends State<TokenModal> {
                 icon: Icon(Icons.add),
                 label: Text('Add account'),
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.all(16.0)),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
+                  padding: WidgetStateProperty.all(EdgeInsets.all(16.0)),
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0))),
                 ),
               ),
             ],

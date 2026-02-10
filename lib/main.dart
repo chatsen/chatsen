@@ -32,12 +32,12 @@ import 'Mentions/CustomMentionsCubit.dart';
 import 'Mentions/MentionsCubit.dart';
 import 'Settings/Settings.dart';
 import 'StreamOverlay/StreamOverlayBloc.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 Future<void> appRunner() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Wakelock.enable();
+  await WakelockPlus.enable();
 
   if (Platform.isAndroid || Platform.isIOS) {
     await Hive.initFlutter();

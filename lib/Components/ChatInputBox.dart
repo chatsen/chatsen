@@ -347,7 +347,7 @@ class ChatInputBoxState extends State<ChatInputBox> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(cmd.trigger, style: Theme.of(context).textTheme.headline5),
+                      Text(cmd.trigger, style: Theme.of(context).textTheme.headlineSmall),
                       Text(cmd.command),
                     ],
                   ),

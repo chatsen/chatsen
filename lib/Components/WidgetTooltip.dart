@@ -378,7 +378,7 @@ class _WidgetTooltipState extends State<WidgetTooltip> with SingleTickerProvider
     TextStyle defaultTextStyle;
     BoxDecoration defaultDecoration;
     if (theme.brightness == Brightness.dark) {
-      defaultTextStyle = theme.textTheme.bodyText2!.copyWith(
+      defaultTextStyle = theme.textTheme.bodyMedium!.copyWith(
         // ??
         color: Colors.black,
         fontSize: _getDefaultFontSize(),
@@ -388,7 +388,7 @@ class _WidgetTooltipState extends State<WidgetTooltip> with SingleTickerProvider
         borderRadius: const BorderRadius.all(Radius.circular(4)),
       );
     } else {
-      defaultTextStyle = theme.textTheme.bodyText2!.copyWith(
+      defaultTextStyle = theme.textTheme.bodyMedium!.copyWith(
         // ?
         color: Colors.white,
         fontSize: _getDefaultFontSize(),

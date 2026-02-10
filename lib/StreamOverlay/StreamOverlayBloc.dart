@@ -4,16 +4,14 @@ import '/StreamOverlay/StreamOverlayState.dart';
 import 'StreamOverlayEvent.dart';
 
 class StreamOverlayBloc extends Bloc<StreamOverlayEvent, StreamOverlayState> {
-  StreamOverlayBloc() : super(StreamOverlayClosed());
-
-  @override
-  Stream<StreamOverlayState> mapEventToState(StreamOverlayEvent event) async* {
-    if (event is StreamOverlayOpen) {
-      yield StreamOverlayOpened(
+  StreamOverlayBloc() : super(StreamOverlayClosed()) {
+    on<StreamOverlayOpen>((event, emit) {
+      emit(StreamOverlayOpened(
         channelName: event.channelName,
-      );
-    } else if (event is StreamOVerlayClose) {
-      yield StreamOverlayClosed();
-    }
+      ));
+    });
+    on<StreamOVerlayClose>((event, emit) {
+      emit(StreamOverlayClosed());
+    });
   }
 }

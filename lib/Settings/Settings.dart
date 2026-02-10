@@ -8,13 +8,8 @@ class Settings extends Bloc<SettingsEvent, SettingsState> {
   final Box settingsBox;
 
   Settings(this.settingsBox) : super(SettingsLoading()) {
-    add(SettingsLoad());
-  }
-
-  @override
-  Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
-    if (event is SettingsLoad) {
-      yield SettingsLoaded(
+    on<SettingsLoad>((event, emit) {
+      emit(SettingsLoaded(
         setupScreen: settingsBox.get('setupScreen') ?? true,
         notificationOnWhisper: settingsBox.get('notificationOnWhisper') ?? false,
         notificationOnMention: settingsBox.get('notificationOnMention') ?? false,
@@ -26,8 +21,9 @@ class Settings extends Bloc<SettingsEvent, SettingsState> {
         mentionCustom: settingsBox.get('mentionCustom') ?? [],
         historyUseRecentMessages: settingsBox.get('historyUseRecentMessages') ?? true,
         mentionWithAt: settingsBox.get('mentionWithAt') ?? false,
-      );
-    } else if (event is SettingsChange) {
+      ));
+    });
+    on<SettingsChange>((event, emit) async {
       await settingsBox.put('setupScreen', event.state.setupScreen);
       await settingsBox.put('notificationOnWhisper', event.state.notificationOnWhisper);
       await settingsBox.put('notificationOnMention', event.state.notificationOnMention);
@@ -39,7 +35,8 @@ class Settings extends Bloc<SettingsEvent, SettingsState> {
       await settingsBox.put('mentionCustom', event.state.mentionCustom);
       await settingsBox.put('historyUseRecentMessages', event.state.historyUseRecentMessages);
       await settingsBox.put('mentionWithAt', event.state.mentionWithAt);
-      yield event.state;
-    }
+      emit(event.state);
+    });
+    add(SettingsLoad());
   }
 }

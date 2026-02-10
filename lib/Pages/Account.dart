@@ -196,7 +196,7 @@ class _AccountPageState extends State<AccountPage> {
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Text(
                               'Accounts',
-                              style: Theme.of(context).textTheme.headline4!.copyWith(
+                              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                     color: Theme.of(context).colorScheme.onSurface,
                                   ),
                             ),

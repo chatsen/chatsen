@@ -25,7 +25,7 @@ class Tile extends StatelessWidget {
                 color: Theme.of(context).hintColor,
               ),
           textTheme: Theme.of(context).textTheme.copyWith(
-                subtitle2: Theme.of(context).textTheme.subtitle2!.copyWith(
+                titleSmall: Theme.of(context).textTheme.titleSmall!.copyWith(
                       color: Theme.of(context).hintColor,
                     ),
               ),
@@ -48,12 +48,12 @@ class Tile extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         if (subtitle != null)
                           Text(
                             subtitle!,
-                            style: Theme.of(context).textTheme.subtitle2,
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                       ],
                     ),

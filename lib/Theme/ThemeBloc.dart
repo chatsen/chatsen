@@ -15,32 +15,37 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     this.mode = ThemeMode.system,
     this.colorScheme = 'amber',
   }) : super(ThemeLoading()) {
-    add(ThemeInitialized());
-  }
-
-  @override
-  Stream<ThemeState> mapEventToState(ThemeEvent event) async* {
-    if (event is ThemeInitialized) {
+    on<ThemeInitialized>((event, emit) {
       var themeMode = themeBox.get('themeMode');
       var themeColorScheme = themeBox.get('themeColorScheme');
       var themeHighContrast = themeBox.get('themeHighContrast');
-      yield ThemeLoaded(
+      emit(ThemeLoaded(
         mode: themeMode != null ? ThemeMode.values[themeMode] : mode,
         highContrast: themeHighContrast ?? false,
         colorScheme: themeColorScheme ?? colorScheme,
-      );
-    } else if (event is ThemeModeChanged && state is ThemeLoaded) {
-      var previousState = state as ThemeLoaded;
-      await themeBox.put('themeMode', event.mode.index);
-      yield previousState.copyWith(mode: event.mode);
-    } else if (event is ThemeColorSchemeChanged && state is ThemeLoaded) {
-      var previousState = state as ThemeLoaded;
-      await themeBox.put('themeColorScheme', event.colorScheme);
-      yield previousState.copyWith(colorScheme: event.colorScheme);
-    } else if (event is ThemeHighContrastChanged && state is ThemeLoaded) {
-      var previousState = state as ThemeLoaded;
-      await themeBox.put('themeHighContrast', event.highContrast);
-      yield previousState.copyWith(highContrast: event.highContrast);
-    }
+      ));
+    });
+    on<ThemeModeChanged>((event, emit) async {
+      if (state is ThemeLoaded) {
+        var previousState = state as ThemeLoaded;
+        await themeBox.put('themeMode', event.mode.index);
+        emit(previousState.copyWith(mode: event.mode));
+      }
+    });
+    on<ThemeColorSchemeChanged>((event, emit) async {
+      if (state is ThemeLoaded) {
+        var previousState = state as ThemeLoaded;
+        await themeBox.put('themeColorScheme', event.colorScheme);
+        emit(previousState.copyWith(colorScheme: event.colorScheme));
+      }
+    });
+    on<ThemeHighContrastChanged>((event, emit) async {
+      if (state is ThemeLoaded) {
+        var previousState = state as ThemeLoaded;
+        await themeBox.put('themeHighContrast', event.highContrast);
+        emit(previousState.copyWith(highContrast: event.highContrast));
+      }
+    });
+    add(ThemeInitialized());
   }
 }

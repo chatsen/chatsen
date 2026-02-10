@@ -18,8 +18,6 @@ class NotificationWrapper extends StatefulWidget {
 class _NotificationWrapperState extends State<NotificationWrapper> {
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  Future<void> onSelectNotification(String? payload) async {}
-
   int currentNotificationIndex = 0;
 
   Future<void> sendNotification({
@@ -38,7 +36,7 @@ class _NotificationWrapperState extends State<NotificationWrapper> {
           importance: Importance.max,
           priority: Priority.max,
         ),
-        iOS: IOSNotificationDetails(),
+        iOS: DarwinNotificationDetails(),
       ),
       payload: payload,
     );
@@ -51,9 +49,9 @@ class _NotificationWrapperState extends State<NotificationWrapper> {
       ..initialize(
         InitializationSettings(
           android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-          iOS: IOSInitializationSettings(),
+          iOS: DarwinInitializationSettings(),
         ),
-        onSelectNotification: onSelectNotification,
+        onDidReceiveNotificationResponse: (NotificationResponse response) async {},
       );
 
     super.initState();

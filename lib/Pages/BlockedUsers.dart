@@ -84,7 +84,7 @@ class _BlockedUsersPageState extends State<BlockedUsersPage> {
                           Spacer(),
                           Text(
                             'Blocked users',
-                            style: Theme.of(context).textTheme.headline4!.copyWith(
+                            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                   color: Theme.of(context).colorScheme.onSurface,
                                 ),
                           ),

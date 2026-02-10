@@ -20,7 +20,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter_chatsen_irc/Twitch.dart' as twitch;
@@ -369,7 +369,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   builder: (context, category, title, description) => Tile(
                     leading: InkWell(
                       borderRadius: BorderRadius.circular(32.0),
-                      onTap: () => launch('https://recent-messages.robotty.de/'),
+                      onTap: () => launchUrl(Uri.parse('https://recent-messages.robotty.de/')),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.clock : Icons.history),
@@ -440,7 +440,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 4.0),
                     child: Text(
                       '${entryGroup.key}',
-                      style: Theme.of(context).textTheme.button!.copyWith(color: Theme.of(context).colorScheme.primary),
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.primary),
                     ),
                   ),
                   for (var entry in entryGroup.value) entry,
@@ -484,19 +484,19 @@ class _SettingsPageState extends State<SettingsPage> {
                                 // ),
                                 IconButton(
                                   icon: Icon(FontAwesomeIcons.twitter),
-                                  onPressed: () => launch('https://twitter.com/chatsenapp'),
+                                  onPressed: () => launchUrl(Uri.parse('https://twitter.com/chatsenapp')),
                                 ),
                                 IconButton(
                                   icon: Icon(FontAwesomeIcons.discord),
-                                  onPressed: () => launch('https://chatsen.app/discord'),
+                                  onPressed: () => launchUrl(Uri.parse('https://chatsen.app/discord')),
                                 ),
                                 IconButton(
                                   icon: Icon(FontAwesomeIcons.github),
-                                  onPressed: () => launch('https://github.com/chatsen/chatsen'),
+                                  onPressed: () => launchUrl(Uri.parse('https://github.com/chatsen/chatsen')),
                                 ),
                                 IconButton(
                                   icon: Icon(FontAwesomeIcons.patreon),
-                                  onPressed: () => launch('https://patreon.com/chatsen'),
+                                  onPressed: () => launchUrl(Uri.parse('https://patreon.com/chatsen')),
                                 ),
                               ],
                             ),
@@ -505,7 +505,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               padding: const EdgeInsets.symmetric(horizontal: 8.0),
                               child: Text(
                                 'Settings',
-                                style: Theme.of(context).textTheme.headline4!.copyWith(
+                                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                       color: Theme.of(context).colorScheme.onSurface,
                                     ),
                               ),
@@ -580,17 +580,17 @@ class _SettingsPageState extends State<SettingsPage> {
                                   children: [
                                     Text(
                                       'Chatsen is currently work-in-progress!',
-                                      style: Theme.of(context).textTheme.subtitle1,
+                                      style: Theme.of(context).textTheme.titleMedium,
                                     ),
                                     SizedBox(height: 2.0),
                                     Text(
                                       'Create an issue on GitHub or ask on Discord if you encounter a problem.',
-                                      style: Theme.of(context).textTheme.subtitle2,
+                                      style: Theme.of(context).textTheme.titleSmall,
                                     ),
                                     SizedBox(height: 4.0),
                                     Text(
                                       'You can support the project on Patreon if you appreciate my work!',
-                                      // style: Theme.of(context).textTheme.subtitle2,
+                                      // style: Theme.of(context).textTheme.titleSmall,
                                     ),
                                   ],
                                 ),
@@ -627,12 +627,12 @@ class _SettingsPageState extends State<SettingsPage> {
                                   children: [
                                     Text(
                                       'Chatsen is looking for translators!',
-                                      style: Theme.of(context).textTheme.subtitle1,
+                                      style: Theme.of(context).textTheme.titleMedium,
                                     ),
                                     SizedBox(height: 2.0),
                                     Text(
                                       'Join the Discord server if you are interested in translating Chatsen to your language.',
-                                      style: Theme.of(context).textTheme.subtitle2,
+                                      style: Theme.of(context).textTheme.titleSmall,
                                     ),
                                   ],
                                 ),
