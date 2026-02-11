@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import '/Accounts/AccountsCubit.dart';
+import '/DataExport.dart';
 import '/Badges/ChatterinoBadges.dart';
 import '/Badges/DankChatBadges.dart';
 import '/Badges/FFZBadges.dart';
@@ -32,6 +33,7 @@ import 'Mentions/CustomMentionsCubit.dart';
 import 'Mentions/MentionsCubit.dart';
 import 'Settings/Settings.dart';
 import 'StreamOverlay/StreamOverlayBloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 Future<void> appRunner() async {
@@ -56,6 +58,19 @@ Future<void> appRunner() async {
   var blockedUsersBox = await Hive.openBox('BlockedUsers');
   var themeBox = await Hive.openBox('Theme');
   var accountsBox = await Hive.openBox('Accounts');
+
+  // Backup all data to SharedPreferences on launch
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('chatsen1backup', buildExportJson(
+      settingsBox: settingsBox,
+      themeBox: themeBox,
+      accountsBox: accountsBox,
+      commandsBox: commandsBox,
+      customMentionsBox: customMentionsBox,
+      blockedUsersBox: blockedUsersBox,
+    ));
+  } catch (_) {}
 
   // timeDilation = 4.0;
 

@@ -1,11 +1,15 @@
 import 'dart:io';
 import 'dart:math';
 
+import '/Accounts/AccountsCubit.dart';
+import '/BlockedUsers/BlockedUsersCubit.dart';
+import '/Commands/CommandsCubit.dart';
 import '/Components/UI/BlurModal.dart';
 import '/Components/UI/CustomSliverAppBarDelegate.dart';
 import '/Components/UI/NoAppBarBlur.dart';
 import '/Components/UI/Tile.dart';
 import '/Consts.dart';
+import '/DataExport.dart';
 import '/Settings/Settings.dart';
 import '/Settings/SettingsEvent.dart';
 import '/Settings/SettingsState.dart';
@@ -15,9 +19,11 @@ import '/Theme/ThemeManager.dart';
 import '/Theme/ThemeState.dart';
 import '/Pages/BlockedTerms.dart';
 import '/Pages/BlockedUsers.dart';
+import '/Mentions/CustomMentionsCubit.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -400,6 +406,39 @@ class _SettingsPageState extends State<SettingsPage> {
                       title: title,
                       subtitle: description,
                       onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommandsPage()))),
+                ),
+                SettingsEntry(
+                  category: 'About',
+                  title: 'Export data',
+                  description: 'Copy all settings and accounts to clipboard as JSON',
+                  builder: (context, category, title, description) => Tile(
+                    leading: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon((Platform.isMacOS || Platform.isIOS) ? CupertinoIcons.doc_on_clipboard : Icons.copy),
+                    ),
+                    title: title,
+                    subtitle: description,
+                    onTap: () async {
+                      final json = buildExportJson(
+                        settingsBox: BlocProvider.of<Settings>(context).settingsBox,
+                        themeBox: BlocProvider.of<ThemeBloc>(context).themeBox,
+                        accountsBox: BlocProvider.of<AccountsCubit>(context).accountBox,
+                        commandsBox: BlocProvider.of<CommandsCubit>(context).commandsBox,
+                        customMentionsBox: BlocProvider.of<CustomMentionsCubit>(context).commandsBox,
+                        blockedUsersBox: BlocProvider.of<BlockedUsersCubit>(context).blockedUsersBox,
+                      );
+                      await Clipboard.setData(ClipboardData(text: json));
+
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            behavior: SnackBarBehavior.floating,
+                            content: Text('Data copied to clipboard!'),
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ),
                 SettingsEntry(
                   category: 'About',
