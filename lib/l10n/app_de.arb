@@ -5,7 +5,7 @@
   "@translationAuthorNames": {
     "description": "Translators should put their desired names to be displayed in the application credits, separated by semicolons here. Example: forsen;nymn;randomuser123 (one per contributor)"
   },
-  "loggedInVia": "Logged in via {provider}",
+  "loggedInVia": "Ageloggt iwwer {provider}",
   "@loggedInVia": {
     "placeholders": {
       "provider": {
@@ -13,11 +13,11 @@
       }
     }
   },
-  "termsOfService": "Terms of Service",
-  "privacyPolicy": "Privacy Policy",
-  "settings": "Settings",
-  "expiresNever": "Never expires",
-  "expiresIn": "Expires in {time}",
+  "termsOfService": "Notzungsbedéngungen",
+  "privacyPolicy": "Dateschutzbestëmmungen",
+  "settings": "Astellungen",
+  "expiresNever": "Leeft ni of",
+  "expiresIn": "Leeft an {time} of",
   "@expiresIn": {
     "placeholders": {
       "time": {
@@ -25,16 +25,16 @@
       }
     }
   },
-  "close": "Close",
-  "add": "Add",
-  "cancel": "Cancel",
+  "close": "Zoumaachen",
+  "add": "Dobäisetzen",
+  "cancel": "Ofbriechen",
   "tokenInput": "Token input",
-  "account": "Account",
-  "refreshAccount": "Refresh account",
-  "removeAccount": "Remove account",
-  "addAnotherAccount": "Add another account",
-  "verifiedUserData": "Verified user data!",
-  "loggedInAs": "Logged in as {user}",
+  "account": "Kont",
+  "refreshAccount": "Kont aktualiséieren",
+  "removeAccount": "Kont läschen",
+  "addAnotherAccount": "Nach e Kont dobäisetzen",
+  "verifiedUserData": "Benotzerdonnéeë verifizéiert!",
+  "loggedInAs": "Ageloggt als {user}",
   "@loggedInAs": {
     "placeholders": {
       "user": {
@@ -42,17 +42,17 @@
       }
     }
   },
-  "anErrorHasOccuredWhenVerifyingUserData": "An error has occurred when verifying user data:",
-  "verifyingUserData": "Verifying user data...",
-  "verifiedUserToken": "Verified user token!",
-  "anErrorHasOccuredWhenVerifyingUserToken": "An error has occurred when verifying user token:",
-  "verifyingUserToken": "Verifying user token...",
+  "anErrorHasOccuredWhenVerifyingUserData": "Et ass e Feeler beim Verifizéiere vun de Benotzerdonnéeën opgetrueden:",
+  "verifyingUserData": "Benotzerdonnéeë ginn iwwerpréift...",
+  "verifiedUserToken": "Benotzer Token verifizéiert!",
+  "anErrorHasOccuredWhenVerifyingUserToken": "Et ass e Feeler beim Verifizéiere vum Benotzer Token opgetrueden:",
+  "verifyingUserToken": "Benotzer Token gëtt iwwerpréift...",
   "searchForChannels": "Search for channels",
-  "recommendedChannels": "Recommended channels",
-  "popularChannels": "Popular channels",
-  "channel": "Channel",
-  "leaveChannel": "Leave channel",
-  "joinUser": "Join {user}",
+  "recommendedChannels": "Recommandéiert Kanäl",
+  "popularChannels": "Populär Kanäl",
+  "channel": "Kanal",
+  "leaveChannel": "Kanal verloossen",
+  "joinUser": "Bei {user} dobäitrieden",
   "@joinUser": {
     "placeholders": {
       "user": {
@@ -68,7 +68,7 @@
       }
     }
   },
-  "joinChannelName": "Join {channel}",
+  "joinChannelName": "Dem Kanal {channel} bäitrieden",
   "@joinChannelName": {
     "placeholders": {
       "channel": {
@@ -76,7 +76,7 @@
       }
     }
   },
-  "sendMessageIn": "Send message in {channel}",
+  "sendMessageIn": "Noricht an de Kanal {channel} schécken",
   "@sendMessageIn": {
     "placeholders": {
       "channel": {
@@ -84,22 +84,22 @@
       }
     }
   },
-  "light": "Light",
-  "dark": "Dark",
+  "light": "Hell",
+  "dark": "Däischter",
   "system": "System",
-  "appearance": "Appearance",
-  "highContrast": "High contrast",
-  "playStream": "Play stream",
-  "stopStream": "Stop stream",
-  "customCommand": "Custom command",
-  "customCommands": "Custom commands",
-  "newCustomCommand": "New custom command",
-  "commandTrigger": "Trigger",
-  "command": "Command",
-  "save": "Save",
-  "browserStreamSettings": "Browser/Stream Settings",
-  "addPage": "Add page",
-  "channelStream": "{channel}'s stream",
+  "appearance": "Ausgesinn",
+  "highContrast": "Héije Kontrast",
+  "playStream": "Stream ofspillen",
+  "stopStream": "Stream stoppen",
+  "customCommand": "Eegene Kommando",
+  "customCommands": "Eegene Kommando",
+  "newCustomCommand": "Neien eegene Kommando",
+  "commandTrigger": "Ausléiser",
+  "command": "Kommando",
+  "save": "Späicheren",
+  "browserStreamSettings": "Browser/Stream Astellungen",
+  "addPage": "Säit dobäisetzen",
+  "channelStream": "Dem {channel} säi Stream",
   "@channelStream": {
     "placeholders": {
       "channel": {
@@ -107,8 +107,8 @@
       }
     }
   },
-  "openInBrowser": "Open in browser",
-  "messageAppearance": "Message appearance",
+  "openInBrowser": "Am Browser opmaachen",
+  "messageAppearance": "Ausgesinn vun den Norichten",
   "showTimestamps": "Show timestamps",
   "compactMessages": "Compact messages",
   "messageTrigger": "Message trigger",
@@ -168,12 +168,12 @@
   "noNotifications": "Someone, somewhere, will mention you someday.",
   "backgroundNotifications": "Background notifications",
   "optionNotAvailableOnYourPlatform": "This option is not available on your platform.",
-  "optionNotAvailablePaywalled": "This option is for Chatsen supporters only.",
-  "clearAll": "Clear all",
+  "optionNotAvailablePaywalled": "Dës Optioun ass just fir Supporter vu Chatsen.",
+  "clearAll": "Alles läschen",
   "cache": "Cache",
-  "clearCache": "Clear cache",
-  "chatters": "Chatters",
-  "lastSeenAgo": "Last seen {time} ago",
+  "clearCache": "Cache leeren",
+  "chatters": "Chatteren",
+  "lastSeenAgo": "Fir d'lescht virun {time} gesinn",
   "@lastSeenAgo": {
     "placeholders": {
       "time": {
@@ -181,6 +181,6 @@
       }
     }
   },
-  "credits": "Credits",
-  "search": "Search"
+  "credits": "Credits / Mercien",
+  "search": "Sichen"
 }
