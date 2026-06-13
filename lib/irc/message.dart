@@ -23,7 +23,10 @@ class Message {
     if (parts.isNotEmpty && parts.first.startsWith('@')) {
       tags = <String, String>{
         for (final tag in parts.first.substring(1).split(';'))
-          if (tag.contains('=')) tag.split('=').first: tag.split('=').skip(1).join('='),
+          if (tag.isNotEmpty)
+            tag.contains('=')
+                ? tag.split('=').first: tag.split('=').skip(1).join('=')
+                : tag: '', // empty string if '=' is missing
       };
 
       parts.removeAt(0);
