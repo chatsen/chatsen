@@ -144,6 +144,13 @@ class Client {
     transmitter.add(ConnectionConnect(twitchAccount));
   }
 
+  /// Reconnects any connection that went stale, for use when the app comes back
+  /// from the background.
+  Future<void> healthCheck() async {
+    await receiver.healthCheck();
+    await transmitter.healthCheck();
+  }
+
   Future<void> stateChange(Connection connection, Change<ConnectionState> change) async {
     // final matchingChannels = channels.state.where((channel) => channel.state is ChannelStateWithConnection && (channel.state as ChannelStateWithConnection).receiver == this);
     for (final channel in channels.state) {
