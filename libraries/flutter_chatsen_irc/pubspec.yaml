@@ -11,6 +11,7 @@ dependencies:
   http: ^1.2.0
   web_socket_channel: ^3.0.0
   collection: ^1.19.0
+  json_annotation: ^4.11.0
 
 dev_dependencies:
   lints: ^5.1.0

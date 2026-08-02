@@ -25,7 +25,11 @@ class IRCMessage {
       if (messageSplit.length <= 1) return null;
       messageSplit[1] = messageSplit.sublist(1).join(' ').trim();
       var tags = messageSplit[0].split(';');
-      ircMessage.tags = {for (var tag in tags) tag.split('=')[0]: tag.split('=')[1]};
+      ircMessage.tags = {
+        for (var tag in tags)
+          if (tag.isNotEmpty)
+            (tag.contains('=') ? tag.substring(0, tag.indexOf('=')) : tag): (tag.contains('=') ? tag.substring(tag.indexOf('=') + 1) : ''),
+      };
       message = messageSplit[1];
     }
 
