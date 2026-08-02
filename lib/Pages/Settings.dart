@@ -522,19 +522,19 @@ class _SettingsPageState extends State<SettingsPage> {
                                 //   onPressed: () => launch('https://twitter.com/chatsenapp'),
                                 // ),
                                 IconButton(
-                                  icon: Icon(FontAwesomeIcons.twitter),
+                                  icon: FaIcon(FontAwesomeIcons.twitter),
                                   onPressed: () => launchUrl(Uri.parse('https://twitter.com/chatsenapp')),
                                 ),
                                 IconButton(
-                                  icon: Icon(FontAwesomeIcons.discord),
+                                  icon: FaIcon(FontAwesomeIcons.discord),
                                   onPressed: () => launchUrl(Uri.parse('https://chatsen.app/discord')),
                                 ),
                                 IconButton(
-                                  icon: Icon(FontAwesomeIcons.github),
+                                  icon: FaIcon(FontAwesomeIcons.github),
                                   onPressed: () => launchUrl(Uri.parse('https://github.com/chatsen/chatsen')),
                                 ),
                                 IconButton(
-                                  icon: Icon(FontAwesomeIcons.patreon),
+                                  icon: FaIcon(FontAwesomeIcons.patreon),
                                   onPressed: () => launchUrl(Uri.parse('https://patreon.com/chatsen')),
                                 ),
                               ],

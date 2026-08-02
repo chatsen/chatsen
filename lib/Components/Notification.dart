@@ -50,6 +50,7 @@ class _NotificationWrapperState extends State<NotificationWrapper> {
         InitializationSettings(
           android: AndroidInitializationSettings('@mipmap/ic_launcher'),
           iOS: DarwinInitializationSettings(),
+          macOS: DarwinInitializationSettings(),
         ),
         onDidReceiveNotificationResponse: (NotificationResponse response) async {},
       );

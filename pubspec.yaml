@@ -28,7 +28,7 @@ dependencies:
   chatsen_resources:
     git: https://github.com/chatsen/resources.git
   cached_network_image: ^3.4.0
-  font_awesome_flutter: ^10.8.0
+  font_awesome_flutter: ^11.0.0
   flutter_svg: ^2.0.0
   wakelock_plus: ^1.3.3
   shared_preferences: ^2.3.0
