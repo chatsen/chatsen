@@ -14,7 +14,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   webview_flutter: ^4.10.0
-  file_picker: ^8.0.0
+  file_picker: ^10.3.10
   flutter_local_notifications: ^18.0.0
   flutter_chatsen_irc:
     path: libraries/flutter_chatsen_irc
