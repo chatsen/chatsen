@@ -55,6 +55,7 @@ jobs:
           cat > ./android/app/build.gradle.kts << 'GRADLE'
           import java.io.FileInputStream
           import java.util.Properties
+          import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
           plugins {
               id("com.android.application")
@@ -78,10 +79,6 @@ jobs:
                   isCoreLibraryDesugaringEnabled = true
                   sourceCompatibility = JavaVersion.VERSION_17
                   targetCompatibility = JavaVersion.VERSION_17
-              }
-
-              kotlinOptions {
-                  jvmTarget = JavaVersion.VERSION_17.toString()
               }
 
               defaultConfig {
@@ -111,6 +108,12 @@ jobs:
                           signingConfigs.getByName("debug")
                       }
                   }
+              }
+          }
+
+          kotlin {
+              compilerOptions {
+                  jvmTarget.set(JvmTarget.JVM_17)
               }
           }
 
