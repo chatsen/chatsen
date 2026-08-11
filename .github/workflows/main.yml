@@ -7,19 +7,19 @@ jobs:
     name: Android Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           repository: chatsen/signingkeys
           token: ${{ secrets.GHKEY }}
           path: signingkeys
           ref: master
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: chatsen
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: zulu
           java-version: "17"
@@ -153,12 +153,12 @@ jobs:
           cp ./chatsen/build/app/outputs/flutter-apk/app-release.apk ./release/Android.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Android.apk
           path: ./release/Android.apk
 
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: ./release/Android.apk
@@ -177,7 +177,7 @@ jobs:
           echo "Sync with Github repository." > whatsnew-en-US
 
       - name: Upload AAB Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: startsWith(github.ref, 'refs/tags/')
         with:
           name: PlayStore.aab
@@ -198,14 +198,14 @@ jobs:
     steps:
       - run: brew install gnu-sed
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           repository: chatsen/signingkeys
           token: ${{ secrets.GHKEY }}
           path: signingkeys
           ref: master
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: chatsen
@@ -358,12 +358,12 @@ jobs:
           ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS.ipa
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: iOS.ipa
           path: ./release/iOS.ipa
 
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: ./release/iOS.ipa
