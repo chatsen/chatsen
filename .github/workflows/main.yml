@@ -153,7 +153,7 @@ jobs:
           cp ./chatsen/build/app/outputs/flutter-apk/app-release.apk ./release/Android.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: Android.apk
           path: ./release/Android.apk
@@ -177,20 +177,21 @@ jobs:
           echo "Sync with Github repository." > whatsnew-en-US
 
       - name: Upload AAB Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         if: startsWith(github.ref, 'refs/tags/')
         with:
           name: PlayStore.aab
           path: ./release/PlayStore.aab
 
-      # - uses: r0adkll/upload-google-play@v1
-      #   if: startsWith(github.ref, 'refs/tags/')
-      #   with:
-      #     packageName: com.chatsen.chatsen
-      #     serviceAccountJson: ./signingkeys/pc-api-7512701657656671844-671-a7a04005a195.json
-      #     track: production
-      #     releaseFiles: ./release/PlayStore.aab
-      #     whatsNewDirectory: .
+      - name: Publish to the Play Store
+        uses: r0adkll/upload-google-play@v1.1.5
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          packageName: com.chatsen.chatsen
+          serviceAccountJson: ./signingkeys/pc-api-7512701657656671844-671-a7a04005a195.json
+          track: production
+          releaseFiles: ./release/PlayStore.aab
+          whatsNewDirectory: .
 
   ios_build:
     name: iOS Build
@@ -358,7 +359,7 @@ jobs:
           ditto -c -k --sequesterRsrc --keepParent ./release/Payload ./release/iOS.ipa
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: iOS.ipa
           path: ./release/iOS.ipa
